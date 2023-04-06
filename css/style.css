@@ -255,3 +255,97 @@ footer {
 footer p {
     font-size: .875rem;
 }
+
+.show {
+    display: inherit !important;
+}
+
+@media only screen and (max-width: 960px) {
+
+  header nav ul {
+    display: none;
+  }
+
+  header nav ul li {
+    margin: 1rem 0;
+  }
+
+  header nav ul li:first-of-type {
+    margin: 0 0 1rem 0;
+  }
+
+  header nav ul li:last-of-type {
+    margin: 1rem 0 0 0;
+  }
+
+  .btnIcon {
+    background-image: url('/images/lm-icon-menu.png');
+    display: flex;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0 1rem 0 0;
+    cursor: pointer;
+}
+
+  .mobileNav {
+    display: flex;
+    align-self: center;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    position: absolute;
+    top: 72px;
+    width: max-content;
+    z-index: 1;
+    padding: 1rem 1.5rem;
+    align-items: flex-start;
+    border-radius: .25rem;
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0px 10px 24px -12px rgba(0,0,0,0.15);
+  }
+
+  header nav ul li a.wrapper {
+    display: flex;
+    width: 100%;
+  }
+
+  nav .btn:last-of-type {
+    margin-right: 0;
+  }
+
+  nav ul .btn {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+  }
+
+  header nav .btn {
+    margin: var(--spacing-base) var(--spacing-medium);
+    display: inline-flex !important;
+  }
+
+  header nav ul li a.wrapper {
+    display: flex;
+  }
+
+  .intro h2 {
+    max-width: 100%;
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+  h2 {
+        font-size: 3rem;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+  h2 {
+        font-size: 2.5rem;
+    }
+}
