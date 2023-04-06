@@ -1,0 +1,12 @@
+{
+  "name": "my_website",
+  "version": "1.0.0",
+  "description": "My Website using HTML, CSS, JavaScript, and Markdown",
+  "scripts": {
+    "start": "browser-sync start --server --files '**/*'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.27.7"
+  }
+}

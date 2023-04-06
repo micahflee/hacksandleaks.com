@@ -1,0 +1,257 @@
+@font-face {
+  font-family: "Sans";
+  src: url("../fonts/sans/Atkinson-Hyperlegible-Regular.woff2") format("woff2"),
+       url("../fonts/sans/Atkinson-Hyperlegible-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Sans Bold";
+  src: url("../fonts/sans/Atkinson-Hyperlegible-Bold.woff2") format("woff2"),
+       url("../fonts/sans/Atkinson-Hyperlegible-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Serif";
+  src: url("../fonts/serif/Merriweather-Regular.woff2") format("woff2"),
+       url("../fonts/serif/Merriweather-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Mono";
+  src: url("../fonts/mono/WOFF2/IBMPlexMono-Regular.woff2") format("woff2"),
+       url("../fonts/mono/WOFF/IBMPlexMono-Regular.woff") format("woff");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Sans', Helvetica, Arial, sans-serif;
+}
+
+.btn {
+    font-size: .875rem;
+    padding: .875rem 1rem .75rem 1rem;
+    font-weight: bold;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    text-decoration: none;
+}
+
+.primaryBtn {
+	background-color: #333;
+	color: #fff;
+	border: none;
+}
+
+.wrapper {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 1.5rem;
+}
+
+p, li {
+    font-size: 1.125rem;
+    line-height: 1.5;
+    max-width: 640px;
+    width: 100%;
+}
+
+a {
+
+}
+
+ul {
+    margin: 0;
+    padding: 0 0 0 1rem;
+    max-width: 640px;
+    width: 100%;
+}
+
+ul li {
+    margin-bottom: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    font-family: 'Mono', monospace;
+    max-width: 640px;
+    width: 100%;
+    margin-bottom: .5rem;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+h1, h2, h3, h4, h5, h6, a, p {
+    color: #333;
+}
+
+h3 {
+    margin-top: 3.5rem;
+}
+
+h4, h5, h6 {
+    margin-top: 2rem;
+}
+
+h1 {
+    font-size: 1.25rem;
+}
+
+h2 {
+    font-size: 3.5rem;
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: .5rem;
+}
+
+h3 {
+    font-size: 2.25rem;
+}
+
+h4 {
+    font-size: 1.875rem;
+}
+
+h5 {
+    font-size: 1.5rem;
+}
+
+h6 {
+    font-size: 1.25rem;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  width: 100%;
+  max-width: 640px;
+}
+
+code {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: .875rem;
+  line-height: 1.5;
+  background-color: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 1rem 1rem;
+  color: rgba(0,0,0,0.85);
+  border-radius: .25rem;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+}
+
+/*HEADER*/
+
+header {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255,255,255,1);
+}
+
+header h1 {
+	width: fit-content;
+    font-size: 1rem;
+}
+
+header .wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+}
+
+nav ul li {
+    margin: 0 0 0 2rem;
+    list-style: none;
+    width: auto;
+}
+
+nav ul li a {
+    font-size: .875rem;
+    text-decoration: none;
+}
+
+a.btn {
+    margin: 0 0 0 2rem;
+}
+
+/*INTRO*/
+
+.intro {
+    height: 100vh;
+}
+
+#reading-time {
+    font-size: .875rem;
+    margin-bottom: 1rem;
+    color: #595959;
+}
+
+.intro h2 {
+    max-width: 80%;
+}
+
+.intro h2 + p {
+    font-size: 1rem;
+    font-family: 'Serif', serif;
+    line-height: 1.6;
+}
+
+.intro h2 + p + p{
+    font-size: .875rem;
+    margin-bottom: 0;
+}
+
+.pagination {
+    padding: 3rem 0;
+}
+
+.pagination a {
+    font-size: .875rem;
+    padding: .875rem 1rem .75rem 1rem;
+    font-weight: bold;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+}
+
+footer p {
+    font-size: .875rem;
+}
