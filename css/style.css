@@ -279,7 +279,7 @@ footer p {
   }
 
   .btnIcon {
-    background-image: url('/images/lm-icon-menu.png');
+    background-image: url('../images/lm-icon-menu.png');
     display: flex;
     align-items: center;
     background-repeat: no-repeat;
