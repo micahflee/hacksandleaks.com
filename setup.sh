@@ -33,16 +33,7 @@ cat > /etc/nginx/sites-available/hush-line.nginx << EOL
 server {
     listen 80;
     server_name localhost;
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-        proxy_connect_timeout 300s;
-        proxy_send_timeout 300s;
-        proxy_read_timeout 300s;
-    }
+    root /var/www/html/hlr-website/; 
     
         add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";
         add_header X-Frame-Options DENY;
@@ -158,11 +149,5 @@ npm install
 echo "Building static HTML"
 cd js/
 node build.js
-
-# Move files to root
 cd output/
-mv * ./
-
-# Start development server
-echo "Starting development server"
-npm start
+mv * /var/www/html/hlr-website/

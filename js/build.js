@@ -26,7 +26,6 @@ function generateHTML(markdown) {
   return css + div.innerHTML;
 }
 
-
 function readTemplate() {
   return fs.readFileSync(path.join(__dirname, '..', 'template.html'), 'utf8');
 }
