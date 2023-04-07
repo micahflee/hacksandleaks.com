@@ -5,6 +5,7 @@ apt update && apt -y dist-upgrade && apt -y autoremove
 apt install -y curl git nodejs npm tor curl gnupg2 ca-certificates lsb-release nginx
 
 # Clone the repo
+mkdir /var/www/html/
 cd /var/www/html/
 git clone https://github.com/glenn-sorrentino/hlr-website.git
 cd hlr-website/
@@ -143,6 +144,12 @@ if [ ! -f package.json ]; then
 EOM
 fi
 
+echo "
+✅ Installation complete!
+                                               
+http://$ONION_ADDRESS
+"
+
 # Install dependencies
 echo "Installing dependencies"
 npm install
@@ -150,9 +157,3 @@ npm install
 # Start development server
 echo "Starting development server"
 npm start
-
-echo "
-✅ Installation complete!
-                                               
-http://$ONION_ADDRESS
-"
