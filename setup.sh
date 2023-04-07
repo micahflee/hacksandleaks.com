@@ -14,7 +14,7 @@ cd hlr-website/
 sudo tee /etc/tor/torrc << EOL
 RunAsDaemon 1
 HiddenServiceDir /var/lib/tor/hidden_service/
-HiddenServicePort 80 127.0.0.1:3000
+HiddenServicePort 80 127.0.0.1:80
 EOL
 
 # Restart Tor service
@@ -24,16 +24,17 @@ sleep 10
 # Get the Onion address
 ONION_ADDRESS=$(sudo cat /var/lib/tor/hidden_service/hostname)
 
-# Enable the Tor hidden service
-sudo ln -sf /etc/nginx/sites-available/hush-line.nginx /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl restart nginx
-
 # Configure Nginx
 cat > /etc/nginx/sites-available/hush-line.nginx << EOL
 server {
     listen 80;
     server_name localhost;
-    root /var/www/html/hlr-website/; 
+    root /var/www/html/hlr-website/;
+    index index.html;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
     
         add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";
         add_header X-Frame-Options DENY;
@@ -45,6 +46,10 @@ server {
         add_header X-XSS-Protection "1; mode=block";
 }
 EOL
+
+# Enable the Tor hidden service
+sudo ln -sf /etc/nginx/sites-available/hush-line.nginx /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl restart nginx
 
 # Configure Nginx
 cat > /etc/nginx/nginx.conf << EOL
@@ -151,3 +156,4 @@ cd js/
 node build.js
 cd output/
 mv * /var/www/html/hlr-website/
+systemctl restart nginx 
