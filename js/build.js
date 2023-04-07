@@ -5,18 +5,11 @@ const { marked } = require('marked');
 const inputDir = path.join(__dirname, '..', 'md');
 const outputDir = 'output'; // the directory where your static HTML files will be generated
 
-function replacePlaceholder(template, placeholder, content) {
-  return template.replace(new RegExp(`<!--${placeholder}-->`, 'g'), content);
-}
-
 function generateHTML(markdown) {
   if (!markdown) {
     console.error('Error: markdown content is undefined or null');
     return '';
   }
-
-  const template = readTemplate();
-  return replacePlaceholder(template, 'CONTENT', marked(markdown));
 }
 
 function readTemplate() {
