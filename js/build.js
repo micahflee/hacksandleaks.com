@@ -35,6 +35,12 @@ function processMarkdownFile(filePath, chapterName, fileName) {
   fs.writeFileSync(outputPath, html);
 }
 
+function calculateReadTime(text) {
+  const wordsPerMinute = 200;
+  const wordCount = text.split(/\s+/).length;
+  return Math.ceil(wordCount / wordsPerMinute);
+}
+
 function build() {
   // Ensure output directory exists
   if (!fs.existsSync(outputDir)) {
@@ -51,8 +57,11 @@ function build() {
     const bodyMd = fs.readFileSync(path.join(chapterPath, 'body.md'), 'utf-8');
     const paginationMd = fs.readFileSync(path.join(chapterPath, 'pagination.md'), 'utf-8');
     
+    // Calculate read time
+    const readTime = calculateReadTime(introMd + bodyMd);
+    
     const navHTML = marked(fs.readFileSync(path.join(inputDir, 'nav.md'), 'utf-8'));
-    const introHTML = marked(introMd);
+    const introHTML = `<div id="reading-time">~${readTime} min read</div>` + marked(introMd);
     const bodyHTML = marked(bodyMd);
     const paginationHTML = marked(paginationMd);
     const footerHTML = marked(fs.readFileSync(path.join(inputDir, 'footer.md'), 'utf-8'));
