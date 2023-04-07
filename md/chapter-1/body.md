@@ -125,11 +125,12 @@ The output from dmarchiver, a 1.7MB text file, was much easier to work with comp
 [2015-11-19 13:47:28] <WikiLeaks> Dems+Media+liberals woudl then form a block to reign in their worst qualities.
 [2015-11-19 13:48:22] <WikiLeaks> With Hillary in charge, GOP will be pushing for her worst qualities., dems+media+neoliberals will be mute.
 [2015-11-19 13:50:18] <WikiLeaks> She's a bright, well connected, sadistic sociopath.
-I could view the HTML version in a web browser, so that it looked exactly as it had originally looked on Twitter. This was also useful for taking screenshots to include in our final report, as shown in Figure 1-1.
-[f02001.png]
 ```
 
-<<a screenshot of the WikiLeaks DMs described above.>>
+I could view the HTML version in a web browser, so that it looked exactly as it had originally looked on Twitter. This was also useful for taking screenshots to include in our final report, as shown in Figure 1-1.
+
+[f02001.png]
+<< a screenshot of the WikiLeaks DMs described above.>>
 
 #### Figure 1-1 Screenshot of the leaked HTML file
 
@@ -299,7 +300,7 @@ When you enable FileVault, it will make you save a recovery key. Save that key i
 Linux uses technology called LUKS for disk encryption. You can check the Disks program (in most versions of Linux, you can open this program by pressing the Windows key, typing “disks,” and pressing ENTER) to see whether your internal disk is encrypted. As shown in Figure 1-3, the program shows you all of the disks attached to your computer and allows you to format them. If your internal disk has an unlocked partition with LUKS encryption, as shown in the figure, disk encryption is enabled.
 
 [f02004.png]
-<<A screenshot of the Disks app in Linux.>>
+<< A screenshot of the Disks app in Linux >>
 
 #### Figure 1-3 Managing disks and partitions using Disks in Linux
 In this case, my internal disk is the 500GB Samsung SSD listed on the left. My disk is partitioned into four parts, and the last part (Partition 4) is 499GB big and is encrypted with LUKS. Your disk might like different than mine, but you’ll know it’s encrypted if the main partition says LUKS.

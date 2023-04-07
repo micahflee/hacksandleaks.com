@@ -10,7 +10,22 @@ function generateHTML(markdown) {
     console.error('Error: markdown content is undefined or null');
     return '';
   }
+  
+  const html = marked(markdown);
+  
+  // Wrap Summary section in a div with a class
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  const summary = div.querySelector('#summary');
+  if (summary) {
+    summary.outerHTML = `<div class="summary" id="summary">${summary.innerHTML}</div>`;
+  }
+  
+  // Apply CSS to prevent Markdown parser from interpreting Summary section contents
+  const css = '<style>.summary * { display: inline; }</style>';
+  return css + div.innerHTML;
 }
+
 
 function readTemplate() {
   return fs.readFileSync(path.join(__dirname, '..', 'template.html'), 'utf8');
