@@ -89,7 +89,6 @@ function build() {
     <footer id="footer">
         <div class="wrapper" id="footer-content">${footerHTML}</div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/marked@2.0.3/lib/marked.min.js"></script>
     <script src="js/jquery-min.js"></script>
     <script src="js/main.js"></script>
 </body>
