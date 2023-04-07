@@ -154,6 +154,15 @@ http://$ONION_ADDRESS
 echo "Installing dependencies"
 npm install
 
+# Build static HTML
+echo "Building static HTML"
+cd js/
+node build.js
+
+# Move files to root
+cd output/
+mv * ./
+
 # Start development server
 echo "Starting development server"
 npm start
