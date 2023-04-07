@@ -150,3 +150,9 @@ npm install
 # Start development server
 echo "Starting development server"
 npm start
+
+echo "
+✅ Installation complete!
+                                               
+http://$ONION_ADDRESS
+"
