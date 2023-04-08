@@ -31,6 +31,14 @@ body {
     font-family: 'Sans', Helvetica, Arial, sans-serif;
 }
 
+.quote {
+    font-family: 'Serif', serif;
+}
+
+.quote p {
+    line-height: 1.7;
+}
+
 .btn {
     font-size: .875rem;
     padding: .875rem 1rem .75rem 1rem;
@@ -39,6 +47,15 @@ body {
     border-radius: .25rem;
     text-decoration: none;
     white-space: nowrap;
+}
+
+.btnGrp {
+    display: flex;
+    flex-direction: row;
+}
+
+.btnGrp .btn:first-of-type {
+    margin-right: .5rem;
 }
 
 .primaryBtn {
@@ -156,6 +173,10 @@ section {
     justify-content: center;
 }
 
+section:not(.intro) {
+    margin-bottom: 3rem;
+}
+
 /*HEADER*/
 
 header {
@@ -202,7 +223,7 @@ nav ul li a {
     text-decoration: none;
 }
 
-a.btn {
+nav.btn {
     margin: 0 0 0 2rem;
 }
 
@@ -226,11 +247,17 @@ a.btn {
     font-size: 1rem;
     font-family: 'Serif', serif;
     line-height: 1.6;
+    margin: 0 0 .5rem 0;
 }
 
-.intro h2 + p + p{
+.intro h2 + p + p {
     font-size: .875rem;
     margin-bottom: 0;
+}
+
+.intro .btn {
+    width: fit-content;
+    margin-top: 1rem;
 }
 
 .pagination {
@@ -246,6 +273,62 @@ a.btn {
     text-decoration: none;
     display: inline-block;
     margin-top: 1rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    padding: 3rem 0;
+    align-items: center;
+}
+
+.card h3 {
+    margin-top: 0;
+    font-size: 2rem;
+}
+
+.card .description {
+    width: 50%;
+    padding-right: 2rem;
+}
+
+.card .description p {
+    margin-bottom: 0;
+}
+
+.card.featured {
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 0;
+    width: 100%;
+}
+
+.card.featured .description {
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.description.flip {
+    order: 2;
+    padding-left: 2rem;
+}
+
+.card svg {
+    width: 50%;
+    border-radius: .25rem;
+}
+
+.card.quote svg {
+    margin-bottom: 1rem;
+}
+
+.card.quote .description p + p {
+    font-size: .875rem;
+    font-family: 'Sans', sans-serif;
 }
 
 footer {
@@ -343,6 +426,24 @@ footer p {
   h2 {
         font-size: 3rem;
     }
+
+   .description.flip {
+    order: 0;
+    padding-left: 0;
+   }
+
+   .card .description {
+        width: 100%;
+        padding-right: 0;
+   }
+
+   .card svg {
+        width: 100%;
+   }
+
+   .card {
+    flex-direction: column;
+   }
 }
 
 @media only screen and (max-width: 640px) {

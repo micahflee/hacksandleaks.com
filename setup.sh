@@ -155,5 +155,10 @@ echo "Building static HTML"
 cd js/
 node build.js
 cd output/
+mkdir /var/www/html/hlr-website/archive/
+mv /var/www/html/hlr-website/introduction.html /var/www/html/hlr-website/archive/introduction.html
+mv /var/www/html/hlr-website/chapter-1.html /var/www/html/hlr-website/archive/chapter-1.html
+mv /var/www/html/hlr-website/chapter-2.html /var/www/html/hlr-website/archive/chapter-2.html
+mv /var/www/html/hlr-website/chapter-3.html /var/www/html/hlr-website/archive/chapter-3.html
 mv * /var/www/html/hlr-website/
 systemctl restart nginx 
