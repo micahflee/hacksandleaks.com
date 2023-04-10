@@ -96,7 +96,7 @@ function build() {
             </nav>
         </div>
     </header>
-    <section class="intro">
+    <section class="intro secondaryIntro">
         <div class="wrapper" id="intro-wrapper">${introHTML}</div>
     </section>
     <section id="content" data-content="${chapter}">

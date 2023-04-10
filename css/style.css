@@ -243,6 +243,11 @@ nav .btn {
     height: 100vh;
 }
 
+.secondaryIntro {
+  height: auto;
+  padding: 13rem 0 10rem 0;
+}
+
 #reading-time {
     font-size: .875rem;
     margin-bottom: 1rem;
