@@ -332,6 +332,19 @@ nav .btn {
     font-family: 'Sans', sans-serif;
 }
 
+.about .btn {
+    margin-top: 2rem;
+}
+
+.btnLrg {
+    font-size: 1.25rem;
+    padding: 1.125rem 1.5rem 1rem 1.5rem;
+}
+
+.about p {
+    text-align: left;
+}
+
 footer {
     display: flex;
     justify-content: center;
