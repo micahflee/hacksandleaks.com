@@ -73,6 +73,9 @@ function build() {
     const paginationHTML = marked(paginationMd);
     const footerHTML = marked(fs.readFileSync(path.join(inputDir, 'footer.md'), 'utf-8'));
 
+    // Check if the current chapter is chapter 1
+    const isChapter1 = index === 1;
+
     // Generate HTML and write to output file
     const htmlContent = `<!DOCTYPE html>
 <html lang="en">
@@ -97,8 +100,7 @@ function build() {
         <div class="wrapper" id="intro-wrapper">${introHTML}</div>
     </section>
     <section id="content" data-content="${chapter}">
-        <div class="wrapper trunc" id="about-content">${bodyHTML}
-            <div class="fade"></div>
+        <div class="wrapper ${isChapter1 ? 'trunc' : ''}" id="about-content">${bodyHTML}${isChapter1 ? '<div class="fade"></div>' : ''}
         </div>
     </section>
     <section class="pagination">
