@@ -88,7 +88,7 @@ function build() {
 <body>
     <header>
         <div class="wrapper">
-           <h1>Hacks, Leaks, and Revelations</h1>
+           <h1><a href="/">Hacks, Leaks, and Revelations</a></h1>
             <nav>
                 <div id="nav">${navHTML}</div>
                 <a class="mobileNav btnIcon"></a>
