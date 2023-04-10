@@ -140,12 +140,6 @@ if [ ! -f package.json ]; then
 EOM
 fi
 
-echo "
-✅ Installation complete!
-                                               
-http://$ONION_ADDRESS
-"
-
 # Install dependencies
 echo "Installing dependencies"
 npm install
@@ -160,3 +154,9 @@ mv /var/www/html/hlr-website/introduction.html /var/www/html/hlr-website/archive
 mv /var/www/html/hlr-website/chapter-1.html /var/www/html/hlr-website/archive/chapter-1.html
 mv * /var/www/html/hlr-website/
 systemctl restart nginx 
+
+echo "
+✅ Installation complete!
+                                               
+http://$ONION_ADDRESS
+"
