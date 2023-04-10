@@ -54,7 +54,7 @@ function build() {
     fs.mkdirSync(outputDir);
   }
 
-  const chapters = ['introduction', 'chapter-1', 'chapter-2', 'chapter-3'];
+  const chapters = ['introduction', 'chapter-1'];
 
   for (const [index, chapter] of chapters.entries()) {
     const chapterPath = path.join(inputDir, chapter);
@@ -97,7 +97,9 @@ function build() {
         <div class="wrapper" id="intro-wrapper">${introHTML}</div>
     </section>
     <section id="content" data-content="${chapter}">
-        <div class="wrapper" id="about-content">${bodyHTML}</div>
+        <div class="wrapper trunc" id="about-content">${bodyHTML}
+            <div class="fade"></div>
+        </div>
     </section>
     <section class="pagination">
         <div class="wrapper" id="pagination-content">${paginationHTML}</div>

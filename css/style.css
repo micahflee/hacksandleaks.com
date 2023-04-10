@@ -188,6 +188,7 @@ header {
     left: 0;
     right: 0;
     background-color: rgba(255,255,255,1);
+    z-index: 10;
 }
 
 header h1 {
@@ -356,6 +357,24 @@ footer p {
 
 .show {
     display: inherit !important;
+}
+
+.trunc {
+    position: relative;
+}
+
+.pagination a[href="https://nostarch.com/hacks-leaks-and-revelations"] {
+    background-color: #333;
+    color: #fff;
+}
+
+.fade {
+    position: absolute;
+    width: 100%;
+    max-width: 640px;
+    height: 200px;
+    background: linear-gradient(0deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    bottom: 0;
 }
 
 @media only screen and (max-width: 960px) {
