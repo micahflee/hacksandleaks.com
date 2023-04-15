@@ -1,6 +1,6 @@
 # Book Publishing
 
-## Generating Static HTML
+## Generating static HTML
 Your content publishes as static HTML, but is editable as markdown. When your markdown is ready, run:
 
 ```
