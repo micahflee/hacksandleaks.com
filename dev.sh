@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Update system
+apt update && apt -y dist-upgrade && apt -y autoremove
+apt install -y nodejs npm
+
 # Check if Node.js and npm are installed
 if ! command -v node &> /dev/null || ! command -v npm &> /dev/null; then
     echo "Node.js and npm are required but not installed. Please install them and try again."
