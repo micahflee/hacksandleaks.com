@@ -243,6 +243,13 @@ nav .btn {
     height: 100vh;
 }
 
+.intro {
+    background-image: url('../images/cover.png');
+    background-size: 30%;
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+
 .secondaryIntro {
   height: auto;
   padding: 13rem 0 10rem 0;
@@ -255,7 +262,7 @@ nav .btn {
 }
 
 .intro h2 {
-    max-width: 80%;
+    max-width: 65%;
 }
 
 .intro h2 + p {
@@ -465,6 +472,19 @@ footer p {
   .intro h2 {
     max-width: 100%;
   }
+
+  .intro {
+    height: 100vh;
+    background-size: 33%;
+    }
+
+    .intro {
+        background-size: 40%;
+    }
+
+    .intro h2, .intro p {
+        max-width: 50%;
+    }
 
 }
 
