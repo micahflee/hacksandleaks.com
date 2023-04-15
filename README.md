@@ -7,7 +7,7 @@ Your content publishes as static HTML, but is editable as markdown. When your ma
 cd /var/www/html/hlr-website/js && apt install -y nodejs npm && node build.js && cd output && mv * ../../
 ```
 
-## Pubishing an onion service
+## Pubishing your book
 When you're ready to publish your book as an onion site, run:
 
 ```
