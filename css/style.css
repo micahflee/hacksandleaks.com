@@ -22,6 +22,18 @@
        url("../fonts/mono/WOFF/IBMPlexMono-Regular.woff") format("woff");
 }
 
+@font-face {
+  font-family: "Mono Light";
+  src: url("../fonts/mono/WOFF2/IBMPlexMono-Light.woff2") format("woff2"),
+       url("../fonts/mono/WOFF/IBMPlexMono-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Mono Extra Light";
+  src: url("../fonts/mono/WOFF2/IBMPlexMono-ExtraLight.woff2") format("woff2"),
+       url("../fonts/mono/WOFF/IBMPlexMono-ExtraLight.woff") format("woff");
+}
+
 * {
     box-sizing: border-box;
 }
@@ -29,6 +41,72 @@
 body {
     margin: 0;
     font-family: 'Sans', Helvetica, Arial, sans-serif;
+}
+
+.homeBody {
+    background-color: #333;
+}
+
+.homeBody header {
+    background-color: #333; 
+}
+
+.homeBody h1, 
+.homeBody h2, 
+.homeBody h3, 
+.homeBody h4, 
+.homeBody h5, 
+.homeBody h6 {
+    color: #86D58D !important;
+}
+
+.homeBody .intro p {
+    font-family: 'Mono', monospace;
+    color: #86D58D !important;
+}
+
+.homeBody .intro {
+    background-image: url('../images/cover.png');
+    background-size: 25%;
+    background-position-y: center;
+    background-position-x: 99%;
+    background-repeat: no-repeat;
+}
+
+.homeBody .intro h2 {
+    font-family: 'Mono Extra Light', monospace;
+}
+
+.homeBody .btn {
+    border-color: rgba(255,255,255,.3);
+    font-family: 'Mono', monospace;
+    color: #86D58D;
+}
+
+.homeBody .primaryBtn {
+    background-color: #86D58D;
+    color: #333;
+}
+
+.homeBody a,
+.homeBody p {
+    color: #fff;
+}
+
+.homeBody .card.quote .description p + p {
+    color: #86D58D;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50vw;
+}
+
+.author {
+    width: 300px;
+    height: 300px;
+    border-radius: 50vw;
 }
 
 .quote {
@@ -42,12 +120,17 @@ body {
 
 .btn {
     font-size: .875rem;
-    padding: .875rem 1rem .75rem 1rem;
+    padding: .75rem 1rem;
     font-weight: bold;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
     text-decoration: none;
     white-space: nowrap;
+}
+
+.btnLrg {
+    font-size: 1.25rem;
+    padding: 1.125rem 1.5rem;
 }
 
 .btnGrp {
@@ -98,7 +181,7 @@ ul li {
 
 h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
-    font-family: 'Mono', monospace;
+    font-family: 'Mono Light', monospace;
     max-width: 640px;
     width: 100%;
     margin-bottom: .5rem;
@@ -243,13 +326,6 @@ nav .btn {
     height: 100vh;
 }
 
-.intro {
-    background-image: url('../images/cover.png');
-    background-size: 30%;
-    background-position: center right;
-    background-repeat: no-repeat;
-}
-
 .secondaryIntro {
   height: auto;
   padding: 13rem 0 10rem 0;
@@ -355,11 +431,6 @@ nav .btn {
 
 .about .btn {
     margin-top: 2rem;
-}
-
-.btnLrg {
-    font-size: 1.25rem;
-    padding: 1.125rem 1.5rem 1rem 1.5rem;
 }
 
 .about p {
@@ -473,19 +544,18 @@ footer p {
     max-width: 100%;
   }
 
-  .intro {
+  .homeBody .intro {
     height: 100vh;
     background-size: 33%;
     }
 
-    .intro {
+    .homeBody .intro {
         background-size: 40%;
     }
 
-    .intro h2, .intro p {
+    .homeBody .intro h2, .intro p {
         max-width: 50%;
     }
-
 }
 
 @media only screen and (max-width: 768px) {
@@ -510,10 +580,40 @@ footer p {
    .card {
     flex-direction: column;
    }
+
 }
 
 @media only screen and (max-width: 640px) {
   h2 {
         font-size: 2.5rem;
+    }
+
+    .homeBody .intro h2, .intro p {
+        max-width: 80%;
+    }
+
+    .homeBody .intro {
+        background-position-x: 135%;
+    }
+
+    .homeBody .intro h2 {
+        max-width: 80%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+
+    .homeBody .intro h2, .intro p {
+        max-width: 100%;
+    }
+
+    .homeBody .intro {
+        background-position-x: center;
+        background-position-y: 80vh;
+        background-size: 65%;
+    }
+
+    .homeBody .intro h2 {
+        max-width: 90%;
     }
 }
