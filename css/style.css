@@ -700,3 +700,12 @@ footer p {
         max-width: 90%;
     }
 }
+
+@media only screen and (max-width: 390px) {
+
+    header h1 {
+        font-size: .875rem;
+    }
+}
+
+}
