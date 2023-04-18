@@ -373,6 +373,26 @@ nav .btn {
     margin-top: 1rem;
 }
 
+.contentRow {
+    flex-direction: column;
+    text-align: center;
+}
+
+.contentRow h3 {
+    width: 100%;
+    max-width: 100%;
+}
+
+.contentRow .wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.contentRow .quote p {
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
 .card {
     display: flex;
     flex-direction: row;
@@ -399,6 +419,11 @@ nav .btn {
     align-items: center;
     padding: 4rem 0;
     width: 100%;
+}
+
+.contentRow .card {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
 }
 
 .card.featured .description {
@@ -435,6 +460,32 @@ nav .btn {
 
 .about p {
     text-align: left;
+}
+
+.toc .wrapper {
+    background-color: rgba(255, 255, 255, 0.1);
+    width: fit-content;
+    padding: 2.5rem 2rem;
+    color: white;
+    border-radius: .5rem;
+}
+
+.toc h3 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-family: 'Serif', serif;
+    font-weight: initial;
+}
+
+.toc ul li {
+    font-size: .875rem;
+}
+
+.toc .strong {
+    font-size: 1rem;
+    font-family: 'Serif', serif;
 }
 
 footer {
@@ -580,6 +631,14 @@ footer p {
    .card {
     flex-direction: column;
    }
+
+   .contentRow .wrapper {
+    flex-direction: column;
+   }
+
+   .contentRow .card {
+      padding: 1.5rem;
+    }
 
 }
 
