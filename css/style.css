@@ -550,6 +550,24 @@ footer p {
     cursor: pointer;
 }
 
+  .homeBody .btnIcon {
+    background-image: url('../images/dm-icon-menu.png');
+  }
+
+  .homeBody header nav ul {
+    flex-direction: column;
+    position: absolute;
+    top: 72px;
+    width: max-content;
+    z-index: 1;
+    padding: 1rem 1.5rem;
+    align-items: flex-start;
+    border-radius: .25rem;
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0px 10px 24px -12px rgba(0,0,0,0.15);
+  }
+
   .mobileNav {
     display: flex;
     align-self: center;
@@ -669,8 +687,13 @@ footer p {
 
     .homeBody .intro {
         background-position-x: center;
-        background-position-y: 80vh;
+        background-position-y: 90vh;
         background-size: 65%;
+        height: 150vh;
+    }
+
+    .homeBody .intro .btnGrp {
+        margin-bottom: 50vh;
     }
 
     .homeBody .intro h2 {
