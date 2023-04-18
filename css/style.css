@@ -377,6 +377,7 @@ nav .btn {
 .contentRow {
     flex-direction: column;
     text-align: center;
+    align-items: center;
 }
 
 .contentRow h3 {
