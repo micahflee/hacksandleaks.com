@@ -659,6 +659,11 @@ footer p {
       padding: 1.5rem;
     }
 
+    .homeBody header nav ul {
+        background-color: rgba(61,61,61,1);
+        right: 3.5rem;
+      }
+
 }
 
 @media only screen and (max-width: 640px) {
@@ -693,7 +698,7 @@ footer p {
     }
 
     .homeBody .intro .btnGrp {
-        margin-bottom: 40vh;
+        margin-bottom: 45vh;
     }
 
     .homeBody .intro h2 {
