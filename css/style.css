@@ -422,6 +422,18 @@ nav .btn {
     width: 100%;
 }
 
+.purchaseOptions .description p {
+    margin-bottom: 1.5rem;
+}
+
+.purchaseOptions .wrapper {
+    justify-content: bottom;
+}
+
+.purchaseOptions .description img {
+    max-width: 10rem;
+}
+
 .contentRow .card {
     padding-right: 1.5rem;
     padding-left: 1.5rem;
