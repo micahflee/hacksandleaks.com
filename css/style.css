@@ -542,6 +542,11 @@ p + .strong {
     margin-bottom: 0 ;
 }
 
+    .contentRow.purchaseOptions h3 {
+        width: 100%;
+        text-align: left;
+    }
+
 @media only screen and (max-width: 960px) {
 
   header nav ul {
@@ -686,11 +691,19 @@ p + .strong {
         right: 3.5rem;
       }
 
+    .purchaseOptions .card {
+        padding: 3rem 1.5rem;
+    }
+
 }
 
 @media only screen and (max-width: 640px) {
   h2 {
         font-size: 2.5rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
     }
 
     .homeBody .intro h2, .intro p {
