@@ -687,13 +687,13 @@ footer p {
 
     .homeBody .intro {
         background-position-x: center;
-        background-position-y: 90vh;
+        background-position-y: 85vh;
         background-size: 65%;
-        height: 150vh;
+        height: 140vh;
     }
 
     .homeBody .intro .btnGrp {
-        margin-bottom: 50vh;
+        margin-bottom: 40vh;
     }
 
     .homeBody .intro h2 {
