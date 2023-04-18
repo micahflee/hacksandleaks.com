@@ -542,11 +542,6 @@ p + .strong {
     margin-bottom: 0 ;
 }
 
-    .contentRow.purchaseOptions h3 {
-        width: 100%;
-        text-align: left;
-    }
-
 @media only screen and (max-width: 960px) {
 
   header nav ul {
