@@ -704,6 +704,10 @@ footer p {
     .homeBody .intro h2 {
         max-width: 90%;
     }
+
+    .secondaryIntro {
+      padding: 10rem 0 10rem 0;
+    }
 }
 
 @media only screen and (max-width: 390px) {
