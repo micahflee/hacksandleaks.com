@@ -126,6 +126,7 @@ body {
     border-radius: .25rem;
     text-decoration: none;
     white-space: nowrap;
+    width: fit-content;
 }
 
 .btnLrg {
@@ -484,8 +485,13 @@ nav .btn {
     font-size: .875rem;
 }
 
+.strong {
+    font-weight: bold;
+}
+
 .toc .strong {
     font-size: 1rem;
+    font-weight: initial;
     font-family: 'Serif', serif;
 }
 
@@ -518,6 +524,10 @@ footer p {
     background: linear-gradient(0deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
     bottom: 0;
     left: 0;
+}
+
+p + .strong {
+    margin-bottom: 0 ;
 }
 
 @media only screen and (max-width: 960px) {
