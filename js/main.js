@@ -54,13 +54,11 @@ function generateRandomString(length) {
 
 function cipherAnimation(element, duration) {
   const originalText = element.textContent;
-  const cipherText = generateRandomString(originalText.length);
-  element.textContent = cipherText;
+  element.textContent = btoa(originalText);
 
   let decipherProgress = 0;
   const decipherInterval = setInterval(function () {
-    const progressPercentage = decipherProgress / originalText.length;
-    const newText = originalText.slice(0, decipherProgress) + cipherText.slice(decipherProgress);
+    const newText = originalText.slice(0, decipherProgress) + btoa(originalText.slice(decipherProgress));
     element.textContent = newText;
     decipherProgress++;
 
@@ -75,12 +73,12 @@ cipherAnimation(title, 2000); // You can adjust the duration as desired.
 title.classList.add("active");
 
 
-$(document).ready(function() {
-  $('.btnIcon').on('click', function() {
+$(document).ready(function () {
+  $('.btnIcon').on('click', function () {
     $('nav ul').toggleClass('show');
   });
 
-  $('nav li').on('click', function() {
+  $('nav li').on('click', function () {
     $('header nav ul').removeClass('show');
   });
 });
