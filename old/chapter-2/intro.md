@@ -1,3 +1,0 @@
-## Chapter 2: Acquiring Datasets
-
-In early January 2010, 22-year-old Chelsea Manning sat at a Windows computer in a temporary Sensitive Compartmentalized Information Facility (SCIF)—an enclosed area or room that’s suitable for working with secret documents—in eastern Baghdad. She was downloading half a million secret “significant activity” reports from the military network SIPRNet, a Department of Defense computer network that’s suitable for transmitting classified information.
