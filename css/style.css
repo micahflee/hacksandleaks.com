@@ -803,6 +803,10 @@ p+.strong {
     h2 {
         font-size: 1.875rem;
     }
+
+    .intro p {
+        font-size: 1.rem;
+    }
 }
 
 }
