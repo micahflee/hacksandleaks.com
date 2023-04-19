@@ -80,8 +80,13 @@ function build() {
     const htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="author" content="Micah Lee">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data by Micah Lee.">
+    <meta name="apple-mobile-web-app-title" content="Hacks, Leaks, and Revelations">
+    <meta name="application-name" content="Hacks, Leaks, and Revelations">
+    <meta name="theme-color" content="#86D58D">
     <title>${chapter.charAt(0).toUpperCase() + chapter.slice(1)}</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
