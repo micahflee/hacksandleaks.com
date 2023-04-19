@@ -63,6 +63,7 @@ body {
 .homeBody .intro p {
     font-family: 'Mono', monospace;
     color: #86D58D !important;
+    margin: .5rem 0;
 }
 
 .homeBody .intro {
@@ -137,6 +138,7 @@ body {
 .btnGrp {
     display: flex;
     flex-direction: row;
+    margin-top: 1.5rem;
 }
 
 .btnGrp .btn:first-of-type {
@@ -384,7 +386,6 @@ nav .btn {
 
 .intro .btn {
     width: fit-content;
-    margin-top: 1rem;
 }
 
 .pagination {
