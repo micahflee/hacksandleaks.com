@@ -262,6 +262,20 @@ section:not(.intro) {
     margin-bottom: 3rem;
 }
 
+.cipher-title {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.cipher-title.active {
+  opacity: 1;
+}
+
+.cipher-title-container {
+  display: inline-block;
+  max-width: 100%;
+}
+
 /*HEADER*/
 
 header {
