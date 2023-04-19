@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { marked } = require('marked');
 
-const inputDir = path.join(__dirname, '..', 'md');
+const inputDir = path.join(__dirname, 'md');
 const outputDir = 'output'; // the directory where your static HTML files will be generated
 
 function generateHTML(markdown) {
@@ -10,9 +10,9 @@ function generateHTML(markdown) {
     console.error('Error: markdown content is undefined or null');
     return '';
   }
-  
+
   const html = marked(markdown);
-  
+
   // Wrap Summary section in a div with a class
   const div = document.createElement('div');
   div.innerHTML = html;
@@ -20,7 +20,7 @@ function generateHTML(markdown) {
   if (summary) {
     summary.outerHTML = `<div class="summary" id="summary">${summary.innerHTML}</div>`;
   }
-  
+
   // Apply CSS to prevent Markdown parser from interpreting Summary section contents
   const css = '<style>.summary * { display: inline; }</style>';
   return css + div.innerHTML;
@@ -63,10 +63,10 @@ function build() {
     const introMd = fs.readFileSync(path.join(chapterPath, 'intro.md'), 'utf-8');
     const bodyMd = fs.readFileSync(path.join(chapterPath, 'body.md'), 'utf-8');
     const paginationMd = fs.readFileSync(path.join(chapterPath, 'pagination.md'), 'utf-8');
-    
+
     // Calculate read time
     const readTime = calculateReadTime(introMd + bodyMd);
-    
+
     const navHTML = marked(fs.readFileSync(path.join(inputDir, 'nav.md'), 'utf-8'));
     const introHTML = `<div id="reading-time">~${readTime} min read</div>` + marked(introMd);
     const bodyHTML = marked(bodyMd);

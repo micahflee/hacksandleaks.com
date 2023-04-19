@@ -1,37 +1,37 @@
 @font-face {
-  font-family: "Sans";
-  src: url("../fonts/sans/Atkinson-Hyperlegible-Regular.woff2") format("woff2"),
-       url("../fonts/sans/Atkinson-Hyperlegible-Regular.woff") format("woff");
+    font-family: "Sans";
+    src: url("../fonts/sans/Atkinson-Hyperlegible-Regular.woff2") format("woff2"),
+        url("../fonts/sans/Atkinson-Hyperlegible-Regular.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Sans Bold";
-  src: url("../fonts/sans/Atkinson-Hyperlegible-Bold.woff2") format("woff2"),
-       url("../fonts/sans/Atkinson-Hyperlegible-Bold.woff") format("woff");
+    font-family: "Sans Bold";
+    src: url("../fonts/sans/Atkinson-Hyperlegible-Bold.woff2") format("woff2"),
+        url("../fonts/sans/Atkinson-Hyperlegible-Bold.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Serif";
-  src: url("../fonts/serif/Merriweather-Regular.woff2") format("woff2"),
-       url("../fonts/serif/Merriweather-Regular.woff") format("woff");
+    font-family: "Serif";
+    src: url("../fonts/serif/Merriweather-Regular.woff2") format("woff2"),
+        url("../fonts/serif/Merriweather-Regular.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Mono";
-  src: url("../fonts/mono/WOFF2/IBMPlexMono-Regular.woff2") format("woff2"),
-       url("../fonts/mono/WOFF/IBMPlexMono-Regular.woff") format("woff");
+    font-family: "Mono";
+    src: url("../fonts/mono/WOFF2/IBMPlexMono-Regular.woff2") format("woff2"),
+        url("../fonts/mono/WOFF/IBMPlexMono-Regular.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Mono Light";
-  src: url("../fonts/mono/WOFF2/IBMPlexMono-Light.woff2") format("woff2"),
-       url("../fonts/mono/WOFF/IBMPlexMono-Light.woff") format("woff");
+    font-family: "Mono Light";
+    src: url("../fonts/mono/WOFF2/IBMPlexMono-Light.woff2") format("woff2"),
+        url("../fonts/mono/WOFF/IBMPlexMono-Light.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Mono Extra Light";
-  src: url("../fonts/mono/WOFF2/IBMPlexMono-ExtraLight.woff2") format("woff2"),
-       url("../fonts/mono/WOFF/IBMPlexMono-ExtraLight.woff") format("woff");
+    font-family: "Mono Extra Light";
+    src: url("../fonts/mono/WOFF2/IBMPlexMono-ExtraLight.woff2") format("woff2"),
+        url("../fonts/mono/WOFF/IBMPlexMono-ExtraLight.woff") format("woff");
 }
 
 * {
@@ -48,14 +48,14 @@ body {
 }
 
 .homeBody header {
-    background-color: #333; 
+    background-color: #333;
 }
 
-.homeBody h1, 
-.homeBody h2, 
-.homeBody h3, 
-.homeBody h4, 
-.homeBody h5, 
+.homeBody h1,
+.homeBody h2,
+.homeBody h3,
+.homeBody h4,
+.homeBody h5,
 .homeBody h6 {
     color: #86D58D !important;
 }
@@ -78,7 +78,7 @@ body {
 }
 
 .homeBody .btn {
-    border-color: rgba(255,255,255,.3);
+    border-color: rgba(255, 255, 255, .3);
     font-family: 'Mono', monospace;
     color: #86D58D;
 }
@@ -93,7 +93,7 @@ body {
     color: #fff;
 }
 
-.homeBody .card.quote .description p + p {
+.homeBody .card.quote .description p+p {
     color: #86D58D;
 }
 
@@ -122,7 +122,7 @@ body {
     font-size: .875rem;
     padding: .75rem 1rem;
     font-weight: bold;
-    border: 1px solid rgba(0,0,0,.15);
+    border: 1px solid rgba(0, 0, 0, .15);
     border-radius: .25rem;
     text-decoration: none;
     white-space: nowrap;
@@ -144,9 +144,9 @@ body {
 }
 
 .primaryBtn {
-	background-color: #333;
-	color: #fff;
-	border: none;
+    background-color: #333;
+    color: #fff;
+    border: none;
 }
 
 .wrapper {
@@ -158,16 +158,15 @@ body {
     padding: 0 1.5rem;
 }
 
-p, li {
+p,
+li {
     font-size: 1.125rem;
     line-height: 1.5;
     max-width: 640px;
     width: 100%;
 }
 
-a {
-
-}
+a {}
 
 ul {
     margin: 0;
@@ -180,7 +179,12 @@ ul li {
     margin-bottom: 1rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     line-height: 1.2;
     font-family: 'Mono Light', monospace;
     max-width: 640px;
@@ -190,7 +194,14 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 0;
 }
 
-h1, h2, h3, h4, h5, h6, a, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p {
     color: #333;
 }
 
@@ -198,7 +209,9 @@ h3 {
     margin-top: 3.5rem;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
     margin-top: 2rem;
 }
 
@@ -231,26 +244,26 @@ h6 {
 }
 
 pre {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  width: 100%;
-  max-width: 640px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+    max-width: 640px;
 }
 
 code {
-  display: inline-block;
-  max-width: 100%;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  font-size: .875rem;
-  line-height: 1.5;
-  background-color: rgba(0,0,0,0.05);
-  border: 1px solid rgba(0,0,0,0.1);
-  padding: 1rem 1rem;
-  color: rgba(0,0,0,0.85);
-  border-radius: .25rem;
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: .875rem;
+    line-height: 1.5;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem 1rem;
+    color: rgba(0, 0, 0, 0.85);
+    border-radius: .25rem;
 }
 
 section {
@@ -263,17 +276,18 @@ section:not(.intro) {
 }
 
 .cipher-title {
-  opacity: 0;
-  transition: opacity 1s ease;
+    opacity: 0;
+    transition: opacity 1s ease;
 }
 
 .cipher-title.active {
-  opacity: 1;
+    opacity: 1;
 }
 
 .cipher-title-container {
-  display: inline-block;
-  max-width: 100%;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 /*HEADER*/
@@ -285,12 +299,12 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(255,255,255,1);
+    background-color: rgba(255, 255, 255, 1);
     z-index: 10;
 }
 
 header h1 {
-	width: fit-content;
+    width: fit-content;
     font-size: 1rem;
 }
 
@@ -342,8 +356,8 @@ nav .btn {
 }
 
 .secondaryIntro {
-  height: auto;
-  padding: 13rem 0 10rem 0;
+    height: auto;
+    padding: 13rem 0 10rem 0;
 }
 
 #reading-time {
@@ -356,14 +370,14 @@ nav .btn {
     max-width: 65%;
 }
 
-.intro h2 + p {
+.intro h2+p {
     font-size: 1rem;
     font-family: 'Serif', serif;
     line-height: 1.6;
     margin: 0 0 .5rem 0;
 }
 
-.intro h2 + p + p {
+.intro h2+p+p {
     font-size: .875rem;
     margin-bottom: 0;
 }
@@ -381,7 +395,7 @@ nav .btn {
     font-size: .875rem;
     padding: .875rem 1rem .75rem 1rem;
     font-weight: bold;
-    border: 1px solid rgba(0,0,0,.15);
+    border: 1px solid rgba(0, 0, 0, .15);
     border-radius: .25rem;
     text-decoration: none;
     display: inline-block;
@@ -477,7 +491,7 @@ nav .btn {
     margin-bottom: 1rem;
 }
 
-.card.quote .description p + p {
+.card.quote .description p+p {
     font-size: .875rem;
     font-family: 'Sans', sans-serif;
 }
@@ -553,153 +567,154 @@ footer p {
     left: 0;
 }
 
-p + .strong {
-    margin-bottom: 0 ;
+p+.strong {
+    margin-bottom: 0;
 }
 
 @media only screen and (max-width: 960px) {
 
-  header nav ul {
-    display: none;
-  }
+    header nav ul {
+        display: none;
+    }
 
-  header nav ul li {
-    margin: 1rem 0;
-  }
+    header nav ul li {
+        margin: 1rem 0;
+    }
 
-  header nav ul li:first-of-type {
-    margin: 0 0 1rem 0;
-  }
+    header nav ul li:first-of-type {
+        margin: 0 0 1rem 0;
+    }
 
-  header nav ul li:last-of-type {
-    margin: 1rem 0 0 0;
-  }
+    header nav ul li:last-of-type {
+        margin: 1rem 0 0 0;
+    }
 
-  .btnIcon {
-    background-image: url('../images/lm-icon-menu.png');
-    display: flex;
-    align-items: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin: 0 1rem;
-    cursor: pointer;
-}
+    .btnIcon {
+        background-image: url('../images/lm-icon-menu.png');
+        display: flex;
+        align-items: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 2.5rem;
+        height: 2.5rem;
+        margin: 0 1rem;
+        cursor: pointer;
+    }
 
-  .homeBody .btnIcon {
-    background-image: url('../images/dm-icon-menu.png');
-  }
+    .homeBody .btnIcon {
+        background-image: url('../images/dm-icon-menu.png');
+    }
 
-  .homeBody header nav ul {
-    flex-direction: column;
-    position: absolute;
-    top: 72px;
-    width: max-content;
-    z-index: 1;
-    padding: 1rem 1.5rem;
-    align-items: flex-start;
-    border-radius: .25rem;
-    background-color: white;
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0px 10px 24px -12px rgba(0,0,0,0.15);
-  }
+    .homeBody header nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        width: max-content;
+        z-index: 1;
+        padding: 1rem 1.5rem;
+        align-items: flex-start;
+        border-radius: .25rem;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 10px 24px -12px rgba(0, 0, 0, 0.15);
+    }
 
-  .mobileNav {
-    display: flex;
-    align-self: center;
-  }
+    .mobileNav {
+        display: flex;
+        align-self: center;
+    }
 
-  header nav ul {
-    flex-direction: column;
-    position: absolute;
-    top: 72px;
-    width: max-content;
-    z-index: 1;
-    padding: 1rem 1.5rem;
-    align-items: flex-start;
-    border-radius: .25rem;
-    background-color: white;
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0px 10px 24px -12px rgba(0,0,0,0.15);
-  }
+    header nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        width: max-content;
+        z-index: 1;
+        padding: 1rem 1.5rem;
+        align-items: flex-start;
+        border-radius: .25rem;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 10px 24px -12px rgba(0, 0, 0, 0.15);
+    }
 
-  header nav ul li a.wrapper {
-    display: flex;
-    width: 100%;
-  }
+    header nav ul li a.wrapper {
+        display: flex;
+        width: 100%;
+    }
 
-  nav .btn:last-of-type {
-    margin-right: 0;
-  }
+    nav .btn:last-of-type {
+        margin-right: 0;
+    }
 
-  nav ul .btn {
-    margin-right: 1rem !important;
-    margin-left: 1rem !important;
-  }
+    nav ul .btn {
+        margin-right: 1rem !important;
+        margin-left: 1rem !important;
+    }
 
-  header nav .btn {
-    margin: var(--spacing-base) var(--spacing-medium);
-    display: inline-flex !important;
-  }
+    header nav .btn {
+        margin: var(--spacing-base) var(--spacing-medium);
+        display: inline-flex !important;
+    }
 
-  header nav ul li a.wrapper {
-    display: flex;
-  }
+    header nav ul li a.wrapper {
+        display: flex;
+    }
 
-  .intro h2 {
-    max-width: 100%;
-  }
+    .intro h2 {
+        max-width: 100%;
+    }
 
-  .homeBody .intro {
-    height: 100vh;
-    background-size: 33%;
+    .homeBody .intro {
+        height: 100vh;
+        background-size: 33%;
     }
 
     .homeBody .intro {
         background-size: 40%;
     }
 
-    .homeBody .intro h2, .intro p {
+    .homeBody .intro h2,
+    .intro p {
         max-width: 50%;
     }
 }
 
 @media only screen and (max-width: 768px) {
-  h2 {
+    h2 {
         font-size: 3rem;
     }
 
-   .description.flip {
-    order: 0;
-    padding-left: 0;
-   }
+    .description.flip {
+        order: 0;
+        padding-left: 0;
+    }
 
-   .card .description {
+    .card .description {
         width: 100%;
         padding-right: 0;
-   }
+    }
 
-   .card svg {
+    .card svg {
         width: 100%;
-   }
+    }
 
-   .card {
-    flex-direction: column;
-   }
+    .card {
+        flex-direction: column;
+    }
 
-   .contentRow .wrapper {
-    flex-direction: column;
-   }
+    .contentRow .wrapper {
+        flex-direction: column;
+    }
 
-   .contentRow .card {
-      padding: 1.5rem;
+    .contentRow .card {
+        padding: 1.5rem;
     }
 
     .homeBody header nav ul {
-        background-color: rgba(61,61,61,1);
+        background-color: rgba(61, 61, 61, 1);
         right: 3.5rem;
-      }
+    }
 
     .purchaseOptions .card {
         padding: 3rem 1.5rem;
@@ -708,7 +723,7 @@ p + .strong {
 }
 
 @media only screen and (max-width: 640px) {
-  h2 {
+    h2 {
         font-size: 2.5rem;
     }
 
@@ -716,7 +731,8 @@ p + .strong {
         font-size: 1.5rem;
     }
 
-    .homeBody .intro h2, .intro p {
+    .homeBody .intro h2,
+    .intro p {
         max-width: 80%;
     }
 
@@ -731,7 +747,8 @@ p + .strong {
 
 @media only screen and (max-width: 480px) {
 
-    .homeBody .intro h2, .intro p {
+    .homeBody .intro h2,
+    .intro p {
         max-width: 100%;
     }
 
@@ -751,7 +768,7 @@ p + .strong {
     }
 
     .secondaryIntro {
-      padding: 10rem 0 5rem 0;
+        padding: 10rem 0 5rem 0;
     }
 }
 
