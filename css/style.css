@@ -798,14 +798,16 @@ p+.strong {
     }
 }
 
+@media only screen and (max-width: 420px) {
+    h2 {
+        font-size: 1.875rem;
+    }
+}
+
 @media only screen and (max-width: 390px) {
 
     header h1 {
         font-size: .875rem;
-    }
-
-    h2 {
-        font-size: 1.875rem;
     }
 }
 
