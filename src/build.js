@@ -87,7 +87,16 @@ function build() {
     <meta name="apple-mobile-web-app-title" content="Hacks, Leaks, and Revelations">
     <meta name="application-name" content="Hacks, Leaks, and Revelations">
     <meta name="theme-color" content="#86D58D">
+
     <title>${chapter.charAt(0).toUpperCase() + chapter.slice(1)}</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="images/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="images/favicon/android-chrome-512x512.png" sizes="512x512">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
