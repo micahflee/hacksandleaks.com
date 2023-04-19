@@ -66,12 +66,13 @@ body {
     margin: .5rem 0;
 }
 
-.homeBody .intro {
-    background-image: url('../images/cover.png');
-    background-size: 25%;
-    background-position-y: center;
-    background-position-x: 99%;
-    background-repeat: no-repeat;
+.homeBody .intro img {
+    width: 30%;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 550px;
 }
 
 .homeBody .intro h2 {
@@ -572,6 +573,17 @@ p+.strong {
     margin-bottom: 0;
 }
 
+@media only screen and (max-width: 1280px) {
+    .homeBody .intro img {
+        width: 35%;
+        right: 0;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+}
+
 @media only screen and (max-width: 960px) {
 
     header nav ul {
@@ -671,19 +683,23 @@ p+.strong {
         background-size: 33%;
     }
 
-    .homeBody .intro {
-        background-size: 40%;
+    .homeBody .intro img {
+        width: 40%;
     }
 
     .homeBody .intro h2,
     .intro p {
         max-width: 50%;
     }
+
+    h2 {
+        font-size: 2.75rem;
+    }
 }
 
 @media only screen and (max-width: 768px) {
     h2 {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .description.flip {
@@ -725,7 +741,7 @@ p+.strong {
 
 @media only screen and (max-width: 640px) {
     h2 {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
     }
 
     h3 {
@@ -737,13 +753,25 @@ p+.strong {
         max-width: 80%;
     }
 
-    .homeBody .intro {
-        background-position-x: 135%;
-    }
-
     .homeBody .intro h2 {
         max-width: 80%;
     }
+
+    .homeBody .intro {
+        height: 140vh;
+    }
+
+    .homeBody .intro img {
+        width: 50%;
+        top: 85vh;
+        left: 55%;
+        transform: translateX(-50%);
+    }
+
+    .homeBody .intro .btnGrp {
+        margin-bottom: 50vh;
+    }
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -753,17 +781,6 @@ p+.strong {
         max-width: 100%;
     }
 
-    .homeBody .intro {
-        background-position-x: center;
-        background-position-y: 85vh;
-        background-size: 65%;
-        height: 140vh;
-    }
-
-    .homeBody .intro .btnGrp {
-        margin-bottom: 45vh;
-    }
-
     .homeBody .intro h2 {
         max-width: 90%;
     }
@@ -771,12 +788,20 @@ p+.strong {
     .secondaryIntro {
         padding: 10rem 0 5rem 0;
     }
+
+    .homeBody .intro img {
+        width: 75%;
+    }
 }
 
 @media only screen and (max-width: 390px) {
 
     header h1 {
         font-size: .875rem;
+    }
+
+    h2 {
+        font-size: 2rem;
     }
 }
 
