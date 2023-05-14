@@ -71,7 +71,7 @@ function build() {
     const readTime = calculateReadTime(introMd + bodyMd);
 
     const navHTML = marked(fs.readFileSync(path.join(inputDir, 'nav.md'), 'utf-8'));
-    const introHTML = `<div id="reading-time">~${readTime} min read</div>` + marked(introMd);
+    const introHTML = marked(introMd);
     const bodyHTML = marked(bodyMd);
     const paginationHTML = marked(paginationMd);
     const footerHTML = marked(fs.readFileSync(path.join(inputDir, 'footer.md'), 'utf-8'));
@@ -115,6 +115,7 @@ function build() {
     </header>
     <section class="intro secondaryIntro">
         <div class="wrapper" id="intro-wrapper">
+          <div id="reading-time">~${readTime} min read${isChapter1 ? ' (excerpt)' : ''}</div>
           <h2>${title}</h2>
           ${introHTML}
         </div>
@@ -129,8 +130,6 @@ function build() {
     <footer id="footer">
         <div class="wrapper" id="footer-content">${footerHTML}</div>
     </footer>
-    <script src="js/jquery-min.js"></script>
-    <script src="js/main.js"></script>
 </body>
 </html>`;
 
