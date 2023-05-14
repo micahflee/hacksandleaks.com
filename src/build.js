@@ -3,7 +3,7 @@ const path = require('path');
 const { marked } = require('marked');
 
 const inputDir = path.join(__dirname, 'md');
-const outputDir = 'output'; // the directory where your static HTML files will be generated
+const outputDir = '..'; // the directory where your static HTML files will be generated
 
 function generateHTML(markdown) {
   if (!markdown) {
@@ -59,6 +59,9 @@ function build() {
   for (const [index, chapter] of chapters.entries()) {
     const chapterPath = path.join(inputDir, chapter);
 
+    // Read the title
+    const title = fs.readFileSync(path.join(chapterPath, 'title.txt'), 'utf-8');
+
     // Read intro, body, and pagination markdown files for each chapter
     const introMd = fs.readFileSync(path.join(chapterPath, 'intro.md'), 'utf-8');
     const bodyMd = fs.readFileSync(path.join(chapterPath, 'body.md'), 'utf-8');
@@ -83,13 +86,13 @@ function build() {
     <meta charset="utf-8">
     <meta name="author" content="Micah Lee">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data by Micah Lee.">
+    <meta name="description" content="Buy Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data by Micah Lee.">
     <meta name="apple-mobile-web-app-title" content="Hacks, Leaks, and Revelations">
     <meta name="application-name" content="Hacks, Leaks, and Revelations">
     <meta name="theme-color" content="#86D58D">
 
-    <title>${chapter.charAt(0).toUpperCase() + chapter.slice(1)}</title>
-    
+    <title>${title} - Hacks, Leaks, and Revelations</title>
+
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16">
@@ -111,7 +114,10 @@ function build() {
         </div>
     </header>
     <section class="intro secondaryIntro">
-        <div class="wrapper" id="intro-wrapper">${introHTML}</div>
+        <div class="wrapper" id="intro-wrapper">
+          <h2>${title}</h2>
+          ${introHTML}
+        </div>
     </section>
     <section id="content" data-content="${chapter}">
         <div class="wrapper ${isChapter1 ? 'trunc' : ''}" id="about-content">${bodyHTML}${isChapter1 ? '<div class="fade"></div>' : ''}
