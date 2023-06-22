@@ -15,5 +15,4 @@ When your markdown is ready, run:
 
 ```
 node build.js
-cp output/* ..
 ```
