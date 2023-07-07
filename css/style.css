@@ -506,6 +506,23 @@ nav .btn {
     text-align: left;
 }
 
+.events {
+    color: #ffffff;
+    text-align: left;
+}
+.events ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.events ul li {
+    font-size: .875rem;
+}
+.events .event-meta {
+    color: #86D58D;
+    font-style: italic;
+}
+
 .toc .wrapper {
     background-color: rgba(255, 255, 255, 0.1);
     width: fit-content;
