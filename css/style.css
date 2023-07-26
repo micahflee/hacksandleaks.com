@@ -425,6 +425,24 @@ nav .btn {
     font-size: 1rem;
 }
 
+.eventInfo { 
+    background-color: rgba(255,255,255,.1);
+    width: fit-content;
+    margin: 0 auto;
+    max-width: 90%;
+    border-radius: .5rem;
+    padding: 1rem;
+}
+
+.eventInfo h4 {
+    margin: .75rem 0 1.75rem 0 !important;
+    line-height: 1.5;
+}
+
+.eventInfo li {
+    font-size: 1rem !important;
+}
+
 .card {
     display: flex;
     flex-direction: row;
@@ -516,11 +534,15 @@ nav .btn {
     padding: 0;
 }
 .events ul li {
-    font-size: .875rem;
+    margin-bottom: 1.5rem;
+
 }
 .events .event-meta {
     color: #86D58D;
-    font-style: italic;
+    font-family: monospace;
+    font-size: .75rem;
+    margin-bottom: .25rem;
+    display: block;
 }
 
 .toc .wrapper {
@@ -763,6 +785,10 @@ p+.strong {
 
     h3 {
         font-size: 1.5rem;
+    }
+
+    h4 {
+        font-size: 1.325rem;
     }
 
     .homeBody .intro h2,
