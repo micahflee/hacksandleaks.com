@@ -425,8 +425,8 @@ nav .btn {
     font-size: 1rem;
 }
 
-.eventInfo { 
-    background-color: rgba(255,255,255,.1);
+.eventInfo {
+    background-color: rgba(255, 255, 255, .1);
     width: fit-content;
     margin: 0 auto;
     max-width: 90%;
@@ -467,7 +467,7 @@ nav .btn {
 .card.featured {
     flex-direction: column;
     align-items: center;
-    padding: 4rem 0;
+    padding: 1rem 0;
     width: 100%;
 }
 
@@ -489,7 +489,7 @@ nav .btn {
 }
 
 .card.featured .description {
-    padding: 0;
+    padding: 0 2rem;
     text-align: center;
     width: 100%;
     display: flex;
@@ -528,15 +528,18 @@ nav .btn {
     color: #ffffff;
     text-align: left;
 }
+
 .events ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
+
 .events ul li {
     margin-bottom: 1.5rem;
 
 }
+
 .events .event-meta {
     color: #86D58D;
     font-family: monospace;
@@ -610,6 +613,14 @@ footer p {
 
 p+.strong {
     margin-bottom: 0;
+}
+
+.slick-dots li button {
+    color: #aaaaaa;
+}
+
+.slick-dots li.slick-active button {
+    color: #ffffff;
 }
 
 @media only screen and (max-width: 1280px) {
