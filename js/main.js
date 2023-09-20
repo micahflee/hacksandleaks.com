@@ -36,30 +36,6 @@ $(document).ready(function () {
   $('nav li').on('click', function () {
     $('header nav ul').removeClass('show');
   });
-
-  // shuffle the divs in .reviews
-  const reviews = document.querySelector(".reviews");
-  for (let i = reviews.children.length; i >= 0; i--) {
-    reviews.appendChild(reviews.children[Math.random() * i | 0]);
-  }
-
-  // reviews
-  $('.reviews').slick({
-    accessibility: true,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: true,
-    infinite: true,
-    slidesToShow: 2,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-        }
-      }
-    ]
-  });
 });
 
 
