@@ -425,6 +425,7 @@ nav .btn {
     font-size: 1rem;
 }
 
+
 .eventInfo {
     background-color: rgba(255, 255, 255, .1);
     width: fit-content;
@@ -539,7 +540,6 @@ nav .btn {
     margin-bottom: 1.5rem;
 
 }
-
 .events .event-meta {
     color: #86D58D;
     font-family: monospace;
