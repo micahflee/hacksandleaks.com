@@ -38,6 +38,10 @@
     box-sizing: border-box;
 }
 
+html {
+  scroll-padding-top: 8rem;
+}
+
 body {
     margin: 0;
     font-family: 'Sans', Helvetica, Arial, sans-serif;
@@ -97,12 +101,14 @@ body {
 
 .homeBody .card.quote .description p+p {
     color: #86D58D;
+    font-size: .925rem;
 }
 
 .avatar {
-    width: 100px;
-    height: 100px;
+    width: 48px;
+    height: 48px;
     border-radius: 50vw;
+    margin-right: .5rem !important;
 }
 
 .author {
@@ -113,11 +119,30 @@ body {
 
 .quote {
     font-family: 'Serif', serif;
+    flex-direction: row !important;
+    max-width: 640px;
+    width: 90%;
+    align-items: start !important;
 }
 
 .quote p {
     line-height: 1.7;
-    font-size: 1.25rem;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.quote .avatar {
+    margin-right: 1.5rem;
+}
+
+.quote p:first-of-type {
+    margin-top: 0;
+}
+
+.snippetQuotes .avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 0 1rem 0;
 }
 
 .btn {
@@ -159,6 +184,24 @@ body {
     justify-content: center;
     flex-direction: column;
     padding: 0 1.5rem;
+}
+
+.wrapper.reviews {
+    align-items: center;
+}
+
+.highlights {
+    flex-direction: column;
+}
+
+.highlights p {
+    font-size: 1.125rem;
+}
+
+.highlights h3 {
+    width: fit-content;
+    align-self: center;
+    margin-bottom: 1rem;
 }
 
 p,
@@ -425,12 +468,11 @@ nav .btn {
     font-size: 1rem;
 }
 
-
 .eventInfo {
     background-color: rgba(255, 255, 255, .1);
-    width: fit-content;
+    width: 90%;
     margin: 0 auto;
-    max-width: 90%;
+    max-width: 640px;
     border-radius: .5rem;
     padding: 1rem;
 }
@@ -515,7 +557,13 @@ nav .btn {
 .card.quote .description p+p {
     font-size: .875rem;
     font-family: 'Sans', sans-serif;
+    display: flex;
+    align-items: center;
 }
+
+.card.quote .description p+img {
+    margin-right: 0;
+} 
 
 .about .btn {
     margin-top: 2rem;
