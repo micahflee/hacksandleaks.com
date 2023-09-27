@@ -38,6 +38,11 @@ $(document).ready(function () {
   });
 
   // shuffle the divs in .reviews
+  const reviewHighlights = document.querySelector(".review-highlights");
+  for (let i = reviewHighlights.children.length; i >= 0; i--) {
+    reviewHighlights.appendChild(reviewHighlights.children[Math.random() * i | 0]);
+  }
+
   const reviews = document.querySelector(".reviews");
   for (let i = reviews.children.length; i >= 0; i--) {
     reviews.appendChild(reviews.children[Math.random() * i | 0]);
