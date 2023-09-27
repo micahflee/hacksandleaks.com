@@ -39,7 +39,7 @@
 }
 
 html {
-  scroll-padding-top: 8rem;
+    scroll-padding-top: 8rem;
 }
 
 body {
@@ -186,7 +186,8 @@ body {
     padding: 0 1.5rem;
 }
 
-.wrapper.reviews {
+.wrapper.reviews,
+.wrapper.review-highlights {
     align-items: center;
 }
 
@@ -564,7 +565,7 @@ nav .btn {
 
 .card.quote .description p+img {
     margin-right: 0;
-} 
+}
 
 .about .btn {
     margin-top: 2rem;
@@ -589,6 +590,7 @@ nav .btn {
     margin-bottom: 1.5rem;
 
 }
+
 .events .event-meta {
     color: #86D58D;
     font-family: monospace;
