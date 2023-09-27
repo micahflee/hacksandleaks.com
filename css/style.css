@@ -315,6 +315,7 @@ code {
 section {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 section:not(.intro) {
@@ -657,6 +658,11 @@ footer p {
     background: linear-gradient(0deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
     bottom: 0;
     left: 0;
+}
+
+.video .wrapper h3 {
+    align-self: center;
+    width: fit-content;
 }
 
 p+.strong {
