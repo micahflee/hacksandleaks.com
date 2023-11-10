@@ -515,6 +515,10 @@ nav .btn {
     width: 100%;
 }
 
+.videoGrp {
+    flex: 1 0 0;
+}
+
 .purchaseOptions .description p {
     margin-bottom: 1.5rem;
 }
@@ -667,6 +671,24 @@ footer p {
 
 p+.strong {
     margin-bottom: 0;
+}
+
+.videoGrp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* This adds space between the cards. Adjust as needed. */
+}
+
+.card {
+    flex: 1;
+    padding: 10px; /* This adds some space inside the cards around the iframes. Adjust as needed. */
+}
+
+.card iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9; /* Maintain the aspect ratio of 16:9 for the videos */
 }
 
 @media only screen and (max-width: 1280px) {
@@ -831,6 +853,22 @@ p+.strong {
 
     .purchaseOptions .card {
         padding: 3rem 1.5rem;
+    }
+
+    .videoGrp {
+        flex-direction: column; /* Stack the flex items vertically */
+    }
+
+    .videoGrp .card {
+        /* Set to 100% to have each card take the full width of the container */
+        width: 100%;
+        /* Reset any flex-grow, flex-shrink and flex-basis values */
+        flex: none;
+        padding: 1rem 0 0 0;
+    }
+
+    .videoGrp .card:first-of-type {
+        margin-top: 1rem;
     }
 
 }
