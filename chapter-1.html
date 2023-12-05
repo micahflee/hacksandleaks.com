@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="author" content="Micah Lee">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Buy Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data by Micah Lee.">
+    <meta name="description"
+        content="Buy Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data by Micah Lee.">
     <meta name="apple-mobile-web-app-title" content="Hacks, Leaks, and Revelations">
     <meta name="application-name" content="Hacks, Leaks, and Revelations">
     <meta name="theme-color" content="#86D58D">
@@ -19,69 +21,182 @@
     <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
 
     <link rel="stylesheet" href="css/style.css">
-    <script defer data-domain="hacksandleaks.com" data-api="https://deniability.brisk.workers.dev/deniability/event" src="https://deniability.brisk.workers.dev/deniability/script.js"></script>
+    <script defer data-domain="hacksandleaks.com" data-api="https://deniability.brisk.workers.dev/deniability/event"
+        src="https://deniability.brisk.workers.dev/deniability/script.js"></script>
 </head>
+
 <body>
     <header>
         <div class="wrapper">
-           <h1><a href="/">Hacks, Leaks, and Revelations</a></h1>
+            <h1><a href="/">Hacks, Leaks, and Revelations</a></h1>
             <nav>
-                <div id="nav"><ul>
-<li><a href="./introduction.html">Introduction</a></li>
-<li><a href="./chapter-1.html">Chapter 1</a></li>
-</ul>
-</div>
+                <div id="nav">
+                    <ul>
+                        <li><a href="./introduction.html">Introduction</a></li>
+                        <li><a href="./chapter-1.html">Chapter 1</a></li>
+                    </ul>
+                </div>
                 <a class="mobileNav btnIcon"></a>
-                <a href="https://nostarch.com/hacks-leaks-and-revelations" role="button" class="primaryBtn btn">Pre-Order</a>
+                <a href="./buy.html" role="button" class="primaryBtn btn">Buy Now</a>
             </nav>
         </div>
     </header>
     <section class="intro secondaryIntro">
         <div class="wrapper" id="intro-wrapper">
-          <div id="reading-time">~10 min read (excerpt)</div>
-          <h2>Chapter 1: Protecting Sources and Yourself</h2>
-          <p>Most of us aren’t very aware of it, but we’re all under surveillance. Telecom companies and tech giants have access to a massive amount of private data about everyone who uses phones and the internet, from our exact physical locations at any given time to the content of our text messages and email, and they can share this data with leak investigators.</p>
+            <div id="reading-time">~10 min read (excerpt)</div>
+            <h2>Chapter 1: Protecting Sources and Yourself</h2>
+            <p>Most of us aren’t very aware of it, but we’re all under surveillance. Telecom companies and tech giants
+                have access to a massive amount of private data about everyone who uses phones and the internet, from
+                our exact physical locations at any given time to the content of our text messages and email, and they
+                can share this data with leak investigators.</p>
 
         </div>
     </section>
     <section id="content" data-content="chapter-1">
-        <div class="wrapper trunc" id="about-content"><p>Even when our private data doesn’t get sent directly to tech companies, our devices still record our every move locally. Can you name every single web page you visited last month? Your web browser probably can, and so can web trackers that follow your activity across the internet.</p>
-<p>In addition to the constant background surveillance that everyone faces, workers with access to sensitive datasets are often under even stricter corporate or government surveillance. Their work computers and phones come preinstalled with spyware that monitors everything they do. Database systems keep track of exactly who searches for which search terms and when, and which documents they open, download, or print.</p>
-<p>It’s in this environment that ordinary people find themselves becoming sources. Through the course of their work, they witness something unethical or disturbing. They might make a folder with incriminating documents, or take screenshots of the company chat, or do some searches on internal databases to learn more and make sure their suspicions are correct. They might email themselves some documents or copy files to a USB stick that they plug into their work computer. They might text their friends or family for advice while thinking about what to do next. Most sources aren’t aware of the massive digital trail that they’ve already left by the time they reach out to a journalist or regulator.</p>
-<p>In this chapter, you’ll learn about protecting sources and securing the datasets you obtain from them. I’ll go over the editorial and ethical considerations involved in redacting documents and deciding what information to publish, as well as where you should store datasets based on how sensitive they are. I’ll show you how to verify that datasets are authentic, describing how I’ve done so in the past for hacked data from COVID-19 pandemic profiteers and chat logs from WikiLeaks. Verifying the authenticity of datasets is not only important to writing accurate stories but also critical to protecting your reputation as a journalist. Finally, you’ll learn how to
-use password managers, encrypt disks, and protect yourself from malicious documents.</p>
-<h3 id="safely-communicating-with-sources">Safely Communicating with Sources</h3>
-<p>Because everything we do leaves a data trail, protecting sources is complicated and difficult. After you publish a blockbuster report based on information you’ve obtained from an anonymous whistleblower, you should expect the target of your investigation to launch an investigation of their own into your source’s identity. The balance of power between a confidential source and the investigators on their trail is extremely asymmetric. If you’re a journalist or researcher trying to protect your source, even doing all the right things perfectly isn’t always enough. Because so much of source protection is beyond your control, it’s important to focus on the handful of things that aren’t.</p>
-<p>As a journalist or researcher, verifying that data you’ve obtained is authentic is one of your core responsibilities. The simplest way to authenticate documents is to ask the company or government that produced them if they’re real, but this is fraught with risk to your source. In some cases, you don’t want to give up any details that might reveal your source’s identity. I’ll discuss this further in the “Authenticating Datasets” section later in this chapter. You also might not want to reveal that specific documents have been leaked, a topic you’ll learn more about in this chapter’s “Redaction” section.</p>
-<p>In this section, I’ll describe which sources face risks and which don’t, as well as strategies for reducing those risks. I’ll also discuss the differences between working with confidential sources who have legitimate access to inside information and hackers who break the law to obtain it. It’s important to carefully consider how your own choices as an investigator could impact your source, preferably before you even begin speaking with one.</p>
-<h3 id="working-with-public-data">Working with Public Data</h3>
-<p>Some datasets don’t pose any risk to the source at all. When the government publishes a set of documents in response to a public records request or when documents are made public as part of a lawsuit, you can include as much of the data as you like in your report. This data might contain revelations that powerful people don’t want anyone to know, but sharing those won’t put anyone at risk of retaliation, since the data is already public.</p>
-<p>Similarly, you don’t need to worry about source protection for datasets that may contain sensitive data but are public and widely available, such as the BlueLeaks dataset you’ll download in Chapter 2. Any information you discover from that dataset has already been scoured by the FBI investigators trying to determine who the hacker was. In these cases, it doesn’t matter how many people had access to the documents. There’s no chance of accidentally burning your source by providing too many details to a government or corporate media office when you ask if the data is real and if they have a statement. Since the dataset is already public, any damage to the source has already been done.</p>
-<h3 id="protecting-sensitive-information">Protecting Sensitive Information</h3>
-<p>If you’re dealing with a dataset from a <em>confidential</em> source, revealing their identity could cause your source to be fired, arrested, or even murdered. The most basic step you should take to protect your source is to simply not talk about them with anyone that isn’t closely collaborating with you on your investigation. Don’t post to social media any details about your source that you’re not planning on making public, don’t talk about them to your friends at parties, and don’t even talk about them to colleagues who aren’t involved in the investigation.</p>
-<p>If you’re interviewing a company or government agency about a leaked dataset you’ve obtained, don’t give them any details about your confidential source, even if they directly ask. If you get arrested and the police are demanding to know who your source is, you have the right to remain silent, and you should exercise it: don’t give the police any information they don’t already have. The only time that you’re obligated to reveal information about your source is if a judge orders you to—and even then, you can resist it.</p>
-<h3 id="minimizing-the-digital-trail">Minimizing the Digital Trail</h3>
-<p>Be sure to leave the smallest digital trail possible when communicating with your source. As much as you can, avoid communication by email, SMS messages, phone calls, direct messages in social media apps, and so on. Don’t follow your confidential source on social media, and make sure they don’t follow you.</p>
-<p>If you must send messages or make calls, use an encrypted messaging app like Signal, which I’ll cover in Chapter 2, and make sure your source deletes any records of their chats with you. You’ll often need to record what your source told you in order to report on it, but take steps to protect those records, such as removing them from messaging apps on your phone and keeping them locally on your computer rather than in a cloud service. If you no longer need your own records of conversations after you’ve published your report—for potential follow-up stories, for example—then delete them.</p>
-<p>Make sure your source knows not to search the internet for you or for the reports you’ve published in a way that could be associated with them. Google search history has been used as evidence against sources in the past. For example, in 2018, Treasury Department whistleblower Natalie Mayflower Sours Edwards was indicted for allegedly providing a secret dataset to BuzzFeed journalist Jason Leopold. The documents she was accused of leaking detailed suspicious financial transactions involving Republican Party operatives, senior members of Donald Trump’s 2020 election campaign, and a Kremlin-connected Russian agent and Russian oligarchs. During the leak investigation, the FBI obtained a search warrant to access her internet search history, and her indictment accused her of searching for multiple articles based on the contents of her alleged leaks shortly after they were published.</p>
-<h3 id="working-with-hackers-and-whistleblowers">Working with Hackers and Whistleblowers</h3>
-<p>The steps you must take to protect your source vary greatly depending on the person’s technical sophistication. Not all sources are whistleblowers, people with inside access to datasets or documents who leak evidence of wrongdoing for ethical reasons. Sometimes your source may be a hacktivist who wants to bring down companies or government agencies that they find unjust.</p>
-<p>Unlike most whistleblowers, hackers tend to understand that they’re under surveillance and that everything they do leaves a digital trail, so they usually take countermeasures to hide their tracks. It’s common for whistleblowers to reveal their identities to journalists for verification reasons, even if they aren’t publicly named, but hackers typically remain fully anonymous. However, hackers can often provide technical information you can use to independently authenticate a dataset using open source intelligence. As with any source, you can’t necessarily trust what hackers tell you, but their expertise can help you independently verify that the data they sent you is authentic. For these reasons, there’s often less risk to your source when you publish documents from hackers rather than from whistleblowers.</p>
-<p>When communicating with a hacker source, it’s important that you stick to your role as a journalist or researcher. In the US, you’re not breaking any laws just by speaking with a source who’s a hacker, but your source
-is almost certainly breaking laws by hacking into companies or governments and stealing data. Don’t do anything that could be construed as conspiring with them. For example, don’t ask them to get specific data for you; let them give you whatever data they choose. If you’re a journalist working with an established newsroom, you might fare better against legal threats than a freelancer would. While everyone should be protected equally under the law, newsrooms often have resources like lawyers and defense funds. When you’re not sure whether something you’re doing could get you in trouble, consult a lawyer.</p>
-<p>Sometimes sources pretend to be hacktivists or whistleblowers but are actually state-sponsored hackers. For instance, Russian military hackers posed as hacktivists when they compromised the Democratic Party and Hillary Clinton’s presidential campaign in 2016, interfering with the US election by sending hacked datasets to WikiLeaks. This sort of dataset might be authentic and newsworthy, but you don’t want to end up being a pawn in someone else’s information warfare. If you’re unsure about your source’s credibility or believe that they might have ulterior motives—or if you’re confident that they’re being dishonest with you—it’s important to mention your skepticism about your source, and why you have doubts, in your reporting. WikiLeaks did the opposite: it insisted its source wasn’t Russian intelligence when it knew otherwise, and it even spread the conspiracy theory that Seth Rich, a Democratic Party employee who was murdered, was the group’s real source, leading to years of harassment against Rich’s family members.</p>
-<div class="fade"></div>
+        <div class="wrapper trunc" id="about-content">
+            <p>Even when our private data doesn’t get sent directly to tech companies, our devices still record our
+                every move locally. Can you name every single web page you visited last month? Your web browser probably
+                can, and so can web trackers that follow your activity across the internet.</p>
+            <p>In addition to the constant background surveillance that everyone faces, workers with access to sensitive
+                datasets are often under even stricter corporate or government surveillance. Their work computers and
+                phones come preinstalled with spyware that monitors everything they do. Database systems keep track of
+                exactly who searches for which search terms and when, and which documents they open, download, or print.
+            </p>
+            <p>It’s in this environment that ordinary people find themselves becoming sources. Through the course of
+                their work, they witness something unethical or disturbing. They might make a folder with incriminating
+                documents, or take screenshots of the company chat, or do some searches on internal databases to learn
+                more and make sure their suspicions are correct. They might email themselves some documents or copy
+                files to a USB stick that they plug into their work computer. They might text their friends or family
+                for advice while thinking about what to do next. Most sources aren’t aware of the massive digital trail
+                that they’ve already left by the time they reach out to a journalist or regulator.</p>
+            <p>In this chapter, you’ll learn about protecting sources and securing the datasets you obtain from them.
+                I’ll go over the editorial and ethical considerations involved in redacting documents and deciding what
+                information to publish, as well as where you should store datasets based on how sensitive they are. I’ll
+                show you how to verify that datasets are authentic, describing how I’ve done so in the past for hacked
+                data from COVID-19 pandemic profiteers and chat logs from WikiLeaks. Verifying the authenticity of
+                datasets is not only important to writing accurate stories but also critical to protecting your
+                reputation as a journalist. Finally, you’ll learn how to
+                use password managers, encrypt disks, and protect yourself from malicious documents.</p>
+            <h3 id="safely-communicating-with-sources">Safely Communicating with Sources</h3>
+            <p>Because everything we do leaves a data trail, protecting sources is complicated and difficult. After you
+                publish a blockbuster report based on information you’ve obtained from an anonymous whistleblower, you
+                should expect the target of your investigation to launch an investigation of their own into your
+                source’s identity. The balance of power between a confidential source and the investigators on their
+                trail is extremely asymmetric. If you’re a journalist or researcher trying to protect your source, even
+                doing all the right things perfectly isn’t always enough. Because so much of source protection is beyond
+                your control, it’s important to focus on the handful of things that aren’t.</p>
+            <p>As a journalist or researcher, verifying that data you’ve obtained is authentic is one of your core
+                responsibilities. The simplest way to authenticate documents is to ask the company or government that
+                produced them if they’re real, but this is fraught with risk to your source. In some cases, you don’t
+                want to give up any details that might reveal your source’s identity. I’ll discuss this further in the
+                “Authenticating Datasets” section later in this chapter. You also might not want to reveal that specific
+                documents have been leaked, a topic you’ll learn more about in this chapter’s “Redaction” section.</p>
+            <p>In this section, I’ll describe which sources face risks and which don’t, as well as strategies for
+                reducing those risks. I’ll also discuss the differences between working with confidential sources who
+                have legitimate access to inside information and hackers who break the law to obtain it. It’s important
+                to carefully consider how your own choices as an investigator could impact your source, preferably
+                before you even begin speaking with one.</p>
+            <h3 id="working-with-public-data">Working with Public Data</h3>
+            <p>Some datasets don’t pose any risk to the source at all. When the government publishes a set of documents
+                in response to a public records request or when documents are made public as part of a lawsuit, you can
+                include as much of the data as you like in your report. This data might contain revelations that
+                powerful people don’t want anyone to know, but sharing those won’t put anyone at risk of retaliation,
+                since the data is already public.</p>
+            <p>Similarly, you don’t need to worry about source protection for datasets that may contain sensitive data
+                but are public and widely available, such as the BlueLeaks dataset you’ll download in Chapter 2. Any
+                information you discover from that dataset has already been scoured by the FBI investigators trying to
+                determine who the hacker was. In these cases, it doesn’t matter how many people had access to the
+                documents. There’s no chance of accidentally burning your source by providing too many details to a
+                government or corporate media office when you ask if the data is real and if they have a statement.
+                Since the dataset is already public, any damage to the source has already been done.</p>
+            <h3 id="protecting-sensitive-information">Protecting Sensitive Information</h3>
+            <p>If you’re dealing with a dataset from a <em>confidential</em> source, revealing their identity could
+                cause your source to be fired, arrested, or even murdered. The most basic step you should take to
+                protect your source is to simply not talk about them with anyone that isn’t closely collaborating with
+                you on your investigation. Don’t post to social media any details about your source that you’re not
+                planning on making public, don’t talk about them to your friends at parties, and don’t even talk about
+                them to colleagues who aren’t involved in the investigation.</p>
+            <p>If you’re interviewing a company or government agency about a leaked dataset you’ve obtained, don’t give
+                them any details about your confidential source, even if they directly ask. If you get arrested and the
+                police are demanding to know who your source is, you have the right to remain silent, and you should
+                exercise it: don’t give the police any information they don’t already have. The only time that you’re
+                obligated to reveal information about your source is if a judge orders you to—and even then, you can
+                resist it.</p>
+            <h3 id="minimizing-the-digital-trail">Minimizing the Digital Trail</h3>
+            <p>Be sure to leave the smallest digital trail possible when communicating with your source. As much as you
+                can, avoid communication by email, SMS messages, phone calls, direct messages in social media apps, and
+                so on. Don’t follow your confidential source on social media, and make sure they don’t follow you.</p>
+            <p>If you must send messages or make calls, use an encrypted messaging app like Signal, which I’ll cover in
+                Chapter 2, and make sure your source deletes any records of their chats with you. You’ll often need to
+                record what your source told you in order to report on it, but take steps to protect those records, such
+                as removing them from messaging apps on your phone and keeping them locally on your computer rather than
+                in a cloud service. If you no longer need your own records of conversations after you’ve published your
+                report—for potential follow-up stories, for example—then delete them.</p>
+            <p>Make sure your source knows not to search the internet for you or for the reports you’ve published in a
+                way that could be associated with them. Google search history has been used as evidence against sources
+                in the past. For example, in 2018, Treasury Department whistleblower Natalie Mayflower Sours Edwards was
+                indicted for allegedly providing a secret dataset to BuzzFeed journalist Jason Leopold. The documents
+                she was accused of leaking detailed suspicious financial transactions involving Republican Party
+                operatives, senior members of Donald Trump’s 2020 election campaign, and a Kremlin-connected Russian
+                agent and Russian oligarchs. During the leak investigation, the FBI obtained a search warrant to access
+                her internet search history, and her indictment accused her of searching for multiple articles based on
+                the contents of her alleged leaks shortly after they were published.</p>
+            <h3 id="working-with-hackers-and-whistleblowers">Working with Hackers and Whistleblowers</h3>
+            <p>The steps you must take to protect your source vary greatly depending on the person’s technical
+                sophistication. Not all sources are whistleblowers, people with inside access to datasets or documents
+                who leak evidence of wrongdoing for ethical reasons. Sometimes your source may be a hacktivist who wants
+                to bring down companies or government agencies that they find unjust.</p>
+            <p>Unlike most whistleblowers, hackers tend to understand that they’re under surveillance and that
+                everything they do leaves a digital trail, so they usually take countermeasures to hide their tracks.
+                It’s common for whistleblowers to reveal their identities to journalists for verification reasons, even
+                if they aren’t publicly named, but hackers typically remain fully anonymous. However, hackers can often
+                provide technical information you can use to independently authenticate a dataset using open source
+                intelligence. As with any source, you can’t necessarily trust what hackers tell you, but their expertise
+                can help you independently verify that the data they sent you is authentic. For these reasons, there’s
+                often less risk to your source when you publish documents from hackers rather than from whistleblowers.
+            </p>
+            <p>When communicating with a hacker source, it’s important that you stick to your role as a journalist or
+                researcher. In the US, you’re not breaking any laws just by speaking with a source who’s a hacker, but
+                your source
+                is almost certainly breaking laws by hacking into companies or governments and stealing data. Don’t do
+                anything that could be construed as conspiring with them. For example, don’t ask them to get specific
+                data for you; let them give you whatever data they choose. If you’re a journalist working with an
+                established newsroom, you might fare better against legal threats than a freelancer would. While
+                everyone should be protected equally under the law, newsrooms often have resources like lawyers and
+                defense funds. When you’re not sure whether something you’re doing could get you in trouble, consult a
+                lawyer.</p>
+            <p>Sometimes sources pretend to be hacktivists or whistleblowers but are actually state-sponsored hackers.
+                For instance, Russian military hackers posed as hacktivists when they compromised the Democratic Party
+                and Hillary Clinton’s presidential campaign in 2016, interfering with the US election by sending hacked
+                datasets to WikiLeaks. This sort of dataset might be authentic and newsworthy, but you don’t want to end
+                up being a pawn in someone else’s information warfare. If you’re unsure about your source’s credibility
+                or believe that they might have ulterior motives—or if you’re confident that they’re being dishonest
+                with you—it’s important to mention your skepticism about your source, and why you have doubts, in your
+                reporting. WikiLeaks did the opposite: it insisted its source wasn’t Russian intelligence when it knew
+                otherwise, and it even spread the conspiracy theory that Seth Rich, a Democratic Party employee who was
+                murdered, was the group’s real source, leading to years of harassment against Rich’s family members.</p>
+            <div class="fade"></div>
         </div>
     </section>
     <section class="pagination">
-        <div class="wrapper" id="pagination-content"><h3 id="buy-hacks-leaks-and-revelations">Buy Hacks, Leaks, and Revelations</h3>
-<p>We hope you&#39;ve enjoyed reading Hacks, Leaks, and Revelations. Show your support and buy a physical copy today!</p>
-<p><a href="https://nostarch.com/hacks-leaks-and-revelations">Buy Now</a>
-<a href="./">Back Home</a></p>
-</div>
+        <div class="wrapper" id="pagination-content">
+            <h3 id="buy-hacks-leaks-and-revelations">Buy Hacks, Leaks, and Revelations</h3>
+            <p>We hope you&#39;ve enjoyed reading Hacks, Leaks, and Revelations. Show your support and buy a physical
+                copy today!</p>
+            <p><a href="https://nostarch.com/hacks-leaks-and-revelations">Buy Now</a>
+                <a href="./">Back Home</a>
+            </p>
+        </div>
     </section>
     <footer id="footer">
-        <div class="wrapper" id="footer-content"><p>This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> / <a href="license.html">More Information</a></p></div>
+        <div class="wrapper" id="footer-content">
+            <p>This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
+                    4.0</a> / <a href="license.html">More Information</a> / Follow Micah on <a
+                    href="https://infosec.exchange/@micahflee" rel="me">Mastodon</a> and
+                <a href="https://bsky.app/profile/micahflee.com" rel="me">Bluesky</a>
+            </p>
+        </div>
     </footer>
 </body>
+
 </html>
