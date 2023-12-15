@@ -642,6 +642,7 @@ footer {
 
 footer p {
     font-size: .75rem;
+    max-width: 100%;
 }
 
 .show {
