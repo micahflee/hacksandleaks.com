@@ -1,2 +1,3 @@
 markdown
 beautifulsoup4
+Pygments

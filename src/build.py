@@ -8,24 +8,6 @@ input_dir = "md"
 output_dir = ".."
 
 
-def generate_html(markdown_content):
-    if not markdown_content:
-        print("Error: markdown content is undefined or null")
-        return ""
-
-    html = markdown.markdown(markdown_content)
-
-    # Wrap Summary section in a div with a class
-    soup = BeautifulSoup(html, "html.parser")
-    summary = soup.find(id="summary")
-    if summary:
-        summary.wrap(soup.new_tag("div", **{"class": "summary"}))
-
-    # Apply CSS to prevent Markdown parser from interpreting Summary section contents
-    css = "<style>.summary * { display: inline; }</style>"
-    return css + str(soup)
-
-
 def read_file(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
         return file.read()
@@ -44,6 +26,8 @@ def calculate_read_time(text):
 
 
 def build():
+    markdown_extensions = extensions=["extra", "smarty", "codehilite"]
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
@@ -63,11 +47,11 @@ def build():
 
         read_time = calculate_read_time(intro_md + body_md)
 
-        nav_html = markdown.markdown(read_file(os.path.join(input_dir, "nav.md")))
-        intro_html = markdown.markdown(intro_md)
-        body_html = markdown.markdown(body_md)
-        pagination_html = markdown.markdown(pagination_md)
-        footer_html = markdown.markdown(read_file(os.path.join(input_dir, "footer.md")))
+        nav_html = markdown.markdown(read_file(os.path.join(input_dir, "nav.md")), extensions=markdown_extensions)
+        intro_html = markdown.markdown(intro_md, extensions=markdown_extensions)
+        body_html = markdown.markdown(body_md, extensions=markdown_extensions)
+        pagination_html = markdown.markdown(pagination_md, extensions=markdown_extensions)
+        footer_html = markdown.markdown(read_file(os.path.join(input_dir, "footer.md")), extensions=markdown_extensions)
 
         html_content = f"""<!DOCTYPE html>
 <html lang="en">

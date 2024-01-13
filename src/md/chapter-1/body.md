@@ -1045,7 +1045,7 @@ access any of the data on your encrypted disk.
 
 If your version of Windows doesn't include BitLocker, try device
 encryption. Click **Start**, then navigate to
-**Settings**[▸]{.MenuArrow}**Update & Security** (or **Privacy &
+**Settings** ▸ **Update & Security** (or **Privacy &
 Security**, depending on your Windows version). Then go to the Device
 encryption tab to check whether it's enabled; if not, enable it.
 
