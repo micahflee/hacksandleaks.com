@@ -270,7 +270,7 @@ exercises and trying out technologies and software as you learn about
 them. The source code for every exercise, as well as the code used in
 case studies and appendixes, is available in an online repository
 organized by chapter at
-https://github.com/micahflee/hacks-leaks-and-revelations.
+[https://github.com/micahflee/hacks-leaks-and-revelations](https://github.com/micahflee/hacks-leaks-and-revelations).
 
 To make this book as accessible as possible, I've tried to keep the
 requirements simple and affordable. You will need the following:

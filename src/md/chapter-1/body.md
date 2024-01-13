@@ -380,7 +380,7 @@ case-by-case basis. The best way to verify a dataset is to use *open
 source intelligence (OSINT)*, or publicly available information that
 anyone with enough skill can find. This might mean scouring social media
 accounts, consulting the Internet Archive's Wayback Machine
-(https://web.archive.org),
+([https://web.archive.org](https://web.archive.org)),
 inspecting metadata of public images or documents, paying services for
 historical domain name registration data, or viewing other types of
 public records. If your dataset includes a database taken from a
@@ -392,7 +392,7 @@ This book's discussion of OSINT focuses on how I've used it in my own
 investigations. If you want to learn more, see Michael Bazzell's *OSINT
 Techniques: Resources for Uncovering Online Information*, along with the
 companion tools listed at
-https://inteltechniques.com/tools.
+[https://inteltechniques.com/tools](https://inteltechniques.com/tools).
 Bazzell describes a large number of tools and techniques for discovering
 details that might help you verify datasets using OSINT.
 
@@ -588,7 +588,7 @@ discovered the following details:
     to show his bias."
 
 You can read our reporting on this dataset at
-https://theintercept.com/2018/02/14/julian-assange-wikileaks-election-clinton-trump/.
+[https://theintercept.com/2018/02/14/julian-assange-wikileaks-election-clinton-trump/](https://theintercept.com/2018/02/14/julian-assange-wikileaks-election-clinton-trump/).
 After The Intercept published this article, Assange and his supporters
 also targeted me personally with antisemitic abuse, and Russia Today,
 the state-run TV station, ran a segment about me. I discuss WikiLeaks
@@ -820,7 +820,7 @@ records safe.
 Most people's passwords aren't unique, meaning they're reused in
 multiple places. This is a very bad idea, since any duplicate password
 is only as secure as the least secure place you've used it. Go to
-https://haveibeenpwned.com,
+[https://haveibeenpwned.com](https://haveibeenpwned.com),
 search for your email address or phone number, and you'll see a list of
 data breaches that you're included in. If your LinkedIn password was
 exposed in a data breach a few years ago but it's the same password you
@@ -870,15 +870,15 @@ recommend:
 passwords between your computers and phone. It has browser extensions to
 fill in passwords automatically when you log in to websites. It's a good
 choice for a day-to-day password manager. Download it at
-https://bitwarden.com.
+[https://bitwarden.com](https://bitwarden.com).
 
 **1Password** Like Bitwarden, 1Password syncs passwords between your
 computer and phone and has a browser extension. It's also a good choice
 for a day-to-day password manager. It costs money, but 1Password gives
 free licenses to journalists. Download it at
-https://1password.com,
+[https://1password.com](https://1password.com),
 or see
-https://1password.com/for-journalism/
+[https://1password.com/for-journalism/](https://1password.com/for-journalism/)
 for more information about the free license program.
 
 **KeePassXC** This software is great for high-security situations.
@@ -886,7 +886,7 @@ Unlike Bitwarden and 1Password, KeePassXC doesn't sync your encrypted
 password database to the cloud, which makes it less convenient but
 potentially more secure. It works well on
 air-gapped computers. Download it at
-https://keepassxc.org.
+[https://keepassxc.org](https://keepassxc.org).
 
 If you'd like to use Bitwarden, 1Password, or a similar password manager
 that syncs between devices, follow the installation instructions on its
@@ -1060,7 +1060,7 @@ to upgrade to the Pro version of Windows, which typically costs about
 
 VeraCrypt is free and open source disk encryption software. To begin,
 download VeraCrypt from
-https://veracrypt.fr,
+[https://veracrypt.fr](https://veracrypt.fr),
 install it on your computer, and open it.
 
 Click **Create Volume** to open the VeraCrypt Volume Creation Wizard.
@@ -1258,7 +1258,7 @@ If you use Windows Home and don't have BitLocker available on your
 computer, use VeraCrypt to encrypt your USB disk.
 
 If you don't already have VeraCrypt, download it from
-https://veracrypt.fr,
+[https://veracrypt.fr](https://veracrypt.fr),
 install it on your computer, and open it. Click **Create Volume** to
 open the VeraCrypt Volume Creation Wizard. On the first page of the
 wizard, VeraCrypt lets you choose from three types of encrypted volumes.
@@ -1447,7 +1447,7 @@ OCR'd and searchable.
 *Figure 1-6: Dangerzone in action*
 
 Download and install Dangerzone from
-https://dangerzone.rocks.
+[https://dangerzone.rocks](https://dangerzone.rocks).
 The app relies on Linux containers. If you're working on a Windows or
 macOS machine, the easiest way to get containers running is to use
 software called Docker Desktop, which you'll be prompted to install the
@@ -1467,7 +1467,7 @@ known-safe version.
 > 
 Another option, which is a bit more complicated, is setting up a *virtual machine (VM)*. VMs are like a stronger version of Linux containers. They isolate the software running inside the VM more than Linux containers can, and they can run on any operating system. If you choose this option, make sure to disable internet access in your VM before opening documents. This way, if the document is malicious, it won’t let any attackers know the document was opened.
 > 
-> Giving detailed instructions on using VMs is outside the scope of this book. However, if you want to try them on your own, the easiest way to get started is to use the free and open source virtualization software VirtualBox (https://www.virtualbox.org). VirtualBox works for Intel-based Macs, Linux, and Windows computers. At the time of writing, there’s a beta version of VirtualBox that supports Apple Silicon Macs, but it has issues. If you have an Apple Silicon Mac, UTM (https://mac.getutm.app) is a good choice. It’s free and open source, and you can find detailed instructions for installing different operating systems at https://docs.getutm.app/guides/guides/. If you’d like something a bit easier, I recommend you try Parallels (https://www.parallels.com) or VMware Fusion (https://www.vmware.com/products/fusion.html) instead; note, however, that neither is free.
+> Giving detailed instructions on using VMs is outside the scope of this book. However, if you want to try them on your own, the easiest way to get started is to use the free and open source virtualization software VirtualBox ([https://www.virtualbox.org](https://www.virtualbox.org)). VirtualBox works for Intel-based Macs, Linux, and Windows computers. At the time of writing, there’s a beta version of VirtualBox that supports Apple Silicon Macs, but it has issues. If you have an Apple Silicon Mac, UTM ([https://mac.getutm.app](https://mac.getutm.app)) is a good choice. It’s free and open source, and you can find detailed instructions for installing different operating systems at [https://docs.getutm.app/guides/guides/](https://docs.getutm.app/guides/guides/). If you’d like something a bit easier, I recommend you try Parallels ([https://www.parallels.com](https://www.parallels.com)) or VMware Fusion ([https://www.vmware.com/products/fusion.html](https://www.vmware.com/products/fusion.html)) instead; note, however, that neither is free.
 
 Dangerzone works great with PDFs and Word documents, but not so great
 with spreadsheets. No matter what type of file you open in Dangerzone,

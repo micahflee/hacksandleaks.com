@@ -157,11 +157,11 @@ DDoSecrets publishes many more datasets than these, and it continues to
 release new ones all the time. For an inventory of all of those
 available, as well as instructions on how to request access to the
 limited-distribution datasets, visit
-https://ddosecrets.com.
+[https://ddosecrets.com](https://ddosecrets.com).
 
 **NOTE** *You won't be able to share that DDoSecrets link on X. Shortly after
 DDoSecrets released BlueLeaks, Twitter permanently suspended the
-@DDoSecrets account and censored all links to https://ddosecrets.com, citing its selectively enforced policy against posting hacked data.
+@DDoSecrets account and censored all links to [https://ddosecrets.com](https://ddosecrets.com), citing its selectively enforced policy against posting hacked data.
 Twitter, now X, prevents tweets or even DMs including DDoSecrets links
 from going through, though WikiLeaks has faced no such censorship.*
 
@@ -217,7 +217,7 @@ you're legally allowed to share. Blizzard Entertainment has even adopted
 the technology itself to distribute large video games like *World of
 Warcraft* to its users, and the Internet Archive, the nonprofit digital
 library at
-https://archive.org,
+[https://archive.org](https://archive.org),
 uses BitTorrent to distribute large files like radio and TV shows. The
 structure of BitTorrent hosting makes for faster downloads, and
 bandwidth costs are shared throughout the swarm.
@@ -289,11 +289,11 @@ In this exercise, you'll download a local copy of the BlueLeaks dataset
 onto the 1TB USB disk you encrypted in the previous chapter. You'll be
 investigating the contents of this dataset later in the book.
 
-Download Transmission (https://transmissionbt.com)
+Download Transmission ([https://transmissionbt.com](https://transmissionbt.com))
 or any BitTorrent client of your choice and install it on your computer
 following the instructions for your operating system. Load the BlueLeaks
 page on the DDoSecrets website at
-https://ddosecrets.com/wiki/BlueLeaks.
+[https://ddosecrets.com/wiki/BlueLeaks](https://ddosecrets.com/wiki/BlueLeaks).
 From there, find the magnet link for the BlueLeaks torrent and copy that
 to your clipboard.
 
@@ -381,7 +381,7 @@ hundreds of messages right as Leopold published multiple articles based
 on this dataset. Edwards and Leopold would have been better off if they
 had used Signal.
 
-**NOTE** *The web page https://signal.org/bigbrother/ lists the handful of times that Signal has been ordered to share data
+**NOTE** *The web page [https://signal.org/bigbrother/](https://signal.org/bigbrother/) lists the handful of times that Signal has been ordered to share data
 with law enforcement and how they responded. In all cases, Signal either
 didn't share any data (because, as the organization says, "It's
 impossible to turn over data that we never had access to in the first
@@ -446,7 +446,7 @@ your contact list itself. (If you grant access to your contacts, the app
 will notify you when one of them creates a Signal account.)
 
 Next, download Signal on your computer from
-https://signal.org.
+[https://signal.org](https://signal.org).
 After installing it, you'll need to scan a QR code from your phone to
 set up your computer as a linked device. Keep in mind that your Signal
 messages will now be copied to both devices, so make sure to keep them
@@ -485,7 +485,7 @@ message.
 People sometimes still send me PGP-encrypted email, and I use PGP to
 respond to them securely. You can find my PGP public key on my personal
 website,
-https://micahflee.com.
+[https://micahflee.com](https://micahflee.com).
 I keep my PGP secret key on a USB device called a YubiKey, which looks
 kind of like a USB stick with a button on it. YubiKeys (and other
 security keys) are mainly used to lock down online accounts. Even if a
@@ -510,11 +510,11 @@ web browser that sends all web traffic through the Tor network. Using
 Tor Browser works much like using Chrome or Firefox. Let's say you want
 to anonymously visit the Organized Crime and Corruption Reporting
 Project's (OCCRP) website at
-https://www.occrp.org.
+[https://www.occrp.org](https://www.occrp.org).
 You simply open Tor Browser (which you can download from
-https://www.torproject.org),
+[https://www.torproject.org](https://www.torproject.org)),
 wait for it to connect to the Tor network, type **occrp.org** in the
-address bar, and hit [ENTER]{.small}, and the page will load.
+address bar, and hit **ENTER**, and the page will load.
 
 **NOTE** *I've been a volunteer in the Tor community for a long time, attending
 the nonprofit's physical gatherings around the world, sometimes running
@@ -624,7 +624,7 @@ transfer especially large datasets, consider using a non-Tor method like
 those described later in this chapter.
 
 **NOTE** *For more information, read the detailed documentation for OnionShare
-at https://docs.onionshare.org.
+at [https://docs.onionshare.org](https://docs.onionshare.org).
 
 If you're using OnionShare to send sensitive
 data, I recommend that you share OnionShare URLs only using encrypted
@@ -640,9 +640,9 @@ source into uploading documents to them, for example.
 
 In this exercise, you'll install Tor Browser and OnionShare on your
 computer and practice using them. Download OnionShare from
-https://onionshare.org
+[https://onionshare.org](https://onionshare.org)
 and Tor Browser from
-https://www.torproject.org,
+[https://www.torproject.org](https://www.torproject.org),
 and follow the instructions for your operating system.
 
 Open Tor Browser, search for anything you like, and visit various
@@ -653,7 +653,7 @@ constantly forces you to prove you're not a robot by filling out
 CAPTCHAs. Several websites have both *clearnet* versions (those
 accessible using normal web browsers) and *.onion* versions. If you're
 using Tor Browser and visit a website that supports both, like
-https://freedom.press,
+[https://freedom.press](https://freedom.press),
 you'll see the .onion available button in the top right of the address
 bar. Clicking it should bring you to the onion version of that site.
 
@@ -725,7 +725,7 @@ ultra-wealthy donors&mdash;two of them billionaires&mdash;provided the bulk of
 the group's donations. I also learned that the group's claim of being a
 network of "over 3 million patriots" was wildly exaggerated: only
 144,000 members were marked "active" in the hacked database. (Read my
-analysis of this dataset at https://theintercept.com/2021/08/05/tea-party-patriots-hacked-billionaire-donors/.)
+analysis of this dataset at [https://theintercept.com/2021/08/05/tea-party-patriots-hacked-billionaire-donors/](https://theintercept.com/2021/08/05/tea-party-patriots-hacked-billionaire-donors/).)
 
 
 
@@ -822,19 +822,19 @@ which explains to potential sources and whistleblowers how to contact
 the newsroom securely. Here are a few examples:
 
 -   The Intercept:
-    https://theintercept.com/source/
+    [https://theintercept.com/source/](https://theintercept.com/source/)
 -   *Washington Post*:
-    https://www.washingtonpost.com/anonymous-news-tips/
+    [https://www.washingtonpost.com/anonymous-news-tips/](https://www.washingtonpost.com/anonymous-news-tips/)
 -   *New York Times*:
-    https://www.nytimes.com/tips
+    [https://www.nytimes.com/tips](https://www.nytimes.com/tips)
 -   ProPublica:
-    https://www.propublica.org/tips/
+    [https://www.propublica.org/tips/](https://www.propublica.org/tips/)
 -   CNN:
-    https://www.cnn.com/tips/
+    [https://www.cnn.com/tips/](https://www.cnn.com/tips/)
 -   *Guardian*:
-    https://www.theguardian.com/securedrop
+    [https://www.theguardian.com/securedrop](https://www.theguardian.com/securedrop)
 -   *Globe and Mail*:
-    https://sec.theglobeandmail.com/securedrop/
+    [https://sec.theglobeandmail.com/securedrop/](https://sec.theglobeandmail.com/securedrop/)
 
 The guidelines on these tips pages are all similar, instructing sources
 to securely contact the newsroom by either sending a message to a
@@ -871,9 +871,9 @@ If you work with a newsroom or an organization that wants to accept
 datasets from sources or whistleblowers, create a tips page on your
 website and look into SecureDrop. You can learn more about the
 SecureDrop project at
-https://securedrop.org
+[https://securedrop.org](https://securedrop.org)
 and read detailed documentation at
-https://docs.securedrop.org.
+[https://docs.securedrop.org](https://docs.securedrop.org).
 
 
 
