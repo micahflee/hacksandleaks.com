@@ -2,17 +2,14 @@
 
 Your content publishes as static HTML, but is editable as markdown.
 
-Make sure you have nodejs installed, and install deps:
+Make sure you have python installed, and install deps:
 
 ```
-apt install -y nodejs npm
-
-cd src
-npm install
+pip install -r requirements.txt
 ```
 
 When your markdown is ready, run:
 
 ```
-node build.js
+./build.py
 ```

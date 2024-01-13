@@ -1,0 +1,25 @@
+- [Dedication](dedication.html)
+- [Acknowledgements](acknowledgements.html)
+- [Introduction](introduction.html)
+- **Part I: Sources and Datasets**
+    - [Chapter 1: Protecting Sources and Yourself](chapter-1.html)
+    - [Chapter 2: Acquiring Datasets](chapter-2.html)
+- **Part II: Tools of the Trade**
+    - [Chapter 3: The Command Line Interface](chapter-3.html)
+    - [Chapter 4: Exporing Datasets in the Terminal](chapter-4.html)
+    - [Chapter 5: Docker, Aleph, and Making Datasets Searchable](chapter-5.html)
+    - [Chapter 6: Reading Other People's Email](chapter-6.html)
+- **Part III: Python Programming**
+    - [Chapter 7: An Introduction to Python](chapter-7.html)
+    - [Chapter 8: Working with Data in Python](chapter-8.html)
+- **Part IV: Structured Data**
+    - [Chapter 9: BlueLeaks, Black Lives Matter, and the CSV File Format](chapter-9.html)
+    - [Chapter 10: BlueLeaks Explorer](chapter-10.html)
+    - [Chapter 11: Parler, the January 6 Insurrection, and the JSON File Format](chapter-11.html)
+    - [Chapter 12: Epik Fail, Extremism Research, and SQL Databases](chapter-12.html)
+- **Part V: Case Studies**
+    - [Chapter 13: Pandemic Profiteers and COVID-19 Disinformation](chapter-13.html)
+    - [Chapter 14: Neo-Nazis and Their Chatrooms](chapter-14.html)
+- [Afterword](afterword.html)
+- [Appendix A: Solutions to Common WSL Problems](appendix-a.html)
+- [Appendix B: Scraping the Web](appendix-b.html)

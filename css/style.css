@@ -248,7 +248,8 @@ h4,
 h5,
 h6,
 a,
-p {
+p,
+li {
     color: #333;
 }
 
@@ -262,11 +263,11 @@ h6 {
     margin-top: 2rem;
 }
 
-h1 {
+header h1 {
     font-size: 1.25rem;
 }
 
-h2 {
+h1 {
     font-size: 3.5rem;
     max-width: 100%;
     width: 100%;
@@ -274,20 +275,24 @@ h2 {
     margin-top: .5rem;
 }
 
-h3 {
+h2 {
     font-size: 2.25rem;
 }
 
-h4 {
+h3 {
     font-size: 1.875rem;
 }
 
-h5 {
+h4 {
     font-size: 1.5rem;
 }
 
-h6 {
+h5 {
     font-size: 1.25rem;
+}
+
+h6 {
+    font-size: 1.1rem;
 }
 
 pre {
@@ -308,7 +313,7 @@ code {
     line-height: 1.5;
     background-color: rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 1rem 1rem;
+    padding: 0;
     color: rgba(0, 0, 0, 0.85);
     border-radius: .25rem;
 }
@@ -319,8 +324,9 @@ section {
     align-items: center;
 }
 
-section:not(.intro) {
-    margin-bottom: 3rem;
+section.buy {
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
 }
 
 .cipher-title {
@@ -408,34 +414,35 @@ nav .btn {
     padding: 13rem 0 10rem 0;
 }
 
+.bookIntro {
+    height: auto;
+    padding: 13rem 0 1rem 0;
+}
+
 #reading-time {
     font-size: .875rem;
     margin-bottom: 1rem;
     color: #595959;
 }
 
-.intro h2 {
+.intro h1 {
     max-width: 65%;
 }
 
-.intro h2+p {
+.intro h1+p {
     font-size: 1rem;
     font-family: 'Serif', serif;
     line-height: 1.6;
     margin: 0 0 .5rem 0;
 }
 
-.intro h2+p+p {
+.intro h1+p+p {
     font-size: .875rem;
     margin-bottom: 0;
 }
 
 .intro .btn {
     width: fit-content;
-}
-
-.pagination {
-    padding: 3rem 0;
 }
 
 .pagination a {
@@ -653,7 +660,7 @@ footer p {
     position: relative;
 }
 
-.pagination a[href="https://nostarch.com/hacks-leaks-and-revelations"] {
+.pagination a[href="buy.html"] {
     background-color: #333;
     color: #fff;
 }
@@ -680,18 +687,21 @@ p+.strong {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* This adds space between the cards. Adjust as needed. */
+    gap: 20px;
+    /* This adds space between the cards. Adjust as needed. */
 }
 
 .card {
     flex: 1;
-    padding: 10px; /* This adds some space inside the cards around the iframes. Adjust as needed. */
+    padding: 10px;
+    /* This adds some space inside the cards around the iframes. Adjust as needed. */
 }
 
 .card iframe {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 9; /* Maintain the aspect ratio of 16:9 for the videos */
+    aspect-ratio: 16 / 9;
+    /* Maintain the aspect ratio of 16:9 for the videos */
 }
 
 @media only screen and (max-width: 1280px) {
@@ -859,7 +869,8 @@ p+.strong {
     }
 
     .videoGrp {
-        flex-direction: column; /* Stack the flex items vertically */
+        flex-direction: column;
+        /* Stack the flex items vertically */
     }
 
     .videoGrp .card {
