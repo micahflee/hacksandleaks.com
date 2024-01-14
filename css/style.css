@@ -300,7 +300,7 @@ pre {
     word-wrap: break-word;
     overflow-wrap: break-word;
     width: 100%;
-    max-width: 640px;
+    max-width: 100%;
 }
 
 code {
