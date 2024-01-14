@@ -37,13 +37,841 @@
     </header>
     <section class="intro bookIntro">
         <div class="wrapper" id="intro-wrapper">
-          <div id="reading-time">~0 min read</div>
+          <div id="reading-time">~36 min read</div>
           <h1>Appendix B: Scraping the Web</h1>
-          
+          <p>Sometimes, in order to research important data publicly available
+online, you&rsquo;ll need to download a local copy. When websites don&rsquo;t
+provide this data in structured downloadable formats like spreadsheets,
+JSON files, or databases, you can make your own copy using <em>web
+scraping</em> (or <em>screen scraping</em>): writing code that loads web pages for
+you and extracts their contents. These might include social media posts,
+court documents, or any other online data. You can use web scraping to
+download either full datasets or the same web page again and again on a
+regular basis to see if its content changes over time.</p>
         </div>
     </section>
     <section id="content" data-content="appendix-b">
-        <div class="wrapper" id="about-content">
+        <div class="wrapper" id="about-content"><p>For example, consider the Parler dataset discussed in Chapter 11. Before Parler was
+kicked offline by its hosting provider for refusing to moderate content
+that encourages and incites violence, the archivist
+@donk_enby wrote code to scrape all 32TB of
+videos&mdash;over a million of them&mdash;to distribute to researchers and
+journalists. This appendix teaches you how to do something similar, if
+the occasion arises.</p>
+<p>I&rsquo;ll discuss legal considerations around web scraping and give a brief
+overview of HTTP, the protocol that web browsers use to communicate with
+websites. Finally, I describe three different techniques that allow you
+to scrape different types of websites. Complete Chapters 7, 8, 9, and 11
+before following along, since you&rsquo;ll need the basic knowledge of Python
+programming, CSVs, HTML, and JSON covered there.</p>
+<h2>Legal Considerations</h2>
+<p>Web scraping isn&rsquo;t a crime, but its legality is still murky. In general,
+using computer systems with permission (like visiting a public website)
+is perfectly fine, but accessing them without authorization (like
+logging in to someone else&rsquo;s account) is illegal hacking.</p>
+<p>In the US, unauthorized access is a violation of the extremely outdated
+hacking law known as the Computer Fraud and Abuse Act of 1986, or CFAA.
+Web scraping shouldn&rsquo;t fall under unauthorized access because it entails
+writing code simply to load public web pages that everyone can already
+access, rather than loading those pages the normal way (using a web
+browser). The problem is that scraping may violate a website&rsquo;s terms of
+service, and there&rsquo;s no legal consensus on whether this could constitute
+a violation of the CFAA&mdash;courts have ruled both ways.</p>
+<p>Despite this, web scraping is an extremely common practice. Search
+engines like Google are essentially massive web scraping operations, as
+are archive sites like the Internet Archive&rsquo;s Wayback Machine at
+<a href="https://web.archive.org">https://web.archive.org</a>.
+Companies often use web scraping to keep track of airline ticket prices,
+job listings, and other public data. It&rsquo;s also a critical tool for
+investigative reporting.</p>
+<p><strong>NOTE</strong> <em>The CFAA was originally passed, at least in part, in response to the 1983 film WarGames. In the film, a teenage hacker, played by Matthew Broderick, breaks into a military supercomputer and almost starts World War III by mistake. At the time, there weren&rsquo;t any laws against hacking computers. The wildly popular film scared Congress into passing such laws.</em></p>
+<p>The Markup, a nonprofit newsroom that investigates the tech industry,
+summed up the case for web scraping in an article that includes several
+examples of investigative journalism that relied on it. For example, the
+newsroom Reveal scraped content from extremist groups on Facebook, as
+well as law enforcement groups, and found significant overlap in
+membership. Reuters also scraped social media and message boards and
+uncovered an underground market for
+adopted kids; that investigation led to a kidnapping conviction. You can
+read the full article at
+<a href="https://themarkup.org/news/2020/12/03/why-web-scraping-is-vital-to-democracy">https://themarkup.org/news/2020/12/03/why-web-scraping-is-vital-to-democracy</a>.</p>
+<p>Before you can start writing code to scrape the web yourself, you&rsquo;ll
+need to understand what HTTP requests are.</p>
+<h2>HTTP Requests</h2>
+<p>When you load a web page, your web browser makes an <em>HTTP request</em>. You
+can think of this as the browser sending a message to the website&rsquo;s
+server, saying, &ldquo;I&rsquo;d like to download the content for the page at this
+URL so I can look at it on my computer,&rdquo; to which the server replies
+with an <em>HTTP response</em> that contains the content, typically HTML code.
+Your browser parses this HTML to figure out what else it needs to
+download to show you the full web page: images, fonts, Cascading Style
+Sheets (CSS) files that define how the web page looks, and JavaScript
+files that tell the website how to act. The browser makes another HTTP
+request for each of these resources, getting the content for them all.
+Websites also tend to make lots of HTTP requests while you&rsquo;re using
+them, such as to check for updates and display them on the page in real
+time.</p>
+<p>HTTP requests and responses have <em>headers</em>, or metadata about the
+request or response. You might need to send specific headers for your
+scraping to work properly, depending on the website you&rsquo;re trying to
+scrape. You might also need your code to keep track of <em>cookies</em>, which
+are required for any site with a login option. There are many types of
+requests you can incorporate into your web scraping code, such as <em>POST</em>
+requests, which are used to submit forms. However, the code in this
+appendix will make only <em>GET</em> requests, the simplest and most common
+type of request, which download the content from a URL.</p>
+<p>Many sites don&rsquo;t like web scrapers for a variety of reasons, including
+the fact that if a script is hammering a site with HTTP requests, this
+increases the site&rsquo;s bandwidth costs and could even cause it to crash.
+Sometimes sites will add roadblocks, such as limiting the number of
+requests you can make in a short amount of time or requiring that the
+user (or bot) fill out a CAPTCHA, in an effort to hinder or prevent
+scraping.</p>
+<p><strong>NOTE</strong> <em>Some time around 2002, when I was in high school, my friends and I
+decided to make a song lyrics website. Similar sites existed, but they
+were incomplete. I thought it would be simple to scrape the lyrics from
+those other sites and make a single site that had</em> [all]
+<em>of the lyrics. I wrote a script to scrape thousands of lyrics from one
+particular site, but my script crashed while it was running. I realized
+it was because the source website had gone down. A few days later, the
+site came back online with a message: the owner was overjoyed to learn
+how much traffic the site was getting, but to keep up with it, they had
+to raise money to keep the site online. I felt bad about it, and we
+never ended up launching that lyrics site.</em></p>
+<h2>Scraping Techniques</h2>
+<p>This section describes three different techniques for web scraping, each
+introducing a different Python module. You&rsquo;ll use a Python package
+called HTTPX to make HTTP requests, then use another called Beautiful
+Soup to help you select the data that you care about from a soup of
+messy HTML code. Finally, you&rsquo;ll use a package called Selenium to write
+code that launches a web browser and controls what it does.</p>
+<p>Web scraping requires a lot of trial and error as well as a thorough
+understanding of the layout of the website that you&rsquo;re scraping data
+from. This appendix gives you just a few examples, not a comprehensive
+overview, but they should give you a head start on writing your own web
+scraping scripts in the future.</p>
+<h3>Loading Pages with HTTPX</h3>
+<p>HTTPX is a third-party Python package that lets you make your own HTTP
+requests with Python. In this section, you&rsquo;ll learn how to use it to
+scrape the most recent posts from any given user on the far-right social
+media site Gab, which you read about in Chapters 1, 12, and 13.</p>
+<p>Install the <code>httpx</code> module
+with pip by running <code>python3 -m pip install httpx</code>. After importing <code>httpx</code> into your code, you should be able to
+load a web page by running the <code>httpx.get()</code> function and passing in a URL. This
+function returns a request object, and you can access the request&rsquo;s
+content with <code>.content</code> for
+binary data or <code>.text</code> for
+text data. For example, Listing B-1 shows Python code to make an HTTP
+request to
+<em>https://example.com</em>
+and view its content.</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">httpx</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="err">!</span><span class="n">doctype</span> <span class="n">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">Example</span> <span class="n">Domain</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
+<span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+<span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">Example</span> <span class="n">Domain</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">This</span> <span class="n">domain</span> <span class="ow">is</span> <span class="k">for</span> <span class="n">use</span> <span class="ow">in</span> <span class="n">illustrative</span> <span class="n">examples</span> <span class="ow">in</span> <span class="n">documents</span><span class="o">.</span> <span class="n">You</span> <span class="n">may</span> <span class="n">use</span> <span class="n">this</span>
+    <span class="n">domain</span> <span class="ow">in</span> <span class="n">literature</span> <span class="n">without</span> <span class="n">prior</span> <span class="n">coordination</span> <span class="ow">or</span> <span class="n">asking</span> <span class="k">for</span> <span class="n">permission</span><span class="o">.&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://www.iana.org/domains/example&quot;</span><span class="o">&gt;</span><span class="n">More</span> <span class="n">information</span><span class="o">...&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
+</code></pre></div>
+
+<p><em>Listing B-1: Scraping the HTML from https://example.com</em></p>
+<p>First, this code imports the <code>httpx</code> module. It then calls the
+<code>httpx.get()</code> function,
+passing in a URL as an argument, and saves the response in the variable
+<code>r</code>. Finally, it displays the
+<code>r.text</code> variable, which is
+all of the HTML code that makes up
+<em>https://example.com</em>.
+(If you&rsquo;re loading a binary file, like an image, then you can get the
+binary data in the <code>r.content</code>
+variable.) This simple <code>httpx.get()</code> function is often all you need to
+scrape entire databases of information from the web. The script I&rsquo;ll
+show you in this section that scrapes posts from Gab relies on this
+function.</p>
+<p>Since web scraping means writing code that loads URLs, your first step
+should be to determine which URLs you need to load. The easiest way to
+do this is to use the built-in developer tools in your web browser. You
+can open them in most browsers by pressing the F12 key. In both Firefox
+and Chrome, you can see the HTTP requests your browser is making, and
+what the responses look like, in the Network tab of the developer tools.
+For example, if you open your browser&rsquo;s developer tools and load the
+profile page of a Gab user, you can see what HTTP requests it makes to
+gather that user&rsquo;s most recent posts. Once you have that information,
+you can write a script that makes the same HTTP requests for you.</p>
+<p><strong>NOTE</strong> <em>The developer tools built in to Firefox, Chrome, and other browsers are a great way to learn what data your web browser is sending back and forth on the websites you&rsquo;re visiting, to see exactly how web pages are laid out, and more. For more about Firefox&rsquo;s developer tools, see <a href="https://firefox-source-docs.mozilla.org/devtools-user/index.html">https://firefox-source-docs.mozilla.org/devtools-user/index.html</a>; for Chrome, see <a href="https://developer.chrome.com/docs/devtools">https://developer.chrome.com/docs/devtools</a>.</em></p>
+<p>For example, the Gab page for Marjorie Taylor Greene, the US
+congressperson who&rsquo;s also a Christian nationalist and QAnon conspiracy
+theorist, is located at
+<a href="https://gab.com/RealMarjorieGreene">https://gab.com/RealMarjorieGreene</a>.
+In a web browser, load that URL and then open the developer tools.
+Refresh the page to get all of the HTTP requests to show up in the
+Network tab.</p>
+<p>In the Network tab, you should see several HTTP requests listed on the
+left half of the developer tools panel. When you click a request, the
+right half of the panel displays information about it. The right half
+has its own tabs that you can switch through to see details like the
+request&rsquo;s headers, cookies, and the body of the request and its
+response.</p>
+<p>When I loaded this page and looked through my browser&rsquo;s HTTP requests
+and their responses, I decided I was most interested in the following
+URLs:</p>
+<blockquote>
+<p><strong>https://gab.com/api/v1/account_by_username/RealMarjorieGreene</strong> The
+response to this request includes a JSON object containing information
+about Greene&rsquo;s Gab profile, including her Gab account ID, 3155503.</p>
+<p><strong>https://gab.com/api/v1/accounts/3155503/statuses?sort_by=newest</strong> The
+response to this request includes a JSON array of Greene&rsquo;s most recent
+Gab posts. Her account ID is in the URL itself.</p>
+</blockquote>
+<p>The first URL let me look up the Gab ID of any account, and the second
+URL let me look up the recent posts from an account, based on its Gab
+ID. Figure B-1 shows Firefox&rsquo;s developer
+tools in action while loading this page.</p>
+<p><img alt="Figure B-1: Viewing the JSON response to a specific request in the Firefox developer tools Network tab" src="media/images/FigureB-1.png" /><br />
+<em>Figure B-1: Viewing the JSON response to a specific request in the Firefox developer tools Network tab</em></p>
+<p>As you can see, this response is in JSON format. I wanted to write a
+script that, given a Gab username, would download the latest posts from
+that user. In order to write it, I had to spend some time looking at the
+JSON in these responses to understand how it was structured and what
+information I was interested in. For example, since I wanted to start
+with a Gab username, my script would first need to load the URL
+<em>https://gab.com/api/v1/account_by_username/&lt;username></em>,
+replacing <em>&lt;username></em> with my target username. It would then need to
+parse the JSON it receives to extract this Gab user&rsquo;s ID. Then, using
+that ID, it would need to load the URL
+<em>https://gab.com/api/v1/accounts/&lt;id>/statuses?sort_by=newest</em>,
+replacing <em>&lt;id></em> with the Gab ID of the target account. Finally, it
+would need to parse that JSON response to display the latest Gab posts.</p>
+<p>Based on this research, I wrote the following script to scrape the
+latest posts from any target Gab account. Here&rsquo;s the code for this web
+scraping script,
+<em>httpx-example.py</em>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
+<span class="kn">import</span> <span class="nn">click</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;gab_username&quot;</span><span class="p">)</span> <span class="err">❶</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">gab_username</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Download a user&#39;s posts from Gab&quot;&quot;&quot;</span>
+
+    <span class="c1"># Get information about the user</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://gab.com/api/v1/account_by_username/</span><span class="si">{</span><span class="n">gab_username</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="err">❷</span>
+    <span class="n">user_info</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">if</span> <span class="s2">&quot;error&quot;</span> <span class="ow">in</span> <span class="n">user_info</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">user_info</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">])</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Display some user info</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Display name: </span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;followers_count&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> followers, </span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;following_count&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> following, </span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;statuses_count&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> posts&quot;</span><span class="p">)</span> <span class="err">❸</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="c1"># Get this user&#39;s posts</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://gab.com/api/v1/accounts/</span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/statuses&quot;</span><span class="p">)</span> <span class="err">❹</span>
+    <span class="n">posts</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">post</span><span class="p">[</span><span class="s2">&quot;reblog&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;repost @</span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;reblog&#39;</span><span class="p">][</span><span class="s1">&#39;account&#39;</span><span class="p">][</span><span class="s1">&#39;username&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;reblog&#39;</span><span class="p">][</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;reblog&#39;</span><span class="p">][</span><span class="s1">&#39;content&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This script first imports the <code>httpx</code> module, since it will need that module
+to make HTTP requests. Like many Python scripts throughout this book, it
+uses the <code>click</code> module to
+accept CLI arguments. In this case, it accepts an argument called
+<code>gab_username</code>, the username
+of the target Gab user ❶.</p>
+<p>When the <code>main()</code> function
+runs, it downloads information about the target user by calling the
+<code>httpx.get()</code> function and
+passing in the URL
+<em>https://gab.com/api/v1/account_by_username/&lt;gab_username></em>,
+replacing <em>&lt;gab_username></em> with the value of the CLI argument and
+storing the result in the variable <code>r</code> ❷. As my browser&rsquo;s developer tools made clear,
+the response should be a JSON object, so the script next calls
+<code>r.json()</code> on it to make HTTPX
+convert it into a dictionary called <code>user_info</code>. It then checks to see if
+<code>user_info</code> has an
+<code>error</code> key; if so, it
+displays the error message and quits early. If you try loading that URL
+with an invalid username, you&rsquo;ll see the error message in the
+<code>error</code> key: the string
+<code>Record not found</code>.</p>
+<p>Once the script has successfully retrieved information about a Gab user,
+it displays some of that information&mdash;the display name, number of
+followers, number of follows, and number of posts&mdash;in the terminal
+❸. The script then uses
+HTTPX to make another HTTP request, this time to load the user&rsquo;s posts.
+Note that this URL includes <code>user_info['id']</code>, which is the ID of the user
+discovered from the previous HTTP request ❹. As before, it calls <code>r.json()</code> to convert the JSON into a Python
+object, this time a list called <code>posts</code>. In the following <code>for</code> loop, the script loops through the
+list of posts, displaying them one at a time.</p>
+<p>You can find a complete copy of this code in the book&rsquo;s GitHub repo at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/appendix-b/httpx-example.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/appendix-b/httpx-example.py</a>.</p>
+<p>At the time of writing, I could use this script
+to download the recent posts of any Gab user by including their username
+as an argument. For example, here&rsquo;s what it looked like when I ran this
+script on the account of Andrew Torba, Gab&rsquo;s founder and owner and the
+author of the book <em>Christian Nationalism</em>, whose Gab username is <code>a</code>:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor appendix-b % python3 httpx-example.py a
+Display name: Andrew Torba
+3,803,381 followers, 2,662 following, 67,317 posts
+
+2022-12-07T04:56:56.989Z: Is it really so crazy to think that I care nothing
+at all about a particular historical atrocity that happened on another
+continent 80 years ago when there is a genocide of babies happening right
+here, right now, today?
+repost @ScipioAmericanus: 2022-12-07T04:50:37.560Z: Jews literally believe
+that they can reject God because they&#39;re justified according to the flesh and
+their own laws. Wicked stuff.
+--snip--
+</code></pre></div>
+
+<p>The output shows Torba&rsquo;s display name, statistics about his account, and
+several of his latest posts to Gab. As you can see, they&rsquo;re on the
+fascist side. Torba has 3.8 million followers, because every Gab user
+automatically follows him when they create an account.</p>
+<p><strong>NOTE</strong> <em>While 3.8 million followers sounds like a lot, most of those accounts
+aren&rsquo;t active. In 2021, I analyzed hacked Gab data and discovered that
+of the roughly 4 million accounts, only 1.5 million of them had posted
+any content at all, only 400,000 had posted more than 10 times, and only
+100,000 of those had posted anything recently. You can read my analysis
+at <a href="https://theintercept.com/2021/03/15/gab-hack-donald-trump-parler-extremists/">https://theintercept.com/2021/03/15/gab-hack-donald-trump-parler-extremists/</a>.</em></p>
+<p>Try running <em>httpx-example.py</em> on any Gab account you&rsquo;d like. Unless Gab&rsquo;s website has changed, this
+should download the recent posts from that user. However, it&rsquo;s possible
+that by the time you run this script, the site may have changed so that
+the script doesn&rsquo;t work anymore. This is the unfortunate nature of web
+scraping. Every script you write that scrapes the web relies on websites
+acting one specific way; if they don&rsquo;t, your script might break. It&rsquo;s
+often a simple matter to update a script so it works again, though. To
+do so, you&rsquo;d need to use your browser&rsquo;s developer tools to figure out
+how the website changed, and then update your script to match its new
+URLs and behavior&mdash;basically, repeat what you just did. In the worst
+case, if the website has changed a lot, you may need to rewrite your
+scraping script from scratch.</p>
+<p>Using Python logic and HTTPX, you can also modify the script to get
+<em>all</em> of the posts for a given account, rather than just the recent
+ones. You could write a script that finds a target Gab user and
+downloads the list of accounts they follow. Or you can take a target Gab
+post and download a list of accounts that liked it. You&rsquo;d just need to
+learn exactly which HTTP requests to make to get the information you&rsquo;re
+interested in, and then have Python make those requests for you. Some of
+these tasks would be more complicated than others&mdash;for example, to get
+the data you&rsquo;re looking for, you may need to create a Gab account and
+have your scraper make requests while you&rsquo;re logged in. The more web
+scraping scripts like these you write, the better at it you&rsquo;ll get.</p>
+<p>To learn more about using the HTTPX package, check out its documentation
+at <a href="https://www.python-httpx.org">https://www.python-httpx.org</a>.</p>
+<h3>Parsing HTML with Beautiful Soup</h3>
+<p>Scraping Gab was simple because the responses to the HTTP requests were
+in JSON format, but pulling specific information out of the HTML in a
+web page is more challenging. The easiest way to parse HTML in Python is
+to use a package aptly called Beautiful Soup (BS4 for short). Install
+the <code>bs4</code> module by running
+<code>python3 -m pip install bs4</code>.</p>
+<p>For example, here&rsquo;s some code that uses the <code>httpx</code> module to download the HTML from
+<em>https://example.com</em>, like you did in the last section:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">httpx</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This code imports the <code>httpx</code>
+module, then imports Beautiful Soup from the <code>bs4</code> module. Next, it uses
+<code>httpx.get()</code> to make an HTTP
+request to
+<em>https://example.com</em>
+and stores the result in <code>r</code>,
+allowing you to access the HTML string itself using the <code>r.text</code> variable. As you saw in Listing B-1,
+this HTTP response is in HTML format and includes the page&rsquo;s title
+inside the <code>&lt;title&gt;</code> tag, as
+well as two paragraphs of text within <code>&lt;p&gt;</code> tags inside the <code>&lt;body&gt;</code> tag.</p>
+<p>Using BS4, you can parse this HTML to select specific pieces of
+content&mdash;in this case, the page title and the content of the first
+paragraph:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">Example</span> <span class="n">Domain</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">paragraph</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">paragraph</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">This</span> <span class="n">domain</span> <span class="ow">is</span> <span class="k">for</span> <span class="n">use</span> <span class="ow">in</span> <span class="n">illustrative</span> <span class="n">examples</span> <span class="ow">in</span> <span class="n">documents</span><span class="o">.</span> <span class="n">You</span> <span class="n">may</span> <span class="n">use</span> <span class="n">this</span>
+    <span class="n">domain</span> <span class="ow">in</span> <span class="n">literature</span> <span class="n">without</span> <span class="n">prior</span> <span class="n">coordination</span> <span class="ow">or</span> <span class="n">asking</span> <span class="k">for</span> <span class="n">permission</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">):</span>
+<span class="o">...</span>      <span class="nb">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">))</span>
+<span class="o">...</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">iana</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">domains</span><span class="o">/</span><span class="n">example</span>
+</code></pre></div>
+
+<p>This code parses the HTML string (<code>r.text</code>) using BS4, storing the resulting
+<code>BeautifulSoup</code> object in the
+<code>soup</code> variable defined in the
+first line of code. This allows you to use <code>soup</code> to extract whatever information you&rsquo;re
+interested in from the HTML. The code then displays the page title by
+printing the value of <code>soup.title.text</code>.</p>
+<p>Next, the script searches for the first paragraph on the HTML page and
+displays its text by printing the value of <code>paragraph.text</code>. Finally, it finds all of the links on
+the page (which are <code>&lt;a&gt;</code>
+tags), loops through them in a <code>for</code> loop, and
+prints the URL for each link (the URL is defined in the <code>href</code> attribute of <code>&lt;a&gt;</code> tags). The
+<em>https://example.com</em>
+web page has only one link, so the code displays just that.</p>
+<p>For practice, next we&rsquo;ll explore a script that scrapes content from
+Hacker News
+(<a href="https://news.ycombinator.com">https://news.ycombinator.com</a>),
+a news aggregator site about tech startups and computer science. Hacker
+News is similar to Reddit in that anyone can post links, and users then
+upvote and downvote those links, with the most popular ones rising to
+the top. Its web design is simple and has remained the same for many
+years, making it a good choice for web scraping practice.</p>
+<p>Your practice script will download the title and URL from the first five
+pages of popular links. The front page of Hacker News displays the 30
+most popular recent posts. If you scroll to the bottom and click More,
+you&rsquo;ll see the second page of results, showing the next 30 most popular
+recent posts, at the <em>https://news.ycombinator.com/?p=2</em> URL. Likewise, the third page of results has the URL <em>https://news.ycombinator.com/?p=3</em>, and so on.</p>
+<p>Figure B-2 shows a Firefox window with Hacker
+News loaded and the developer tools open. This time, I&rsquo;ve switched to
+the Inspector tab, which allows you to inspect how the HTML of the page
+is laid out. The Inspector tab shows all of the HTML tags that make up
+the page, and when you mouse over an individual tag, your browser
+highlights the corresponding design element on the web page. In this
+example, I moused over an <code>&lt;a&gt;</code> tag, and the browser highlighted that
+element.</p>
+<p><img alt="Figure B-2: Using Firefox’s developer tools to inspect the HTML that makes up a Hacker News post" src="media/images/FigureB-2.png" /><br />
+<em>Figure B-2: Using Firefox’s developer tools to inspect the HTML that makes up a Hacker News post</em></p>
+<p>The developer tools show that all posts in the
+Hacker News site are laid out in an HTML table. In HTML, tables are
+defined within <code>&lt;table&gt;</code> tags.
+Each row is a <code>&lt;tr&gt;</code> tag, and
+each cell within it has a <code>&lt;td&gt;</code> tag. Here&rsquo;s the HTML code from a
+typical Hacker News post:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;athing&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;34466985&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;title&quot;</span> <span class="na">valign</span><span class="o">=</span><span class="s">&quot;top&quot;</span> <span class="na">align</span><span class="o">=</span><span class="s">&quot;right&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;rank&quot;</span><span class="p">&gt;</span>4.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;votelinks&quot;</span> <span class="na">valign</span><span class="o">=</span><span class="s">&quot;top&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">center</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;up_34466985&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;vote?id=34466985&amp;amp;how=up&amp;amp;goto=news&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;votearrow&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;upvote&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">center</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;titleline&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://people.ece.cornell.edu/land/courses/ece4760/RP2040/C_SDK_DMA_machine/DMA_machine_rp2040.html&quot;</span><span class="p">&gt;</span>
+        Direct Memory Access computing machine RP2040
+      <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sitebit comhead&quot;</span><span class="p">&gt;</span> (<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;from?site=cornell.edu&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sitestr&quot;</span><span class="p">&gt;</span>cornell.edu<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>)
+      <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>The rows with <code>class="athing"</code>, or the value of the attribute
+<code>class</code> set to
+<code>athing</code>, contain links that
+users have posted. Inside each <code>athing</code> row, there are three cells (that is,
+three <code>&lt;``td&gt;</code> tags). The last of these cells
+contains the actual link, the <code>&lt;a&gt;</code> tag.</p>
+<p>The following script, <em>bs4-example.py</em>, scrapes the titles and URLs of
+the first five pages of the most popular posts recently posted on Hacker
+News, saving them in a CSV spreadsheet and also displaying them to the
+terminal:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">httpx</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">])</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">page_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LOADING PAGE </span><span class="si">{</span><span class="n">page_number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://news.ycombinator.com/?p=</span><span class="si">{</span><span class="n">page_number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">table_row</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;athing&quot;</span><span class="p">):</span>
+                <span class="n">table_cells</span> <span class="o">=</span> <span class="n">table_row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">)</span>
+                <span class="n">last_cell</span> <span class="o">=</span> <span class="n">table_cells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">link</span> <span class="o">=</span> <span class="n">last_cell</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+                <span class="n">link_url</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">link_url</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="n">link</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">:</span> <span class="n">link_url</span><span class="p">})</span>
+
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>First, the script imports the <code>csv</code>, <code>time</code>, <code>httpx</code>, and <code>bs4</code> modules. In the <code>main()</code> function, it opens a new CSV for
+writing called <em>output.csv</em>, creates a <code>csv.DictWriter()</code> object, and uses that object to write
+the CSV headers (<code>Title</code> and
+<code>URL</code>, in this case), as you
+learned in Chapter 9.</p>
+<p>The following <code>for</code> loop loops
+through the results of <code>range(1, 6)</code>, saving each item as <code>page</code>. The <code>range()</code> function is useful for looping through
+a list of numbers; in this case, it starts with 1, then 2, and so on
+until it hits 6 and then stops, meaning it returns the numbers 1 through
+5. The code displays the page number that it&rsquo;s about to load, then makes
+the HTTP request to load that page using <code>httpx.get()</code>, creating a different URL for the
+current page on each loop. After making each HTTP request that gets a
+page of results, the code parses all of the HTML from that page using
+BS4, storing it as <code>soup</code>.</p>
+<p>Now things get slightly trickier. As noted earlier, all of the HTML
+table rows that have the class <code>athing</code> contain links that users posted. The
+script gets a list of all of these rows by calling
+<code>soup.find_all("tr", class_="athing")</code>. The <code>find_all()</code> method searches the BS4 object
+<code>soup</code> for all instances of
+the HTML tag <code>&lt;tr&gt;</code> and
+returns a list of matches. In this case, the code also includes
+<code>class_="athing"</code>, which tells
+BS4 to include only tags that have the <code>class</code> attribute set to <code>athing</code>. The <code>for</code> loop loops through them, saving each
+item in the <code>table_row</code>
+variable.</p>
+<p>Now that the code is looping through each table row that contains a link
+posted by a user, it goes on to find that link tag. There are several
+links in each table row, so it figures out which one is the link a user
+posted. First, it calls <code>table_row.find_all("td")</code> to get a list of all of the table
+cells inside <code>table_row</code>,
+storing that list in <code>table_cells</code>. As noted earlier, the last cell
+contains the link that we care about. Therefore, the code pulls out just
+the last cell in this list, storing it in the variable
+<code>last_cell</code> (the <code>−1</code> index is the last item in a list). The
+code searches just <code>last_cell</code>
+for the link it contains (the <code>&lt;a&gt;</code> tag), and uses <code>print()</code> to display the link&rsquo;s title and URL.
+Finally, it calls <code>writer.writerow()</code> to also save this row into the CSV.</p>
+<p>The code does this once for each of the page&rsquo;s 30 rows. It then waits
+one second, using <code>time.sleep(1)</code>, and moves on to the next page, until
+it has extracted all the links from the first five pages. When the
+script is finished running, it creates a file called <em>output.csv</em> that
+should contain the 150 most recent popular links posted to Hacker News.
+Most of the time when you&rsquo;re scraping
+real data for an investigation, you&rsquo;ll save it to a CSV spreadsheet,
+like this script did, or to a SQL database (as discussed in Chapter 12) so that you can work with it later.</p>
+<p><strong>NOTE</strong> <em>The <code>find_all()</code> method in this code passes an argument called <code>class_</code> instead of <code>class</code>. This is because <code>class</code> is a Python keyword and can&rsquo;t be used as a variable name. If you want to use
+<code>find_all()</code> to select tags using any other attribute, then the argument name will be the same as the attribute name. For example, <code>soup.find _all("a", href="https://example.com")</code> will find all link tags in
+<code>soup</code> that have an href attribute set to <code>https://example.com.</code></em></p>
+<p>You can also find a copy of this code in the book&rsquo;s GitHub repo at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/appendix-b/bs4-example.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/appendix-b/bs4-example.py</a>.</p>
+<p>Here&rsquo;s what it looked like when I ran this script:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor appendix-b % python3 bs4-example.py
+LOADING PAGE 1
+
+Buy Hi-Resolution Satellite Images of Any Place on Earth
+https://www.skyfi.com/pricing
+
+The McMurdo Webcams
+https://www.usap.gov/videoclipsandmaps/mcmwebcam.cfm
+
+--snip--
+LOADING PAGE 2
+
+Thoughts on the Python Packaging Ecosystem
+https://pradyunsg.me/blog/2023/01/21/thoughts-on-python-packaging/
+--snip--
+</code></pre></div>
+
+<p>Try running it yourself now. Assuming Hacker News hasn&rsquo;t updated its web
+design, it should work fine; however, the URLs will differ because the
+most popular recent links on Hacker News are constantly changing.</p>
+<p>This script scrapes only the first five pages of content on Hacker News.
+In theory, you could scrape <em>all</em> the content on the site since its
+founding in 2007. To do so, you&rsquo;d have to modify the script to stop not
+after page 5 but when it gets to the very last page, presumably one that
+doesn&rsquo;t have any links on it. This assumes that the site will actually
+show you content that old and that you could make those millions of HTTP
+requests without it blocking your IP address. I don&rsquo;t know if this is
+true or not with Hacker News&mdash;I haven&rsquo;t attempted to scrape everything
+from this site myself.</p>
+<p>I mentioned in the HTTP Requests section that some websites
+add roadblocks to make scraping more difficult, and this turned out to
+be true with Hacker News. When I first wrote this script, it didn&rsquo;t
+include the <code>time .sleep(1)</code>
+code, which waits one second between each HTTP request. I found that
+Hacker News limits how quickly you can make HTTP requests, and the fifth
+request in quick succession responded with an HTML page with the error
+message
+<code>Sorry, we're not able to serve your requests this quickly</code>. I solved
+this problem by waiting one second between HTTP requests. It&rsquo;s common to
+run into hurdles like this while you&rsquo;re writing scrapers, but it&rsquo;s also
+often a simple matter of modifying your script like this to get around
+these roadblocks.</p>
+<blockquote>
+<h4>BS4 WEB SCRAPING FOR TRAVEL</h4>
+<p>In 2014, shortly after Edward Snowden leaked his massive dataset of top-secret NSA documents to Laura Poitras and Glenn Greenwald, I scheduled a trip to Rio de Janeiro, where Greenwald lived, to help him with computer security and to look through the Snowden docs myself. (This was several years before Greenwald unfortunately became a far-right pundit who openly supports the American fascist movement.) At the time, Americans could travel to Brazil only if they had a visa, and they needed to visit a consulate in person to get one. However, the San Francisco consulate’s website told me that all appointments were booked for the next two months.</p>
+<p>To solve this problem, I wrote a simple Python script that scraped the consulate’s availability calendar web page, using BS4 to loop through each cell in the calendar and see if any appointment slots were open. If it found an opening, my script would send me a text message. I then configured a VPS to run this script every 10 minutes so I’d be the first to know if someone canceled their appointment. In less than two days, I got a text, snagged an appointment, and got my visa. I flew to Rio a few days later.</p>
+</blockquote>
+<p>To learn more about using the BS4 package, check out its documentation at <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">https://www.crummy.com/software/BeautifulSoup/bs4/doc/</a>.</p>
+<h3>Automating Web Browsers with Selenium</h3>
+<p>Sometimes scraping websites is too challenging for Beautiful Soup alone.
+This is often the case with sites that are JavaScript-heavy, where
+viewing the HTML source doesn&rsquo;t result in much information you&rsquo;re
+interested in. This is true for sites like Facebook, YouTube, and Google
+Maps. It&rsquo;s much simpler to get information from this sort of site by
+using a web browser than by untangling the complicated web of HTTP
+requests that you&rsquo;d need to make to get the same information. Some
+websites also put up barriers to scraping. They might add JavaScript
+code that ensures visitors are using real web browsers before showing
+them content, preventing users from just making HTTP requests using cURL
+(discussed in Chapter 4) or a Python package
+like HTTPX.</p>
+<p>You can control a real web browser for scraping purposes by using
+software called Selenium. Scripts that just make HTTP requests are more
+efficient and run much quicker than using Selenium because they don&rsquo;t
+require running a whole web browser and downloading all of the resources
+of the target website. When I&rsquo;m writing a
+scraper, I generally start by attempting to scrape the site using HTTPX,
+but if this technique turns out to be too complicated, I switch to
+Selenium.</p>
+<p>To use the Selenium Python package, you must also install a <em>web
+driver</em>, software that Selenium uses to control a web browser. Selenium
+supports Chrome, Firefox, Safari, and Edge. The example in this section
+uses the Firefox driver, which is called geckodriver.</p>
+<p>To continue, follow the instructions for your operating system, then
+skip to the Testing Selenium in the Python Interpreter section.</p>
+<h4>Installing Selenium and geckodriver on Windows</h4>
+<p>For this task, Windows users should work with native Windows tools
+rather than WSL. Install the <code>selenium</code> Python module by opening PowerShell
+and running the following command:</p>
+<div class="codehilite"><pre><span></span><code>python -m pip install selenium
+</code></pre></div>
+
+<p>Also make sure you have Firefox installed (see <a href="https://www.mozilla.org/en-US/firefox/new/">https://www.mozilla.org/en-US/firefox/new/</a>).</p>
+<p>To install geckodriver, go to <a href="https://github.com/mozilla/geckodriver/releases">https://github.com/mozilla/geckodriver/releases</a>. You&rsquo;ll see several ZIP files for the latest version of geckodriver that
+you can download. Download the appropriate Windows version and unzip it.
+You should end up with a single file called <em>geckodriver.exe</em>. In File
+Explorer, copy this file and paste it into <em>C:\Windows\System32</em>. This
+will allow you to run geckodriver from PowerShell no matter what your
+working directory is.</p>
+<h4>Installing Selenium and geckodriver on macOS</h4>
+<p>If you&rsquo;re using macOS, open a terminal. Install the <code>selenium</code> Python module by running the
+following:</p>
+<div class="codehilite"><pre><span></span><code>python3 -m pip install selenium
+</code></pre></div>
+
+<p>Then install geckodriver by running the following:</p>
+<div class="codehilite"><pre><span></span><code>brew install geckodriver
+</code></pre></div>
+
+<p>This should give you everything you need to use Selenium in Python.</p>
+<h4>Installing Selenium and geckodriver on Linux</h4>
+<p>If you&rsquo;re using Linux, open a terminal. Install the <code>selenium</code> Python module by running the
+following:</p>
+<div class="codehilite"><pre><span></span><code>python3 -m pip install selenium
+</code></pre></div>
+
+<p>Install geckodriver by running the following:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt update
+sudo apt install firefox-geckodriver
+</code></pre></div>
+
+<p>This should give you everything you need to use Selenium in Python.</p>
+<h4>Testing Selenium in the Python Interpreter</h4>
+<p>Now that you have Selenium and geckodriver installed, test them out in
+the Python interpreter by loading this book&rsquo;s git repo website on GitHub
+to get a feel for how Selenium allows you to control a web browser:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://github.com/micahflee/hacks-leaks-and-revelations&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+<span class="n">GitHub</span> <span class="o">-</span> <span class="n">micahflee</span><span class="o">/</span><span class="n">hacks</span><span class="o">-</span><span class="n">leaks</span><span class="o">-</span><span class="ow">and</span><span class="o">-</span><span class="n">revelations</span><span class="p">:</span> <span class="n">Code</span> <span class="n">that</span> <span class="n">goes</span> <span class="n">along</span> <span class="k">with</span> <span class="n">the</span> <span class="n">Hacks</span><span class="p">,</span> <span class="n">Leaks</span><span class="p">,</span> <span class="ow">and</span> <span class="n">Revelations</span> <span class="n">book</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This code first imports <code>webdriver</code> from the <code>selenium</code> module. It then creates a new Firefox
+driver by calling <code>webdriver.Firefox()</code> and saves it in the variable
+<code>driver</code>. When you create the
+Selenium driver, a new Firefox window should open on your computer, and
+a robot icon should appear in the address bar&mdash;this is how you know
+that this browser is being controlled by Selenium.</p>
+<p>The code then instructs the browser to load the URL
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations">https://github.com/micahflee/hacks-leaks-and-revelations</a>.
+After running the command, you should see Firefox load that GitHub page.
+Once the page is loaded, including all of its JavaScript or other
+complicated components, you can write code to control it. In this case,
+the code just displays the title of the page in the terminal with
+<code>print(driver.title)</code>.
+Finally, it quits Firefox.</p>
+<h4>Automating Screenshots with Selenium</h4>
+<p>Now let&rsquo;s try something slightly more complicated. In this section,
+we&rsquo;ll go over a script that will take two arguments: a location name and
+the filename of a screenshot to save. Using Selenium, the script will
+load Google Maps at <a href="https://maps.google.com">https://maps.google.com</a>,
+search for the location, zoom in a little, turn on the satellite images
+layer, and take a screenshot of the satellite image of the location,
+saving it to disk.</p>
+<p>While I&rsquo;m programming web scrapers, I find it helpful to have an
+interactive Python interpreter open in a terminal where I can test out
+Selenium or BS4 commands, allowing me to see if they work in real time
+without having to start my script over. When I&rsquo;m writing a Selenium
+script, I open developer tools inside the browser I&rsquo;m driving to inspect
+all of the HTML tags, which helps me figure out which commands to run.
+Once I get something working, I copy the working code into the script
+that I&rsquo;m writing in my text editor.</p>
+<p>For example, to search for the location in Google Maps, I needed to make
+the Selenium browser select the search box, type the location, and press <strong>ENTER</strong>. In HTML, tags often have <code>id</code> attributes. By using the
+Firefox developer tools, I discovered that the search box in Google
+Maps, which is an <code>&lt;input&gt;</code>
+tag, includes the <code>id="searchboxinput"</code> attribute, meaning the search box has
+an <code>id</code> of
+<code>searchboxinput</code>. That allowed
+me to enter code into the Python interpreter that would select the
+search box, type a search query into it, and press <strong>ENTER</strong> in
+the browser it was controlling. I didn&rsquo;t always get it right on the
+first try, but after some trial and error, I wrote some working code. At
+this point, I added that code to my script.</p>
+<p>I also used developer tools to figure out how to turn on the satellite
+image layer. In the bottom-left corner of Google Maps is an icon called
+the <em>minimap</em> that lets you toggle different layers on and off. The
+developer tools showed me that this icon had an <code>id</code> of <code>minimap</code> and that I could click one of the
+buttons in the minimap element to turn on the satellite layer; just like
+with the search box, I tested clicking this icon in the Python
+interpreter until I got it working.</p>
+<p>The following script, <em>selenium-example.py,</em> uses Selenium to take
+satellite image screenshots from Google Maps for you:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.keys</span> <span class="kn">import</span> <span class="n">Keys</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;screenshot_filename&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">screenshot_filename</span><span class="p">):</span>
+    <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">()</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://maps.google.com&quot;</span><span class="p">)</span>
+    <span class="n">search_box</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="s2">&quot;searchboxinput&quot;</span><span class="p">)</span>
+    <span class="n">search_box</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">search_box</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
+    <span class="n">search_box</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">Keys</span><span class="o">.</span><span class="n">RETURN</span><span class="p">)</span>
+
+    <span class="n">body</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">)</span>
+    <span class="n">body</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">Keys</span><span class="o">.</span><span class="n">ADD</span><span class="p">)</span>
+    <span class="n">body</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">Keys</span><span class="o">.</span><span class="n">ADD</span><span class="p">)</span>
+
+    <span class="n">minimap</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="s2">&quot;minimap&quot;</span><span class="p">)</span>
+    <span class="n">buttons</span> <span class="o">=</span> <span class="n">minimap</span><span class="o">.</span><span class="n">find_elements</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="s2">&quot;button&quot;</span><span class="p">)</span>
+    <span class="n">buttons</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="n">screenshot_filename</span><span class="p">)</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>First, the script imports the <code>click</code> and <code>time</code> modules and then several components
+from the <code>selenium</code> module.
+Specifically, it imports <code>webdriver</code>, the component required to actually
+launch and control a web browser. It also imports <code>Keys</code> and <code>By</code> to automate pressing <strong>ENTER</strong>
+after searching and to search for HTML elements by their <code>id</code> attribute.</p>
+<p><strong>NOTE</strong> <em>Exactly what you need to import from <code>selenium</code> depends on what you&rsquo;re trying
+to do. Consult the Selenium for Python documentation to learn exactly
+what you need and when&mdash;that&rsquo;s how I figured it out.</em></p>
+<p>The code includes Click decorators before the <code>main()</code> function, making this a command line
+program that takes two arguments, <code>location</code> and <code>screenshot_filename</code>. The <code>location</code> variable is a Google Maps search
+query, like <em>Manhattan, NY</em> or <em>The Great Pyramid of Giza</em>, and
+<code>screenshot_filename</code> is the
+path to save the final screenshot.</p>
+<p>When the <code>main()</code> function
+runs, the code starts by creating a Selenium web driver, which should
+open a Firefox window that the script will then control. The
+<code>driver.implicitly_wait(10)</code>
+function tells Selenium to wait up to 10 seconds for page elements to
+load. The code loads <a href="https://maps.google.com">https://maps.google.com</a> in Firefox with the <code>driver.get()</code> function, then finds the search box
+element on the page, storing it in the variable <code>search_box</code>. It finds the search box by running
+<code>driver.find_element(By.ID, "searchboxinput")</code>. Once the code has this search box
+object stored in <code>search_box</code>,
+it clears any text in the text box by calling the <code>clear()</code> method on it, and then it types the
+text in the <code>location</code> string
+by calling <code>send_keys(location)</code>. Finally, it presses <strong>ENTER</strong>
+to search for this location by calling <code>send_keys(Keys.RETURN)</code>. At this point, Google Maps should
+search for the location.</p>
+<p>The code then zooms in by selecting the <code>&lt;body&gt;</code> tag, the main HTML tag that contains
+all other tags, then telling Firefox to press the + key twice, which is
+the Google Maps keyboard shortcut to zoom in.</p>
+<p>At this point, Firefox has loaded Google Maps, searched for a location,
+and zoomed in on that location. The code then turns on the satellite
+image layer by locating the minimap in the corner of the screen. Once it
+finds this, it locates all of the <code>&lt;button&gt;</code> tags inside the minimap by calling the
+<code>find_elements(By.TAG_NAME, "button")</code> method, and then it clicks the third
+button, calling the <code>click()</code>
+method on the third element (which has an index of <code>2</code>) on the list of buttons. This turns on
+the satellite images layer.</p>
+<p>Finally, the script waits two seconds, just to make sure the satellite
+images have finished loading, and then saves a screenshot of the web
+page to <code>screenshot_filename</code>.
+When it&rsquo;s done, it quits Firefox.</p>
+<p>You can find a complete copy of this code in the book&rsquo;s GitHub repo at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/appendix-b/selenium-example.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/appendix-b/selenium-example.py</a>.</p>
+<p>You can use <em>selenium-example.py</em> to generate Google Maps screenshots of
+any location you like. For example, I ran the following command:</p>
+<div class="codehilite"><pre><span></span><code>python3 selenium-example.py <span class="s2">&quot;great pyramid of giza&quot;</span> giza.png
+</code></pre></div>
+
+<p>This opened a Firefox window that was controlled by Selenium. It loaded Google Maps, searched for <em>great
+pyramid of giza</em>, zoomed in, turned on the satellite images layer, and
+saved a screenshot of the window in the file <em>giza.png</em>. Figure
+B-3 shows <em>giza.png</em>, scraped from Google
+Maps.</p>
+<p><img alt="Figure B-3: A satellite image of the Great Pyramid of Giza from Selenium" src="media/images/FigureB-3.png" /><br />
+<em>Figure B-3: A satellite image of the Great Pyramid of Giza from Selenium</em></p>
+<p>On your own, it might also be fun to try searching for <em>US Capitol</em>;
+<em>Washington, DC</em>; <em>Kremlin, Moscow</em>; or <em>Tokyo, Japan</em>.</p>
+<p>This example script used Selenium to take screenshots. You could modify
+it so that Selenium automatically takes a screenshot each time a public
+figure posts to social media, so you&rsquo;ll have a record of it in case they
+delete it. You&rsquo;re not limited to cataloging information in this way,
+though; you can also use Selenium to extract information from web pages
+and store them in CSV spreadsheets or any other format you&rsquo;d like, just
+like you can with BS4.</p>
+<p>To learn more about Selenium for Python, check out its documentation at
+<a href="https://selenium-python.readthedocs.io">https://selenium-python.readthedocs.io</a>.</p>
+<h2>Next Steps</h2>
+<p>In this appendix, I&rsquo;ve gone over a few techniques for web scraping and
+provided some simple example scripts to show off the basics of how they
+work. However, in order to write code for your future web scraping
+projects, you&rsquo;ll probably need to learn more about web development than
+is covered in this book, depending on what site you&rsquo;re trying to scrape.
+For example, your HTTPX and BS4 scraper
+might need to first log in to a website and then make all of its future
+requests as that logged-in user in order to access the content you&rsquo;re
+after. This would require making HTTP POST requests instead of just GET
+requests and keeping track of cookies, neither of which I&rsquo;ve covered
+here.</p>
+<p>As a next step, I recommend getting more comfortable with the developer
+tools built into browsers. This will help familiarize you with the HTTP
+requests your browser makes and what their responses include. Spend more
+time browsing the layout of HTML elements, as you did in this appendix.
+The more you learn about web development, including more complex topics
+like HTTP headers and cookies, the easier it will be for you to scrape
+the web. If you can access information in a web browser, you can write a
+script that automates accessing that information.</p>
         </div>
     </section>
     <section class="pagination">
