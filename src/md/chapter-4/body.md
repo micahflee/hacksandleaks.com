@@ -34,10 +34,7 @@ do
 done
 ```
 
-This `for` loop starts with
-the syntax `for`
-`variable_name`
-`in` `list_of_items`, followed by `do`, followed by the commands to run for
+This `for` loop starts with the syntax `for variable_name in list_of_items`, followed by `do`, followed by the commands to run for
 each item in the list, followed by `done`. In this case, `variable_name` is `NUMBER` and `list_of_items` is `1 2 3`. The value of the `NUMBER` variable will be `1` the first time the code loops,
 `2` during the second loop,
 and `3` during the third loop.
@@ -79,10 +76,8 @@ The variable name in this code is
 machine to run the `ls *.zip`
 command. This command outputs a list of all of the ZIP files in the
 current folder, producing a list of filenames. The `for` loop cycles through that list and runs
-the code between `do` and
-`done` for each filename. In
-this case, the `echo` command
-prints the filenames to the terminal in `ZIP filename:` `filename` format.
+the code between `do` and `done` for each filename. In
+this case, the `echo` command prints the filenames to the terminal in `ZIP filename: filename` format.
 
 For example, here's what it looks like when I run this code in the
 *BlueLeaks* folder in my terminal on macOS:
@@ -1454,7 +1449,7 @@ shell.
 
 Completely close your terminal window and click through any warnings
 saying that your active programs will close if you do this. Open a new
-terminal window and SSH back into your server using the `ssh` `username@hostname` command. Then run
+terminal window and SSH back into your server using the `ssh username@hostname` command. Then run
 `byobu` again to attach your
 previous session. Any programs you run inside this Byobu session won't
 quit when you disconnect from SSH.

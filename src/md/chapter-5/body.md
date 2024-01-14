@@ -209,7 +209,7 @@ apt can install. An Ubuntu container is also a convenient way to access
 a shell on a clean Ubuntu system, allowing you to install software or
 test programs.
 
-Docker commands use the `docker` `command` syntax. Run the following to
+Docker commands use the `docker command` syntax. Run the following to
 start your own Ubuntu container (if you're using Linux, remember to add
 `sudo`):
 
@@ -278,7 +278,7 @@ CONTAINER ID   IMAGE           COMMAND   CREATED           STATUS         PORTS 
 
 When you start a container with
 `docker run`, you can give it
-a name with the arguments `--name` `your_container_name`. Otherwise, it will be
+a name with the arguments `--name your_container_name`. Otherwise, it will be
 assigned a random name. The container in my `docker ps` output is called `epic_borg`.
 
 To *kill* a container, or force it to quit, you run
@@ -307,7 +307,7 @@ CONTAINER ID   IMAGE         ...   STATUS                     PORTS     NAMES
 337a795a53b2   ubuntu:latest ...   Exited (0) 43 minutes ago            nostalgic_keldysh
 ```
 
-It's good practice to run `docker rm` `container_name` to prune your stopped Docker
+It's good practice to run `docker rm container_name` to prune your stopped Docker
 containers when you're done using them. For example, I'd run
 `docker rm nostalgic_keldysh`
 to remove my `nostalgic_keldysh` container.
@@ -461,7 +461,7 @@ Deleted Containers:
 Total reclaimed space: 82B
 ```
 
-You can now run `docker volume rm` `volume-name` to remove any volumes attached
+You can now run `docker volume rm volume-name` to remove any volumes attached
 to those containers, or run `docker volume prune` to delete all volumes that Docker
 containers aren't currently using. Run
 `docker volume rm test-data` to
@@ -851,7 +851,7 @@ title, a username, and a password, and then explore your new WordPress
 site.
 
 To open a shell and run commands in an active container with Docker
-Compose, you use the `docker-compose exec` `container_name command` syntax. For example, this is
+Compose, you use the `docker-compose exec container_name command` syntax. For example, this is
 how you'd get a shell in the `wordpress` container:
 
 ```sh
@@ -1299,7 +1299,7 @@ the web interface to make investigations, they get assigned completely
 random foreign IDs. When you use `aleph crawldir` to create them, the
 `Foreign ID` is based on the
 filesystem path that you're indexing; alternatively, you can use the
-`-f` `foreign_id` arguments to specify your own
+`-f foreign_id` arguments to specify your own
 if you like.
 
 Next, run the following command while indexing *icefishx* to check the
