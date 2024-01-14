@@ -1,0 +1,5 @@
+[Buy Now](buy.html)
+[Contents](contents.html)
+[⬅️ Chapter 9](chapter-9.html)
+[Chapter 11 ➡️](chapter-11.html)
+[Back Home](/)
