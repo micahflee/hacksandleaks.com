@@ -37,13 +37,2013 @@
     </header>
     <section class="intro bookIntro">
         <div class="wrapper" id="intro-wrapper">
-          <div id="reading-time">~0 min read</div>
+          <div id="reading-time">~80 min read</div>
           <h1>Chapter 14: Neo-Nazis and Their Chatrooms</h1>
-          
+          <p>In early August 2017, hundreds of white supremacists assembled in the
+city of Charlottesville, Virginia, for the Unite the Right rally. The
+protesters&mdash;hailing from groups like Vanguard America, Identity Evropa,
+League of the South, and the Ku Klux Klan&mdash;flew Nazi and Confederate
+battle flags, wore red &ldquo;Make America Great Again&rdquo; hats, and chanted
+slogans like &ldquo;Jews will not replace us!&rdquo;</p>
         </div>
     </section>
     <section id="content" data-content="chapter-14">
-        <div class="wrapper" id="about-content">
+        <div class="wrapper" id="about-content"><p>On August 12, James Alex Fields Jr., described by his high school
+history teacher as &ldquo;deeply into Adolf Hitler and white supremacy,&rdquo; drove
+a car into a group of counterprotesters, murdering 32-year-old Heather
+Heyer and injuring 19 other people. Earlier in the event, Fields was
+seen marching with a Vanguard America shield. That same day, a group of
+six white men followed 20-year-old Black special ed assistant teacher
+DeAndre Harris into a parking garage and beat him with poles and metal
+pipes, an attack that was caught on film and posted to the internet. In
+response to the racist violence, Trump famously said
+that there were &ldquo;very fine people on both sides.&rdquo;</p>
+<p>The Unite the Right rally, like much of the American fascist movement&rsquo;s
+activism during the 2017&ndash;2021 Trump presidency, was largely organized
+online using Discord, a group chat platform designed for gamers. In
+Discord, users join <em>servers</em>, a group of chatrooms, or a <em>channel</em>, a
+single chatroom. Each channel covers different topics. Fascists created
+Discord servers for their regional hate groups, as well as for projects
+like organizing Unite the Right.</p>
+<p>An antifascist infiltrator gained access to the server used to organize
+Unite the Right, called Charlottesville 2.0, as well as many other
+servers used by fascists at the time. They then leaked the chat logs to
+Chris Schiano and Dan Feidt, journalists working with the independent
+nonprofit news collective Unicorn Riot. The leak took the form of
+screenshots from the Discord app, large JSON files containing thousands
+of messages, and audio recordings from voice meetings.</p>
+<p>In this chapter, I describe how the JSON chat log files were structured
+and how I went about analyzing them, using techniques covered in
+Chapter 11. I&rsquo;ll describe the custom app
+that I wrote to investigate this dataset and explain how I used it to
+investigate a Discord server called Pony Power, whose members doxed
+their political enemies. You&rsquo;ll also learn the inside story of
+DiscordLeaks, Unicorn Riot&rsquo;s public searchable archive based on my app,
+which contains millions of chat messages from far-right Discord servers.
+Finally, I discuss a major hack of the American neo-Nazi organization
+Patriot Front that took place four and a half years after the
+Charlottesville rally. This hack included chat logs from RocketChat, a
+self-hosted system that Unicorn Riot also hosts in DiscordLeaks.</p>
+<p>Like my reporting on the AFLDS dataset, this case study is an example of
+journalism with real-world impact. My work, along with that of Unicorn
+Riot, antifascist infiltrators, and other anonymous developers, helped
+lead to a court settlement against the most notorious American white
+supremacist leaders and organizations, resulting in over $25 million
+worth of damages. I hope that this case study will inspire your own work
+on datasets of structured chat logs, should you obtain them in the
+future. With the rise of remote work and the increasing popularity of
+chat platforms like Discord, Slack, and RocketChat, this type of leak is
+only getting more common.</p>
+<p>I&rsquo;ll start with a brief description of how these chat logs were leaked.</p>
+<h3>How Antifascists Infiltrated Neo-Nazi Discord Servers</h3>
+<p>Unicorn Riot reporters covered the Unite the Right gathering on the
+ground in Charlottesville. In the following days, the collective
+announced that it had received anonymously leaked chat logs from the
+far-right groups that took part in the rally, and particularly from the
+Charlottesville 2.0 Discord server. It began publishing articles based
+on these leaks, showing evidence of premeditated plans for violence,
+memes about hitting protesters with cars, and posts made after the event
+celebrating Heather Heyer&rsquo;s murder.
+It also published ZIP files containing thousands of screenshots from the
+infiltrated Discord servers. Researchers, both amateur and professional,
+immediately began correlating breadcrumbs from these chat logs with
+photos and videos of the event that were posted to social media to
+identify specific fascist activists.</p>
+<p>Alongside Charlottesville 2.0, other leaked fascist Discord servers had
+names like Vibrant Diversity, Ethnoserver, Safe Space 3, and 4th Reich.
+Some servers only had a few dozen users, while others had over a
+thousand. The most active server at the time, Vibrant Diversity,
+included a channel called #problematic_oven, where users shared racist
+memes. The 4th Reich server included a #rare_hitlers channel, where
+users shared vintage propaganda from Nazi Germany.</p>
+<p>Once the reporting of Unicorn Riot and others had made it clear to
+Discord that Nazis were relying on its service, the chat platform shut
+down many far-right chat servers and accounts. &ldquo;Discord&rsquo;s mission is to
+bring people together around gaming. We&rsquo;re about positivity and
+inclusivity. Not hate. Not violence,&rdquo; the company said in a statement.
+&ldquo;We will continue to take action against white supremacy, nazi ideology,
+and all forms of hate.&rdquo; Shutting down individual servers and accounts
+didn&rsquo;t work, though; fascists simply created new accounts and set up new
+chat servers. Just as quickly, antifascists infiltrated those new
+servers and continued to leak chat logs to Unicorn Riot.</p>
+<p>Fascists started spreading conspiracy theories that there were no
+infiltrators but that Discord itself was selling their chat logs to the
+Southern Poverty Law Center, a nonprofit that monitors hate groups. &ldquo;The
+Charlottesville planning server was leaked, even though it was highly
+secure and no one could figure out who could have leaked it,&rdquo; Andrew
+Anglin, founder of the notorious neo-Nazi website the Daily Stormer,
+wrote in an April 2018 blog post. &ldquo;Since then, servers have been
+repeatedly leaked. People have been doxed without being able to figure
+out how they were doxed. Repeatedly and consistently, I have been given
+reason to believe that these are not Discord &lsquo;leaks,&rsquo; but data being
+bought by our enemies.&rdquo; This wasn&rsquo;t true, of course. Anglin provided no
+evidence for the claim, Discord&rsquo;s privacy policy promises that it
+doesn&rsquo;t sell user data, and we know exactly how the data was leaked:
+antifascists were invited into the group by pretending to be racists.</p>
+<p>A few weeks after Unite the Right, I got a hold of some of these chat
+logs myself and began to analyze them.</p>
+<h3>Analyzing Leaked Chat Logs</h3>
+<p>In late August of 2017, after Unicorn Riot had started publishing
+articles based on leaked chats, someone from the collective asked me if
+I&rsquo;d like to cover the fascist chat logs for The Intercept. While
+journalism can be competitive, with each newsroom racing to publish
+breaking news first without getting scooped, the opposite is often true
+when it comes to complicated datasets. When it&rsquo;s clear that there&rsquo;s no
+way that a single newsroom has the resources
+to discover all of the revelations in a dataset, it only makes sense to
+bring in other newsrooms and share access to the data. This sort of
+collaboration helps everyone because different newsrooms have different
+audiences, and it makes real-world impact from the reporting more
+likely.</p>
+<p>My Unicorn Riot contact sent me a ZIP file full of JSON files and
+screenshots of Discord chats that covered several Discord servers. The
+JSON files contained more complete logs of everything posted to these
+chatrooms, while the screenshots captured only specific conversations.
+While screenshots are initially simpler to use because you don&rsquo;t need to
+write any code or use special tools to read them, having the chat logs
+in a structured data format like JSON is much more useful in the long
+run. The best way to peruse screenshots of chats is to open individual
+images, read them one at a time, take note of the filenames that contain
+interesting content, and refer back to them as needed. This quickly
+becomes unwieldy when you&rsquo;re dealing with thousands of screenshots.</p>
+<p>I started digging into the JSON files to see what I was dealing with.
+Specifically, I used the handy command line tool <code>jq</code> to figure out exactly how this data
+was structured in order to find the lists of users and channels and read
+the messages in each channel.</p>
+<p><strong>NOTE</strong> <em>Besides manually reading screenshots and taking notes, another option
+would have been to index the screenshots in software like Aleph, which
+you used in Chapter 5. Aleph would then perform OCR
+on the images, extracting their text and enabling me to search them for
+keywords. This might be helpful in locating specific messages, but in
+the end, it&rsquo;s still not as useful as structured data. If I were dealing
+with this data today and only had screenshots without access to JSON
+data, I would definitely rely on Aleph.</em></p>
+<h4>Making JSON Files Readable</h4>
+<p>Each JSON file within the ZIP file sent by my source contained the
+entire archive of chat logs from a given Discord server. For example,
+one 29MB JSON file was called <em>VibrantDiversityComplete-Sept5at327PM</em>.
+For the purposes of this book, I&rsquo;ve renamed it <em>VibrantDiversity.json</em>
+to make the following examples easier to read.</p>
+<p>When I opened this file in a text editor, its contents looked like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;meta&quot;</span><span class="p">:{</span><span class="nt">&quot;users&quot;</span><span class="p">:{</span><span class="nt">&quot;231148326249037824&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;D&#39;Marcus Liebowitz&quot;</span><span class="p">},</span><span class="nt">&quot;232213403974893569&quot;</span><span class="p">:{</span><span class="nt">&quot;nam</span>
+<span class="nt">e&quot;</span><span class="p">:</span><span class="s2">&quot;northern_confederate&quot;</span><span class="p">},</span><span class="nt">&quot;279620004641767424&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;☇Unlimited Power☇&quot;</span><span class="p">},</span><span class="nt">&quot;23338059623405977</span>
+<span class="nt">6&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;OrwellHuxley&quot;</span><span class="p">},</span><span class="nt">&quot;289851780521787392&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;badtanman&quot;</span><span class="p">},</span><span class="nt">&quot;337421867700715524&quot;</span><span class="p">:{</span><span class="nt">&quot;nam</span>
+<span class="nt">e&quot;</span><span class="p">:</span><span class="s2">&quot;spadegunner&quot;</span><span class="p">},</span><span class="nt">&quot;315936522656546818&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;erz1871&quot;</span><span class="p">},</span><span class="nt">&quot;122932975724789761&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Archer&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="nt">&quot;201547638129164290&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;SLUG2_&quot;</span><span class="p">},</span><span class="nt">&quot;288899711929286667&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;million plus&quot;</span><span class="p">},</span><span class="err">&quot;25019824</span>
+<span class="err">--snip--</span>
+</code></pre></div>
+
+<p>This block of data is not very human-readable. As you learned in
+Chapter 11, it&rsquo;s much easier to read JSON
+data that&rsquo;s been reformatted using line breaks, indentation, and syntax
+highlighting. Using the <code>jq</code>
+command, I formatted it and added syntax highlighting in my terminal
+like so:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq
+{
+  &quot;meta&quot;: {
+    &quot;users&quot;: {
+      &quot;231148326249037824&quot;: {
+        &quot;name&quot;: &quot;D&#39;Marcus Liebowitz&quot;
+      },
+      &quot;232213403974893569&quot;: {
+        &quot;name&quot;: &quot;northern_confederate&quot;
+      },
+      &quot;279620004641767424&quot;: {
+        &quot;name&quot;: &quot;☇Unlimited Power☇&quot;
+      },
+--snip--
+</code></pre></div>
+
+<p>Running this command added formatting and syntax highlighting to the
+file&rsquo;s contents, but still resulted in 29MB of text madly scrolling
+through my terminal. To understand the data better, I needed to run more
+specific commands that would reveal its overall structure.</p>
+<h4>Exploring Objects, Keys, and Values with jq</h4>
+<p>I could tell by looking at the beginning of the JSON data that the whole
+file was one large JSON object, and one of that object&rsquo;s keys was
+<code>meta</code>. I ran the following
+<code>jq</code> command to see what other
+keys there were:</p>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;keys&#39;</span>
+</code></pre></div>
+
+<p>The output told me that the data for each Discord server includes two
+parts, <code>data</code> and
+<code>meta</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;meta&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+
+<p>Guessing that <code>meta</code> included
+the metadata for the server, I ran the following command to determine
+the keys of the <code>meta</code> object:</p>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta | keys&#39;</span>
+</code></pre></div>
+
+<p>This command piped the output of <code>cat VibrantDiversity.json</code> as input into the
+<code>jq '.meta | keys'</code> command.
+It looks like there&rsquo;s a second pipe there, but there&rsquo;s not. The string
+<code>'.meta | keys'</code> is actually
+just a single argument into <code>jq</code>. The pipe character is how you chain
+multiple <code>jq</code> filters together
+so that the output of one gets piped into the output of the next; in
+this case, <code>.meta</code> outputs the
+value of the <code>meta</code> key and
+pipes it into <code>keys</code>, which
+outputs the keys from that value.</p>
+<p>The output showed me that the metadata included
+information about channels, servers, and users:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;channels&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;servers&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;userindex&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;users&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+
+<p>So far, I had only looked at the keys of JSON objects. It was time to
+look at some of the content, starting with the servers. By running
+<code>jq '.meta .servers'</code>, I could
+look at the value of the <code>servers</code> key inside the <code>meta</code> object:</p>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.servers&#39;</span>
+</code></pre></div>
+
+<p>The output in Listing 14-1 showed that
+<em>VibrantDiversity.json</em> lists a single server in the metadata sections,
+Vibrant Diversity, just as I expected.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vibrant Diversity&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SERVER&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 14-1: The list of servers in <code>VibrantDiversity.json</code></em></p>
+<p>I could tell that this output was an array, since it was a list of items
+surrounded by brackets ([ and ]).</p>
+<p>Next, I wanted to see what channels this server had, so I ran the
+following command to view the value of the <code>channels</code> key in the <code>meta</code> object:</p>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.channels&#39;</span>
+</code></pre></div>
+
+<p>Listing 14-2 shows the output of this command.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;274024266435919872&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rules&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;274262571367006208&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;general&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;292812979555139589&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;effortposting&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;288508006990348299&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;problematic_oven&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;274055625988898816&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;music&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;343979974241550337&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gun-posting-goes-here&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;328841016352440320&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;food-posting&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;274025126641795074&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;share_contact_info&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;288901961313550336&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;recruiting&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 14-2: The list of channels in the Vibrant Diversity server</em></p>
+<p>Whereas the output in Listing 14-1 was an
+array, the output for <code>.meta.channels</code> was a JSON object, as indicated by the
+braces (<code>{</code>and <code>}</code>) surrounding it.</p>
+<p>The keys for this object are long numbers, presumably the ID of the
+channel, and their values are objects that contain the <code>server</code> and <code>name</code> keys. For example, the channel with
+key <code>288508006990348299</code> has
+the value <code>{"server": 0, "name": "problematic_oven"}</code>. The <code>server</code> value for all of these channels is
+<code>0</code>. I guessed that this was
+the index of the servers array from Listing 14-1. Since there was only one server in
+this JSON file, the index for all of the channels is the first item in
+the list, <code>0</code>. The
+<code>name</code> value was
+<code>problematic_oven</code>. When I
+later read the chats in this channel, it was full of antisemitic posts
+and Nazi memes, and the word <em>oven</em> was clearly a reference to the
+Holocaust. This was definitely a neo-Nazi chat server.</p>
+<p>I wanted to see a list of this server&rsquo;s users, so I ran the following
+command to view the value of the <code>users</code> key in the <code>meta</code> object:</p>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.users&#39;</span>
+</code></pre></div>
+
+<p>Listing 14-3 shows my output.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;231148326249037824&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;D&#39;Marcus Liebowitz&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;232213403974893569&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;northern_confederate&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;279620004641767424&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;☇Unlimited Power☇&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 14-3: The list of users in the Vibrant Diversity server</em></p>
+<p>Just like the list of channels in Listing 14-2, the output for <code>.meta.users</code> in Listing 14-3 is a JSON object. The keys are long
+numbers, presumably the ID of the user, and the values are objects with
+just a single key, the user&rsquo;s name.</p>
+<p>So far, I had explored the metadata keys <code>channels</code>, <code>servers</code>, and <code>users</code>, but there was one left: the
+<code>userindex</code> key. I ran the
+following command to view the <code>userindex</code> key&rsquo;s value:</p>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.userindex&#39;</span>
+</code></pre></div>
+
+<p>Listing 14-4 shows my output.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;231148326249037824&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;232213403974893569&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;279620004641767424&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 14-4: The list of user IDs for each user in the Vibrant Diversity server</em></p>
+<p>The output for the <code>.meta.userlist</code> command was a JSON array rather than
+an object, and each item in the array was a string that looks like a
+Discord ID. Sure enough, the first item, <code>231148326249037824</code>, turned out to be the ID of the first
+user from Listing 14-3, D&rsquo;Marcus Liebowitz.
+At this point I didn&rsquo;t fully understand the purpose of
+<code>userlist</code>, but it soon became
+clear, as you&rsquo;ll see later in this section.</p>
+<p>Armed with a basic understanding of the server&rsquo;s metadata, I ran the
+following command to find the keys for the <code>data</code> object:</p>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.data | keys&#39;</span>
+</code></pre></div>
+
+<p>Listing 14-5 shows my output.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;274024266435919872&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;274025126641795074&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;274055625988898816&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;274262571367006208&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;288508006990348299&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;288901961313550336&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;292812979555139589&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;328841016352440320&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;343979974241550337&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 14-5: The keys to the <code>data</code> object in the Vibrant Diversity server</em></p>
+<p>These keys are the same channel IDs from Listing 14-2, so I guessed that the values
+of each key contained the actual messages in those chat channels.
+Because I needed to start somewhere, I decided to view the chat messages
+from the #problematic_oven channel, so I ran the following command:</p>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.data.&quot;288508006990348299&quot;&#39;</span>
+</code></pre></div>
+
+<p>The full argument for this <code>jq</code> command is surrounded by single
+quotes. The <code>.data</code> part of
+the filter looks in the key <code>data</code>, and the
+<code>."288508006990348299"</code> part
+of the filter looks in the key <code>288508006990348299</code>, which is the ID of the
+#problematic_oven channel. I put the ID in quotes so that <code>jq</code> would know that this key was a string
+and not a number.</p>
+<p>As with the first time I used <code>jq</code> to read this JSON file, the output of
+this command scrolled through a large block of text, though considerably
+less than before. In this case, the output showed chat messages from
+only a single channel, rather than showing all of the data in the JSON
+file. Listing 14-6 shows just a few chat
+messages from the middle of the output.</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq &#39;.data
+.&quot;288508006990348299&quot;&#39;
+{
+--snip--
+  &quot;352992491282366485&quot;: {
+    &quot;u&quot;: 4,
+    &quot;t&quot;: 1504230368205,
+    &quot;m&quot;: &quot;we need more white girls with nice asses&quot;
+  },
+  &quot;352992512752746496&quot;: {
+    &quot;u&quot;: 4,
+    &quot;t&quot;: 1504230373324,
+    &quot;m&quot;: &quot;no more gay jew shit&quot;
+  },
+  &quot;352992579949690890&quot;: {
+    &quot;u&quot;: 1,
+    &quot;t&quot;: 1504230389345,
+    &quot;m&quot;: &quot;you&#39;re not allowed to oogle anyone whiter than med&quot;
+  },
+  &quot;352992652687441920&quot;: {
+    &quot;u&quot;: 1,
+    &quot;t&quot;: 1504230406687,
+    &quot;m&quot;: &quot;if i catch you looking at anglo/celtic/nordic girls you&#39;re banned&quot;
+  },
+--snip--
+</code></pre></div>
+
+<p><em>Listing 14-6: Chat messages from the #problematic_oven channel in the Vibrant Diversity server</em></p>
+<p>Just like the channels in Listing 14-2,
+this output is a JSON object with keys that contain long numbers. In
+this case, these keys appeared to be message IDs, and the values
+appeared to be details about that specific chat message. In each
+message, the <code>u</code> field
+represented the user and the <code>m</code> field contained
+the message content. The <code>t</code>
+field was a Unix timestamp, the number of seconds or sometimes
+milliseconds since January 1, 1970, a common way to represent specific
+dates and times in computer science. These particular timestamps were in
+milliseconds.</p>
+<p>At this point, I knew that I was looking at a conversation between two
+neo-Nazis. The top two messages in Listing 14-6 are from a user with the ID of
+<code>4</code>, and the bottom two
+messages are from a user with the ID of <code>1</code>. Because the value of <code>t</code> gets bigger with each message, these
+appear to be displayed in chronological order. I decided to take a
+closer look at the message <code>352992512752746496</code>, from user <code>4</code>, with the timestamp
+<code>1504230373324</code>.</p>
+<h4>Converting Timestamps</h4>
+<p>Unix timestamps are a useful way for computers to store an entire
+date&mdash;the year, month, day, and time of day&mdash;in a single number. I
+needed to convert the timestamp associated with that message into
+human-readable format to find out the date and time when the message was
+posted.</p>
+<p>I used the following lines of code in the Python interpreter to convert
+the <code>1504230373324</code> timestamp
+into a more human-readable Python <code>datetime</code> object:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="mi">1504230373324</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The syntax in this code is similar to the code you used to import
+modules in Chapter 8. Rather than
+<code>import module</code>, this code takes the syntax
+<code>from module import resource_name</code>, loading a single
+<code>datetime</code> resource from the
+<code>datetime</code> module. Next, the
+code defines a variable called <code>timestamp</code> and sets its value to the return value
+of the <code>datetime.fromtimestamp()</code> function. This function takes the
+number of seconds since January 1, 1970, as an argument. Because the
+Discord logs are in milliseconds rather than seconds, this code first
+divides the Discord timestamp by 1,000 to convert it to seconds before
+passing it into the function. The function returns a Python
+<code>datetime</code> object.</p>
+<p>When I displayed the <code>datetime</code> object with <code>print(timestamp)</code>, I could see that this chat message
+was posted on August 31, 2017, at 6:46 [PM]:</p>
+<div class="codehilite"><pre><span></span><code>2017-08-31 18:46:13.324000
+</code></pre></div>
+
+<p>I now had an idea of the timeframe in which this chat exchange took
+place. Next, I wanted to see which users were involved.</p>
+<h4>Finding Usernames</h4>
+<p>I wanted to find the username for person who&rsquo;d posted the
+<code>352992512752746496</code> message
+in Listing 14-6. The <code>u</code> value for this message was <code>4</code>, so I checked to see if <code>4</code> was a valid user ID from the output in
+Listing 14-3 but found that it wasn&rsquo;t
+there; all of the user IDs in that JSON object are 18 digits long. I
+turned to the output in Listing 14-4 that shows the value of
+<code>userindex</code> in the
+<code>meta</code> object. The value of
+<code>userindex</code> is an array of
+strings, each an 18-digit user ID.</p>
+<p>As described in Chapter 11, JSON arrays are
+lists of items in a specific order. Objects, on the other hand, don&rsquo;t
+have any order. You select values from arrays using their numerical
+indices, starting from index 0 for the first item. Because objects don&rsquo;t
+have numerical indices, there&rsquo;s no concept of the first, second, or
+third item in the object; you could edit a JSON file to rearrange the
+object&rsquo;s items, and it would still be the same object. For this reason,
+I guessed that the <code>u</code> value
+was actually an index of the <code>userindex</code> array.</p>
+<p>To determine which user ID corresponded to the user whose <code>u</code> value was <code>4</code>, I looked for the value of
+<code>userindex</code> at index
+<code>4</code> by running the following
+command:</p>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.userindex[4]&#39;</span>
+</code></pre></div>
+
+<p>This command is similar to the one in Listing 14-4, but because it uses
+<code>.meta.userindex[4]</code>, it
+selects the value at index <code>4</code>
+of the <code>.meta.userindex</code> array
+and just displays that result. My output showed that this value was the
+string <code>289851780521787392</code>,
+an 18-digit user ID:</p>
+<div class="codehilite"><pre><span></span><code><span class="s2">&quot;289851780521787392&quot;</span><span class="w"></span>
+</code></pre></div>
+
+<p>Now that I had a user ID, I used it in the following command to find the
+matching username:</p>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.users.&quot;289851780521787392&quot;&#39;</span>
+</code></pre></div>
+
+<p>Like the previous command, this command selects just one value to
+output. In this case, it selects the <code>meta</code> key, then the <code>users</code> key, then the
+<code>289851780521787392</code> key. The
+result is an object that includes a <code>name</code> key:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;badtanman&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>The name <em>badtanman</em> was the username I was looking for.</p>
+<p>In the chat logs quoted in Listing 14-6,
+the user <em>badtanman</em> is talking to someone with the <code>u</code> value of <code>1</code>. To find that person&rsquo;s username, I ran
+the same commands, substituting the appropriate ID numbers:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq &#39;.meta.userindex[1]&#39;
+&quot;232213403974893569&quot;
+micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq &#39;.meta.users.&quot;232213403974
+893569&quot;&#39;
+{
+  &quot;name&quot;: &quot;northern_confederate&quot;
+}
+</code></pre></div>
+
+<p>I&rsquo;d found that the snippet of chat messages in
+Listing 14-6 was a conversation between
+<em>badtanman</em> and <em>northern_confederate</em> on the night of August 31, 2017.</p>
+<p>Running all of these <code>jq</code>
+commands, along with running code in the Python interpreter to convert
+timestamps, is tedious. If confronted with a large volume of chat logs,
+you don&rsquo;t want to research every group of messages this way. But when
+you&rsquo;re exploring an unfamiliar dataset for the first time, you need to
+manually explore it like this until you better understand how the data
+is structured. After doing this preliminary analysis, I could use my new
+understanding of the chat logs to write Python scripts or even a full
+custom app (like I ended up developing for this dataset) to aid my
+research.</p>
+<p>Before I actually started writing Python code to more easily parse these
+chat logs, though, I noticed a file that I&rsquo;d missed before in the
+Unicorn Riot ZIP file that might make researching this dataset a lot
+easier.</p>
+<h3>The Discord History Tracker</h3>
+<p>The ZIP file from my Unicorn Riot contact had dozens of files in it,
+most of them JSON files and PNG screenshots, along with a few folders
+containing other JSON files. I&rsquo;d immediately zeroed in on the JSON files
+to analyze their data structure, but until now I hadn&rsquo;t noticed the file
+<em>logviewer.html</em>. This was an HTML and JavaScript file that, when opened
+in a web browser, would allow me to load JSON chat log files and read
+through them.</p>
+<p>After talking with my Unicorn Riot contact, I learned that this local
+HTML file is part of a piece of open source software called Discord
+History Tracker. This software, not affiliated with Discord, lets users
+save an offline copy of everything they have access to in a given
+Discord server in JSON format. Antifascist activists used this software
+to exfiltrate chat logs from Vibrant Diversity, Charlottesville 2.0, and
+other fascist-run Discord servers.</p>
+<p>Discord History Tracker included two components. The main component was
+in charge of actually creating a backup of a Discord server. The user
+would load the Discord server in their web browser, open their developer
+tools, and copy and paste the Discord History Tracker JavaScript code
+into their browser&rsquo;s console. This would then scrape all of the data in
+the Discord server and save a backup file in JSON format. The second
+component of Discord History Tracker was the <em>logviewer.html</em> file,
+which contained offline HTML software for viewing those backup files.</p>
+<p>Figure 14-1 shows <em>logviewer.html</em> loaded in
+a web browser. In the screenshot, I&rsquo;ve scrolled to the aforementioned
+messages between <em>badtanman</em> and <em>northern_confederate</em> from the
+#problematic_oven channel.</p>
+<p><strong>NOTE</strong> <em>The screenshot in Figure 14-1 shows software from 2017. The Discord History Tracker interface has changed considerably since then. Among other changes, it now saves the data in SQLite databases, rather than as JSON files, and you can view the logs in a desktop app instead of using the <code>logviewer.html</code> file. You can learn more about the software at <a href="https://dht.chylex.com">https://dht.chylex.com</a>.</em></p>
+<p><img alt="Figure 14-1: The August 31, 2017, chat between badtanman and northern_confederate,
+viewed in the Discord Offline History web app" src="media/images/Figure14-1.png" /><br />
+<em>Figure 14-1: The August 31, 2017, chat between <code>badtanman</code> and <code>northern_confederate</code>,
+viewed in the Discord Offline History web app</em></p>
+<p>This offline HTML viewer software made it considerably easier to
+navigate and read the contents of the JSON files. I could click through
+the channels on the left, and then read through a page of chats at a
+time. However, it also lacked some features that would be important for
+my ongoing investigation:</p>
+<ul>
+<li>There was no simple way to search for individual messages. For
+    example, suppose I wanted to search for mentions of Berkeley, the
+    city I lived in at the time. I would have to click a channel like
+    #general, use my web browser&rsquo;s search feature to search for
+    <em>Berkeley</em>, and then find which messages appeared in the #general
+    channel. I would also need to change the settings to display all
+    messages per page so I could search them all at once, rather than
+    displaying just 1,000 messages at a time, as shown in Figure
+    14-1. I would then have to replicate this
+    search for every other channel in the server, and if I wanted to
+    search other Discord servers as well, I&rsquo;d have to replicate it for
+    each channel in each server.</li>
+<li>The offline viewer only supported looking at one server at a time,
+    but I wanted to be able to search multiple servers at once and also
+    track a single user&rsquo;s messages across different servers.</li>
+<li>There was no way to generate hyperlinks
+    leading to individual messages. When you&rsquo;re taking notes for a story
+    based on chat logs like this, it&rsquo;s helpful to track the messages of
+    interest. Without links, you&rsquo;ll regularly have to go back and search
+    for specific messages all over again.</li>
+</ul>
+<p>I decided to build my own web application to add these missing features.
+I already had all of the chat logs in a structured format, which is by
+far the biggest requirement to build a custom app, as you learned in
+Chapter 10&rsquo;s discussion of BlueLeaks
+Explorer. If I&rsquo;d had only screenshots of the Discord servers, a custom
+app with these features wouldn&rsquo;t have been possible. Screenshots aren&rsquo;t
+structured data, and there&rsquo;s no easy way to write software that allows
+you to browse the chat messages they contain.</p>
+<h3>A Script to Search the JSON Files</h3>
+<p>As you&rsquo;ve learned throughout this book, understanding how the data is
+structured is a prerequisite to writing code that works with it.
+Therefore, I decided to use the knowledge I&rsquo;d gained from manually
+investigating the JSON files with <code>jq</code> to build a simple Python script that
+let me search one of the JSON files for keywords. Initially I thought I
+might be able to use this script to do all of the analysis I needed, but
+that turned out to be wrong; I ended up writing a complete custom app to
+investigate this dataset as well. Even so, this first (considerably
+simpler) script allowed me to use Python code to express the structure
+of the dataset that I&rsquo;d already gleaned, which simplified the process of
+programming the full web app. In this section I go over exactly how my
+initial Discord JSON search script worked.</p>
+<p>For example, I knew my script needed to be able to display chat messages
+based on what I searched for. Let&rsquo;s say I wanted my code to display the
+following chat message from Listing 14-6:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">&quot;352992491282366485&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;u&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1504230368205</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;we need more white girls with nice asses&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>The value of the <code>u</code> key is
+<code>4</code>, but now I knew how to
+find the actual username of the person who posted this message. First,
+my code needed to look in the JSON&rsquo;s <code>meta</code> object and select the fourth item in
+the <code>userindex</code> array, which
+is the user ID <code>289851780521787392</code>. My code then would look again in the
+JSON&rsquo;s <code>meta</code> object, this
+time for the <code>users</code> key, and
+use that user ID as the key to get this user object:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;badtanman&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>My code would select the <code>name</code> string from that object to get the
+username of the message poster, <code>badtanman</code>, and then replicate the whole process
+to display the correct username for every message.</p>
+<p>I opened my text editor and started writing a Python script,
+<em>discord-json -search.py</em>, to search one of the JSON files for keywords.
+Here&rsquo;s my completed source code (you can also find it at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/discord-json-search.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/discord-json-search.py</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/python3</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">def</span> <span class="nf">highlight</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❶</span>
+    <span class="n">new_message</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">new_index</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">index</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">new_index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Found</span>
+            <span class="n">new_message</span> <span class="o">+=</span> <span class="n">message</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">new_index</span><span class="p">]</span>
+            <span class="n">new_message</span> <span class="o">+=</span> <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span>
+                <span class="n">message</span><span class="p">[</span><span class="n">new_index</span> <span class="p">:</span> <span class="n">new_index</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">query</span><span class="p">)],</span> <span class="n">underline</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">new_index</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Not found</span>
+            <span class="n">new_message</span> <span class="o">+=</span> <span class="n">message</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">new_message</span>
+
+<span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">server_name</span><span class="p">,</span> <span class="n">user_name</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❷</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s2">&quot;#</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel_name</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;bright_magenta&quot;</span><span class="p">),</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s2">&quot;[server: </span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">server_name</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;bright_black&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+        <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">user_name</span><span class="p">,</span> <span class="n">bold</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">timestamp</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="s2">&quot;</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;bright_black&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">highlight</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">))</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❸</span>
+    <span class="c1"># Loop through each channel</span>
+    <span class="k">for</span> <span class="n">channel_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]:</span> <span class="err">❹</span>
+        <span class="c1"># Get the channel name and server name</span>
+        <span class="n">channel_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;channels&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="err">❺</span>
+        <span class="n">server_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;servers&quot;</span><span class="p">][</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;channels&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="s2">&quot;server&quot;</span><span class="p">]</span>
+        <span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">message_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">]:</span> <span class="err">❻</span>
+            <span class="c1"># Pull the user data, timestamp, and message body from the message</span>
+            <span class="n">user_index</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="n">message_id</span><span class="p">][</span><span class="s2">&quot;u&quot;</span><span class="p">]</span>
+            <span class="n">user_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;userindex&quot;</span><span class="p">][</span><span class="n">user_index</span><span class="p">]</span>
+            <span class="n">user_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;users&quot;</span><span class="p">][</span><span class="n">user_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="n">message_id</span><span class="p">][</span><span class="s2">&quot;t&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
+            <span class="p">)</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="n">message_id</span><span class="p">][</span><span class="s2">&quot;m&quot;</span><span class="p">]</span>
+
+            <span class="c1"># Is the query in the message?</span>
+            <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="err">❼</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">server_name</span><span class="p">,</span> <span class="n">user_name</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span> 
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;query&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❽</span>
+    <span class="c1"># Load the JSON file</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to load JSON file&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="c1"># Search</span>
+    <span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>It&rsquo;s simplest to explain how this script worked from bottom to top,
+since that&rsquo;s how it executed and also how I programmed it. The
+<code>main()</code> function
+[❽] is a Click command that
+takes two arguments: the filename for a JSON file with Discord chat logs
+called <code>filename</code>, and a
+search term called <code>query</code>.
+The code opened the filename that was passed in and parsed it using
+<code>json.loads()</code> to turn it into
+a JSON object. Then it called the <code>search()</code> function, passing in the data from the
+JSON file and the search query.</p>
+<p>The <code>search()</code> function
+[❸] is where all the magic
+happened. I knew from my previous analysis that these Discord JSON
+objects had two keys: the <code>data</code> key, which contained the messages in
+each channel, and the <code>meta</code>
+key, which contained metadata about these messages. My script started by
+looping through every channel in <code>data['data']</code> [❹], then using its <code>channel_id</code> to look up that channel&rsquo;s name and
+server in the metadata [❺]. It
+then looped through every message in that channel
+[❻] and stored the message&rsquo;s
+username, timestamp, and the message itself in variables.</p>
+<p>The code then checked to see if the search query that was passed into
+the script as a CLI argument (stored in <code>query</code>) existed in the message (stored in
+<code>message</code>) [❼]. As described in Chapter 7, it converted both strings to lowercase
+using the <code>lower()</code> method to
+make the search case insensitive. If the lowercase version of the
+message contained the lowercase version of the search term, the script
+then passed all of the relevant variables into the <code>display()</code> function to display the message in the
+terminal.</p>
+<p>The <code>display()</code> function
+[❷] took arguments for
+metadata about a message, the message text itself, and the search term
+and used those to display the message. This code used
+<code>click.echo()</code> instead of
+<code>print()</code> to display text to
+the terminal, and it used <code>click.style()</code> to apply different colors and
+formatting. (You could do all of this just with the <code>print()</code> function, but the <code>click</code> module makes it simpler to style
+terminal output.) After displaying two lines of metadata for the
+message, the script then displayed the output of the
+<code>highlight()</code> function, which
+returned the message itself in color with the search term underlined.</p>
+<p>The <code>highlight()</code> function
+[❶] created an empty string
+called <code>new_message</code> and then
+made it a copy of <code>message</code>,
+the original message it displayed, except with all instances of the
+search term underlined using <code>click.style()</code>. It then returned
+<code>new_message</code> and displayed it
+to the terminal in the <code>display()</code> function.</p>
+<p>For example, if I wanted to search <em>VibrantDiversity.json</em> for the term
+<em>berkeley</em>, I could run:</p>
+<div class="codehilite"><pre><span></span><code>python3 discord-json-search.py ~/datasets/Discord-JSON-Scrapes/VibrantDiversity.json <span class="s2">&quot;berkeley&quot;</span>
+</code></pre></div>
+
+<p>The output listed over a hundred chat messages that mentioned Berkeley.
+Each message showed the name of the channel, the name of the Discord
+server, the user who posted it and when, and the content of the message.
+Here&rsquo;s the first snippet of output, which highlighted the search term in
+the message with an underline:</p>
+<div class="codehilite"><pre><span></span><code>#general [server: Vibrant Diversity]
+Hector Sun Sep  3 20:19:11 2017
+Look at how many antifa were at Boston and Berkeley.  We need numbers.  We can&#39;t have rallies with less than a thousand people now.  Even that&#39;s a low number.
+--snip--
+</code></pre></div>
+
+<p>The first message that mentioned Berkeley was a post from the user
+<em>Hector</em> in the #general channel on September 3, 2017. This user was
+complaining about the relatively small number of fascists that showed up
+to their rallies in Boston and Berkeley, compared to the &ldquo;antifa&rdquo;
+counterprotesters.</p>
+<p>This script allowed me to search a full Discord server for keywords, but
+it still lacked several of the features that I wanted: it could work
+with only one Discord leak at a time,
+and there was no easy way to browse through and read the data
+sequentially or to save links to specific interesting messages. I
+started building out a web application to help me perform these missing
+tasks.</p>
+<h3>My Discord Analysis Code</h3>
+<p>I&rsquo;ve found that after obtaining a large dataset full of structured data,
+building a custom web application to explore it, as I did with BlueLeaks
+Explorer, makes it much easier to find its hidden revelations. After
+writing <em>discord-json -search.py</em>, I spent about a week creating Discord
+Analysis, a custom web app to analyze leaked Discord chat logs.</p>
+<p>Since I wanted to be able to search multiple Discord servers at once, I
+decided that the best solution would be to convert all of the data from
+JSON files into a SQL database. I used a Python tech stack that I was
+already familiar with, Flask (discussed briefly in Chapter 10), for the web app and SQLAlchemy for
+communicating with the SQL database.</p>
+<p>SQLAlchemy is an <em>Object Relational Mapping (ORM)</em> Python module that&rsquo;s
+useful for making code that works with SQL databases simpler to write
+and more secure. ORMs allow you to work with SQL databases in such a way
+that you don&rsquo;t have to directly write any SQL code yourself, which means
+your projects won&rsquo;t be vulnerable to SQL injection. This web app used
+Flask-SQLAlchemy, a Flask extension that adds SQLAlchemy support to
+Flask apps.</p>
+<p>While developing my Discord Analysis web app, I was actively using it to
+research the leaked neo-Nazi chat logs. If I had new questions about the
+data (like what other messages a user posted) or found that I needed new
+features (like limiting my search to a single server), I would program
+them in as I went along. This is typically how I build research tools: I
+start using them long before they&rsquo;re complete, and I let the direction
+of my research guide which features I add next.</p>
+<p>In this section, I explain how I went about developing the different
+components of the app: designing a SQL database, importing chat logs
+from the Discord JSON files into that database, and building the web
+interface to research the chat logs. You&rsquo;ll learn how I used SQLAlchemy
+to define database tables, insert rows into them, and select rows from
+them. You&rsquo;ll also learn how I used Flask to build this web app,
+including how to make Jinja templates and how to define routes&mdash;skills
+you&rsquo;ll need if you build your own Flask web apps in the future.</p>
+<p><strong>NOTE</strong> <em>Fully explaining how to build a Flask and SQLAlchemy web app is outside the scope of this book. Instead, I go over how I went about building this app in broad strokes, which should still be useful if you ever decide to build a similar one yourself. The best way to learn how to make your own Flask app is by exploring Flask&rsquo;s excellent documentation at <a href="https://flask.palletsprojects.com">https://flask.palletsprojects.com</a>; that&rsquo;s how I learned. The Flask documentation includes a tutorial that walks you through every step of developing a simple web app. The Python skills you&rsquo;ve learned from Chapters 7 and 8 are more than enough for you to follow along with the tutorial. You can also find docs for SQLAlchemy at <a href="https://www.sqlalchemy.org">https://www.sqlalchemy.org</a> and for Flask&rsquo;s SQLAlchemy extension at <a href="https://flask-sqlalchemy.palletsprojects.com">https://flask-sqlalchemy.palletsprojects.com</a>.</em></p>
+<p>The code for Discord Analysis, which has quietly been public on my
+GitHub account for years, hasn&rsquo;t been updated much since 2017, with the
+exception of some small changes I made when preparing it for this book.
+I don&rsquo;t plan on maintaining it. Still, you should be able to get it
+running locally if you&rsquo;d like to explore it further, and you can use it
+as inspiration for your own future projects that use a similar tech
+stack. Read through this section to see how it works, and then if you&rsquo;re
+curious, try getting it running locally yourself.</p>
+<p>As I explain the app, I&rsquo;ll quote sections of the source code. It&rsquo;s too
+long to include all of it here, but you can find the full code online in
+the book&rsquo;s GitHub repository at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/tree/main/chapter-14/discord-analysis">https://github.com/micahflee/hacks-leaks-and-revelations/tree/main/chapter-14/discord-analysis</a>.
+I recommend that you pull up the full source code for each file as I
+describe how it works.</p>
+<h4>Designing the SQL Database</h4>
+<p>I started my web app with a Python script called <em>app.py</em>. You can find
+the full source code for this file at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/app.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/app.py</a>.
+First, my code imported the appropriate Flask and SQLAlchemy modules,
+created a new Flask app object called <code>app</code>, and created a new Flask-SQLAlchemy
+object called <code>db</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">escape</span><span class="p">,</span> <span class="n">flash</span><span class="p">,</span> <span class="n">redirect</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_DATABASE_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///database.sqlite3&quot;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</code></pre></div>
+
+<p>I started by importing several items from the <code>flask</code> module, like <code>Flask</code> and <code>render_template</code>, that I knew I&rsquo;d need later in the
+program. In the next line, I also imported <code>SQLAlchemy</code> from the <code>flask_sqlalchemy</code> module.</p>
+<p>Using the newly imported <code>Flask</code>, I then created a Flask object called
+<code>app</code>. Every Flask web app
+includes such an object (and usually by that name) to define exactly how
+the app will work. I modified the <code>app.config</code> dict to set some configuration
+settings, telling it that I wanted to use a SQLite3 database stored in
+the file <em>database.sqlite3</em>, and I wanted to turn debug mode on, which
+is useful while you&rsquo;re actively developing a web app. Finally, I created
+the SQLAlchemy object called <code>db</code>, passing in <code>app</code>.</p>
+<p>For the next bit of code, I&rsquo;ll introduce you to
+a new Python concept that I didn&rsquo;t explicitly cover in Part III but that you&rsquo;ve technically been using all
+along: classes. In Python, a <em>class</em> is a template for creating new
+objects that can store data (using variables called <em>attributes</em>) and
+perform actions (using functions called <em>methods</em>). For example, strings
+are technically classes. When you run the code <code>s = "example"</code>, the variable <code>s</code> is an instance of the string class,
+the data it stores is the string <code>example</code>, and it has a bunch of methods you can
+call on it, such as <code>s.upper()</code>, which returns an uppercase version of
+the string. When you write SQLAlchemy code, you define a class for each
+database table. This way, you can write code that works with Python
+objects without needing to write the SQL queries yourself.</p>
+<p>I started writing code to define the SQL tables that would store Discord
+data for servers, users, channels, and messages. For example, the
+following code defines the <code>Server</code> class, which represents the SQL table
+to store data about servers:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Server</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">channels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Channel&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;server&quot;</span><span class="p">)</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Message&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;server&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+</code></pre></div>
+
+<p>Using SQLAlchemy requires that you define your own classes. You can
+think of this <code>Server</code> class
+as a description of a new type of Python object that represents a row in
+the server SQL table. Because I defined it as
+<code>Server(db .Model)</code>, this
+class inherited all of the functionality of the <code>db.Model</code> class, which is part of SQLAlchemy.
+Inside the class definition, I defined the table&rsquo;s columns: <code>id</code> (an auto-incrementing number) and
+<code>name</code> (a string). Next, I
+defined this table&rsquo;s relationships to other tables, in this case
+relating <code>servers</code> to
+<code>channels</code> and
+<code>messages</code>&mdash;both the
+<code>Channel</code> table and the
+<code>Message</code> table have a
+<code>server_id</code> column.</p>
+<p>Finally, I defined the <code>__init__()</code> method. When you define a class, you
+must call the first argument of every method <code>self</code> to represent this Python object
+itself. You can optionally include other arguments, too. The
+<code>__init__()</code> method is a type
+of method called a <em>constructor</em>, which runs as soon as you create the
+object. This constructor sets the value of the object&rsquo;s <code>name</code> attribute (which you access within the
+class as <code>self.name</code>) to the
+value of <code>name</code>, which is a
+variable passed into the <code>__init__()</code> method as an argument.</p>
+<p>For example, to add a row to the <code>Server</code> table in the SQL database for the
+Vibrant Diversity Discord server, I could run the code in Listing 14-7. (My Discord Analysis app doesn&rsquo;t
+actually use this code&mdash;it loads the servers from the JSON data&mdash;but
+I&rsquo;m including this example to help you understand how to use SQLAlchemy
+classes to interact with databases without needing to write SQL
+queries.)</p>
+<div class="codehilite"><pre><span></span><code><span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="s2">&quot;Vibrant Diversity&quot;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</code></pre></div>
+
+<p><em>Listing 14-7: Using SQLAlchemy to insert data into a SQL database</em></p>
+<p>The first line of code creates a <code>Server</code> object by running
+<code>Server("Vibrant Diversity")</code>.
+This would run the constructor method, passing in the string
+<code>Vibrant Diversity</code> as
+<code>name</code>. The constructor would
+then set the value of its <code>name</code> attribute to the name that was passed
+in. When the constructor finishes running, the code would save this
+newly created Python object in the <code>server</code> variable. The next two lines of code
+use the SQLAlchemy object <code>db</code>
+to run the <code>INSERT</code> query in
+the SQL database and insert this row. The <code>db.session .add()</code> method collects a list of SQL queries,
+and the <code>db.session.commit()</code>
+method runs those SQL queries on the database. In SQL, sometimes it&rsquo;s
+more efficient to run several queries and then commit them all at once
+rather than one at a time.</p>
+<p>In other words, the code in Listing 14-7 is
+basically the same as running the SQL query
+<code>INSERT INTO server SET name='Vibrant Diversity';</code>, except this way all you need to do is
+interact with Python objects, not write any SQL yourself. After creating
+the server object, I could then access that object&rsquo;s ID attribute with
+<code>server.id</code> or the object&rsquo;s
+name attribute with <code>server.name</code>.</p>
+<p>In addition to the <code>Server</code>
+table I just described, I also created the following tables, which you
+can view in detail in the <em>app.py</em> file at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/app.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/app.py</a>:</p>
+<p><code>User</code> A Discord user. I
+included the columns <code>id</code>,
+<code>discord_id</code>, and
+<code>name</code>. The <code>id</code> column is an auto-incrementing number,
+and <code>discord_id</code> is the
+original ID that Discord itself used. This is useful for identifying the
+same user across servers.</p>
+<p><code>Channel</code> A channel in a
+Discord server. The columns are <code>id</code>, <code>discord_id</code>, <code>name</code>, and <code>server_id</code>. The <code>server_id</code> column forms a relationship with the
+<code>Server</code> table, since each
+server has a set of channels. Every Discord server JSON file contains a
+list of channels. Adding this relationship means that the SQL database I
+was designing would match the data structure in the JSON files.</p>
+<p><code>Message</code> A Discord message.
+The columns are <code>id</code>,
+<code>discord_id</code>,
+<code>timestamp</code>, <code>message</code>, <code>attachments_json</code>, <code>user_id</code>, <code>channel_id</code>, and <code>server_id</code>. The <code>attachments _json</code> column contains extra data from
+messages with attachments, like when someone posts an image to Discord.
+The <code>user_id</code>,
+<code>channel_id</code>, and
+<code>server_id</code> columns form
+relationships with the <code>User</code>,
+<code>Channel</code>, and
+<code>Server</code> tables. These also
+would match the structure found in the JSON files.</p>
+<p>Figure 14-2 shows the relationship between
+these four tables. The <code>Channel</code> table includes a <code>server_id</code> column, so it&rsquo;s related to the
+<code>Server</code> table.
+The <code>Message</code> table includes columns for
+<code>channel_id</code>,
+<code>server_id</code>, and
+<code>user_id</code>, so it&rsquo;s related to
+the <code>Channel</code>,
+<code>Server</code>, and <code>User</code> tables.</p>
+<p><img alt="Figure 14-2: Relationships between the SQL tables in the Discord Analysis app" src="media/images/Figure14-2.png" /><br />
+<em>Figure 14-2: Relationships between the SQL tables in the Discord Analysis app</em></p>
+<p>My goal for this web app would be to build an interface that allows me
+to explore the data stored in these SQL tables. I wanted to be able to
+search all of the messages at once, including from multiple servers, to
+see which users posted in multiple servers and to be able to generate
+links to individual messages that I could store in my notes. Before
+building the web interface, though, I needed to load the database with
+data from the JSON files.</p>
+<h4>Importing Chat Logs into the SQL Database</h4>
+<p>I wrote a separate script, <em>admin.py</em>, that I used to import data into
+the SQL database. This script took a command as its first argument. If I
+passed in <code>create-db</code>, it
+would use SQLAlchemy to create the SQL tables that I had defined in
+<em>app.py</em>. When I passed in <code>import-json</code>, followed by the filename of a JSON
+file, the code would import Discord data from that JSON file into the
+SQL database. I also eventually added the <code>user-stats</code> command, which displayed how many
+messages each user in the whole database posted, and on which servers.</p>
+<p>This <em>admin,py</em> file is too long to include in this chapter in its
+entirety, but as with <em>app.py</em>, you can find a copy of the complete code
+in the book&rsquo;s GitHub repo at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/admin.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/admin.py</a>.</p>
+<p>In this section, I&rsquo;ll explain how I built the <code>import-json</code> command (specifically, the
+<code>import_json()</code> function,
+which is what gets called when you run <code>import-json</code>), the most interesting part of the
+script. This is the code that opens up the JSON files containing Discord
+server leaks, loops through all the data, and then inserts it into the
+SQL database. As with the <em>discord-json -search.py</em> script, I relied on
+my previous manual analysis of the Discord JSON files to write this
+code. Basically, this is the part that requires an understanding of the
+structure of the original data.</p>
+<p>The <code>import_json()</code> function
+is too long to display it all here, so instead I&rsquo;ll display snippets
+that explain the general idea of how it works. The function takes the
+filename for a JSON file containing Discord leaks as an argument. It
+opens this file, loads it into a variable called <code>data</code>, and then uses the information in
+<code>data</code> to add servers, users,
+channels, and messages to the SQL database. I&rsquo;ll show the code that adds
+users, channels, and messages soon, but first, Listing 14-8 shows the code that adds servers.</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding servers: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;servers&quot;</span><span class="p">]:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><em>Listing 14-8: Code from <code>admin.py</code> to add servers to the database</em></p>
+<p>This code looped through all of the servers it found in
+<code>data["meta"]["servers"]</code>,
+adding a row to the database for each server that it found. For example,
+in Listing 14-1, I used <code>jq</code> to view this list of servers for
+<em>VibrantDiversity.json</em> and found that it contained only a single
+server. Listing 14-8 uses Python code to
+find that same list of servers from the same part of the target leaked
+JSON file.</p>
+<p>For each server it found, the code stored the server&rsquo;s name in the
+<code>name</code> variable, then tried to
+add that server to the database. This code used Python exception
+handling, which you learned about in Chapter 7. In the <code>try</code> block, the code created a new
+<code>Server</code> object (this
+represents a row in the <code>Server</code> table in SQLAlchemy), added that row
+to the database using <code>db.session``.add(server)</code>, and finally committed the database
+changes with <code>db.session.commit()</code>, just like in the SQLAlchemy code in
+Listing 14-7. After the server was
+successfully inserted into the database, the program displayed a plus
+sign (<code>+</code>) and moved on to the
+next loop.</p>
+<p>When I defined the <code>Server</code>
+table in <em>app.py</em>, I specified that the <code>name</code> column should be unique, meaning that
+there could be no two rows with the same <code>name</code> column. If SQLAlchemy threw the
+<code>sqlalchemy.exc.IntegrityError</code> exception while the script was trying
+to add the row to the database, that meant a server with that name
+already existed in the database, and the <code>except</code> block should run instead. If this
+happened, then the code rolled back the change that it was about to make
+and displayed a dot (<code>.</code>)
+instead of a plus sign.</p>
+<p>Why did I worry about catching these exceptions to begin with instead of
+just adding rows to the database? As with the programming exercises that
+you completed in previous chapters, I didn&rsquo;t write the whole script
+perfectly the first time and then run it. Instead, I wrote small bits of
+code at a time and ran them to make sure my script was working so far.
+This exception handling allowed me to rerun an import on the same JSON
+file over and over while starting where I left off. If my script showed
+a plus sign, I knew it had added a new row to the database. If it showed
+a dot, that meant the row already existed and the script moved on.</p>
+<p>You might also notice that the familiar
+<code>print()</code> function calls look
+odd in Listing 14-8: my code passed in the
+<code>end=""</code> and
+<code>flush=True</code> keyword
+arguments. By default, <code>print()</code> displays the string the user passes in
+as an argument, then adds a newline character (<code>\n</code>) to the end. The <code>end</code> argument replaces that newline with
+something else (in this case, an empty string). In other words, this is
+how I could print a string without moving on to the next line. The
+<code>flush=True</code> argument makes
+sure that the output gets displayed to the screen immediately; without
+it, the output would still get displayed, but not right after the
+function call. This allowed me to watch the progress of an import.</p>
+<p>After adding servers, the script added users, as shown in Listing 14-9.</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding users: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">user_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;users&quot;</span><span class="p">]:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;users&quot;</span><span class="p">][</span><span class="n">user_discord_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">user_discord_id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><em>Listing 14-9: Code from <code>admin.py</code> to add users to the database</em></p>
+<p>This code is very similar to Listing 14-8,
+but instead of looping through the list
+<code>data["meta"]["servers"]</code>, it
+looped through the dictionary <code>data["meta"]["users"]</code>. Listing 14-3 shows this JSON object of users from
+<em>VibrantDiversity .json</em>. As described in Chapter 8, when you loop through a dictionary, you&rsquo;re
+actually looping through the dictionary&rsquo;s keys. In this case, the script
+stored each key in the <code>user_discord_id</code> variable. Armed with the user&rsquo;s
+Discord ID, it then looked up that user&rsquo;s name in the metadata.</p>
+<p>In the <code>try</code> block, the script
+then created a new <code>User</code>
+object, this time with both the user&rsquo;s Discord ID and name, and tried
+adding it to the database. When I defined the <code>User</code> table in <em>app.py</em>, I specified that
+<code>user_discord_id</code> should be
+unique in order to prevent duplicate users. Like Listing 14-8, the code displayed a plus sign when
+adding the user to the database and a dot if it hit an error. This
+error-handling code would be important when I started importing multiple
+servers: if a Discord user was already in the database because they were
+a member of a previous server, the code wouldn&rsquo;t create a duplicate user
+for them.</p>
+<p>After adding servers and users, the script then added channels, using
+the code in Listing 14-10.</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding channels: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">channel_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;channels&quot;</span><span class="p">]:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;channels&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="n">server_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;channels&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="s2">&quot;server&quot;</span><span class="p">]</span>
+ <span class="err">❶</span> <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;servers&quot;</span><span class="p">][</span><span class="n">server_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">Channel</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">channel_discord_id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><em>Listing 14-10: Code from <code>admin.py</code> to add channels to the database</em></p>
+<p>This code is also similar to Listings 14-8 and 14-9. This time however,
+it looped through the keys of the <code>data["meta"]["channels"]</code> dictionary, storing each key as
+<code>channel_discord_id</code>.</p>
+<p>Listing 14-2 showed this JSON object of
+channels from <em>VibrantDiversity .json</em>, which you can revisit to remind
+yourself what this dictionary looks like. For each channel, the code in
+Listing 14-8 stored the name of the channel
+in <code>name</code> and that channel&rsquo;s
+server index in <code>server_id</code>.
+It then queried the SQL database itself to get the server row in
+Listing 14-10 ❶, which should have been added earlier by the
+code in Listing 14-9, and stored this value
+in <code>server</code>. The SQL query
+that the <code>Server.query.filter_by()</code> function call ran was similar to
+<code>SELECT * FROM servers WHERE name='``name``';</code>, where <code>name</code> is the server name.</p>
+<p>In the <code>try</code> block, the code
+then created a new <code>Channel</code>
+object, this time telling it the server, the channel&rsquo;s Discord ID, and
+the channel name. As with the previous listings, it tried adding this
+channel to the database, displaying a plus sign on success and a dot if
+the channel already existed.</p>
+<p>Finally, after adding servers, users, and channels, the code added all
+of the messages, as shown in Listing 14-11.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">channel_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]:</span>
+    <span class="c1"># Get the channel</span>
+    <span class="n">channel</span> <span class="o">=</span> <span class="n">Channel</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">discord_id</span><span class="o">=</span><span class="n">channel_discord_id</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span> <span class="err">❶</span>
+
+    <span class="c1"># Loop through each message in this channel</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adding messages from </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, #</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">message_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">]:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">&quot;t&quot;</span><span class="p">]</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">&quot;m&quot;</span><span class="p">]</span>
+
+            <span class="n">user_index</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">&quot;u&quot;</span><span class="p">]</span>
+            <span class="n">user_discord_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;userindex&quot;</span><span class="p">][</span><span class="n">user_index</span><span class="p">]</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">discord_id</span><span class="o">=</span><span class="n">user_discord_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span> <span class="err">❷</span>
+
+            <span class="k">if</span> <span class="s2">&quot;a&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">]:</span>
+                <span class="n">attachments_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+                  <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">attachments_json</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="n">message</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span>
+                <span class="n">channel</span><span class="o">.</span><span class="n">server</span><span class="p">,</span>
+                <span class="n">message_discord_id</span><span class="p">,</span>
+                <span class="n">timestamp</span><span class="p">,</span>
+                <span class="n">message</span><span class="p">,</span>
+                <span class="n">user</span><span class="p">,</span>
+                <span class="n">channel</span><span class="p">,</span>
+                <span class="n">attachments_json</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><em>Listing 14-11: Code from <code>admin.py</code> to add messages to the database</em></p>
+<p>This time, this code looped through all of the keys of the
+<code>data["data"]</code> dictionary. As
+you learned in Listing 14-5, this
+dictionary&rsquo;s keys are the Discord IDs of channels. My code stored each
+ID in the variable <code>channel _discord_id</code>. I then used SQLAlchemy to query the
+database to load this actual channel row ❶ (the SQL query that this command ran was
+similar to <code>SELECT * FROM channel WHERE channel_discord_id=``channel_discord_id</code>, where
+<code>channel_discord_id</code>
+is the channel ID). After learning what channel it was dealing with, the
+code then looped through all of that channel&rsquo;s messages to add them to
+the database, storing each message&rsquo;s Discord ID as
+<code>message_discord_id</code>.</p>
+<p>The rest of the code in Listing 14-11 is
+also similar to Listings 14-8 through 14-10. In the <code>try</code> block, for each message, the code
+stored the timestamp and message in the <code>timestamp</code> and <code>message</code> variables. It then looked up the user
+Discord ID from the metadata and queried the SQL database for the
+<code>User</code> object
+❷, and, if the message
+included an attachment, it also created a string called
+<code>attachments_json</code>. Finally,
+it created a <code>Message</code> object
+and inserted this message into the database. As before, the code
+displayed a plus sign if it successfully inserted a message or a dot if
+that message was already in the database.</p>
+<p>Since exception handling ensured <em>admin.py</em> wouldn&rsquo;t import duplicate
+rows, I could use this script to import newer versions of JSON files
+from the same Discord server. For example, if Unicorn Riot&rsquo;s infiltrator
+used Discord History Tracker to save another offline copy of everything
+in Vibrant Diversity a month later, and I imported that new JSON file,
+it would import only the new messages.</p>
+<p>Once this code was written, I used it to import
+all of the JSON Discord files that I had received from Unicorn Riot. To
+import data from the Vibrant Diversity channel, I would run this
+command:</p>
+<div class="codehilite"><pre><span></span><code>python3 admin.py import-json ~/datasets/Discord-JSON-Scrapes/VibrantDiversity.json
+</code></pre></div>
+
+<p>And here is the output:</p>
+<div class="codehilite"><pre><span></span><code>Adding servers: +
+Adding users: +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--snip--
+Adding channels: +++++++++
+Adding messages from Vibrant Diversity, #rules: +++++++++++++++
+Adding messages from Vibrant Diversity, #general: +++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--snip--
+Adding messages from Vibrant Diversity, #recruiting: ++++++++++++++++++++++++++++++++++++++++++
++++++++++
+Import complete
+</code></pre></div>
+
+<p>Each plus sign in this output represents a different row of data
+inserted into the database. The <em>VibrantDiversity.json</em> file added 1
+server, 530 users, 9 channels, and a total of 255,349 messages,
+importing a message at a time.</p>
+<p>I then used <em>admin.py</em> to import the rest of the Discord JSON files I
+had, including chat logs from Anticom, 4th Reich, Ethnoserver, and other
+leaked servers. For example, next I imported one of the smaller servers
+called Pony Power, which I&rsquo;ll discuss further later in this chapter,
+like so:</p>
+<div class="codehilite"><pre><span></span><code>python3 admin.py import-json ~/datasets/Discord-JSON-Scrapes/PonyPowerComplete-Sept5at155PM.txt
+</code></pre></div>
+
+<p>And here is the output from that command (in this case, I&rsquo;d already
+imported the Vibrant Diversity data, and these two Discord channels had
+some overlapping users, so my script skipped importing some of the
+users):</p>
+<div class="codehilite"><pre><span></span><code>Importing: /Users/micah/datasets/Discord-JSON-Scrapes/PonyPowerComplete-Sept5at155PM.txt
+Adding servers: +
+Adding users: .++++..+++++.+++++..++++.++.+++++++++++..+.+......
+Adding channels: ++++
+Adding messages from Pony Power, #general-chat: +++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--snip--
+</code></pre></div>
+
+<p>This JSON file included 50 users. The code skipped 17 of them
+(displaying dots instead of plus signs) because they were already in the
+database from Vibrant Diversity, and it added 33 new users.</p>
+<p>My database was now full of neo-Nazi chat logs,
+preparing me to build a web interface to explore them. When you&rsquo;re
+building a web app to investigate data, you need some data to explore to
+make sure your app is actually working as intended. If I hadn&rsquo;t imported
+the actual data first, I would have had to make up and import some test
+data so I&rsquo;d have something to troubleshoot with while building the web
+app. But I decided to import the real data first because I knew I&rsquo;d need
+to write that code eventually anyway.</p>
+<h4>Building the Web Interface</h4>
+<p>When you build web apps, it&rsquo;s often useful to split your web pages into
+reusable components, like headers, footers, and sidebars. Individual
+pages may have their own reusable components, too. For example, the page
+that lists chat messages might repeat the same message component for
+each message on the page. You define these components in <em>templates</em>,
+HTML files that can contain variables and logic, like <code>if</code> statements or <code>for</code> loops. You can render a template
+(convert it into HTML) by passing the template file along with variables
+into a <em>templating engine</em>, or code that converts a template into HTML.</p>
+<p>Flask comes with a popular templating engine called Jinja. To build the
+web interface to explore the chat logs I&rsquo;d just imported, I started by
+creating the layout template in Jinja. In short, I wrote the HTML code
+that would make up the layout of all of the pages in my web app, but
+also included Python variables and loops. Listing 14-12 shows the code for <em>layout.html</em>, my
+layout template.</p>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Discord Analysis<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">stylesheet</span> <span class="na">type</span><span class="o">=</span><span class="s">text/css</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{url_for(&#39;static&#39;, filename=&#39;style.css&#39;)}}&quot;</span><span class="p">&gt;</span> ❶
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wrapper&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+      {% for server in servers %} ❷
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;server&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{server.name}}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+          {% for c in server.channels %} ❸
+          <span class="p">&lt;</span><span class="nt">li</span><span class="err">{%</span> <span class="na">if</span> <span class="na">channel</span> <span class="err">%}{%</span> <span class="na">if</span> <span class="na">c</span><span class="err">.</span><span class="na">id</span><span class="o">=</span><span class="s">=channel.id</span> <span class="err">%}</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;active&quot;</span> <span class="err">{%</span> <span class="na">endif</span> <span class="err">%}{%</span> <span class="na">endif</span> <span class="err">%}</span><span class="p">&gt;&lt;</span><span class="nt">a</span>
+              <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{c.permalink()}}&quot;</span><span class="p">&gt;</span>#{{c.name}}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;message-count&quot;</span><span class="p">&gt;</span>[{{
+              &quot;{0:,}&quot;.format(c.message_count() | int)}}]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+            {% endfor %}
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      {% endfor %}
+
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/users&quot;</span><span class="p">&gt;</span>Users<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;search&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;get&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/search&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;q&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;q&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Search query&quot;</span> <span class="err">{%</span> <span class="na">if</span> <span class="na">q</span> <span class="err">%}</span>
+            <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{q}}&quot;</span> <span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span> <span class="p">/&gt;</span> ❹
+          <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;s&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>[all servers]<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+            {% for server in servers %} ❺
+            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{server.id}}&quot;</span> <span class="err">{%</span> <span class="na">if</span> <span class="na">server</span><span class="err">.</span><span class="na">id</span><span class="o">=</span><span class="s">=s</span> <span class="err">%}</span> <span class="na">selected</span><span class="o">=</span><span class="s">&quot;selected&quot;</span> <span class="err">{%</span> <span class="na">endif</span>
+              <span class="err">%}</span><span class="p">&gt;</span>
+              {{server.name}}
+            <span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+            {% endfor %}
+          <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Search&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;messages&quot;</span><span class="p">&gt;</span>
+        {% for message in get_flashed_messages() %} ❻
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">flash</span><span class="p">&gt;</span>{{message}}<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        {% endfor %}
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+      {% block content %}{% endblock %} ❼
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p><em>Listing 14-12: The <code>layout.html</code> layout template</em></p>
+<p>The code in Listing 14-12 looks like HTML
+at a glance, but if you look closely you&rsquo;ll see that it&rsquo;s actually a
+Jinja template. For example, look at the code that adds the <em>CSS
+(Cascading Style Sheets)</em> file&mdash;which defines the page&rsquo;s style&mdash;to the
+page ❶. The HTML syntax for
+adding a stylesheet is</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">stylesheet</span> <span class="na">type</span><span class="o">=</span><span class="s">text/css</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;style.css&quot;</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>where <code>style.css</code> is
+the path or URL of a CSS file. Instead of an actual filename, the code
+in Listing 14-12 uses this:</p>
+<div class="codehilite"><pre><span></span><code>{{url_for(&#39;static&#39;, filename=&#39;style.css&#39;)}}
+</code></pre></div>
+
+<p>In a Jinja template, putting a Python expression between <code>{{</code> and <code>}}</code> means Python will evaluate this
+expression when the template is rendered. In this case, Listing 14-12 rendered that line as
+<code>&lt;link rel=stylesheet type=text/css href="/static/style.css"&gt;</code> because the <code>url_for()</code> function, which is part of Flask, returned the <code>/static/style.css</code> string.</p>
+<p>The template in Listing 14-12 also included some <code>for</code> loops. In Jinja, you start a
+<code>for</code> loop with the code <code>{% for item in list %}</code> and end it with <code>{% endfor %}</code>. In the left sidebar of the layout,
+the template listed all of the Discord servers in the databases
+❷, looping through the items
+in the <code>servers</code> list one at a
+time. (For this template to render properly, I&rsquo;d need to make sure to
+pass <code>servers</code> into the
+template as a variable when I render it in the Flask code.) For each
+server, after displaying the server name, it looped through all of the
+channels in that server ❸,
+getting the list of channels from <code>server.channels</code>. For each channel, the code displayed
+a link to view messages in that channel followed by the number of
+messages it contains.</p>
+<p>The template also included a search bar at the top of the page
+❹, as well as a drop-down
+menu with options to search a specific server or to search them all
+❺. It also included a list
+of notification messages ❻ I
+could use if I wanted to display an error message&mdash;for example, if I
+tried loading a link to view messages in a channel that didn&rsquo;t exist in
+the database. Finally, the template displayed the content block for that
+particular page ❼. While all
+pages shared this template, the content block differed for each page.</p>
+<p>After starting on my templates, I wrote code for a handful of <em>routes</em>,
+which let the web app know which page the user&rsquo;s web browser was trying
+to view. In web development, you can think of a route as a path for a
+web page, except it can include placeholders. For example, if the web
+app is hosted at <em>http://localhost:5000</em>,
+and the Python code defines the route <code>/search</code> for the search page, users can view
+that route with the URL
+<em>http://localhost:5000/search</em>.</p>
+<p>The home page route (<code>/</code>),
+shown in Listing 14-13, was by far the
+simplest one in my web app. This page displayed the message &ldquo;This is a
+web app that will let you research the alt-right chatroom leak,
+published by Unicorn Riot.&rdquo;</p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="n">servers</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;index.html&quot;</span><span class="p">,</span> <span class="n">servers</span><span class="o">=</span><span class="n">servers</span><span class="p">)</span>
+</code></pre></div>
+
+<p><em>Listing 14-13: The home page route (<code>/</code>)</em></p>
+<p>In Flask, each route is a function that returns the HTML for that web
+page. The <code>index()</code> function
+starts with the <code>@app.route("/")</code> decorator, which is how Flask knows
+that the <code>/</code> route should call
+this function. This function first runs a SQL query to get all of the
+servers in the database, stored in the variable <code>servers</code>. It then calls the
+<code>render_template()</code> function,
+rendering the <em>index.html</em> template, passing the <code>servers</code> variable into the template, and
+returning the HTML it receives.</p>
+<p>Listing 14-14 shows the code for the
+<em>index.html</em> Jinja template that was rendered.</p>
+<div class="codehilite"><pre><span></span><code>{% extends &quot;layout.html&quot; %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Alt-right chatroom research<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is a web app that will let you research the alt-right chatroom leak,
+    published by Unicorn Riot.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Click on channel names to browse them. Search for keywords. Viewing
+    individual messages will show you the whole conversation from an hour
+    before and after that message.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div>
+
+<p><em>Listing 14-14: The <code>index.html</code> template</em></p>
+<p>The first line of code in this template means that Jinja should render
+the <em>layout.html</em> template but replace
+<code>{% block content %}{% endblock %}</code> with the content block defined
+here&mdash;some text that says, &ldquo;Alt-right chatroom research&rdquo; and a brief
+description of the web app. Also notice that in Listing 14-13, I passed the <code>servers</code> variable into the template; the
+<em>layout.html</em> template in Listing 14-11
+used this variable to make the list of servers in the sidebar.</p>
+<p>Figure 14-3 shows what the app&rsquo;s home page
+looked like at this point, with the home page text as defined in
+<em>index.html</em> and with the servers on the left and the search bar at the
+top as defined in <em>layout.html</em>.</p>
+<p><img alt="Figure 14-3: The home page of my Discord Analysis web app" src="media/images/Figure14-3.png" /><br />
+<em>Figure 14-3: The home page of my Discord Analysis web app</em></p>
+<p>Let&rsquo;s look at one more route that does a bit more than the <code>/</code> route, the <code>/search</code> route, which will help explain how one
+of the web app&rsquo;s core features&mdash;searching the chat logs&mdash;works. Here&rsquo;s
+the Python code:</p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/search&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">():</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">page</span><span class="p">,</span> <span class="n">per_page</span> <span class="o">=</span> <span class="n">get_pagination_args</span><span class="p">()</span>
+
+    <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+    <span class="n">messages</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="n">query</span>
+    <span class="k">if</span> <span class="n">server</span><span class="p">:</span>
+        <span class="n">messages</span> <span class="o">=</span> <span class="n">messages</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">)</span>
+    <span class="n">pagination</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Message</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;%</span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Message</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">per_page</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">server</span><span class="p">:</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Search </span><span class="si">{</span><span class="n">server</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Search: </span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">servers</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">pagination_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/search?q=</span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">&amp;s=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
+        <span class="s2">&quot;results.html&quot;</span><span class="p">,</span>
+        <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span>
+        <span class="n">s</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">),</span>
+        <span class="n">servers</span><span class="o">=</span><span class="n">servers</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="o">=</span><span class="n">pagination</span><span class="p">,</span>
+        <span class="n">pagination_link</span><span class="o">=</span><span class="n">pagination_link</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+
+<p>The <code>search()</code> function starts
+with the decorator <code>@app.route("/search")</code>, so Flask knows that the
+<code>/search</code> route should call
+this function. At the beginning of the function, I defined the
+<code>q</code>, <code>s</code>, <code>page</code>, and <code>per_page</code> variables as the values from the URL&rsquo;s
+query string. For example, if the URL ends in
+<em>/search?q</em>[=]<em>berkeley</em>, then this code would set the
+value of <code>q</code> to the
+<code>berkeley</code>.</p>
+<p>I got this query string information from the Flask variable
+<code>request.args</code>, which is a
+dictionary containing all of the values after the <code>?</code> in the URL. The code got the value of
+the <code>q</code> key in this dictionary
+by evaluating <code>request.args.get("q")</code>, but <code>request.args["q"]</code> would work just the same. When using
+the <code>.get()</code> method on
+dictionaries, you can choose default values, as I did in the following
+line. The expression <code>request.args.get("s", 0)</code> looks through <code>request.args</code> for the key <code>s</code> and returns it if it finds it. If the
+expression doesn&rsquo;t find <code>s</code>,
+it returns <code>0</code>.</p>
+<p>On the search page, <code>q</code> is the
+search query and <code>s</code> is the ID
+of the server to search (if <code>s</code> is <code>0</code>, this means I want to search all
+servers). The <code>page</code> and
+<code>per_page</code> variables are used
+for <em>pagination</em>, which determines how an app displays a limited number
+of results per page. The <code>page</code> variable is the page number, and
+<code>per_page</code> is the number of
+results per page.</p>
+<p>Since three of the routes in my app used pagination (<code>/search</code>, <code>/channel</code>, and <code>/user</code>), I wrote the code to find the
+<code>page</code> and <code>per_page</code> query strings in the function
+<code>get_pagination_args()</code>, which
+allowed me to just call that function instead of repeating the same code
+in multiple places.</p>
+<p>I then queried the SQL database for the server
+with the ID stored in <code>s</code>,
+saving the result as <code>server</code>.
+The <code>server</code> variable is used
+to optionally search a single Discord server, rather than all of them.
+If the SQL database doesn&rsquo;t have any servers with that ID, then
+<code>server</code> is set to
+<code>None</code>, which means the app
+should search all servers. I then started building the SQL query to
+search for all of the messages, storing the results in the variable
+<code>messages</code>. If this search was
+limited to a specific server (that is, if there&rsquo;s a value for
+<code>s</code>), the code modified
+<code>messages</code> to filter just by
+messages from that server. Finally, I used the SQLAlchemy pagination
+feature to run the SQL query, making sure to select the correct page of
+results, storing the search results in the variable <code>pagination</code>. Part of the SQLAlchemy query included
+<code>Message.message.like(f"%{q}%")</code> to ultimately run a SQL query that
+used SQL&rsquo;s <code>LIKE</code> operator,
+which did a case-insensitive search for any messages containing the
+string <code>q</code>, as described in
+Chapter 12.</p>
+<p>In the following <code>if</code>
+statement, my code defined the <code>description</code> variable as a description of the
+search, showing either just the search query or both it and the name of
+the server being searched. It then loaded all of the servers with
+<code>servers=Server.query.all()</code>, which the <em>layout.html</em> layout
+template needs to render the sidebar. Finally, the code rendered the
+<em>results.html</em> Jinja template, passing in all of the appropriate
+variables, resulting in the search results page.</p>
+<p>In addition to the home page route (<code>/</code>) and the search route
+(<code>/search</code>), I created these other routes for my web app:</p>
+<blockquote>
+<p><code>/view/``message_id</code> The hyperlink to a specific Discord message</p>
+<p><code>/channel/``channel_id</code> The hyperlink to a specific channel in a Discord server</p>
+<p><code>/users</code> A page that listed all Discord users in the database, along with how many messages each has posted</p>
+<p><code>/users/``user_id</code> A page that listed the messages that each Discord user has posted, spanned across all servers and channels that they posted in</p>
+</blockquote>
+<p>As you can see in Figure 14-3, the Discord
+servers that I imported while developing the app are all listed in the
+left sidebar, along with each server&rsquo;s channels. To start my research, I
+could search for keywords (using the <code>/search</code> route), or I could click a channel
+name on the left and read its chat logs (using the <code>/channel/``channel_id</code> route).</p>
+<p>You can view the code for all of these routes in <em>app.py</em> at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/app.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/app.py</a>.</p>
+<p>Now that you know how the Discord Analysis web app works, let&rsquo;s look at
+how I went about using it to analyze the Discord leaks.</p>
+<h4>Using Discord Analysis to Find Revelations</h4>
+<p>After I had built enough of the Discord Analysis web app that I could
+start using it for actual research, I started by reading a cross section
+of all of the Discord leaks I had imported and taking notes on what
+might make good articles&mdash;all the while
+fixing bugs as I discovered them, and adding features as I felt I needed
+them. I went one Discord server at a time, trying to understand the gist
+of what was discussed in each channel. I searched for terms like
+<em>WikiLeaks</em> to see what the fascists were saying about it, since it had
+recently played a role in Trump&rsquo;s 2016 election victory. I stumbled upon
+various conversations about digital security advice and which encrypted
+messaging apps to trust, all of it mixed up with numerous conspiracy
+theories, racist diatribes, and selfies of people holding guns.</p>
+<p>Here&rsquo;s how the process of using Discord Analysis on my computer actually
+worked. When I wanted to run my web app to test it during development or
+to start researching neo-Nazi chats, I&rsquo;d run <code>python3 app.py</code>. It showed this output, which is the
+typical output you see every time you start a Flask web app:</p>
+<div class="codehilite"><pre><span></span><code> * Serving Flask app &#39;app&#39;
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production
+deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 654-228-939
+</code></pre></div>
+
+<p>The output said that the Flask web server started and was running at the
+URL
+<em>http://127.0.0.1:5000</em>.
+The web server continued to run until I was ready to quit it by pressing
+<strong>CTRL-C</strong>. I loaded that URL in my web browser to view the web
+app. As I made web requests, my terminal output showed me web service
+logs. For example, when I loaded the home page, my app produced these
+logs:</p>
+<div class="codehilite"><pre><span></span><code>127.0.0.1 - - [14/Jan/2023 11:58:30] &quot;GET / HTTP/1.1&quot; 200 -
+127.0.0.1 - - [14/Jan/2023 11:58:30] &quot;GET /static/style.css HTTP/1.1&quot; 200 -
+127.0.0.1 - - [14/Jan/2023 11:58:30] &quot;GET /favicon.ico HTTP/1.1&quot; 404 -
+</code></pre></div>
+
+<p>The left column is the IP address (<code>127.0.0.1</code>) of the web browser that loaded each
+route; in this case, I loaded routes from my own computer. It also shows
+the timestamp the route was loaded, which route was loaded, and other
+information. The first route that I loaded was the home page (you can
+tell because the first log line says <code>GET /</code>), and it responded with the HTTP code
+<code>200</code>, which means it loaded
+successfully. Immediately after that, my browser loaded the CSS
+stylesheet at <code>/static/style.css</code>, which successfully loaded too, and
+tried to load the favicon (the icon in the corner of a web browser tab)
+at <code>/favicon.ico</code>. However,
+the server replied with the HTTP code <code>404</code>, &ldquo;File not found,&rdquo; because I hadn&rsquo;t
+bothered creating a favicon for my app.</p>
+<p>At the top of each page in the web app was a search bar, next to which
+was the drop-down menu that let me choose to search all servers or just
+one. For example, I tried searching all Discord servers from which I had
+imported data for the string <code>berkeley</code>. Back in my terminal, I could see that
+my browser had loaded the <code>/search?q=berkeley&amp;s=</code> route:</p>
+<div class="codehilite"><pre><span></span><code>127.0.0.1 - - [14/Jan/2023 11:58:57] &quot;GET /search?q=berkeley&amp;s= HTTP/1.1&quot; 200 -
+127.0.0.1 - - [14/Jan/2023 11:58:57] &quot;GET /static/style.css HTTP/1.1&quot; 304 -
+</code></pre></div>
+
+<p>The search page loaded the CSS stylesheet at <code>/static/style.css</code> as well, but this time it returned
+with the HTTP code <code>304</code>,
+which means that the stylesheet hadn&rsquo;t been modified since the last time
+my browser made that request.</p>
+<p>Figure 14-4 shows the Discord Analysis web
+app showing these search results. You can see that the page has the URL
+<em>http://127.0.0.1:5000/search?q=berkeley&amp;s=</em>
+and lists search results from all servers for the string
+<code>berkeley</code>.</p>
+<p><img alt="Figure 14-4: Searching for the string berkeley in my Discord Analysis web app" src="media/images/Figure14-4.png" /><br />
+<em>Figure 14-4: Searching for the string berkeley in my Discord Analysis web app</em></p>
+<p>My search found 417 messages that contained the string
+<code>berkeley</code>, along with
+information on who posted each message, in what channel, in what server,
+at what time, and the content of the message, with the search term
+itself highlighted. If I clicked on the user&rsquo;s name, which linked to the
+<code>/users/&lt;user_id&gt;</code> route, I&rsquo;d see all of the
+posts from that user, including those on multiple Discord servers.</p>
+<p>Each message also had a view link, which led to the <code>/view/&lt;message_id&gt;</code> route and pulled up a page
+displaying that individual message. This allowed me to store links to
+individual messages in my notes. When I clicked on a view link I&rsquo;d
+saved, the web app would show me not only that message but also the 20
+messages before and after it, so I could easily see the rest of the
+conversation.</p>
+<p>The app also allowed me to explore the leaked
+chats by manually reading through each channel. I could select
+individual channels by clicking the links in the left sidebar. For
+example, Figure 14-5 shows the #general
+channel in the Pony Power server. In this case, the URL was
+<em>http://127.0.0.1:5000/channel/10</em>,
+meaning the <code>channel_id</code> in the <code>/channel/&lt;channel_id&gt;</code> route was <code>10</code>. The ID field in the <code>Channel</code> table auto-increments, so the first
+row starts at 1, then 2, then 3, and so on. I imported the Vibrant
+Diversity JSON file first, which created channels with IDs 1 through 9,
+then imported the Pony Power JSON file, which created channels with IDs
+10 through 13.</p>
+<p><img alt="Figure 14-5: Viewing chat logs for the #general-chat channel in the Pony Power server in my Discord Analysis web app" src="media/images/Figure14-5.png" /><br />
+<em>Figure 14-5: Viewing chat logs for the #general-chat channel in the Pony Power server in my Discord Analysis web app</em></p>
+<p>With this case study as inspiration, I hope that you&rsquo;ll feel confident
+building similar custom apps for your future investigations when you get
+your hands on large structured datasets like these.</p>
+<p>After spending a few days splitting my time between writing code and
+reading some of the worst stuff on the internet, I ultimately decided to
+write about Pony Power, a server set up for the sole purpose of
+harassing and doxing people.</p>
+<h3>The Pony Power Discord Server</h3>
+<p>Pony Power was one of the smaller servers, with only 50 users and just
+over 1,000 messages posted over the course of just 10 days. More than
+any other server, it was full of PII for perceived members of antifa. I
+decided to focus my reporting on this server because this harassment
+campaign was clearly newsworthy, and because the server was small enough
+that I could read through all of the messages and write about the
+highlights. As a single reporter, it would have taken me considerably
+longer to do the same for larger servers, like Vibrant Diversity.</p>
+<p>In the Pony Power chat logs, I found private
+data from over 50 people from 14 states across the country, from
+California to Florida. The information often included users&rsquo;
+photographs, social media profiles, home addresses, phone numbers, email
+addresses, dates of birth, driver&rsquo;s license numbers, vehicle
+information, places of employment, and in one instance, a Social
+Security number. As I read through the Pony Power chat logs, from the
+beginning to the end, I built up a spreadsheet listing each person who
+was doxed to help me keep track of them, as well as Discord Analysis
+links to the messages where the doxing happened. The server&rsquo;s
+#faces-of-rainbow-ponies channel contained nearly all of the PII.</p>
+<p>The Pony Power fascists weren&rsquo;t very selective about their targets.
+Anyone they considered to be a member of antifa or an antifa sympathizer
+was fair game, as were journalists they disagreed with, professors from
+liberal universities, or anyone who spoke out against racism.</p>
+<p>Eight times in 2017, fascists traveled to Berkeley to hold protests.
+They came prepared with racist and antisemitic signs and armed with
+weapons for street fighting. One of these protests, a Say No to Marxism
+rally, was scheduled for late August. In response, antifascists began
+preparing a counterprotest. &ldquo;So who is going to be there to stand up
+against Antifa? This is a good chance to dox them so we can have an idea
+who they are,&rdquo; one of the Pony Power members posted in the chat. &ldquo;We
+should go onto their Facebook page if they have an active one and
+dox all the ones who plan on being there and who liked the post.&rdquo;</p>
+<p>Another Pony Power user posted a link to a website for &ldquo;white people
+striving to be allies in the fight for Black Liberation&rdquo; and said,
+&ldquo;These white allies need doxing.&rdquo; Another wanted to dox members of the
+Democratic Socialists of America and the Southern Poverty Law Center.
+Some members of the group disagreed about the strategy of doxing
+everyone they didn&rsquo;t like, though. &ldquo;Fuck these random ass people to be
+honest,&rdquo; another user posted. &ldquo;We need to dox journalists and leadership
+of activist groups.&rdquo; A person going by the name <em>Klaus Albricht</em>
+suggested, &ldquo;It&rsquo;s time we start mapping out the liberal teachers of
+universities.&rdquo;</p>
+<p><em>Albricht</em> decided to dox a 22-year-old college student because her
+Facebook cover photo showed her wearing a shirt reading &ldquo;Punch more
+Nazis,&rdquo; a reference to Richard Spencer, a white supremacist best known
+for the viral video in which he is punched in the face while being
+interviewed. <em>Albricht</em> outlined a plan to trick her into clicking a
+malicious link so he could learn her IP address. He also said that he
+would dox people who liked her shirt. Less than 20 minutes later, he
+posted her home address, what she was studying at college, and links to
+all her social media accounts.</p>
+<p>While writing my story, I reached out to the woman who was doxed. She
+told me, &ldquo;I never clicked the link because it seemed hella sketch.&rdquo; She
+also said that she hadn&rsquo;t gone out to protest fascists and that she was
+annoyed that they had doxed her just because she hurt their feelings.
+She was &ldquo;terrified&rdquo; that they had her address because &ldquo;it&rsquo;s not just
+myself who&rsquo;s at risk, but now also my parents who live here as well.&rdquo;</p>
+<p>In the 10 days&rsquo; worth of Pony Power chat logs I had at my disposal, I
+also found the fascists doxing Emily Gorcenski, an antifascist data
+scientist from Charlottesville who had
+witnessed Fields&rsquo;s car plow into protesters. She&rsquo;s a trans woman, and
+the fascists posted her deadname (the name she went by before she
+transitioned) and her home address. She has since moved to Germany.</p>
+<p>Fascists also doxed 10 alleged members of an antifa group from
+Gainesville, Florida. A user who went by the name <em>adolphus (not
+hitler)</em> posted, &ldquo;I lost my job because of these [homophobic slur]s,&rdquo;
+later posting again that he lost his job because he attended the Unite
+the Right rally in Charlottesville, so &ldquo;I&rsquo;ve got some scores to settle
+with my local antifa.&rdquo; I searched the internet for terms like
+<em>Gainesville Charlottesville fired</em> and quickly found news articles
+about a Gainesville man who was fired from his job after marching in
+Charlottesville with neo-Nazis. He was a member of the pro-slavery hate
+group League of the South, and he had gotten arrested in Charlottesville
+for carrying a concealed handgun. I tracked down a court document
+related to his arrest and found one that included his phone number.
+Because I decided to name him in the article, I called him to give him a
+chance to provide his side of the story, per the journalistic practices
+described in Chapter 1. To keep my actual
+phone number private from him and the League of the South, I used a new
+virtual phone number I had created just for this purpose (today, I have
+a public phone number that I use solely for communicating with sources
+like this). I left messages, but he never responded.</p>
+<blockquote>
+<h4>MENTAL HEALTH AND EXTREMISM RESEARCH</h4>
+<p>While building Discord Analysis and developing a story based on the chat logs from my Unicorn Riot contact, I spent several hours a day for two weeks reading racist, antisemitic, misogynistic, and outright genocidal rants by neo-Nazis speaking to one another online. Among these, one message in particular stuck out to me. It was written by a man, probably in his 50s, well past midnight, and it was a rant about the Jews who he believed were secretly controlling the media and the banks. It was clear to me that he was expressing deeply held beliefs rather than just trying to post something edgy, like a lot of the younger fascists seemed to be doing. While writing this chapter, I searched my Discord Analysis app for the term <em>jew</em> to see if I could find that specific message, but it came back with over 11,000 results, all of them full of hate. I decided it wasn’t worth tracking it down after all.</p>
+<p>I knew about antisemitism, of course. I’d experienced antisemitic microaggressions myself. But reading through these neo-Nazi chat logs was the first time that I realized how many people—including thousands of Americans, many of whom lived in my city—really wished that we were all dead.</p>
+<p>After reading through a massive amount of this content, I had many ideas for articles I wanted to write, but I ended up writing only a single one, about the Pony Power server. After publishing the first article, I didn’t want to spend more time reading these chats. I found it much better for my mental health to instead focus on writing code to improve my Discord search tool so that others could do the research. As I describe in the following section, this code eventually became a collaboration with Unicorn Riot called DiscordLeaks.</p>
+<p>Reading through chat logs like this is an experience that no one should have to go through. But unfortunately, it’s necessary for extremism researchers. If you’re doing this sort of work, make sure to prioritize your own mental health. Take breaks and find people to talk to about the terrible things you’re seeing so you don’t keep it all inside. However you go about it, it’s important to have a plan for making this work sustainable, because it will definitely affect you.</p>
+</blockquote>
+<p>Pony Power members also went after Michael Novick, at the time a
+70-year-old retired teacher from Los Angeles who had been an antifascist
+activist for over 50 years. In the late 1980s, Novick helped found a
+group called Anti-Racist Action, and he&rsquo;s been dealing with threats from
+neo-Nazis ever since. Because Novick&rsquo;s name appeared on antiracist
+websites, Pony Power users decided that he must be an antifa leader.
+&ldquo;Michael is behind what we know as the power structure,&rdquo; <em>Albricht</em>
+posted. The Pony Power users then hit what they believed to be a gold
+mine: they discovered a video of Novick speaking at the 2011 Los Angeles
+Housing &amp; Hunger Crisis Conference in which he said, &ldquo;I&rsquo;m of Jewish
+descent.&rdquo; &ldquo;HE ADMITS HE IS JEWISH! I KNEW IT!&rdquo; <em>Albricht</em> exclaimed. &ldquo;We
+have our link. Antifa is a Jewish organization!&rdquo; He added, &ldquo;Now let&rsquo;s
+tear these [antisemitic slur]s apart!&rdquo; and began inventing an antifa
+organization chart that placed Novick on top. &ldquo;This man we know for a
+fact is the leader of Antifa. [&hellip;] All other branches report to him.&rdquo;</p>
+<p>Novick told me it&rsquo;s no secret that he&rsquo;s Jewish. &ldquo;My father came to the
+US in the early &rsquo;30s as a teenager from Poland, and most of his family
+(many aunts, uncles, and cousins) were wiped out by the Nazis either in
+Bialystok during a ghetto rebellion or in the camps,&rdquo; he said. He also
+told me that there&rsquo;s no antifa &ldquo;command structure&rdquo; or &ldquo;organization
+chart.&rdquo; He added, &ldquo;Some antifa are Jewish. Hardly surprising, given the
+level of antisemitism displayed by the fascists and neo-Nazis.&rdquo;</p>
+<p>According to a story by Unicorn Riot reporter Chris Schiano, the Pony
+Power server was started by Dan Kleve. At the time, Kleve was a
+biochemistry major at the University of Nebraska&ndash;Lincoln and a member
+of the neo-Nazi group Vanguard America. After Klein was outed as one of
+the fascists who marched in Charlottesville, people began calling the
+head of his department to demand that he be expelled. Schiano wrote that
+Kleve created the Pony Power server, in apparent retaliation against
+those demanding his expulsion, &ldquo;to seek revenge by maliciously
+publishing the personal information of alleged antifascists and
+encouraging others to harass them and bring them harm.&rdquo;</p>
+<p>You can read my full reporting on the Pony
+Power Discord chat logs at
+<a href="https://theintercept.com/2017/09/06/how-right-wing-extremists-stalk-dox-and-harass-their-enemies/">https://theintercept.com/2017/09/06/how-right-wing-extremists-stalk-dox-and-harass-their-enemies/</a>.</p>
+<h3>The Launch of DiscordLeaks</h3>
+<p>After publishing my Pony Power article, I was sure that there were many
+more revelations spread throughout the hundreds of thousands of messages
+in the leaked chat logs, but I decided I needed a break from Nazis. I
+wanted to make it possible for others to analyze the rest of the Discord
+servers, though, and I knew from my own experience with these datasets
+that there were technical challenges to analyzing them, which is why I
+developed Discord Analysis to begin with. I spoke with the journalists
+from Unicorn Riot and showed them the Discord Analysis web app I had
+used to write my article. We decided that Unicorn Riot would run a
+public version of this app for researchers, journalists, and members of
+the public to use. This is how DiscordLeaks was born.</p>
+<p>DiscordLeaks
+(<a href="https://discordleaks.unicornriot.ninja">https://discordleaks.unicornriot.ninja</a>)
+is a searchable public database designed to make it easy for anyone to
+access the massive corpus of fascist chat logs from hundreds of Discord
+servers infiltrated by antifascists. I and a small team of anonymous
+developers worked in our spare time to add new features to the app and
+handle the scaling issues that come with hosting a public website that
+gets lots of traffic. We kept the modified source code for DiscordLeaks
+private, but it&rsquo;s based on the Discord Analysis source code that I just
+described. By late 2017, DiscordLeaks was live, and by early 2018 it was
+full of chat logs from several Discord servers uploaded by Unicorn Riot
+journalists, including the one used to organize Unite the Right. The
+only redactions to the chat logs on DiscordLeaks are the PII for victims
+of doxing and harassment by far-right extremists; the rest of the data
+is fully public.</p>
+<p>Over the years, Unicorn Riot has obtained a steady stream of leaked
+Discord chat logs from fascist groups and continued to index them into
+DiscordLeaks. I eventually stopped contributing to the project myself.
+In the time I&rsquo;ve been away, it&rsquo;s matured: the infrastructure is now
+running in Docker containers, and the speed of search has greatly
+improved thanks to the addition of an Elasticsearch database (both
+technologies were discussed in Chapter 5).
+Today, DiscordLeaks contains millions of messages from nearly 300
+Discord servers used by the far right, available for the public to
+research. It also contains chat logs from RocketChat servers, which I
+discuss in the next section.</p>
+<h3>The Aftermath</h3>
+<p>By 2019, I had stopped writing code for DiscordLeaks myself, but I still
+kept in touch with the developers and promoted the website. I was proud
+of my role in developing this important tool for extremism research, but
+at the time I still had no idea how much positive impact it would
+ultimately have.</p>
+<p>In this section I&rsquo;ll discuss two major
+developments in the DiscordLeaks project since I wrote the initial code
+back in 2017. In 2021, survivors of the Charlottesville terrorist attack
+won a $25 million settlement against the organizers of Unite the Right
+in a lawsuit made possible, in part, by evidence published on
+DiscordLeaks. DiscordLeaks continues to be a vital tool for extremism
+researchers: in 2022, DiscordLeaks&rsquo; anonymous developers updated it to
+include another major leak of neo-Nazi chat logs, this time from the
+group Patriot Front.</p>
+<h4>The Lawsuit Against Unite the Right</h4>
+<p>In 1871, in response to the wave of racist terrorism against Black
+people that swept the South after the end of the Civil War, the US
+Congress passed the Ku Klux Klan Act. This law allows victims of racist
+violence to sue the perpetrators in civil court. If the victims can
+prove there was a conspiracy to deprive them of their civil rights, they
+can force the racists to pay monetary damages. This is exactly what nine
+survivors from Charlottesville did.</p>
+<p>The plaintiffs in these cases were all Charlottesville residents, some
+of whom were severely injured that day&mdash;one suffered a fractured skull,
+another a broken leg and ankle. They filed the Sines v. Kessler lawsuit
+in October 2017 against 14 individuals and 10 organizations, with the
+goal of bankrupting the American fascist movement. The individual
+defendants included Jason Kessler, the primary organizer of Unite the
+Right; James Alex Fields Jr., the neo-Nazi terrorist serving a prison
+sentence for Heather Heyer&rsquo;s murder; Richard Spencer; and leaders of the
+fascist groups that organized Unite the Right. Defendants also included
+fascist groups themselves like Vanguard America, Traditionalist Worker
+Party, various branches of the Ku Klux Klan, and the National Socialist
+Movement.</p>
+<p>The Charlottesville survivors&rsquo; lawsuit was organized and funded by a
+legal nonprofit called Integrity First for America (IFA). The mission of
+the organization, founded in response to the violence of Unite the
+Right, was &ldquo;defending democratic norms and ensuring equal rights for
+every American.&rdquo; Using over 5TB of evidence in the form of phone
+records, text messages, videos from Unite the Right, email messages,
+social media posts, and private messages and chat logs, the plaintiffs
+successfully made their case. IFA made all of the evidence used in the
+lawsuit available to the public at
+<a href="https://www.integrityfirstforamerica.org/exhibits">https://www.integrityfirstforamerica.org/exhibits</a>.</p>
+<p>On its blog, IFA explained that while its lawyers did eventually get
+copies of the neo-Nazi chat logs directly from Discord as part of the
+lawsuit&rsquo;s discovery process, DiscordLeaks provided &ldquo;an immense amount&rdquo;
+of detail before the lawsuit was filed. In the chat logs published by
+Unicorn Riot, Unite the Right attendees discussed whether they could hit
+protesters with cars and then claim self-defense, which is what
+happened. This evidence &ldquo;provided crucial early information that made
+the speed and breadth of the initial complaint possible.&rdquo;</p>
+<p>In November 2021, the court found the fascist organizers guilty and
+ordered them to pay over $25 million in damages. In late 2022, IFA
+wound down its operations.</p>
+<h4>The Patriot Front Chat Logs</h4>
+<p>In the aftermath of the violent Unite the Right protests in
+Charlottesville, one of the neo-Nazi groups in attendance, Vanguard
+America, broke apart due to infighting. Out of the ashes of Vanguard
+America, a new fascist group called Patriot Front was born. Patriot
+Front, based out of Texas, is known for requiring members to do weekly
+&ldquo;activism&rdquo; involving vandalizing property with racist messages and
+posting Patriot Front propaganda, like stickers, all over the place.
+According to the Anti-Defamation League, Patriot Front was responsible
+for 82 percent of all reported incidents in 2021 involving the
+distribution of racist, antisemitic, and other hateful propaganda in the
+US.</p>
+<p>In January 2022, someone hacked Patriot Front and leaked 400GB of data
+to Unicorn Riot, including thousands of messages posted to the group&rsquo;s
+internal RocketChat server, an open source chat platform that anyone can
+host themselves. Unicorn Riot collaborated with DDoSecrets to publish
+the 400GB Patriot Front dataset, which you can find at
+<a href="https://ddosecrets.com/wiki/Patriot_Front">https://ddosecrets.com/wiki/Patriot_Front</a>.
+In response to this leak, the DiscordLeaks developers also updated the
+app to include support for RocketChat, and they imported over 12,000 new
+messages into it from two Patriot Front chat servers. You can find
+Patriot Front&rsquo;s chat logs at
+<a href="https://discordleaks.unicornriot.ninja/rocket-chat/">https://discordleaks.unicornriot.ninja/rocket-chat/</a>.</p>
+<p>Figure 14-6 shows a still from a video in
+the Patriot Front dataset of members reading their manifesto and
+chanting &ldquo;Life, liberty, victory!&rdquo; The video includes a few seconds at
+the end where one of the neo-Nazis, apparently thinking the recording
+was over, yells, &ldquo;Seig fucking Heil!&rdquo;</p>
+<p><img alt="Figure 14-6: Patriot Front members, from a video in the hacked dataset" src="media/images/Figure14-6.png" /><br />
+<em>Figure 14-6: Patriot Front members, from a video in the hacked dataset</em></p>
+<p>Unfortunately, the American fascist movement
+has steadily grown since the election of Donald Trump in 2016. But
+there&rsquo;s a wealth of public datasets about this movement, just waiting
+for researchers like you to dig in and expose it.</p>
+<h3>Summary</h3>
+<p>In this chapter, you&rsquo;ve learned how antifascists infiltrated the Discord
+servers used by the American fascist movement, including organizers of
+the deadly Unite the Right rally in 2017, and leaked millions of chat
+logs to Unicorn Riot in JSON format. You saw how I went about analyzing
+these JSON files to understand their structure, how the custom Flask and
+SQLAlchemy web app I built worked under the hood, and how the app
+ultimately became DiscordLeaks. I also described my own investigation
+into the Pony Power server that fascists used to dox their enemies.
+Finally, you read about the amazing results from the Sines v. Kessler
+lawsuit and the continued success of DiscordLeaks tools.</p>
         </div>
     </section>
     <section class="pagination">
