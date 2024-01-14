@@ -1105,7 +1105,7 @@ enter your VeraCrypt passphrase to boot up.
 
 When you reboot your computer, it should boot up to the VeraCrypt
 bootloader, and you'll need to enter the VeraCrypt passphrase to
-proceed. Under PIM, just press [ENTER]{.small}. If all goes well, it
+proceed. Under PIM, just press **ENTER**. If all goes well, it
 will succeed, Windows will boot up, and VeraCrypt will open on the
 Pretest Completed page again after you log in. Click **Encrypt** to
 begin encrypting your internal disk with VeraCrypt. From now on, you'll

@@ -26,7 +26,12 @@ def calculate_read_time(text):
 
 
 def build():
-    markdown_extensions = extensions=["extra", "smarty", "codehilite"]
+    extensions = extensions = ["extra", "smarty", "codehilite"]
+    extension_configs = {
+        "codehilite": {
+            "guess_lang": False,
+        }
+    }
 
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -47,11 +52,25 @@ def build():
 
         read_time = calculate_read_time(intro_md + body_md)
 
-        nav_html = markdown.markdown(read_file(os.path.join(input_dir, "nav.md")), extensions=markdown_extensions)
-        intro_html = markdown.markdown(intro_md, extensions=markdown_extensions)
-        body_html = markdown.markdown(body_md, extensions=markdown_extensions)
-        pagination_html = markdown.markdown(pagination_md, extensions=markdown_extensions)
-        footer_html = markdown.markdown(read_file(os.path.join(input_dir, "footer.md")), extensions=markdown_extensions)
+        nav_html = markdown.markdown(
+            read_file(os.path.join(input_dir, "nav.md")),
+            extensions=extensions,
+            extension_configs=extension_configs,
+        )
+        intro_html = markdown.markdown(
+            intro_md, extensions=extensions, extension_configs=extension_configs
+        )
+        body_html = markdown.markdown(
+            body_md, extensions=extensions, extension_configs=extension_configs
+        )
+        pagination_html = markdown.markdown(
+            pagination_md, extensions=extensions, extension_configs=extension_configs
+        )
+        footer_html = markdown.markdown(
+            read_file(os.path.join(input_dir, "footer.md")),
+            extensions=extensions,
+            extension_configs=extension_configs,
+        )
 
         html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -74,6 +93,7 @@ def build():
     <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pygments.css">
     <script defer data-domain="hacksandleaks.com" data-api="https://deniability.brisk.workers.dev/deniability/event" src="https://deniability.brisk.workers.dev/deniability/script.js"></script>
 </head>
 <body>

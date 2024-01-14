@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Micah Lee">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Buy Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data by Micah Lee.">
+    <meta name="apple-mobile-web-app-title" content="Hacks, Leaks, and Revelations">
+    <meta name="application-name" content="Hacks, Leaks, and Revelations">
+    <meta name="theme-color" content="#86D58D">
+
+    <title>Chapter 3: The Command Line Interface - Hacks, Leaks, and Revelations</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="images/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="images/favicon/android-chrome-512x512.png" sizes="512x512">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pygments.css">
+    <script defer data-domain="hacksandleaks.com" data-api="https://deniability.brisk.workers.dev/deniability/event" src="https://deniability.brisk.workers.dev/deniability/script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+           <h1><a href="/">Hacks, Leaks, and Revelations</a></h1>
+            <nav>
+                <div id="nav"><ul>
+<li><a href="contents.html">Contents</a></li>
+</ul></div>
+                <a class="mobileNav btnIcon"></a>
+                <a href="buy.html" role="button" class="primaryBtn btn">Buy Now</a>
+            </nav>
+        </div>
+    </header>
+    <section class="intro bookIntro">
+        <div class="wrapper" id="intro-wrapper">
+          <div id="reading-time">~51 min read</div>
+          <h1>Chapter 3: The Command Line Interface</h1>
+          <blockquote>
+<p><em>Back in the days of the command-line interface, users were all
+Morlocks who had to convert their thoughts into alphanumeric symbols
+and type them in, a grindingly tedious process that stripped away all
+ambiguity, laid bare all hidden assumptions, and cruelly punished
+laziness and imprecision.</em></p>
+<p>&mdash;Neal Stephenson, <em>In the Beginning &hellip; Was the Command Line</em></p>
+</blockquote>
+<p>If you&rsquo;re like most people, you interface with your computer primarily
+via its graphical desktop environment: you move the pointer with your
+mouse or trackpad and click icons to run programs and open documents.
+Programs open in windows that you can resize, maximize, minimize, and
+drag around the screen. You can run various programs at once in separate
+windows and switch between them. However, there&rsquo;s an alternative,
+incredibly powerful interface you can use to communicate with your
+computer and give it instructions: the <em>command line interface (CLI)</em>.</p>
+        </div>
+    </section>
+    <section id="content" data-content="chapter-3">
+        <div class="wrapper" id="about-content"><p>Command line interfaces are text-based, rather than graphical,
+interfaces to interact with your computer. Instead of clicking on icons,
+you enter commands to run programs in a <em>terminal emulator</em> (normally
+referred to just as a <em>terminal</em>). After running
+a command, you&rsquo;ll typically see text-based output displayed in the
+terminal.</p>
+<p>In this chapter, you&rsquo;ll learn the basic command line skills you need to
+follow along with the rest of this book. Whether you&rsquo;re using Windows,
+macOS, or Linux, you&rsquo;ll learn how to install and uninstall software via
+the command line, how filepaths work, how to navigate around the folders
+on your computer, and how to use text editors. You&rsquo;ll also write your
+first <em>shell script</em>, a file containing a series of commands.</p>
+<h3>Introducing the Command Line</h3>
+<p>To prepare you to start working on the command line, this section
+explains some fundamentals: what shells are, how users and paths work in
+different operating systems, and the concept of privilege escalation.</p>
+<h4>The Shell</h4>
+<p>The <em>shell</em> is the program that lets you run text-based commands, while
+the terminal is the graphical program that runs your shell. When you
+open a terminal and see a blinking text cursor waiting for commands,
+you&rsquo;re using a shell. When hackers try to break into a computer, their
+initial goal is to &ldquo;pop a shell,&rdquo; or access the text-based interface
+that allows them to run whatever commands they want.</p>
+<p>All operating systems, even mobile ones like Android and iOS, have
+shells. This book focuses on Unix shells, the kind that come with macOS
+and Linux (but Windows users can also use them). Most versions of Linux
+use a shell called bash, and macOS uses one called zsh. These shells are
+very similar, and for the purposes of this book you can think of them as
+interchangeable.</p>
+<p>Windows, on the other hand, comes with two shells: an older one called
+Command Prompt (or <em>cmd.exe</em>) and a newer one called PowerShell. The
+<em>syntax</em>&mdash;rules that define what different commands mean&mdash;used by
+Windows shells is very different from that used by Unix shells. If
+you&rsquo;re a Windows user, you&rsquo;ll primarily work in a Unix shell for the
+examples in this book. Setting up your computer to run Linux directly in
+Windows will be this chapter&rsquo;s first exercise.</p>
+<p>To make your shell do something, such as run a program, you carefully
+enter the desired command and then press <strong>ENTER</strong> (or
+<strong>RETURN</strong> on Mac keyboards). To quit the shell, enter
+<code>exit</code> and press
+<strong>ENTER</strong>. Shells are finicky: you need to enter commands using
+the correct capitalization, punctuation, and spacing, or they won&rsquo;t
+work. Typos usually result in nothing more serious than error messages,
+however, and it&rsquo;s easy to go back and fix a mistake in a command. I&rsquo;ll
+explain how to do so in the Editing Commands section on page
+68.</p>
+<h4>Users and Paths</h4>
+<p>Although operating systems like Windows, macOS, and Linux are different
+in some ways, they all share basic building blocks, including users and
+paths.</p>
+<p>All operating systems have <em>users</em>, separate accounts that different
+people use to log in to the same computer. Users generally have home
+folders, also known as home directories, where their files live. Figure
+3-1 shows my terminal in Ubuntu, a popular
+Linux distribution.</p>
+<p><img alt="Figure 3-1: My Ubuntu terminal" src="media/images/Figure3-1.png" /><br />
+<em>Figure 3-1: My Ubuntu terminal</em></p>
+<p>My username is <em>micah</em> and the name of my Ubuntu computer is <em>rogue</em>.
+Your terminal will look different depending on your operating system,
+username, and computer name.</p>
+<p>All operating systems also have filesystems, the collection of files and
+folders available on the computer (you got a brief introduction to
+filesystems in Chapter 1 while encrypting
+your USB disk). In a filesystem, each file and folder has a <em>path</em>,
+which you can think of like the location, or address, of that file. For
+example, if your username is <em>alice</em>, the path of your home folder in
+different operating systems would look as follows:</p>
+<ul>
+<li>Windows: <em>C:\Users\alice</em></li>
+<li>macOS: <em>/Users/alice</em></li>
+<li>Linux: <em>/home/alice</em></li>
+</ul>
+<p>Windows filesystems operate differently from macOS or Linux filesystems
+in a few key ways. First, in Windows, disks are labeled with letters.
+The main disk, where Windows itself is installed, is the <em>C: drive</em>.
+Other disks, like USB disks, are assigned other letters. In Windows,
+folders in a path are separated with a backslash (<code>\</code>), while other operating systems use
+forward slashes (<code>/</code>). In
+Linux, paths are case sensitive, but not in Windows and macOS (by
+default). For example, in Linux you can store one file called
+<em>Document.pdf</em> and another called <em>document.pdf</em> in the same folder. If
+you try to do the same in Windows, saving the second file overwrites the
+first.</p>
+<p>Let&rsquo;s look at some example paths. If your username is <em>alice</em> and you
+download a file called <em>Meeting Notes.docx</em> into the <em>Downloads</em> folder,
+here&rsquo;s what that path would look like:</p>
+<ul>
+<li>Windows: <em>C:\Users\alice\Downloads\Meeting Notes.docx</em></li>
+<li>macOS: <em>/Users/alice/Downloads/Meeting Notes.docx</em></li>
+<li>Linux: <em>/home/alice/Downloads/Meeting Notes.docx</em></li>
+</ul>
+<p>When you plug in a USB disk, it&rsquo;s mounted to
+different paths for different operating systems. If your disk is labeled
+<em>datasets</em>, the path representing the location of that disk might look
+as follows:</p>
+<ul>
+<li>Windows: <em>D:</em> (or whatever drive letter Windows decides to mount the
+    disk to)</li>
+<li>macOS: <em>/Volumes/datasets</em></li>
+<li>Linux: <em>/media/alice/datasets</em></li>
+</ul>
+<p>It&rsquo;s important to understand how to read paths, since you&rsquo;ll need to
+include the location of your dataset or files it contains in the
+commands you run.</p>
+<h4>User Privileges</h4>
+<p>Most users have limited privileges in an operating system. However, the
+<em>root user</em> in Linux and macOS and the <em>administrator user</em> in Windows
+have absolute power. While <em>alice</em> may not be able to save files into
+<em>bob</em>&lsquo;s home folder, for example, the root user has permissions to save
+files anywhere on the computer. When a Mac asks you to enter your user
+password to change system preferences or install software, or when a
+Windows machine asks if you want to allow a program to make changes to
+your computer, the operating system is asking for your consent before
+switching from your unprivileged user account to the root or
+administrator user account.</p>
+<p>Most of the time when you&rsquo;re working in a terminal, you run commands as
+an unprivileged user. To run a command that requires root (or
+administrative) privileges in Linux and macOS, such as to install a new
+program, just put <code>sudo</code> in
+front of it and press <strong>ENTER</strong>, and you&rsquo;ll be prompted to enter
+the password for your regular user account.</p>
+<p>As an example, the <code>whoami</code>
+command tells you which user just ran a command. On my computer, if I
+enter <code>whoami</code> without
+<code>sudo</code>, the output is
+<code>micah</code>. However, if I enter
+<code>sudo whoami</code>, which requires
+me to type my password, the output is <code>root</code>:</p>
+<div class="codehilite"><pre><span></span><code>micah@rogue:~$ whoami
+micah
+micah@rogue:~$ sudo whoami
+[sudo] password for micah:
+root
+</code></pre></div>
+
+<p>If you recently ran <code>sudo</code>,
+you can run it again for a few minutes without having to re-enter your
+password.</p>
+<p><strong>WARNING</strong> <em>Be very careful when running commands as root, since running the wrong
+commands as the root user can accidentally delete all of your data or
+break your operating system. Before using sudo, make sure you have a
+clear understanding of what you&rsquo;re about to do.</em></p>
+<p>You can use <code>sudo</code> to gain root access only if your
+current user has administrator access. If you&rsquo;re the only user on your
+computer, you&rsquo;re probably an administrator. To find out, try using
+<code>sudo</code> and see whether you get
+a &ldquo;permission denied&rdquo; error.</p>
+<p>Figure 3-2 shows a comic by Randall Munroe
+from his XKCD website that succinctly demonstrates the power of
+<code>sudo</code>.</p>
+<p><img alt="Figure 3-2: Demanding a sandwich with sudo" src="media/images/Figure3-2.png" /><br />
+<em>Figure 3-2: Demanding a sandwich with sudo</em></p>
+<p>Before learning more command line code, Windows users must install
+Ubuntu (see Exercise 3-1). Mac or Linux users can skip to the Basic
+Command Line Usage section on page 62.</p>
+<h3>Exercise 3-1: Install Ubuntu in Windows</h3>
+<p>To work with Ubuntu on a Windows machine, you could install both Windows
+and Linux or use a virtual machine within Windows, as mentioned in
+Chapter 1. However, for this book&rsquo;s
+purposes, it&rsquo;s simplest to use the <em>Windows Subsystem for Linux (WSL)</em>,
+a Microsoft technology that lets you run Linux programs directly in
+Windows. Opening an Ubuntu window in WSL will, in turn, open a bash
+shell and let you install and run Ubuntu software. (Technically, WSL
+does use a VM, but it&rsquo;s fast, managed by Windows, and unobtrusive,
+running entirely behind the scenes.)</p>
+<p>To install WSL, open a PowerShell window as an administrator: click
+<strong>Start</strong>, search for <strong>powershell</strong>, right-click <strong>Windows
+PowerShell</strong>, choose <strong>Run as Administrator</strong>, and click <strong>Yes</strong>.
+Figure 3-3 shows this process, which may look
+slightly different depending on your version of Windows.</p>
+<p><img alt="Figure 3-3: Running PowerShell as an administrator in Windows" src="media/images/Figure3-3.png" /><br />
+<em>Figure 3-3: Running PowerShell as an administrator in Windows</em></p>
+<p>In your administrator PowerShell window, enter the following command and
+press <strong>ENTER</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">wsl</span> <span class="p">-</span><span class="n">-install</span> <span class="n">-d</span> <span class="n">Ubuntu</span>
+</code></pre></div>
+
+<p>This installs the Windows Subsystem for Linux, then downloads and
+installs Ubuntu Linux on your computer.</p>
+<p>Your screen should now look something like this:</p>
+<div class="codehilite"><pre><span></span><code>PS C :\Windows\system32&gt; wsl --install -d Ubuntu
+Installing: Windows Subsystem for Linux
+Windows Subsystem for Linux has been installed.
+Downloading: WSL Kernel
+Installing: WSL Kernel
+WSL Kernel has been installed.
+Downloading: GUI App Support
+Installing: GUI App Support
+GUI App Support has been installed.
+Downloading: Ubuntu
+The requested operation is succession. Changes will not be effective until the
+system is rebooted.
+PS C:\Windows\system32&gt;
+</code></pre></div>
+
+<p>The final line of this output tells you to reboot your computer. Enter
+<code>exit</code> and press
+<strong>ENTER</strong> (or just close the window) to quit PowerShell, then
+reboot. After you log in to Windows again, you should see an Ubuntu
+window informing you that the installation may take a few more minutes
+to complete. Then the window should present you
+with a prompt asking you to create a new user:</p>
+<div class="codehilite"><pre><span></span><code>Please create a default UNIX user account. The username does not need to match
+your Windows username.
+For more information visit: https://aka.ms/wslusers
+Enter new UNIX username:
+</code></pre></div>
+
+<p>Ubuntu needs to keep track of its own users rather than the existing
+users on your Windows computer.</p>
+<p>With the Ubuntu terminal window in focus, enter a username and press
+<strong>ENTER</strong>. The terminal should then prompt you to create a
+password:</p>
+<div class="codehilite"><pre><span></span><code>New password:
+</code></pre></div>
+
+<p>Either use the same password you use to log in to your Windows account
+or create a new one and save it in your password manager. Enter your
+password and press <strong>ENTER</strong>. While you&rsquo;re typing, nothing will
+appear in the Ubuntu terminal.</p>
+<p>The terminal should now prompt you to re-enter your new password; do so
+and press <strong>ENTER</strong>, which should drop you into an Ubuntu shell
+with a prompt and a blinking cursor. My prompt says
+<code>micah@cloak:~$</code> because my
+username is <em>micah</em> and the name of my Windows computer is <em>cloak</em>:</p>
+<div class="codehilite"><pre><span></span><code>New password:
+Retype new password:
+passwd: password updated successfully
+Installation successful!
+--snip--
+micah@cloak:~$
+</code></pre></div>
+
+<p>You can now open Ubuntu in your Windows computer. From this point on,
+when instructed to open a terminal or run some command line code, use an
+Ubuntu terminal window unless I specify otherwise.</p>
+<p>From within your Ubuntu shell, you can access your Windows disks in the
+<em>/mnt</em> folder. For example, you can access the <em>C:</em> drive in <em>/mnt/c</em>
+and the <em>D:</em> drive in <em>/mnt/d</em>. Suppose I download a document using my
+web browser and want to access it from Ubuntu. The path to my
+<em>Downloads</em> folder in Windows is <em>/mnt/c/Users/micah/Downloads</em>, so the
+document would be in that folder. If I want to access the BlueLeaks data
+that I downloaded to my USB disk from Ubuntu, then assuming that <em>D:</em> is
+the USB disk&rsquo;s drive, the path would be <em>/mnt/d/BlueLeaks</em>.</p>
+<p>For more details on using Windows and WSL, including information on
+common problems related to using USB disks in WSL, as well as disk
+performance issues and various ways to deal with them, check out
+Appendix A. Wait until you&rsquo;ve worked through at least Chapter 4 to start implementing these solutions, since
+the instructions involve more advanced command line concepts introduced
+in that chapter.</p>
+<h3>Basic Command Line Usage</h3>
+<p>In this section, you&rsquo;ll learn to use the command line to explore files
+and folders on your computer. This is a prerequisite to working with
+datasets, which are just folders full of files and other folders. You&rsquo;ll
+learn how to open a terminal, list files in any folder, distinguish
+between relative and absolute paths, switch to different folders in your
+shell, and look up documentation on commands from within your terminal.</p>
+<p><strong>NOTE</strong> <em>When learning command line skills, you can always look things up if you
+run into problems&mdash;I still do this every day. You&rsquo;re likely not the
+first person to encounter any given command line issue, so with a few
+well-worded internet searches, you can find someone else&rsquo;s solution.</em></p>
+<h4>Opening a Terminal</h4>
+<p>To get started, skip to the subsection for your operating system to
+learn how to open a terminal. Throughout this chapter, keep a terminal
+open while you&rsquo;re reading to test all the commands.</p>
+<h5>The Windows Terminal</h5>
+<p>Open the Ubuntu app by clicking <strong>Start</strong> in the bottom-left corner of
+the screen, searching for <strong>ubuntu</strong>, and clicking <strong>Ubuntu</strong>.</p>
+<p>You&rsquo;ll use Ubuntu most often for this book, but you may need to open the
+native Windows terminals occasionally as well. You can likewise open
+PowerShell and Command Prompt by clicking <strong>Start</strong> and searching for
+them. Check out the Microsoft program Windows Terminal
+(https://aka.ms/terminal),
+which lets you open different terminals in different tabs, choosing
+between PowerShell, Command Prompt, Ubuntu, and others. If you choose to
+install it, you can open it the same way.</p>
+<p>Pin the Ubuntu app or Windows Terminal app to your taskbar so you can
+quickly open it in the future: right-click its icon and select <strong>Pin to
+Taskbar</strong>.</p>
+<h5>The macOS Terminal</h5>
+<p>Open the Terminal app by opening Finder, going to the <em>Applications</em>
+folder, double-clicking the <em>Utilities</em> folder, and double-clicking
+<strong>Terminal</strong>. Figure 3-4 shows my macOS
+terminal running zsh, the default macOS shell. My username is <em>micah</em>,
+and the name of my Mac is <em>trapdoor</em>.</p>
+<p><img alt="Figure 3-4: My macOS terminal" src="media/images/Figure3-4.png" /><br />
+<em>Figure 3-4: My macOS terminal</em></p>
+<p>Pin the Terminal app to your dock so you can quickly open it in the
+future. To do so, after you open Terminal, press <strong>CTRL</strong> and
+click the Terminal icon on your dock, then choose
+<strong>Options</strong> ▸ <strong>Keep in Dock</strong>.</p>
+<h5>The Linux Terminal</h5>
+<p>In most Linux distributions, open the Terminal app by pressing the
+Windows key, typing <strong>terminal</strong>, and pressing <strong>ENTER</strong>. If
+you&rsquo;re running Ubuntu (or any other Linux distribution that uses the
+GNOME graphical environment), pin the Terminal app to your dock so you
+can quickly open it in the future. To do so, right-click the Terminal
+icon and select <strong>Add to Favorites</strong>.</p>
+<h4>Clearing Your Screen and Exiting the Shell</h4>
+<p>As you practice using the terminal in the following sections, you&rsquo;ll
+sometimes want to start fresh, without having to see all the previous
+commands you ran or their output or error messages. Run this simple
+command to declutter your terminal:</p>
+<div class="codehilite"><pre><span></span><code>clear
+</code></pre></div>
+
+<p>This clears everything off the screen, leaving you with nothing but a
+blank command prompt. Make sure to do this only if you no longer need to
+see the output of your previous commands. (In the Windows Command Prompt
+and PowerShell, use <code>cls</code>
+instead of <code>clear</code>.)</p>
+<p>When you&rsquo;re done using the CLI, exit your shell by running this command:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">exit</span>
+</code></pre></div>
+
+<p>You can also close the terminal window to exit. If you&rsquo;re running a
+program when you close the terminal, that program will quit as well.</p>
+<h4>Exploring Files and Directories</h4>
+<p>When you open a terminal, your shell starts out in your user&rsquo;s home
+folder, represented as a tilde (<code>~</code>). The folder you&rsquo;re currently in is
+your <em>current working directory</em>, or just <em>working directory</em>. If you
+ever forget what directory you&rsquo;re in, run the <code>pwd</code> command (short for &ldquo;print working
+directory&rdquo;) to find out.</p>
+<p>Running the <code>ls</code> command in
+your terminal lists all of the files in your working directory. You can
+use this command to check the contents of folders you&rsquo;re working with.
+If there are no files or only hidden files, <code>ls</code> won&rsquo;t list anything. To check for
+hidden files, modify the <code>ls</code>
+command using <code>-a</code> (short for
+<code>--all</code>):</p>
+<div class="codehilite"><pre><span></span><code>ls -a
+</code></pre></div>
+
+<p>When you add anything to the end of a command, like <code>-a</code>, you&rsquo;re using a <em>command line
+argument</em>. Think of arguments as settings that change how the program
+you&rsquo;re running will act&mdash;in this case, by showing hidden files instead
+of hiding them.</p>
+<p>By default, the <code>ls</code> command
+displays files in a format intended to take up as few lines in your
+terminal as possible. However, you may want to display one file per line
+for easier reading and to get more information about each
+file, such as its size, when it was last modified, permissions, and
+whether it&rsquo;s a folder. Using the <code>-l</code> argument (short for
+<code>--format=long</code>) formats the
+output as a list.</p>
+<p>You can use both <code>-a</code> and
+<code>-l</code> at the same time like so:</p>
+<div class="codehilite"><pre><span></span><code>ls -al
+</code></pre></div>
+
+<p>Running this command on my Mac gives me the following output:</p>
+<div class="codehilite"><pre><span></span><code>total 8
+drwxr-x---+ 13 micah  staff   416 Nov 25 11:34 .
+drwxr-xr-x   6 root   admin   192 Nov  9 15:51 ..
+-rw-------   1 micah  staff     3 Nov  6 15:30 .CFUserTextEncoding
+-rw-------   1 micah  staff  2773 Nov 25 11:33 .zsh_history
+drwx------   5 micah  staff   160 Nov  6 15:31 .zsh_sessions
+drwx------+  3 micah  staff    96 Nov  6 15:30 Desktop
+drwx------+  3 micah  staff    96 Nov  6 15:30 Documents
+drwx------+  3 micah  staff    96 Nov  6 15:30 Downloads
+drwx------+ 31 micah  staff   992 Nov  6 15:31 Library
+drwx------   3 micah  staff    96 Nov  6 15:30 Movies
+drwx------+  3 micah  staff    96 Nov  6 15:30 Music
+drwx------+  3 micah  staff    96 Nov  6 15:30 Pictures
+drwxr-xr-x+  4 micah  staff   128 Nov  6 15:30 Public
+</code></pre></div>
+
+<p>The first column of this output describes the type of file&mdash;whether
+it&rsquo;s a <em>directory</em> (another name for a folder) or an ordinary file&mdash;as
+well as the file&rsquo;s permissions. Directories start with <code>d</code>, and ordinary files start with a
+hyphen (<code>-</code>). The second
+column represents the number of links in the file, which isn&rsquo;t relevant
+for the purposes of this book.</p>
+<p>The third and fourth columns represent the user and the <em>group</em> that
+owns the file. In addition to users, operating systems have groups of
+users that can have their own permissions. For example, in Linux, all
+users allowed to use <code>sudo</code>
+are in the <em>sudo</em> group. If you create or download a file, its user and
+group are normally your username. The fifth column is the file size in
+bytes. For example, in the file called <em>.zsh_history</em>, my output is
+2,773 bytes.</p>
+<p>The next three columns of the output represent the time and date when
+the file was last modified, and the final column shows the filename.</p>
+<p>To see a listing of files in a folder other than the working directory,
+add the path to that folder to the end of the <code>ls</code> command. For example, this is how I&rsquo;d
+create a listing of files in my <em>code/hacks-leaks-and-revelations</em>
+folder, which contains the files released with this book:</p>
+<div class="codehilite"><pre><span></span><code>ls -la code/hacks-leaks-and-revelations
+</code></pre></div>
+
+<p>I&rsquo;d get the following output:</p>
+<div class="codehilite"><pre><span></span><code>total 96
+drwxr-xr-x  22 micah  staff    704 Jul 27 09:28 .
+drwxr-xr-x  12 micah  staff    384 Jul 27 09:28 ..
+drwxr-xr-x  12 micah  staff    384 Jul 27 09:28 .git
+drwxr-xr-x   3 micah  staff     96 Jul 27 09:28 .github
+-rw-r--r--   1 micah  staff     30 Jul 27 09:28 .gitignore
+-rw-r--r--   1 micah  staff  35149 Jul 27 09:28 LICENSE
+-rw-r--r--   1 micah  staff   6997 Jul 27 09:28 README.md
+drwxr-xr-x   6 micah  staff    192 Jul 27 09:28 appendix-b
+drwxr-xr-x   5 micah  staff    160 Jul 27 09:28 chapter-1
+drwxr-xr-x   6 micah  staff    192 Jul 27 09:28 chapter-10
+drwxr-xr-x  11 micah  staff    352 Jul 27 09:28 chapter-11
+drwxr-xr-x  13 micah  staff    416 Jul 27 09:28 chapter-12
+drwxr-xr-x   8 micah  staff    256 Jul 27 09:28 chapter-13
+drwxr-xr-x   3 micah  staff     96 Jul 27 09:28 chapter-14
+drwxr-xr-x   5 micah  staff    160 Jul 27 09:28 chapter-2
+drwxr-xr-x  10 micah  staff    320 Jul 27 09:28 chapter-3
+drwxr-xr-x  13 micah  staff    416 Jul 27 09:28 chapter-4
+drwxr-xr-x  13 micah  staff    416 Jul 27 09:28 chapter-5
+drwxr-xr-x  10 micah  staff    320 Jul 27 09:28 chapter-6
+drwxr-xr-x  12 micah  staff    384 Jul 27 09:28 chapter-7
+drwxr-xr-x  20 micah  staff    640 Jul 27 09:28 chapter-8
+drwxr-xr-x  14 micah  staff    448 Jul 27 09:28 chapter-9
+</code></pre></div>
+
+<p>You&rsquo;ll download your own copy of these files in Exercise 3-7.</p>
+<h4>Navigating Relative and Absolute Paths</h4>
+<p>Programs often require you to provide paths to files or folders, usually
+when you run a program that works with specific files on your computer.
+The path that I passed into <code>ls</code> in the previous section,
+<em>code/hacks-leaks-and-revelations</em>, is a <em>relative</em> path, meaning it&rsquo;s
+relative to the current working directory, my home folder. Relative
+paths can change. For example, if I change my working directory from my
+home folder (<em>/Users/micah</em>) to just <em>/Users</em>, the relative path to that
+folder changes to <em>micah/code/hacks-leaks-and-revelations</em>.</p>
+<p>The <em>absolute</em> path to the <em>code/hacks-leaks-and-revelations</em> folder is
+<em>/Users/micah/code/hacks-leaks-and-revelations</em>, which always provides
+the location of that folder regardless of my working directory. Absolute
+paths start with a forward slash (<em>/</em>), which is also known as the root
+path.</p>
+<p>You can use two keywords to access relative paths to specific folders:
+<code>.</code> (dot), which represents a
+relative path to the current folder, and <code>..</code> (dot dot), which represents a relative
+path to the <em>parent folder</em> (the folder that contains the current
+folder).</p>
+<h4>Changing Directories</h4>
+<p>The <code>cd</code> command (which stands
+for &ldquo;change directory&rdquo;) allows you to change to a different folder. To
+change your working directory to the folder, run:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> path
+</code></pre></div>
+
+<p>For <code>path</code>,
+substitute the path to the folder to which you&rsquo;d like to move. You can
+use either a relative or an absolute path.</p>
+<p>Suppose I&rsquo;m using macOS and have downloaded BlueLeaks to a <em>datasets</em>
+USB disk plugged into my machine. After opening a terminal, I can run
+the following command to change my working directory
+to the <em>BlueLeaks</em> folder, using the absolute path to the folder:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets/BlueLeaks
+</code></pre></div>
+
+<p>Alternatively, I can use a relative path to the folder, running the
+following command from my home folder:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ../../Volumes/datasets/BlueLeaks
+</code></pre></div>
+
+<p>Why does the relative path start with <code>../..</code> in this example? When I open the
+terminal, the working directory is my home folder, which in macOS is
+<em>/Users/micah</em>. The relative path <code>..</code> would be its parent folder, <em>/Users</em>;
+the relative path <code>../..</code>
+would be <em>/</em>; the relative path <code>../../Volumes</code> would be <em>/Volumes</em>; and so on.</p>
+<p>As noted earlier, the tilde symbol (<code>~</code>) represents your home folder. No
+matter what your working directory is, you can run the following to go
+back to your home folder:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ~
+</code></pre></div>
+
+<p>Use the following syntax to move to a folder inside your home folder:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ~/folder_name
+</code></pre></div>
+
+<p>For example, the following command would move you to your <em>Documents</em>
+folder:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ~/Documents
+</code></pre></div>
+
+<p>If you run <code>ls</code> again after a
+<code>cd</code> command, the output
+should show you the files in the folder to which you just moved.</p>
+<h4>Using the help Argument</h4>
+<p>Most commands let you use the argument <code>-h</code>, or <code>--help</code>, which displays detailed instructions
+explaining what the command does and how to use it. For example, try
+running the following:</p>
+<div class="codehilite"><pre><span></span><code>unzip --help
+</code></pre></div>
+
+<p>This command should show instructions on all of the different arguments
+that are available to you when using the <code>unzip</code> command, which is used to extract
+compressed ZIP files.</p>
+<p>Here&rsquo;s the output I got when I ran that command on my Mac:</p>
+<div class="codehilite"><pre><span></span><code>UnZip 6.00 of 20 April 2009, by Info-ZIP.  Maintained by C. Spieler.  Send
+bug reports using http://www.info-zip.org/zip-bug.html; see README for details.
+--snip--
+  -p  extract files to pipe, no messages     -l  list files (short format)
+  -f  freshen existing files, create none    -t  test compressed archive data
+  -u  update files, create if necessary      -z  display archive comment only
+  -v  list verbosely/show version info       -T  timestamp archive to latest
+  -x  exclude files that follow (in xlist)   -d  extract files into exdir
+--snip--
+</code></pre></div>
+
+<p>This output briefly describes what each argument for the <code>unzip</code> command does. For example, if you use
+the <code>-l</code> argument, the command
+shows a list of all of the files and folders inside the ZIP file without
+actually unzipping it.</p>
+<h4>Accessing Man Pages</h4>
+<p>Many commands also have manuals, otherwise known as <em>man pages</em>, which
+give more detail about how to use those commands. Run the following to
+access a command&rsquo;s man page:</p>
+<div class="codehilite"><pre><span></span><code>man command_name
+</code></pre></div>
+
+<p>For example, to read the manual for the <code>unzip</code> command, run:</p>
+<div class="codehilite"><pre><span></span><code>man unzip
+</code></pre></div>
+
+<p>The output should display a longer explanation of how to use the
+<code>unzip</code> command and its
+arguments.</p>
+<p>Use the up and down arrows and the page up and page down keys to scroll
+through the man pages, or press <code>/</code> and enter a term to search. For
+example, to learn more details about how the <code>unzip</code> command&rsquo;s <code>-l</code> argument works, press <code>/</code> and enter <code>-l</code>, then press <strong>ENTER</strong>. This
+should bring you to the first time <code>-l</code> appears on the man page. Press N to
+move on to the next occurrence of your search term.</p>
+<p>When you&rsquo;re finished, press Q to quit the man page.</p>
+<h3>Tips for Navigating the Terminal</h3>
+<p>This section introduces ways to make working on the command line more
+convenient and efficient, along with tips for avoiding and fixing
+errors. It also shows how to handle problematic filenames, such as those
+with spaces, quotes, or other special characters. A basic understanding
+of these concepts will save you a lot of time in the future.</p>
+<h4>Entering Commands with Tab Completion</h4>
+<p>Shells have a feature called <em>tab completion</em> that saves time and
+prevents errors: enter the first few letters of a command or a path,
+then press <strong>TAB</strong>. Your shell will fill in the rest if possible.</p>
+<p>For example, both macOS and Ubuntu come with a program called hexdump.
+In a terminal, enter <code>hexd</code> and
+press <strong>TAB</strong>. This should automatically fill in
+the rest of the hexdump command. Tab completion also works for paths.
+For example, Unix-like operating systems use the <em>/tmp</em> folder to store
+temporary files. Enter <code>ls /tm</code>
+and press <strong>TAB</strong>. Your shell should add the <code>p</code> to finish typing out the full command.</p>
+<p>If you enter only the first couple letters of a command or a path, there
+may be more than one way for your shell to complete your line of code.
+Assuming that you have both <em>Downloads</em> and <em>Documents</em> folders in your
+home folder, type <code>ls ~/Do</code> and
+press <strong>TAB</strong>. You&rsquo;ll hear a quiet beep, meaning that the shell
+doesn&rsquo;t know how to proceed. Press <strong>TAB</strong> one more time, and it
+should display the options, like this:</p>
+<div class="codehilite"><pre><span></span><code>Documents/  Downloads/
+</code></pre></div>
+
+<p>If you enter a <code>c</code> so that
+your command so far is <code>ls ~/Doc</code> and press <strong>TAB</strong>, the command
+should complete to <code>ls ~/Documents/</code>. If you enter a <code>w</code> so that your command so far is
+<code>ls ~/Dow</code> and press
+<strong>TAB</strong>, it should complete to <code>ls ~/Downloads/</code>.</p>
+<p>If you&rsquo;ve already typed out the path of a folder, you can also press
+<strong>TAB</strong> to list files in that folder, or to automatically complete
+the filename if there&rsquo;s only one file in the folder. For example, say I
+have my <em>datasets</em> USB disk, on which I&rsquo;ve downloaded BlueLeaks, plugged
+into my Ubuntu computer. If I want to change to my <em>BlueLeaks</em> folder, I
+can enter the following and press <strong>TAB</strong>:</p>
+<div class="codehilite"><pre><span></span><code>cd /Vo
+</code></pre></div>
+
+<p>This completes the command as follows:</p>
+<div class="codehilite"><pre><span></span><code>cd /Volumes/
+</code></pre></div>
+
+<p>I press <strong>TAB</strong> again, and my computer beeps and lists the folders
+in <em>/Volumes</em>, which in my case are <em>Macintosh HD</em> and <em>datasets</em>. I
+enter <code>d</code>, so my command is
+<code>cd /Volumes/d</code>, and press
+<strong>TAB</strong>, and the shell completes the command as follows:</p>
+<div class="codehilite"><pre><span></span><code>cd /Volumes/datasets/
+</code></pre></div>
+
+<p>I press <strong>TAB</strong> again. My computer beeps again and lists all of
+the files and folders in my <em>datasets</em> USB disk. I enter <code>B</code> (the first letter of BlueLeaks) and
+press <strong>TAB</strong>, which gives me:</p>
+<div class="codehilite"><pre><span></span><code>cd /Volumes/datasets/BlueLeaks/
+</code></pre></div>
+
+<p>Finally, I press <strong>ENTER</strong> to change to that folder.</p>
+<h4>Editing Commands</h4>
+<p>You can also edit commands. When you start typing a command, you can
+press the left and right arrow keys to move the cursor, allowing you to
+edit the command before running it. You can also
+press <strong>HOME</strong> and <strong>END</strong>&mdash;or, if you&rsquo;re using a Mac
+keyboard, <strong>CONTROL</strong>-A and <strong>CONTROL</strong>-E&mdash;to go to the
+beginning and end of a line, respectively. You can also cycle between
+commands you&rsquo;ve already run using the up and down arrows. If you just
+ran a command and want to run it again, or to modify it and then run it,
+press the up arrow to return to it. Once you find the command you&rsquo;re
+looking for, use the arrow keys to move your cursor to the correct
+position, edit it, and then press <strong>ENTER</strong> to run it again.</p>
+<p>For example, I frequently get &ldquo;permission denied&rdquo; errors when I
+accidentally run commands as my unprivileged user when I should have run
+them as root. When this happens, I press the up arrow, then
+<strong>CONTROL</strong>-A to go to the beginning of the line, add
+<code>sudo</code>, and press
+<strong>ENTER</strong> to successfully run the command.</p>
+<h4>Dealing with Spaces in Filenames</h4>
+<p>Sometimes filenames contain multiple words separated by spaces. If you
+don&rsquo;t explicitly tell your shell that a space is part of a filename, the
+shell assumes that the space is there to separate parts of your command.
+For example, this command lists the files in the <em>Documents</em> folder:</p>
+<div class="codehilite"><pre><span></span><code>ls -lh ~/Documents
+</code></pre></div>
+
+<p>Under the hood, your shell takes this string of characters and splits it
+into a list of parts that are separated by spaces: <code>ls</code>, <code>-lh</code>, and <code>~/Documents</code>. The first part, <code>ls</code>, is the command to run. The rest of
+the parts are the command&rsquo;s arguments. The <code>-lh</code> argument tells the program to display
+the output as a list and make the file sizes human-readable. That is, it
+will convert the file sizes into units that are easier to read, like
+kilobytes, megabytes, and gigabytes, rather than a large number of
+bytes. The <code>~/Documents</code>
+argument means you want to list the files in that folder.</p>
+<p>Suppose you want to use the same command to list the files in a folder
+with a space in its name, like <em>\~/My Documents</em>. You&rsquo;ll run into
+problems if you enter this command:</p>
+<div class="codehilite"><pre><span></span><code>ls -lh ~/My Documents
+</code></pre></div>
+
+<p>When your shell tries to separate this command into parts, it will come
+up with <code>ls</code>, <code>-lh</code>, <code>~/My</code>, and <code>Documents</code>; that is, it sees <em>\~/My Documents</em> as
+two separate arguments, <code>~/My</code>
+and <code>Documents</code>. It will try
+to list the files in the folder <em>\~/My</em> (which doesn&rsquo;t exist), then also
+list files in the folder <em>Documents</em>, which isn&rsquo;t what you intended.</p>
+<p>To solve this problem, put the name of the folder in quotes:</p>
+<div class="codehilite"><pre><span></span><code>ls -lh <span class="s2">&quot;~/My Documents&quot;</span>
+</code></pre></div>
+
+<p>The shell sees anything within quotes as a single entity. In this case,
+<code>ls</code> is the command and its
+arguments are <code>-lh</code> followed
+by <code>~/My Documents</code>.</p>
+<p>Alternatively, you can use a backslash
+(<code>\</code>) to <em>escape</em> the space:</p>
+<div class="codehilite"><pre><span></span><code>ls -lh ~/My<span class="se">\ </span>Documents
+</code></pre></div>
+
+<p>In the Unix family of operating systems, the backslash is called the
+<em>escape character</em>. When the shell parses that string of characters, it
+treats an <em>escaped space</em> (<code>\</code>
+followed by a space) as a part of the name. Again, the shell reads
+<code>ls</code> as the command and
+<code>-lh</code> and
+<code>~/My Documents</code> as its
+arguments.</p>
+<h4>Using Single Quotes Around Double Quotes</h4>
+<p>You can use the escape character to escape more than spaces. Suppose you
+want to delete a filename that has a space <em>and</em> quotes in it, like <em>Say
+&ldquo;Hello&rdquo;.txt.</em> You can use the <code>rm</code> command to delete files, but the
+following syntax won&rsquo;t work:</p>
+<div class="codehilite"><pre><span></span><code>rm Say <span class="s2">&quot;Hello&quot;</span>.txt
+</code></pre></div>
+
+<p>Your shell will split this command into the words <code>rm</code>, <code>Say</code>, and <code>Hello.txt</code>. You might think you could solve this
+by simply adding more quotes</p>
+<div class="codehilite"><pre><span></span><code>rm <span class="s2">&quot;Say &quot;</span>Hello<span class="s2">&quot;.txt&quot;</span>
+</code></pre></div>
+
+<p>but that won&rsquo;t work either, since you&rsquo;re quoting something that contains
+quotes already. Instead, surround the argument with single quotes ('),
+like this:</p>
+<div class="codehilite"><pre><span></span><code>rm <span class="s1">&#39;Say &quot;Hello&quot;.txt&#39;</span>
+</code></pre></div>
+
+<p>Your shell will read this command as <code>rm</code> and the argument as
+<code>Say "Hello" .txt</code>, exactly as
+you intended.</p>
+<p>Avoid putting spaces, quotes, or other troublesome characters in
+filenames whenever possible. Sometimes you can&rsquo;t avoid them, especially
+when working with datasets full of someone else&rsquo;s files. Tab completion
+helps in those cases, allowing you to enter just enough of the filename
+so that when you press <strong>TAB</strong>, your shell will fill out the rest
+for you. To delete a file in your working directory called <em>Say
+&ldquo;Hello&rdquo;.txt</em>, for example, entering <code>rm Sa</code>, then pressing <strong>TAB</strong>,
+completes the command to <code>rm Say\ \"Hello\".txt</code> with the correct escape characters
+included, so you don&rsquo;t have to provide the proper syntax yourself.</p>
+<h3>Installing and Uninstalling Software with Package Managers</h3>
+<p>Of the many powerful command line tools that let you quickly work with
+datasets, only some come preinstalled; you&rsquo;ll need to install the rest
+yourself. While you&rsquo;re likely used to installing software by downloading
+an installer from a website and then running it, the command line uses
+<em>package</em> <em>managers</em>, programs that let you install,
+uninstall, and update software. Nearly all CLI software is free and open
+source, so Linux operating systems come with large collections of
+software that you can easily install or uninstall with a single command.
+Package management projects are also available for macOS (Homebrew) and
+Windows (Chocolately).</p>
+<p>If you&rsquo;re using Linux, you likely use a package manager called apt. This
+is what the popular Linux operating systems like Ubuntu and Debian use,
+as well as all of the Linux distributions based on them (including
+Ubuntu in WSL). If your Linux distribution doesn&rsquo;t use apt, you&rsquo;ll need
+to look up the package manager documentation for your operating system.</p>
+<blockquote>
+<h4>PACKAGE MANAGEMENT FOR NON-UBUNTU LINUX USERS</h4>
+<p>You should be able to follow along with this book no matter what version of Linux you’re using. Several other Debian-based Linux distributions also rely on apt, like Linux Mint, Pop! OS, and others. If you’re using one of these, the apt commands in this book should work, though the names of software packages may be slightly different. If you encounter that issue, run <code>apt search [software_name]</code>
+to find the name of the package that you should be installing for your operating system.</p>
+<p>If you’re using a version of Linux that doesn’t use apt as its package manager, you’ll need to slightly modify this book’s commands to use your Linux distribution’s package manager. For example, if you’re running Fedora, Red Hat, CentOS, or other similar Linux distributions, you’ll use a package manager called DNF (for older versions of these distributions, the package manager is called yum). See Fedora’s documentation at <a href="https://docs.fedoraproject.org/en-US/quick-docs/dnf/">https://docs.fedoraproject.org/en-US/quick-docs/dnf/</a> for more details on using DNF. Arch Linux uses a package manager called pacman (<a href="https://wiki.archlinux.org/title/Pacman">https://wiki.archlinux.org/title/Pacman</a>).</p>
+<p>If you’re using a Linux distribution not mentioned here, read your operating system’s package management documentation and learn how to search for, install, uninstall, and update software from the terminal. When you come across an apt command in this book, use your operating system’s package manager software instead. Other Linux commands covered in this book should be the same regardless of your distribution.</p>
+</blockquote>
+<p>If you&rsquo;re using a Mac, start with Exercise 3-2 to learn how to use
+Homebrew. If you&rsquo;re using Linux or Windows with WSL, skip to Exercise
+3-3 to learn how to use apt. This book mostly uses Unix shells and
+doesn&rsquo;t cover Chocolately, which installs Windows software instead of
+Linux software.</p>
+<h3>Exercise 3-2: Manage Packages with Homebrew on macOS</h3>
+<p>To install Homebrew, macOS&rsquo;s package manager, open a browser and go to
+Homebrew&rsquo;s website at
+<a href="https://brew.sh">https://brew.sh</a>,
+where you should find the command to install the tool. Copy and paste
+the installation command into your terminal and press <strong>RETURN</strong>:</p>
+<div class="codehilite"><pre><span></span><code>/bin/bash -c <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<p>This command uses a program called cURL, which I&rsquo;ll discuss later in
+this chapter, to download a shell script from GitHub. It then runs that
+script using the bash shell. The script itself uses <code>sudo</code>, meaning that if you enter your
+password, it will run commands as root on your computer.</p>
+<p>This is what the output looks like on my Mac:</p>
+<div class="codehilite"><pre><span></span><code>==&gt; Checking for &#39;sudo&#39; access (which may request your password)...
+Password:
+</code></pre></div>
+
+<p>Enter the password you use to log in to your Mac and press
+<strong>RETURN</strong> to change your status from unprivileged user to root.
+No characters will appear in the terminal while you&rsquo;re typing.</p>
+<p>After you enter your password, Homebrew should show you a list of paths
+for files that it will install. The output should end with the following
+message:</p>
+<div class="codehilite"><pre><span></span><code>Press RETURN to continue or any other key to abort:
+</code></pre></div>
+
+<p>Press <strong>RETURN</strong> and wait for Homebrew to finish installing. If
+any problems arise, Homebrew will fail and show you an error message.</p>
+<p><strong>WARNING</strong> <em>Copying and pasting commands into your terminal can be dangerous: if a
+hacker tricks you into running the wrong shell script, they could hack
+your computer. Copy and paste commands in your terminal only from
+sources you trust.</em></p>
+<p>Now that you&rsquo;ve installed Homebrew, you have access to the
+<code>brew</code> command, which you can
+use to install more software. To check whether Homebrew has a certain
+program available to install, run:</p>
+<div class="codehilite"><pre><span></span><code>brew search program_name
+</code></pre></div>
+
+<p>For example, Neofetch is a CLI program that displays information about
+your computer. To see if it&rsquo;s available in Homebrew, run:</p>
+<div class="codehilite"><pre><span></span><code>brew search neofetch
+</code></pre></div>
+
+<p>The output should list the packages that have <em>neofetch</em> in their names
+or descriptions; in this case, Neofetch should be listed. Similarly
+combine <code>brew search</code> with other program names to check
+whether they&rsquo;re available to install.</p>
+<p>When you find a package you want to install, run:</p>
+<div class="codehilite"><pre><span></span><code>brew install program_name
+</code></pre></div>
+
+<p>For example, to install Neofetch, run:</p>
+<div class="codehilite"><pre><span></span><code>brew install neofetch
+</code></pre></div>
+
+<p>This should download and install the <code>neofetch</code> tool. Try running it:</p>
+<div class="codehilite"><pre><span></span><code>neofetch
+</code></pre></div>
+
+<p>Figure 3-5 shows Neofetch running on my Mac.
+The figure is black-and-white in print, but if you run the command on
+your computer, you should see a rainbow of colors.</p>
+<p><img alt="Figure 3-5: Running Neofetch on my Mac" src="media/images/Figure3-5.png" /><br />
+<em>Figure 3-5: Running Neofetch on my Mac</em></p>
+<p>Uninstall programs with the <code>brew uninstall</code> command. For example, run the
+following to uninstall Neofetch:</p>
+<div class="codehilite"><pre><span></span><code>brew uninstall neofetch
+</code></pre></div>
+
+<p>To update all programs you&rsquo;ve installed with Homebrew to their latest
+versions, run:</p>
+<div class="codehilite"><pre><span></span><code>brew upgrade --greedy
+</code></pre></div>
+
+<p>Run <code>brew help</code> to see some examples of how to use this command.</p>
+<p>Now that you have a package manager installed, you&rsquo;ll practice using the
+command line in Exercise 3-4.</p>
+<h3>Exercise 3-3: Manage Packages with apt on Windows or Linux</h3>
+<p>You must run most apt commands as root. Before installing or updating
+software, make sure your operating system has an up-to-date list of
+available software by opening a terminal and running the following:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt update
+</code></pre></div>
+
+<p>When I run that command on my Linux computer, I get this output:</p>
+<div class="codehilite"><pre><span></span><code>Hit:1 http://us.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:3 http://us.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://us.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+178 packages can be upgraded. Run &#39;apt list --upgradable&#39; to see them.
+</code></pre></div>
+
+<p>This tells me I have 178 packages that can be upgraded. Run the
+following to upgrade your own software:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt upgrade
+</code></pre></div>
+
+<p>Here&rsquo;s the output when I run that command:</p>
+<div class="codehilite"><pre><span></span><code>Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following packages will be upgraded:
+--snip--
+178 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+64 standard security updates
+Need to get 365 MB of archives.
+After this operation, 2,455 kB of additional disk space will be used.
+Do you want to continue? [Y/n]
+</code></pre></div>
+
+<p>Type Y and press <strong>ENTER</strong> to install the updates.</p>
+<p>You&rsquo;re now ready to install new software. To check whether the package
+manager has a certain program available to install, run:</p>
+<div class="codehilite"><pre><span></span><code>apt search program_name
+</code></pre></div>
+
+<p>You don&rsquo;t need to use <code>sudo</code> with this search command because it&rsquo;s
+not installing or uninstalling anything. However, once you find a
+package you want to install, run:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt install program_name
+</code></pre></div>
+
+<p>For example, Neofetch is a CLI program that displays information about
+your computer. To see if Neofetch is available in your package manager,
+run:</p>
+<div class="codehilite"><pre><span></span><code>apt search neofetch
+</code></pre></div>
+
+<p>The output should show a list of packages that have <em>neofetch</em> in their
+names or descriptions; in this case, Neofetch should be listed.</p>
+<p>To install the <code>Neofetch</code>
+tool, run:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt install neofetch
+</code></pre></div>
+
+<p>You should see a list of packages that you must install in order to use
+Neofetch. Press Y and then <strong>ENTER</strong> to download and install them
+all.</p>
+<p>Once installation is complete, try running Neofetch:</p>
+<div class="codehilite"><pre><span></span><code>neofetch
+</code></pre></div>
+
+<p>Figure 3-6 shows Neofetch running on my Ubuntu
+computer. The figure is black-and-white in print, but if you run the
+command on your computer, the output should appear in several different
+colors.</p>
+<p><img alt="Figure 3-6: Running Neofetch on my Ubuntu computer" src="media/images/Figure3-6.png" /><br />
+<em>Figure 3-6: Running Neofetch on my Ubuntu computer</em></p>
+<p>Uninstall packages with the <code>sudo apt remove</code> command. For
+example, to uninstall Neofetch, run:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt remove neofetch
+</code></pre></div>
+
+<p>Now that you have a package manager installed, you&rsquo;ll practice using the
+command line in Exercise 3-4.</p>
+<h3>Exercise 3-4: Practice Using the Command Line with cURL</h3>
+<p>In this exercise, you&rsquo;ll learn how to determine whether you have a
+command installed, download web pages, save the output from a file using
+redirection, and view the contents of files directly from the terminal.</p>
+<p>The cURL program is a common way to load web pages from the command
+line. To load all of the HTML code for the website
+<a href="https://www.torproject.org">https://www.torproject.org</a>,
+for example, run the following command:</p>
+<div class="codehilite"><pre><span></span><code>curl https://www.torproject.org
+</code></pre></div>
+
+<p>To see if cURL is installed, use the <code>which</code> command:</p>
+<div class="codehilite"><pre><span></span><code>which curl
+</code></pre></div>
+
+<p>If cURL is installed, the output should show you the path where the
+program is installed on your computer (something like <em>/usr/bin/curl</em>).
+If not, the output should return you to the shell prompt.</p>
+<p>If you don&rsquo;t have cURL, use your package manager to install it. Enter
+<code>sudo apt install curl</code> for
+Windows with WSL and Linux machines or <code>brew install curl</code> for Macs. Then run <code>which curl</code> again, and you should see the path to
+the cURL program.</p>
+<h4>Download a Web Page with cURL</h4>
+<p>When you load a web page, your web browser renders a human-readable
+version of its content based on the page&rsquo;s HTML, CSS, and JavaScript
+code. To see the raw HTML content from the web page hosted at
+<em>https://example.com</em>,
+run the following command in your terminal:</p>
+<div class="codehilite"><pre><span></span><code>curl example.com
+</code></pre></div>
+
+<p>If you load that site in a browser and then view the HTML source by
+pressing <strong>CTRL</strong>-U in Windows or Linux, or
+⌘-U in macOS, you should see the same HTML code that
+this command displays in your terminal.</p>
+<p>Some websites are designed to show you text that&rsquo;s easy to read in a
+terminal when you access them through cURL, as opposed to showing you
+HTML. For example,
+<a href="https://ifconfig.co">https://ifconfig.co</a>
+will tell you your IP address, geolocate it, and
+tell you what country and city it thinks you&rsquo;re in. Try running the
+following command:</p>
+<div class="codehilite"><pre><span></span><code>curl https://ifconfig.co
+</code></pre></div>
+
+<p>This should display your IP address. Next, run the following:</p>
+<div class="codehilite"><pre><span></span><code>curl https://ifconfig.co/country
+</code></pre></div>
+
+<p>When I run this command, my output is <code>United States</code>. You can try connecting to a VPN
+server in another country and then run it again; it should detect your
+web traffic as coming from that other country.</p>
+<h4>Save a Web Page to a File</h4>
+<p>Run the following commands to load
+<em>https://example.com</em>
+and save it to a file:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /tmp
+curl https://example.com &gt; example.html
+</code></pre></div>
+
+<p>The first line of code changes your working directory to <em>/tmp</em>, a
+temporary folder where files you store get deleted automatically. The
+second line loads
+<em>https://example.com</em>,
+but instead of displaying the site&rsquo;s contents for you in the terminal,
+it redirects them into the file <em>example.html</em> and doesn&rsquo;t display
+anything in the terminal.</p>
+<p>The <code>&gt;</code> character takes the
+output of the command to its left and saves it into the filename to its
+right. This is called <em>redirection</em>. Since you changed to the <em>/tmp</em>
+folder before running the <code>curl</code> command and the filename you provided
+was a relative path, it saved to the file <em>/tmp/example.html</em>.</p>
+<p>Run a directory listing to make sure you&rsquo;ve stored the file correctly:</p>
+<div class="codehilite"><pre><span></span><code>ls -lh
+</code></pre></div>
+
+<p>This should list all the files in <em>/tmp</em>, which should include a file
+called <em>example.html</em>. Try displaying the contents of that file in your
+terminal using the <code>cat</code>
+command:</p>
+<div class="codehilite"><pre><span></span><code>cat /tmp/example.html
+</code></pre></div>
+
+<p>The terminal isn&rsquo;t always a good place to view a file&rsquo;s contents. For
+example, long lines will wrap, which may make them difficult to
+comprehend. In the following section, you&rsquo;ll learn more about the
+different types of files and how to work with them more easily in the
+command line.</p>
+<h3>Text Files vs. Binary Files</h3>
+<p>There are many different types of files, but they all fit into one of
+two categories: <em>text files</em> and <em>binary files</em>.</p>
+<p>Text files are made up of letters, numbers,
+punctuation, and a few special characters. Source code, like Python
+scripts (discussed in Chapters 7 and
+8); shell scripts; and HTML, CSS, and
+JavaScript files are all examples of text files. Spreadsheets in CSV
+(comma-separated value) format and JSON files (discussed in Chapters
+9 and 11,
+respectively) are also text files. These files are relatively simple to
+work with. You can use the <code>cat</code> command to display text files, as you
+did in the previous exercise.</p>
+<p>Binary files are made up of data that&rsquo;s more than just letters, numbers,
+and punctuation. They&rsquo;re designed for computer programs, not humans, to
+understand. If you try to view the contents of a binary file using the
+<code>cat</code> command, you&rsquo;ll just see
+gibberish. Instead, you must use specialized programs that understand
+those binary formats. Office documents like PDFs, Word documents, and
+Excel spreadsheets are binary files, as are images (like PNG and JPEG
+files), videos (like MP4 and MOV files), and compressed data like ZIP
+files.</p>
+<p><strong>NOTE</strong> <em>The term binary file is technically a misnomer,
+because all files are represented by computers as binary&mdash;strings of
+ones and zeros.</em></p>
+<p>Text files aren&rsquo;t always easy to understand (if you&rsquo;re not familiar with
+HTML, viewing it might look like gibberish), but it&rsquo;s at least possible
+to display them in a terminal. This isn&rsquo;t true for binary files. For
+example, if you try using <code>cat</code> to display the contents of binary
+files like PNG images in your terminal, the output will look something
+like this:</p>
+<div class="codehilite"><pre><span></span><code>?PNG
+
+IHDR?L??
+?D?ؐ???? Pd@?????Y????????u???+?2???ע???@?!N???? ^?K??Eׂ?(??U?N????E??ł??.?ʛ?u_??|?????g?s?ܙ{?@;?
+?sQ
+ ?x?)b?hK&#39;?/??L???t?+???eC????+?@????L??????/@c@웗7?qĶ?F
+                                                        ?L????N??4Ӈ4???!?????
+--snip--
+</code></pre></div>
+
+<p>Your terminal can&rsquo;t display all of the characters that make up PNG
+images, so those characters just don&rsquo;t get displayed. If you want to see
+the information stored in a PNG, you need to open it in software that&rsquo;s
+designed to view images.</p>
+<p>To work with the files in datasets or write shell scripts and Python
+code, you&rsquo;ll need a <em>text editor</em>, a program designed to edit text
+files. You&rsquo;ll install a text editor in Exercise 3-5 to prepare for
+writing your first shell script.</p>
+<h3>Exercise 3-5: Install the VS Code Text Editor</h3>
+<p>In this exercise, you&rsquo;ll download the free and open source text editor
+Visual Studio Code (VS Code) and practice using it to view a file.
+Download VS Code from
+https://code.visualstudio.com
+and install it. (If you&rsquo;re already familiar with another text editor,
+feel free to keep using that one instead.)</p>
+<p>VS Code comes with a command called
+<code>code</code> that makes it easy to
+open files in VS Code directly from your terminal. Once VS Code is
+finished installing, run the following commands:</p>
+<div class="codehilite"><pre><span></span><code>curl https://example.com &gt; /tmp/example.html
+code /tmp/example.html
+</code></pre></div>
+
+<p>The first line of code saves the HTML from
+<em>https://example.com</em>
+in the file <em>/tmp/example.html</em>, just like you did in Exercise 3-4. The
+second line opens this file in VS Code.</p>
+<p>When you open new files and folders in VS Code, it asks whether you
+trust each file&rsquo;s author, giving you the option to open the file in
+Restricted Mode. For the exercises in this book, you can open files
+without using Restricted Mode.</p>
+<p>When you open <em>example.html</em>, it should look something like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Example Domain<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">”Content-type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+        background-color: #f0f0f2;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Open Sans&quot;,
+&quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+
+    }
+--snip--
+</code></pre></div>
+
+<p>The output shows the same HTML code that you saw in your terminal when
+you ran <code>cat/tmp/example.html</code>
+in Exercise 3-4, but this time it should be much easier to read. VS Code
+and many other text editors have a feature called <em>syntax highlighting</em>,
+where different parts of the file appear in different colors. This makes
+it far quicker and easier for your brain to interpret source code, and
+also for you to catch mistakes in syntax.</p>
+<p>VS Code is highly customizable and includes a wide variety of extensions
+that add extra functionality and make the program more pleasant to use.
+When you open new types of files, for instance, VS Code might ask if
+you&rsquo;d like to install extensions to better support those files.</p>
+<p><strong>NOTE</strong> <em>To learn more about VS Code&rsquo;s other features, including when to use
+Restricted Mode, check out the documentation at
+<a href="https://code.visualstudio.com/docs">https://code.visualstudio.com/docs</a>.</em></p>
+<p>Now that you have some experience running
+commands in a shell and have set up a text editor, you&rsquo;ll write your
+first shell script in Exercise 3-6.</p>
+<h3>Exercise 3-6: Write Your First Shell Script</h3>
+<p>As mentioned earlier, a shell script is a text file that contains a list
+of shell commands. When you tell your shell to run the script, it runs
+those commands one at a time. Many commands are themselves shell
+scripts, such as the <code>man</code>
+command you used earlier in this chapter.</p>
+<h4>Navigate to Your USB Disk</h4>
+<p>Make sure your <em>datasets</em> USB disk is plugged in and mounted, and open
+up a terminal. To change your working directory to the <em>datasets</em> disk,
+skip to the subsection for your operating system.</p>
+<h5>Windows</h5>
+<p>After mounting your USB disk, open File Explorer by clicking <strong>This PC</strong>
+on the left. This page will show all of your connected drives and their
+drive letters. Note your USB disk&rsquo;s drive letter, then change your
+working directory to the disk by running the following command,
+substituting <code>d</code> for
+the correct drive letter:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /mnt/d/
+</code></pre></div>
+
+<p>Your shell&rsquo;s working directory should now be your <em>datasets</em> USB disk.
+To check, run <code>ls</code> to view the
+files on this disk.</p>
+<h5>macOS</h5>
+<p>After mounting your <em>datasets</em> USB disk, open a terminal and change your
+working directory to the disk by running the following command:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets
+</code></pre></div>
+
+<p>Your shell&rsquo;s working directory should now be your <em>datasets</em> USB disk.
+To check, run <code>ls</code> to view the
+files on this disk.</p>
+<h5>Linux</h5>
+<p>After mounting your <em>datasets</em> USB disk, open a terminal and change your
+working directory to the disk. In Linux, the path to your disk is
+probably something like
+<em>/media/</em>[\&lt;]{.symbol_Italic}<em>username</em>[>]{.symbol_Italic}<em>/datasets</em>.
+For example, my username is <em>micah</em>, so I would run this command:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /media/micah/datasets
+</code></pre></div>
+
+<p>Your shell&rsquo;s working directory should now be
+your <em>datasets</em> USB disk. To check, run <code>ls</code> to view the files on this disk.</p>
+<h4>Create an Exercises Folder</h4>
+<p>The <code>mkdir</code> command creates a
+new folder. Now that you&rsquo;re in your USB disk drive in your terminal, run
+the following commands to create a new folder called <em>exercises</em>, and
+then switch to it:</p>
+<div class="codehilite"><pre><span></span><code>mkdir exercises
+<span class="nb">cd</span> exercises
+</code></pre></div>
+
+<p>Now make a folder for your Chapter 3
+exercises:</p>
+<div class="codehilite"><pre><span></span><code>mkdir chapter-3
+</code></pre></div>
+
+<p>Next, you&rsquo;ll open the <em>exercises</em> folder in VS Code.</p>
+<h4>Open a VS Code Workspace</h4>
+<p>Each VS Code window is called a <em>workspace</em>. You can add folders to your
+workspace, which allows you to easily open any files in that folder or
+create new ones. To open a VS Code workspace for your <em>exercises</em>
+folder, run the following command:</p>
+<div class="codehilite"><pre><span></span><code>code .
+</code></pre></div>
+
+<p>If the argument that you pass into <code>code</code> is a folder, like <code>.</code> (the current working directory), VS
+Code will add that folder to your workspace. If the path is a file, like
+in Exercise 3-5 when you opened <em>/tmp/example.html</em>, it will open just
+that file.</p>
+<p>Next, create a new file in the <em>chapter-3</em> folder. To do this,
+right-click the <em>chapter-3</em> folder, choose <strong>New File</strong>, name your file
+<em>exercise-3-6.sh</em>, and press <strong>ENTER</strong>. This should create a new
+file that you can edit. Since the file extension is <em>.sh</em>, VS Code
+should correctly guess that it&rsquo;s a shell script and use the right type
+of syntax highlighting.</p>
+<p>Figure 3-7 shows a VS Code workspace with the
+<em>exercises</em> folder added and the empty file <em>exercise-3-6.sh</em> created.</p>
+<p>The VS Code window is split into two main parts. The Explorer panel on
+the left shows the contents of all of the folders added to your
+workspace. In this case, it shows <em>exercises</em> and everything it
+contains: a <em>chapter-3</em> folder and the <em>exercise-3-6.sh</em> file you just
+created. The right side of the window is the editor, where you&rsquo;ll enter
+your shell script.</p>
+<p><img alt="Figure 3-7: VS Code with the exercises folder open in a workspace" src="media/images/Figure3-7.png" /><br />
+<em>Figure 3-7: VS Code with the exercises folder open in a workspace</em></p>
+<h4>Write the Shell Script</h4>
+<p>Enter the following text into <em>exercise-3-6.sh</em> in VS Code and save the
+file:</p>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">&quot;Hello world! This is my first shell script.&quot;</span>
+<span class="c1"># Display the current user</span>
+<span class="nb">echo</span> <span class="s2">&quot;The current user is:&quot;</span>
+whoami
+<span class="c1"># Display the current working directory</span>
+<span class="nb">echo</span> <span class="s2">&quot;The current working directory is:&quot;</span>
+<span class="nb">pwd</span>
+</code></pre></div>
+
+<p>The first line that starts with <code>#!</code> is called the <em>shebang</em>, and it tells
+the shell which <em>interpreter</em>&mdash;the program that opens and runs the
+script&mdash;to use. In this case, the shell will use <code>/bin/bash</code>, meaning you&rsquo;re writing a bash script.
+In this book, you&rsquo;ll add that same shebang to the top of all of your
+shell scripts. Even if you&rsquo;re working from a shell besides bash, this
+shebang tells your computer to run the current script using bash.</p>
+<p>In shell scripts, lines that start with the hash character (<code>#</code>) are called <em>comments</em>, and they don&rsquo;t
+affect how the code itself works; if you removed the comments from this
+script, it would run the same way. The first character of the shebang is
+a hash character, which means that it&rsquo;s technically a comment in bash
+and zsh.</p>
+<p>Comments like <code># Display the current user</code> work as notes to remind you what your
+code does when you come back to a script you wrote months or years
+earlier. Anyone else who works with your code, perhaps trying to fix
+something or add features, will appreciate your comments for the same
+reason.</p>
+<p>The <code>echo</code> command displays text to the terminal.
+The <code>whoami</code> command displays
+the name of the user running the script. The <code>pwd</code> command displays the current working
+directory.</p>
+<h4>Run the Shell Script</h4>
+<p>Before you can run a script, you need to make it <em>executable</em> by giving
+it permission to run as a program. The <code>chmod</code> command lets you change permissions on
+files with the following syntax:</p>
+<div class="codehilite"><pre><span></span><code>chmod permissions filename
+</code></pre></div>
+
+<p>To mark a file as executable, use <code>+x</code> as the <code>permissions</code> argument. Run the following
+command in your terminal (from within your <em>exercises</em> folder):</p>
+<div class="codehilite"><pre><span></span><code>chmod +x ./chapter-3/exercise-3-6.sh
+</code></pre></div>
+
+<p>You can now run the script by entering either its absolute path or its
+relative path:</p>
+<div class="codehilite"><pre><span></span><code>./chapter-3/exercise-3-6.sh
+</code></pre></div>
+
+<p>Starting your command with <code>./</code> tells your shell that you&rsquo;re entering
+the relative path to a script.</p>
+<p>Here&rsquo;s the output I get when I run this script on my Mac:</p>
+<div class="codehilite"><pre><span></span><code>Hello world! This is my first shell script.
+The current user is:
+micah
+The current working directory is:
+/Volumes/datasets/exercises
+</code></pre></div>
+
+<p>The current user is <em>micah</em> and the current working directory is
+<em>/Volumes/datasets/exercises</em>.</p>
+<p>This script shows you different output depending on your working
+directory. To demonstrate the differences, here&rsquo;s what happens when I
+switch to my home folder and then run it again:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor exercises % cd ~
+micah@trapdoor ~ % /Volumes/datasets/exercises/chapter-3/exercise-3-6.sh
+Hello world! This is my first shell script.
+The current user is:
+micah
+The current working directory is:
+/Users/micah
+</code></pre></div>
+
+<p>This time, the current working directory in the output has changed to
+<em>/Users/micah</em>. Try switching to your own home folder with
+<code>cd ~</code> and running the script
+again.</p>
+<p>The script also shows different output depending
+on which user is running it. So far I&rsquo;ve been running it as <em>micah</em>, but
+here&rsquo;s what the output looks like when I run it as root:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % sudo /Volumes/datasets/exercises/chapter-3/exercise-3-6.sh
+Password:
+Hello world! This is my first shell script.
+The current user is:
+root
+The current working directory is:
+/Users/micah
+</code></pre></div>
+
+<p>This time, the output lists the current user as <code>root</code>. Try running the script as root on
+your own computer.</p>
+<p>You&rsquo;ll write many more scripts throughout this book. I&rsquo;ve included a
+copy of the code for every exercise in this book&rsquo;s online resources. In
+Exercise 3-7, you&rsquo;ll download a copy of all of this code.</p>
+<h3>Exercise 3-7: Clone the Book’s GitHub Repository</h3>
+<p>Programmers store source code in <em>git repositories</em> (or <em>git repos</em> for
+short), which are composed of a collection of files (usually source
+code) and the history of how they have changed over time. By storing
+your scripts this way, you can host them on GitHub, a popular website
+for hosting git repos. Git repos help you share your code with others,
+and they make it easier for multiple people to write code for the same
+project. When you <em>clone</em> a git repo, you download a copy of it to your
+computer.</p>
+<p>This book comes with a git repo at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations">https://github.com/micahflee/hacks-leaks-and-revelations</a>
+containing the code for every exercise and case study in this book,
+along with additional instructions and source code related to the book&rsquo;s
+appendixes. In this exercise, you&rsquo;ll clone this repo and store the copy
+locally on your computer.</p>
+<p>First, check whether the <code>git</code>
+program is installed on your machine:</p>
+<div class="codehilite"><pre><span></span><code>which git
+</code></pre></div>
+
+<p>If git is installed, you&rsquo;ll see its path in the output, like
+<em>/usr/bin/git</em>. If it&rsquo;s not installed, this command won&rsquo;t display
+anything in the terminal. In that case, install git by entering the
+appropriate command for your operating system:
+<code>brew install git</code> for macOS
+users, or <code>sudo apt install git</code> for Linux and WSL users.</p>
+<p>Next, in your terminal, change to your USB disk folder. On my macOS
+computer, I do this with the following command:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets
+</code></pre></div>
+
+<p>If necessary, replace the path in my command with the appropriate path
+to your <em>datasets</em> USB disk for your operating system.</p>
+<p>Once you&rsquo;re in the <em>datasets</em> disk, run this
+command to clone the repo:</p>
+<div class="codehilite"><pre><span></span><code>git clone https://github.com/micahflee/hacks-leaks-and-revelations.git
+</code></pre></div>
+
+<p>This should create a new folder called <em>hacks-leaks-and-revelations</em>
+containing all of the code from the book&rsquo;s repo.</p>
+<p>Finally, add the book&rsquo;s git repo folder to your VS Code workspace. In VS
+Code, click <strong>File</strong> ▸ <strong>Add Folder to Workspace</strong>, then
+browse for the <em>hacks-leaks-and-revelations</em> folder on your USB disk.
+This will add the book&rsquo;s code to your VS Code workspace so you can
+easily browse through all of the files.</p>
+<p>You now have access to solutions for all future exercises! In the
+following chapters, I&rsquo;ll walk you through the process of writing your
+own scripts from scratch, but you can also run the complete scripts
+taken from the git repo or copy and paste their code into your own code.</p>
+<h3>Summary</h3>
+<p>In this chapter, you&rsquo;ve learned the basics of command line theory,
+including how to use the shell in a terminal, run various shell
+commands, and navigate the shell using features like tab completion. You
+installed software directly in the terminal using a package manager, and
+you wrote your first simple shell script.</p>
+<p>In the next chapters, you&rsquo;ll put these techniques into practice to
+explore hundreds of gigabytes of data, make datasets searchable, convert
+email from a proprietary format to an open format, and write Python
+code. You&rsquo;ll start in the following chapter by taking a deeper dive into
+the BlueLeaks dataset.</p>
+        </div>
+    </section>
+    <section class="buy">
+        <div class="wrapper">
+            <h3>Information Wants to be Free</h3>
+            <p><strong>Everyone should have access to the information in this book.</strong> To remove barriers to access, I've made Hacks, Leaks, and Revelations available for free online under a <a href="license.html">Creative Commons license</a>. If you can afford it, show your support and <a href="buy.html">buy a copy</a> today! (The physical book is also much nicer to read.)</p>
+        </div>
+    </section>
+    <section class="pagination">
+        <div class="wrapper" id="pagination-content"><h3>Keep reading Hacks, Leaks, and Revelations</h3>
+<p><a href="buy.html">Buy Now</a>
+<a href="contents.html">Contents</a>
+<a href="chapter-2.html">Chapter 2 👈</a>
+<a href="chapter-4.html">Chapter 4 👉</a>
+<a href="/">Back Home</a></p></div>
+    </section>
+    <footer id="footer">
+        <div class="wrapper" id="footer-content"><p>This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> / <a href="license.html">More Information</a></p></div>
+    </footer>
+</body>
+</html>
