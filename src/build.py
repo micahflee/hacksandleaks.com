@@ -118,14 +118,14 @@ def build():
         <div class="wrapper" id="about-content">{body_html}
         </div>
     </section>
+    <section class="pagination">
+        <div class="wrapper" id="pagination-content">{pagination_html}</div>
+    </section>
     <section class="buy">
         <div class="wrapper">
             <h3>Information Wants to be Free</h3>
-            <p><strong>Everyone should have access to the information in this book.</strong> To remove barriers to access, I've made Hacks, Leaks, and Revelations available for free online under a <a href="license.html">Creative Commons license</a>. If you can afford it, show your support and <a href="buy.html">buy a copy</a> today! (The physical book is also much nicer to read.)</p>
+            <p><strong>Everyone should have access to the information in this book.</strong> To remove barriers to access, I've made Hacks, Leaks, and Revelations available for free online under a <a href="license.html">Creative Commons license</a>. If you can afford it, show your support and <a href="buy.html">buy a copy</a> today!</p>
         </div>
-    </section>
-    <section class="pagination">
-        <div class="wrapper" id="pagination-content">{pagination_html}</div>
     </section>
     <footer id="footer">
         <div class="wrapper" id="footer-content">{footer_html}</div>

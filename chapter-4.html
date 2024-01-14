@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Micah Lee">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Buy Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data by Micah Lee.">
+    <meta name="apple-mobile-web-app-title" content="Hacks, Leaks, and Revelations">
+    <meta name="application-name" content="Hacks, Leaks, and Revelations">
+    <meta name="theme-color" content="#86D58D">
+
+    <title>Chapter 4: Exporing Datasets in the Terminal - Hacks, Leaks, and Revelations</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="images/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="images/favicon/android-chrome-512x512.png" sizes="512x512">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pygments.css">
+    <script defer data-domain="hacksandleaks.com" data-api="https://deniability.brisk.workers.dev/deniability/event" src="https://deniability.brisk.workers.dev/deniability/script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+           <h1><a href="/">Hacks, Leaks, and Revelations</a></h1>
+            <nav>
+                <div id="nav"><ul>
+<li><a href="contents.html">Contents</a></li>
+</ul></div>
+                <a class="mobileNav btnIcon"></a>
+                <a href="buy.html" role="button" class="primaryBtn btn">Buy Now</a>
+            </nav>
+        </div>
+    </header>
+    <section class="intro bookIntro">
+        <div class="wrapper" id="intro-wrapper">
+          <div id="reading-time">~57 min read</div>
+          <h1>Chapter 4: Exporing Datasets in the Terminal</h1>
+          <p>In this chapter, you&rsquo;ll build on the command line skills you&rsquo;ve learned
+so far and begin investigating real datasets. You&rsquo;ll use <code>for</code> loops to unzip the BlueLeaks files,
+then search the files to determine which fusion centers have the most
+data and which documents contain the keywords <em>antifa</em> and <em>Black Lives
+Matter</em>. I&rsquo;ll also give an overview of the mysterious encrypted data in
+the dataset and describe my hypothesis of how the hacker collected the
+data.</p>
+        </div>
+    </section>
+    <section id="content" data-content="chapter-4">
+        <div class="wrapper" id="about-content"><p>You&rsquo;ll also learn to create Linux cloud servers and connect to them
+securely for faster internet and extra disk space. As practice, you&rsquo;ll
+use a remote server to download and briefly examine hacked data from the
+Oath Keepers militia, a far-right extremist group that participated in
+the January 6, 2021, US Capitol insurrection.</p>
+<h3>Introducing for Loops</h3>
+<p>The BlueLeaks torrent you downloaded in Exercise 2-1 is 269GB and
+contains 168 different ZIP files ranging from 49GB to half a kilobyte
+each. In theory, you could manually unzip these 168 files one at a time
+to access the data. However, this slow, tedious process becomes
+impractical with even larger datasets (imagine individually extracting
+10,000 ZIP files). In this section, you&rsquo;ll learn to speed up this task
+by automating it with <code>for</code>
+loops.</p>
+<p>A <code>for</code> loop is a type of
+command that runs a piece of code once for every item in a list. Each
+time the code loops, it stores the current item in a <em>variable</em>, which
+you can think of as a placeholder for some value. Code variables are
+similar to those in math, where the value of <em>x</em> might be different for
+different problems, but in shell scripting, the values can be text or
+numbers. Even though each loop runs the same code, the results may be
+different, because the value of the variable changes with each loop.</p>
+<p>For example, the following <code>for</code> loop displays the numbers 1, 2, and 3:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> NUMBER <span class="k">in</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="nv">$NUMBER</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<p>This <code>for</code> loop starts with
+the syntax <code>for</code>
+<code>variable_name</code>
+<code>in</code> <code>list_of_items</code>, followed by <code>do</code>, followed by the commands to run for
+each item in the list, followed by <code>done</code>. In this case, <code>variable_name</code> is <code>NUMBER</code> and <code>list_of_items</code> is <code>1 2 3</code>. The value of the <code>NUMBER</code> variable will be <code>1</code> the first time the code loops,
+<code>2</code> during the second loop,
+and <code>3</code> during the third loop.</p>
+<p>The <code>echo</code> command displays
+something, in this case <code>$NUMBER</code>, to the terminal. The dollar sign
+(<code>$</code>) means the code should
+display the value of the <code>NUMBER</code> variable, rather than the word
+<code>NUMBER</code>.</p>
+<p><strong>NOTE</strong> <em>Using all caps is a common convention for variable names, but it&rsquo;s not
+required. For example, you could call the variable <code>number</code> instead of <code>NUMBER</code> and display it with
+<code>echo $number</code> instead of <code>echo $NUMBER</code>.
+Variable names are case sensitive.</em></p>
+<p>When you run the previous <code>for</code> loop in your terminal, you should see
+the following output:</p>
+<div class="codehilite"><pre><span></span><code>1
+2
+3
+</code></pre></div>
+
+<p>You can also use a <code>for</code> loop
+to loop through the output of another shell command, as shown in the
+following code:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> FILENAME <span class="k">in</span> <span class="k">$(</span>ls *.zip<span class="k">)</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;ZIP filename: </span><span class="nv">$FILENAME</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<p>The variable name in this code is
+<code>FILENAME</code>. Next,
+<code>$(ls *.zip)</code> tells your
+machine to run the <code>ls *.zip</code>
+command. This command outputs a list of all of the ZIP files in the
+current folder, producing a list of filenames. The <code>for</code> loop cycles through that list and runs
+the code between <code>do</code> and
+<code>done</code> for each filename. In
+this case, the <code>echo</code> command
+prints the filenames to the terminal in <code>ZIP filename:</code> <code>filename</code> format.</p>
+<p>For example, here&rsquo;s what it looks like when I run this code in the
+<em>BlueLeaks</em> folder in my terminal on macOS:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor BlueLeaks % for FILENAME in $(ls *.zip)
+for&gt; do
+for&gt;     echo &quot;ZIP filename: $FILENAME&quot;
+for&gt; done
+ZIP filename: 211sfbay.zip
+ZIP filename: Securitypartnership.zip
+ZIP filename: acprlea.zip
+--snip--
+</code></pre></div>
+
+<p>Each time the code loops, the value of <code>FILENAME</code> is the name of one of the ZIP files.
+When the <code>echo</code> command runs,
+it displays those filenames, one after another.</p>
+<h3>Exercise 4-1: Unzip the BlueLeaks Dataset</h3>
+<p>In this exercise, you&rsquo;ll write a script to unzip all the ZIP files in
+BlueLeaks so you can work with the data they contain. Once unzipped, the
+files will take 271GB of additional space on your <em>datasets</em> USB.</p>
+<p>If you&rsquo;re using macOS or Linux, follow the instructions in Unzip Files
+on macOS or Linux next. If you&rsquo;re using Windows, read that
+subsection to learn how to write <code>for</code> loops in bash since you&rsquo;ll need that
+skill later in the book, but you won&rsquo;t need to follow along until
+Unzip Files on Windows on page 92.</p>
+<h4>Unzip Files on macOS or Linux</h4>
+<p>Open a terminal and navigate to your <em>BlueLeaks</em> folder by running the
+following command, replacing <code>blueleaks_path</code> with your own folder path:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> blueleaks_path
+</code></pre></div>
+
+<p>On Linux, I&rsquo;d use this command (your path will be different):</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /media/micah/datasets/BlueLeaks
+</code></pre></div>
+
+<p>On macOS, I&rsquo;d use the following (again, your path will vary):</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets/BlueLeaks
+</code></pre></div>
+
+<p>Run <code>ls</code> to see the list of files in this folder
+and <code>ls -lh</code> to see detailed
+information about these files, like their sizes.</p>
+<p>To unzip single files, you use the following syntax:</p>
+<div class="codehilite"><pre><span></span><code>unzip filename
+</code></pre></div>
+
+<p>For example, run this command to unzip the first file in BlueLeaks:</p>
+<div class="codehilite"><pre><span></span><code>unzip 211sfbay.zip
+</code></pre></div>
+
+<p>This should extract the 2.6GB <em>211sfbay.zip</em> file into the folder called
+<em>211sfbay</em>. Run <code>ls</code> again and
+you should see the new folder containing all of the hacked data from one
+of the BlueLeaks sites.</p>
+<p>However, you want to unzip <em>all</em> of the BlueLeaks files. Delete the
+<em>211sfbay</em> folder:</p>
+<div class="codehilite"><pre><span></span><code>rm -r 211sfbay
+</code></pre></div>
+
+<p>The <code>rm</code> command on its own
+deletes files; to delete entire folders, you include <code>-r</code> (short for <code>--recursive</code>). The <code>-r</code> option deletes all the files in that
+folder, and all the files in folders in that folder, and so on, before
+finally deleting the target folder.</p>
+<p>Navigate to your text editor, create a new folder in your <em>exercises</em>
+folder called <em>chapter-4</em>, and create a new file in the <em>chapter-4</em>
+folder called <em>exercise -4-1-unzip.sh</em>. (Storing your script in a
+separate folder prevents you from polluting the dataset with your own
+files.) In your new file, enter the following code:</p>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="k">for</span> FILENAME <span class="k">in</span> <span class="k">$(</span>ls *.zip<span class="k">)</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Unzipping </span><span class="nv">$FILENAME</span><span class="s2">...&quot;</span>
+    unzip -o <span class="nv">$FILENAME</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<p>Since <em>exercise-4-1-unzip.sh</em> is a shell script, it begins with the same
+<code>#!/bin/bash</code> shebang as the
+script in Chapter 3. After you define this
+<code>for</code> loop, the script starts
+it with <code>do</code> and ends it with
+<code>done</code>, running the
+<code>echo "Unzipping $FILENAME…"</code>
+and <code>unzip -o $FILENAME</code>
+commands over and over. The <code>echo</code> command displays the value of the
+<code>FILENAME</code> variable, which
+changes to a new filename with each loop, and the <code>unzip</code> command unzips that file. The
+<code>-o</code> argument tells
+<code>unzip</code> to <em>overwrite</em> files
+if necessary, meaning that if any file being unzipped already exists,
+the script will replace it with the newer version.</p>
+<p>For example, when you run this code on BlueLeaks, the value of
+<code>FILENAME</code> during the first
+loop is <code>211sfbay.zip</code>. The
+code that runs in this loop is equivalent to the following commands:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">echo</span> <span class="s2">&quot;Unzipping 211sfbay.zip...&quot;</span>
+unzip -o 211sfbay.zip
+</code></pre></div>
+
+<p>The second time the code loops, it runs the same
+code with <code>acprlea.zip</code> as the
+<code>FILENAME</code> value, and so on.</p>
+<p>Change to your <em>BlueLeaks</em> folder. On my Mac, I do this by running the
+following command:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets/BlueLeaks
+</code></pre></div>
+
+<p>Next, make this shell script executable and run it as follows:</p>
+<div class="codehilite"><pre><span></span><code>chmod +x ../exercises/chapter-4/exercise-4-1-unzip.sh
+../exercises/chapter-4/exercise-4-1-unzip.sh
+</code></pre></div>
+
+<p>These commands assume that your <em>exercises</em> folder is in the same folder
+as the <em>BlueLeaks</em> folder. The relative path to your <em>exercises</em> folder
+is <em>../exercises</em>, and the relative path to the shell script you just
+saved is <em>../exercises/chapter-4/exercise-4-1-unzip.sh</em>.</p>
+<p>After you run these commands, your script should begin unzipping all 168
+BlueLeaks files. Sit back, relax, and perhaps enjoy a beverage while you
+wait for it to finish, which could take hours.</p>
+<blockquote>
+<h5>LOOPING THROUGH FILENAMES WITH SPACES</h5>
+<p>Looping over the output of <code>ls</code> as you’ve just done works only if the filenames don’t contain spaces. If they did, your script would fail due to invalid filenames. For example, if you had a file called <code>Work Documents.zip</code> in the folder, the <code>for</code> loop would consider it two files, <code>Work</code> and <code>Documents.zip</code>, as discussed in Chapter 3.</p>
+<p>The output of the <code>ls</code> command is a string—that is, a list of characters—with each filename separated by a newline character (<code>\n</code>), which represents a line break. If you have two files in a folder, <code>readme.txt</code> and <code>Work Documents.zip</code>, the <code>ls</code>
+command outputs a string like <code>readme.txt\nWork Documents.zip</code>.</p>
+<p>The bash shell includes an environment variable called <code>IFS (short for “internal field separator”)</code>, which the shell uses to figure out how to split strings in a <code>for</code> loop. By default, strings are split by any whitespace: spaces, tabs, or newlines. This is why, if you loop through the string <code>1 2 3</code>, you get three smaller strings—<code>1</code>, <code>2</code>, and <code>3</code>—separated with spaces. Likewise, looping through the string <code>readme.txt\nWork Documents.zip</code> results in the smaller strings <code>readme.txt</code>,<code>Work</code>, and <code>Documents.zip</code>, separated with a newline character and a space.</p>
+<p>To work with filenames with spaces, you change the value of the <code>IFS</code> variable so that it splits strings only on newline characters, but not on spaces or tabs. Then you change it back after the loop. Here’s an example:</p>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">ORIGINAL_IFS</span><span class="o">=</span><span class="nv">$IFS</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -n <span class="s2">&quot;\n&quot;</span><span class="k">)</span>
+<span class="k">for</span> FILENAME <span class="k">in</span> <span class="k">$(</span>ls<span class="k">)</span>
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$FILENAME</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="nv">$ORIGINAL_IFS</span>
+</code></pre></div>
+
+<p>Inside the <code>for</code> loop, the <code>FILENAME</code> variable will contain the full filename, even if it includes spaces. You can use code like this to unzip files (as long as they’re all ZIP files) or open them using any other CLI program.</p>
+<p>None of the ZIP filenames in the BlueLeaks data have spaces, but you may need to use this script on filenames with spaces for future projects.</p>
+</blockquote>
+<p>If you&rsquo;re not using Windows, skip ahead to the Organize Your Files section on page 93. Otherwise, read on.</p>
+<h4>Unzip Files on Windows</h4>
+<p>Unzipping files in WSL from a USB disk formatted for Windows might be
+<em>very</em> slow, due to WSL performance problems. Fortunately, there&rsquo;s a
+much faster way to unzip all 168 files in BlueLeaks, using PowerShell
+and a program called 7-Zip.</p>
+<h5>Install 7-Zip</h5>
+<p>The open source Windows archiving program 7-Zip lets you extract various
+types of compressed files<em>.</em> Download and install 7-Zip from
+<a href="https://www.7-zip.org">https://www.7-zip.org</a>.
+You&rsquo;ll receive a warning saying that the program is made by an unknown
+publisher, but it&rsquo;s safe to install as long as you&rsquo;ve downloaded it from
+the official website.</p>
+<p>After you install 7-Zip, you can use its <em>7z.exe</em> program to extract
+files directly from PowerShell. By default, <em>7z.exe</em> should be located
+in <em>C:\Program Files\7-Zip\7z.exe</em>. However, to run the program from
+any directory, add <em>C:\Program Files\7-Zip</em> to your <code>Path</code> environment variable.</p>
+<p><em>Environment variables</em> are variables that already exist when you open
+your shell, as opposed to ones that you create in a <code>for</code> loop or by other methods. The
+<code>Path</code> environment variable is
+a list of folders that contain programs. It contains some folders by
+default, but you can also add your own. When you run <code>7z</code>, PowerShell looks in each folder
+listed in <code>Path</code> and checks
+for a file called <em>7z.exe</em>, then runs that program for you.</p>
+<p>To add <em>7z.exe</em> to <code>Path</code>,
+click <strong>Start</strong>, search for <strong>environment variables</strong>, and click <strong>Edit
+the System Environment Variables</strong>. In the window that opens, click
+<strong>Environment Variables</strong>, and you should see a window with lists of
+user variables and system variables. Double-click <strong>Path</strong> in the User
+Variables box, which should show you all of the folders stored in
+<code>Path</code>. Click <strong>New</strong>, add
+<em>C:\Program Files\7-Zip</em>, and click <strong>OK</strong> to save. If you have a
+PowerShell window open, close PowerShell and open
+it again, forcing the shell to use the new changes to the <code>Path</code> environment variable.</p>
+<p>You can now use the <code>7z</code>
+command to run 7-Zip.</p>
+<h5>Unzip in PowerShell with 7-Zip</h5>
+<p>In a PowerShell terminal, change to the <em>BlueLeaks</em> folder on your
+<em>datasets</em> USB disk. For example, on my computer, I run:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd </span><span class="n">D</span><span class="p">:\</span><span class="n">BlueLeaks</span>
+</code></pre></div>
+
+<p>Next, run the following PowerShell commands (this is the PowerShell
+version of the <em>exercise-4-1-unzip.sh</em> shell script in the previous
+subsection):</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">$ZipFiles</span> <span class="p">=</span> <span class="nb">Get-ChildItem</span> <span class="n">-Path</span> <span class="p">.</span> <span class="n">-Filter</span> <span class="s2">&quot;*.zip&quot;</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$ZipFile</span> <span class="k">in</span> <span class="nv">$ZipFiles</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">7z</span> <span class="n">x</span> <span class="nv">$ZipFile</span><span class="p">.</span><span class="n">FullName</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>The first line sets the PowerShell variable <code>$ZipFiles</code> to the list of ZIP files it finds in
+the current folder, represented by the dot (<code>.</code>). This is followed by a
+<code>foreach</code> loop, which loops
+through this list, setting the variable <code>$ZipFile</code> to the name of each file. The
+<code>7z</code> command runs over and
+over again for each different filename, unzipping each file.</p>
+<p>When I run these commands in my PowerShell terminal, I get the following
+output:</p>
+<div class="codehilite"><pre><span></span><code>Scanning the drive for archives:
+1 file, 2579740749 bytes (2461 MiB)
+
+Extracting archive: D:\BlueLeaks\211sfbay.zip
+--
+Path = D:\BlueLeaks\211sfbay.zip
+Type = zip
+Physical Size = 2579740749
+--snip--
+</code></pre></div>
+
+<p>Your PowerShell window should likewise begin unzipping all 168 BlueLeaks
+files.</p>
+<p><strong>NOTE</strong> <em>Once you&rsquo;re finished with this chapter, read Appendix
+A and implement one of the solutions it describes for
+avoiding WSL performance problems to make it easier to work with big
+datasets like BlueLeaks in Windows going forward. You&rsquo;ll use WSL for the
+remainder of the book, so you&rsquo;ll need a plan to resolve any issues you
+encounter.</em></p>
+<h4>Organize Your Files</h4>
+<p>Your <em>BlueLeaks</em> folder should now be full of both ZIP files and
+extracted folders. Now you&rsquo;ll make a separate <em>BlueLeaks-extracted</em>
+folder for the extracted data and keep the ZIP
+files themselves in the <em>BlueLeaks</em> folder so that you can continue to
+seed the torrent with them if you like.</p>
+<p>Open a terminal (if you&rsquo;re in Windows, switch to a WSL Ubuntu terminal
+again), change folders to your <em>datasets</em> USB disk, and run the
+following commands:</p>
+<div class="codehilite"><pre><span></span><code>mv BlueLeaks BlueLeaks-extracted
+mkdir BlueLeaks
+mv BlueLeaks-extracted/*.zip BlueLeaks
+</code></pre></div>
+
+<p>The <code>mv</code> command moves or
+renames files. On the first line, it renames the <em>BlueLeaks</em> folder
+<em>BlueLeaks-extracted</em>. The <code>mkdir</code> command, which you used in Chapter
+3, creates a new empty folder called
+<em>BlueLeaks</em>. The third command moves all of the ZIP files in the
+<em>BlueLeaks-extracted</em> folder into the newly created <em>BlueLeaks</em> folder.</p>
+<p>Your <em>datasets</em> USB disk should now contain a folder called <em>BlueLeaks</em>
+with 250GB of ZIP files, along with another folder called
+<em>BlueLeaks-extracted</em> with 269GB of extracted hacked police data.</p>
+<h3>How the Hacker Obtained the BlueLeaks Data</h3>
+<p>We don&rsquo;t know how the hacker hacked and leaked the BlueLeaks files, but
+we can make an educated guess based on clues from the dataset.</p>
+<p>Imagine that it&rsquo;s June 6, 2020, less than two weeks after Minneapolis
+cop Derek Chauvin murdered George Floyd by kneeling on his neck for over
+nine minutes while Floyd struggled to breathe, triggering the summer&rsquo;s
+Black Lives Matter uprising against police violence. Millions of people
+took to the streets to demand police accountability and the end of
+racist police violence in what was &ldquo;the largest movement in the
+country&rsquo;s history,&rdquo; according to the <em>New York Times</em>.</p>
+<p>Now imagine you&rsquo;re a hacktivist. In addition to confronting police in
+the streets, you&rsquo;re confronting them on the internet. Using OSINT,
+you&rsquo;ve discovered that hundreds of police websites use the same shoddy
+web application developed by the Texas web development firm Netsential.
+All these sites run on Windows, use Microsoft&rsquo;s Internet Information
+Services (IIS) web server software, and are programmed using Microsoft&rsquo;s
+web framework ASP.NET. They&rsquo;re also all hosted from IP addresses in the
+same data center in Texas.</p>
+<p>After you spend some time poking around one of these sites, the Arizona
+High Intensity Drug Trafficking Area (AZHIDTA), you find what you were
+looking for: a <em>remote code execution vulnerability</em>, a type of bug that
+lets you run commands on a remote server, like the Windows server
+running the AZHIDTA website. (My guess is that the vulnerability started
+with SQL injection, a technology beyond the scope of this book.)</p>
+<p><strong>WARNING</strong> <em>I&rsquo;m about to tell you about a potential URL for a hacking tool left
+behind by the hacker, but don&rsquo;t actually try loading it in your browser
+because it might be illegal. Attempting to access someone else&rsquo;s hacking
+tools is definitely a legal gray area.</em></p>
+<p>To open a shell on this web server, you use a
+<em>web shell</em>, a web page that, when you submit a form with a command in
+it, runs that command on the web server and responds with its output.
+Using the vulnerability you discovered, you save a web shell into a file
+called <em>blug.aspx</em> on the web server&rsquo;s disk. Loading <em>/blug.aspx</em> on the
+<a href="https://www.azhidta.org">https://www.azhidta.org</a>
+website in your browser allows you to run whatever commands you want on
+the server.</p>
+<p>The web shell <em>blug.aspx</em> is included in the BlueLeaks dataset. In order
+to understand how this web shell works, I set up a Windows virtual
+machine with an IIS server to test it, as shown in Figure
+4-1. The left side of the screenshot is the
+shell (in which I ran the command <code>dir c:\</code>). The right side let me browse the
+server&rsquo;s filesystem and upload new files.</p>
+<p><img alt="Figure 4-1: Testing the blug.aspx web shell in a Windows VM" src="media/images/Figure4-1.png" /><br />
+<em>Figure 4-1: Testing the blug.aspx web shell in a Windows VM</em></p>
+<p>I don&rsquo;t know for sure if this is how the BlueLeaks hack happened, but I
+think it&rsquo;s very likely. While researching BlueLeaks, I found the
+following web shell files, all timestamped late on June 6, 2020, making
+them among the most recently created files in the dataset:</p>
+<p><strong><em>azhidta/ntdaddy.aspx</em></strong> The Classic ASP web shell NTDaddy, developed
+around 2001 by a hacker named obzerve</p>
+<p><strong><em>azhidta/blug.aspx</em></strong> The ASP.NET web shell called ASPX Shell,
+developed in 2007 by a hacker named LT</p>
+<p><strong><em>azhidta/pscp64.exe</em></strong> A program that comes with PuTTY, a popular
+Windows tool for securely copying files to and from remote servers</p>
+<p><strong><em>icefishx/7z.exe</em></strong> A copy of the 7-Zip compression and extraction
+program</p>
+<p>My guess is that the hacktivist first tried to create a <em>ntdaddy.aspx</em>
+web shell, but found that it didn&rsquo;t work because it was developed using
+an earlier version of ASP called Classic ASP, while the BlueLeaks site
+used the modern version, ASP.NET. They then created the <em>blug.aspx</em> web
+shell instead, used that shell to upload <em>pscp64.exe</em> and <em>7z.exe</em>, used
+<em>7z.exe</em> to compress all of the files for a given police website, and
+uploaded that data to their own server with <em>pscp64.exe</em>.</p>
+<p>After manually hacking one of the BlueLeaks
+sites, the hacker likely automated the process for the rest of the
+BlueLeaks sites. Perhaps they created a shell script that used cURL
+instead of a web browser to perform the same steps. They could have run
+that script in a <code>for</code> loop
+targeting all 251 websites, uploading hundreds of gigabytes of data to
+themselves, in a single Saturday evening. They then likely forgot to
+delete the <em>blug.aspx</em>, <em>pscp64.exe</em>, <em>7z.exe</em>, and <em>ntdaddy.aspx</em> files
+before submitting the dataset to DDoSecrets.</p>
+<h3>Exercise 4-2: Explore BlueLeaks on the Command Line</h3>
+<p>In this exercise, you&rsquo;ll start exploring the contents of your unzipped
+BlueLeaks files, using commands and advanced shell features that let you
+quickly measure file and folder size and sort and count lines of output.</p>
+<h4>Calculate How Much Disk Space Folders Use</h4>
+<p>The <code>du</code> command (short for
+&ldquo;disk usage&rdquo;) is a powerful tool for assessing a new dataset. Linux and
+macOS come with slightly different versions of <code>du</code>. The Linux version, which is part of a
+software package called GNU coreutils, is better and more up to date at
+the time of writing, so you&rsquo;ll use it for this exercise.</p>
+<p>Users of Linux and Windows with WSL should already have the correct
+built-in <code>du</code> tool. If you&rsquo;re
+using macOS, run <code>brew install coreutils</code> in the terminal to install coreutils.
+After this, the <code>du</code> command
+will run the macOS version of the tool, while the <code>gdu</code> command will run the coreutils version
+that you just installed. In the following commands, macOS users should
+replace <code>du</code> with
+<code>gdu</code>.</p>
+<p>To find out how much space the extracted BlueLeaks dataset takes, open
+your terminal and run this command, using the path to the
+<em>BlueLeaks-extracted</em> folder on your computer:</p>
+<div class="codehilite"><pre><span></span><code>du -sh --apparent-size /media/micah/datasets/BlueLeaks-extracted
+</code></pre></div>
+
+<p>The <code>-s</code> argument in this
+command (short for <code>--summarize</code>) displays the total disk space of a
+folder rather than how much space each file inside it takes up. The
+<code>-h</code> argument (short for
+<code>--human-readable</code>) shows file
+sizes in units like kilobytes, megabytes, or gigabytes, rather than in
+terms of system blocks (a unit that changes depending on how your disk
+is set up). Finally, the <code>--apparent-size</code> argument shows you how big the files
+actually are, as opposed to how much space they take up on your disk.</p>
+<p>The command checks the size of every file in BlueLeaks and adds them
+all together, so it takes a while to run. When it&rsquo;s done, it should tell
+you that the <em>BlueLeaks-extracted</em> folder takes up 269GB.</p>
+<p><strong>NOTE</strong> <em>In addition to using <code>-h</code> to generate human-readable
+units, you can specify which units you want to use. The <code>-b</code> argument, short for <code>--bytes</code>, shows file sizes in
+bytes, <code>-k</code> shows them in kilobytes, and <code>-m</code> shows them in megabytes.</em></p>
+<p>Next, you&rsquo;ll measure the size of an individual
+folder in BlueLeaks. Change to your <em>BlueLeaks-extracted</em> folder; for
+example, I&rsquo;d run <code>cd /media/micah/datasets/BlueLeaks-extracted</code> on my Linux computer. From there, run
+the following command to measure the size of the <em>ncric</em> folder, which
+contains documents from the Northern California Regional Intelligence
+Center (NCRIC), the fusion center I&rsquo;ve spent the most time researching:</p>
+<div class="codehilite"><pre><span></span><code>du -sh --apparent-size ncric
+</code></pre></div>
+
+<p>The output should tell you that the <em>ncric</em> folder takes 19GB.</p>
+<p>To find out the size of each folder in BlueLeaks, you could run the
+<code>du -sh --apparent-size</code>
+<code>path</code> command for
+each folder, but it&rsquo;s quicker to use another <code>for</code> loop. Run the following code in the
+terminal:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> FOLDER <span class="k">in</span> <span class="k">$(</span>ls<span class="k">)</span><span class="p">;</span> <span class="k">do</span> du -sh --apparent-size <span class="nv">$FOLDER</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
+
+<p>As shown here, you can run multiple commands on the same line by
+separating them with semicolons (<code>;</code>). This one-liner loops through the
+output of the <code>ls</code> command,
+which, since you&rsquo;re currently in the <em>BlueLeaks-extracted</em> folder, is
+the name of each BlueLeaks folder. The code stores these names in the
+<code>FOLDER</code> variable and then,
+inside each iteration of the loop, runs the
+<code>du -sh --apparent-size $FOLDER</code> command.</p>
+<p>Here are the first few lines of output:</p>
+<div class="codehilite"><pre><span></span><code>2.8G    211sfbay
+29M     Securitypartnership
+216M    acprlea
+65M     acticaz
+748M    akorca
+--snip--
+</code></pre></div>
+
+<p>This shows you how much disk space each folder uses.</p>
+<h4>Use Pipes and Sort Output</h4>
+<p>You now know the size of each folder in the BlueLeaks dataset. Next,
+you&rsquo;ll sort the 168 folders in order of disk space. By determining which
+folders are the largest, you can quickly tell which fusion centers have
+the most data and therefore are probably the biggest or most active.</p>
+<p>To sort this list of folders by the smallest file size to the largest,
+use the <code>sort</code> command, which
+takes a list of text lines and, by default, sorts them
+<em>alphanumerically</em>; that is, text is sorted alphabetically and numbers
+are sorted by their first numeral. For example, the list <code>file1</code>, <code>file10</code>, <code>file2</code>, &hellip;, <code>file9</code> is sorted alphanumerically: since text
+lines are sorted one character at a time, and since <code>1</code> is less than <code>2</code>, <code>file10</code> comes before <code>file2</code>.</p>
+<p>To sort your BlueLeaks files by file size, modify the command with the
+<code>-h</code>
+(<code>--human-numeric-sort</code>)
+argument. This argument pays attention to the <em>value</em> of numbers, not
+just characters, so it correctly places smaller numerical values before
+larger ones. It also takes file size units into account,
+meaning it will place 2MB before 1GB, even
+though 2 is numerically greater than 1.</p>
+<p>In shell scripting, the <em>pipe</em> operator (<code>|</code>) lets you take the output of a command
+to the left of the operator and pipe it into the command on the right.
+When you pipe input into the <code>sort</code> command, it outputs a sorted version
+of that input. Run the <code>for</code>
+loop from the previous subsection, this time piping the output into
+<code>sort</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> FOLDER <span class="k">in</span> <span class="k">$(</span>ls<span class="k">)</span><span class="p">;</span> <span class="k">do</span> du -sh –apparent-size <span class="nv">$FOLDER</span><span class="p">;</span> <span class="k">done</span> <span class="p">|</span> sort -h
+</code></pre></div>
+
+<p>This line first runs the <code>for</code>
+loop that measures the space each BlueLeaks folder takes up. The output
+of this code is a list of lines of text, where each line starts with the
+human-readable size of a folder. Piping those lines of text as input
+into the <code>sort -h</code> command
+sorts those lines numerically while paying attention to the file size
+units.</p>
+<p>Your output should look like this:</p>
+<div class="codehilite"><pre><span></span><code>256     miacxold
+256     ncric-history-good
+256     ncricSteveBackup
+259K    terrorismtip
+548K    oaktac
+625K    sccpca
+--snip--
+13G     lacleartraining
+14G     jric
+19G     ncric
+36G     miacx
+46G     repo
+</code></pre></div>
+
+<p>The folders that have the least data should be at the top: <em>miacxold</em>,
+<em>ncric-history-good</em>, and <em>ncricSteveBackup</em> contain only empty
+subfolders. The <em>repo</em> folder, the largest folder in BlueLeaks, should
+appear at the bottom of the list, right after <em>miacx</em>, the
+second-largest folder.</p>
+<blockquote>
+<h5>FILE SIZE UNITS AND CONVERSIONS</h5>
+<p>You’re likely familiar with file size units like megabytes and gigabytes, and you might have a mental model of how much information those units can hold: Office documents are often a few megabytes, a two-hour video file might be a gigabyte or two, and a video game might be hundreds of gigabytes. Being able to convert between the different units of disk space is an important skill for working with large datasets.</p>
+<p>Units like kilobyte, megabyte, gigabyte, and terabyte sound metric, but they’re not. For instance, the <code>kilo-</code> prefix denotes a factor of 1,000, but there are 1,024 bytes in a kilobyte. Here’s a list of common conversions:</p>
+<ul>
+<li>1 byte (B): 8 bits, or 8 ones and zeros in binary</li>
+<li>1 kilobyte (KB): 1,024 bytes</li>
+<li>1 megabyte (MB): 1,024 kilobytes</li>
+<li>1 gigabyte (GB): 1,024 megabytes</li>
+<li>1 terabyte (TB): 1,024 gigabytes</li>
+<li>1 petabyte (PB): 1,024 terabytes</li>
+</ul>
+<p>As an example, the <code>ncric</code> folder in BlueLeaks is 20,008,051,852 bytes, which is 19,539,113.1KB, or 19,081.2MB, or 18.6GB—about 160 billion bits.`</p>
+</blockquote>
+<h4>Create an Inventory of Filenames in a Dataset</h4>
+<p>When you&rsquo;re working with an enormous dataset like BlueLeaks, it&rsquo;s
+helpful to create an inventory of all of the files it contains by
+listing them in a text file. This way you can easily count the number of
+files in the dataset or search for filenames without having to go
+through the much slower process of looping through the dataset itself.</p>
+<p>You can create this inventory with the <code>find</code> command, which outputs a list of files
+and folders in a folder. From within the <em>BlueLeaks-extracted</em> folder,
+run the following command to list all of the files in BlueLeaks:</p>
+<div class="codehilite"><pre><span></span><code>find . -type f
+</code></pre></div>
+
+<p>The first argument after <code>find</code> is the folder whose contents you want
+to list. This command uses a dot to find files in the current folder,
+but you could use any relative or absolute path. The <code>-type f</code> arguments filters the list so it
+includes only files. (To include only folders, add the <code>-type d</code> arguments.)</p>
+<p>When you run this command, the names of the many files in BlueLeaks
+should start rapidly scrolling across your terminal. To make the output
+more manageable, run the command again, this time redirecting the output
+into the file <em>../BlueLeaks-filenames.txt</em>:</p>
+<div class="codehilite"><pre><span></span><code>find . -type f &gt; ../BlueLeaks-filenames.txt
+</code></pre></div>
+
+<p>As discussed in Chapter 3, redirection tells
+your shell to take the output from the left side of the redirection
+operator (<code>&gt;</code>) and save it
+into the file at the path you specify on the right. In this case, the
+shell sends the list of filenames from the <code>find</code> command to the
+<em>BlueLeaks-filenames.txt</em> file on your <em>datasets</em> USB disk, rather than
+displaying the filenames across your terminal.</p>
+<p>To read through these filenames at your leisure, open
+<em>BlueLeaks-filenames.txt</em> in VS Code by running this command:</p>
+<div class="codehilite"><pre><span></span><code>code ../BlueLeaks-filenames.txt
+</code></pre></div>
+
+<p>It&rsquo;s easier to slowly scroll through these
+files in your text editor, but there are too many to count with the
+naked eye.</p>
+<h4>Count the Files in a Dataset</h4>
+<p>The <code>wc</code> command takes some
+input and tells you how many characters, words, or lines it contains.
+When used with the <code>-l</code> (or
+<code>--lines</code>) argument, it counts
+the number of lines. To count the lines in the <em>BlueLeaks-filenames.txt</em>
+file you created, and by extension count the number of files in
+BlueLeaks, run the following command:</p>
+<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> wc -l
+</code></pre></div>
+
+<p>The <code>cat</code> command outputs the
+contents of a file&mdash;in this case, <em>BlueLeaks-filenames.txt</em>. Instead of
+displaying it, the command pipes the output into <code>wc</code> to count the number of lines that it
+contains. It should tell you that there are just over <em>one million</em>
+files in BlueLeaks.</p>
+<p>Another way to get the same result is to run the <code>find</code> command from the previous section
+again, and pipe its output into <code>wc</code>, like this:</p>
+<div class="codehilite"><pre><span></span><code>find . -type f <span class="p">|</span> wc -l
+</code></pre></div>
+
+<p>That command takes longer to run, though, since it searches through the
+whole dataset again (press <strong>CTRL</strong>[-C]{.Character_20_style} to
+cancel this command before it finishes).</p>
+<h3>Exercise 4-3: Find Revelations in BlueLeaks with grep</h3>
+<p>In the summer of 2020, while American society was going through a
+long-due reckoning about the scale of racist police killings, right-wing
+media (and police) instead focused on the dangers of the protesters
+themselves. They lumped the modern civil rights movement into two
+categories: &ldquo;Black Lives Matter&rdquo; and &ldquo;antifa,&rdquo; the latter a label used
+by antifascist activists since the 1930s. The modern American antifa
+movement grew in response to the 2016 election of Donald Trump and the
+mainstreaming of white supremacy in the US.</p>
+<p>The <code>grep</code> command will filter
+input for keywords, letting you search the content of datasets for
+newsworthy information. In this exercise, you&rsquo;ll use <code>grep</code> to find out what police had to say
+about antifa during the protests.</p>
+<h4>Filter for Documents Mentioning Antifa</h4>
+<p>You&rsquo;ll start by grepping your list of filenames to find any that include
+the word <em>antifa</em>. From the <em>BlueLeaks-extracted</em> folder, search the
+<em>BlueLeaks-filenames.txt</em> file that you created in Exercise 4-2 by
+running the following command:</p>
+<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep antifa
+</code></pre></div>
+
+<p>This command pipes the output of
+<code>cat ../BlueLeaks-filenames.txt</code>, which is a list of a million
+filenames, into <code>grep antifa</code>.
+This should filter the huge list of filenames to show you only those
+that include the word <em>antifa</em>. However, it returns no results.</p>
+<p>Since the <code>grep</code> command is
+case sensitive, try again using the <code>-i</code> (or <code>--ignore-case</code>) argument:</p>
+<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep -i antifa
+</code></pre></div>
+
+<p>When I run this command, I get the following output:</p>
+<div class="codehilite"><pre><span></span><code>./ociac/files/EBAT1/U-FOUO_CFIX__OCIAC_JRA_DVE Use of Social Media_ANTIFA_ANTI-ANTIFA MOVEMENTS
+.pdf
+./arictexas/files/DDF/ARIC-LES - Situational Awareness - Antifa Activity.pdf
+./arictexas/files/DDF/SWTFC-LES - Situational Awareness - ANTIFA Event Notification.pdf
+./arictexas/files/DPI/ARIC-LES - Situational Awareness - Antifa Activity.png
+./arictexas/files/DPI/SWTFC-LES - Situational Awareness - ANTIFA Event Notification.png
+./dediac/files/DDF/ANTIFA - Fighting in the Streets.pdf
+./dediac/files/DDF/ANTIFA Sub Groups and Indicators - LES.pdf
+./dediac/files/DDF/FBI_PH_SIR_Tactics_and_Targets_Identified_for_4_November_2017_ANTIFA_Rally_in _Philadelphia_PA-2.pdf
+./dediac/files/EBAT1/ANTIFA - Fighting in the Streets.pdf
+./dediac/files/EBAT1/ANTIFA Sub Groups and Indicators - LES.pdf
+./dediac/files/DPI/ANTIFA - Fighting in the Streets.png
+./dediac/files/DPI/FBI_PH_SIR_Tactics_and_Targets_Identified_for_4_November_2017_ANTIFA_Rally_in _Philadelphia_PA-2.png
+</code></pre></div>
+
+<p>This command returns 12 results, all files that have the term <em>antifa</em>
+in their filenames. The <code>grep</code>
+command might highlight your search terms in each line of output by
+coloring them differently; I&rsquo;ve highlighted them here in bold. Open a
+few of the documents in this list to see what they contain.</p>
+<p><strong>NOTE</strong> <em>You can run BlueLeaks documents through Dangerzone if you like, but the
+risks are low with this dataset. These documents are now all public, so
+if any have tracking technology that lets the original file owner know
+someone is looking at the document, it doesn&rsquo;t matter much. Given that
+these are hacked documents from police fusion centers, not attachments
+on phishing email messages or something similar, they&rsquo;re also unlikely
+to be malicious.</em></p>
+<p>I often combine <code>find</code> and
+<code>grep</code> to make lists of
+filenames and filter those lists down, which allows me to locate files
+on my computer more quickly and precisely than with my operating
+system&rsquo;s graphical file search tools. For example, suppose you&rsquo;re
+looking into the <em>azhidta</em> folder for the Arizona High Intensity Drug
+Trafficking Area site. To quickly find any documents that have the word
+<em>marijuana</em> in their filename, you could run
+<code>find azhidta | grep -i marijuana</code>. To count the number of files with
+<em>marijuana</em> in the filenames, you could pipe all of that into the
+<code>wc -l</code> command.</p>
+<h4>Filter for Certain Types of Files</h4>
+<p>In addition to searching for keywords like <em>antifa</em> or <em>marijuana</em>,
+<code>grep</code> can help you filter a
+list of filenames to include only certain file types. Grep for Microsoft
+Word documents, filenames that end in <em>.docx</em>, by running the following
+command:</p>
+<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep -i .docx
+</code></pre></div>
+
+<p>This command uses <code>cat</code> to
+display the list of filenames in BlueLeaks, then filters it down for
+those that contain <em>.docx</em>. You should see thousands of filenames scroll
+by. To learn exactly how many, run the command again, this time piping
+the output into <code>wc -l</code>:</p>
+<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep -i .docx <span class="p">|</span> wc -l
+</code></pre></div>
+
+<p>The <code>wc</code> command should tell
+you that the previous command had 8,861 results.</p>
+<h4>Use grep with Regular Expressions</h4>
+<p>If you scroll through the <em>.docx</em> filenames you just found, you&rsquo;ll see
+that a few of them aren&rsquo;t actually Word documents. For example, the
+filename <em>./arictexas/files/DDF/2014 Austin City Limits Festival - APD
+Threat Overview.docx.pdf</em> contains <em>.docx</em> but is actually a PDF.</p>
+<p>When you use <code>grep</code>, you can
+pass a regular expression (regex for short) into it as an argument. A
+<em>regex</em> is a character or sequence of characters that defines a search
+pattern. For example, the caret character (<code>^</code>) represents the beginning of a line,
+and the dollar sign character (<code>$</code>) represents the end of a line.
+Grepping for <code>something$</code> will
+show you only results that end with <em>something</em>. Grepping for
+<code>^something</code> will show you
+only results that begin with <em>something</em>.</p>
+<p>To search just for filenames that end with <em>.docx</em>, add a dollar sign
+(<code>$</code>) to the end of the text
+you&rsquo;re grepping for. For example, try running the following command:</p>
+<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep -i .docx$ <span class="p">|</span> wc -l
+</code></pre></div>
+
+<p>The output should tell you that there are 8,737 results, 124 less than
+the previous command. That means there are 8,737 Word docs in this
+dataset.</p>
+<p>Run the following command to find out how many Word docs are in the
+<em>ncric</em> folder:</p>
+<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep ^./ncric/ <span class="p">|</span> grep -i .docx$ <span class="p">|</span> wc -l
+</code></pre></div>
+
+<p>The <code>cat</code> command outputs the
+list of filenames in BlueLeaks, which is then piped into the first
+<code>grep</code> command, which in turn
+filters your output down to files that begin with <em>./ncric</em>, using
+<code>^</code>. Next, that output is
+piped into the second <code>grep</code>
+command, which further filters the output to files that end
+with <em>.docx</em>, using <code>$</code>. Finally, the remaining output is
+piped into the <code>wc -l</code>
+command, which tells you how many lines are left. The output of the full
+command should tell you that there are 600 Word docs in the <em>ncric</em>
+folder.</p>
+<p>On your own, try using <code>find</code>,
+<code>grep</code>, and <code>wc</code> to find out how many PDFs (<em>.pdf</em>) and
+Excel documents (<em>.xlsx</em>) are in the dataset. You can also experiment
+with other file types.</p>
+<h4>Search Files in Bulk with grep</h4>
+<p>In addition to piping output from other commands into <code>grep</code>, you can use <code>grep</code> to search directly within text files
+by using the following syntax:</p>
+<div class="codehilite"><pre><span></span><code>grep search_term filename
+</code></pre></div>
+
+<p>For example, Linux comes with a file called <em>/etc/passwd</em>, which
+includes a list of users on the system. To find just the line about my
+own user in that file, I can use one of the following commands:</p>
+<div class="codehilite"><pre><span></span><code>grep micah /etc/passwd
+cat /etc/passwd | grep micah
+</code></pre></div>
+
+<p>The <code>grep</code> command opens the
+<em>/etc/passwd</em> file and then searches it, while the <code>cat</code> command opens that file and then pipes
+its contents into <code>grep</code>,
+which searches it. Both of these commands output the following result:</p>
+<div class="codehilite"><pre><span></span><code>micah:x:1000:1000:,,,:/home/micah:/bin/bash
+</code></pre></div>
+
+<p>You can use <code>grep</code> to search
+multiple files, or even folders full of files, for hits all at once. As
+noted earlier, to search a folder, you use the <code>-r</code> (or <code>--recursive</code>) argument and specify the name of a
+folder. To specify multiple files at once, use an asterisk (<code>*</code>) as a wildcard character. For example,
+you can use <code>*.txt</code> as the
+filename to search all text files in your current folder.</p>
+<p>There are CSV spreadsheets in every BlueLeaks folder that contain the
+contents of the websites&rsquo; databases. Now that you&rsquo;ve grepped for
+filenames that contain the keyword <em>antifa</em>, use the following command
+to bulk-search the term <em>Black Lives Matter</em> in the contents of the
+files, not just in their filenames:</p>
+<div class="codehilite"><pre><span></span><code>grep -i <span class="s2">&quot;black lives matter&quot;</span> */*.csv
+</code></pre></div>
+
+<p>The <code>-i</code> argument in this
+command makes the search case insensitive. The
+<code>black lives matter</code> argument
+is the search term (in quotation marks, because it has spaces). The
+<code>*/*.csv</code> argument is the path
+to search, which uses two wildcard characters. These arguments tell
+<code>grep</code> to open every folder,
+then each file within those folders that ends in <em>.csv</em>, and search for
+the <em>black lives matter</em> keyword.</p>
+<p>This command takes some time to run because it&rsquo;s searching all 158,232
+CSV files in BlueLeaks. When it&rsquo;s finished, it should show you the lines
+from CSV files that mention <em>black lives matter</em> and tell you in which
+files it found those lines. For example, here are
+snippets from a few of the lines of the output from that command:</p>
+<div class="codehilite"><pre><span></span><code>arictexas/IncidentMap.csv:834,&quot;10/26/16 00:00:00&quot;,-9.7735716800000006e+01,3.0267881299999999e+0
+1,&quot;TX&quot;,,&quot;TLO&quot;,&quot;An APD Police Explorer received a call from a blocked number in which the caller
+identified himself as an activist for Black Lives Matter, and identified the recipient by name,
+address, and personal descriptors before calling him a racist for having an interest in a LE
+career.  No explicit threats were made during the call...
+bostonbric/EmailBuilder.csv:&lt;p&gt;
+&lt;strong&gt;BRIC SHIELD Alert: &lt;/strong&gt;To promote public safety and situational awareness for
+events taking place in the City of Boston tonight, the BRIC is sharing the information below
+regarding planned activities. &lt;/p&gt;... &lt;p&gt;&lt;b&gt;Known COB Activities for Tuesday, June 2nd&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Violence in Boston Inc &amp; Black Lives Matter Rally and Vigil - 4:45 PM at 624 Blue Hill
+Avenue. &lt;/li&gt;&lt;li&gt;Not One More! - 5:00 PM to 8:00 PM. Meeting at Franklin Park Road &amp; Blue Hill
+Ave and marching to Franklin Park. &lt;/li&gt;...
+chicagoheat/Blog.csv:Media sources report that the online activist group Anonymous, or a group
+claiming to be Anonymous, has called for a collective &#39;Day of Rage&#39; to take place in numerous
+cities across the United States on Friday, July 15th. The action has been called in solidarity
+with the Black Lives Matter movement in light of the recent controversial officer-involved
+shootings that resulted in the deaths of Alton Sterling and Philando Castile. The group that
+posted the call for action states that acts of violence or rioting are to be condemned.
+ncric/Requests.csv:Organizer of a Black Lives Matter Protest for 06/02.  Currently scheduled
+1PM meet time at Sears parking lot of Newpark Mall.  They plan to march to City Hall and then
+to Fremont PD.  She has repeated she intends for a peaceful protest.  She further claims she
+reached out to City and PD to join the march.  Recent graphics encourage non-descript clothing,
+heat resistant gloves, turning off Face Id on iPhone etc.
+</code></pre></div>
+
+<p>The command finds a total of 178 lines in BlueLeaks CSVs that contain
+the term <em>black lives matter</em>. Each is a potential lead for further
+investigative research.</p>
+<p><strong>NOTE</strong> <em>The <code>grep</code> command is a great tool for searching the content of text files, but it doesn&rsquo;t
+work with binary files, like Microsoft Office documents or PDFs. To
+search those in bulk, you&rsquo;ll need more sophisticated tools, which you&rsquo;ll
+learn about in Chapter 5.</em></p>
+<p>On your own, try using <code>grep</code>
+to filter the list of BlueLeaks filenames for specific words or
+bulk-search terms within the CSV files. If you find any interesting
+documents, read them to see if they&rsquo;re newsworthy. Consider narrowing
+your searches once you find a lead by looking for other related
+documents. You might focus on a single fusion center or a topic like
+antifa that spans different centers. Individual documents may contain
+law enforcement lingo you can use as search terms for related documents.
+Take detailed notes on what&rsquo;s most revealing in each document, then rely
+on these notes if you decide to write about your findings.</p>
+<h3>Encrypted Data in the BlueLeaks Dataset</h3>
+<p>As you dig around in the BlueLeaks dataset, you&rsquo;ll notice some patterns.
+Most folders contain many CSVs, as well as.<em>aspx</em> files, the source code
+of the hacked websites. They also contain <em>files</em> subfolders containing
+the bulk of the files and folders uploaded to each site,
+including PDFs and Microsoft Office documents.</p>
+<p>However, one folder, <em>repo</em>, contains just a <em>config</em> file and <em>data</em>,
+<em>index</em>, <em>keys</em>, <em>locks</em>, and <em>snapshots</em> subfolders. Inside those
+subfolders are other subfolders and files with apparently random names.
+There are no documents that can be opened&mdash;no spreadsheets or similar
+files. As you discovered in Exercise 4-2, the <em>repo</em> folder is the
+largest folder in BlueLeaks, at 46GB. Its timestamps are from June 8,
+2020, although the latest timestamps for most of the rest of the dataset
+are from June 6. Without more information, it&rsquo;s not clear what these
+files mean or how to access them.</p>
+<p>When I discover a mystery like this in a dataset, I search the internet.
+In this case, I searched for the names of the files and folders within
+the <em>repo</em> folder by entering <em>config data index keys locks snapshots</em>
+into a search engine, and found documentation for a CLI program called
+restic. A restic repository, according to the documentation I found at
+<a href="https://restic.readthedocs.io/en/latest/100_references.html">https://restic.readthedocs.io/en/latest/100_references.html</a>,
+is a folder that holds backup data. Restic repositories contain a
+<em>config</em> file and folders called <em>data</em>, <em>index</em>, <em>keys</em>, <em>locks</em>, and
+<em>snapshots</em>, as shown in Figure 4-2.</p>
+<p><img alt="Figure 4-2: The layout of a restic respository" src="media/images/Figure4-2.png" /><br />
+<em>Figure 4-2: The layout of a restic respository</em></p>
+<p>This suggests that the <em>repo</em> folder in BlueLeaks contains backup data
+in restic format. To find out what&rsquo;s inside this backup, I installed the
+<code>restic</code> package. Users of
+Linux or Windows with WSL can install <code>restic</code> using apt:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt install restic
+</code></pre></div>
+
+<p>Mac users can install <code>restic</code> from Homebrew with the following command:</p>
+<div class="codehilite"><pre><span></span><code>brew install restic
+</code></pre></div>
+
+<p>I ran <code>restic --help</code> and
+found that I could view the snapshots in a repository with the
+<code>restic snapshots</code> command,
+which I then used to try to view the snapshots in the <em>repo</em> folder like
+so:</p>
+<div class="codehilite"><pre><span></span><code>restic snapshots --repo repo/
+</code></pre></div>
+
+<p>I was then confronted with a password prompt:</p>
+<div class="codehilite"><pre><span></span><code>enter password for repository:
+</code></pre></div>
+
+<p>This prompt indicates that the backup is encrypted. The only way to
+proceed is to guess the password, which I haven&rsquo;t been able to do.</p>
+<p>While a 46GB folder full of encrypted data in a public leak is rare,
+it&rsquo;s not uncommon to stumble upon other encrypted files in datasets like
+Office documents or ZIP files. I can&rsquo;t help but imagine that the most
+interesting details in any dataset might be the encrypted parts.
+Password-cracking is outside the scope of this book, but if you can
+figure out the password for <em>repo</em>, please let me know.</p>
+<h3>Data Analysis with Servers in the Cloud</h3>
+<p>So far, you&rsquo;ve used the CLI <em>locally</em> on your own computer, but you can
+also use it <em>remotely</em> via servers to which you connect through a cloud
+network. DigitalOcean, AWS, Microsoft Azure, and countless other cloud
+hosting companies rent virtual private servers (VPSes) to the public,
+usually for a few dollars a month or a few cents an hour. All the
+command line skills you&rsquo;ve learned so far apply to remote servers, too.</p>
+<p>There are many advantages to working with massive datasets in the cloud:</p>
+<ul>
+<li>Instead of dealing with USB hard disks, you can attach virtual hard
+    disks to your virtual servers, increasing their size if you&rsquo;re
+    running low on disk space.</li>
+<li>VPS bandwidth is generally much better than residential or
+    commercial internet service, speeding up large dataset downloads.</li>
+<li>You can also pay for more powerful VPSes for scripts that require
+    significant computational resources, so they no longer take hours or
+    days to finish running.</li>
+<li>Rather than being forced to wait while a script runs on your local
+    machine, you can do whatever you want on your computer, even
+    suspending it or shutting it down, while your remote server is
+    crunching data.</li>
+<li>If your source has the required technical skills, you can ask them
+    to upload data to a VPS with a large hard disk, as discussed
+    in Chapter 2. They can even do this anonymously using
+    Tor. You can then download the dataset or choose to analyze it
+    remotely on the VPS.</li>
+</ul>
+<p><strong>WARNING</strong> <em>Avoid working on cloud servers with high- or medium-sensitivity
+datasets. The cloud hosting provider has total access over your VPS and
+the data on it and can even give copies of that data to law enforcement
+or other parties in response to legal requests.</em></p>
+<p>This section will go into more detail on <em>SSH (Secure Shell)</em> software
+(introduced in Chapter 2), which allows you
+to securely get a shell on a VPS, as well as two tools that are
+essential for working remotely on the command line: text-based window
+managers and CLI text editors. This should prepare you to set up a VPS
+in the next exercise.</p>
+<p>The SSH protocol is a method for securely logging in to another computer
+remotely. You can connect to a VPS remotely by running the <code>ssh</code> command with a username and the IP
+address or domain name of the server to which you want to connect. For
+example, to log in as the root user to the server with the hostname
+<em>example.com</em>, you run:</p>
+<div class="codehilite"><pre><span></span><code>ssh root@example.com
+</code></pre></div>
+
+<p>You then need to <em>authenticate</em> to the server, or prove that you have
+permission to log in, by typing the user password or using <em>SSH keys</em>.
+Similar to PGP keys (discussed in Chapter 2), generating an SSH key on your computer
+gives you two files: a public key and a secret key. Once you put your
+public key on the remote server, only people with your secret key on
+their computer (hopefully just you) can remotely log in to that server
+using SSH. If someone spies on your internet, they can&rsquo;t see anything
+you&rsquo;re doing in your SSH session&mdash;they&rsquo;ll just see garbled encrypted
+data. Every SSH key also has a <em>fingerprint</em>, a unique string of
+characters that identifies that specific key. SSH keys are more secure
+than passwords, so cloud providers often require that you use them. Once
+you SSH into a remote server, you&rsquo;ll be dropped into a shell just like
+the one on your own computer, but running on a computer across the
+internet.</p>
+<p>A <em>text-based window manager</em> is software that lets you open and switch
+between separate shells in the same terminal window, all in the same SSH
+session. Text-based window managers also allow you to keep programs
+running in the background even if you disconnect from SSH, by
+maintaining an active shell session on your VPS. This protects your work
+if, for example, your laptop dies, you lose internet access, or you
+close your terminal window by mistake.</p>
+<p>For example, say you want to download BlueLeaks on your VPS and then
+unzip it with a <code>for</code> loop. If
+you close your terminal window before the loop is done, you&rsquo;ll quit the
+remote shell, which will close the <code>unzip</code> program, and your remote work will
+stop. However, if you SSH to your VPS, connect to a window manager
+session, and then start unzipping BlueLeaks files, you can safely close
+the terminal window without stopping your work. If you open a new
+terminal later, SSH back into your server, and open your window manager
+again, your previous session with all your running
+programs should reappear. In the upcoming
+exercise, you&rsquo;ll use the Byobu window manager, which comes with Ubuntu.</p>
+<p>When you SSH into a remote server, you don&rsquo;t have easy access to a
+graphical text editor like VS Code. To edit files&mdash;to modify a shell
+script, for example&mdash;you&rsquo;ll need to use a CLI text editor instead. Two
+popular CLI text editors are nano and vim. The nano text editor is
+relatively easy to use but doesn&rsquo;t have advanced features, while vim is
+more powerful but has a steeper learning curve. For simplicity&rsquo;s sake,
+in the following exercise you&rsquo;ll use nano.</p>
+<p><strong>NOTE</strong> <em>Technically, you can use VS Code to edit files remotely over SSH, but
+there are some limitations. See <a href="https://code.visualstudio.com/docs/remote/ssh">https://code.visualstudio.com/docs/remote/ssh</a> for more information on VS Code&rsquo;s support for editing files over SSH.</em></p>
+<h3>Exercise 4-4: Set Up a VPS</h3>
+<p>In this exercise, you&rsquo;ll create an account on a cloud hosting provider,
+generate an SSH key, create a VPS on your cloud provider, SSH into it,
+start a Byobu session, and install updates. To follow along you&rsquo;ll need
+to spend a small amount of money. I provide detailed instructions for
+using DigitalOcean in this exercise, but use whatever cloud hosting
+provider you prefer, keeping in mind that the initial steps will likely
+be slightly different.</p>
+<p>Go to <a href="https://www.digitalocean.com">https://www.digitalocean.com</a>
+and create an account, providing a credit card number while signing up.
+Use a strong password, store it in your password manager, and turn on
+two-factor authentication.</p>
+<h4>Generate an SSH Key</h4>
+<p>To generate an SSH key, open a terminal on your local computer (if
+you&rsquo;re using Windows, use a WSL terminal) and run:</p>
+<div class="codehilite"><pre><span></span><code>ssh-keygen -t ed25519
+</code></pre></div>
+
+<p>The <code>ssh-keygen</code> command
+generates an SSH key, while the options specify the type of encryption
+key you want to generate&mdash;in this case, <code>ed25519</code>, which uses modern elliptic curve
+encryption and is the most secure option.</p>
+<p>After you run this command, the program will ask you a few questions,
+starting with where you want to save your key. For example, I get the
+following output on my Mac:</p>
+<div class="codehilite"><pre><span></span><code>Generating public/private ed25519 key pair.
+Enter file in which to save the key (/Users/micah/.ssh/id_ed25519):
+</code></pre></div>
+
+<p>Press <strong>ENTER</strong> to use the default location for the key,
+<em>\~/.ssh/id_ed25519</em>. Next, the program should ask you for a
+passphrase:</p>
+<div class="codehilite"><pre><span></span><code>Enter passphrase (empty for no passphrase):
+</code></pre></div>
+
+<p>I recommend generating a random passphrase in your password manager,
+saving it as <em>SSH key passphrase</em>, then copying and pasting the
+passphrase into your terminal. After
+pressing <strong>ENTER</strong>, re-enter your passphrase and press
+<strong>ENTER</strong> again.</p>
+<p>When you&rsquo;re done, the <code>ssh-keygen</code> command should have created two new
+files: your SSH secret key in <em>\~/.ssh/id_ed25519</em> and your SSH public
+key in <em>\~/.ssh/id_ed25519.pub</em>.</p>
+<p><strong>NOTE</strong> <em>If you&rsquo;re using Windows and prefer to SSH from PowerShell, you can
+install the OpenSSH client directly in Windows. Open a PowerShell window
+as an administrator and run <code>Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0</code> to enable using the ssh
+command from PowerShell.</em></p>
+<h4>Add Your Public Key to the Cloud Provider</h4>
+<p>Next, add your public key to your new DigitalOcean account. After
+logging in to the web console, go to the Settings page and switch to the
+Security tab. Click <strong>Add SSH Key</strong>, then copy and paste your SSH public
+key into the form.</p>
+<p>Back in your terminal, display the content of your public key by running
+this command:</p>
+<div class="codehilite"><pre><span></span><code>cat ~/.ssh/id_ed25519.pub
+</code></pre></div>
+
+<p>Here&rsquo;s the output I get:</p>
+<div class="codehilite"><pre><span></span><code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILxYgUq1ePSRSv7LTITG5hecwNBQzs3EZmo4PRzsV4yT micah@trapdoor
+.local
+</code></pre></div>
+
+<p>Your output should look similar, with the last word being your username
+and the hostname of your own computer. Copy this whole string, starting
+with <code>ssh-ed25519</code>, and paste
+it into DigitalOcean, then give it a name, as shown in Figure
+4-3.</p>
+<p><img alt="Figure 4-3: The form for adding a new SSH key to a DigitalOcean account" src="media/images/Figure4-3.png" /><br />
+<em>Figure 4-3: The form for adding a new SSH key to a DigitalOcean account</em></p>
+<p>Name your SSH keys after the computer on which
+you generated them, since they&rsquo;re allowing this specific computer to
+access remote computers. For example, I&rsquo;ve called my key <em>trapdoor</em>, the
+name of my Mac.</p>
+<h4>Create a VPS</h4>
+<p>Now that DigitalOcean has your SSH public key, you can create a new VPS.
+Click <strong>Create</strong> at the top of the DigitalOcean console and follow the
+instructions to create a new <em>droplet</em>, DigitalOcean&rsquo;s term for a VPS.
+Choose the following settings for your VPS:</p>
+<ol>
+<li>For Choose an Image, pick <strong>Ubuntu</strong>.</li>
+<li>For Choose a Plan, pick <strong>Shared CPU</strong> ▸ <strong>Basic</strong> and
+    choose how much memory, CPU power, hard disk space, and internet
+    bandwidth you want. Less powerful machines are cheaper; more
+    powerful ones are more expensive. For this exercise, choose a
+    relatively cheap option like 1GB of RAM, 1 CPU, 25GB of disk space,
+    and 1TB of bandwidth for \$7 per month.</li>
+<li>For Add Block Storage, you can choose to attach an additional hard
+    disk to your droplet. You don&rsquo;t need to do this now, but in the
+    future, to work with a large dataset like BlueLeaks, you can add
+    more disk space.</li>
+<li>For Choose a Datacenter Region, choose the host city for your VPS.
+    File transfers between your computer and your server will be fastest
+    if you choose a nearby location, but feel free to create your VPS
+    anywhere you&rsquo;d like.</li>
+<li>For Authentication, choose <strong>SSH Keys</strong> and select the SSH key that
+    you just added to your DigitalOcean account.</li>
+<li>For Select Additional Options, check the box beside Monitoring to
+    see statistics about how much memory and processor power the VPS is
+    using over time from the DigitalOcean console.</li>
+<li>For Finalize and Create, choose one droplet and give it the hostname
+    <em>test-vps</em>.</li>
+</ol>
+<p>Click <strong>Create Droplet</strong> and wait a minute or two for DigitalOcean to
+provision your new VPS, then find its IP address. Figure
+4-4 shows the Droplets page of my DigitalOcean
+account with my new server&rsquo;s IP address, 178.128.22.151.</p>
+<p><img alt="Figure 4-4: My test-vps IP address" src="media/images/Figure4-4.png" /><br />
+<em>Figure 4-4: My test-vps IP address</em></p>
+<p>Click the IP address to copy it to your clipboard.</p>
+<h4>SSH into Your Server</h4>
+<p>Run the following command to SSH into your server:</p>
+<div class="codehilite"><pre><span></span><code>ssh username@hostname
+</code></pre></div>
+
+<p>Here, <code>username</code> is
+the user you want to connect to on the remote server, and
+<code>hostname</code> is either
+the hostname or IP address of the remote server. With DigitalOcean, the
+username is <code>root</code> and the
+hostname is the IP address of your server.</p>
+<p>Here&rsquo;s what it looks like when I SSH into my server for the first time:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % ssh root@178.128.22.151
+The authenticity of host &#39;178.128.22.151 (178.128.22.151)&#39; can&#39;t be established.
+ED25519 key fingerprint is SHA256:062oSOXq+G1sGLIzoQdFnQvJE/BU8GLLWnNr5WUOmAs.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+</code></pre></div>
+
+<p>A remote server has its own SSH key, a <em>server key.</em> This output shows
+you the server key&rsquo;s fingerprint and asks whether you want to trust it.
+If you enter <code>yes</code>, your SSH
+software will store this fingerprint in the <em>\~/.ssh/known_hosts</em> file
+containing all the fingerprints for the SSH servers to which you&rsquo;ve
+connected in the past, so that when you SSH into your server in the
+future, it shouldn&rsquo;t prompt you again. You can also enter <code>no</code> to cancel, or copy and paste the
+fingerprint of the server key that you&rsquo;re expecting.</p>
+<p><strong>NOTE</strong> <em>If you SSH into a server and the fingerprint isn&rsquo;t what your software
+expects it to be, SSH will show you a warning message, which could mean
+that the server key has changed or that your SSH connection is being
+attacked. This authentication scheme is known as trust on first use
+(TOFU): you trust the first fingerprint you see and deny
+all other fingerprints for that server in the future.</em></p>
+<p>Enter <code>yes</code> and press
+<strong>ENTER</strong> to continue. You should be dropped into a root shell on
+your remote server:</p>
+<div class="codehilite"><pre><span></span><code>root@test-vps:~#
+</code></pre></div>
+
+<p>Since you provided DigitalOcean with your SSH public key, you don&rsquo;t need
+to enter a password to log in. If anyone else tries SSHing to your
+server, they&rsquo;ll get the <code>Permission denied (publickey)</code> error.</p>
+<p>Take a look around your new cloud-based system. Run <code>ls</code> to list files, <code>ls -al</code> to see hidden files, and <code>cd</code> to change to folders.</p>
+<h4>Start a Byobu Session</h4>
+<p>If you used the Ubuntu image to set up your droplet, the Byobu window
+manager should be installed. Run the <code>byobu</code> command to start a Byobu session. (If
+you&rsquo;re using a different operating system, or if for some reason Byobu
+isn&rsquo;t installed, you&rsquo;ll get a <code>Command 'byobu' not found</code> error message. Run
+<code>apt update</code>, followed by
+<code>apt install byobu</code>, to install
+the program.)</p>
+<p>The <code>byobu</code> command should drop you into a shell
+inside of your new session. A line at the bottom of your terminal shows
+which window you&rsquo;ve opened, along with information like the date and
+time. Each Byobu window is like its own separate shell in the same Byobu
+session, and you can open as many windows as you want.</p>
+<p>To demonstrate how Byobu works, run <code>whoami</code> (which should tell you that you&rsquo;re the
+root user) and <code>ls -l /</code> (which
+should show you a list of files in your server&rsquo;s root folder). Now press
+<strong>CTRL</strong>-A. Byobu will ask you how you want this keyboard command
+to operate:</p>
+<div class="codehilite"><pre><span></span><code>Configure Byobu&#39;s ctrl-a behavior...
+
+When you press ctrl-a in Byobu, do you want it to operate in:
+    (1) Screen mode (GNU Screen&#39;s default escape sequence)
+    (2) Emacs mode  (go to beginning of line)
+
+Note that:
+  - F12 also operates as an escape in Byobu
+  - You can press F9 and choose your escape character
+  - You can run &#39;byobu-ctrl-a&#39; at any time to change your selection
+
+Select [1 or 2]:
+</code></pre></div>
+
+<p>Enter <code>1</code> and press
+<strong>ENTER</strong>. This allows you to open a new window in Byobu by
+pressing <strong>CTRL</strong>-A, followed by C (for &ldquo;create&rdquo;). Try that now to
+open a new empty shell. Press <strong>CTRL</strong>-A followed by N (for
+&ldquo;next&rdquo;) to switch back to your first window. To exit a Byobu window, you
+run the <code>exit</code> command in that
+shell.</p>
+<p><strong>NOTE</strong> <em>See <a href="https://www.byobu.org">https://www.byobu.org</a> for more complete documentation about this program, including a video tutorial.</em></p>
+<p>Completely close your terminal window and click through any warnings
+saying that your active programs will close if you do this. Open a new
+terminal window and SSH back into your server using the <code>ssh</code> <code>username@hostname</code> command. Then run
+<code>byobu</code> again to attach your
+previous session. Any programs you run inside this Byobu session won&rsquo;t
+quit when you disconnect from SSH.</p>
+<h4>Install Updates</h4>
+<p>Always install updates when you set up a new server to keep it secure.
+Run the following commands (you don&rsquo;t need to use <code>sudo</code>, since you&rsquo;re the root user):</p>
+<div class="codehilite"><pre><span></span><code>apt update
+apt upgrade
+</code></pre></div>
+
+<p>Follow the instructions to finish installing updates.</p>
+<p>If you ever need to reboot your server (such as after updating the Linux
+kernel), run the <code>reboot</code>
+command. You&rsquo;ll get kicked out of your SSH session,
+but you should be able to SSH back in shortly when the reboot completes. You can also reboot your VPS from
+DigitalOcean&rsquo;s web console&mdash;for example, if the entire server crashed
+and you can&rsquo;t SSH into it.</p>
+<h3>Exercise 4-5: Explore the Oath Keepers Dataset Remotely</h3>
+<p>In this exercise, you&rsquo;ll use BitTorrent to download the Oath Keepers
+dataset to your cloud server and explore it using the skills you&rsquo;ve
+gained in this chapter. You&rsquo;ll also learn to copy data from your remote
+server to your laptop using the <code>rsync</code> command. Finally, you&rsquo;ll delete your
+VPS to avoid getting charged for time when you&rsquo;re not using it.</p>
+<p>The Oath Keepers dataset contains data from the far-right extremist
+group that participated in the January 6, 2021, US Capitol insurrection.
+In September 2021, a hacktivist broke into the Oath Keepers servers and
+made off with the group&rsquo;s email messages, chat logs, membership lists,
+and other data, and then leaked it to DDoSecrets. You&rsquo;ll continue
+working with this dataset when you learn to analyze email dumps in
+Chapter 6.</p>
+<p><strong>NOTE</strong> <em>This book works only with the publicly available part of the Oath
+Keepers dataset, which contains email messages and chat logs. To access
+content like the Oath Keepers&rsquo; donor and membership lists, which contain
+PII, contact DDoSecrets.</em></p>
+<p>Because your home or office internet connection is likely significantly
+slower than a cloud provider&rsquo;s, it&rsquo;s inefficient to download a dataset
+to your laptop and then upload it to your remote server. To download the
+dataset directly to your VPS, you&rsquo;ll use <code>transmission-cli</code>, the command line version of the
+BitTorrent client you used to download BlueLeaks in Chapter 2. In your VPS, run the following command to
+install <code>transmission-cli</code>:</p>
+<div class="codehilite"><pre><span></span><code>apt install transmission-cli
+</code></pre></div>
+
+<p>You can now use the <code>transmission-cli</code> command to download files. You must
+pass in either the path to a <em>.torrent</em> file or a magnet link as an
+argument. In this exercise, you&rsquo;ll use the torrent file available at
+<a href="https://ddosecrets.com/wiki/Oath_Keepers">https://ddosecrets.com/wiki/Oath_Keepers</a>.</p>
+<p>Run the following commands:</p>
+<div class="codehilite"><pre><span></span><code>mkdir ~/datasets
+<span class="nb">cd</span> ~/datasets
+</code></pre></div>
+
+<p>This creates a new folder called <em>datasets</em> on your server, then changes
+to it. Download the torrent file from the link on the DDoSecrets page
+and load it into your BitTorrent client with the following commands:</p>
+<div class="codehilite"><pre><span></span><code>wget https://ddosecrets.com/images/0/02/Oath_Keepers.torrent
+transmission-cli -w . Oath_Keepers.torrent
+</code></pre></div>
+
+<p>The <code>wget</code> command downloads files&mdash;in this
+case, <em>Oath_Keepers.torrent</em>&mdash;and saves them in the current folder.
+The <code>transmission-cli</code> command
+downloads the 3.9GB torrent to your server from the BitTorrent swarm and
+uploads parts of it to other parts of the swarm. The <code>-w .</code> arguments tell
+<code>transmission-cli</code> to download
+the torrent into the current working folder. (You could change that to
+<code>-w ~/Downloads</code>, for example,
+if you wanted to download it into the <em>\~/Downloads</em> folder instead.)</p>
+<p><strong>NOTE</strong> <em>If no torrent file is available for a dataset, you can replace the
+torrent filename with a magnet link in double quotes as an argument in
+the <code>transmission-cli</code> command.</em></p>
+<p>When you&rsquo;ve finished downloading the torrent, your server will be a seed
+until you quit the program by pressing <strong>CTRL</strong>-C. While you&rsquo;re
+waiting for the dataset to finish downloading, or if you&rsquo;ve finished but
+want to continue seeding the torrent, you can work on your VPS in a
+separate Byobu shell.</p>
+<p>To check how much free space your server has left, run the following
+command after the download is complete:</p>
+<div class="codehilite"><pre><span></span><code>df -h
+</code></pre></div>
+
+<p>The <code>df</code> command tells you how
+much disk space is free on each connected drive, and the <code>-h</code> argument displays these numbers in
+human-readable units. After downloading the Oath Keepers dataset, I got
+the following output from these commands on my server:</p>
+<div class="codehilite"><pre><span></span><code>Filesystem      Size  Used Avail Use% Mounted on
+tmpfs            98M 1000K   97M   2% /run
+/dev/vda1        25G  5.8G   19G  24% /
+tmpfs           486M   80K  486M   1% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/vda15      105M  5.3M  100M   5% /boot/efi
+tmpfs            98M  4.0K   98M   1% /run/user/0
+</code></pre></div>
+
+<p>As shown in bold, my root partition mounted on <code>/</code> has 25GB of space, has used 5.8GB, and
+has 19GB free.</p>
+<p>Change your working directory to <em>\~/datasets/Oath Keepers</em>, remembering
+to put the filepath in quotes or escape the space in the path. For
+example, you could run this command from the <em>\~/datasets</em> folder:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> Oath<span class="se">\ </span>Keepers
+</code></pre></div>
+
+<p>Run the following command to find that the Oath Keepers dataset takes up
+3.9GB of space:</p>
+<div class="codehilite"><pre><span></span><code>root@test-vps:~/datasets/Oath Keepers# du -sh --apparent-size .
+3.9G    .
+</code></pre></div>
+
+<p>Next, run the <code>ls</code> command to list the files in the <em>Oath
+Keepers</em> folder:</p>
+<div class="codehilite"><pre><span></span><code>root@test-vps:~/datasets/Oath Keepers# ls -lh
+total 13M
+drwxr-xr-x 2 root root 4.0K Aug  2 23:47 &#39;Oath Keepers.sbd&#39;
+-rw-r--r-- 1 root root  12M Aug  2 23:47  messages.json
+-rw-r--r-- 1 root root 1.4M Aug  2 23:44  messages_old.json
+</code></pre></div>
+
+<p>The output shows that this folder contains a folder called <em>Oath
+Keepers.sbd</em>, a 12MB file called <em>messages.json</em>, and a 1.4MB file
+called <em>messages_old.json</em>. These JSON files are chat logs.</p>
+<p>Switch to the <em>Oath Keepers.sbd</em> folder and run <code>ls</code> again:</p>
+<div class="codehilite"><pre><span></span><code>root@test-vps:~/datasets/Oath Keepers# cd Oath\ Keepers.sbd/
+root@test-vps:~/datasets/Oath Keepers/Oath Keepers.sbd# ls -lh
+total 3.9G
+-rw-r--r-- 1 root root 2.2M Aug  2 23:45  Archive
+-rw-r--r-- 1 root root  23K Aug  2 23:44 &#39;Saved Correspondence&#39;
+-rw-r--r-- 1 root root  25K Aug  2 23:44  Systems
+-rw-r--r-- 1 root root 2.8M Aug  2 23:44  ak
+--snip--
+</code></pre></div>
+
+<p>The output shows that this folder contains 100 files, each representing
+a different inbox full of email.</p>
+<p>Since you&rsquo;ll use the Oath Keepers dataset later in the book, next you&rsquo;ll
+copy it from your VPS to your <em>datasets</em> USB disk with the
+<code>rsync</code> program, which
+synchronizes local folders and remote folders using SSH.</p>
+<p><strong>NOTE</strong> <em>The</em> <em><code>scp</code> command (short for &ldquo;secure copy&rdquo;) also copies files and folders from your computer to a remote server, or vice versa, over SSH. The BlueLeaks hacker likely used a Windows version of <code>scp</code>, pscp64.exe, to exfiltrate data from the hacked police web servers to a server they controlled. For very large folders, however, <code>rsync</code> is often a better choice than <code>scp</code>, since if it fails halfway through, you can rerun the command and it will start where it left off.</em></p>
+<p>Open a terminal running locally on your computer (not SSHed to your VPS)
+and run <code>which rsync</code> to check
+whether <code>rsync</code> is installed.
+If so, the command returns the path to the program, something like
+<em>/usr/bin/rsync</em>. If not, you&rsquo;ll see no output. Windows with WSL and
+Linux users can install <code>rsync</code> with the following command:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt install rsync
+</code></pre></div>
+
+<p>macOS users can install it with the following command:</p>
+<div class="codehilite"><pre><span></span><code>brew install rsync
+</code></pre></div>
+
+<p>To copy a file from a remote server to your
+local computer, run the following command:</p>
+<div class="codehilite"><pre><span></span><code>rsync -av --progress remote_user@remote_host:remote_path local_path
+</code></pre></div>
+
+<p>The <code>-av</code> argument is a
+combination of <code>-a</code> (short for
+<code>--archive</code>), which preserves
+the file permissions in the copy you&rsquo;re making, and <code>-v</code> (short for - -<code>verbose</code>), which outputs each filename as it
+copies the files. The <code>--progress</code> argument displays progress bars for
+each file as it&rsquo;s copying. The <code>rsync</code> command will SSH into the server
+<code>remote_host</code> with
+the username <code>remote_user</code>. If it authenticates
+successfully, it will download the file or folder at
+<code>remote_path</code> and
+save it on your computer at <code>local_path</code>.</p>
+<p>For example, here&rsquo;s how I&rsquo;d download the Oath Keepers dataset from my
+VPS to my <em>datasets</em> USB disk:</p>
+<div class="codehilite"><pre><span></span><code>rsync -av --progress root@178.128.22.151:<span class="s2">&quot;~/datasets/Oath\ Keepers&quot;</span> /Volumes/datasets/
+</code></pre></div>
+
+<p>In this case, <code>root@178.128.22.151:"~/datasets/Oath\ Keepers"</code> is the <code>remote _user``@``remote_host``:``remote_path</code> argument, since the <em>Oath
+Keepers</em> folder is in the <em>datasets</em> folder in the root user&rsquo;s home
+folder on my VPS. I put the remote path in quotes and escape the space
+in the filename, telling my local shell that
+<code>root@178.128.22.151:"~/datasets/Oath\ Keepers"</code> is a single argument. The
+<code>local_path</code> argument
+is the <code>/media/micah/datasets/</code> path to my <em>datasets</em> USB disk.</p>
+<p><strong>NOTE</strong> <em>You can also use <code>rsync</code> to upload files from your
+computer to a remote server&mdash;just put the <code>local_path</code>
+argument first, as the source, and put the
+<code>remote_user@remote_host:remote_path</code> argument second, as
+the destination.</em></p>
+<p>Here&rsquo;s the output I get when I run this command:</p>
+<div class="codehilite"><pre><span></span><code>receiving incremental file list
+Oath Keepers/
+Oath Keepers/messages.json
+     12,109,624 100%    1.89MB/s    0:00:06 (xfr#1, to-chk=102/104)
+Oath Keepers/messages_old.json
+      1,393,296 100%    1.65MB/s    0:00:00 (xfr#2, to-chk=101/104)
+Oath Keepers/Oath Keepers.sbd/
+Oath Keepers/Oath Keepers.sbd/Archive
+      2,288,916 100%    1.81MB/s    0:00:01 (xfr#3, to-chk=99/104)
+Oath Keepers/Oath Keepers.sbd/Saved Correspondence
+        23,192 100%   111.02kB/s    0:00:00 (xfr#4, to-chk=98/104)
+Oath Keepers/Oath Keepers.sbd/Systems
+        25,382 100%   121.51kB/s    0:00:00 (xfr#5, to-chk=97/104)
+Oath Keepers/Oath Keepers.sbd/ak
+      2,921,276 100%    4.33MB/s    0:00:00 (xfr#6, to-chk=96/104)
+Oath Keepers/Oath Keepers.sbd/al
+     41,772,536 100%    6.57MB/s    0:00:06 (xfr#7, to-chk=95/104)
+--snip--
+</code></pre></div>
+
+<p>The <code>rsync</code> command copies every file, one at a
+time, from the remote folder to the local folder over SSH, displaying a
+line after each filename that shows the file&rsquo;s download speed and
+progress. You can press <strong>CTRL</strong>-C to cancel the command, then
+rerun that command, and <code>rsync</code> should continue where it left off.
+This is especially useful when you need to copy gigabytes or terabytes
+of data spread across millions of files&mdash;if the file transfer fails,
+you can pick up where you left off.</p>
+<p>Once <code>rsync</code> finishes running,
+you&rsquo;ll have downloaded a local copy of the Oath Keepers dataset to your
+<em>datasets</em> USB disk. You&rsquo;ll use this dataset again in Chapter 6, when you learn techniques for researching
+email dumps.</p>
+<p><strong>WARNING</strong> <em>Destroy your VPS from the DigitalOcean web console when you&rsquo;re done
+with it. Using it for an hour or two should cost you only a few cents,
+but the bill can get expensive if you don&rsquo;t pay attention.</em></p>
+<h3>Summary</h3>
+<p>In this chapter, you&rsquo;ve put your command line skills to the test,
+unzipping the compressed files in BlueLeaks and learning to quickly
+search and sort datasets. You also worked with servers in the cloud and
+briefly explored the Oath Keepers dataset.</p>
+<p>In the next chapter, you&rsquo;ll continue expanding your command line skills
+and learn two new tools: Docker, which allows you to run Linux software
+on any operating system, and Aleph, which allows you to search datasets
+by keyword.</p>
+        </div>
+    </section>
+    <section class="pagination">
+        <div class="wrapper" id="pagination-content"><p><a href="buy.html">Buy Now</a>
+<a href="contents.html">Contents</a>
+<a href="chapter-3.html">⬅️ Chapter 3</a>
+<a href="chapter-5.html">Chapter 5 ➡️</a>
+<a href="/">Back Home</a></p></div>
+    </section>
+    <section class="buy">
+        <div class="wrapper">
+            <h3>Information Wants to be Free</h3>
+            <p><strong>Everyone should have access to the information in this book.</strong> To remove barriers to access, I've made Hacks, Leaks, and Revelations available for free online under a <a href="license.html">Creative Commons license</a>. If you can afford it, show your support and <a href="buy.html">buy a copy</a> today!</p>
+        </div>
+    </section>
+    <footer id="footer">
+        <div class="wrapper" id="footer-content"><p>This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> / <a href="license.html">More Information</a></p></div>
+    </footer>
+</body>
+</html>
