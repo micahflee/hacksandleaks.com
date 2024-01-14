@@ -37,13 +37,2214 @@
     </header>
     <section class="intro bookIntro">
         <div class="wrapper" id="intro-wrapper">
-          <div id="reading-time">~0 min read</div>
+          <div id="reading-time">~74 min read</div>
           <h1>Chapter 12: Epik Fail, Extremism Research, and SQL Databases</h1>
-          
+          <p>On a Saturday morning in late October 2018 in Pittsburgh, Pennsylvania,
+Robert Bowers posted a message to the fascist-friendly social network
+Gab. &ldquo;Hebrew Immigrant Aid Society likes to bring invaders in that
+kill our people,&rdquo; he wrote. &ldquo;I can&rsquo;t sit by and watch my people get
+slaughtered. Screw your optics, I&rsquo;m going in.&rdquo; He was parroting the
+&ldquo;great replacement&rdquo; conspiracy theory, popularized in the US by former
+Fox News host Tucker Carlson, which claims that Jews are replacing white
+people with immigrants of color.</p>
         </div>
     </section>
     <section id="content" data-content="chapter-12">
-        <div class="wrapper" id="about-content">
+        <div class="wrapper" id="about-content"><p>Armed with an AR-15 assault rifle and three Glock semi-automatic
+pistols, Bowers entered the Tree of Life Synagogue, where three
+different Jewish congregations were holding Shabbat services that
+morning, and committed the deadliest
+antisemitic terrorist attack in US history. He killed 11 people and
+wounded 6 others, including several Holocaust survivors.</p>
+<p>That day, several companies kicked Gab off their platforms. GoDaddy, the
+registrar that Gab used to buy the domain gab.com, sent Gab a letter
+saying it had &ldquo;discovered numerous instances of content on your site
+that both promotes and encourages violence against people.&rdquo; Gab was down
+only for a few days, though, thanks in part to the domain name registrar
+and web hosting company Epik, which soon took over registration for
+gab.com.</p>
+<p>In this chapter, you&rsquo;ll learn about Epik, its extremist customers, and
+the 2021 data breach that exposed hundreds of gigabytes of customer
+data. You&rsquo;ll download and learn to work with some of the leaked data,
+most of which is in the format of structured query language, or SQL
+(often pronounced &ldquo;sequel&rdquo;). SQL is a popular database technology that
+many websites, online services, and local software use to store data.
+This chapter focuses on MySQL databases, which use the SQL software that
+Epik uses. You&rsquo;ll also practice using database software called MariaDB,
+a community-maintained version of MySQL. Finally, you&rsquo;ll learn to run a
+SQL server (software that allows you to host SQL databases), import the
+data, and write your own code to search it, skills that will prepare you
+for investigating your own SQL datasets in the future.</p>
+<h3>The Structure of SQL Databases</h3>
+<p>I have briefly discussed SQL databases in previous chapters, including
+Chapter 10, where you converted CSVs into
+SQLite databases for BlueLeaks Explorer. There are many types of SQL
+databases, including PostgreSQL, Microsoft SQL Server, Oracle SQL, and
+the aforementioned MySQL and SQLite. While they&rsquo;re all based on SQL,
+they have minor differences that mean they&rsquo;re not entirely compatible
+with each other. SQL databases are popular; therefore, so are SQL data
+breaches.</p>
+<p>Some SQL database software is proprietary. For example, Microsoft SQL
+Server is the version of SQL that Microsoft products require, and it
+runs only on Windows. Oracle is another proprietary version of SQL; if
+you get a leaked Oracle database, you&rsquo;ll need to use Oracle software to
+access it. PostgreSQL and MySQL are free and open source and run on
+Linux servers, making them popular and widely used in web development.
+SQLite is another free and open source version of SQL. It can&rsquo;t handle
+huge databases, but it&rsquo;s very simple and convenient for small
+ones&mdash;iPhone and Android apps frequently store their settings in a
+SQLite database, for example.</p>
+<p><strong>NOTE</strong> <em>Some datasets may require you to set up a SQL database server that you&rsquo;re unfamiliar with, or figure out how to convert them into a type of SQL you already know, in order to analyze them. I once contributed to an investigation based on a leaked Chinese police database that revealed the suffocating surveillance of China&rsquo;s Uyghur minority group in the Xinjiang region. It was an Oracle database, but it&rsquo;s unclear whether the Chinese police paid for it or were pirating it. Because Oracle is proprietary and the investigating technologists didn&rsquo;t have an Oracle license or experience with this version of SQL, they decided to convert it into a PostgreSQL database so they could more easily work with the data. Read the full report by Yael Grauer at <a href="https://theintercept.com/2021/01/29/china-uyghur-muslim-surveillance-police/">https://theintercept.com/2021/01/29/china-uyghur-muslim-surveillance-police/</a>.</em></p>
+<p>Next we&rsquo;ll look at what relational databases are, how SQL servers
+typically work, and the terminology used to describe SQL databases and
+the data they contain.</p>
+<h4>Relational Databases</h4>
+<p>SQL databases are made up of tables, which you can think of as
+spreadsheets comprising a list of rows, with each row containing the
+same columns, or <em>fields</em>. SQL databases are useful because they&rsquo;re
+<em>relational</em>, meaning that data in different tables can relate to each
+other. You saw this firsthand when working with BlueLeaks Explorer: the
+BlueLeaks folders had individual spreadsheets like <em>Documents.csv</em> and
+<em>DocumentCategory.csv</em>, but once you converted them into SQLite
+databases, you could rely on the relationship between the Documents and
+the DocumentCategory tables to browse BlueLeaks documents by category.</p>
+<p>Let&rsquo;s look at a simple example: a database that contains two related
+tables for books and authors. Table 12-1
+shows the information stored in the <code>authors</code> table.</p>
+<p><em>Table 12-1: The <code>authors</code> Table</em></p>
+<table>
+<thead>
+<tr>
+<th><code>id</code></th>
+<th><code>name</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Micah Lee</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Carl Sagan</td>
+</tr>
+</tbody>
+</table>
+<p>Table 12-2 shows the information stored in the <code>books</code> table.</p>
+<p><em>Table 12-2: The <code>books</code> Table</em></p>
+<table>
+<thead>
+<tr>
+<th><code>id</code></th>
+<th><code>title</code></th>
+<th><code>author_id</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Hacks, Leaks, and Revelations</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Pale Blue Dot</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Contact: A Novel</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Each SQL database can contain multiple tables, and each table has a
+defined set of fields. For example, Table 12-2 has <code>id</code>, <code>title</code>, and <code>author_id</code> fields.</p>
+<p>Every table in a SQL database normally has a unique <code>id</code> field that <em>auto-increments</em>, meaning
+that when you add rows of data to the table, the first row is
+automatically given an <code>id</code> of
+1, the second is given an <code>id</code>
+of 2, and so on, ensuring that no two rows ever have the same
+<code>id</code>. If Table 12-1 included two authors named Micah Lee, it
+would be clear in the database that they&rsquo;re not the same person, because
+the ID for each row would be different.</p>
+<p>In general, tables relate to each other using
+these unique ID numbers. Let&rsquo;s say you&rsquo;re browsing through the
+<code>books</code> table and come across
+<em>Contact: A Novel</em>. Who wrote it? According to the data in its row, the
+<code>author_id</code> is <code>2</code>. To find out who the author is, you&rsquo;d
+look at the <code>authors</code> table
+for the row with the <code>id</code> of
+<code>2</code> to find that it&rsquo;s Carl
+Sagan.</p>
+<p>This example deals with a small amount of data, but SQL databases can
+become huge and complicated. For example, instead of two authors, you
+might find a database with 10 million users and all sorts of tables that
+relate to it using a field called <code>user_id</code>.</p>
+<h4>Clients and Servers</h4>
+<p>Most types of SQL databases are <em>server</em> software, meaning you install a
+SQL server to hold all of the data. Other computers then use a SQL
+<em>client</em> to communicate with that server to search for, add, or update
+data. This communication is similar to how websites work: a web server
+has the software that runs the website, while a web browser (the client)
+connects to the server remotely to load web pages, submit forms, and so
+on. SQL clients communicate to servers using SQL queries, also known as
+<em>statements</em>. Similarly to English, SQL queries start with a <em>verb</em> that
+describes an action being taken and have <em>clauses</em> that further describe
+that action. All SQL queries end with semicolons (<code>;</code>).</p>
+<p>Each SQL server can host multiple databases. For example, you could run
+20 different WordPress websites on the same MySQL server by having each
+website use a different database. The Epik dataset includes data from
+nine different MySQL databases. If you downloaded them all, you could
+import all nine into the same MySQL server. Because much of the Epik
+data is in MySQL format, in Exercise 12-1 you&rsquo;ll run a MySQL server in
+Docker. Once you have a server running, you&rsquo;ll connect to it later using
+a client to import the data and begin your analysis.</p>
+<p>In this chapter, you&rsquo;ll try out two different MySQL clients: the
+web-based client Adminer and the <code>mysql</code> command line client, which allows you
+to interact with the database from the terminal. For MySQL, Adminer is
+more user-friendly for manually browsing a SQL database, but
+<code>mysql</code> is especially useful
+for working on remote servers and creating or restoring database
+backups. For a simpler introduction to working with clients, you&rsquo;ll use
+Adminer in the first half of this chapter, then move on to the command
+line client. All clients interact with servers in the same way, sending
+SQL queries to the SQL server, which runs them and returns a response.
+Therefore, the skills you learn using Adminer will also apply to the CLI
+client.</p>
+<p>SQL servers also normally have a system of users and permissions that
+allow you to grant a given user access to some databases but not others.
+The root user on MySQL and other databases has total access to every
+database on the server. When you&rsquo;re researching a leaked database, it&rsquo;s
+fine to run all of your searches as the root user since you&rsquo;re typically
+the only person using that server. However, if you&rsquo;re running a database
+that strangers online might use, such as a website powered by a SQL
+database, you should use non-root database users with restricted
+permissions. This way, if one of those strangers hacks your database,
+they&rsquo;ll have access only to what that specific database user has
+permissions for.</p>
+<h4>Tables, Columns, and Types</h4>
+<p>You can store only a single type of data in each column in a SQL table.
+For example, you can store strings, but not numerals, in the
+<code>title</code> column of Table 12-2 (though you could get around this by
+storing a string representation of a number, like the string
+<code>'1'</code> instead of the number
+<code>1</code>).</p>
+<p>Data types differ slightly depending on the flavor of SQL you&rsquo;re using.
+However, you&rsquo;ll generally see types representing numbers, times, or
+strings of text. The following list includes some common SQL types that
+are all valid in MySQL:</p>
+<blockquote>
+<p><code>INT</code> Integers or whole numbers</p>
+<p><code>DECIMAL</code> Numbers with decimal places</p>
+<p><code>DATE</code> A specific date</p>
+<p><code>DATETIME</code> A specific date, along with the time of day</p>
+<p><code>VARCHAR</code> A string of characters of a specified length</p>
+<p><code>TEXT</code> Also a string of text</p>
+</blockquote>
+<p>If Table 12-2 were stored in a MySQL
+database, <code>id</code> would be type
+<code>INT</code>, <code>title</code> would be type <code>TEXT</code>, and <code>author_id</code> would be type <code>INT</code>. If you tried storing the string
+<code>"hola"</code> in the
+<code>author_id</code> field, the SQL
+server would respond with an error message, because the data isn&rsquo;t an
+integer.</p>
+<blockquote>
+<h5>THE HISTORY OF MARIADB</h5>
+<p>MySQL was first released in 1995 as open source SQL database software maintained by the Swedish company MySQL AB. For nearly two decades it reigned as the most popular database for web apps, ushering in the early internet’s Web 2.0 era. Wildly popular web app software like WordPress, Drupal, Joomla, and MediaWiki (which powers Wikipedia) were all built on MySQL databases and developed in the PHP programming language.`</p>
+<p>In 2008, Sun Microsystems acquired MySQL AB, and with it the MySQL software. In 2009, Oracle announced that it was acquiring Sun Microsystems. The MySQL community had many concerns about the future of the project in Oracle’s hands, including that it would cease to be open source. In response, the database’s original creator, Michael “Monty” Widenius, forked MySQL into a new version, MariaDB, that would remain open forever. (<em>Forking</em> an open source project means starting a whole new open source project that’s based on the code of an existing project.) Many of the original MySQL developers stopped working on MySQL and moved to the MariaDB project.</p>
+<p>MariaDB is completely compatible with MySQL, and you can seamlessly switch between the two database servers and clients. The command line client that comes with MySQL will connect to a MariaDB server, and the command line client that comes with MariaDB will connect to a MySQL server. I’ve found that it’s easier to get MariaDB up and running than the original MySQL software, so you’ll use a MariaDB server for the exercises in this chapter. However, since MariaDB is completely compatible with MySQL, it’s common to use the terms interchangeably. I’ll refer to both as MySQL for the remainder of the chapter, except when referring to specific MariaDB software packages.</p>
+<p>When Widenius originally created MySQL, he named it after his daughter, My. When he forked MySQL into MariaDB in 2009, he named the new project after his youngest daughter, Maria.</p>
+</blockquote>
+<p>The simplest way to run a MariaDB server on your computer is by using
+Docker containers, like you did in Exercise 5-3 when you set up a local
+WordPress website as practice using Docker Compose. In the following
+exercises, you&rsquo;ll get a MySQL server up and running, connect to your new
+server using MySQL clients, and practice using SQL.</p>
+<h3>Exercise 12-1: Create and Test a MySQL Server Using Docker and Adminer</h3>
+<p>With Docker, you can quickly run different types of SQL servers on your
+computer, no matter what operating system you&rsquo;re running. In this
+exercise, you&rsquo;ll run a MariaDB server on your computer using Docker
+Compose. Once you have the server up and running, you&rsquo;ll use the Adminer
+MySQL client to add the contents of Tables 12-1 and 12-2 to
+it as a test. You&rsquo;ll move on to working with real leaked data later in
+the chapter, but you&rsquo;ll start by experimenting with some simple example
+databases.</p>
+<h4>Run the Server</h4>
+<p>Create a folder for this chapter&rsquo;s exercises and a <em>docker-compose.yaml</em>
+file in that folder. Type the following code into the file (or copy and
+paste it from
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-12/docker-compose.yaml">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-12/docker-compose.yaml</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.9&#39;</span><span class="w"></span>
+<span class="nt">services</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:10.9</span><span class="w"></span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">MARIADB_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">this-is-your-root-password</span><span class="w"></span>
+<span class="w">      </span><span class="nt">MARIADB_ROOT_HOST</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3306:3306</span><span class="w"></span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./db_data:/var/lib/mysql</span><span class="w"></span>
+
+<span class="w">  </span><span class="nt">adminer</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adminer</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080:8080</span><span class="w"></span>
+</code></pre></div>
+
+<p>The <em>docker-compose.yaml</em> file in Exercise 5-3 used a <code>db</code> service running MariaDB, and a
+<code>wordpress</code> service running
+the WordPress container. In that case, <code>wordpress</code> connected to <code>db</code> to run queries in order to save and
+load website content. This code uses an <code>adminer</code> service to likewise connect to the
+<code>db</code> service.</p>
+<p>The code provides the version number of the Compose specification with
+which the file is written (<code>3.9</code>). It then defines the two services and
+includes the version of the <code>mariadb</code> container image that the <code>db</code> service runs. It sets the database
+root user&rsquo;s password to <code>this-is-your-root-password</code> (change this to a different password
+if you like). As noted earlier, you&rsquo;ll work as the database&rsquo;s root user
+throughout this chapter, since you&rsquo;re the only one accessing this
+database. It publishes port 3306, meaning that you can connect to the
+server with a MySQL client on <em>localhost</em> at port 3306, and configures a
+volume to store all of MariaDB&rsquo;s database files in a <em>db_data</em> folder.
+You&rsquo;ll import several gigabytes of data into this database.</p>
+<p>The <code>adminer</code> service runs the
+latest version of the <code>adminer</code> container image. Adminer publishes
+port 8080, so you can load Adminer in a web browser at
+<em>http://localhost:8080</em>.</p>
+<p>Open a terminal, change to the folder for this chapter&rsquo;s exercises, and
+start the containers with the following command:</p>
+<div class="codehilite"><pre><span></span><code>docker-compose up
+</code></pre></div>
+
+<p>The first time you start the containers, your computer downloads the
+container images from Docker Hub, if you don&rsquo;t already have them. After
+the containers start, you should see that a <em>db_data</em> folder containing
+all of the data stored in the database so far has been added to your
+<em>exercises</em> folder.</p>
+<h4>Connect to the Database with Adminer</h4>
+<p>You just started two containers, one for your MySQL server and the other
+for your MySQL client, Adminer. Now you&rsquo;ll connect to Adminer and use it
+to log in to your MySQL server. To access Adminer, open a browser and
+load <em>http://localhost:8080</em>. You should
+see the Adminer login page shown in Figure
+12-1. Here you can choose the type of
+database to which you&rsquo;re connecting and what credentials you&rsquo;ll use to
+log in. Keep System as MySQL, keep Server as db, set Username to
+<strong>root</strong>, and set Password to <strong>this-is-your-root-password</strong> (or
+whatever you used in your <em>docker-compose.yaml</em> file). Leave the
+Database field blank, since you haven&rsquo;t imported any databases yet.</p>
+<p>Once you&rsquo;ve logged in, you should see a list of default databases:
+<code>information_schema</code>,
+<code>mysql</code>,
+<code>performance_schema</code>, and
+<code>sys</code>. MariaDB uses these to
+store information it needs to run the database server, so in general,
+you shouldn&rsquo;t touch them. Instead, you&rsquo;ll create new databases and work
+with them.</p>
+<p><img alt="Figure 12-1: The Adminer login page" src="media/images/Figure12-1.png" /><br />
+<em>Figure 12-1: The Adminer login page</em></p>
+<h4>Create a Test Database</h4>
+<p>To test out your new MySQL server, you&rsquo;ll create a brand-new database
+and enter Tables 12-1 and
+12-2. Click the <strong>Create Database</strong> link,
+enter <strong>books</strong> in the field that pops up, and click <strong>Save</strong>. Once
+you&rsquo;ve created the books database, click the <strong>Create Table</strong> link.
+Under Table Name, enter <strong>authors</strong>.</p>
+<p>To add a column in Adminer, you enter its name under the Column Name
+header and choose a data type. To enter the first column from Table
+12-1, create an <strong>id</strong> column and choose type
+<strong>int</strong> (short for &ldquo;integer,&rdquo; as mentioned earlier). Select the <strong>AI</strong>
+radio button, which sets this column to auto-increment. When you&rsquo;ve
+finished, create the second column, <strong>name</strong>, with type <strong>text</strong>.</p>
+<p>Figure 12-2 shows what the form should look
+like when you&rsquo;ve finished.</p>
+<p><img alt="Figure 12-2: Creating the authors" src="media/images/Figure12-2.png" /><br />
+<em>Figure 12-2: Creating the authors</em></p>
+<p>Click <strong>Save</strong> to finish creating the table in the database. Adminer
+should bring you to the structure page for your new table, showing you
+the two columns you just created. Your table should start out empty,
+without any rows.</p>
+<p>At the top of the window, you should see page navigation links (for
+example, MySQL ▸ db ▸ books in Figure
+12-2). Click <strong>books</strong> to return to the books
+database page, then click <strong>Create Table</strong> again to create Table
+12-2, giving it the name <strong>books</strong>. Add the
+following columns:</p>
+<ul>
+<li>An <strong>id</strong> column with type <strong>int</strong> and
+    <strong>AI</strong> checked</li>
+<li>A <strong>title</strong> column with type <strong>text</strong></li>
+<li>An <strong>author_id</strong> column</li>
+</ul>
+<p><strong>NOTE</strong> <em>Adminer is smart enough to determine on its own that the author_id
+column uses the <code>int</code>
+type and relates to the authors.id column, so it will automatically set
+the type to <code>authors</code>.</em></p>
+<p>Figure 12-3 shows what this form should look
+like once you&rsquo;ve added these columns.</p>
+<p><img alt="Figure 12-3: Creating the books table in Adminer" src="media/images/Figure12-3.png" /><br />
+<em>Figure 12-3: Creating the books table in Adminer</em></p>
+<p>Click <strong>Save</strong>. You&rsquo;ve now created a <code>books</code> database with two tables,
+<code>authors</code> and <code>books</code>, but there isn&rsquo;t any data in it yet.</p>
+<p>Now that you have a MySQL database running on your computer and access
+to the Adminer MySQL client, you&rsquo;re ready to run your own SQL queries.
+Your first queries will add the data from Tables 12-1 and 12-2
+into their corresponding MySQL tables.</p>
+<h3>Exercise 12-2: Query Your SQL Database</h3>
+<p>In this exercise, you&rsquo;ll learn the syntax of SQL queries. You&rsquo;ll be
+using MySQL, but the syntax is nearly identical to that of all other
+types of SQL, so this section should give you a solid foundation for
+writing SQL queries in general. You&rsquo;ll learn the different verbs and
+practice running SQL queries to add, update, delete, and most
+importantly, search the data in SQL databases.</p>
+<p>Make sure that your Docker containers from Exercise 12-1 are up, then
+load Adminer in your web browser at
+<em>http://localhost:8080</em>. Also make sure
+you&rsquo;ve logged in to your MySQL server as the root user, using the same
+password from the previous exercise. When you&rsquo;re ready, click the
+<strong>books</strong> database to begin.</p>
+<h4>INSERT Statements</h4>
+<p>So far the <code>books</code> database
+you created in Exercise 12-1 includes the tables <code>authors</code> and <code>books</code>, but those tables don&rsquo;t have any rows.</p>
+<p>To add new rows to your tables, you use the <code>INSERT</code> verb as follows:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+</code></pre></div>
+
+<p>In Adminer, click the <strong>SQL Command</strong> link in the left sidebar. In the
+empty field that pops up, enter the following <code>INSERT</code> queries:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Micah Lee&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Carl Sagan&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Hacks, Leaks, and Revelations&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Pale Blue Dot&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Contact: A Novel&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+
+<p>These commands insert all of the rows into the two tables in the
+database, one row at a time. The first two lines insert rows into the
+<code>authors</code> table, just setting
+the <code>name</code> field, while the
+last three lines insert rows into the <code>books</code> table, setting the <code>title</code> and <code>author_id</code> fields. These <code>INSERT</code> statements don&rsquo;t specify <code>id</code> values because the <code>id</code> field for both tables auto-increments,
+starting with <code>1</code>.</p>
+<p>While you don&rsquo;t need to set the <code>id</code> field when inserting into the
+<code>books</code> table, you do need to
+set the <code>author_id</code> field
+manually, which is how you tell the database who the author of each book
+is. Since the <code>authors</code> table
+started out empty, the author row for <code>Micah Lee</code> should have an <code>id</code> of <code>1</code> (as it was the first row added to the
+table), and the row for <code>Carl Sagan</code> should have an <code>id</code> of <code>2</code>. When the code inserts the
+<code>Hacks, Leaks, and Revelations</code> title, it sets
+<code>author"SANS_TheSansMonoCd_W5Regular_11"&gt;1</code>, and when it inserts the two books by
+Carl Sagan, it sets <code>author_id</code> to <code>2</code>.</p>
+<p><strong>NOTE</strong> <em>In this chapter I write SQL keywords like <code>INSERT</code> and <code>WHERE</code> in all caps, but doing so is
+just a popular convention. SQL keywords aren&rsquo;t case sensitive, so you
+can use <code>insert</code>,
+<code>where</code>,
+<code>select</code>, and so on
+if you prefer.</em></p>
+<p>Figure 12-4 shows the process of inserting
+data into the <code>authors</code> and
+<code>books</code> tables by running
+these five <code>INSERT</code> queries.</p>
+<p><img alt="Figure 12-4: Running INSERT queries in Adminer" src="media/images/Figure12-4.png" /><br />
+<em>Figure 12-4: Running INSERT queries in Adminer</em></p>
+<p>Once you&rsquo;ve entered this series of SQL queries
+into Adminer, click <strong>Execute</strong> to run them, which should insert all of
+these rows into your database. Click <strong>select</strong> in the left sidebar to
+view the new data in the database. Figure
+12-5 shows all of the rows in the
+<code>books</code> tables in Adminer.</p>
+<p><img alt="Figure 12-5: Viewing rows in the books table in Adminer" src="media/images/Figure12-5.png" /><br />
+<em>Figure 12-5: Viewing rows in the books table in Adminer</em></p>
+<p>Right above the table of data in Figure
+12-5, you can see the line
+<code>SELECT * from 'books' LIMIT 50</code> <code>(0.0002 s)</code>, which is the SQL statement Adminer
+executed to retrieve this data from the MySQL database, followed by the
+amount of time it took for the query to run.</p>
+<h4>SELECT Statements</h4>
+<p>While <code>INSERT</code> statements add
+information to SQL databases, <code>SELECT</code> statements ask a database for specific
+information. When investigating leaked SQL databases, you&rsquo;ll likely
+spend most of your time writing <code>SELECT</code> statements.</p>
+<p>You can use a <code>SELECT</code>
+statement to select all of the books by a certain author or, in the case
+of Epik data, all of the domain names registered by a specific person.
+Here&rsquo;s the general syntax:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...;</span><span class="w"></span>
+</code></pre></div>
+
+<p>When your SQL client runs a <code>SELECT</code> statement, the SQL server returns a
+table of data. To select everything in the <code>books</code> table, click the <strong>SQL Command</strong> link
+in Adminer&rsquo;s left sidebar and run the following query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This command uses an asterisk (<code>*</code>) as a wildcard character, which means
+you&rsquo;d like the response to include all columns. It also leaves out the
+<code>WHERE</code> clause, so it will include all of the
+rows in the <code>books</code> table
+without filtering them. Figure 12-6 shows
+these results in Adminer.</p>
+<p><img alt="Figure 12-6: Running a SELECT query in Adminer" src="media/images/Figure12-6.png" /><br />
+<em>Figure 12-6: Running a SELECT query in Adminer</em></p>
+<p>After running a <code>SELECT</code>
+query, click Adminer&rsquo;s <strong>Export</strong> link to export the data returned as a
+CSV spreadsheet. The options in the first drop-down menu are <em>open</em>,
+which allows you to open a CSV directly in your browser; <em>save</em>, used to
+download the CSV; and <em>gzip</em>, which lets you download a compressed
+version of the CSV. The three options in the second drop-down menu allow
+you to save the file with data separated by commas, semicolons, or tab
+characters.</p>
+<p>You can open spreadsheets created this way in software like Microsoft
+Excel or LibreOffice Calc and work with the data using that software.
+This makes it easier to share the data with colleagues or use advanced
+features like visualizing the data.</p>
+<h5>Selecting Individual Fields</h5>
+<p>You previously ran the <code>SELECT * FROM table_name</code> query to select all the
+columns in a table, but you can also choose only specific columns. Say
+you want to return only a list of titles in the table. Select the
+<code>title</code> field alone with this
+query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>Instead of including all columns, this table includes only the book
+titles. The SQL server should return the results shown in Table 12-3. (For the remainder of this section, for simplicity&rsquo;s sake, I&rsquo;ll represent the information returned from SQL
+queries as tables in text rather than Adminer screenshots.)</p>
+<p><em>Table 12-3: The <code>title</code> Column in the <code>books</code> Table</em></p>
+<table>
+<thead>
+<tr>
+<th><code>title</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hacks, Leaks, and Revelations</td>
+</tr>
+<tr>
+<td>Pale Blue Dot</td>
+</tr>
+<tr>
+<td>Contact: A Novel</td>
+</tr>
+</tbody>
+</table>
+<p>When you&rsquo;re working with larger databases, select only the columns you
+need so your queries will finish faster.</p>
+<h5>Sorting Results</h5>
+<p>Use the <code>ORDER BY</code> clause to
+sort the results of your queries. For example, to select all of the
+columns in the <code>books</code> table,
+with the results sorted by the book title, run this query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">title</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>The results of this query will be ordered alphabetically by the title
+column, as shown in Table 12-4.</p>
+<p><em>Table 12-4: All Columns in the <code>books</code> Table, Ordered by the <code>title</code> Column</em></p>
+<table>
+<thead>
+<tr>
+<th><code>id</code></th>
+<th><code>title</code></th>
+<th><code>author_id</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>Contact: A Novel</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Hacks, Leaks, and Revelations</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Pale Blue Dot</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>By default, results are sorted in ascending order: text fields are
+ordered alphabetically; number fields are ordered from smallest to
+largest; and date fields are ordered from earliest to latest. You can
+sort the results in descending order by using the <code>DESC</code> keyword. For example, use the
+following query to select all of the books, ordered by <code>title</code> column in reverse alphabetical order:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>You can also sort results by more than one column. For example, to first
+order the books by <code>author_id</code>
+(so the results will include all books by author 1 first, then by author
+2, and so on), and then by <code>title</code> (so that within each author&rsquo;s list of
+books, the books are sorted by title), run this query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">author_id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This should order the results first by <code>author_id</code>, then by <code>title</code>, as shown in Table
+12-5.</p>
+<p><em>Table 12-5: All Columns in the <code>books</code> Table, Ordered by <code>author_id</code> and <code>title</code></em></p>
+<table>
+<thead>
+<tr>
+<th><code>id</code></th>
+<th><code>title</code></th>
+<th><code>author_id</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Hacks, Leaks, and Revelations</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Contact: A Novel</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Pale Blue Dot</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>In this case, all of the books by the author with <code>author_id</code> of <code>1</code> (Micah Lee) are shown first, and the
+books by the author with <code>author_id</code> of <code>2</code> (Carl Sagan) are shown next. The books
+for each author are then sorted alphabetically by <code>title</code>.</p>
+<h5>Counting Rows in a Table</h5>
+<p>SQL databases have built-in functions you can run as part of your
+queries. For example, to find out how many rows are in the
+<code>books</code> table, use the
+<code>COUNT()</code> function:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>After you run this command, the SQL server should return the results
+shown in Table 12-6.</p>
+<p><em>Table 12-6: Counting the Number of Rows in the <code>books</code> Table</em></p>
+<table>
+<thead>
+<tr>
+<th><code>COUNT(*)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>Selecting <code>COUNT(*)</code> from a
+table is considerably faster than selecting all of the rows in that
+table and then counting them.</p>
+<h5>Filtering SELECT Results with WHERE Clauses</h5>
+<p>You can also filter the results you get back using the <code>WHERE</code> clause. For instance, to find the
+titles of books written by Micah Lee, run the following query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author_id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>The SQL server should return the results shown in Table 12-7.</p>
+<p><em>Table 12-7: The <code>title</code> of <code>books</code> Where <code>author</code> is Micah Lee</em></p>
+<table>
+<thead>
+<tr>
+<th><code>title</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hacks, Leaks, and Revelations</td>
+</tr>
+</tbody>
+</table>
+<p>Similarly to Python <code>if</code>
+statements, the <code>WHERE</code> clause
+also supports parentheses and Boolean logic operators <code>AND</code> and <code>OR</code>, as well as the comparison
+operators greater than (<code>&gt;</code>), greater than or equal to
+(<code>&gt;=</code>), less than (<code>&lt;</code>), and less than or equal to
+(<code>&lt;=</code>). For example, say you
+want to search for books with an <code>id</code> between 10 and 100, including the
+number 10 but not the number 100. Try that out with the following query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>You can use the equals (<code>=</code>)
+operator to search for exact strings. For example, run the following
+command to find all of the authors with the name Carl Sagan:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Carl Sagan&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This search is case sensitive, so while it would find authors named Carl
+Sagan, it wouldn&rsquo;t find authors named CARL SAGAN or carl sagan. For a
+case-insensitive search, use the <code>LIKE</code> operator. Try running the following
+command:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;carl sagan&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This command finds authors named Carl Sagan, CARL SAGAN, carl sagan, or
+any other capitalization.</p>
+<p>The <code>LIKE</code> operator supports
+the wildcard character, the percent sign (<code>%</code>), which will match any characters.
+Querying the <code>authors</code> table
+where <code>name LIKE '%lee%'</code> will
+search for rows where <code>name</code>
+contains any number of characters (<code>%</code>), followed by <code>lee</code>, followed by any number of characters
+again (<code>%</code>). For example, to
+find all of the authors with Lee in their names, run:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%lee%&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This query returns the row with the name <code>Micah Lee</code>, but it would also return Stan Lee,
+Lee Young-ae, and Andrea Leeds.</p>
+<p>To search just for people with the last name Lee, run this query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;% lee&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>In this case, there&rsquo;s only one wildcard character at the beginning of
+the string, followed by a space, followed by <code>lee</code>. This query will return Stan Lee,
+since this name matches any number of characters, followed by a space,
+followed by <code>lee</code>. However, it
+won&rsquo;t return Lee Young-ae; this name matches any number of characters
+but has no space followed by <code>lee</code>, and it contains extra characters
+after <code>lee</code>.</p>
+<p>Using logical operators, you can combine as many conditions as you want.
+For example, to look for books written by Carl Sagan that have the word
+<em>blue</em> in their titles, run this query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author_id</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%blue%&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>You could expand on that query by running the
+following query to also check for books with <em>green</em> or <em>red</em> in their
+titles:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"></span>
+<span class="w">    </span><span class="n">author_id</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%red%&#39;</span><span class="w"> </span><span class="k">OR</span><span class="w"></span>
+<span class="w">        </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%green%&#39;</span><span class="w"> </span><span class="k">OR</span><span class="w"></span>
+<span class="w">        </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%blue%&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+
+<p>This query uses both the logical operators <code>AND</code> and <code>OR</code>, as well as parentheses. When you run
+it, the SQL server will reject any rows where <code>author_id</code> isn&rsquo;t <code>2</code> and where <code>title</code> doesn&rsquo;t contain at least one of the
+strings <code>red</code>, <code>green</code>, or <code>blue</code>.</p>
+<p>This final query has multiple lines, with some of them indented. As your
+queries get longer, using whitespace like this can make your SQL queries
+easier to read. In general, I tend to write short queries on a single
+line and split longer queries into multiple lines. You&rsquo;ll continue
+indenting your queries in the following sections.</p>
+<p>You should now have a basic understanding of how to select data from a
+table in a SQL database. In the next section, you&rsquo;ll learn to select
+data from multiple tables at once.</p>
+<h4>JOIN Clauses</h4>
+<p>Because SQL databases are relational, you can select data from and
+receive results from columns from multiple tables simultaneously using
+<code>JOIN</code> clauses. You can think
+of these clauses as the SQL server combining (joining) multiple tables
+into a single table, then selecting rows from that combined table.</p>
+<p>For example, say you want to write a single query that will return a
+table of book titles and their authors, relying on the <code>title</code> field in the <code>books</code> table and the <code>name</code> field in the <code>authors</code> table. Run the query in Listing 12-1 to select a table of results from
+columns in those two tables at once.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">books</span><span class="p">.</span><span class="n">title</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">authors</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"></span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">id</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 12-1: Selecting from both the <code>books</code> and the <code>authors</code> tables using the <code>JOIN</code> clause</em></p>
+<p>Since this query involves more than one table, you must specify the
+names of the columns you want to select in the format
+<code>table_name.column_name</code>. The SQL query selects the
+book title with <code>books.title</code>
+and the author name with <code>authors.name</code>. The <code>FROM</code> clause shows that this query is
+selecting <em>from</em> the <code>books</code> table and joining this table with the
+<code>authors</code> table. The
+<code>JOIN</code> clause explains how the
+two tables are related: the SQL server knows that a <code>books</code> row is related to an <code>authors</code> row if the value of
+<code>books.author_id</code> matches the
+value of <code>authors.id</code>.</p>
+<p>When you run this query, the SQL database uses the
+<code>books.author_id=authors.id</code> relationship specified in the
+<code>JOIN</code> clause to build the
+combined table shown in Table 12-8, from
+which it can then select rows.</p>
+<p><em>Table 12-8: The <code>books</code> and <code>authors</code> Tables, Combined on <code>books.author_id = authors.id</code></em></p>
+<table>
+<thead>
+<tr>
+<th><code>books.id</code></th>
+<th><code>books.author_id</code></th>
+<th><code>books.title</code></th>
+<th><code>authors.id</code></th>
+<th><code>authors.name</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>Hacks, Leaks, and Revelations</td>
+<td>1</td>
+<td>Micah Lee</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>Pale Blue Dot</td>
+<td>2</td>
+<td>Carl Sagan</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>Contact: A Novel</td>
+<td>2</td>
+<td>Carl Sagan</td>
+</tr>
+</tbody>
+</table>
+<p>Each row in this combined table includes all of the columns from both
+the <code>books</code> and the
+<code>authors</code> tables. First,
+notice that the value in each row for <code>books.author_id</code> is the same as the
+<code>authors.id</code> value. This is
+because of the <code>books.author_id=authors.id</code> relationship specified in the
+<code>JOIN</code> clause. In each row,
+the books fields contain full rows from the <code>books</code> table, and the authors fields contain
+full rows from the <code>authors</code>
+table. Since Carl Sagan has two books in this database, his books take
+up two rows in the combined table.</p>
+<p>The <code>SELECT</code> query in Listing 12-1 selects the columns
+<code>books.title</code> and
+<code>authors.name</code> from this
+combined table. This final result of the query should contain the
+information in Table 12-9.</p>
+<p><em>Table 12-9: Results from the Query in Listing 12-1</em></p>
+<table>
+<thead>
+<tr>
+<th><code>title</code></th>
+<th><code>name</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hacks, Leaks, and Revelations</td>
+<td>Micah Lee</td>
+</tr>
+<tr>
+<td>Pale Blue Dot</td>
+<td>Carl Sagan</td>
+</tr>
+<tr>
+<td>Contact: A Novel</td>
+<td>Carl Sagan</td>
+</tr>
+</tbody>
+</table>
+<p>The SQL server responds with a single table of rows that contains fields
+from both tables, based on the <code>books.author_id=authors.id</code> relationship specified in the
+<code>JOIN</code> clause.</p>
+<p>The type of join described in this section is technically called an
+<code>INNER JOIN</code>, which is the
+default type of join in MySQL. In addition to <code>INNER</code> joins, however, you can also use
+<code>LEFT</code> and <code>RIGHT</code> joins.</p>
+<h5>Using LEFT and RIGHT Joins</h5>
+<p>There are two additional ways to join tables together in SQL:
+<code>LEFT JOIN</code> and
+<code>RIGHT JOIN</code> queries. Each
+time you join two tables, the table from which you&rsquo;re selecting is the
+&ldquo;left&rdquo; table (<code>books</code>, in the
+previous example). The table with which you&rsquo;re joining is the &ldquo;right&rdquo;
+table (<code>authors</code>, in this
+case). <code>LEFT JOIN</code> means that
+the combined table should contain all of the rows from the left
+table, but not necessarily all of the rows from
+the right table. As you might guess, <code>RIGHT JOIN</code> means that the combined table should
+contain all the rows in the right table, but not necessarily those from
+the left. Finally, as you saw in the previous section,
+<code>INNER JOIN</code> means that the
+results should contain only rows where the relationship holds. That is,
+if there are any rows in the left table that don&rsquo;t match any rows in the
+right table&mdash;and vice versa&mdash;based on the join relationship, then
+those rows won&rsquo;t be included in the results.</p>
+<p>To demonstrate how this works, use the following query to add a row to
+the <code>authors</code> table, replacing
+<code>Your Name</code> with your
+own name:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Your Name&#39;</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+
+<p>Now run the query in Listing 12-2.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">books</span><span class="p">.</span><span class="n">title</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">authors</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"></span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">id</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 12-2: Selecting from the <code>authors</code> table and doing a <code>LEFT JOIN</code> to the <code>books</code> table</em></p>
+<p>This query is similar to the one in Listing 12-1, but this time it selects from the
+<code>authors</code> table (making it the
+left table) and joins it with the <code>books</code> table (making that the right table),
+using a <code>LEFT JOIN</code> instead of
+an <code>INNER JOIN</code>. The results
+of that query contain the information in Table 12-10.</p>
+<p><em>Table 12-10: Results from a <code>LEFT JOIN</code> Query, with the Left Table Containing More Rows</em></p>
+<table>
+<thead>
+<tr>
+<th><code>title</code></th>
+<th><code>name</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hacks, Leaks, and Revelations</td>
+<td>Micah Lee</td>
+</tr>
+<tr>
+<td>Pale Blue Dot</td>
+<td>Carl Sagan</td>
+</tr>
+<tr>
+<td>Contact: A Novel</td>
+<td>Carl Sagan</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td><em>Your Name</em></td>
+</tr>
+</tbody>
+</table>
+<p>Table 12-10 has an extra row that the
+output of Listing 12-1 didn&rsquo;t have. In this
+row, the book <code>title</code> column
+is <code>NULL</code>, a SQL term meaning
+&ldquo;empty,&rdquo; and the author <code>name</code>
+column is your own name. Because this is a <code>LEFT JOIN</code>, the results include all rows from the
+left table (<code>authors</code>), even
+though there aren&rsquo;t any rows from the right table (<code>books</code>) associated with it in the
+relationship.</p>
+<p>If you ran the same query as Listing 12-2
+but instead used an <code>INNER JOIN</code> (or just a <code>JOIN</code>, since inner joins are the default
+join type), the results wouldn&rsquo;t include that last row. Your
+<code>LEFT JOIN</code> results included
+all rows from the left table (<code>authors</code>), including the extra author you added
+(your own name). But when you do an <code>INNER JOIN</code>, the results include only rows from
+the left and right tables where a relationship holds. Since there aren&rsquo;t
+any books with the <code>books.author_id</code> set to your own <code>author.id</code>, the relationship doesn&rsquo;t hold, so the
+results don&rsquo;t include that row.</p>
+<p>Which type of <code>JOIN</code> you need
+to use depends on the type of analysis you&rsquo;re trying to do.
+<code>INNER JOIN</code> is a reasonable
+default, but if the SQL results you&rsquo;re getting are missing data that you
+want, then you&rsquo;ll probably want to use a <code>LEFT JOIN</code> instead.</p>
+<h5>Using WHERE Clauses with Joins</h5>
+<p>As with other <code>SELECT</code>
+statements, you can use the <code>WHERE</code> clause along with <code>JOIN</code> clauses to filter your results. To
+find all titles written by Carl Sagan without knowing what his
+<code>id</code> is in the
+<code>authors</code> table, run this
+query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">title</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"></span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Carl Sagan&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This query selects the column <code>books.title</code> from the <code>books</code> table and joins it with the
+<code>authors</code> table using the
+<code>books.author_id=authors.id</code> relationship. It then filters those
+results to only show the rows where <code>authors.name</code> is Carl Sagan. This query should
+return the results shown in Table 12-11.</p>
+<p><em>Table 12-11: Selecting from the <code>books</code> Table Based on a Column in the Related <code>authors</code> Table</em></p>
+<table>
+<thead>
+<tr>
+<th><code>title</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pale Blue Dot</td>
+</tr>
+<tr>
+<td>Contact: A Novel</td>
+</tr>
+</tbody>
+</table>
+<p>As with the other <code>SELECT</code>
+statement, you can also sort your results. If you wanted to sort these
+by title, you&rsquo;d add <code>ORDER BY books.title</code> to the query.</p>
+<p>You&rsquo;ve now learned the trickiest parts of searching SQL databases for
+information. Next, we&rsquo;ll discuss two more simple SQL verbs:
+<code>UPDATE</code> and <code>DELETE</code>.</p>
+<h4>UPDATE Statements</h4>
+<p>You can update rows in a table using the <code>UPDATE</code> verb, which uses this syntax:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">column1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>For example, try updating this book&rsquo;s title to include its subtitle by
+running the follow query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">books</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data&#39;</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This should have updated the <code>title</code> of the book with the <code>id</code> of <code>1</code> from
+<code>Hacks, Leaks, and Revelations</code> to
+<code>Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data</code>.</p>
+<h4>DELETE Statements</h4>
+<p>To delete rows in a table, use the <code>DELETE</code> verb, which takes the following
+syntax:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>For example, you could delete the
+<code>Hacks, Leaks, and Revelations</code> book from the database by running this
+query (but don&rsquo;t do this now, as you&rsquo;ll want to keep this row for
+exercises later in the chapter):</p>
+<div class="codehilite"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>In this case, the condition is <code>id``=1</code>, so this query finds any rows with an
+<code>id</code> of 1 and deletes them.
+Alternatively, if you wanted to delete all of the books with me as the
+author, the condition could be <code>author_id=1</code>. Or if you wanted to delete all of the
+books with <em>blue</em> in their titles, the condition could be
+<code>title LIKE '%blue%'</code>.</p>
+<h3>Introducing the MySQL Command Line Client</h3>
+<p>So far, you&rsquo;ve run all of your SQL queries through Adminer for a simpler
+user experience as you learned the basics of SQL. MySQL clients like
+Adminer work well for everyday tasks like browsing data in databases,
+running individual queries, and quickly creating new tables. However,
+for some tasks, you&rsquo;ll need to use the <code>mysql</code> command line client.</p>
+<p>For example, later in this chapter, you&rsquo;ll use the <code>mysql</code> client to import data from a SQL
+backup file from the Epik dataset into your MySQL server. SQL backup
+files are simply text files, generally with filenames that end in
+<em>.sql</em>, full of SQL queries&mdash;sometimes several gigabytes of SQL
+queries. To import the backup, the client runs each query in the file,
+one after the other. Adminer&rsquo;s import feature allows you to upload a
+<em>.sql</em> file, but the Adminer Docker service has an upload limit of 128MB
+by default. The SQL backup from the Epik dataset you&rsquo;ll work with later
+in this chapter is 1.2GB compressed, so it would be impossible to import
+it using Adminer. (Once you import it, however, you can use either
+client to run queries on the data.)</p>
+<p>The MySQL command line client is also useful for working on remote
+servers, which I&rsquo;ll discuss later in the chapter. After you SSH into a
+server on the cloud, you can use the <code>mysql</code> command to connect to the MySQL
+service and then run SQL queries there.</p>
+<p>The command line client isn&rsquo;t ideal for all tasks. For example, if your
+query results include many columns, each line of output might be wider
+than your terminal window, causing the output to wrap, which makes it
+very difficult to read. Moreover, the command line client displays all
+the output in your terminal. If you&rsquo;re
+running many queries, it might be cumbersome to scroll back through your
+terminal history to find specific results that you ran previously. For
+everyday queries, it&rsquo;s easier to use a graphical client like Adminer.</p>
+<blockquote>
+<h4>PYTHON AND MYSQL</h4>
+<p>You can also consider writing Python code that interacts with MySQL databases, where your Python script acts as the SQL client. For example, you wrote Python scripts in Chapter 9 that loop through every row in a CSV and then run a block of code; you might want to similarly loop through every row returned in response to a <code>SELECT</code> query. To write Python code that connects to a MySQL database and runs queries, you can use a module called <code>PyMySQL</code>. For Python code that runs SQL queries, the table of data often isn’t displayed—instead, it’s stored in a variable, typically a list of dictionaries that you can loop through. For more information, see the documentation for the <code>PyMySQL</code> module at <a href="https://pymysql.readthedocs.io">https://pymysql.readthedocs.io</a>.</p>
+</blockquote>
+<p>So far, you&rsquo;ve seen SQL query results displayed in Adminer as HTML
+tables. If you run the same queries using the <code>mysql</code> client, the data will be displayed as
+text in your terminal. You&rsquo;ll test this in Exercise 12-3.</p>
+<h3>Exercise 12-3: Install and Test the Command Line MySQL Client</h3>
+<p>In this exercise, you&rsquo;ll install and practice using the MariaDB command
+line client <code>mysql</code>, which has
+the same name and works in the same way as the official MySQL client.</p>
+<p>Start by opening a terminal. If you&rsquo;re using a Mac, install it in
+Homebrew by running this command:</p>
+<div class="codehilite"><pre><span></span><code>brew install mariadb
+</code></pre></div>
+
+<p>If you&rsquo;re using Linux or Windows with WSL, install it by running this
+command:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt install mariadb-client
+</code></pre></div>
+
+<p>You can now use the <code>mysql</code>
+command to connect to your MySQL database. To do so, run the following
+command:</p>
+<div class="codehilite"><pre><span></span><code>mysql -h localhost --protocol<span class="o">=</span>tcp -u root -p
+</code></pre></div>
+
+<p>The <code>-h</code> argument (short for
+<code>--host</code>) tells the client the
+IP address or hostname of the MySQL server to which you want to connect.
+In this case, the hostname is
+<code>localhost</code>, since the server
+is running locally on your computer. The <code>--protocol``=tcp</code> argument tells the MySQL client to
+connect to the server over the network, which is required when you&rsquo;re
+running the server in a Docker container. The <code>-u</code> argument (short for <code>--user</code>) tells the client that you&rsquo;re logging
+in as the root user, in this case. Finally, <code>-p</code> (short for <code>--password</code>) tells the client that this user is
+protected with a password.</p>
+<p>After you run the <code>mysql</code>
+command, press <strong>ENTER</strong>. The MySQL client should prompt you to
+type the root user&rsquo;s password:</p>
+<div class="codehilite"><pre><span></span><code>Enter password:
+</code></pre></div>
+
+<p>Once you enter the correct password, you should end up in the MySQL
+shell:</p>
+<div class="codehilite"><pre><span></span><code>Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 104
+Server version: 10.9.4-MariaDB-1:10.9.4+maria~ubu2204 mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.
+MariaDB [(none)]&gt;
+</code></pre></div>
+
+<p>From here, you can run all the same SQL queries you did in Adminer.
+However, to work in the command line client, you&rsquo;ll need to know a few
+additional queries.</p>
+<h3>MySQL-Specific Queries</h3>
+<p>Queries like <code>INSERT</code> and
+<code>SELECT</code> are typically nearly
+identical between different versions of SQL, but each version has unique
+queries for actions like returning a list of databases in the server or
+a list of tables in a database. To navigate around a MySQL server from
+the command line client, you&rsquo;ll need to know the following
+MySQL-specific queries:</p>
+<blockquote>
+<p><code>SHOW DATABASES;</code> Shows a list of all of the databases on your MySQL server</p>
+<p><code>USE database_name;</code> Switches you into a specific database, so you can start running queries there</p>
+<p><code>SHOW TABLES;</code> Shows a list of all of the tables in the currently selected database</p>
+<p><code>DESCRIBE TABLE table_name;</code> Shows you the columns in a table</p>
+</blockquote>
+<p>There are other MySQL-specific queries, but these are all you&rsquo;ll need to
+know for the purposes of this book.</p>
+<p><strong>NOTE</strong> <em>Technically, Adminer uses these queries too, but it runs them for you
+in the background. When you use the command line client, you have to run
+them yourself. For example, when Adminer showed you a list of databases,
+it ran <code>SHOW DATABASES</code>; for you in order to find the
+list; when you selected the <code>books</code> database, technically
+it ran <code>USE books</code>; for you.</em></p>
+<p>Let&rsquo;s test these queries. Run the following command to list all of the
+available databases on your MySQL server:</p>
+<div class="codehilite"><pre><span></span><code>MariaDB [(none)]&gt; SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| books              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.068 sec)
+</code></pre></div>
+
+<p>The result of this query lists all of the databases in this MySQL
+server. In this case, it lists the <code>books</code> database you created in Exercise 12-1
+and the four databases that come with MySQL by default.</p>
+<p>Switch to the <code>books</code>
+database:</p>
+<div class="codehilite"><pre><span></span><code>MariaDB [(none)]&gt; USE books;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [books]&gt;
+</code></pre></div>
+
+<p>After you run <code>USE books;</code>,
+the prompt should change from <code>MariaDB [(none)]&gt;</code> to <code>MariaDB [books]&gt;</code>, letting you know which database is
+currently selected. When you run normal SQL queries with verbs like
+<code>SELECT</code> or <code>INSERT</code>, they&rsquo;ll run in the currently selected
+database.</p>
+<p>Now that you&rsquo;ve selected a database, list all of its tables with the
+following command:</p>
+<div class="codehilite"><pre><span></span><code>MariaDB [books]&gt; SHOW TABLES;
++-----------------+
+| Tables_in_books |
++-----------------+
+| authors         |
+| books           |
++-----------------+
+2 rows in set (0.025 sec)
+</code></pre></div>
+
+<p>This database has two tables, <code>authors</code> and <code>books</code>. List all of the columns in the
+<code>books</code> table:</p>
+<div class="codehilite"><pre><span></span><code>MariaDB [books]&gt; DESCRIBE books;
++-----------+---------+------+-----+---------+----------------+
+| Field     | Type    | Null | Key | Default | Extra          |
++-----------+---------+------+-----+---------+----------------+
+| id        | int(11) | NO   | PRI | NULL    | auto_increment |
+| title     | text    | NO   |     | NULL    |                |
+| author_id | int(11) | NO   | MUL | NULL    |                |
++-----------+---------+------+-----+---------+----------------+
+3 rows in set (0.023 sec)
+</code></pre></div>
+
+<p>This displays a table of data with each row representing a different
+column in the table that you&rsquo;re describing, including all of the
+attributes of each column. For example, you can see that the
+<code>id</code> column has the type of
+<code>int</code> and is set to
+auto-increment.</p>
+<p>The queries you just ran return information about the MySQL server
+itself&mdash;what databases it contains, what tables those databases
+contain, and what columns are in each table. You can also query for the
+data stored in the database itself. For example, try running the
+following query to get a list of all of the books stored in the
+<code>books</code> table:</p>
+<div class="codehilite"><pre><span></span><code>MariaDB [books]&gt; SELECT * FROM books;
++----+-------------------------------+-----------+
+| id | title                         | author_id |
++----+-------------------------------+-----------+
+|  1 | Hacks, Leaks, and Revelations |         1 |
+|  2 | Pale Blue Dot                 |         2 |
+|  3 | Contact: A Novel              |         2 |
++----+-------------------------------+-----------+
+3 rows in set (0.012 sec)
+</code></pre></div>
+
+<p>You can run any of the queries that you ran in Adminer using the CLI
+client, and the rows will be displayed in your terminal.</p>
+<p>At any point, you can run <code>exit</code> to quit:</p>
+<div class="codehilite"><pre><span></span><code>MariaDB [(books)]&gt; exit
+Bye
+</code></pre></div>
+
+<p>This will drop you back into your terminal.</p>
+<p>You&rsquo;ve made it through the crash course on SQL and are ready to start
+tackling real data! In the rest of the chapter, you&rsquo;ll learn more about
+Epik and its massive data breach, then download and analyze a MySQL
+database backup from the Epik dataset.</p>
+<h3>The History of Epik</h3>
+<p>Epik, a Seattle-area company founded by Rob Monster in 2009, has long
+provided domain name and web hosting services to neo-Nazi and far-right
+websites. Its customers have included the notorious neo-Nazi website
+the Daily Stormer, the conspiracy website
+InfoWars, the Proud Boys hate group, and the Oath Keepers right-wing
+militia, which you learned about in Chapter 6. After Gab moved to Epik, Monster baselessly
+claimed that much of the hate speech on Gab was posted by liberals who
+wanted to make the service look bad.</p>
+<p>As I mentioned in this chapter&rsquo;s introduction, in October 2018, Robert
+Bowers posted a message to Gab shortly before committing the deadliest
+antisemitic terrorist attack in US history. GoDaddy deplatformed Gab, so
+it moved its domain hosting service to Epik. This wasn&rsquo;t the only time
+that Epik helped save a far-right platform that was getting deplatformed
+after a mass shooting.</p>
+<p>In addition to helping save Gab, Epik started hosting the domain name
+for the far-right message board then known as 8chan (now rebranded as
+8kun) after a similar mass shooting in 2019. Patrick Crusius posted a
+manifesto to 8chan shortly before killing 23 people and injuring 23 more
+in a Walmart in El Paso, Texas, the deadliest anti-Latino terrorist
+attack in recent US history. Crusius&rsquo;s manifesto also spouted the &ldquo;great
+replacement&rdquo; conspiracy theory. After the attack, Cloudflare suspended
+8chan&rsquo;s service, but Epik was there to quickly bring the site back
+online.</p>
+<p>Epik also handled domain hosting for Parler, the social media site
+discussed in the previous chapter, after various platforms banned it in
+the aftermath of the deadly January 6, 2021, attack on the US Capitol.
+Epik has since become a popular domain name registrar for far-right and
+conservative websites worried about getting deplatformed. America&rsquo;s
+Frontline Doctors, the anti-vaccine disinformation group I discuss in
+the following chapter, has also registered its domains with Epik, though
+it&rsquo;s not at risk of being deplatformed.</p>
+<p>In this section, you&rsquo;ll learn about the history and motivation behind
+the Epik hack and the type of information this dataset contains.</p>
+<h4>The Epik Hack</h4>
+<p>On September 1, 2021, less than a year before the US Supreme Court&rsquo;s
+2022 decision to overturn the constitutional right to abortion, the
+state of Texas passed the most restrictive abortion law in the US&mdash;more
+restrictive, at the time, than any law passed since the 1973 Supreme
+Court decision Roe v. Wade. The Texas Heartbeat Act banned abortions six
+weeks after pregnancy, before many people even realize they&rsquo;re pregnant.
+The law is enforced by civil lawsuits: any member of the public who
+believes in forced birth can sue anyone who performs or facilitates
+abortions, creating a chilling effect for reproductive health care.</p>
+<p>An anti-abortion lobbyist group quickly set up a website by the name
+ProLifeWhistleblower.com, inviting the public to anonymously submit
+private details about people they believed were obtaining or
+facilitating abortions. GoDaddy kicked the group off its platform,
+citing a violation of its terms of service, so the site switched its
+domain hosting to Epik. Epik soon caved to public pressure and likewise
+stopped providing service, but this was enough to catch the attention of
+hackers.</p>
+<p>In September and October of 2021, in a series
+of hacks dubbed Operation Epik Fail, hackers identifying with Anonymous
+hacked Epik incredibly thoroughly, releasing hundreds of gigabytes of
+data on BitTorrent. DDoSecrets downloaded a copy of this data, added it
+to its leak archive, and also made it accessible to download from its
+public data server, rather than just using BitTorrent. Most data
+breaches expose a database, a collection of email, or a cache of
+documents. This breach included all of these, along with bootable disk
+images from Epik&rsquo;s servers&mdash;essentially, the entire hard disks that
+powered its servers. You could use bootable disk images to run a
+snapshot of Epik&rsquo;s complete servers in a virtual machine. With some
+work, this would allow you to rifle through <em>everything</em> hosted on these
+servers.</p>
+<p>The hackers published their leaks in three parts over the course of four
+weeks. In a press release accompanying the first data leak (see Figure
+12-7), they announced that they had released
+&ldquo;a decade&rsquo;s worth of data&rdquo; from Epik. &ldquo;This dataset is all that&rsquo;s needed
+to trace the actual ownership and management of the fascist side of the
+Internet that has eluded researchers, activists, and, well, just about
+everybody,&rdquo; the press release continued.</p>
+<p><img alt="Figure 12-7: The top of the !README.TXT file included in the dataset, written by the Epik hackers" src="media/images/Figure12-7.png" /><br />
+<em>Figure 12-7: The top of the <code>!README.TXT</code> file included in the dataset, written by the Epik hackers</em></p>
+<p>It&rsquo;s true: the Epik dataset includes 10 years of data from the company,
+including all of the data from nine MySQL databases. These databases
+include tables full of customers of various Epik products, like their
+domain name registrar; their service that protects websites against
+attacks, called BitMitigate; and their VPN service, called Anonymize.
+The databases also include information about domain name purchases,
+email forwarding for these domains, credit card transactions, customers&rsquo;
+passwords, and more.</p>
+<p>The most important data in the Epik dataset, in
+my opinion, is the WHOIS privacy data containing information on the
+owners behind the domain names Epik hosts.</p>
+<h4>Epik’s WHOIS Data</h4>
+<p><em>WHOIS</em> (pronounced &ldquo;who is&rdquo;) data is the public ownership information
+you&rsquo;re required to provide when buying a domain name. This generally
+includes contact details like names, email addresses, phone numbers, and
+physical addresses, along with the domain&rsquo;s registrant contact,
+administrative contact, and technical contact (in many cases, the same
+person plays all three roles). Which organization keeps track of WHOIS
+records depends on the domain name in question, but the records are all
+public. A quick internet search should turn up plenty of online services
+that allow you to look up WHOIS data for any given domain. The
+<code>whois</code> command line tool also
+lets you look up WHOIS data from a terminal.</p>
+<p>Public WHOIS data creates a major privacy issue, since it allows anyone
+to easily discover not only the owner of a domain but also their PII. To
+combat this, many domain registrars offer WHOIS privacy services, where
+they&rsquo;ll put their own information in the WHOIS record or just replace
+the owner name with something like REDACTED FOR PRIVACY on their
+customers&rsquo; behalf.</p>
+<p>Epik runs a WHOIS privacy service, hiding the ownership information of
+many far-right domain names from the public. But the Epik dataset
+includes that hidden information. As long as a domain name was
+registered on Epik before September 2021, when the hack occurred, you
+can use this dataset to look up its true owners.</p>
+<p>You can find the WHOIS ownership data associated with any domain name
+simply by running <code>whois</code>
+<code>domain_name</code> in a
+terminal. This command will look up the public information, meaning that
+if a domain uses a WHOIS privacy service, you won&rsquo;t get to see who
+actually owns it. For example, you would run the following command to
+find the ownership information about the Oath Keepers domain name,
+oathkeepers.org:</p>
+<div class="codehilite"><pre><span></span><code>whois oathkeepers.org
+</code></pre></div>
+
+<p>When I ran this command, I got the following output:</p>
+<div class="codehilite"><pre><span></span><code>--snip--
+Creation Date: 2009-03-01T21:07:55Z
+Registry Expiry Date: 2032-03-01T21:07:55Z
+Registrar: Epik Inc.
+Registrar IANA ID: 617
+Registrar Abuse Contact Email: abuse@epik.com
+Registrar Abuse Contact Phone: +1.425366881
+Domain Status: ok https://icann.org/epp#ok
+Registry Registrant ID: REDACTED FOR PRIVACY
+Registrant Street: REDACTED FOR PRIVACY
+Registrant City: REDACTED FOR PRIVACY
+Registrant State/Province: WA
+Registrant Name: REDACTED FOR PRIVACY
+Registrant Organization: Anonymize, Inc.
+Registrant Postal Code: REDACTED FOR PRIVACY
+Registrant Country: US
+Registrant Phone: REDACTED FOR PRIVACY
+Registrant Phone Ext: REDACTED FOR PRIVACY
+Registrant Fax: REDACTED FOR PRIVACY
+Registrant Fax Ext: REDACTED FOR PRIVACY
+Registrant Email: Please query the RDDS service of the Registrar of Record identified in this output for information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
+--snip--
+</code></pre></div>
+
+<p>Public WHOIS data told me that oathkeepers.org was first registered on
+March 1, 2009; it expires in 2032; and its current registrar was Epik.
+However, all the contact information for the person who registered it
+was listed as <code>REDACTED FOR PRIVACY</code>, effectively hiding the domain
+ownership information from the public.</p>
+<p>If you search the Epik dataset for this domain name, however, as you&rsquo;ll
+learn to do later in this chapter, you can find all the redacted site
+ownership details. When I searched the dataset, I found that the
+oathkeepers.org registrant organization is Oath Keepers, and the
+registrant name is Stewart Rhodes. As noted in Chapter 6, Rhodes is the Oath Keepers founder who was
+convicted of seditious conspiracy for his role in the January 6, 2021,
+attack and subsequently sentenced to 18 years in prison. The dataset
+also includes Rhodes&rsquo; phone number, email address, and a physical
+address in Granbury, Texas.</p>
+<p>Interestingly, the administrator and technical contacts for this domain
+lists the company eJam Systems LLC, along with the name Edward Durfee,
+an email address at ejamsystems.com, a phone number, and a home address
+in Northvale, New Jersey. eJam Systems LLC appears to be a right-wing
+company, run by Edward Durfee, that did tech work for the Oath Keepers.
+None of this information was available in the WHOIS records, but now
+it&rsquo;s all public, thanks to the Epik hack. If you check out the email in
+the <em>sentmail648</em> folder you imported in Chapter 6, you&rsquo;ll find messages from the address
+<em>oksupport\@oathkeepers.org</em> all signed by Edward Durfee, IT Support.</p>
+<p><strong>NOTE</strong> <em>In Chapter 1, I discussed not revealing unnecessary
+PII. In this case, I believe that publishing Durfee&rsquo;s name, the city he
+lives in, and the name of his company is in the public interest. Since
+he&rsquo;s an organizer for the Oath Keepers, a group that attempted to
+subvert democracy, this makes him a legitimate target of reporting.
+There&rsquo;s no public interest in publishing his home address, phone number,
+or email address, though.</em></p>
+<p>After the Epik hack, reporter Mikael Thalen wrote an article for the
+Daily Dot based on the leaked WHOIS data and focusing on Ali Alexander,
+one of the primary organizers on January 6 and a major activist in the
+Stop the Steal movement. Thalen used the Epik data to show that in the
+days following the riot, Alexander began turning on WHOIS privacy for
+over 100 domains he owned, nearly half of them connected to the election
+lie, such as stopthestealmovement.com and stopthestealnews.com. You can
+read Thalen&rsquo;s reporting at
+<a href="https://www.dailydot.com/debug/ali-alexander-epik-hack-web-domains-capitol-riot/">https://www.dailydot.com/debug/ali-alexander-epik-hack-web-domains-capitol-riot/</a>.</p>
+<p>In Exercise 12-4, you&rsquo;ll download part of the Epik dataset and get ready
+to start exploring it yourself.</p>
+<h3>Exercise 12-4: Download and Extract Part of the Epik Dataset</h3>
+<p>The Epik dataset is split into three folders: <em>EpikFail</em>,
+<em>EpikFailTheB:Sides</em>, and <em>EpikFailYouLostTheGame,</em> which you can
+download either using BitTorrent or from DDoSecrets&rsquo; public data server
+at
+<a href="https://data.ddosecrets.com/Epik/">https://data.ddosecrets.com/Epik/</a>.
+Inside the first folder, <em>EpikFail</em>, are three subfolders: <em>emails</em>,
+<em>filesystems</em>, and <em>sql</em>. The <em>emails</em> folder contains email messages
+from a single email account related to Epik, while the <em>filesystems</em>
+folder contains all of the files taken from one of Epik&rsquo;s Linux servers.
+The <em>sql</em> folder, by far the largest folder in the first part of the
+Epik dataset, contains backups of MySQL databases. For this exercise,
+you&rsquo;ll download a single MySQL backup file, <em>api_system.sql.gz</em>, which
+takes only 1.2GB of disk space.</p>
+<p>On your <em>datasets</em> USB disk, create a new folder called <em>Epik</em> for the
+Epik dataset, and then download <em>api_system.sql.gz</em> from
+<a href="https://data.ddosecrets.com/Epik/EpikFail/sql/api_system.sql.gz">https://data.ddosecrets.com/Epik/EpikFail/sql/api_system.sql.gz</a>
+and save it there. Now, open a terminal (if you&rsquo;re in Windows, use an
+Ubuntu terminal) and change to the <em>Epik</em> folder on your <em>datasets</em> USB
+disk like so:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % cd /Volumes/datasets/Epik
+micah@trapdoor Epik % ls -lh
+total 0
+-rw-r--r--  1 user  staff   1.2G Sep 17  2021 api_system.sql.gz
+</code></pre></div>
+
+<p>The file is a compressed backup of a MySQL database with the extension
+<em>.sql.gz</em>, meaning that it was compressed using GZIP discussed in
+Chapter 11. To extract the
+<em>api_system.sql.gz</em> file, run the following command:</p>
+<div class="codehilite"><pre><span></span><code>gunzip api_system.sql.gz
+</code></pre></div>
+
+<p>SQL data compresses very well: the original <em>api_system.sql.gz</em> file is
+1.2GB, but the extracted version, <em>api_system.sql</em>, is 20GB, taking up
+16 times as much disk space.</p>
+<p>Now that you&rsquo;ve extracted the file, the next step is to import it into
+your MySQL database in Exercise 12-5.</p>
+<h3>Exercise 12-5: Import Epik Data into MySQL</h3>
+<p>The Epik dataset includes nine separate MySQL databases. To keep things
+simple, the exercises in this chapter require you to import and explore
+data only in the <em>api_system.sql</em> database into your MySQL server. Each
+<em>.sql</em> file in the Epik dataset represents a full database containing
+several tables. In order to import one of these
+files into MySQL, first you&rsquo;ll need to create a database for it.</p>
+<h4>Create a Database for api_system</h4>
+<p>You&rsquo;ll use the <code>mysql</code> command
+line client to create a new database called
+<code>epikfail_api_system</code>.
+Prefixing your database title with <code>epikfail_</code> will help you keep it separate from
+other databases you might import in the future.</p>
+<p>Open a terminal and run the following command to connect to your MySQL
+server as the root user:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % mysql -h localhost --protocol=tcp -u root -p
+Enter password:
+Welcome to the MariaDB monitor. Commands end with ; or \g.
+--snip--
+</code></pre></div>
+
+<p>After logging in with the root password, run this command to create the
+<code>epikfail_api_system</code>
+database:</p>
+<div class="codehilite"><pre><span></span><code>MariaDB [(none)]&gt; CREATE DATABASE epikfail_api_system;
+Query OK, 1 row affected (0.015 sec)
+MariaDB [(none)]&gt; exit
+Bye
+</code></pre></div>
+
+<p>Congrats, you&rsquo;ve just created a new database!</p>
+<h4>Import api_system Data</h4>
+<p>The simplest way to import a MySQL backup into a MySQL client is to pipe
+the data into the <code>mysql</code>
+program, by running the following command:</p>
+<div class="codehilite"><pre><span></span><code>cat filename.sql <span class="p">|</span> mysql -h localhost --protocol<span class="o">=</span>tcp -u root -p database_name
+</code></pre></div>
+
+<p>The problem is that you&rsquo;d see no output&mdash;no progress bars or any other
+indication that it&rsquo;s actually working. This is fine for small SQL
+backups that take a few seconds to import, but it might take hours or
+days to import large backups. To solve this problem, I use a simple
+program called <code>pv</code>, which
+stands for &ldquo;Pipe Viewer,&rdquo; to display a progress bar. The <code>pv</code> command is similar to the
+<code>cat</code> command, but it also
+displays useful output so you can be sure your command is running.</p>
+<p>If you&rsquo;re using a Mac, install <code>pv</code> in Homebrew by running the following
+command:</p>
+<div class="codehilite"><pre><span></span><code>brew install pv
+</code></pre></div>
+
+<p>If you&rsquo;re using Linux or Windows with WSL, install <code>pv</code> by running the following command:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt install pv
+</code></pre></div>
+
+<p>Once you&rsquo;ve installed <code>pv</code>, make sure you&rsquo;re in the <em>Epik</em> folder
+and run this command:</p>
+<div class="codehilite"><pre><span></span><code>pv api_system.sql <span class="p">|</span> mysql -h localhost --protocol<span class="o">=</span>tcp -u root -p epikfail_api_system
+</code></pre></div>
+
+<p>Just like <code>cat</code>, <code>pv</code> should load data from
+<em>api_system.sql</em> and pipe it into <code>mysql</code>, but this time it should show you a
+progress bar like this one, complete with the import speed and the
+estimated time that it will finish:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Epik % pv api_system.sql | mysql -h localhost --protocol=tcp -u root -p
+epikfail_api_system
+Enter password:
+2.89GiB 0:33:47 [587KiB/s] [=====&gt;                    ] 14% ETA 3:14:56
+</code></pre></div>
+
+<p>In this example, I had been running the import for 33 minutes and 47
+seconds. It had progressed through 2.89GB of the data (14 percent) and
+estimated it would finish in 3 hours and 15 minutes, at a current speed
+of 587KB per second (though import speed varies greatly depending on
+which query is currently running). It took me a total of four hours to
+import <em>api_system.sql</em>.</p>
+<blockquote>
+<h5>TROUBLESHOOTING DURING DATABASE IMPORTS</h5>
+<p>Something can always go wrong while you’re in the middle of importing a database. You could accidentally close your terminal window, stopping the import partway through. Your laptop could run out of battery, or you could accidentally unplug your USB disk. You might need to cancel the import midway through (by pressing CTRL-C). If anything like this happens, don’t worry. It’s fairly simple to delete your database, create a new one, and start the import over again. Unfortunately, though, you can’t continue where you left off.</p>
+<p>To restart an interrupted import, you can drop the database using the <code>DROP DATABASE database_name;</code> statement. This deletes the whole database and all of its tables. Create a new database and import the data again. For example, if your <code>epikfail_api_system</code> import was interrupted, you start over by running these MySQL queries as the root user with the following commands:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">epikfail_api_system</span><span class="p">;</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">epikfail_api_system</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>Then start the import again.</p>
+</blockquote>
+<p>Wait for the data from <em>api_system.sql</em> to finish importing before you
+move on to the next section. (It&rsquo;s possible to run queries on the
+database before it&rsquo;s fully imported, but you&rsquo;ll only get results from
+the data that&rsquo;s been imported so far.)</p>
+<h3>Exploring Epik’s SQL Database</h3>
+<p>Once <em>api_system.sql</em> has finished importing, it&rsquo;s time to dive in and
+take a look at the <code>epikfail_api_system</code> database. With databases like this, a
+good tactic is to manually view each table and try to determine if it
+contains data worth exploring further. To begin my investigation, I
+looked at the first rows in each of the 49 tables in
+<code>epikfail_api_system</code>,
+starting with the <code>backorder</code>
+table and ending with the <code>whoisxmlapi_cache</code> table. I tried to get a sense of what
+information that table held, if it was related to other tables in the
+database, and how many rows of data there were.</p>
+<p>In this section, I&rsquo;ll guide you through the tables that stood out to me
+in the <code>epikfail_api_system</code>
+database. You can use either Adminer or the <code>mysql</code> command line client: they both query
+the same SQL server and will receive the same tables of data in
+response. When your interest is piqued, you can try running your own
+queries as well. It&rsquo;s good practice to refrain from running
+<code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code> queries in leaked databases that
+you&rsquo;re investigating. However, <code>SELECT</code> queries don&rsquo;t modify anything in the
+database, so you can run as many as you want at any point, then continue
+following along when you&rsquo;re done.</p>
+<h4>The domain Table</h4>
+<p>The <code>domain</code> table in the
+<code>epikfail_api_system</code> database
+has over 1.6 million rows in it and is clearly a list of domain names in
+Epik&rsquo;s system. Count the number of rows in this table using the
+following query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">domain</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>Table 12-12 shows the results from that query.</p>
+<p><em>Table 12-12: Counting the Rows in the <code>domain</code> Table</em></p>
+<table>
+<thead>
+<tr>
+<th><code>COUNT(*)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1688005</td>
+</tr>
+</tbody>
+</table>
+<p>Columns in the <code>domain</code> table
+include <code>id</code>, <code>name</code> (the domain name, in all caps),
+<code>cr_date</code> (presumably the
+domain name&rsquo;s creation date), and <code>exp_date</code> (presumably the domain name&rsquo;s
+expiration date).</p>
+<p>To look at the 10 most recently created domains in this table, run the
+following query:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">cr_date</span><span class="p">,</span><span class="w"> </span><span class="n">exp_date</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">domain</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cr_date</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This command uses the
+<code>ORDER BY cr_date DESC</code> clause
+to sort data returned by the <code>cr_date</code> column, in descending order (from most
+recent to oldest, in this case). The <code>LIMIT 10</code> clause in the following line limits
+the results to only 10 rows; if you left that clause out, the command
+would return all 1.6 million rows.</p>
+<p>Table 12-13 shows the results from this query.</p>
+<p><em>Table 12-13: Selecting the Most Recently Created Domains</em></p>
+<table>
+<thead>
+<tr>
+<th><code>id</code></th>
+<th><code>name</code></th>
+<th><code>cr_date</code></th>
+<th><code>exp_date</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>17803243</td>
+<td>MAKEAPPLIANCESWORKAGAIN.COM</td>
+<td>2021-03-01 01:41:52</td>
+<td>2022-03-01 01:41:52</td>
+</tr>
+<tr>
+<td>17803233</td>
+<td>BEREANBAPTISTPORTCHARLOTTE.ORG</td>
+<td>2021-03-01 01:33:26</td>
+<td>2022-03-01 01:33:26</td>
+</tr>
+<tr>
+<td>17803213</td>
+<td>WECONSIGNGUNS.NET</td>
+<td>2021-03-01 01:32:04</td>
+<td>2022-03-01 01:32:04</td>
+</tr>
+<tr>
+<td>17803223</td>
+<td>WECONSIGNGUNS.COM</td>
+<td>2021-03-01 01:32:04</td>
+<td>2022-03-01 01:32:04</td>
+</tr>
+<tr>
+<td>17803183</td>
+<td>MAINEANTIQUEMALL.COM</td>
+<td>2021-03-01 01:29:42</td>
+<td>2022-03-01 01:29:42</td>
+</tr>
+<tr>
+<td>17803203</td>
+<td>MAINEANTIQUESTORE.COM</td>
+<td>2021-03-01 01:29:42</td>
+<td>2022-03-01 01:29:42</td>
+</tr>
+<tr>
+<td>17803193</td>
+<td>MAINEANTIQUESHOP.COM</td>
+<td>2021-03-01 01:29:42</td>
+<td>2022-03-01 01:29:42</td>
+</tr>
+<tr>
+<td>17803173</td>
+<td>WOOGITYBOOGITY.COM</td>
+<td>2021-03-01 01:20:35</td>
+<td>2022-03-01 01:20:35</td>
+</tr>
+<tr>
+<td>17803163</td>
+<td>NAMECAESAR.COM</td>
+<td>2021-03-01 01:17:52</td>
+<td>2022-03-01 01:17:52</td>
+</tr>
+<tr>
+<td>17803153</td>
+<td>SCENICBOATTOUR.COM</td>
+<td>2021-03-01 01:17:11</td>
+<td>2022-03-01 01:17:11</td>
+</tr>
+</tbody>
+</table>
+<p>To search the list of Epik domains for ones containing specific
+keywords, use the <code>LIKE</code>
+operator in the <code>WHERE</code>
+clause. For example, try using the following queries to search for
+domains that mention the word <em>Trump</em>, ordered by the most recently
+created domains:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">cr_date</span><span class="p">,</span><span class="w"> </span><span class="n">exp_date</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">domain</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%trump%&#39;</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cr_date</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>As you learned earlier, using <code>LIKE</code> makes the search case insensitive, and
+<code>%</code> characters are wildcards.
+Filtering the results by <code>name LIKE '%trump%'</code> will display only results that include
+<em>trump</em> (regardless of capitalization) somewhere in their name.</p>
+<p>The query returns 413 results total. Table 12-14 shows the first 10 results.</p>
+<p>Clearly, many people used Epik to register Trump-related domain names.
+These results don&rsquo;t include any ownership information for these domains,
+though. To find that missing information, let&rsquo;s take a look at the
+<code>privacy</code> table.</p>
+<p><em>Table 12-14: Domains That Include the Word <code>Trump</code></em></p>
+<table>
+<thead>
+<tr>
+<th><code>id</code></th>
+<th><code>name</code></th>
+<th><code>cr_date</code></th>
+<th><code>exp_date</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>17802593</td>
+<td>TRUMPISM.IO</td>
+<td>2021-02-28 23:45:44</td>
+<td>2022-02-28 23:45:44</td>
+</tr>
+<tr>
+<td>17750903</td>
+<td>TRUMPWONINALANDSLIDE.COM</td>
+<td>2021-02-23 08:52:33</td>
+<td>2022-02-23 08:52:33</td>
+</tr>
+<tr>
+<td>17750913</td>
+<td>DONALDTRUMPWONINALANDSLIDE.COM</td>
+<td>2021-02-23 08:52:33</td>
+<td>2022-02-23 08:52:33</td>
+</tr>
+<tr>
+<td>17676023</td>
+<td>DUMP-TRUMP.NET</td>
+<td>2021-02-22 21:38:40</td>
+<td>2022-02-22 21:38:40</td>
+</tr>
+<tr>
+<td>17694803</td>
+<td>TRUMPBEEGIRLS.COM</td>
+<td>2021-02-19 00:14:23</td>
+<td>2026-02-19 00:14:23</td>
+</tr>
+<tr>
+<td>17672243</td>
+<td>TRUMP2020.NET</td>
+<td>2021-02-17 17:43:32</td>
+<td>2022-02-17 17:43:32</td>
+</tr>
+<tr>
+<td>17661353</td>
+<td>FANTRUMP.COM</td>
+<td>2021-02-16 19:04:43</td>
+<td>2022-02-16 19:04:43</td>
+</tr>
+<tr>
+<td>17662513</td>
+<td>DONALDTRUMP.TRUTH</td>
+<td>2021-02-16 13:22:16</td>
+<td>2022-02-16 13:22:16</td>
+</tr>
+<tr>
+<td>17662433</td>
+<td>TRUMP.TRUTH</td>
+<td>2021-02-16 13:22:13</td>
+<td>2022-02-16 13:22:13</td>
+</tr>
+<tr>
+<td>17615793</td>
+<td>VOTELARATRUMP.COM</td>
+<td>2021-02-14 17:38:12</td>
+<td>2023-02-14 17:38:12</td>
+</tr>
+</tbody>
+</table>
+<h4>The privacy Table</h4>
+<p>The <code>privacy</code> table has
+721,731 rows of data. Like the <code>domain</code> table, it has a <code>domain</code> column that lists domain names, but it
+also includes columns with all of the private WHOIS details. Relevant
+columns include <code>admin_org</code>,
+<code>admin _name</code>,
+<code>admin_email</code>,
+<code>admin_address</code>,
+<code>admin_phone</code>, and other
+similar information. There are also numerous similar columns with
+<code>tech_</code>, <code>bill_</code>, and <code>reg_</code> prefixes. The data in this table
+includes WHOIS data for the administrator contact, the technical
+contact, the billing contact, and the registrant contact. There&rsquo;s also a
+<code>date_add</code> column with a
+timestamp, presumably noting when this domain was added to Epik&rsquo;s
+system.</p>
+<p>I mentioned earlier that, in 2019, Patrick Crusius posted a manifesto to
+8chan before killing 23 people and injuring 23 more in El Paso, Texas.
+In the aftermath of the terrorist attack, 8chan moved its domain name
+hosting to Epik. With that in mind, search the data for 8chan.co,
+8chan&rsquo;s domain name, to see who is behind the site:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">domain</span><span class="o">=</span><span class="s1">&#39;8CHAN.CO&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>Table 12-15 shows partial results from this
+query. The query selects all columns (<code>*</code>), but I included only the
+<code>admin_</code> columns here because
+the <code>tech_</code>, <code>bill_</code>, and <code>reg_</code> columns all have the exact same data
+that appears in the <code>admin_</code>
+column.</p>
+<p>This domain was added to Epik&rsquo;s system the night of August 4, 2019. This
+was the day after Crusius posted his manifesto to 8chan and then went on
+his anti-Latino murder spree.</p>
+<p>It&rsquo;s public knowledge that Jim Watkins and his son, Ron Watkins, ran
+8chan at the time (they are also behind today&rsquo;s rebrand, 8kun).
+According to the HBO documentary miniseries <em>Q: Into the Storm</em>,
+directed and produced by Cullen Hoback, the pair are also by far the
+most likely people behind the QAnon conspiracy cult. Jim Watkins, an
+American, lived in the Philippines at the time of
+Crusius&rsquo;s rampage. As you can see from the hidden WHOIS data, the admin
+address is for a property in the Philippines. This increases confidence
+that the data is authentic, and also gives key data points about Jim
+Watkins in case we wanted to research him further: an address and phone
+number.</p>
+<p><em>Table 12-15: Ownership Data for the Domain 8chan.co</em></p>
+<ul>
+<li><code>id</code>: 2429814</li>
+<li><code>domain</code>: 8CHAN.CO</li>
+<li><code>date_add</code>: 2019-08-04 23:01:11</li>
+<li><code>admin_org</code>: Loki Technology, Incorporated</li>
+<li><code>admin_name</code>: Jim Watkins</li>
+<li><code>admin_email</code>: domains@nttec.com</li>
+<li><code>admin_address</code>: <em>redacted</em></li>
+<li><code>admin_city</code>: Pasig</li>
+<li><code>admin_state</code>: NCR</li>
+<li><code>admin_zip</code>: 1600</li>
+<li><code>admin_country</code>: PH</li>
+<li><code>admin_cc</code>: PH</li>
+<li><code>admin_phone</code>: <code>+63</code><em>redacted</em></li>
+</ul>
+<p>Since Watkins runs a website popular among American terrorists and is
+likely one of the people behind QAnon, the next logical step is to check
+if he or his company, Loki Technology, owned any other domain names on
+Epik. To find out, try running this query in the
+<code>epikfail_api_system</code>
+database:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_email</span><span class="o">=</span><span class="s1">&#39;domains@nttec.com&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This query searches for domains that list <code>admin_email</code> as <code>domains@nttec.com</code>, which is the administrator email
+address on 8chan.co. However, it returns just a single row for that
+domain. Run the following query, modified with the expression
+<code>admin_email LIKE '%@nttec.com'</code> to check for domains where
+<code>admin_email</code> is any email
+address at the nttec.com domain:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_email</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%@nttec.com&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>However, this query has the same results. For your next query, switch
+tactics and search for domains that list <code>admin_org</code> as anything mentioning Loki
+Technology, using the <code>admin_org LIKE '%Loki Technology%'</code> expression. The expression includes
+wildcard characters, just in case Watkins listed his company slightly
+differently on different domains, like &ldquo;Loki Technology, Inc.&rdquo; instead
+of &ldquo;Loki Technology, Incorporated&rdquo;:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_org</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Loki Technology%&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This query returns the same result. For a final
+query, search the domains that list <code>admin_name</code> as <code>Jim Watkins</code>, using <code>LIKE</code> to make the search case insensitive:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;Jim Watkins&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>Unfortunately, all these queries return just one result: the 8chan.co
+row.</p>
+<p>In the next section, you&rsquo;ll learn about how I eventually found more
+information about domains owned by Jim Watkins in the Epik dataset, just
+not in the <code>epikfail_api_system</code> database. For now, let&rsquo;s look at some
+final interesting tables in this database.</p>
+<h4>The hosting and hosting_server Tables</h4>
+<p>The <code>hosting</code> table has 3,934
+rows and appears to show websites that Epik actually runs the servers
+for, not just the domain name registration. Columns include
+<code>domain</code>, <code>cr_date</code>, <code>username</code>, <code>password</code> (in plaintext, though it&rsquo;s not clear
+what these usernames and passwords are for), <code>plan</code> (like silver, gold, or platinum),
+<code>server_id</code>, and others. Run
+the following query to view the most recent rows:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">domain</span><span class="p">,</span><span class="w"> </span><span class="n">cr_date</span><span class="p">,</span><span class="w"> </span><span class="n">plan</span><span class="p">,</span><span class="w"> </span><span class="n">server_id</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">hosting</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cr_date</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>Since the query uses the <code>ORDER BY cr_date DESC</code> clause, the results will be sorted
+from most recent to oldest. The <code>LIMIT 5</code> clause means the results will include
+at most five rows. Table 12-16 shows the
+results from this query.</p>
+<p><em>Table 12-16: Recent Rows in the <code>hosting</code> Table</em></p>
+<table>
+<thead>
+<tr>
+<th><code>id</code></th>
+<th><code>domain</code></th>
+<th><code>cr_date</code></th>
+<th><code>plan</code></th>
+<th><code>server_id</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>33613</td>
+<td>THELIBERATEDPRESS.COM</td>
+<td>2021-02-28 18:08:06</td>
+<td>bronze</td>
+<td>23</td>
+</tr>
+<tr>
+<td>39573</td>
+<td>REICKERTSPLUMBING.COM</td>
+<td>2021-02-28 17:30:18</td>
+<td>email</td>
+<td>23</td>
+</tr>
+<tr>
+<td>39563</td>
+<td>IANLAZAR.COM</td>
+<td>2021-02-28 16:50:10</td>
+<td>bronze</td>
+<td>23</td>
+</tr>
+<tr>
+<td>39553</td>
+<td>APAYWEEKLY.COM</td>
+<td>2021-02-28 16:16:08</td>
+<td>sitebuilder-basic</td>
+<td>23</td>
+</tr>
+<tr>
+<td>39543</td>
+<td>BOUNCETHEBOX.COM</td>
+<td>2021-02-28 15:24:08</td>
+<td>silver</td>
+<td>23</td>
+</tr>
+</tbody>
+</table>
+<p>I tried loading several of the domain names in this table in a browser.
+Some of them are down, while others appear to be websites for random
+businesses. I quickly noticed that the <code>server_id</code> column implies a relationship with
+another table. I guessed the related table was most likely the
+<code>hosting_server</code> table and
+began to run queries on that.</p>
+<p>The <code>hosting_server</code> table has only six rows, each a
+different server that Epik uses to host websites. Run this query to see
+the data in this table:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">api_host</span><span class="p">,</span><span class="w"> </span><span class="n">login_host</span><span class="p">,</span><span class="w"> </span><span class="n">login_port</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">hosting_server</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>Table 12-17 shows the query results.</p>
+<p><em>Table 12-17: The <code>hosting_server</code> Table</em></p>
+<table>
+<thead>
+<tr>
+<th><code>id</code></th>
+<th><code>api_host</code></th>
+<th><code>login_host</code></th>
+<th><code>login_port</code></th>
+<th><code>username</code></th>
+<th><code>password</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>192.187.99.50</td>
+<td>hosting.epik.com</td>
+<td>2082</td>
+<td>epikhost</td>
+<td><em>redacted</em></td>
+</tr>
+<tr>
+<td>2</td>
+<td>204.12.206.186</td>
+<td>hosting5.epik.com</td>
+<td>2083</td>
+<td>hostinge</td>
+<td><em>redacted</em></td>
+</tr>
+<tr>
+<td>3</td>
+<td>88.214.193.70</td>
+<td>hosting6.epik.com</td>
+<td>2083</td>
+<td>hostinge</td>
+<td><em>redacted</em></td>
+</tr>
+<tr>
+<td>13</td>
+<td>88.214.193.195</td>
+<td>hosting7.epik.com</td>
+<td>2083</td>
+<td>hostinge</td>
+<td><em>redacted</em></td>
+</tr>
+<tr>
+<td>14</td>
+<td>88.214.193.163</td>
+<td>hosting8.epik.com</td>
+<td>2083</td>
+<td>hostinge</td>
+<td><em>redacted</em></td>
+</tr>
+<tr>
+<td>23</td>
+<td>88.214.194.85</td>
+<td>hosting9.epik.com</td>
+<td>2083</td>
+<td>hostinge</td>
+<td><em>redacted</em></td>
+</tr>
+</tbody>
+</table>
+<p>The passwords in this table are all in plaintext. In fact, if you load
+<em>https://hosting9.epik.com:2083</em>
+in Tor Browser, you&rsquo;ll see the login page for cPanel, software that&rsquo;s
+used to manage shared web hosting systems like this. The usernames and
+passwords in the <code>hosting_server</code> table are likely the credentials to
+log in to this cPanel server&mdash;but don&rsquo;t actually try this out. As noted
+earlier, it&rsquo;s fine for you to see the passwords scattered across
+datasets, but actually attempting to log in to an account with them is
+illegal. In any case, Epik has probably changed its passwords since the
+data breach.</p>
+<p>All of the recent websites in the <code>hosting</code> table have a <code>server_id</code> of <code>23</code>. Check how many websites are hosted on
+that server by running a query to join it with the
+<code>hosting_server</code> table:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">hosting</span><span class="w"></span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">hosting_server</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hosting_server</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span><span class="o">=</span><span class="mi">23</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>The result is 1,155, so that&rsquo;s the number of websites the server with ID
+23 hosts.</p>
+<p>What about the rest of the servers? The quickest way to figure out how
+many websites each server hosts is to use a <code>GROUP BY</code> clause, like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">server_id</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">server_count</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">hosting</span><span class="w"></span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">hosting_server</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hosting_server</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>This query groups by
+<code>hosting.server_id</code>, which
+means each row of the results will show the number of rows in the
+<code>hosting</code> table with that
+<code>server_id</code>. Table 12-18 shows the results of this query.</p>
+<p><em>Table 12-18: The Number of Websites Hosted on Each Server</em></p>
+<table>
+<thead>
+<tr>
+<th><code>server_id</code></th>
+<th><code>server_count</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>762</td>
+</tr>
+<tr>
+<td>13</td>
+<td>1474</td>
+</tr>
+<tr>
+<td>14</td>
+<td>543</td>
+</tr>
+<tr>
+<td>23</td>
+<td>1155</td>
+</tr>
+</tbody>
+</table>
+<p>While there&rsquo;s always more to learn, you should now have the SQL skills
+to write powerful queries that can help you quickly find what you&rsquo;re
+looking for, even in tables with millions of rows.</p>
+<h3>Working with Epik Data in the Cloud</h3>
+<p>The MySQL databases from Epik contain an overwhelming amount of data
+that&rsquo;s useful for extremism research, and only a fraction of that data
+is in the <em>api_system.sql.gz</em> backup that you&rsquo;ve imported for this
+chapter. Some of the other databases, such as <em>intrust.sql.gz</em>, contain
+even more interesting information. If you&rsquo;re curious, I suggest
+downloading, importing, and investigating all nine MySQL databases from
+the Epik dataset.</p>
+<p>Some of these databases would likely take your computer days to finish
+importing and would require a large amount of disk space. It&rsquo;s more
+convenient to download and work with databases like these on a server in
+the cloud rather than on your local computer. To do so, follow these
+steps:</p>
+<ol>
+<li>Create a new VPS on a cloud service provider (making sure it has
+    plenty of disk space) and SSH into it, like you did in Exercise 4-4.</li>
+<li>Use <code>wget</code> to download
+    just the compressed database backups, a total of 14GB, from
+    <a href="https://data.ddosecrets.com/Epik/EpikFail/sql/">https://data.ddosecrets.com/Epik/EpikFail/sql/</a>.
+    Alternatively, using a CLI BitTorrent client, you could download the
+    entire first part of the Epik dataset, which is 35GB of data,
+    similar to what you did in Exercise 4-5.</li>
+<li>Extract the compressed MySQL database backups as you did in Exercise
+    12-4. By the time you&rsquo;re done extracting these files, you&rsquo;ll have
+    145GB of MySQL backup files.</li>
+<li>Install a MySQL server on your VPS. There are various ways of doing
+    this, but one option is to install Docker on your VPS and run a
+    MySQL server as you did in Exercise 12-3. Since your VPS will be
+    running Linux, just make sure to follow the Linux instructions
+    there.</li>
+<li>Using the command line MySQL client, create nine databases, one for
+    each backup file. Next, using <code>pv</code> and <code>mysql</code>, import all nine database
+    backups as you did in Exercise 12-5. This
+    step will likely take your VPS several days to finish, but since the
+    remote server is handling the import, this won&rsquo;t disrupt other work
+    on your computer.</li>
+</ol>
+<p>These are essentially the steps I followed when I investigated the Epik
+dataset at The Intercept. The downside to doing this all in the cloud is
+that you&rsquo;ll need to pay a monthly bill to your hosting provider for the
+server that you&rsquo;re using. However, once you have a remote MySQL server
+full of Epik databases, you can use a MySQL client to connect to it and
+run queries, which will allow you to analyze hundreds of gigabytes of
+leaked databases.</p>
+<p>The most useful part of the Epik dataset, in my opinion, is the fact
+that you can use it to peel back the curtain behind Epik&rsquo;s WHOIS privacy
+service. You did this some in the Exploring Epik&rsquo;s SQL
+Database section, but you looked only in the <code>privacy</code> table of the
+<code>epikfail_api_system</code>
+database. But that isn&rsquo;t the only place where you can find WHOIS privacy
+data.</p>
+<p>The nine different MySQL databases in the Epik leak appear to have lots
+of duplicate data. For example, the <code>epikfail_intrust</code> database has a table called
+<code>domains_whois</code> with all of
+the same columns as the <code>privacy</code> table. The <code>domains_whois</code> table has 1.4 million rows of data,
+roughly twice as many as the <code>privacy</code> table, though many of the rows appear
+to contain similar data. In the <code>epikfail_whois</code> database, there&rsquo;s a table called
+<code>data</code> with similar columns
+and 1.3 million rows of data. All three tables have various duplicates
+of the same WHOIS data, so you may want to search them all before
+concluding that a domain name ownership isn&rsquo;t in this dataset.</p>
+<p>In the Exploring Epik&rsquo;s SQL Database section, you ran some
+queries in <code>epiktrust_api_system</code> to find domains that Jim Watkins owns
+other than 8chan.co, but they fell short. If you import additional
+databases, can you find other domains he owns? When I ran similar
+queries in the <code>epikfail_intrust</code> database on the
+<code>domains_whois</code> table, which
+has more data than the <code>privacy</code> table in the
+<code>epiktrust_api_system</code>
+database, I got some hits. If you want to run this query yourself,
+you&rsquo;ll need to first download and import the <em>intrust.sql</em> database into
+your MySQL server.</p>
+<p>Here&rsquo;s the query I ran to search the <code>domains_whois</code> table in the
+<code>epikfail _intrust</code> database
+for domains owned by Jim Watkins&rsquo;s company:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">domains_whois</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_email</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%@nttec.com&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+
+<p>Table 12-19 lists the truncated results of
+this query, showing only some of the columns. As you can see, Jim
+Watkins owns all of the domains listed in the results.</p>
+<p>At the time of writing, the domain 5ch.net loaded a Japanese-language
+site called 5channel. When I loaded 2ch.net, it failed with a
+&ldquo;connection timed out&rdquo; error from Cloudflare, and when I loaded
+bbspink.com, I got an &ldquo;access denied&rdquo; error from Cloudflare saying that
+the site blocks connections from the US. I connected to a VPN in Europe
+and tried again; this time, it redirected to 5ch.net. If you&rsquo;d like, you
+can try the same steps yourself.</p>
+<p><em>Table 12-19: Other Domains Owned by Jim Watkins from the <code>epikfail_intrust</code> Database</em></p>
+<table>
+<thead>
+<tr>
+<th><code>id</code></th>
+<th><code>domain</code></th>
+<th><code>date_update</code></th>
+<th><code>admin_org</code></th>
+<th><code>admin_name</code></th>
+<th><code>admin_email</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8615894</td>
+<td>8CH.NET</td>
+<td>2019-10-13 01:27:05</td>
+<td>Loki Technology, Incorporated</td>
+<td>Jim Watkins</td>
+<td>domains@nttec.com</td>
+</tr>
+<tr>
+<td>8615904</td>
+<td>8CHAN.CO</td>
+<td>2019-10-13 01:27:06</td>
+<td>Loki Technology, Incorporated</td>
+<td>Jim Watkins</td>
+<td>domains@nttec.com</td>
+</tr>
+<tr>
+<td>8615944</td>
+<td>5CH.NET</td>
+<td>2019-10-13 01:27:07</td>
+<td>Loki Technology, Incorporated</td>
+<td>Jim Watkins</td>
+<td>domains@nttec.com</td>
+</tr>
+<tr>
+<td>8615984</td>
+<td>2CH.NET</td>
+<td>2019-10-13 01:27:08</td>
+<td>Loki Technology, Incorporated</td>
+<td>Jim Watkins</td>
+<td>domains@nttec.com</td>
+</tr>
+<tr>
+<td>8616004</td>
+<td>BBSPINK.COM</td>
+<td>2019-10-13 01:27:09</td>
+<td>Loki Technology, Incorporated</td>
+<td>Jim Watkins</td>
+<td>domains@nttec.com</td>
+</tr>
+</tbody>
+</table>
+<p>As you explore more databases, you&rsquo;ll discover that writing SQL queries
+to find what you&rsquo;re looking for takes some trial and error. Sometimes
+the results from one query will inform what you should search for
+next&mdash;as you&rsquo;ve seen, I used the email that Watkins registered 8chan.co
+with to find his other domains, for example. When you don&rsquo;t find what
+you&rsquo;re looking for, tweak your queries to make them more broad, or
+search a different field that might give you similar information.</p>
+<h3>Summary</h3>
+<p>In this chapter, you&rsquo;ve learned how to run your own MySQL server on your
+computer using Docker containers. You took a crash course in SQL, the
+language used to communicate with SQL servers, and were introduced to
+Epik, the online service provider for right-wing extremists and American
+terrorists who have committed mass murder. Finally, you downloaded a
+MySQL database backup from the 2021 Epik Fail dataset, imported it into
+your own local MySQL server, and ran SQL queries to begin investigating
+it yourself.</p>
+<p>This marks the conclusion of Part IV, which has given
+you the foundational tools and techniques to explore almost any dataset
+you can get your hands on. Part V, the final two
+chapters of the book, doesn&rsquo;t include any exercises. Instead, it
+describes real data-driven investigations I&rsquo;ve worked on in the past,
+shows you what code I wrote and why, and explains exactly how I used the
+skills I&rsquo;ve taught you throughout this book to find revelations. I hope
+you&rsquo;ll use these case studies as inspiration for your own future
+data-driven investigations.</p>
         </div>
     </section>
     <section class="pagination">

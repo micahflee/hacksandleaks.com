@@ -37,13 +37,1881 @@
     </header>
     <section class="intro bookIntro">
         <div class="wrapper" id="intro-wrapper">
-          <div id="reading-time">~0 min read</div>
+          <div id="reading-time">~63 min read</div>
           <h1>Chapter 13: Pandemic Profiteers and COVID-19 Disinformation</h1>
-          
+          <blockquote>
+<p><em>About a month ago, there was an article printed in a newspaper I had
+never heard of called The Intercept. I discovered that The Intercept
+is a rag far left of the</em> New York Times. <em>They printed an article
+alleging that the telemedicine company to which America&rsquo;s Frontline
+Doctors referred people&mdash;a third-party telemedicine company&mdash;had had
+patient data breaches, that it had been hacked. This got the
+telemedicine company, of course, very nervous. They thought they had
+good firewalls up. They spent about $200,000 to prove that there was
+no actual hack, that it was all made up. It was all a lie. But it was
+the basis for Congressman Clyburn&rsquo;s investigation into me! And I
+thought to myself, That sounds very familiar. A fake story in a rag
+paper.</em></p>
+<p>&mdash;Dr. Simone Gold, founder of America&rsquo;s Frontline Doctors, speaking
+at a November 2021 event hosted by the David Horowitz Freedom Center,
+an Islamophobic hate group, in Palm Beach, Florida</p>
+</blockquote>
+<p>On September 11, 2021, an anonymous hacker sent me about 100MB of
+compressed data from, in the words of my source, &ldquo;the horse paste
+peddlers.&rdquo; My source was looking into America&rsquo;s Frontline Doctors
+(AFLDS), an anti-science propaganda group founded in 2020 to support
+President Trump in his opposition to public health policies during the
+coronavirus pandemic.</p>
         </div>
     </section>
     <section id="content" data-content="chapter-13">
-        <div class="wrapper" id="about-content">
+        <div class="wrapper" id="about-content"><p>AFLDS, along with a small network of telehealth
+companies that my source told me were &ldquo;hilariously easy&rdquo; to hack,
+falsely claims to its sizable online audience that COVID-19 vaccines are
+dangerous and ineffective. It also promotes the drugs hydroxychloroquine
+(commonly used to treat malaria and lupus) and ivermectin (commonly used
+as a dewormer in livestock) as miracle cures for the virus. AFLDS
+creates high-quality anti-vaccine propaganda videos and distributes them
+to hundreds of thousands of followers across social media platforms.</p>
+<p>The hacker sent me two datasets from two separate companies: Cadence
+Health, which ran the platform AFLDS used to give telehealth
+consultations to patients, and Ravkoo Pharmacy, which filled
+prescriptions for these drugs. After investigating over 1GB of JSON and
+CSV files cumulatively contained in the decompressed datasets, I
+discovered that AFLDS and its partners duped tens of thousands of people
+into seeking ineffective treatments and charged them at least $15
+million&mdash;likely much more&mdash;for consultations and prescriptions for
+these drugs.</p>
+<p>The revelations from my investigation led the US House Select
+Subcommittee on the Coronavirus Crisis, headed by Rep. James Clyburn
+(D-SC), to open an investigation into AFLDS and SpeakWithAnMD;
+technically, AFLDS worked directly with SpeakWithAnMD for providing
+telehealth consultations, and Cadence Health was SpeakWithAnMD&rsquo;s vendor
+for managing the technology. Clyburn called these groups &ldquo;predatory
+actors&rdquo; that have been &ldquo;touting misinformation and using it to market
+disproven and potentially hazardous coronavirus treatments.&rdquo; The
+committee recommended that the Federal Trade Commission open its own
+investigation into these companies and later expanded its investigation
+to also cover Cadence Health.</p>
+<p>Also in response to my reporting, other reporting on AFLDS, and
+pro-science activism in the medical community, the Medical Board of
+California (MBC) opened an investigation into Dr. Simone Gold, the
+founder of AFLDS, to determine if she should be stripped of her medical
+license. (At the time of writing, she is still licensed in California,
+as well as in Florida, where she has since moved.) AFLDS later accosted
+MBC president Kristina Lawson in a parking garage with cameras as part
+of an anti-science propaganda video it was producing.</p>
+<p>Because the AFLDS dataset is full of medical records and PII, none of it
+is public, so you won&rsquo;t be able to work with it yourself. Instead, I&rsquo;ll
+describe the data, show redacted pieces of it, and show snippets of the
+Python code I wrote to make sense of it. If a similar dataset ever drops
+in your lap, the skills you&rsquo;ve learned in this book so far and the
+strategies described in this chapter, along with perhaps some additional
+independent study, should enable you to investigate it just like I did.</p>
+<h3>The Origins of AFLDS</h3>
+<p>Before we get into the dataset, let&rsquo;s take a look at how AFLDS was
+founded, including its ties to Trump&rsquo;s 2020 reelection campaign and the
+conservative advocacy group the Tea Party Patriots, as well as exactly
+how AFLDS&rsquo;s extremely profitable scheme succeeded in swindling vaccine
+skeptics into spending millions of dollars on phone consultations and
+bogus medicine for COVID-19.</p>
+<p>On May 11, 2020, a senior staffer in Donald Trump&rsquo;s reelection campaign
+and the Republican activist group CNP Action held a conference call. An
+audio recording of this call was leaked to Center for Media and
+Democracy, a progressive watchdog group, which gave a copy of the
+recording to the Associated Press (AP), which in turn reported on it. A
+key topic of discussion was reportedly finding &ldquo;extremely pro-Trump
+doctors&rdquo; to go on TV and defend Trump&rsquo;s plan to rapidly reopen the
+economy, despite the more cautious safety guidance coming from the
+Centers for Disease Control and Prevention (CDC). Nancy Schulze, a
+Republican Party activist married to a former Republican member of
+Congress, said on the call that she had a list of doctors willing to
+defend Trump&rsquo;s policies and that &ldquo;those are the types of guys that we
+should want to get out on TV and radio to help push out the message.&rdquo;</p>
+<p>Dr. Gold was the &ldquo;extremely pro-Trump doctor&rdquo; they were looking for.
+During AP&rsquo;s reporting of this conference call, a public relations firm
+distributed an open letter to Trump signed by over 400 doctors, calling
+the pandemic lockdown policies a &ldquo;mass casualty event.&rdquo; Dr. Gold&rsquo;s
+signature was at the top of the letter, though she denied coordinating
+her efforts with the Trump campaign. This open letter was released after
+AP had sent requests for comment to individuals on the call and to
+Trump&rsquo;s reelection campaign, but before it had published its article.
+This letter appears to be, at least in part, an attempt to preempt the
+article with a positive spin, something that might happen when you reach
+out for comment while doing adversarial journalism, as discussed in
+Chapter 1.</p>
+<p>In June 2020, weeks after the conference call and the open letter, Gold
+founded an Arizona nonprofit called the Free Speech Foundation. The
+enterprise started with a million-dollar annual budget and fiscal
+sponsorship from the Tea Party Patriots Foundation, the major US
+conservative organization introduced in Chapter 2. AFLDS launched on July 27, 2020, as a Free
+Speech Foundation project. Gold, along with other doctors in white lab
+coats, held a press conference on the steps of the Supreme Court
+building where they falsely claimed that a cocktail of
+hydroxychloroquine, azithromycin, and zinc could cure COVID-19. The
+event was livestreamed on Breitbart. Then-President Trump shared videos
+of the press conference on Twitter, garnering millions of views before
+tech companies took them down for violating rules against pandemic
+misinformation.</p>
+<blockquote>
+<h4>SIMONE GOLD, INSURRECTIONIST</h4>
+<p>Simone Gold isn’t just an anti-vaxxer quack doctor getting rich off of fake cures for COVID-19; she’s also one of the insurrectionists who stormed the US Capitol on January 6, 2021. After Gold pleaded guilty to misdemeanor trespassing, she was sentenced to two months in prison, a year of supervised release, and a $9,500 fine.</p>
+<p>In response to Gold’s arrest, AFLDS went on a fundraising spree, claiming that the charge against her was a politically motivated trampling of her free speech rights. The group raised more than $430,000 by the date of her sentencing, which the judge called “unseemly.” He also accused AFLDS of “mischaracterizing” her trial, “telling your supporters that this is a political prosecution of a law-abiding physician that’s designed to threaten and intimidate any American who dares to exercise their First Amendment rights.”</p>
+<p>After Gold reported to prison in July 2022, her California medical license was automatically placed on “inactive” status, meaning she was barred from practicing medicine (though it was reactivated after she was released). While she served her sentence, AFLDS continued to fundraise off of her plight, including sending a newsletter that unironically cited an article from The Intercept about privacy issues in her prison.</p>
+<p>John Strand, a former underwear model who hosted some of AFLDS’s short medical disinformation videos and who had become romantically involved with Gold as her employee, was also arrested during the Capitol riot. Unlike Gold, he did not plead guilty to misdemeanor trespassing, opting instead to try his luck at trial. He was found guilty of four misdemeanors and one felony (obstructing an official proceeding) and was sentenced in June 2023 to 32 months in prison and fined $10,000.</p>
+</blockquote>
+<p>In early 2021, well into the pandemic, AFLDS set up a system on its
+website to sell $90 telemedicine consultations so people could get
+prescriptions for hydroxychloroquine&mdash;a drug that, at that point in the
+pandemic, had already been debunked as a treatment for COVID-19. On
+January 3, Gold told a packed, maskless church audience in Tampa,
+Florida, that AFLDS made &ldquo;hydroxychloroquine available for the entire
+nation by going to our website. Then you can consult with a telemedicine
+doctor. And whether you have COVID, or you don&rsquo;t have COVID, or you&rsquo;re
+just worried about getting COVID, you can get yourself a prescription
+and they mail it to you.&rdquo; She insisted, &ldquo;The big fight wasn&rsquo;t the virus,
+it was the fear.&rdquo;</p>
+<p>Figure 13-1 shows the AFLDS website
+advertising prescriptions for COVID-19 &ldquo;medication.&rdquo;</p>
+<p>If one of AFLDS&rsquo;s hundreds of thousands of followers watched one of the
+group&rsquo;s anti-vaccine propaganda videos and decided that they needed
+ivermectin or hydroxychloroquine, first they would click the prominent
+Contact a Physician button on the AFLDS home page. This brought them
+to SpeakWithAnMD, the telehealth partner&rsquo;s
+website. Clicking the button on that site to book a consultation sent
+the patient to a page to create an account at Cadence Health, a vendor
+of SpeakWithAnMD. Cadence Health provided the actual telehealth platform
+that SpeakWithAnMD used.</p>
+<p><img alt="Figure 13-1: The home page on AFLDS’s website from March 4, 2022" src="media/images/Figure13-1.png" /><br />
+<em>Figure 13-1: The home page on AFLDS’s website from March 4, 2022</em></p>
+<p>The patient would then fill out a form answering medical questions;
+click through the disclaimer &ldquo;As a potential patient, I acknowledge and
+understand that the Hydroxychloroquine (HCQ) and Ivermectin have been
+deemed &lsquo;Highly Not Recommended&rsquo; by the WHO, FDA, CDC, and NIH&rdquo;; and
+enter their credit card information to pay $90 for a consultation. In
+the next few days, the patient would receive a phone call from someone
+in AFLDS&rsquo;s network of physicians, who would write them a prescription
+for the unproven drugs. ABC News paid the $90, got a call from someone
+who wrote them a prescription for ivermectin, and recorded the
+prescriber saying, &ldquo;I don&rsquo;t have any medical knowledge as far as the
+medicine, or even about COVID.&rdquo;</p>
+<p>At the time, the prescriptions were almost always processed through the
+online pharmacy Ravkoo. The patient would call Ravkoo, read their credit
+card number on the phone, and get the drugs mailed to their door.
+Sometimes they would be charged as much as $700 for ivermectin; Ravkoo
+didn&rsquo;t accept health insurance for these sales.</p>
+<p>When I started this investigation, I wasn&rsquo;t familiar with any of these
+companies. It was obvious that AFLDS was in the business of misleading
+its followers about public health so it could sell ineffective
+alternatives for preventing and treating COVID-19. But I didn&rsquo;t know how
+SpeakWithAnMD, Cadence Health, or Ravkoo fit into the scheme. Were they
+in on the AFLDS scam, or were they legitimate businesses that just
+happened to work with AFLDS?</p>
+<p>Next, I&rsquo;ll show you step-by-step how I unraveled this entire COVID-19
+pandemic profiteering scheme, starting with a description of the
+datasets that my hacker source sent me.</p>
+<h3>The Cadence Health and Ravkoo Datasets</h3>
+<p>The 100MB of compressed data from my source included records for
+hundreds of thousands of patients, in two separate files. This section
+describes how I stored and extracted
+these sensitive documents, revisits some basic command line data
+analysis (as you learned about in Chapter 4), and describes some of the key types of
+data I discovered in the dataset.</p>
+<h4>Extracting the Data into an Encrypted File Container</h4>
+<p>Because patient records are more sensitive than other medium-sensitivity
+data, I took additional precautions to secure this dataset and my work
+with it. I created an encrypted file container, a 5GB encrypted file
+that I could unlock with a strong passphrase stored in my password
+manager. This is where I saved the original dataset, as well as all of
+my notes, code, and other files related to this investigation, giving me
+an extra layer of protection in case my computer is ever compromised.
+Even then, whoever accesses my data won&rsquo;t be able to access the patient
+records without knowing the passphrase.</p>
+<p>I used Linux software called zuluCrypt to manage my encrypted file
+container, but VeraCrypt, which you learned about in Chapter 1, would also have been a good option and is
+available on any operating system. ZuluCrypt is similar to VeraCrypt,
+but it&rsquo;s slightly nicer to use and works only in Linux. I could also
+have used Disk Utility in macOS to create encrypted DMG files.</p>
+<p>My source sent me two tarball files: <em>hipaa_special.tar.zst</em> (33MB) and
+<em>horse_around_find_out.tar.zst</em> (74MB). Here&rsquo;s a listing of them:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor data % ls -lh
+total 215904
+-rwx------  1 micah  staff    32M Sep 14  2021 hipaa_special.tar.zst
+-rwx------  1 micah  staff    73M Sep 13  2021 horse_around_find_out.tar.zst
+</code></pre></div>
+
+<p>In Chapter 11, you worked with a similar
+file format, <em>.tar.gz</em>, where files are compressed using the GZIP
+algorithm. These <em>.tar.zst</em> files were compressed using a different
+algorithm, Zstandard. Installing the Zstandard package allowed me to
+uncompress this type of file using the command <code>tar -xf filename</code>. The <code>-xf</code> argument combines <code>-x</code>, which tells <code>tar</code> to extract the file, and <code>-f</code>, which indicates that the following
+argument is the filename that you&rsquo;re extracting. The <code>tar</code> program detects that this is a
+Zstandard file and uses <code>zstd</code>
+to uncompress it. Finally, because <code>tar</code> extracts a file into the current
+working folder, I created new folders, changed to them, and then
+extracted the data into that folder. For example, here&rsquo;s how I extracted
+<em>hipaa_special.tar.zst</em>:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor data % mkdir hipaa_special
+micah@trapdoor data % cd hipaa_special
+micah@trapdoor hipaa_special % tar -xf ../hipaa_special.tar.zst
+</code></pre></div>
+
+<p>As you learned in Chapter 3, these commands
+make a new folder called <em>hipaa_special</em>, change to that folder, and
+then extract the <em>hipaa_special.tar.zst</em> file from the parent folder.</p>
+<p>Likewise, the following commands change to the
+parent folder, make a new folder called <em>horse_around_and_find</em> out,
+change to that folder, and then extract
+<em>horse_around_find_out.tar.zst</em> into that folder:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor hipaa_special % cd ..
+micah@trapdoor data % mkdir horse_around_find_out
+micah@trapdoor data % cd horse_around_find_out
+micah@trapdoor horse_around_find_out % tar -xf ../horse_around_find_out.tar.zst
+</code></pre></div>
+
+<p>After extracting these folders, I did what I always do the first time I
+encounter any new dataset: start measuring it with command line tools.</p>
+<h4>Analyzing the Data with Command Line Tools</h4>
+<p>First, I wanted to know how much disk space these files took up and how
+many files were in each folder. I used the command line tricks described
+in Chapter 4 to figure this out:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor data % gdu --apparent-size -sh hipaa_special
+493M    hipaa_special
+micah@trapdoor data % find hipaa_special -type f | wc -l
+  281546
+micah@trapdoor data % gdu --apparent-size -sh horse_around_find_out
+691M   horse_around_find_out
+micah@trapdoor data % find horse_around_find_out -type f | wc -l
+     215
+</code></pre></div>
+
+<p>Because I ran these commands on my Mac, I used the <code>gdu</code> command from the <code>coreutils</code> Homebrew package to estimate disk
+space (rather than the <code>du</code>
+command for Linux). The <code>find</code>
+command created a list of files in the given folder, and that list was
+piped into the <code>wc -l</code>
+command, which counted the number of files listed. My output showed that
+the <em>hipaa_special</em> folder took 493MB of space and contained 281,546
+files, and the <em>horse_around _find_out</em> folder took 691MB of space
+and contained 215 files. Let&rsquo;s look at one at a time.</p>
+<h5>Viewing the hipaa_special Folder</h5>
+<p>It was clear at this point that <em>hipaa_special</em> contained far more
+files than I could manually read. I ran the following command to view
+the first few lines of filenames in the <em>hipaa_special</em> folder listing,
+so I could get a feel for what was in there and start opening some of
+those files next:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor data % ls -lh hipaa_special | head
+</code></pre></div>
+
+<p>My code piped the output of the <code>ls</code> command into the <code>head</code> command, which by default displays the
+first 10 lines of input. This way, I didn&rsquo;t need to watch hundreds of
+thousands of filenames scroll by just to get a sense of the folder&rsquo;s
+contents.</p>
+<p>My output showed that the folder contains small
+files with numeric filenames and no file extensions:</p>
+<div class="codehilite"><pre><span></span><code>--snip--
+-rw-r--r--  1 micah  staff   8.1K Sep 13  2021 100000
+-rw-r--r--  1 micah  staff   1.3K Sep 13  2021 100001
+-rw-r--r--  1 micah  staff   1.3K Sep 12  2021 100002
+-rw-r--r--  1 micah  staff   1.4K Sep 13  2021 100003
+-rw-r--r--  1 micah  staff   1.5K Sep 13  2021 100004
+-rw-r--r--  1 micah  staff   1.5K Sep 13  2021 100005
+-rw-r--r--  1 micah  staff   1.5K Sep 13  2021 100006
+-rw-r--r--  1 micah  staff   1.3K Sep 13  2021 100007
+-rw-r--r--  1 micah  staff   1.3K Sep 13  2021 100008
+</code></pre></div>
+
+<p>When I opened one of these files in VS Code, I could quickly see that it
+was a JSON file. Each of these files, I discovered, was a record for a
+different user in Cadence Health&rsquo;s system. For example, Listing 13-1 shows a redacted version of the file <em>244273</em>.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;provider_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;npi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;spi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;partner_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">244273</span><span class="p">,</span><span class="w"> </span><span class="err">❶</span><span class="w"></span>
+<span class="w">        </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;fname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;lname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;work_phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;work_phone_ext&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted@hotmail.com&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;certified_states&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;gender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;fax&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;ssn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">999999999</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;birthdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;addressLine1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;zipcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;avatar&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;avatar\/default_avatar.png&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">78410</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;partner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;,3,&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">❷</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;America\/Los_Angeles&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;role_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;alcohol_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;alcohol_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;current_physician&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;consultationNotes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">❸</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">179820</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;09\/04\/2021 13:47:28&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">❹</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;note&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This visit was performed via telemedicine.\nThe patient confirmed knowledge of the limitations of the use of telemedicine were verbally confirmed by the provider.\nVerification of patient identity was established.\nVerbal consent was obtained for medical treatment obtained\n\nThe patient is being interviewed via phone Platform\n\nPatient has need for covid meds in regards to: ivermectin\nSymptoms onset date: 7 days\n\nOccupation:\nChronic Medical illnesses: denies heart lung or liver problems\</span>
+<span class="s2">--snip--</span>
+<span class="s2">be required.&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;practice&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;covid19_treatment&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;internalNotes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 13-1: An example JSON file from <code>hipaa_special</code></em></p>
+<p>I could see that the filename (<em>244273</em>) matched the patient&rsquo;s user ID
+❶. The record also includes
+a reference to a partner ❷.
+This value is in an odd format, but I quickly discovered that it&rsquo;s a
+comma-separated list of partner IDs with, for some reason, blank values
+at the beginning and end of the list. I don&rsquo;t know why Cadence Health
+chose to represent which partners each patient belonged to as a string
+rather than a JSON array, which would have been cleaner. Once I figured
+out that they had made this choice, though, it was simple enough to work
+around. I discovered that the vast majority of the patients have a value
+of <code>,3,</code> for <code>partner</code>, which, as you&rsquo;ll see later in this
+chapter, means they&rsquo;re AFLDS patients.</p>
+<p>The record also includes the patient&rsquo;s name, email, address, date of
+birth, other personal information, and detailed consultation notes. In
+some of the patient records, the <code>consultationNotes</code> array ❸ is empty, but in this case, it lists details.
+I assume that patients with empty consultation notes created an account
+in the Cadence Health system but never paid the $90 and therefore
+didn&rsquo;t have any telehealth consultations. The patient from this file had
+their $90 phone consultation on September 4, 2021, at 1:47 PM
+❹.</p>
+<p>This dataset includes patient records similar to that shown in Listing
+13-1 for 281,000 patients.</p>
+<p>My source told me that they had created their own account in the Cadence
+Health system while they were hacking it. As they used the website, they
+watched exactly which URLs their web browser loaded. When they noticed
+that the URL that returned their own patient record included their
+patient ID, they tried loading similar URLs with other IDs. Those URLs
+returned other users&rsquo; patient records. Therefore, my source simply wrote
+a script to download all 281,000 patient records and stored them in
+individual JSON files. The <em>hipaa_special.tar.zst</em> file contains the
+output of that script.</p>
+<h5>Viewing the horse_around_find_out Folder</h5>
+<p>The <em>horse_around_find_out</em> folder is much smaller and easier to deal
+with. I ran the following command to find out what files it contained
+(this folder contains a small enough number of files that there was no
+reason to pipe it into <code>head</code>):</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor data % ls -lh horse_around_find_out
+</code></pre></div>
+
+<p>My output showed that the files in this folder are mostly JSON files
+from Cadence Health and CSVs from the Ravkoo pharmacy site, as well as a
+few other files:</p>
+<div class="codehilite"><pre><span></span><code>--snip--
+-rw-r--r--    1 micah  staff   387M Sep 12  2021 cadence_allpatients_all.json
+-rw-r--r--    1 micah  staff    13K Sep 12  2021 cadence_allpharmacies_all.json
+-rw-r--r--    1 micah  staff   317K Sep 12  2021 cadence_allproviders_all.json
+-rw-r--r--    1 micah  staff   3.9K Sep 12  2021 cadence_allteams_all.json
+-rw-r--r--    1 micah  staff    15K Sep 13  2021 cadence_api.txt
+-rw-r--r--    1 micah  staff   103M Sep 12  2021 cadence_contacts_all.json
+-rw-r--r--    1 micah  staff   1.0M Sep 12  2021 cadence_getPrescriptionPad_all.json
+-rw-r--r--    1 micah  staff   983K Sep 11  2021 cadence_health_partners.json
+drwxr-xr-x  202 micah  staff   6.3K Sep 12  2021 cadence_js
+-rw-r--r--    1 micah  staff   238K Sep 12  2021 cadence_providers_2.json
+-rw-r--r--    1 micah  staff   321K Sep 12  2021 ravkoo_contact.csv
+-rw-r--r--    1 micah  staff   1.8M Sep 12  2021 ravkoo_drugs.csv
+-rw-r--r--    1 micah  staff    51K Sep 12  2021 ravkoo_insurance.csv
+-rw-r--r--    1 micah  staff   149M Sep 13  2021 ravkoo_rxdata.csv
+-rw-r--r--    1 micah  staff    60K Sep 12  2021 ravkoo_screenshot.png
+-rw-r--r--    1 micah  staff   361B Sep 12  2021 ravkoo_third_parties.csv
+</code></pre></div>
+
+<p>I started manually opening these files to see what they contain. The
+<em>cadence_api.txt</em> file appears to contain a few hundred lines of
+JavaScript code that lists URLs within the Cadence Health API, possibly
+used by the hacker to download the data. The <em>cadence_js</em> folder
+contains several inscrutable JavaScript files, probably the code that
+powered the Cadence Health website itself.</p>
+<p>The folder also contains the file <em>ravkoo_screenshot.png</em>, a screenshot
+from Ravkoo&rsquo;s Super Admin interface, shown in Figure
+13-2. I never had access to the interface
+itself, just this screenshot. It appears that the links on the left
+represent tables of data from Ravkoo&rsquo;s database, and the information on
+the right displays all of the data from a selected table.</p>
+<p>My source told me that they had discovered a secret URL for this admin
+interface, though they didn&rsquo;t explain exactly how they found it. Anyone
+could create an account on Ravkoo&rsquo;s system, and as long as they were
+logged in, they could go to the URL for this interface. From there, they
+could click the table names in the list on the left to access all of
+Ravkoo&rsquo;s data from their web browser. My source built the CSV files they
+sent me (<em>ravkoo_contact .csv</em>, <em>ravkoo_drugs.csv</em>, and so on) by
+scraping the data from the Ravkoo Super Admin interface, just as
+@donk_enby did to create the Parler dataset. (See
+Appendix B for more information on web scraping.)</p>
+<p><img alt="Figure 13-2: A screenshot from the secret Ravkoo Super Admin interface" src="media/images/Figure13-2.png" /><br />
+<em>Figure 13-2: A screenshot from the secret Ravkoo Super Admin interface</em></p>
+<p>I could see that the <em>horse_around_and_find_out</em> folder contained
+mostly JSON and CSV files, but I needed to do more research to determine
+their significance.</p>
+<h5>Viewing the cadence_allpatients_all.json File</h5>
+<p>I started by looking at the largest file in
+<em>horse_around_and_find_out</em>, the 387MB
+<em>cadence_allpatients_all.json</em> file. This enormous JSON object lists
+information about every Cadence Health patient, including much of the
+same data listed in the <em>hipaa_special</em> patient records. Listing
+13-2 shows a redacted section of the data
+from this file for a single patient.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">168692</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;mname&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;lname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted@gmail.com&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted_password_hash&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;ssn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">999999999</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fax&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;birthdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;gender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;maritalStatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;addressLine1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;addressLine2&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;zipcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NJ&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-08-18 14:04:58&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-08-18 14:04:58&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 13-2: An example JSON object describing a patient in <code>cadence_allpatients_all.json</code></em></p>
+<p>Many of these fields have a value of <code>null</code>, meaning they&rsquo;re empty. The Cadence
+Health software likely made it optional to collect this information, and
+AFLDS chose not to do so for its patients. The value of the
+<code>ssn</code> field (presumably for
+Social Security number) is <code>999999999</code> in this example. All patients in this
+JSON file have their SSN set either to this number or to <code>null</code>, so it appears that this dataset
+doesn&rsquo;t include real SSNs. The <em>cadence_allpatients_all.json</em> file
+also included each user&rsquo;s password hash. Someone with all these password
+hashes could potentially recover the original passwords for users
+without strong passwords. The value of <code>created_at</code> appears to be the timestamp for when
+this patient record was created&mdash;in other words, when this person
+created their account.</p>
+<p>After reading through several patient records in my text editor, I had a
+decent understanding of the type of data in this file, so I moved on to
+examining the smaller files.</p>
+<h5>Viewing the cadence_health_partners.json File</h5>
+<p>The <em>cadence_health_partners.json</em> file contains a JSON object with a
+list of 17 of Cadence&rsquo;s partners, such as America&rsquo;s Frontline Doctors,
+SpeakWithAnMD, and Dr. Zelenko. Listing 13-3 shows a redacted example of the AFLDS
+partner from that file.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;America&#39;s Frontline Doctors&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;practices&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;covid19,followupvisit&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;one_merchant_security_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;stripe_publishable_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dev+admin@cadencehealth.us&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;stripe_secret_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;virtual_visit_price&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;covid19&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;90.00&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;followupvisit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;59.99&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 13-3: An example JSON object describing a partner in <code>cadence_health_partners.json</code></em></p>
+<p>Each partner has unique <code>id</code>
+and <code>name</code> fields, along with
+many others that describe the partner&rsquo;s settings. The first lines of
+this JSON object show that AFLDS&rsquo;s <code>id</code> is <code>3</code>. The <code>practices</code> field is a string containing a
+comma-separated list of telehealth consultation types that this partner
+offers (<code>covid19</code> and
+<code>followupvisit</code>, in this
+case). This JSON object includes secret tokens for payment processors in
+the lines with fields for <code>one_merchant _security_key</code> and <code>stripe_secret_key</code>, which I&rsquo;ve redacted. The
+<code>virtual_visit _price</code> field
+is a JSON object containing other fields for each type of practice this
+partner offers and, in this case, shows that AFLDS charges $90 for
+COVID-19 visits and $59.99 for follow-up visits.</p>
+<p>After reviewing <em>cadence_health_partners.json</em> and the patient data in
+the <em>hipaa_special</em> folder, I noticed a relationship between the two.
+Each partner&rsquo;s JSON object has an <code>id</code>, and each patient has a
+<code>partner</code> field. Listing 13-3 shows that AFLDS&rsquo;s partner <code>id</code> is <code>3</code>, indicating that the patient in Listing 13-1 with a <code>partner</code> value of <code>,3,</code> was an AFLDS patient.</p>
+<h5>The ravkoo_rxdata.csv File</h5>
+<p>Of the six Ravkoo files, I found that <em>ravkoo_rxdata.csv</em> was by far
+the biggest. Figure 13-3 shows a portion of
+the data in this spreadsheet.</p>
+<p><img alt="Figure 13-3: Viewing ravkoo_rxdata.csv in LibreOffice Calc format" src="media/images/Figure13-3.png" /><br />
+<em>Figure 13-3: Viewing <code>ravkoo_rxdata.csv</code> in LibreOffice Calc format</em></p>
+<p>This 149MB CSV spreadsheet contained 340,000 rows of data, each
+representing a prescription filled. Each prescription included the name
+and dosage of the drug, usage instructions, information about refills,
+the date it was filled, a Remarks column (where many of the rows list
+<code>AMERICAS FRONT LINE DOCTORS—ENCORE</code>), and other information.</p>
+<p>After a cursory review of <em>ravkoo_rxdata.csv</em>, it was clear that it
+might contain revelations about how much money AFLDS and the companies
+it worked with charged for bogus COVID-19 health care. However, its
+current format would make it difficult to work with. I needed to
+transform the data in order to more easily make sense of it.</p>
+<h3>Creating a Single Spreadsheet of Patients</h3>
+<p>I wanted to separate the AFLDS patients who had paid $90 for phone
+consultations from the total list of patients, many of whom had never
+paid, so I could get a clearer idea of the scale of AFLDS&rsquo;s scam. For
+each of these paying patients, I wanted to find their name, gender,
+birth date, the date they created their Cadence Health account, and the
+number of telehealth consultations they had.</p>
+<p>The <em>cadence_allpatients_all.json</em> file contained information about
+all of the patients, including the previously discussed
+<code>created_at</code> timestamp.
+However, it didn&rsquo;t include the consultation notes, and I needed those to
+determine how many consultations the patient actually had. Meanwhile,
+the 281,000 JSON files in the <em>hipaa_special</em> folder had information
+about all of the patients, including consultation notes, but it didn&rsquo;t
+have the <code>created_at</code>
+timestamp.</p>
+<p>I decided to write a Python script to comb through the <em>cadence_allpatients_all.json</em> file and all the files in the <em>hipaa_special</em>
+folder, pull out the information I was looking for, and save it all in a
+single CSV. Here&rsquo;s the Python code for my script (you can also find a
+copy in the book&rsquo;s GitHub repo at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-aflds-patients-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-aflds-patients-csv.py</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Turn a JSON file into a Python dict or list</span>
+<span class="k">def</span> <span class="nf">data_from_json</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="c1"># Export a CSV full of AFLDS patients</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Load patient data from cadence_allpatients_all.json</span>
+    <span class="n">patients_data</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span>
+        <span class="s2">&quot;data/horse_around_find_out/cadence_allpatients_all.json&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># Keep track of the created_at timestamps for each patient&#39;s id</span>
+    <span class="n">patient_ids_to_created_at</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">patient</span> <span class="ow">in</span> <span class="n">patients_data</span><span class="p">[</span><span class="s2">&quot;patients&quot;</span><span class="p">]:</span>
+        <span class="n">patient_ids_to_created_at</span><span class="p">[</span><span class="n">patient</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">patient</span><span class="p">[</span><span class="s2">&quot;created_at&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Start the list of AFLDS patients that have had at least one consultation</span>
+    <span class="n">patient_rows</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Loop through every file in the hipaa_special folder</span>
+    <span class="k">for</span> <span class="n">patient_id</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;data/hipaa_special&quot;</span><span class="p">):</span>
+        <span class="c1"># Load the patient data</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data/hipaa_special&quot;</span><span class="p">,</span> <span class="n">patient_id</span><span class="p">))</span>
+
+        <span class="c1"># Some of the patient records are empty. This skips them</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Make sure AFLDS (id 3) is in the list of partners</span>
+        <span class="n">partner_ids</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;partner&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;3&quot;</span> <span class="ow">in</span> <span class="n">partner_ids</span><span class="p">:</span>
+            <span class="c1"># Count how many consultations this patient has</span>
+            <span class="n">num_consultations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;consultationNotes&quot;</span><span class="p">])</span>
+
+            <span class="c1"># If they have had more than one, add them to the list</span>
+            <span class="k">if</span> <span class="n">num_consultations</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">patient_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                      <span class="p">{</span>
+                        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;user_id&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="n">patient_ids_to_created_at</span><span class="p">[</span>
+                            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span>
+                          <span class="p">],</span>
+                        <span class="s2">&quot;fname&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;fname&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;lname&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;lname&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;email&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;city&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;state&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;gender&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;birthdate&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;birthdate&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;num_consultations&quot;</span><span class="p">:</span> <span class="n">num_consultations</span><span class="p">,</span>
+                      <span class="p">}</span>
+                <span class="p">)</span>
+
+    <span class="c1"># Write the CSV file</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;aflds-patients.csv&quot;</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fname&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lname&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;email&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;city&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;state&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gender&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;birthdate&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;num_consultations&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">patient_rows</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>You won&rsquo;t be able to run this or any other script in this chapter
+without a copy of the private dataset, so I&rsquo;ll summarize how it worked.</p>
+<p>First, the script loaded <em>cadence_allpatients_all.json</em> as a Python
+object. It then looped through each patient in that object, keeping
+track of which <code>user_id</code>
+mapped to which <code>created_at</code>
+timestamp in a dictionary.</p>
+<p>It created an empty list called
+<code>aflds_patients</code> and then
+looped through every filename in the <em>hipaa_special</em> folder, where each
+file represents a different patient. For each filename, it loaded the
+corresponding JSON file as a Python object representing a patient. If
+the <code>partner</code> field included
+the ID 3 (meaning that the record was associated with AFLDS), and if the
+length of the <code>consultationNotes</code> field was greater than 0 (meaning
+there was at least one consultation), then it added this patient to the
+<code>aflds_patients</code> list, making
+sure to include the patient&rsquo;s <code>created_at</code> timestamp, too.</p>
+<p>It opened a new CSV file, <em>aflds-patients.csv</em>, for writing, and then
+wrote the <code>aflds_patients</code>
+list as rows in the CSV file.</p>
+<p>After working through the exercises in this book, you should have all
+the skills you need to write your own similar scripts. This is true for
+all of the scripts I wrote for this investigation, which you&rsquo;ll see
+throughout this chapter. For example, in Chapter 8, you learned about dictionaries and lists;
+in Chapter 9, you learned how to use the
+<code>csv</code> module to create your
+own CSV spreadsheets; and in Chapter 11,
+you learned how to load and work with data in JSON format. This script
+incorporates all these techniques.</p>
+<p>Running this script created a 6.4MB CSV file called <em>aflds-patients.csv</em>
+with 72,000 rows. Figure 13-4 shows a
+redacted view of this spreadsheet. As you can see, this data is
+significantly easier to make sense of compared to hundreds of thousands
+of small JSON files, and one enormous one.</p>
+<p><img alt="Figure 13-4: A redacted view of aflds-patients.csv" src="media/images/Figure13-4.png" /><br />
+<em>Figure 13-4: A redacted view of <code>aflds-patients.csv</code></em></p>
+<p>This spreadsheet lists the 72,000 AFLDS patients who were referred to
+SpeakWithAnMD and actually bought a $90 consultation. If each patient
+paid $90, these consultations alone would have
+cost them, collectively, $6.4 million. Many of the patients had
+multiple consultations, so I estimate patients were charged <em>$6.7
+million</em> from consultations alone. There&rsquo;s no way of knowing just from
+this data how the money was distributed, but it was likely split between
+AFLDS, individual physicians in its network, and SpeakWithAnMD.</p>
+<p>My source&rsquo;s dataset included all of the patient data in Cadence Health&rsquo;s
+database. When I sorted the spreadsheet on the <code>created_at</code> column, which includes the dates each
+patient created their Cadence account, I could see that the earliest
+patients made their accounts on July 16, 2021, and the latest patients
+created theirs on September 12, 2021, when my source hacked Cadence
+Health. While only 72,000 patients paid for $90 consultations, I had
+data for an additional 180,000 AFLDS patients who created Cadence
+accounts but never had a consultation, meaning that 90 percent of the
+281,000 patients in the Cadence Health database during this time span
+were referred by AFLDS.</p>
+<p>While AFLDS had been selling $90 consultations since January 2021,
+Roque Espinal, Cadence Health&rsquo;s CEO, confirmed to me that his service
+for SpeakWithAnMD launched on July 16. Since this is the date of the
+earliest patient data I have, this means that my source collected
+records for <em>all</em> of Cadence&rsquo;s patients. My source&rsquo;s data shows that in
+the two-month period between July and September, AFLDS charged its
+patients an average of $100,000 a day from $90 consultations alone. If
+AFLDS brought in that much each day during the first half of the year as
+well, it would have brought in an additional <em>$18 million</em> in revenue.
+Again, this is just from selling consultations; it doesn&rsquo;t include the
+cost of the prescription drugs.</p>
+<p>At this point in my investigation, it was clear that AFLDS was spreading
+medical disinformation, and it seemed evident that SpeakWithAnMD and
+Ravkoo were at least aware of this and were profiting from it as well.
+However, I wasn&rsquo;t sure if Cadence Health, which provided a service to
+SpeakWithAnMD, had realized what its service was being used for. But
+before exploring that further, I decided to switch gears and start
+looking at Ravkoo&rsquo;s drug prescription data.</p>
+<h3>Calculating Revenue from Prescriptions Filled by Ravkoo</h3>
+<p>The <em>ravkoo_rxdata.csv</em> spreadsheet introduced earlier has 340,000
+rows, each representing a prescription that was filled. It includes a
+<code>DrugName</code> column with values
+like <code>IVERMECTIN 3 MG TABLET</code>,
+a <code>cost</code> column with the price
+of that prescription, and a <code>Fill_Date</code> column with the date that the
+prescription was filled.</p>
+<p>By sorting the spreadsheet by <code>Fill_Date</code>, I could see that the Ravkoo pharmacy
+filled the first prescription on November 27, 2020, and the last ones
+were filled on August 24, 2021. The SpeakWithAnMD data covers a
+two-month period, but the Ravkoo data covers a nine-month period. That
+is, my dataset contained two months&rsquo; worth of
+patient records, but nine months&rsquo; worth of prescription records. In this
+section I describe the Python code I wrote to gain a better
+understanding of what drugs Ravkoo sold and how much of them related to
+quack cures for COVID-19.</p>
+<h4>Finding the Price and Quantity of Drugs Sold</h4>
+<p>To find out how much money Ravkoo charged patients for each specific
+drug, I wrote another script, shown in Listing 13-4 (you can also find a copy of it at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ravkoo-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ravkoo-csv.py</a>).</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1"># Export a CSV that adds up prescriptions and their costs for each drug</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+        <span class="c1"># A dictionary that maps drug names to another dictionary containing the</span>
+    <span class="c1"># prescription count and total cost for that drug</span>
+    <span class="n">drugs</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Add up the number of prescriptions and total cost for all drugs, to display</span>
+    <span class="c1"># at the end</span>
+    <span class="n">prescription_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_cost</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Loop through ravkoo_rxdata.csv, and count prescriptions and costs</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/horse_around_find_out/ravkoo_rxdata.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">drugs</span><span class="p">:</span>
+               <span class="n">drugs</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;prescription_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;total_cost&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+            <span class="c1"># Count prescriptions and cost for this drug</span>
+            <span class="n">drugs</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]][</span><span class="s2">&quot;prescription_count&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">drugs</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]][</span><span class="s2">&quot;total_cost&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Cost&quot;</span><span class="p">])</span>
+
+            <span class="c1"># Count prescriptions and cost for _all_ drugs</span>
+            <span class="n">prescription_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">total_cost</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Cost&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Write the CSV file</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;drug_name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prescription_count&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;total_cost&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;ravkoo.csv&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">drug_name</span> <span class="ow">in</span> <span class="n">drugs</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;drug_name&quot;</span><span class="p">:</span> <span class="n">drug_name</span><span class="p">,</span>
+                    <span class="s2">&quot;prescription_count&quot;</span><span class="p">:</span> <span class="n">drugs</span><span class="p">[</span><span class="n">drug_name</span><span class="p">][</span><span class="s2">&quot;prescription_count&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;total_cost&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">drugs</span><span class="p">[</span><span class="n">drug_name</span><span class="p">][</span><span class="s2">&quot;total_cost&quot;</span><span class="p">]),</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of prescriptions: </span><span class="si">{</span><span class="n">prescription_count</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total cost: $</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">total_cost</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p><em>Listing 13-4: The Python script <code>create-ravkoo-csv.py</code>, which adds up Ravkoo prescriptions and drug costs and exports a CSV of the results</em></p>
+<p>First this script created an empty dictionary called <code>drugs</code>, which mapped drug names to another
+dictionary containing <code>prescription_count</code> and <code>total_cost</code> values. It then loaded
+<em>ravkoo_rxdata.csv</em> and looped through its rows. For each row, if the
+<code>DrugName</code> wasn&rsquo;t in the
+<code>drugs</code> dictionary yet, the
+script added it, then incremented the drug&rsquo;s prescription count by 1 and
+added the <code>Cost</code> value to that
+drug&rsquo;s total cost. It saved all of the data in <code>drugs</code> into a CSV called <em>ravkoo.csv</em>.
+Finally, the script counted up the total number of prescriptions and the
+total cost for <em>all</em> drugs sold to all patients and displayed it in the
+terminal.</p>
+<p>Here&rsquo;s the output I got when I ran the script:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor AFLDS % python3 create-ravkoo-csv.py
+Number of prescriptions: 340,000
+Total cost: $15,119,473
+</code></pre></div>
+
+<p>My output showed that patients paid over $15 million to Ravkoo for all
+the prescriptions in the hacked data. However, many of these
+prescriptions might not have anything to do with AFLDS or bogus COVID-19
+cures.</p>
+<p>The resulting CSV file, <em>ravkoo.csv</em>, contained 1,552 rows, the number
+of unique <code>DrugName</code> values in
+the original <em>ravkoo_rxdata.csv</em>. Figure
+13-5 shows this spreadsheet, sorted
+descending by <code>total_cost</code>, to
+show which drugs cost patients the most money.</p>
+<p>How much of this revenue was from drugs that AFLDS pushed on its
+followers? The drug that cumulatively cost patients the most was
+<code>IVERMECTIN 3 MG TABLET</code>,
+which was prescribed 63,409 times, at a total cost of $4.6 million.
+Ivermectin is used primarily to treat parasites in livestock, but it&rsquo;s
+also occasionally used to treat scabies and lice in humans. I didn&rsquo;t
+know for sure that all of these ivermectin sales were directly from
+AFLDS, but it was suspicious that ivermectin was bringing in so much
+money during the COVID-19 pandemic, when disinformation about its
+efficacy was rampant.</p>
+<p>Another row had the <code>drug_name</code> of <code>IVERMECTIN 3MG PO TAB</code> (the same dose of ivermectin, just
+with a slightly different name <code>DrugName</code> value from <em>ravkoo_rxdata.csv</em>) that
+cost 883 patients another $98,900. Other drugs like hydroxychloroquine
+and azithromycin had the same problem: there were different
+<code>DrugName</code> values that
+actually represented the same drug. If I wanted to
+know the total revenue from each individual drug, I would have to
+combine all of the ivermectin prescriptions into one row and do the same
+with the other drugs.</p>
+<p><img alt="Figure 13-5: Viewing ravkoo.csv in LibreOffice Calc" src="media/images/Figure13-5.png" /><br />
+<em>Figure 13-5: Viewing <code>ravkoo.csv</code> in LibreOffice Calc</em></p>
+<h4>Categorizing Prescription Data by Drug</h4>
+<p>Because I was investigating AFLDS, I was most interested in the drugs
+that the group promotes: ivermectin, hydroxychloroquine, and a few
+others. In addition to ivermectin, AFLDS promotes the <em>Zelenko
+protocol</em>, named after Dr. Vladimir Zelenko, the American doctor who, at
+the start of the pandemic in March 2020, claimed (without evidence) that
+he had successfully treated hundreds of COVID-19 patients using a
+combination of hydroxychloroquine, azithromycin, and zinc sulfate. (The
+AFLDS website on treatment options also lists vitamin C as part of the
+Zelenko protocol.) Zelenko also spread other medical disinformation,
+claiming, for example, that more children die from COVID-19 vaccines
+than from the virus itself. Then-President Trump publicly lauded
+Zelenko&rsquo;s work, saying that he himself took hydroxychloroquine to treat
+COVID-19.</p>
+<p>I wanted to see how much of Ravkoo&rsquo;s business consisted of selling these
+drugs. To do this, I&rsquo;d have to reorganize the data. I needed to create a
+similar spreadsheet, but instead of having a column for the
+<code>DrugName</code> lifted directly
+from the hacked data, I wanted that column to be a category of
+prescriptions. Once I had a straightforward spreadsheet that mapped
+individual drugs to their revenue, I could visualize that data&mdash;for
+example, in a pie chart.</p>
+<p>The <em>ravkoo.csv</em> spreadsheet showed me the most commonly prescribed
+drugs. Based on the names of these drugs, I came up with a list of
+categories: Ivermectin, Hydroxychloroquine, Azithromycin, Zinc, Vitamin
+C, and Other. In other words, the most commonly
+prescribed drugs were exactly what AFLDS was promoting.</p>
+<p>I then wrote another script very similar to the one in Listing 13-4, but with one additional step. For
+every row in the <em>ravkoo_rxdata.csv</em> spreadsheet, the script determined
+which of those categories the drug fit into and added up the number of
+prescriptions and cost for each category. It then saved all of this data
+as a CSV called <em>ravkoo-categories.csv</em>.</p>
+<p>Here&rsquo;s my Python script (you can also find it at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ravkoo-categories-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ravkoo-categories-csv.py</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1"># Export a CSV that adds up prescriptions and their costs for each category of drug</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># A dictionary that maps drug categories to another dictionary containing the</span>
+    <span class="c1"># prescription count and total cost for that drug category</span>
+    <span class="n">drug_categories</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Loop through ravkoo_rxdata.csv, and count prescriptions and costs</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/horse_around_find_out/ravkoo_rxdata.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;ivermectin&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Ivermectin&quot;</span>
+            <span class="k">elif</span> <span class="s2">&quot;hydroxychloroquine&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Hydroxychloroquine&quot;</span>
+            <span class="k">elif</span> <span class="s2">&quot;azithromycin&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Azithromycin&quot;</span>
+            <span class="k">elif</span> <span class="s2">&quot;zinc&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+               <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Zinc&quot;</span>
+            <span class="k">elif</span> <span class="s2">&quot;vitamin c&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Vitamin C&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Other&quot;</span>
+
+            <span class="k">if</span> <span class="n">category</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">drug_categories</span><span class="p">:</span>
+                <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;prescription_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;total_cost&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+            <span class="c1"># Count prescriptions and cost for this drug category</span>
+            <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span><span class="s2">&quot;prescription_count&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span><span class="s2">&quot;total_cost&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Cost&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Write the CSV file</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;drug_category&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prescription_count&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;total_cost&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;ravkoo-categories.csv&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">drug_categories</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;drug_category&quot;</span><span class="p">:</span> <span class="n">category</span><span class="p">,</span>
+                    <span class="s2">&quot;prescription_count&quot;</span><span class="p">:</span> <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span>
+                         <span class="s2">&quot;prescription_count&quot;</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;total_cost&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span><span class="s2">&quot;total_cost&quot;</span><span class="p">]),</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>After running this script, I ended up with a file called
+<em>ravkoo-categories .csv</em>. Table 13-1 shows
+the data from this spreadsheet, detailing Ravkoo&rsquo;s prescription sales.</p>
+<p><em>Table 13-1: Categories of Drugs Sold by Ravkoo</em></p>
+<table>
+<thead>
+<tr>
+<th>Drug category</th>
+<th>Prescription count</th>
+<th>Total cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hydroxychloroquine</td>
+<td>92,646</td>
+<td>$1,234,727</td>
+</tr>
+<tr>
+<td>Zinc</td>
+<td>82,608</td>
+<td>$177,336</td>
+</tr>
+<tr>
+<td>Ivermectin</td>
+<td>64,300</td>
+<td>$4,734,163</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>42,193</td>
+<td>$6,476,213</td>
+</tr>
+<tr>
+<td>Vitamin C</td>
+<td>31,281</td>
+<td>$52,712</td>
+</tr>
+<tr>
+<td>Azithromycin</td>
+<td>26,972</td>
+<td>$2,444,319</td>
+</tr>
+</tbody>
+</table>
+<p>This data clearly revealed Ravkoo&rsquo;s role in AFLDS&rsquo;s scam: <em>87 percent</em>
+of all prescriptions sold by Ravkoo are for fake COVID-19 treatments.
+Over a nine-month period, patients collectively paid <em>$8.6 million</em> to
+Ravkoo for snake oil that they were told would prevent or cure COVID-19.
+This is in addition to the roughly $6.7 million (and potentially many
+millions more) that patients paid SpeakWithAnMD for phone consultations.
+As far as I can tell, Ravkoo&rsquo;s only role in the scheme was as a
+pharmacy, and it didn&rsquo;t receive any money from the phone consultations.
+AFLDS also, at various times, worked with different pharmacies.</p>
+<p>By the time The Intercept published this investigation into AFLDS,
+Ravkoo CEO Alpesh Patel told me that his company had already stopped
+doing business with SpeakWithAnMD. &ldquo;The volume over there went up crazy,
+and we didn&rsquo;t feel comfortable,&rdquo; he said. &ldquo;And we don&rsquo;t have that much
+capacity to fill that many prescriptions.&rdquo; Using OSINT, which you
+learned about in Chapter 1, I confirmed that
+Patel was telling the truth: after scouring the internet about AFLDS,
+including reading reporting from other journalists and pro-science
+activists on Twitter who were keeping track of the group, I discovered
+that AFLDS ran some Telegram channels, including one specifically for
+its patients. In this Telegram channel, I
+discovered that patients had posted messages about Ravkoo no longer
+working with SpeakWithAnMD or AFLDS.</p>
+<h3>A Deeper Look at the Cadence Health Patient Data</h3>
+<p>At this point, I knew that 72,000 AFLDS patients paid for $90
+telehealth consultations and that 87 percent of Ravkoo&rsquo;s prescriptions
+were for fake COVID-19 cures. I wanted to further understand the patient
+data, and there was still a lot more to dig into. Who were
+SpeakWithAnMD&rsquo;s other partners besides AFLDS, and how much of the
+company&rsquo;s business did they make up? And what could I learn about the
+AFLDS patients themselves? To answer these questions, I wrote more
+Python code.</p>
+<h4>Finding Cadence’s Partners</h4>
+<p>I wanted to know how much of SpeakWithAnMD&rsquo;s business, and by extension
+Cadence Health&rsquo;s business, came from AFLDS. The file <em>cadence_health
+_partners.json</em> includes a list of all the partners, so I wrote a
+Python script that counted the number of patients associated with each
+one, shown in Listing 13-5 (you can also
+find a copy at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-cadence-partners-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-cadence-partners-csv.py</a>).</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1"># Turn a JSON file into a Python dict or list</span>
+<span class="k">def</span> <span class="nf">data_from_json</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="c1"># Convert the comma-separated list of partners, like &quot;,3,&quot;, into a Python list</span>
+<span class="c1"># of partners, like [&quot;America&#39;s Frontline Doctors&quot;]</span>
+<span class="k">def</span> <span class="nf">get_partners</span><span class="p">(</span><span class="n">partner_lookup</span><span class="p">,</span> <span class="n">patient</span><span class="p">):</span>
+    <span class="n">partners</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">partner_ids</span> <span class="o">=</span> <span class="n">patient</span><span class="p">[</span><span class="s2">&quot;partner&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">partner_id</span> <span class="ow">in</span> <span class="n">partner_ids</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">partner_id</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">partners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">partner_lookup</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">partner_id</span><span class="p">)])</span>
+
+    <span class="k">return</span> <span class="n">partners</span>
+
+<span class="c1"># Export a CSV that lists Cadence partners</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">partner_rows</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Load the Cadence patient data</span>
+    <span class="n">patients_data</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span>
+        <span class="s2">&quot;data/horse_around_find_out/cadence_allpatients_all.json&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Load the Cadence partners data</span>
+    <span class="n">partners_data</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span>
+        <span class="s2">&quot;data/horse_around_find_out/cadence_health_partners.json&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create a dictionary that maps a partner ID with its name</span>
+    <span class="n">partner_lookup</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">partner</span> <span class="ow">in</span> <span class="n">partners_data</span><span class="p">:</span>
+        <span class="n">partner_lookup</span><span class="p">[</span><span class="n">partner</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">partner</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Loop through all of the partners</span>
+    <span class="k">for</span> <span class="n">partner</span> <span class="ow">in</span> <span class="n">partners_data</span><span class="p">:</span>
+        <span class="c1"># Count how many patients use this partner</span>
+        <span class="n">patients</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">patient</span> <span class="ow">in</span> <span class="n">patients_data</span><span class="p">[</span><span class="s2">&quot;patients&quot;</span><span class="p">]:</span>
+            <span class="n">patient_partners</span> <span class="o">=</span> <span class="n">get_partners</span><span class="p">(</span><span class="n">partner_lookup</span><span class="p">,</span> <span class="n">patient</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">patient_partner</span> <span class="ow">in</span> <span class="n">patient_partners</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">patient_partner</span> <span class="o">==</span> <span class="n">partner</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]:</span>
+                    <span class="n">patients</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Add the partner&#39;s row</span>
+        <span class="n">partner_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="n">partner</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="n">partner</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;Domain&quot;</span><span class="p">:</span> <span class="n">partner</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;Patients&quot;</span><span class="p">:</span> <span class="n">patients</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Write the CSV file</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Domain&quot;</span><span class="p">,</span> <span class="s2">&quot;Patients&quot;</span><span class="p">]</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;cadence-partners.csv&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">partner_rows</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p><em>Listing 13-5: The <code>create-cadence-partners-csv.py</code> script returns the number of patients associated with each Cadence Health partner.</em></p>
+<p>First, my script loaded <em>cadence_allpatients_all.json</em> and
+<em>cadence_health _partners.json</em> as Python objects. It created an empty
+list called <code>partner_rows</code>,
+then looped through each partner. Inside this <code>for</code> loop was a nested <code>for</code> loop which, for each partner, looped
+through each patient checking to see if that patient used that partner.
+The script then added this information (the partner&rsquo;s ID, name, and
+domain, along with the tally of its associated patients) to the
+<code>partner_rows</code> list. Finally,
+it saved its findings in a CSV called <em>cadence-partners.csv</em>.</p>
+<p>Table 13-2 shows the data from this spreadsheet, describing all of Cadence Health&rsquo;s partners and how many patients they have.</p>
+<p><em>Table 13-2: Cadence Health Partners</em></p>
+<table>
+<thead>
+<tr>
+<th><code>ID</code></th>
+<th><code>Name</code></th>
+<th><code>Domain</code></th>
+<th><code>Patients</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Encore Telemedicine</td>
+<td>encore.cadencehealth.us</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SpeakWithAnMD</td>
+<td>speakwithanmd.cadencehealth.us</td>
+<td>21,193</td>
+</tr>
+<tr>
+<td>3</td>
+<td>America’s Frontline Doctors</td>
+<td>aflds.cadencehealth.us</td>
+<td>255,266</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Corstet</td>
+<td>corstet.cadencehealth.us</td>
+<td>1,604</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Dr. Zelenko</td>
+<td>drzelenko.cadencehealth.us</td>
+<td>55</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Encore Demo</td>
+<td>encoredemo.cadencehealth.us</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Kim’s Pharmacy</td>
+<td>kims.cadencehealth.us</td>
+<td>6</td>
+</tr>
+<tr>
+<td>8</td>
+<td>TelMDFirst</td>
+<td>telmdfirst.cadencehealth.us</td>
+<td>2,410</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Dr. Tsifutis</td>
+<td>drtsifutis.cadencehealth.us</td>
+<td>301</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Dr. Immanuel</td>
+<td>drimmanuel.cadencehealth.us</td>
+<td>3</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Dr. Palumbo</td>
+<td>drpalumbo.cadencehealth.us</td>
+<td>29</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Dr. Boz</td>
+<td>drboz.cadencehealth.us</td>
+<td>311</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Dr. Parker</td>
+<td>drparker.cadencehealth.us</td>
+<td>409</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Dr. Johnson</td>
+<td>drajohnson.cadencehealth.us</td>
+<td>3</td>
+</tr>
+<tr>
+<td>15</td>
+<td>DEV</td>
+<td>localhost:8080</td>
+<td>1</td>
+</tr>
+<tr>
+<td>16</td>
+<td>HablaConUnMD.com</td>
+<td>hablaconunmd.cadencehealth.us</td>
+<td>0</td>
+</tr>
+<tr>
+<td>17</td>
+<td>VirtuaFirst, PLLC</td>
+<td>vf.cadencehealth.us</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Out of 281,603 patients, AFLDS referred 255,266 to SpeakWithAnMD and, by
+extension, Cadence Health. That means that 90 percent of the patients in
+Cadence&rsquo;s database came from AFLDS.</p>
+<p>I learned some additional interesting information from the partners
+list. The first partner listed, Encore Telemedicine, is SpeakForAnMD&rsquo;s
+parent company. The fourth, Corstet, is owned by Jerome Corsi, who also
+owns Encore Telemedicine. Corsi is a former host of the conspiracy show
+<em>InfoWars</em>, a proponent of the racist &ldquo;birtherism&rdquo; conspiracy theory
+about former US president Barack Obama&rsquo;s citizenship. He was also caught
+up in special counsel Robert Mueller&rsquo;s investigation into Russian
+interference in the 2016 election. The list of partners also includes
+individual doctors, including Dr. Zelenko of &ldquo;Zelenko protocol&rdquo; fame and
+Dr. Stella Immanuel, one of the AFLDS doctors from the previously
+mentioned press conference in front of the Supreme Court building. After
+that event, she quickly earned viral fame for having claimed that the
+uterine disorder endometriosis is caused by women dreaming of sex with
+demons and witches.</p>
+<p>This spreadsheet confirmed that the bulk of the
+Cadence data was related to AFLDS patients. I decided to dig even deeper
+into AFLDS patient data to see what revelations could be hiding there.</p>
+<h4>Searching for Patients by City</h4>
+<p>The <em>aflds-patients.csv</em> spreadsheet I created from the original
+dataset, containing 72,000 rows of patients who were referred by AFLDS
+and who had at least one consultation, includes columns for
+<code>city</code> and <code>state</code>. This location data allowed me to
+write another Python script to count how many patients were from each
+city and look up GPS coordinates for that city so I could plot them on a
+map.</p>
+<p>In Chapter 11, you worked with GPS
+coordinates you found directly in Parler video metadata and plotted them
+on a map using Google Earth. In this case, however, I had only cities
+and states, so I needed to look up their GPS coordinates myself. I wrote
+a script to convert the names of the cities in the spreadsheet into GPS
+coordinates, a process called <em>geocoding</em>.</p>
+<p>Listing 13-6 shows my Python script (you
+can also find a copy at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-cities-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-cities-csv.py</a>).</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">httpx</span>
+
+<span class="n">geocode_api_key</span> <span class="o">=</span> <span class="s2">&quot;PUT_GEOCODE_API_KEY_HERE&quot;</span>
+
+<span class="c1"># Export a CSV that for each city lists its GPS coordinates and the number of patients there</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># This dictionary maps names of cities (in format &quot;City, State&quot;, like &quot;New York, NY&quot;)</span>
+    <span class="c1"># to a dictionary with info about that city (number of patients, GPS coordinates)</span>
+    <span class="n">cities</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Count how many patients are in each city</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;aflds-patients.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="n">city</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="k">if</span> <span class="n">city</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
+                <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+            <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found patients in </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cities</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> cities&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Look up GPS coordinates for each city</span>
+    <span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
+
+        <span class="c1"># Give each API request 3 tries, in case a connection fails</span>
+        <span class="n">tries</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Loading GPS coordinates for: </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> patients)&quot;</span>
+                <span class="p">)</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                    <span class="s2">&quot;https://app.geocodeapi.io/api/v1/search&quot;</span><span class="p">,</span>
+                     <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;apikey&quot;</span><span class="p">:</span> <span class="n">geocode_api_key</span><span class="p">,</span>
+                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">city</span><span class="p">,</span>
+                        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&quot;boundary.country&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">)</span>
+                <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="c1"># The connection failed</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">tries</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">tries</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed, skipping&quot;</span><span class="p">)</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sleeping 2s and trying again&quot;</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;features&quot;</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;geometry&quot;</span><span class="p">][</span><span class="s2">&quot;coordinates&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;geometry&quot;</span><span class="p">][</span><span class="s2">&quot;coordinates&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Write the CSV file</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;count&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;city&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lon&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lat&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;label&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;cities.csv&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;count&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="n">city</span><span class="p">,</span>
+                    <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lat&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lon&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+                 <span class="p">}</span>
+            <span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p><em>Listing 13-6: The <code>create-cities-csv.py</code> script geocodes city and state names.</em></p>
+<p>To perform the geocoding, the script used an API. Of the various
+options, I chose one called Geocodeapi, simply because it seemed easy to
+use and was free for the number of requests I planned on making. I made
+an account at
+<a href="https://geocodeapi.io">https://geocodeapi.io</a>,
+created an API key, and stored it my script in the variable
+<code>geocode_api_key</code>. In order to
+make the API calls, the script used the third-party Python module
+<code>httpx</code>. (For more details on
+this module, check out Appendix B.)</p>
+<p>After defining the API key, my script created an empty dictionary called
+<code>cities</code> to map city names to
+information about it&mdash;specifically, the number of patients and its GPS
+coordinates.</p>
+<p>The script then loaded <em>aflds-patients.csv</em> and looped through each
+patient. For each, it created a new string called <code>city</code> in the format <code>City, State</code> (for example,
+<code>Atlanta, Georgia</code>). If
+<code>city</code> didn&rsquo;t exist in the
+<code>cities</code> dictionary yet, the
+script set <code>cities[city] = {"count": 0}</code>. Then it added 1 to
+<code>cities[city]["count"]</code>. By
+the time this loop finished running, <code>cities</code> contained a list of every city where
+there are patients, as well as the number of patients in that city.</p>
+<p>The next step was geocoding for each city. Another <code>for</code> loop looped through <code>cities</code> and, using the <code>httpx.get()</code> function, made an HTTP request for
+each city to the Geocodeapi API, passing along the city name and my API
+key. When the script got a response with GPS coordinates, it stored the
+latitude and longitude in <code>cities[city]["lat"]</code> and <code>cities[city]["lon"]</code>. This step takes a few hours since
+it&rsquo;s making thousands of API requests, so it displayed text in the
+terminal before each one, allowing me to get a sense of the progress
+while it was running.</p>
+<p>Finally, the script wrote all of the data in the <code>cities</code> dictionary into a CSV called
+<em>cities.csv</em>.</p>
+<p>When I ran the script, I got the following output:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor AFLDS % python3 create-cities-csv.py
+Found patients in 15,196 cities
+Loading GPS coordinates for: roan mountain, TN (1 patients)
+Loading GPS coordinates for: El Paso, TX (22 patients)
+Loading GPS coordinates for: Paulden, AZ (7 patients)
+Loading GPS coordinates for: Athens, NY (5 patients)
+Loading GPS coordinates for: Estero, FL (31 patients)
+Loading GPS coordinates for: Columbia, MD (16 patients)
+Loading GPS coordinates for: Houston, TX (371 patients)
+Loading GPS coordinates for: Newtown Square, PA (14 patients)
+Loading GPS coordinates for: Plymouth, MN (32 patients)
+Loading GPS coordinates for: Blairsville, GA (20 patients)
+Loading GPS coordinates for: shelby twownhsip, MI (1 patients)
+Loading GPS coordinates for: Waukesha, WI (13 patients)
+--snip--
+</code></pre></div>
+
+<p>Figure 13-6 shows <em>cities.csv</em>, sorted by
+number of patients per city.</p>
+<p><img alt="Figure 13-6: Results from cities.csv" src="media/images/Figure13-6.png" /><br />
+<em>Figure 13-6: Results from <code>cities.csv</code></em></p>
+<p>Armed with GPS coordinates, I could now plot the patient data on a map.
+I used an online service called MapBox
+(<a href="https://www.mapbox.com">https://www.mapbox.com</a>),
+mentioned in Chapter 11, to display circles
+on a map for each of the 15,196 cities&mdash;the more patients from that
+city, the bigger the circle. MapBox has a user interface that makes it
+simple to upload a CSV file with GPS coordinates and indicate how you
+want the data to be visualized on a map. MapBox also allows you to embed
+maps directly into web pages. When I published my article, I embedded
+this map into it so readers could interact with it themselves. Figure
+13-7 shows that map, zoomed in on the United
+States.</p>
+<p>People in every state in the country, as well as Washington, DC, paid
+$90 for telehealth consultations, including 8,600 people in California,
+8,000 in Florida, and 7,400 in Texas. The dots on the map show only
+cities with at least 10 AFLDS patients.</p>
+<p>In addition to the cities patients lived in, the data also included
+their birth dates, making it simple to calculate their ages. Since age
+is a major risk factor for COVID-19, I explored this data next.</p>
+<p><img alt="Figure 13-7: A map of cities in the US with AFLDS patients as of September 11, 2021" src="media/images/Figure13-7.png" /><br />
+<em>Figure 13-7: A map of cities in the US with AFLDS patients as of September 11, 2021</em></p>
+<h4>Searching for Patients by Age</h4>
+<p>Your age plays a major role in how likely you are to get seriously sick
+or die from COVID-19. During the pandemic, the CDC published statistics
+that described individual risk for COVID-19 infection, hospitalization,
+and death based on your age. Up until May 2023, the CDC continually
+updated these statistics as new data came in and as the pandemic
+changed. When I published my findings in September 2021, people who were
+50 to 64 years old were 4 times more likely to be hospitalized and 30
+times more likely to die from COVID-19 than 18- to 29-year-olds. People
+who were 65 to 74 were 5 times more likely to be hospitalized and 90
+times more likely to die.</p>
+<p>While I was writing my report, there were no COVID-19 treatments that
+worked well (except for monoclonal antibodies, which were difficult to
+administer and not widely available). The only way for older people to
+greatly reduce their risk of death or serious illness was to get
+vaccinated. AFLDS spent a lot of resources convincing people that
+COVID-19 vaccines are dangerous and that wearing masks to prevent the
+spread of COVID-19 is a violation of personal freedom.</p>
+<p>When patients created an account on the Cadence Health website, they
+were asked to enter their date of birth. I wrote a script to calculate
+their age and organize them into the same age groups that the CDC used
+so that I could see their likelihood of getting hospitalized or dying.
+Listing 13-7 shows the Python code for that
+script (you can also find it at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ages-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ages-csv.py</a>).</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="c1"># Export a CSV that shows how many patients are part of each age group</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Age groups, the same ones used in CDC data</span>
+    <span class="n">age_groups</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;&lt;0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;0-4&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;5-17&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;18-29&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;30-39&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;40-49&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;50-64&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;65-74&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;75-84&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;85+&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;&gt;100&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="p">}</span>
+
+    <span class="n">sept2021</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;aflds-patients.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="n">birthdate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;birthdate&quot;</span><span class="p">],</span> <span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">/%Y&quot;</span><span class="p">)</span>
+            <span class="n">age</span> <span class="o">=</span> <span class="n">sept2021</span> <span class="o">-</span> <span class="n">birthdate</span>
+
+            <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;&lt;0&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">5</span><span class="p">):</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;0-4&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">18</span><span class="p">):</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;5-17&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">30</span><span class="p">):</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;18-29&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">40</span><span class="p">):</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;30-39&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">50</span><span class="p">):</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;40-49&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">65</span><span class="p">):</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;50-64&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">75</span><span class="p">):</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;65-74&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">85</span><span class="p">):</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;75-84&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">100</span><span class="p">):</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;85+&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;&gt;100&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Write the CSV file</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;age_group&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;patients&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;ages.csv&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">age_group</span> <span class="ow">in</span> <span class="n">age_groups</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;age_group&quot;</span><span class="p">:</span> <span class="n">age_group</span><span class="p">,</span>
+                    <span class="s2">&quot;patients&quot;</span><span class="p">:</span> <span class="n">age_groups</span><span class="p">[</span><span class="n">age_group</span><span class="p">],</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p><em>Listing 13-7: The <code>create-ages-csv.py</code> script calculates patients’ ages and groups them by age.</em></p>
+<p>My script first defined a dictionary called <code>age_groups</code>, with keys for each of the CDC&rsquo;s age
+groups and values set to 0. I also added two other age groups: people
+less than 0 years old and people older than 100, because (as I
+discovered while writing the script) some patients had put birth dates
+in the future or in the far past.</p>
+<p>The script then loaded <em>aflds-patients.csv</em> and looped through each
+patient, calculating the patient&rsquo;s age as of September 2021 (when I was
+doing this investigation). Based on their age, the script determined
+which age group the patient belonged to and incremented
+<code>age_groups</code> by 1. By the time
+the loop finished, the <code>age_groups</code> dictionary contained a count of the
+number of patients in each group.</p>
+<p>Finally, the script saved the information from <code>age_groups</code> into a CSV spreadsheet called
+<em>ages.csv</em>. Table 13-3 shows the results.</p>
+<p><em>Table 13-3: AFLDS Patients by Age Group</em></p>
+<table>
+<thead>
+<tr>
+<th>Age group</th>
+<th>Patients</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Less than 0</td>
+<td>702</td>
+</tr>
+<tr>
+<td>0 to 4</td>
+<td>48</td>
+</tr>
+<tr>
+<td>5 to 17</td>
+<td>159</td>
+</tr>
+<tr>
+<td>18 to 29</td>
+<td>3,047</td>
+</tr>
+<tr>
+<td>30 to 39</td>
+<td>8,190</td>
+</tr>
+<tr>
+<td>40 to 49</td>
+<td>14,698</td>
+</tr>
+<tr>
+<td>50 to 64</td>
+<td>31,007</td>
+</tr>
+<tr>
+<td>65 to 74</td>
+<td>11,441</td>
+</tr>
+<tr>
+<td>75 to 84</td>
+<td>2,079</td>
+</tr>
+<tr>
+<td>85+</td>
+<td>317</td>
+</tr>
+<tr>
+<td>Greater than 100</td>
+<td>338</td>
+</tr>
+</tbody>
+</table>
+<p>After running the script and reviewing the data
+it created, I could see that some people clearly lied about their birth
+date: 702 people entered birth dates in the future, which would make
+them younger than 0 years old, and another 338 people entered dates that
+would make them older than 100 or even 1,000. The other 71,000 people
+entered birth dates that are likely correct.</p>
+<p>I then combined this data with the CDC&rsquo;s statistics about COVID-19 risks
+based on age, ignoring the obviously fake birth dates. Table 13-4 shows how many AFLDS patients belong to
+each age group, along with how likely people in that age group were to
+get infected with COVID-19 and, if infected, how likely they were to be
+hospitalized or die. (All rates are relative to people in the 18-to-29
+age group, because this group has had the most infections.)</p>
+<p><em>Table 13-4: AFLDS Patients by Age Group and Risk</em></p>
+<table>
+<thead>
+<tr>
+<th>Age group</th>
+<th>AFLDS patients</th>
+<th>Risk of infection</th>
+<th>Risk of hospitalization</th>
+<th>Risk of death</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 to 4</td>
+<td>48</td>
+<td>&lt;1x</td>
+<td>&lt;1x</td>
+<td>&lt;1x</td>
+</tr>
+<tr>
+<td>5 to 17</td>
+<td>159</td>
+<td>1x</td>
+<td>&lt;1x</td>
+<td>&lt;1x</td>
+</tr>
+<tr>
+<td>18 to 29</td>
+<td>3,047</td>
+<td>Reference group</td>
+<td>Reference group</td>
+<td>Reference group</td>
+</tr>
+<tr>
+<td>30 to 39</td>
+<td>8,190</td>
+<td>1x</td>
+<td>2x</td>
+<td>4x</td>
+</tr>
+<tr>
+<td>40 to 49</td>
+<td>14,698</td>
+<td>1x</td>
+<td>2x</td>
+<td>10x</td>
+</tr>
+<tr>
+<td>50 to 64</td>
+<td>31,007</td>
+<td>1x</td>
+<td>4x</td>
+<td>30x</td>
+</tr>
+<tr>
+<td>65 to 74</td>
+<td>11,441</td>
+<td>1x</td>
+<td>5x</td>
+<td>90x</td>
+</tr>
+<tr>
+<td>75 to 84</td>
+<td>2,079</td>
+<td>1x</td>
+<td>9x</td>
+<td>220x</td>
+</tr>
+<tr>
+<td>85+</td>
+<td>317</td>
+<td>1x</td>
+<td>15x</td>
+<td>570x</td>
+</tr>
+</tbody>
+</table>
+<p>My script showed that 44 percent of AFLDS patients are between 50 and
+64, making them 30 times more likely to die from COVID-19 than younger
+people. Another 16 percent of AFLDS patients are between 65 and 74,
+making them 90 times more likely to die. In just the two-month period
+covered by the Cadence patient data, <em>nearly 45,000 people</em> older than
+50 rejected science and instead put their trust in AFLDS during the
+COVID-19 pandemic. I wonder how many deaths AFLDS is responsible for.</p>
+<h3>Authenticating the Data</h3>
+<p>While in the midst of analyzing the data, I knew I also needed to verify
+that this data was authentic before I could publish my findings. The
+data my source gave to me certainly appeared to be authentic, but I
+wanted to be more confident.</p>
+<p>I started by creating an account on Cadence Health&rsquo;s website. Sure
+enough, the fields I was asked to fill out with account information were
+the same fields present in the Cadence patient
+data. I also used Firefox&rsquo;s developer tools to look at the web requests
+my browser was making and saw that it matched the data I had; for
+example, the partner ID associated with my account was 3, the partner ID
+for AFLDS. (I discuss the developer tools built into web browsers like
+Firefox and Chrome in more detail in Appendix B.)</p>
+<p>The data looked legitimate, but I wanted to check that these patients
+were real people. To do that, I decided to cross-reference this data
+with another dataset. Gab, the social network popular among fascists,
+anti-democracy activists, and anti-vaxxers that I first discussed in
+Chapter 1, was hacked in early 2021, with
+65GB of data leaked to DDoSecrets. This data included about 38,000 email
+addresses for Gab users.</p>
+<p><strong>NOTE</strong> <em>Due to PII, DDoSecrets distributes its Gab data only to journalists and researchers. You can learn more about this dataset at <a href="https://ddosecrets.com/wiki/GabLeaks">https://ddosecrets.com/wiki/GabLeaks</a>.</em></p>
+<p>I made a list of 72,000 AFLDS patient email addresses, along with a
+separate list of 38,000 Gab user email addresses. I then wrote a Python
+script to load both lists and see if there were any email addresses in
+common. The script found several matches. I started looking through the
+Gab timeline of each match to see if I could find references to AFLDS,
+specifically to receiving medication, and found the verification I was
+looking for.</p>
+<p>One 56-year-old patient created their Cadence Health account on July 26,
+2021. Their patient record included consultation notes from July 30, the
+date of their phone consultation. On September 4, they posted a link to
+Gab for a tractor supply store that sells ivermectin paste for
+livestock, asking, &ldquo;Should I pick some up?&rdquo; Two days later they posted
+an update: &ldquo;All sold out!&rdquo; The day after that, they posted a comment
+saying, &ldquo;Front line doctors finally came through with HCQ/Zinc
+delivery.&rdquo; HCQ is short for hydroxychloroquine.</p>
+<p>Figure 13-8 shows a screenshot from this Gab
+thread. (Every post includes eight usernames; I&rsquo;ve redacted all of
+them.)</p>
+<p>The Ravkoo data didn&rsquo;t include patient email addresses, so I couldn&rsquo;t
+think of an obvious way to authenticate it with OSINT like I did for the
+Cadence Health data. Instead, I found the phone number for Ravkoo CEO
+Alpesh Patel and gave him a call. After I informed him that I was a
+journalist, that Ravkoo had been breached, and that I had all its
+prescription records, his immediate response was, &ldquo;That can&rsquo;t be right.
+Our platform is secure.&rdquo; After I emailed him the screenshot of Ravkoo&rsquo;s
+Super Admin interface, though, I could hear the panic in his voice.
+&ldquo;That&rsquo;s a breach in HIPAA, so I have to report that first,&rdquo; he said,
+referring to the US health care privacy law. &ldquo;That&rsquo;s an even more
+serious issue than your journalism.&rdquo;</p>
+<p>He wanted me to tell him the name of the hacker and said he would report
+all of this to the FBI. I didn&rsquo;t tell him my source&rsquo;s name, of course.
+Unless you&rsquo;re actively being compelled by a judge, you&rsquo;re never
+obligated to tell anyone anything about your sources. In any case, I
+never learned my source&rsquo;s name, which helps keep it secret.</p>
+<p><img alt="Figure 13-8: A Gab screenshot that I used to verify the data" src="media/images/Figure13-8.png" /><br />
+<em>Figure 13-8: A Gab screenshot that I used to verify the data</em></p>
+<p>Patel then said, &ldquo;I have to call my CTO,&rdquo; and hung up. Ravkoo had in
+fact been breached. We gave Patel ample opportunity to refute any of the
+information we planned on publishing, but it was all accurate.</p>
+<p>You can read my full investigative report at
+<a href="https://theintercept.com/2021/09/28/covid-telehealth-hydroxychloroquine-ivermectin-hacked/">https://theintercept.com/2021/09/28/covid-telehealth-hydroxychloroquine-ivermectin-hacked/</a>.</p>
+<h3>The Aftermath</h3>
+<p>After completing this in-depth data-driven investigation, the day before
+The Intercept was ready to publish our findings, I reached out to
+everyone involved to explain the revelations that we had discovered and
+give them a chance to comment.</p>
+<p>Roque Espinal, Cadence Health&rsquo;s CEO, said that he had no idea that his
+platform was being used by AFLDS. &ldquo;I&rsquo;m totally flabbergasted. I had to
+look up exactly who these people were,&rdquo; he said. &ldquo;I&rsquo;m fully vaccinated.
+My children are fully vaccinated. I&rsquo;m trying to make heads and tails of
+this right now.&rdquo; After I spoke with him, Espinal told me he immediately
+cut off service from SpeakWithAnMD. &ldquo;I don&rsquo;t want to be associated with
+any crap like that. None of that quackery that&rsquo;s going on.&rdquo;</p>
+<p>Espinal said that he was invited to a Zoom meeting with representatives
+from AFLDS, SpeakWithAnMD, and &ldquo;16 different attorneys.&rdquo; He told
+me that he said, &ldquo;I&rsquo;m ending my contract with
+you guys immediately,&rdquo; and disconnected from the meeting.
+SpeakWithAnMD&rsquo;s telehealth system went down that day, and AFLDS patients
+couldn&rsquo;t pay for $90 consultations for a full week (saving them an
+estimated $700,000 on bogus consultations during that time).</p>
+<p>Espinal also claimed that Cadence Health didn&rsquo;t collect credit card
+payments from patients at all&mdash;that this was all SpeakWithAnMD&rsquo;s work.
+He said that Cadence was paid a total of $17,500 for providing service
+to SpeakWithAnMD (he showed me the invoices he&rsquo;d sent). The latter
+company went on to rake in millions of dollars with the help of the
+services Cadence provided.</p>
+<h4>HIPAA’s Breach Notification Rule</h4>
+<p>Espinal told me that Cadence Health didn&rsquo;t directly host AFLDS&rsquo;s patient
+database; instead, he said, SpeakWithAnMD hosted it in an AWS account.
+But Jim Flinn, a public relations agent working for SpeakWithAnMD,
+insisted the opposite: that the hacked database was hosted in Cadence
+Health&rsquo;s AWS account, not in SpeakWithAnMD&rsquo;s.</p>
+<p>Both sides refuse to admit that health care data was breached from their
+servers. And while Ravkoo Pharmacy began notifying patients of their
+data breach&mdash;something that HIPAA required it to do within two months
+of discovering it&mdash;neither SpeakWithAnMD nor Cadence Health has
+followed this rule, and at the time of writing, patients haven&rsquo;t been
+notified of the breach. One of these companies is in violation of
+HIPAA&rsquo;s breach notification rule.</p>
+<h4>Congressional Investigation</h4>
+<p>In October 2021, the US House of Representative&rsquo;s Select Subcommittee on
+the Coronavirus Crisis launched an investigation into AFLDS and
+SpeakWithAnMD based on my reporting, as well as reporting on AFLDS by
+Vera Bergengruen for <em>Time</em> magazine. The committee&rsquo;s chair, Rep. James
+Clyburn, wrote letters to AFLDS founder Simone Gold and to Jerome Corsi,
+owner of SpeakWithAnMD&rsquo;s parent company, demanding detailed records from
+both companies. These included documents related to ownership,
+organizational structure, and staffing; details about the doctors&rsquo;
+training and qualifications; numbers of patients and what they were
+prescribed; and descriptions of the companies&rsquo; total revenue and net
+income for each quarter.</p>
+<p>&ldquo;Attempts to monetize coronavirus misinformation have eroded public
+confidence in proven treatments and prevention measures and hindered
+efforts to control the pandemic,&rdquo; Clyburn wrote in his letter to AFLDS.
+&ldquo;Some Americans who have been influenced by misinformation have chosen
+not to get vaccinated, delayed receiving evidence-based treatment, and
+ingested unapproved substances in harmful quantities.&rdquo; Clyburn also
+wrote a letter to the Federal Trade Commission requesting that the
+agency investigate whether these companies are in violation of federal
+laws.</p>
+<p>In January 2022, the House committee announced
+that &ldquo;despite repeated assurances of compliance, SpeakWithAnMD has
+failed to produce any documents responsive to the Select Subcommittee&rsquo;s
+requests.&rdquo; Then in February, after being stonewalled by SpeakWithAnMD,
+Clyburn expanded the committee&rsquo;s investigation to include Cadence Health
+as well. Unfortunately, nothing more resulted from Congress&rsquo;s
+investigation into AFLDS, SpeakWithAnMD, and Cadence Health.</p>
+<h4>Simone Gold’s New Business Venture</h4>
+<p>With a federal investigation into AFLDS underway, the group apparently
+decided it was time to leave the snake oil business and stick to
+disinformation and anti-vax litigation. At the time of writing,
+SpeakWithAnMD&rsquo;s website is still online, but patients are no longer able
+to book a telehealth consultation. Cadence Health&rsquo;s website is
+down&mdash;Espinal told me he fired his company&rsquo;s only customer,
+SpeakWithAnMD.</p>
+<p>Simone Gold herself wasn&rsquo;t done pushing evidence-free health care. In
+June 2022, AFLDS sent a newsletter to its supporters announcing her new
+venture, GoldCare: a telemedicine &ldquo;health care&rdquo; service that early
+adopters could subscribe to for $83 a month, designed to entirely
+replace evidence-based health care. &ldquo;If you are reading this email, you
+are aware that there is overwhelming evidence that the government did
+its best to kill people during Covid,&rdquo; Gold wrote. &ldquo;If you prefer not to
+pay money every month just to play Russian Roulette, you will stop
+feeding the beast and join us. [&hellip;] Our system is ethical, of the
+highest quality, and will ultimately cost less than conventional
+insurance.&rdquo;</p>
+<h4>Scandal and Infighting at AFLDS</h4>
+<p>Under pressure from California investigators, Gold moved to Naples,
+Florida. As she prepared to serve two months in prison for storming the
+Capitol on January 6, 2021, she resigned from her position on the AFLDS
+board, staying on as a well-paid consultant. While she was behind bars,
+leaders at AFLDS conducted an audit of her use of the group&rsquo;s charity
+funds. AFLDS had received at least $10 million in donations, <em>in
+addition</em> to all of the money it had scammed out of patients. While more
+than a million Americans were dying from COVID-19 during the pandemic,
+what was Gold doing with all that money?</p>
+<p>Joey Gilbert, a Nevada lawyer and former professional boxer, took over
+from Gold as chair of the AFLDS board while she was in prison. According
+to a lawsuit filed in November 2022 against Gold by Gilbert and other
+AFLDS board members, Gold lived rent-free with John Strand, her
+boyfriend who had stormed the Capitol with her, in a $3.6 million
+mansion purchased using AFLDS charity funds. The lawsuit also alleged
+that she was spending $12,000 a month on a bodyguard, $5,600 a month
+for a housekeeper, and $50,000 a month on credit card expenses&mdash;all
+AFLDS&rsquo;s money. Furthermore, it accused her of purchasing three cars,
+including a Mercedes-Benz, and taking
+unauthorized private jet flights, including a single trip that cost
+$100,000, with AFLDS money.</p>
+<p>Finally, the lawsuit accused Gold of hijacking AFLDS resources for her
+own business. Gilbert claimed that Gold used the Naples mansion to house
+GoldCare employees and that she enlisted AFLDS employees to work for
+GoldCare while on the AFLDS payroll. For her part, Gold accused the
+AFLDS leaders of destroying her nonprofit, demanding that they resign.
+&ldquo;Just as the mother lioness will not let her baby lion be murdered,
+neither will I,&rdquo; Gold wrote in an email to them, according to an
+affidavit in the lawsuit.</p>
+<p>After Gold was released from prison, she regained control of AFLDS. She
+locked the employees out of their email, pressured an employee to hand
+over the password to the group&rsquo;s Telegram account with hundreds of
+thousands of followers, and took control over the AFLDS website. There,
+she posted press releases claiming that, while she had discussed
+resigning from her position, those discussions &ldquo;were never legally
+actualized&rdquo; and asserting that she&rsquo;s the legitimate leader of AFLDS.
+Gold wrote in an email to AFLDS supporters that &ldquo;the allegations are
+cetegorically [<em>sic</em>] false,&rdquo; and that &ldquo;under my leadership, AFLDS
+will never tolerate corruption, no matter the personal price.&rdquo; At the
+time of publication, the ultimate fate of AFLDS is still unknown, but
+Gold appears to control the reins.</p>
+<h3>Summary</h3>
+<p>In this chapter, you&rsquo;ve seen how I turned 100MB of compressed files from
+an anonymous hacker into a groundbreaking report on AFLDS. That report
+resulted in a congressional investigation and contributed to the demise
+of a corrupt network of telehealth companies that profited off the
+COVID-19 pandemic. I explained exactly how I went about investigating
+the Cadence Health and Ravkoo datasets, all in JSON and CSV format. You
+also read through the Python code I wrote to answer specific questions
+about the data and to convert it into formats that I could
+visualize&mdash;all skills that you can use in your own data-heavy
+investigations. I explained how I used OSINT to authenticate the data,
+as well as the story of AFLDS fracturing and descending into chaos in
+the aftermath.</p>
+<p>The next and final chapter of this book describes another case study in
+which I developed a custom tool to research chat logs from neo-Nazi
+Discord servers, contributing to the victory of a lawsuit against the
+organizers of the deadly 2017 Unite the Right rally.</p>
         </div>
     </section>
     <section class="pagination">

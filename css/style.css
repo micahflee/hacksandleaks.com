@@ -319,7 +319,8 @@ code {
 }
 
 p code,
-li code {
+li code,
+th code {
     padding: 0 0.25rem;
 }
 

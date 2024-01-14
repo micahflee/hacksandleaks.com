@@ -37,13 +37,2137 @@
     </header>
     <section class="intro bookIntro">
         <div class="wrapper" id="intro-wrapper">
-          <div id="reading-time">~0 min read</div>
+          <div id="reading-time">~77 min read</div>
           <h1>Chapter 11: Parler, the January 6 Insurrection, and the JSON File Format</h1>
-          
+          <p>On the morning of January 6, 2021, two months after Donald Trump lost
+the 2020 election to Joe Biden by about 6 million votes, thousands of
+Trump&rsquo;s supporters prepared to storm the US Capitol in Washington, DC,
+hoping to subvert democracy. &ldquo;We will never give up. We will never
+concede,&rdquo; Trump told the crowd from the National Mall, just south of the
+White House. &ldquo;We fight like hell, and if you don&rsquo;t fight like hell,
+you&rsquo;re not going to have a country anymore.&rdquo;</p>
         </div>
     </section>
     <section id="content" data-content="chapter-11">
-        <div class="wrapper" id="about-content">
+        <div class="wrapper" id="about-content"><p>Smartphones in hand, the pro-Trump, anti-democracy activists recorded
+the entire event. They posted their photos and videos online, many to
+the far-right social media site Parler. In this chapter, you&rsquo;ll learn to
+work with the massive trove of video evidence collected from that day&rsquo;s
+insurrection in a popular file format called JavaScript Object Notation
+(JSON). You&rsquo;ll learn how JSON data is structured and write Python code
+to scour a million JSON files full of Parler video metadata to find
+specific videos. You&rsquo;ll also learn
+about working with Global Positioning System (GPS) coordinates,
+including how to plot points on a map, since many of the videos include
+GPS coordinates in their metadata. All of these skills could serve you
+well in your future investigations.</p>
+<p>Let&rsquo;s start with a brief history of how the Parler dataset became
+available to the public.</p>
+<h3>The Origins of the Parler Dataset</h3>
+<p>The protesters at the US Capitol insurrection filmed themselves marching
+with Don&rsquo;t Tread on Me, Fuck Biden, and Trump flags; tearing down
+fences; fighting with riot cops; smoking weed; smashing windows and then
+storming the Capitol building through them; throwing chairs at police;
+and threatening the lives of members of Congress and Vice President Mike
+Pence. They uploaded these videos to Parler in real time as they filmed
+them.</p>
+<p>During the attack on the Capitol, pro-Trump rioters attacked police
+officers with baseball bats, flag poles, and pipes, injuring at least
+138 of them. One officer, Brian Sicknick, was hospitalized and died the
+next day. In the weeks and months following the attack, four more
+officers who responded that day died by suicide. A Capitol Police
+officer shot and killed Ashli Babbitt, a rioter who attempted to breach
+the doors to the US Senate chamber where senators were sheltering. Three
+more Trump supporters died during the riot: one from being crushed to
+death in the crowd, one from a stroke, and one from a heart attack.</p>
+<p>Days after the attack, citing Parler&rsquo;s unwillingness to moderate content
+that encourages and incites violence, Apple and Google banned the Parler
+app from their app stores. Amazon Web Services (AWS), the major cloud
+hosting service that Parler had relied on, kicked the company off its
+service. It took Parler a month and a half to bring its site back up.
+Before it went down, though, a quick-thinking archivist downloaded over
+a million videos from the site. In this section, I&rsquo;ll describe how she
+downloaded the videos and how they were used in Trump&rsquo;s second
+impeachment trial.</p>
+<h4>How the Parler Videos Were Archived</h4>
+<p>On the Saturday after the January 6 attack, John Paczkowski and Ryan Mac
+published an email in BuzzFeed News from the Amazon AWS Trust &amp; Safety
+Team to Parler. Amazon informed Parler that it &ldquo;cannot provide services
+to a customer that is unable to effectively identify and remove content
+that encourages or incites violence against others,&rdquo; and that &ldquo;we plan
+to suspend Parler&rsquo;s account effective Sunday, January 10th.&rdquo; Less than
+48 hours before Parler went dark, a hacker named
+@donk_enby, with the help of other archivists, raced
+to download a copy of all of the videos and images uploaded to the
+social network.</p>
+<p>Parler, it turns out, lacked security measures that prevent automatic
+scraping of the site&rsquo;s data. <em>Web scraping</em> is a method of automated
+data collection where you use code to load web pages, rather than
+manually loading them in a browser, and extract
+their data. This chapter won&rsquo;t cover how to scrape the web like
+@donk_enby did, but if you&rsquo;re curious, you can learn
+how in Appendix B.</p>
+<p>Parler&rsquo;s website didn&rsquo;t have any <em>rate limiting</em>, a security feature
+that prevents users from accessing the site too frequently, so nothing
+stopped a single computer from making millions of web requests. The URLs
+of Parler posts appeared to have random IDs, but
+@donk_enby discovered that they also had hidden
+incremental IDs (1, 2, 3, and so on), so a script could easily loop
+through every ID, make a web request to download every post, and then
+find the URLs for every video and image to download. While Parler did
+strip metadata from videos uploaded by its users, they also left
+original copies of videos that contained this metadata at predictable
+URLs. \@donk_enby downloaded versions of the videos that contained a
+wealth of hidden information, including, in many cases, the GPS
+coordinates of where the video was filmed.</p>
+<p>When @donk_enby archived this data, she saved it to an
+AWS S3 bucket, an AWS service for hosting files that never runs out of
+disk space. (It&rsquo;s ironic that, in response to AWS kicking Parler off its
+service, she saved copies of the videos to a different part of AWS.)</p>
+<p>Because there&rsquo;s no widely agreed-upon definition of hacking, whether or
+not Parler was &ldquo;hacked&rdquo; is a matter of perspective. Technically,
+@donk_enby scraped public content from a public
+website, which isn&rsquo;t illegal and doesn&rsquo;t require bypassing
+security&mdash;had Parler even had any that would have prevented this. The
+same thing is often true of illegal hacking, though; people break into
+systems that are barely protected or accidentally left open to the
+public.</p>
+<p>By Sunday night, @donk_enby had managed to archive at
+least 32TB of videos. &ldquo;I hope that it can be used to hold people
+accountable and to prevent more death,&rdquo; she told <em>Vice</em>. She worked with
+DDoSecrets to make a copy of the data available to the public&mdash;the copy
+you&rsquo;ll work with in this chapter.</p>
+<h4>The Dataset’s Impact on Trump’s Second Impeachment</h4>
+<p>On January 13, a week after the deadly riot at the Capitol and a week
+before Joe Biden&rsquo;s inauguration as the new president, the US House of
+Representatives impeached Trump for &ldquo;incitement of insurrection,&rdquo; making
+Trump the first president in US history to be impeached twice.</p>
+<p>During the impeachment trial in the US Senate, which took place in
+February at the beginning of Biden&rsquo;s administration, the impeachment
+managers showed many videos of violent Trump supporters that
+@donk_enby had archived from Parler as evidence to
+support their case. &ldquo;I had an efficient way to download it all. I knew
+what was there, but it seemed that nobody else could see the value,&rdquo; she
+told CNN at the time. &ldquo;I hope it inspires more people with similar
+skills to mine to use those skills for good.&rdquo;</p>
+<p>Ultimately, 57 percent of the Senate, including seven members of the
+Republican Party, found Trump guilty, while 43 percent&mdash;all of whom
+were Republicans&mdash;found him not guilty. The US Constitution requires a
+two-thirds majority of the Senate to convict, so Trump was acquitted.
+However, over 1,000 people were charged in connection to the January 6
+insurrection. Two members of the far-right Oath
+Keepers militia, including its leader, Stewart Rhodes, and four members
+of the Proud Boys hate group, including its former leader, Enrique
+Tarrio, were convicted of seditious conspiracy. Several other members of
+these groups were also convicted of lesser crimes. Rhodes was sentenced
+to 18 years in prison in May 2023, and Tarrio was sentenced to 22 years
+in prison in September 2023.</p>
+<p>Further investigating this dataset is obviously in the public interest.
+Let&rsquo;s get started in Exercise 11-1.</p>
+<h3>Exercise 11-1: Download and Extract Parler Video Metadata</h3>
+<p>The Parler data is so large that it&rsquo;s not practical, for the purposes of
+this chapter, to download it all. Instead, you&rsquo;ll start with just the
+video metadata DDoSecrets has made available separately. The metadata
+contains useful information about each video, like its file format, when
+it was filmed, what type of phone or camera was used to film it, and in
+some cases the GPS coordinates describing where it was filmed. In this
+exercise, you&rsquo;ll learn how to use the metadata to select and download
+individual videos to view.</p>
+<p><strong>NOTE</strong> <em>If you&rsquo;re using Windows, I recommend that you follow along with this chapter using your Ubuntu terminal instead of PowerShell and that you save this data in your WSL Linux filesystem (for example, in <code>~/datasets</code>), instead of in your Windows-formatted USB disk (<code>/mnt/c</code> or <code>/mnt/d</code>). Because of disk performance issues with WSL, I found that working with this data in Linux rather than directly in Windows was significantly faster. If you&rsquo;ve only used Python in Windows so far, install Python in Ubuntu with the command <code>sudo apt install python3 python3-pip</code>, then install the click Python module by running <code>python3 -m pip install click</code>. You&rsquo;ll need the click module for the exercises in this chapter. Refer to Appendix A to learn more about solving performance issues in WSL if you run into any problems.</em></p>
+<h4>Download the Metadata</h4>
+<p>Since the Parler dataset takes up so much disk space, DDoSecrets
+couldn&rsquo;t publish it using BitTorrent like it does with most of its other
+public releases. To seed that torrent, you would need a single server
+with 32TB of data, and no one would be able to connect to the swarm to
+download it because no one has 32TB of disk space lying around. Instead,
+DDoSecrets hosts the Parler data on its public data web server. If you
+know the filename of a Parler video, you can download it from
+<em>https://data.ddosecrets.com/Parler/Videos/&lt;filename></em>.</p>
+<p>You can also download a full list of filenames,
+<em>ddosecrets-parler-listing.txt.gz</em>, and metadata for all of the video
+files, <em>metadata.tar.gz</em>. Files ending in <em>.gz</em> are compressed using a
+format called GZIP, so you can tell from the filename that
+<em>ddosecrets-parler-listing.txt.gz</em> is a compressed text file. Files
+ending in <em>.tar</em>, called <em>tarballs</em>, also combine multiple files and
+folders together into a single file. Tar files aren&rsquo;t compressed,
+though&mdash;they take up as much disk space as all of the files they
+contain&mdash;so it&rsquo;s common to compress them with GZIP, resulting in
+<em>.tar.gz</em> files. The <em>metadata.tar.gz</em> file is a GZIP-compressed
+tarball.</p>
+<p>Start by downloading
+<em>ddosecrets-parler-listing.txt.gz</em> and <em>metadata.tar.gz</em> using the
+<code>wget</code> command. This command
+is similar to <code>curl</code>, but it
+downloads a file and saves it to disk by default instead of displaying
+it in your terminal. Check if you already have <code>wget</code> installed by running
+<code>which wget</code>. If you don&rsquo;t,
+install it on macOS with <code>brew install wget</code>, or on Linux or Windows with WSL with
+<code>sudo apt install wget</code>.</p>
+<p>Open a terminal. Create a new folder for the Parler data you&rsquo;ll
+download, and change to that folder. (If you&rsquo;re using Windows with WSL,
+make sure you create it in your WSL Linux filesystem, such as at
+<em>\~/datasets/Parler</em>.) For example, here&rsquo;s how I did it on my Mac,
+creating the folder on my <em>datasets</em> USB disk:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % cd /Volumes/datasets
+micah@trapdoor datasets % mkdir Parler
+micah@trapdoor datasets % cd Parler
+micah@trapdoor Parler %
+</code></pre></div>
+
+<p>Now use <code>wget</code> to download the
+list of filenames by running the following command:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Parler % wget https://data.ddosecrets.com/Parler/Videos/ddosecrets-parler
+-listing.txt.gz
+--snip--
+Resolving data.ddosecrets.com (data.ddosecrets.com)... 172.67.75.15, 104.26.3.199, 104.26.2.199
+Connecting to data.ddosecrets.com (data.ddosecrets.com)|172.67.75.15|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 17790173 (17M) [application/octet-stream]
+Saving to: &#39;ddosecrets-parler-listing.txt.gz&#39;
+
+ddosecrets-parler-listin 100%[==================================&gt;]  16.97M  29.1MB/s    in 0.6s 
+... (29.1 MB/s) - &#39;ddosecrets-parler-listing.txt.gz&#39; saved [17790173/17790173]
+</code></pre></div>
+
+<p>The output should show that you&rsquo;ve downloaded the 17MB <em>ddosecrets
+-parler-listing.txt.gz</em> file. The <code>wget</code> program shows you a progress bar of
+your download in your terminal.</p>
+<p>Next, download the video metadata by running the following command:</p>
+<div class="codehilite"><pre><span></span><code>wget https://data.ddosecrets.com/Parler/Videos/metadata.tar.gz
+</code></pre></div>
+
+<p>Check to make sure you&rsquo;ve successfully downloaded the files by running
+<code>ls -lh</code>. You should get the
+following output:</p>
+<div class="codehilite"><pre><span></span><code>-rw-r--r--  1 micah  staff    17M Mar 28  2021 ddosecrets-parler-listing.txt.gz
+-rw-r--r--  1 micah  staff    203M Mar 15  2021 metadata.tar.gz
+</code></pre></div>
+
+<p>The file containing the list of filenames should be 17MB, and the
+metadata file should be 203MB.</p>
+<h4>Uncompress and Download Individual Parler Videos</h4>
+<p>To uncompress GZIP files, you&rsquo;ll use the <code>gunzip</code> command with the following syntax:
+<code>gunzip filename.gz</code>. Running <code>gunzip</code> on a gzipped file deletes the original
+file and leaves you with the uncompressed version without the <em>.gz</em> file
+extension.</p>
+<p>Uncompress the <em>ddosecrets-parler-listing.txt.gz</em> file by running the
+following command:</p>
+<div class="codehilite"><pre><span></span><code>gunzip ddosecrets-parler-listing.txt.gz
+</code></pre></div>
+
+<p>Your original 17MB file, <em>ddosecrets-parler-listing.txt.gz</em>, should be
+replaced with a 43MB text file called <em>ddosecrets-parler-listing.txt</em>,
+which contains over one million lines, one for each video that
+@donk_enby archived.</p>
+<p>To make sure it worked, run <code>ls -lh</code> again. Your output should look
+something like this:</p>
+<div class="codehilite"><pre><span></span><code>-rw-r--r--  1 user  staff    43M Mar 28  2021 ddosecrets-parler-listing.txt
+-rw-r--r--  1 user  staff    203M Mar 15  2021 metadata.tar.gz
+</code></pre></div>
+
+<p>Count the number of files in <em>ddosecrets-parler-listing.txt</em> with the
+following command:</p>
+<div class="codehilite"><pre><span></span><code>cat ddosecrets-parler-listing.txt <span class="p">|</span> wc -l
+</code></pre></div>
+
+<p>As you learned in Chapter 4, the
+<code>cat</code> command displays the
+content of a file, and piping that command&rsquo;s output into <code>wc -l</code> counts the number of lines in that
+file. The output should be <code>1031509</code>, meaning there are 1,031,509 lines in
+<em>ddosecrets-parler-listing.txt</em>.</p>
+<p>If you load the file in a text editor, it should look like this:</p>
+<div class="codehilite"><pre><span></span><code>2021-01-12  18:31:54  77632730  0002bz1GNsUP
+2021-01-12  18:37:33  14586730  0003lx5cSwSB
+2021-01-12  18:37:33  822706    0004D2lOBGpr
+2021-01-12  18:37:33  17354739  000EyiYpWZqg
+2021-01-12  18:37:33  2318606   000SbGUM7vD4
+2021-01-12  18:37:33  5894269   000oDvV6Bcfd
+2021-01-12  18:37:36  20806361  0012uTuxv9qQ
+2021-01-12  18:37:34  45821231  0015NlY0yUB5
+--snip--
+</code></pre></div>
+
+<p>The first and second columns of text show the date and time that
+@donk_enby first uploaded each file to the S3 bucket,
+just after scraping it. The third column is the size of the file, in
+bytes, and the final column is the filename. All of the video files in
+the Parler dataset have similar random-looking names. These are the
+original IDs that Parler used for each video, and they don&rsquo;t have file
+extensions.</p>
+<p>Now that you know the filenames of each Parler
+video, you can download individual files from
+<em>https://data.ddosecrets.com/Parler/Videos/&lt;filename></em>.
+Let&rsquo;s try downloading one of the first videos listed in
+<em>ddosecrets-parler-listing .txt</em>. First, use the following commands to
+create a <em>videos</em> folder and switch to that folder:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Parler % mkdir videos
+micah@trapdoor Parler % cd videos
+</code></pre></div>
+
+<p>Next, run the following command to download the Parler file
+<em>0003lx5cSwSB</em>:</p>
+<div class="codehilite"><pre><span></span><code>wget https://data.ddosecrets.com/Parler/Videos/0003lx5cSwSB
+</code></pre></div>
+
+<p>You can normally tell the format of a file based on its file extension,
+but since these Parler video filenames don&rsquo;t have extensions, use the
+following <code>file</code> command to
+determine the format of <em>0003lx5cSwSB</em>:</p>
+<div class="codehilite"><pre><span></span><code>file 0003lx5cSwSB
+</code></pre></div>
+
+<p>The output, <code>0003lx5cSwSB: ISO Media, MP4 v2 [ISO 14496-14]</code>, shows that the file is an MP4 video.
+To make it easier to open in video-playing software, you&rsquo;ll need to add
+the <em>.mp4</em> extension to the filename. You can rename files using the
+command <code>mv</code>
+<code>source_path dest_path</code>, which moves a file from a
+source path to a destination path. To rename <em>0003lx5cSwSB</em> to
+<em>0003lx5cSwSB.mp4</em>, run the following command:</p>
+<div class="codehilite"><pre><span></span><code>mv 0003lx5cSwSB 0003lx5cSwSB.mp4
+</code></pre></div>
+
+<p>You can now watch <em>0003lx5cSwSB.mp4</em> in software like VLC Media Player.
+Figure 11-1 shows a screenshot from this
+video, which features Trump battling the &ldquo;fake news&rdquo; media and calls him
+the &ldquo;Savior of the Universe.&rdquo;</p>
+<p><img alt="Figure 11-1: A screenshot from a pro-Trump Parler video showing an altered image of Trump riding a motorcycle" src="media/images/Figure11-1.png" /><br />
+<em>Figure 11-1: A screenshot from a pro-Trump Parler video showing an altered image of Trump riding a motorcycle</em></p>
+<p>In your terminal, run <code>cd ..</code> to change out of the <em>videos</em> folder
+you just created and back to the Parler dataset folder.</p>
+<p>There are over a million videos in this dataset, and most likely, only a
+small fraction contain anything newsworthy. If you randomly pick
+individual videos to download and watch, chances are you&rsquo;ll be wasting a
+lot of time. To more efficiently find interesting videos, let&rsquo;s take a
+closer look at the metadata.</p>
+<h4>Extract Parler Metadata</h4>
+<p>To view the Parler metadata, you&rsquo;ll need to extract the
+<em>metadata.tar.gz</em> tarball. In your terminal, uncompress and extract
+<em>metadata.tar.gz</em> using the <code>tar</code> command:</p>
+<div class="codehilite"><pre><span></span><code>tar -xvf metadata.tar.gz
+</code></pre></div>
+
+<p>Because it&rsquo;s so common to gzip tar archives, the <code>tar</code> command will automatically detect if
+it&rsquo;s gzipped and uncompress it for you, so you don&rsquo;t need to manually do
+the <code>gunzip</code> step yourself. In
+the <code>-xvf</code> argument,
+<code>x</code> tells <code>tar</code> to extract the files from
+<em>metadata.tar</em>, <code>v</code> (meaning
+verbose) tells <code>tar</code> to
+display each filename it extracts in the terminal, and <code>f</code> means that the next argument is a
+filename for the tarball on which this command will run.</p>
+<p>Your output should look like this:</p>
+<div class="codehilite"><pre><span></span><code>x metadata/
+x metadata/.aws/
+x metadata/meta-00CnBY5xCdca.json
+x metadata/meta-0003lx5cSwSB.json
+x metadata/meta-0070HNolzi3z.json
+x metadata/meta-00BIFOMnOyi1.json
+x metadata/meta-0002bz1GNsUP.json
+--snip--
+</code></pre></div>
+
+<p>The command might take 10 minutes or so to extract the over one million
+JSON files in <em>metadata.tar.gz</em> into a new folder called <em>metadata</em>,
+depending on the speed of your hard disk. (If you&rsquo;re using Windows with
+WSL and this step is going very slowly, consult Appendix A for
+performance tips.)</p>
+<p>Feel free to run <code>ls</code> on the
+<em>metadata</em> folder or view it in a file browser, but beware that there
+are so many files that those simple tasks will take a long time (it took
+over five minutes for the <code>ls</code>
+command to finish running on my computer). Figure
+11-2 shows the files in the <em>metadata</em> folder
+in Finder on macOS.</p>
+<p>The files in this folder are all named
+<em>meta-&lt;ID>.json</em>, where <em>ID</em>
+is the original video ID from Parler. For example, you can find the
+metadata for the file <em>0003lx5cSwSB</em>, the video you downloaded in the
+previous section, at <em>metadata/meta-0003lx5cSwSB.json</em>. All of these
+metadata files are in the JSON file format, so let&rsquo;s take a closer look
+at that now.</p>
+<p><img alt="Figure 11-2: Some of the extracted Parler metadata files" src="media/images/Figure11-2.png" /><br />
+<em>Figure 11-2: Some of the extracted Parler metadata files</em></p>
+<h3>The JSON File Format</h3>
+<p>JSON is a format used to store information in text strings. One of its
+main benefits is that it&rsquo;s human-readable. Some file formats are
+designed for computers rather than humans to understand. If you run
+<code>cat</code> on a PDF file, for
+example, you&rsquo;ll see random-looking output in your terminal. You need to
+open the PDF in a program like Adobe Reader to understand the
+information it contains. However, humans can easily read the JSON text
+format just by viewing it in a text editor or by using the <code>cat</code> command.</p>
+<p>JSON is one of the most widely used data formats, and the one most APIs
+communicate with. Whenever you visit a website that does anything
+interactive, chances are your web browser and the website&rsquo;s server are
+passing JSON data back and forth. This is one reason why hacked data, as
+well as data scraped from APIs, is often full of JSON files. Most of the
+data from the America&rsquo;s Frontline Doctors dataset, covered in detail in
+Chapter 13, is in JSON format, as is much
+of the data hacked from Gab, the right-wing social network discussed in
+Appendix B.</p>
+<p>In this section, you&rsquo;ll learn more about JSON syntax and how to load
+JSON data into Python scripts.</p>
+<h4>Understanding JSON Syntax</h4>
+<p>JSON has JavaScript in its name because it was first derived from that
+programming language, but it&rsquo;s a <em>language-independent</em> data format: you
+can work with JSON data in JavaScript, Python, or any other programming
+language. Using their own JSON libraries, programming languages can
+convert JSON text strings into structured data
+(such as Python&rsquo;s dictionaries and lists) and also convert that
+structured data back into JSON text strings that can be loaded by code
+in any other programming language.</p>
+<p>To get an idea of the structure of a JSON file, run the following
+command in your terminal to display the metadata for the Parler video
+with the filename <em>0003lx5cSwSB</em>:</p>
+<div class="codehilite"><pre><span></span><code>cat metadata/meta-0003lx5cSwSB.json
+</code></pre></div>
+
+<p>The output should look like Listing 11-1.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;SourceFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;ExifToolVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.00</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;FileType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MP4&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;FileTypeExtension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mp4&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;MIMEType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;video/mp4&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;MajorBrand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MP4 v2 [ISO 14496-14]&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;MinorVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;CompatibleBrands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mp42&quot;</span><span class="p">,</span><span class="s2">&quot;mp41&quot;</span><span class="p">,</span><span class="s2">&quot;iso4&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;MovieHeaderVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;CreateDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020:10:15 09:35:29&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;ModifyDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020:10:15 09:35:29&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;TimeScale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">48000</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0:01:59&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 11-1: Video metadata for the file <code>0003lx5cSwSB</code></em></p>
+<p>As you can see, <code>FileType</code> is
+<code>MP4</code>. The
+<code>CreateDate</code> is
+<code>2020:10:15 09:35:29</code>, meaning
+that this video was filmed on October 15, 2020, at 9:35 [AM],
+and the <code>Duration</code> is
+<code>0:01:59</code>, or 1 minute and 59
+seconds.</p>
+<p>JSON syntax is extremely similar to Python syntax but uses different
+terminology to describe types of information:</p>
+<p><strong>Object</strong></p>
+<p>A set of key-value pairs. An object is essentially equivalent to a
+dictionary in Python and even uses the same syntax. In JSON, however,
+keys <em>must</em> be strings. Objects are defined between braces (<code>{</code>and}), and keys and values are
+separated with colons&mdash;for example,
+<code>{"first_name": "Frederick", "last_name": "Douglass"}</code>. The JSON output for Listing
+11-1 also includes a JSON object.</p>
+<p><strong>Array</strong></p>
+<p>An ordered list of items. An array is essentially equivalent to a list
+in Python and uses the same syntax. Arrays are defined between brackets (<code>[</code>and <code>]</code>), and items are
+separated by commas. The JSON output in Listing 11-1 has a few arrays, such as
+<code>["mp42","mp41","iso4"]</code>.</p>
+<p><strong>Boolean</strong></p>
+<p>A value of either <code>true</code> or
+<code>false</code>. These work the same
+as <code>True</code> and <code>False</code> in Python, but they&rsquo;re lowercase in
+JSON.</p>
+<p><strong>Number</strong></p>
+<p>Any whole number or number with decimals in it, such as <code>2600</code> or <code>3.14</code>. These are similar to numbers in
+Python, though while Python makes a distinction between integers (whole
+numbers) and floating points (numbers with decimals), JSON does not.</p>
+<p><strong>String</strong></p>
+<p>A sequence of text characters&mdash;for example,
+<code>"videos have metadata?"</code>.
+This is exactly the same as a string in Python, except that JSON strings
+<em>must</em> be enclosed double quotes (<code>"</code>), whereas Python also allows you to
+use single quotes (<code>'</code>).</p>
+<p><code>null</code></p>
+<p>A keyword representing an empty value. This is very similar to Python&rsquo;s
+<code>None</code> keyword.</p>
+<p>All JSON data is made up of combinations of these types, so it&rsquo;s
+important to understand their exact syntax. If you use any invalid
+syntax, such as surrounding a string with single quotes instead of
+double quotes or using the Boolean <code>True</code> instead of <code>true</code>, the JSON data won&rsquo;t load properly.</p>
+<p>Unlike in Python code, whitespace isn&rsquo;t important in JSON data. For
+example, consider this JSON string:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;abolitionists&quot;</span><span class="p">:[{</span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="s2">&quot;Frederick&quot;</span><span class="p">,</span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="s2">&quot;Douglass&quot;</span><span class="p">},{</span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="s2">&quot;John&quot;</span><span class="p">,</span><span class="nt">&quot;last</span>
+<span class="nt">_name&quot;</span><span class="p">:</span><span class="s2">&quot;Brown&quot;</span><span class="p">},{</span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="s2">&quot;Harriet&quot;</span><span class="p">,</span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="s2">&quot;Tubman&quot;</span><span class="p">}]}</span><span class="w"></span>
+</code></pre></div>
+
+<p>To write the same JSON string in a more human-readable format, you can
+split it into multiple lines and add indentation:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;abolitionists&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Frederick&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Douglass&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Brown&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Harriet&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tubman&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>You might encounter JSON files in datasets that
+are formatted either way. I often open JSON files in VS Code and use the
+text editor&rsquo;s built-in format feature to reformat the JSON for
+legibility. To format a document in VS Code, click <strong>View</strong> ▸ <strong>Command Palette</strong> ▸ <strong>Format
+Document</strong> and press <strong>ENTER</strong>.</p>
+<h4>Parsing JSON with Python</h4>
+<p>You can turn JSON data into Python dictionaries and lists using Python&rsquo;s
+built-in <code>json</code> module. First,
+open a Python interpreter and import the module:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">json</span>
+</code></pre></div>
+
+<p>The function in this module that I use the most is
+<code>json.loads()</code>. This takes a
+string with JSON data as an argument, parses the string into a Python
+object like a dictionary or a list, and returns that object. For
+example, define a string called <code>json_data</code> and set its value to a JSON string
+with the following command:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">json_data</span> <span class="o">=</span> <span class="s1">&#39;{&quot;first_name&quot;: &quot;Frederick&quot;, &quot;last_name&quot;: &quot;Douglass&quot;}&#39;</span>
+</code></pre></div>
+
+<p>The value you set <code>json_data</code>
+to looks similar to a dictionary, but since it&rsquo;s surrounded by single
+quotes, it&rsquo;s actually a string. In Python, the <code>type()</code> function tells you the type of a
+variable. You can confirm that <code>json_data</code> is a string with the following
+command:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">str</span><span class="s1">&#39;&gt;</span>
+</code></pre></div>
+
+<p>This output shows that <code>json_data</code> is a class of type <code>str</code> (Chapter 14 will touch on classes), meaning it&rsquo;s a string. Now define a variable called <code>obj</code> and set its value to the return value
+of the <code>json.loads()</code>
+function:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Here, <code>json.loads()</code> takes a
+string as input and, if the string contains valid JSON, converts it into
+structured data&mdash;in this case, storing the resulting object in
+<code>obj</code>. Use the
+<code>type()</code> function on
+<code>obj</code> now to see what type of
+variable it is:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">dict</span><span class="s1">&#39;&gt;</span>
+</code></pre></div>
+
+<p>The output shows that you&rsquo;ve parsed this JSON data into a Python
+dictionary (a <code>dict</code>), which
+you can now use like any other dictionary. For
+example, to put the value at the
+<code>last_name</code> key of this
+dictionary in an f-string and then display it, use the following
+command:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, Mr. </span><span class="si">{</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;last_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="n">Hello</span><span class="p">,</span> <span class="n">Mr</span><span class="o">.</span> <span class="n">Douglass</span><span class="o">.</span>
+</code></pre></div>
+
+<p>To practice accessing structured data, in your terminal, change to your
+Parler dataset folder, and then open a Python interpreter. Run the
+following commands to load the metadata from a Parler video as
+structured data. I&rsquo;ve chosen the file <em>metadata/meta-HS34fpbzqg2b.json</em>,
+but feel free to load whichever file you&rsquo;d like:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">json</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;metadata/meta-HS34fpbzqg2b.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>      <span class="n">json_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+</code></pre></div>
+
+<p>You now have the video metadata in the variable <code>obj</code>. The simplest way to start inspecting
+it is to display it to the screen with the <code>print()</code> function:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="p">[{</span><span class="s1">&#39;SourceFile&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;ExifToolVersion&#39;</span><span class="p">:</span> <span class="mf">12.0</span><span class="p">,</span> <span class="s1">&#39;FileType&#39;</span><span class="p">:</span> <span class="s1">&#39;MOV&#39;</span><span class="p">,</span> <span class="s1">&#39;FileTypeExtension&#39;</span><span class="p">:</span> <span class="s1">&#39;mov&#39;</span><span class="p">,</span>
+<span class="s1">&#39;MIMEType&#39;</span><span class="p">:</span> <span class="s1">&#39;video/quicktime&#39;</span><span class="p">,</span> <span class="s1">&#39;MajorBrand&#39;</span><span class="p">:</span> <span class="s1">&#39;Apple QuickTime (.MOV/QT)&#39;</span><span class="p">,</span> <span class="s1">&#39;MinorVersion&#39;</span><span class="p">:</span>
+<span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span> <span class="s1">&#39;CompatibleBrands&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;qt &#39;</span><span class="p">],</span> <span class="s1">&#39;MediaDataSize&#39;</span><span class="p">:</span> <span class="mi">139501464</span><span class="p">,</span> <span class="s1">&#39;MediaDataOffset&#39;</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span>
+<span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+</code></pre></div>
+
+<p>This output looks a little like JSON, but it&rsquo;s a Python object&mdash;in this
+case, a list with a nested dictionary. Use the <code>len()</code> function you learned about in
+Chapter 8 to count how many items are in
+this list:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="mi">1</span>
+</code></pre></div>
+
+<p>Since any given Parler video metadata file contains the metadata only
+for one video, there&rsquo;s only one item in this list. In order to access
+that metadata, you need to select the first item in the list. To do
+that, use <code>obj[0]</code> (remember,
+0 is the first index for any list) as follows:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="p">{</span><span class="s1">&#39;SourceFile&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;ExifToolVersion&#39;</span><span class="p">:</span> <span class="mf">12.0</span><span class="p">,</span> <span class="s1">&#39;FileType&#39;</span><span class="p">:</span> <span class="s1">&#39;MOV&#39;</span><span class="p">,</span> <span class="s1">&#39;FileTypeExtension&#39;</span><span class="p">:</span> <span class="s1">&#39;mov&#39;</span><span class="p">,</span>
+<span class="s1">&#39;MIMEType&#39;</span><span class="p">:</span> <span class="s1">&#39;video/quicktime&#39;</span><span class="p">,</span> <span class="s1">&#39;MajorBrand&#39;</span><span class="p">:</span> <span class="s1">&#39;Apple QuickTime (.MOV/QT)&#39;</span><span class="p">,</span> <span class="s1">&#39;MinorVersion&#39;</span><span class="p">:</span>
+<span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span> <span class="s1">&#39;CompatibleBrands&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;qt &#39;</span><span class="p">],</span> <span class="s1">&#39;MediaDataSize&#39;</span><span class="p">:</span> <span class="mi">139501464</span><span class="p">,</span> <span class="s1">&#39;MediaDataOffset&#39;</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span>
+<span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+</code></pre></div>
+
+<p>This time, the output starts with a brace,
+meaning the item is a dictionary. Now use a <code>for</code> loop to view all of the keys in this
+dictionary:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">SourceFile</span>
+<span class="n">ExifToolVersion</span>
+<span class="n">FileType</span>
+<span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+<span class="n">GPSLatitude</span>
+<span class="n">GPSLongitude</span>
+<span class="n">Rotation</span>
+<span class="n">GPSPosition</span>
+</code></pre></div>
+
+<p>Each key listed in this output represents a different piece of video
+metadata from the JSON file. You can also select values from this
+dictionary using their keys. For example, try printing the values for
+the <code>GPSLatitude</code> and
+<code>GPSLongitude</code> keys:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLatitude&quot;</span><span class="p">])</span>
+<span class="mi">38</span> <span class="n">deg</span> <span class="mi">53</span><span class="s1">&#39; 26.52&quot; N</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLongitude&quot;</span><span class="p">])</span>
+<span class="mi">77</span> <span class="n">deg</span> <span class="mi">0</span><span class="s1">&#39; 28.44&quot; W</span>
+</code></pre></div>
+
+<p>These values represent the GPS coordinates for the location where this
+video was filmed.</p>
+<p>Since JSON makes it easy to convert structured data into strings and
+back, when creating BlueLeaks Explorer I used JSON files to store the
+structure of BlueLeaks sites, as described in the section The
+Technology Behind BlueLeaks Explorer in Chapter 10. When you create a structure for a
+BlueLeaks site, BlueLeaks Explorer stores all of the configuration for
+that site in a dictionary, then saves that information to a JSON file.
+If you quit BlueLeaks Explorer and then run it again later, it loads
+that JSON file back into a dictionary. Since the Parler metadata comes
+in JSON format, you can also write Python code that loads these JSON
+files to easily access that metadata, as you&rsquo;ll do later in this
+chapter.</p>
+<p>To learn more about the <code>json</code>
+module, you can find the documentation and plenty of example code at
+<a href="https://docs.python.org/3/library/json.html">https://docs.python.org/3/library/json.html</a>.</p>
+<h4>Handling Exceptions with JSON</h4>
+<p>The <code>json.loads()</code> function
+will throw an exception if you pass an invalid JSON string into it, like
+this:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s2">&quot;this isn&#39;t valid json&quot;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+  <span class="n">File</span> <span class="s2">&quot;/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/__init__.py&quot;</span><span class="p">,</span>
+<span class="n">line</span> <span class="mi">346</span><span class="p">,</span> <span class="ow">in</span> <span class="n">loads</span>
+    <span class="k">return</span> <span class="n">_default_decoder</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/decoder.py&quot;</span><span class="p">,</span>
+<span class="n">line</span> <span class="mi">337</span><span class="p">,</span> <span class="ow">in</span> <span class="n">decode</span>
+    <span class="n">obj</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_decode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="n">_w</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">end</span><span class="p">())</span>
+  <span class="n">File</span> <span class="s2">&quot;/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/decoder.py&quot;</span><span class="p">,</span>
+<span class="n">line</span> <span class="mi">355</span><span class="p">,</span> <span class="ow">in</span> <span class="n">raw_decode</span>
+    <span class="k">raise</span> <span class="n">JSONDecodeError</span><span class="p">(</span><span class="s2">&quot;Expecting value&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">err</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
+<span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span> <span class="n">Expecting</span> <span class="n">value</span><span class="p">:</span> <span class="n">line</span> <span class="mi">1</span> <span class="n">column</span> <span class="mi">1</span> <span class="p">(</span><span class="n">char</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+
+<p>A <code>json.decoder.JSONDecodeError</code> exception means that the string you
+passed in doesn&rsquo;t contain valid JSON data. In this case, it&rsquo;s telling
+you the error in the JSON string is at line 1, column 1, and character
+0, meaning the error is located at the first character of the string. If
+you have a longer JSON string that&rsquo;s mostly valid but just has a little
+syntax issue, this error message can help you determine which piece of
+your syntax is wrong.</p>
+<p>Validating JSON data is a common use for Python exception handling,
+which you learned about in Exception Handling in Chapter 7. For example, let&rsquo;s say you have a string
+called <code>json_data</code>. The
+following code will catch exceptions in case this string contains
+invalid JSON data:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The JSON is valid&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid JSON&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This code uses <code>try</code> and
+<code>except</code> statements to catch
+the <code>json.decoder.JSONDecodeError</code> exception if it gets thrown. If
+<code>json_data</code> is a valid JSON
+string, it will display <code>The JSON is valid</code>, followed by the information in
+<code>obj</code>. If the JSON string is
+invalid, the script will display <code>Invalid JSON</code> and then continue running without
+crashing.</p>
+<p>To load a JSON file in Python functions such as <code>main()</code>, you must first load the content of
+the file into a string like so</p>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;filename.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</code></pre></div>
+
+<p>replacing <code>filename.json</code> with whatever file you&rsquo;re
+loading, such as <code>metadata/meta-HS34fpbzqg2b.json</code> to load the metadata for the
+<em>HS34fpbzqg2b</em> video file. As you learned in Reading and Writing
+Files in Chapter 8, this code opens the file as a
+file object <code>f</code> and then
+stores its content into a string called <code>json_data</code>.</p>
+<p>Next, you&rsquo;d run that string through <code>json.loads()</code> to convert it from a string into
+structured data, like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid JSON&quot;</span><span class="p">)</span>
+    <span class="k">return</span>
+</code></pre></div>
+
+<p>When this code finishes running, if the JSON
+string was valid, <code>obj</code> will
+contain the JSON data. Otherwise, it will display <code>Invalid JSON</code> and then return early from the
+function. The remaining code in the function can access the data in
+<code>obj</code>.</p>
+<p>To prepare for using this module to write Python scripts that parse the
+Parler metadata files, next we&rsquo;ll look at how to access values like GPS
+coordinates from JSON files with several command line programs.</p>
+<h3>Tools for Exploring JSON Data</h3>
+<p>While we&rsquo;ve been focusing primarily on working with JSON files using
+Python, sometimes writing a Python script is overkill if you just want
+to quickly search a large block of JSON text. In this section, you&rsquo;ll
+learn to use our old friend <code>grep</code>, as well as a more powerful tool
+called <code>jq</code>, to search JSON
+files.</p>
+<h4>Counting Videos with GPS Coordinates Using grep</h4>
+<p>As you know from Chapter 4, the command line
+programs <code>grep</code> and
+<code>wc</code> are incredibly powerful
+tools to quickly assess datasets. In a single command, and without
+needing to write a Python script, you can use <code>grep</code> to efficiently search inside JSON
+files.</p>
+<p>For example, let&rsquo;s say you want to figure out how many Parler video
+metadata files include GPS coordinates. Open a terminal, switch to your
+Parler dataset folder, and run the following command to grep for the
+string <code>GPSCoordinates</code>:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Parler % grep -r GPSCoordinates metadata
+</code></pre></div>
+
+<p>The first argument, <code>-r</code>
+(short for <code>--recursive</code>),
+tells <code>grep</code> to look inside
+every file in the given folder. The next argument,
+<code>GPSCoordinates</code>, is the
+string to search for. The final argument, <code>metadata</code>, is the name of the folder to search.</p>
+<p>When you run this command, your terminal should quickly fill with GPS
+coordinates:</p>
+<div class="codehilite"><pre><span></span><code>metadata/meta-31VC1ufihFpa.json:  &quot;GPSCoordinates&quot;: &quot;22 deg 8&#39; 0.60\&quot; S, 51 deg 22&#39; 4.80\&quot; W&quot;,
+metadata/meta-ImUNiSXcoGKh.json:  &quot;GPSCoordinates&quot;: &quot;0 deg 0&quot; 0.00\&quot; N, 0 deg 0&#39; 0.00\&quot; E&quot;,
+metadata/meta-70Tv9tAQUKyL.json:  &quot;GPSCoordinates&quot;: &quot;36 deg 10&#39; 49.08\&quot; N, 115 deg 26&#39; 45.60\&quot;
+W, 1922.566 m Above Sea Level&quot;,
+metadata/meta-P2w4QOgv5n9U.json:  &quot;GPSCoordinates&quot;: &quot;26 deg 14&#39; 46.32\&quot; N, 80 deg 5&#39; 38.76\&quot; W,
+3.424 m Above Sea Level&quot;,
+--snip--
+</code></pre></div>
+
+<p>However, you&rsquo;re trying to find how many of these videos have GPS
+coordinates, not necessarily what those coordinates are. If coordinates
+are still loading in your terminal, press <strong>CTRL</strong>-C to cancel the
+command, then pipe the output of
+<code>grep</code> into <code>wc -l</code> to count how many lines get displayed:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Parler % grep -r GPSCoordinates metadata | wc -l
+64088
+</code></pre></div>
+
+<p>Of the slightly more than one million videos, about 64,000 have GPS
+coordinates.</p>
+<p>Programs like <code>grep</code> and
+<code>wc</code> can only take you so far
+in your attempts to efficiently search large quantities of data. For
+example, if the JSON files you&rsquo;re searching are formatted on a single
+line, rather than split into multiple lines like the Parler files,
+<code>grep</code> will search the entire
+block of JSON data for your string rather than a line at a time. You
+can&rsquo;t use <code>grep</code> to extract
+specific fields of data from JSON, either. For that, the best tool for
+the job is a program called <code>jq</code>.</p>
+<h4>Formatting and Searching Data with the jq Command</h4>
+<p>The <code>jq</code> program allows you to
+take JSON data as input and select key information from it. In this
+section, you&rsquo;ll learn how to use it to extract specific information from
+the Parler files.</p>
+<p>First, you&rsquo;ll need to install <code>jq</code>. Mac users can do so by running the
+<code>brew install jq</code> command.
+Linux or Windows with WSL users, run the <code>sudo apt install jq</code> command.</p>
+<p>You can use the <code>jq</code> command
+to indent JSON data and show syntax highlighting in your terminal,
+making the data easier to read. For example, try running this command in
+your terminal:</p>
+<div class="codehilite"><pre><span></span><code>cat metadata/meta-HS34fpbzqg2b.json <span class="p">|</span> jq
+</code></pre></div>
+
+<p>The first part of the command,
+<code>cat metadata/meta-HS34fpbzqg2b.json</code>, outputs the content of that JSON
+file, which contains the metadata for a single Parler video. The second
+part, <code>| jq</code>, pipes that
+output as input into <code>jq</code>.</p>
+<p>The output should look like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;SourceFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;ExifToolVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;FileType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MOV&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;FileTypeExtension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mov&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;MIMEType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;video/quicktime&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;MajorBrand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Apple QuickTime (.MOV/QT)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;MinorVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;CompatibleBrands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;qt  &quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;GPSLatitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;38 deg 53&#39; 26.52\&quot; N&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;GPSLongitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;77 deg 0&#39; 28.44\&quot; W&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">     </span><span class="nt">&quot;Rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;GPSPosition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;38 deg 53&#39; 26.52\&quot; N, 77 deg 0&#39; 28.44\&quot; W&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+
+<p>This version includes syntax highlighting (as in VS Code) and formats
+the JSON data so that the items in every array and object are listed on
+separate lines and indented.</p>
+<p>You can also use <code>jq</code> to
+filter for details from inside the JSON data. For example, suppose you
+just want to know the GPS coordinates from this JSON file. In the
+preceding code, you can tell from the bracket character at the beginning
+that this JSON data is an array. The first value of the array is an
+object, since it starts with a brace character, and one of the keys of
+the object is <code>GPSPosition</code>.
+To filter for <code>GPSPosition</code>,
+pass <code>".[0].GPSPosition"</code> as
+an argument into the <code>jq</code>
+command, as follows:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Parler % cat metadata/meta-HS34fpbzqg2b.json | jq &quot;.[0].GPSPosition&quot;
+&quot;38 deg 53&#39; 26.52\&quot; N, 77 deg 0&#39; 28.44\&quot; W&quot;
+</code></pre></div>
+
+<p>In this command, <code>.[0]</code>
+selects the first item of the list in the file named
+<em>metaHS34fpbzqg2b.json</em>, and <code>.GPSPosition</code> selects the value with the key
+<code>GPSPosition</code> from the object.
+The output shows the value of the <code>GPSPosition</code> field,
+<code>"38 deg 53' 26.52\" N, 77 deg 0' 28.44\" W"</code>.</p>
+<p>If you&rsquo;re interested in learning more about how to use <code>jq</code>, check out its website at
+<a href="https://stedolan.github.io/jq">https://stedolan.github.io/jq</a>.
+You&rsquo;ll also revisit it in Chapter 14, where
+I explain how I used it to understand the structure of leaked neo-Nazi
+chat logs.</p>
+<p>Now that you have a foundational understanding of JSON, you&rsquo;ll try your
+hand at writing Python code that works with it in Exercise 11-2.</p>
+<h3>Exercise 11-2: Write a Script to Filter for Videos with GPS from January 6, 2021</h3>
+<p>In this exercise, you&rsquo;ll write a Python script that filters the Parler
+videos down to just those filmed on January 6, 2021, whose metadata
+includes GPS coordinates. You&rsquo;ll do this by looping through all the JSON
+files in the dataset, converting them into Python objects, and
+inspecting their metadata to show you just the ones you&rsquo;re looking for.</p>
+<p>For a challenge, you can try programming your own script to meet the
+following requirements:</p>
+<ul>
+<li>Make this script accept an argument, <code>parler_metadata_path</code>, using Click. This will be the
+    path to the <em>metadata</em> folder full of JSON files.</li>
+<li>Define a new variable called <code>count</code> that keeps track of the number of
+    Parler videos that include GPS coordinates in their metadata, and
+    set it to <code>0</code>.</li>
+<li>Loop through all of the JSON files in the <em>metadata</em> folder. For
+    each loop, your program should run the content of each JSON file
+    through the <code>json.loads()</code> function to turn it into a Python
+    object. As described in the &ldquo;[Parsing JSON with
+    Python&rdquo;] section, each object is technically a
+    list containing one element, a dictionary full of all of the video&rsquo;s
+    metadata.</li>
+<li>Check to see if that video&rsquo;s metadata dictionary includes the key
+    <code>GPSCoordinates</code> and if
+    the date stored in the key <code>CreateDate</code> is January 6, 2021. If both of
+    these are true, the script should display a message that this file
+    includes GPS coordinates and is from January 6, 2021, and increment
+    the <code>count</code> variable by 1.</li>
+<li>Have the program display a message after looping through all the
+    metadata files that tells the user the total number of videos with
+    GPS coordinates from January 6, 2021 (which should be stored in the
+    <code>count</code> variable, now that
+    you&rsquo;re done counting).</li>
+</ul>
+<p>Alternatively, follow along with the rest of this exercise and I&rsquo;ll walk
+you through the programming process.</p>
+<h4>Accept the Parler Metadata Path as an Argument</h4>
+<p>Start with the usual Python script template:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Next, make the following modifications to your script so that it accepts
+the <code>parler_metadata_path</code> CLI
+argument. This way, when you run the script, you can pass in the path to
+the <em>metadata</em> folder as an argument, which the code will use to open
+all of the JSON files inside that folder. The modifications are shown in
+bold:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parler metadata path: </span><span class="si">{</span><span class="n">parler_metadata_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This code first imports the <code>click</code> module, then uses it to make the
+<code>main()</code> function accept the
+argument <code>parler_metadata_path</code>. It also adds a docstring to show what
+the script does when you run it with the <code>--help</code> argument. Finally, the
+<code>print()</code> function will print
+the value of <code>parler_metadata_path</code> to the screen.</p>
+<p>Test your code to make sure it works so far,
+replacing the argument with the path to your own <em>metadata</em> folder:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-11 % python3 exercise-11-2.py /Volumes/datasets/Parler/metadata
+Parler metadata path: /Volumes/datasets/Parler/metadata
+</code></pre></div>
+
+<p>Sure enough, the code should display the same string, stored in
+<code>parler_metadata_path</code>, that
+you passed in as an argument.</p>
+<h4>Loop Through Parler Metadata Files</h4>
+<p>Next, add some code that will loop through all of the JSON files in the
+<em>metadata</em> folder and run <code>json.loads()</code> on their contents to convert them into
+structured data in Python. Modify your code as follows:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+        <span class="n">abs_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">)</span> <span class="ow">and</span> <span class="n">abs_filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully loaded JSON: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>The code imports the <code>os</code> and
+<code>json</code> modules at the top of
+the file so it can use the functions they contain later on. The program
+then loops through the return value of the <code>os.listdir()</code> function, which returns the list of
+files in the <em>metadata</em> folder, storing each filename in the variable
+<code>filename</code>.</p>
+<p>Inside the <code>for</code> loop, the
+code defines a new variable called <code>abs_filename</code> to be the absolute path of the JSON
+file the code is working with each time it loops. It creates the
+absolute path by concatenating <code>parler_metadata_path</code> with <code>filename</code> using the <code>os.path.join()</code> function. Now that the code knows the
+full filename, it checks to make sure that this is actually a file, not
+a folder, and that it ends with <em>.json</em>.</p>
+<p>If the code confirms the file is JSON, it loads
+all of the data from this file into the variable <code>json_data</code> and then converts that string into
+structured data, saved in the variable <code>metadata</code>, using <code>try</code> and <code>except</code> statements, as described in the
+Handling Exceptions with JSON section. If there are no syntax
+errors in an individual JSON file, the code displays a message to the
+screen saying that the file loaded successfully. Otherwise, it displays
+an error and moves on to the next file using the <code>continue</code> statement. In a <code>for</code> loop, <code>continue</code> statements immediately end the current
+loop and move on to the next loop.</p>
+<p>To summarize, at this point the code is looping through every file in
+the <em>metadata</em> folder, and for each JSON file it comes across, opening
+it and loading its content as a text string. It then converts this
+string into a Python object using the <code>json.loads()</code> function, storing the object in the
+<code>metadata</code> variable, and
+displays a message that it successfully loaded. If the file didn&rsquo;t
+successfully load, the message says that the JSON was invalid, and the
+code continues on to the next JSON file.</p>
+<p>Run the program again, replacing the argument with the path to your own
+<em>metadata</em> folder:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-11 % python3 exercise-11-2.py /Volumes/datasets/Parler/metadata
+Successfully loaded JSON: meta-gzK2iNatgLLr.json
+Successfully loaded JSON: meta-31VC1ufihFpa.json
+Successfully loaded JSON: meta-ZsZRse5JGx8j.json
+--snip--
+</code></pre></div>
+
+<p>If your output shows many messages saying different JSON files loaded
+successfully, your code is working. Once you&rsquo;ve determined that your
+output looks correct, you can press <strong>CTRL</strong>-C to cancel the
+script before it finishes running.</p>
+<h4>Filter for Videos with GPS Coordinates</h4>
+<p>Your code currently loops through all of the Parler metadata files,
+loads each file, and converts it into a Python object so you can work
+with it. Next, you need to filter out the videos that include GPS
+coordinates and to count those videos. To do so, make the following
+modifications:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+        <span class="n">abs_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">)</span> <span class="ow">and</span> <span class="n">abs_filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="s2">&quot;GPSCoordinates&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found GPS coordinates: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total videos with GPS coordinates: </span><span class="si">{</span><span class="n">count</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This code defines a new variable called <code>count</code> and starts its value out as
+<code>0</code>. This will keep track of
+the number of videos with GPS coordinates. After each JSON file is
+loaded into the <code>metadata</code>
+variable, an <code>if</code> statement
+checks if the key <code>GPSCoordinates</code> exists inside this metadata
+dictionary. Remember from the previous section that <code>metadata</code> is a list with one item, making
+<code>metadata[0]</code> the actual
+dictionary your code is checking. If this video metadata does have the
+<code>GPSCoordinates</code> field, the
+control flow moves to the code block after the <code>if</code> statement. Otherwise, it moves on to
+the next loop.</p>
+<p>When the Python script comes across metadata that includes GPS
+coordinates, it displays the name of the file with <code>print()</code> and increments <code>count</code> by 1. This way, by the time this
+<code>for</code> loop is finished,
+<code>count</code> will contain the total
+number of videos that have GPS coordinates in their metadata. Finally,
+after the <code>for</code> loop
+completes, the code displays that total count with a second call to the
+<code>print()</code> function. As you
+learned in Chapter 8, the <code>:,</code> in the f-string will display larger
+numbers with comma separators.</p>
+<p>Run your program again:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-11 % python3 exercise-11-2.py /Volumes/datasets/Parler/metadata
+Found GPS coordinates: meta-31VC1ufihFpa.json
+Found GPS coordinates: meta-ImUNiSXcoGKh.json
+Found GPS coordinates: meta-70Tv9tAQUKyL.json
+--snip--
+Found GPS coordinates: meta-1FMyKoVq53TV.json
+Found GPS coordinates: meta-Y0jO2wy1Z7RO.json
+Found GPS coordinates: meta-aZlkDfPojhxW.json
+Total videos with GPS coordinates: 63,983
+</code></pre></div>
+
+<p>Because this script loads the JSON data from over a million files, it
+might take a few minutes to finish running. In the end, your script
+should find 63,983 videos with GPS coordinates. There should also be
+63,984 lines of output: one with the name of each metadata file that has
+GPS coordinates, and one at the end that lists the total.</p>
+<h4>Filter for Videos from January 6, 2021</h4>
+<p>Now you&rsquo;ll whittle down that list of roughly 64,000 videos even further
+to find out which were filmed on January 6, 2021.</p>
+<p>You can tell the date on which a video was filmed from the
+<code>CreateDate</code> field in its
+metadata, as shown earlier in Listing 11-1.
+The value of this field looks something like this:</p>
+<div class="codehilite"><pre><span></span><code>&quot;CreateDate&quot;: &quot;2020:12:28 17:25:47&quot;,
+</code></pre></div>
+
+<p>To use the <code>CreateDate</code> field
+to filter the results further, make the following modifications to your
+code:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+        <span class="n">abs_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">)</span> <span class="ow">and</span> <span class="n">abs_filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+              <span class="k">if</span> <span class="p">(</span>
+                <span class="s2">&quot;GPSCoordinates&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="s2">&quot;CreateDate&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;CreateDate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;2021:01:06&quot;</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GPS + Jan 6: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total videos with GPS coordinates, filmed Jan 6: </span><span class="si">{</span><span class="n">count</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Rather than just checking for videos with GPS coordinates, now the code
+also checks for those that have a <code>CreateDate</code> that starts with <code>2021:01:06</code>. Once the code determines that the
+metadata in the current loop has GPS coordinates and was created on
+January 6, 2021, it displays the filename with
+<code>print(f"GPS + Jan 6: {filename}")</code>. When the <code>for</code> loop is finished, it displays the
+total count.</p>
+<p>The expression in this code&rsquo;s <code>if</code> statement is surrounded by
+parentheses, and the three conditions inside those parentheses are
+indented. This is purely cosmetic; the code would work exactly the same
+if it were all on one line, but this formatting makes it slightly easier
+to read.</p>
+<p>You can find the final script in the book&rsquo;s GitHub repo at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-11/exercise-11-2.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-11/exercise-11-2.py</a>.
+Run the completed script like so:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-11 % python3 exercise-11-2.py /Volumes/datasets/Parler/metadata
+GPS + Jan 6: meta-xHkUeMHMFx3F.json
+GPS + Jan 6: meta-eGqmDWzz0oSh.json
+GPS + Jan 6: meta-WhQeLMyPWIrG.json
+--snip--
+GPS + Jan 6: meta-fhqU4rQ4ZFzO.json
+GPS + Jan 6: meta-pTbZXLmXGyyn.json
+GPS + Jan 6: meta-hL60MjItBhOW.json
+Total videos with GPS coordinates, filmed Jan 6: 1,958
+</code></pre></div>
+
+<p>The script might still take a few minutes to run, but this time, there
+should be fewer results. Only 1,958 Parler videos have GPS coordinates
+and were filmed on January 6, 2021; this is about 3 percent of the
+videos with GPS coordinates, and less than 0.2 percent of all of the
+videos.</p>
+<p>Watching almost 2,000 videos, while perhaps unpleasant, is at least
+feasible. We can still do better, though. In all likelihood, some of
+those January 6 videos weren&rsquo;t actually filmed at the insurrection
+itself, but just happened to be uploaded the same day from other
+locations. To prepare for filtering this list further in order to find
+videos filmed at the insurrection, you&rsquo;ll need some background on
+working with GPS coordinates.</p>
+<h3>Working with GPS Coordinates</h3>
+<p>In this section, you&rsquo;ll learn how latitude and longitude coordinates
+work and how to look them up on online map services like Google Maps.
+You&rsquo;ll also learn how to convert between different GPS formats and
+measure the rough distance between two locations. I&rsquo;ll introduce a few
+new Python features, including the <code>split()</code> and <code>replace()</code> methods for modifying strings and the
+<code>float()</code> function for
+converting a string into a decimal number.</p>
+<h4>Searching by Latitude and Longitude</h4>
+<p>You can define any location on Earth using two coordinates: latitude and
+longitude. These coordinates are measured in degrees, with each degree
+split into 60 minutes and each minute split into 60 seconds. Latitude
+goes from 90 degrees North, which is the North Pole, to 0 degrees at the
+equator, to 90 degrees South, which is the South Pole. Longitude goes
+from 180 degrees West, which is in the middle of the Pacific Ocean, to 0
+degrees, which cuts through England, to
+180 degrees East, back to that same location in the middle of the
+Pacific.</p>
+<p>For example, if you look up the metadata for the Parler video with
+filename <em>HS34fpbzqg2b</em> (which shows Trump supporters removing
+barricades around the Capitol building while police officers stand by
+and watch), you&rsquo;d find the following GPS coordinates:</p>
+<p>Latitude: 38 deg 53[′] 26.52[″] N</p>
+<p>Longitude: 77 deg 0[′] 28.44[″] W</p>
+<p>That means this video was filmed at the latitude of 38 degrees, 53
+minutes, 26.52 seconds North and the longitude of 77 degrees, 0 minutes,
+28.44 seconds West.</p>
+<p>You can use various online map services, like Google Maps, to search by
+GPS coordinates and see exactly where on Earth they point to. To search
+the coordinates contained in the Parler metadata, you&rsquo;ll need to
+slightly modify them so that Google Maps will recognize them, loading
+<a href="https://www.google.com/maps">https://www.google.com/maps</a>
+and entering these coordinates as the string
+38°53′26.52″,
+−77°0′28.44. Try searching for those
+coordinates in Google Maps now. Figure 11-3
+shows the exact location this video was filmed: just outside the US
+Capitol building, where police had set up barricades.</p>
+<p><img alt="Figure 11-3: Pinpointing a location near the US Capitol building in Google Maps" src="media/images/Figure11-3.png" /><br />
+<em>Figure 11-3: Pinpointing a location near the US Capitol building in Google Maps</em></p>
+<p>You can also use Google Maps to discover the GPS coordinates of any
+given point. If you right-click anywhere on the map, a context menu
+should pop up showing you the GPS coordinates of that point. However,
+when you do this, the coordinates it shows you will look slightly
+different because they&rsquo;ll be in decimal format.</p>
+<p>In the next section, you&rsquo;ll learn to convert
+from decimals to degrees, minutes, and seconds.</p>
+<h4>Converting Between GPS Coordinate Formats</h4>
+<p>GPS coordinates in decimal format show the number of degrees on the left
+side of the decimal point, and converted minutes and seconds values on
+the right side. For example, consider the GPS coordinates from the
+<em>HS34fpbzqg2b</em> video:</p>
+<ul>
+<li>The latitude is 38 degrees, 53 minutes, 26.52 seconds North, which
+    is 38.8907 in decimal.</li>
+<li>The longitude is 77 degrees, 0 minutes, 28.44 seconds West, which is
+    −77.0079 in decimal.</li>
+</ul>
+<p>One degree is 60 minutes and one minute is 60 seconds, meaning there are
+3,600 seconds in a degree. The formula to convert from degrees, minutes,
+and seconds to decimal format is <em>degrees</em> + (<em>minutes</em> / 60) +
+(<em>seconds</em> / 3,600). Latitudes are negative in the Southern Hemisphere
+but positive in the Northern Hemisphere, while longitudes are negative
+in the Western Hemisphere but positive in the Eastern Hemisphere. The
+latitude for the <em>HS34fpbzqg2b</em> video is positive, while the longitude
+is negative.</p>
+<p>Decimal numbers are simpler to work with in code. Since the GPS
+coordinates in the Parler metadata are formatted as degrees, minutes,
+and seconds, let&rsquo;s use some Python code to convert them to decimal
+format. The <code>gps_degrees_to_decimal()</code> function in Listing
+11-2 takes a GPS coordinate from the Parler
+metadata as an argument and returns the decimal version.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">gps_degrees_to_decimal</span><span class="p">(</span><span class="n">gps_coordinate</span><span class="p">):</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">gps_coordinate</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">degrees</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">minutes</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &#39; &quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="n">seconds</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &quot; &#39;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="n">hemisphere</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">gps_decimal</span> <span class="o">=</span> <span class="n">degrees</span> <span class="o">+</span> <span class="p">(</span><span class="n">minutes</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">hemisphere</span> <span class="o">==</span> <span class="s2">&quot;W&quot;</span> <span class="ow">or</span> <span class="n">hemisphere</span> <span class="o">==</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span>
+        <span class="n">gps_decimal</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">gps_decimal</span>
+</code></pre></div>
+
+<p><em>Listing 11-2: The <code>gps_degrees_to_decimal()</code> function</em></p>
+<p>This function introduces some new Python features. First, the
+<code>split()</code> string method splits
+a string into a list of parts based on whitespace. For example, this
+method would convert the string <code>'77 deg 0' 28.44" W'</code> into the list of strings
+<code>['77', 'deg', "0' ", '28.44" ', 'W']</code>. The line <code>parts = gps _coordinate.split()</code> stores the return value of
+<code>gps_coordinate.split()</code> into
+the <code>parts</code> variable. If you
+passed that string into this function as <code>gps_coordinate</code>, this would mean the following:</p>
+<ul>
+<li><code>parts[0]</code> is the string <code>77</code>.</li>
+<li><code>parts[1]</code> is the string
+    <code>deg</code>.</li>
+<li><code>parts[2]</code> is the string
+    <code>0'</code> (0 followed by a
+    single quote).</li>
+<li><code>parts[3]</code> is the string
+    <code>28.44"</code> (28.44 followed
+    by a double quote).</li>
+<li><code>parts[4]</code> is the string
+    <code>W</code>.</li>
+</ul>
+<p>Before you can do math with strings in Python, you must convert them
+into <em>floating-point numbers</em>&mdash;which are just numbers that can contain
+decimals&mdash;using the <code>float()</code>
+function. Listing 11-2 uses
+<code>float()</code> to set the value of
+<code>degrees</code> to the
+floating-point version of <code>parts[0]</code>. In this case, it converts the value
+of the string <code>77</code> in
+<code>gps_coordinate</code> to the
+floating-point number <code>77.0</code>.</p>
+<p>The next line of code similarly uses the <code>replace()</code> string method to convert the
+<code>minutes</code> value to a
+floating-point number. This method searches the string for the first
+argument and replaces it with the second argument. For example,
+<code>"GPS is fun".replace("fun", "hard")</code> returns the string
+<code>GPS is hard</code>. When you run
+<code>parts[2].replace(" ' ", " ")</code>, you&rsquo;re replacing the single quote
+character (<code>'</code>) with an empty
+string, in order to delete that character. This would convert the string
+<code>0'</code> from
+<code>gps_coordinate</code> to
+<code>0</code> and then convert
+<code>0</code> to the floating-point
+number <code>0.0</code>.</p>
+<p>The next line uses <code>replace()</code>
+to delete the double quote character (<code>"</code>), converting the string
+<code>28.44"</code> from
+<code>gps_coordinates</code> to
+<code>28.44</code>, then converting that
+into the floating-point number <code>28.44</code> and saving it as <code>seconds</code>.</p>
+<p>The rest of the function is more straightforward. It defines the
+variable <code>gps_decimal</code> as the
+decimal version of the GPS coordinates that are passed in an argument,
+using the formula to convert the coordinates to decimal format using the
+numbers in <code>degrees</code>,
+<code>minutes</code>, and
+<code>seconds</code>. If the coordinates
+are in the Western or Southern Hemisphere, the code
+<code>gps_decimal *= -1</code> makes <code>gps_decimal</code> a negative number. Finally, the
+function returns <code>gps _decimal</code>, the decimal version of the GPS
+coordinates.</p>
+<p>Since the GPS coordinates in the Parler data come in strings of degrees,
+minutes, and seconds, you&rsquo;ll use the <code>gps_degrees_to_decimal()</code> function in the next exercise to
+convert them to decimal format. First, though, you&rsquo;ll need to know how
+to calculate distances between two GPS coordinates.</p>
+<h4>Calculating GPS Distance in Python</h4>
+<p>To determine which Parler videos were filmed in Washington, DC, based on
+their GPS coordinates, you can begin by finding the coordinates for the
+center point of the city and then imagine a circle around that point.
+You can consider a video to have been filmed in the city if its metadata
+has both a longitude and latitude within that circle. This won&rsquo;t tell
+you if the video was exactly filmed within the Washington, DC, city
+limits, but it&rsquo;s close enough. In this section, I&rsquo;ll review the simple
+math required to do this calculation.</p>
+<p>The Earth isn&rsquo;t flat, but for the purposes of
+this chapter, pretend that Washington, DC, is a flat plane. You can
+think of GPS coordinates as a 2D point on a Cartesian coordinate system,
+where longitude represents the <em>x</em> axis (East and West) and latitude
+represents the <em>y</em> axis (North and South). Since you can look up the
+coordinates of the center of Washington, DC, and you know the
+coordinates for where each video was filmed, you can use the distance
+formula to determine if it&rsquo;s inside the circle.</p>
+<p>The distance formula, as you might recall from geometry class, is used
+to calculate the distance between two points. It states that the
+distance between two points equals the square root of ((<em>x</em><sub>2</sub>
+− <em>x</em><sub>1</sub>&gt;)<sup>2</sup> + (<em>y</em><sub>2</sub> − <em>y</em><sub>1</sub>)<sup>2</sup>),
+where (<em>x</em><sub>1</sub>, <em>y</em><sub>1</sub>) is one point and (<em>x</em><sub>2</sub>, <em>y</em><sub>2</sub>) is another
+point. As an example, Figure 11-4 shows the distance between the White House and the US Capitol, with the White House at point (<em>x</em><sub>1</sub>, <em>y</em><sub>1</sub>) and the US Capitol at point (<em>x</em><sub>2</sub>, <em>y</em><sub>2</sub>).</p>
+<p><img alt="Figure 11-4: Using the distance formula to calculate the distance between the White House and the US Capitol" src="media/images/Figure11-4.png" /><br />
+<em>Figure 11-4: Using the distance formula to calculate the distance between the White House and the US Capitol</em></p>
+<p>To determine if a given Parler video was filmed in Washington, DC,
+you&rsquo;ll compare the city center with the GPS coordinates of a Parler
+video. The center point of DC is constant, and when you loop through the
+JSON files of Parler metadata, you can find all the relevant GPS
+coordinates. If you plug these points into the distance formula, you can
+determine whether the distance is close enough to the center to be
+considered inside the city.</p>
+<p><strong>NOTE</strong> <em>Since the Earth isn&rsquo;t actually flat, using the distance formula will
+only be relatively accurate for short distances, like 20 kilometers.
+It&rsquo;s possible to calculate much more accurate distances between GPS
+coordinates using spherical geometry, but that requires using
+trigonometry functions like sine, cosine, and arctangent. Using the
+distance formula is much simpler and accurate enough for our purposes.</em></p>
+<p>Listing 11-3 shows a Python <code>distance()</code> function that implements the distance formula.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+
+<p><em>Listing 11-3: The <code>distance()</code> function</em></p>
+<p>The distance formula requires you to calculate a square root, which you
+can do using Python&rsquo;s <code>math.sqrt()</code> function. To access this function,
+first you import the <code>math</code>
+module at the top of the file. The <code>distance()</code> function takes the <code>x1</code>, <code>x2</code>, <code>y1</code>, and <code>y2</code> arguments, then calculates the
+distance formula, returning the distance between the two points. (In
+Python, <code>**</code> is the power
+operator, so we write <em>x</em><sup>2</sup> as <code>x**2</code>.) If you call <code>distance()</code> and pass any two points into it as
+arguments, it will return the distance between them.</p>
+<h4>Finding the Center of Washington, DC</h4>
+<p>Now you&rsquo;ll find the coordinates of the center of Washington, DC, so that
+you can use the distance formula to compare them against those from a
+Parler video. Load
+<a href="https://www.google.com/maps">https://www.google.com/maps</a>
+in your browser and search for <strong>Washington DC</strong>. Right-click the US
+Capitol building, which is approximately at the center of the city.
+Google Maps should show you the GPS coordinates of that point (see
+Figure 11-5); click them to copy them. Your
+GPS coordinates might be slightly different, depending on where exactly
+you clicked.</p>
+<p><img alt="Figure 11-5: Using Google Maps to find the GPS coordinates of the center of Washington, DC" src="media/images/Figure11-5.png" /><br />
+<em>Figure 11-5: Using Google Maps to find the GPS coordinates of the center of Washington, DC</em></p>
+<p>If the radius of the imaginary circle around
+Washington, DC, is about 20 kilometers, you can consider any videos
+filmed within 0.25 degrees to be inside the city. I decided on 0.25
+degrees by checking the GPS coordinates on the outskirts of DC and
+comparing them to the coordinates in the city center.</p>
+<p>Armed with the <code>gps_degrees_to_decimal()</code> and <code>distance()</code> Python functions and the GPS
+coordinates for the center of Washington, DC, you&rsquo;re ready to finish
+filtering the Parler videos to find the insurrection videos in Exercise
+11-3.</p>
+<h3>Exercise 11-3: Update the Script to Filter for Insurrection Videos</h3>
+<p>In this exercise, you&rsquo;ll filter the results of the Exercise 11-2 script
+even further, searching just for videos filmed in Washington, DC. First,
+make a copy of <em>exercise-11-2.py</em> and rename it <em>exercise-11-3.py</em>. Now
+modify <em>exercise-11-3.py</em> to match the following code:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">gps_degrees_to_decimal</span><span class="p">(</span><span class="n">gps_coordinate</span><span class="p">):</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">gps_coordinate</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">degrees</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">minutes</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &#39; &quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="n">seconds</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &quot; &#39;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="n">hemisphere</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">gps_decimal</span> <span class="o">=</span> <span class="n">degrees</span> <span class="o">+</span> <span class="p">(</span><span class="n">minutes</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">hemisphere</span> <span class="o">==</span> <span class="s2">&quot;W&quot;</span> <span class="ow">or</span> <span class="n">hemisphere</span> <span class="o">==</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span>
+        <span class="n">gps_decimal</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">gps_decimal</span>
+
+<span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">was_video_filmed_in_dc</span><span class="p">(</span><span class="n">metadata</span><span class="p">):</span>
+    <span class="n">dc_x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">77.0066</span>
+    <span class="n">dc_y</span> <span class="o">=</span> <span class="mf">38.8941</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">gps_degrees_to_decimal</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLongitude&quot;</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">gps_degrees_to_decimal</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLatitude&quot;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">distance</span><span class="p">(</span><span class="n">dc_x</span><span class="p">,</span> <span class="n">dc_y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.25</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Filter Parler videos that were filmed in Washington DC and on Jan 6, 2021&quot;&quot;&quot;</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+      <span class="n">abs_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">)</span> <span class="ow">and</span> <span class="n">abs_filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="s2">&quot;GPSLongitude&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="s2">&quot;GPSLatitude&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="s2">&quot;CreateDate&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;CreateDate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;2021:01:06&quot;</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="n">was_video_filmed_in_dc</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+          <span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found an insurrection video: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total videos filmed in Washington DC on January 6: </span><span class="si">{</span><span class="n">count</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This code first defines the <code>gps_degrees_to_decimal()</code> function from Listing
+11-2 and the <code>distance()</code> function from Listing 11-3, importing the required <code>math</code> module at the top of the file. It will
+later use <code>gps_degrees_to _decimal()</code> to convert GPS coordinates from the
+Parler video metadata into decimal format and <code>distance()</code> to calculate the distance between that
+GPS coordinate and the center of Washington, DC.</p>
+<p>Next, the code defines the <code>was_video_filmed_in_dc()</code> function. This function takes a single
+argument, <code>metadata</code>, which
+contains the Parler video metadata loaded from its JSON file. It returns
+<code>True</code> if the GPS coordinates
+in that metadata are located inside Washington, DC, but otherwise
+returns <code>False</code>.</p>
+<p>The <code>was_video_filmed_in_dc()</code>
+function first defines the <em>x</em> and <em>y</em> coordinates you found for the
+city center in the variables <code>dc_x</code> and <code>dc_y</code>. Next, it defines the <em>x</em> and <em>y</em>
+coordinates of the Parler video, storing those values in the variables
+<code>x</code> and <code>y</code>. Since the GPS coordinates in the
+<code>GPSLongitude</code> and
+<code>GPSLatitude</code> metadata fields
+aren&rsquo;t in decimal format, it first passes those strings into the
+<code>gps_degrees_to_decimal()</code>
+function to convert them from degrees, minutes, and seconds into
+decimals and then saves the return values into <code>x</code> and <code>y</code>.</p>
+<p>Finally, <code>was_video_filmed_in_dc()</code> calls the <code>distance()</code> function to determine the distance
+between these two points. The return value is this expression:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">distance</span><span class="p">(</span><span class="n">dc_x</span><span class="p">,</span> <span class="n">dc_y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.25</span>
+</code></pre></div>
+
+<p>The <code>distance()</code> function returns a number representing
+the distance between the center of Washington, DC, and the location
+where the video was filmed. If that number is less than or equal to 0.25
+(roughly 20 kilometers), the expression evaluates to <code>True</code>; otherwise, it evaluates to
+<code>False</code>. Thus, the
+<code>was_video_filmed_in_dc()</code>
+function returns a Boolean.</p>
+<p>With these functions defined at the top of the file, the remaining
+changes to the script are minimal. The code updates the docstring, since
+our script&rsquo;s purpose has changed. It also updates the <code>if</code> statement that checks whether or not
+an insurrection video was found. The version of this script from
+Exercise 11-2 just checked if the metadata included a
+<code>GPSCoordinates</code> field, but
+now it checks for the fields <code>GPSLongitude</code> and <code>GPSLatitude</code> as well. The videos with GPS
+coordinates contain all three of these fields. <code>GPSCoordinates</code> is just a single field that contains
+both longitude and latitude. However, since you need separate values for
+longitude and latitude, it&rsquo;s simpler to use the metadata fields that are
+already separated. Finally, the <code>if</code> statement confirms that the video was
+filmed in Washington, DC, by calling
+<code>was_video_filmed_in_dc(metadata)</code>.</p>
+<p>If all of these conditions are true&mdash;the metadata contains
+<code>GPSLongitude</code> and
+<code>GPSLatitude</code>; the metadata
+contains <code>CreateDate</code> with a
+value matching January 6, 2021; and the GPS coordinates in the metadata
+show that the video was filmed in Washington, DC&mdash;then the code
+displays a message saying it found an insurrection video and increments
+<code>count</code>. Finally, after the
+script has finished looping through all of the Parler metadata files, it
+displays the total number of insurrection videos found.</p>
+<p>You can find the final script in the book&rsquo;s GitHub repo at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-11/exercise-11-3.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-11/exercise-11-3.py</a>.
+Run your complete script now, making sure to pass in the correct path to
+your Parler <em>metadata</em> folder:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-11 % python3 exercise-11-3.py /Volumes/datasets/Parler/metadata
+Found an insurrection video: meta-QPsyYtwu4zJb.json
+Found an insurrection video: meta-Hcv3lzEsnWaa.json
+Found an insurrection video: meta-6dDTCsYzK3k3.json
+--snip--
+Found an insurrection video: meta-eLSgf3w5r4PI.json
+Found an insurrection video: meta-goL0HLdYn3Pb.json
+Found an insurrection video: meta-a7DW37R386K3.json
+Total videos filmed in Washington DC on January 6: 1,202
+</code></pre></div>
+
+<p>The script should find 1,202 insurrection videos. This means that out of
+the 1,958 videos uploaded to Parler on January 6 that included GPS
+coordinates, at least 61 percent were videos of the insurrection itself.
+(It&rsquo;s possible that more videos uploaded to Parler were also from the
+insurrection that day but just didn&rsquo;t include GPS coordinates in their
+metadata.) Manually watching 1,202 Parler videos is still unpleasant,
+but at least it&rsquo;s not as bad as watching 1,958.</p>
+<blockquote>
+<h4>PROPUBLICA’S PARLER DATABASE</h4>
+<p>Using the metadata as a starting point, as you’ve done so far in this chapter, 36 journalists at ProPublica did in fact watch thousands of insurrection videos from this dataset in late January 2021. The nonprofit newsroom published an interactive database of newsworthy Parler videos related to the January 6 attack. “ProPublica reviewed thousands of videos uploaded publicly to the service that were archived by a programmer before Parler was taken offline by its web host,” states the project’s website at <a href="https://projects.propublica.org/parler-capitol-videos/">https://projects.propublica.org/parler-capitol-videos/</a>. The project included over 500 videos that “ProPublica determined were taken during the events of Jan. 6 and were relevant and newsworthy.” Readers could see what was happening during the insurrection at any point in time that day, and ProPublica organized the videos into the categories Around DC, Near Capitol, and Inside Capitol.</p>
+</blockquote>
+<p>You now know which of the Parler videos were from the January 6
+insurrection, but you can draw even more interesting conclusions from
+this dataset (and others that contain similar location data) when you
+visualize the data on a map.</p>
+<h3>Plotting GPS Coordinates on a Map with simplekml</h3>
+<p>Rather than just displaying a list of insurrection video filenames, you
+could plot the locations of those videos on a map, allowing you to
+easily choose which videos you&rsquo;d like to watch first. You could also map
+all Parler videos that contain GPS coordinates around the world, in case
+there are other newsworthy videos in this dataset that don&rsquo;t relate to
+the January 6 insurrection. In this section, you&rsquo;ll learn to write
+Python code to create a file of Parler location data that you can then
+upload to an online map service to visualize it.</p>
+<p>Google Earth
+(<a href="https://earth.google.com">https://earth.google.com</a>)
+allows you to upload a file in Keyhole Markup Language (KML), a file
+format designed to describe geographical features such as points on a
+map. KML was created in 2004 specifically for use with Google Earth, and
+it became a standard file format for describing geographic data in 2008.</p>
+<p>Listing 11-4 shows an example KML file.</p>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;kml</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/kml/2.2&quot;</span> <span class="na">xmlns:gx=</span><span class="s">&quot;http://www.google.com/kml/ext/2.2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Document</span> <span class="na">id=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;Placemark</span> <span class="na">id=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;name&gt;</span>New York City<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;description&gt;</span>The Big Apple<span class="nt">&lt;/description&gt;</span>
+            <span class="nt">&lt;Point</span> <span class="na">id=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;coordinates&gt;</span>-74.006393,40.714172,0.0<span class="nt">&lt;/coordinates&gt;</span>
+          <span class="nt">&lt;/Point&gt;</span>
+      <span class="nt">&lt;/Placemark&gt;</span>
+    <span class="nt">&lt;/Document&gt;</span>
+<span class="nt">&lt;/kml&gt;</span>
+</code></pre></div>
+
+<p><em>Listing 11-4: A file written in KML, <code>example.kml</code></em></p>
+<p>As you can see, the KML format is similar to HTML. Both formats are
+extensions of XML, or Extensible Markup Language, so they share the same
+rules. The first line, starting with <code>&lt;?xml</code>, is called the XML prolog, and it
+defines some metadata about this file. The entire contents of the KML
+file are wrapped in a <code>&lt;kml&gt;</code>
+tag. Inside this is a <code>&lt;Document&gt;</code> tag, and inside this are one or more
+<code>&lt;Placemark&gt;</code> tags. Each
+<code>&lt;Placemark&gt;</code> represents a
+point on a map: its name, description, and GPS coordinates in decimal
+format. This example file describes a single point for New York City.</p>
+<p>To plot GPS coordinates on Google Earth, you must generate a KML file
+that contains these coordinates and then upload it to the service. The
+simplest way to create KML files is by using the <code>simplekml</code> Python module. You can use this module
+to create a new KML object, create a new point on it for each Parler
+video with GPS coordinates, and then save that KML object to a <em>.kml</em>
+file.</p>
+<p>Install the <code>simplekml</code> module
+by running the following command:</p>
+<div class="codehilite"><pre><span></span><code>python3 -m pip install simplekml
+</code></pre></div>
+
+<p>Now use the module in the Python interpreter to generate the <em>example
+.kml</em> file from Listing 11-4:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">simplekml</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">kml</span> <span class="o">=</span> <span class="n">simplekml</span><span class="o">.</span><span class="n">Kml</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">kml</span><span class="o">.</span><span class="n">newpoint</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;New York City&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The Big Apple&quot;</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[(</span><span class="o">-</span><span class="mf">74.006393</span><span class="p">,</span>
+<span class="mf">40.714172</span><span class="p">)])</span>
+<span class="o">&lt;</span><span class="n">simplekml</span><span class="o">.</span><span class="n">featgeom</span><span class="o">.</span><span class="n">Point</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x101241cc0</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">kml</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;example.kml&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>After importing the <code>simplekml</code> module, this code defines the value of
+the <code>kml</code> variable as the
+output of <code>simplekml.Kml()</code>,
+which returns a KML object. It then uses the <code>kml.newpoint()</code> method to add GPS points to the KML
+file it&rsquo;s creating. While this example just adds one point for New York
+City, with the description &ldquo;The Big Apple,&rdquo; you can add as many points
+as you want. Note that the value of the <code>coords</code> argument must be a list of tuples,
+with each tuple containing longitude and latitude coordinates in decimal
+format. Finally, after adding points, the code saves the KML file by
+running <code>kml.save()</code> and
+passes an output filename.</p>
+<p>You can find further documentation for the <code>simplekml</code> Python module at
+<a href="https://simplekml.readthedocs.io">https://simplekml.readthedocs.io</a>.</p>
+<blockquote>
+<h4>ALTERNATIVES TO GOOGLE EARTH</h4>
+<p>There are many different ways to plot GPS points, including alternative online services like MapBox (<a href="https://www.mapbox.com">https://www.mapbox.com</a>), which allows you to upload a CSV of GPS coordinates to generate points on a map and even embed that map into articles on your website.</p>
+<p>In future projects, you may need to visualize sensitive geographic data without sharing it with a third-party service like Google Earth or MapBox. The free and open source desktop software QGIS (<a href="https://qgis.org">https://qgis.org</a>) allows you to create maps locally on your computer, though it’s pretty complicated to use. You can also write Python code that pulls data from OpenStreetMap (<a href="https://www.openstreetmap.org">https://www.openstreetmap.org</a>), a vast and completely free and open source mapping resource that allows you to create geographic images with GPS points on them. These options aren’t as simple as using online tools, and explaining how they work is beyond the scope of this book.</p>
+<p>You don’t necessarily need GPS coordinates in your dataset to visualize location data on a map. If you have addresses, or even just city names or postal codes, you could convert that information to GPS coordinates and then plot those on a map. You could do the same with IP addresses, converting them to their rough GPS locations.</p>
+</blockquote>
+<p>You now know how to create KML files full of location data that can be
+mapped in Google Earth. As your final exercise in this chapter, you&rsquo;ll
+generate KML files based on GPS coordinates in the Parler dataset.</p>
+<h3>Exercise 11-4: Create KML Files to Visualize Location Data</h3>
+<p>So far, we&rsquo;ve focused on finding Parler videos filmed in Washington, DC,
+during the January 6 insurrection. While this is undoubtedly the most
+newsworthy part of this dataset, there could be other things we&rsquo;re
+missing. Parler is a global far-right social network. What other
+far-right videos did people post to it? Does it contain any interesting
+data from other countries, such as Russia? In this exercise, you&rsquo;ll
+write a script that creates two KML files full of GPS coordinates from
+the Parler dataset to visualize in Google Earth:</p>
+<ul>
+<li>A <em>parler-videos-all.kml</em> file containing all videos with GPS
+    coordinates</li>
+<li>A <em>parler-videos-january6.kml</em> file containing videos with GPS
+    coordinates filmed on January 6, 2021</li>
+</ul>
+<p>This exercise will give you experience creating KML files and using
+Google Earth to visualize location data, a skill that will likely come
+in handy for any future dataset you come across that includes location
+data.</p>
+<p>You&rsquo;ll base your script for this exercise off
+the script you wrote in Exercise 11-3. For a challenge, you can try
+programming your own script to meet the following requirements:</p>
+<ul>
+<li>Make this script accept an argument, <code>parler_metadata_path</code>, using Click. This will be the
+    path to the <em>metadata</em> folder full of JSON files.</li>
+<li>Import the <code>simplekml</code>
+    module and create two KML objects (one for each KML file you&rsquo;ll be
+    creating). Loop through the Parler video metadata JSON files, and
+    add different points to the appropriate KML objects depending on the
+    metadata. Points for all videos should be added to
+    <em>parler-videos-all.kml</em>, and points only for videos with the
+    <code>CreateDate</code> of January 6,
+    2021, should be added to <em>parler-videos-january6.kml</em>.</li>
+<li>Give every point you add to a KML object a name, a description, and
+    GPS coordinates in decimal format. The name should be the Parler
+    video ID (for example, <code>HS34fpbzqg2b</code>), and the description should be a
+    string containing the video&rsquo;s download link (for example,
+    <a href="https://data.ddosecrets.com/Parler/Videos/HS34fpbzqg2b">https://data.ddosecrets.com/Parler/Videos/HS34fpbzqg2b</a>) as well as important metadata
+    fields such as <code>CreateDate</code>, <code>FileTypeExtension</code>, or others you&rsquo;re interested in.</li>
+<li>Make your script loop through all of the metadata JSON files and
+    filter them for videos that contain GPS coordinates.</li>
+</ul>
+<p>Alternatively, follow along with the instructions in the rest of this
+exercise.</p>
+<h4>Create a KML File for All Videos with GPS Coordinates</h4>
+<p>You&rsquo;ll begin by writing a script to loop through all of the Parler
+metadata JSON files and add any GPS coordinates it finds to a single KML
+file, <em>parler -videos-all.kml</em>, including only the video URL in the
+description, not any metadata. Make a copy of the <em>exercise-11-3.py</em>
+script and name it <em>exercise-11-4.py</em>, then make the following
+modifications:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">simplekml</span>
+
+<span class="k">def</span> <span class="nf">json_filename_to_parler_id</span><span class="p">(</span><span class="n">json_filename</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">json_filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">gps_degrees_to_decimal</span><span class="p">(</span><span class="n">gps_coordinate</span><span class="p">):</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">gps_coordinate</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">degrees</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">minutes</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &#39; &quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="n">seconds</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &quot; &#39;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="n">hemisphere</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">gps_decimal</span> <span class="o">=</span> <span class="n">degrees</span> <span class="o">+</span> <span class="p">(</span><span class="n">minutes</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">seconds</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">hemisphere</span> <span class="o">==</span> <span class="s2">&quot;W&quot;</span> <span class="ow">or</span> <span class="n">hemisphere</span> <span class="o">==</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span>
+        <span class="n">gps_decimal</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">gps_decimal</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create KML files of GPS coordinates from Parler metadata&quot;&quot;&quot;</span>
+    <span class="n">kml_all</span> <span class="o">=</span> <span class="n">simplekml</span><span class="o">.</span><span class="n">Kml</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+      <span class="n">abs_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">)</span> <span class="ow">and</span> <span class="n">abs_filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+              <span class="k">if</span> <span class="p">(</span>
+                <span class="s2">&quot;GPSLongitude&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="s2">&quot;GPSLatitude&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLongitude&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span>
+                <span class="ow">and</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLatitude&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span>
+            <span class="p">):</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">json_filename_to_parler_id</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;URL: https://data.ddosecrets.com/Parler/Videos/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">lon</span> <span class="o">=</span> <span class="n">gps_degrees_to_decimal</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLongitude&quot;</span><span class="p">])</span>
+                <span class="n">lat</span> <span class="o">=</span> <span class="n">gps_degrees_to_decimal</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLatitude&quot;</span><span class="p">])</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found a video with GPS coordinates: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">kml_all</span><span class="o">.</span><span class="n">newpoint</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)])</span>
+
+    <span class="n">kml_all</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;parler-videos-all.kml&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Since you&rsquo;re going to be mapping this data, you don&rsquo;t need the code that
+detects if a video is in Washington, DC&mdash;you&rsquo;ll be able to tell by
+zooming into Washington, DC. Therefore, this code deletes the
+<code>distance()</code> and
+<code>was_video_filmed_in_dc()</code>
+functions from the previous script, as well as the <code>math</code> import. The new code imports the
+<code>simplekml</code> module at the top
+of the file so that you can use it later in the script.</p>
+<p>Next, the code defines the function
+<code>json_filename_to_parler_id()</code>. This function is only a single,
+complex line of code that takes the filename of a Parler metadata JSON
+file as an argument, then returns the Parler ID associated with that
+file. For example, say the value of <code>json_filename</code> is <code>meta-31VC1ufihFpa.json</code>. In this case, the expression
+<code>json_filename.split("-")</code>
+will evaluate to the list <code>['meta', '31VC1ufihFpa.json']</code>. Since Python starts counting at zero,
+the code selects the second item in that list (the string
+<code>31VC1ufihFpa.json</code>) by adding
+<code>[1]</code> to that expression,
+making it <code>json_filename .split("-")[1]</code>. Next, it splits <em>that</em> string on the
+period character with the expression
+<code>json_filename.split("-")[1].split(".")</code>, which returns the list
+<code>['31VC1ufihFpa', 'json']</code>. It
+then selects the first item in that list (the string
+<code>31VC1ufihFpa</code>) by adding
+<code>[0]</code> to that expression,
+making it <code>json_filename .split("-")[1].split(".")[0]</code>. The
+<code>json_filename_to_parler_id()</code>
+function just returns the result of that expression, which is the Parler
+ID.</p>
+<p>In the <code>main()</code> function, the
+code defines a new KML object called <code>kml_all</code> to contain all the GPS points found in
+the Parler metadata. The rest of this code should be familiar to you
+from Exercises 11-2 and 11-3. It loops through the Parler <em>metadata</em>
+folder looking for JSON files, loading the JSON data for each file it
+finds into the <code>metadata</code>
+variable. This time, the <code>if</code>
+statement ensures that the metadata dictionary contains the keys
+<code>GPSLongitude</code> and
+<code>GPSLatitude</code> and that those
+values aren&rsquo;t blank.</p>
+<p>When the code finds a Parler video that contains non-empty GPS fields,
+it sets up variables with the data it needs to add the point to the KML
+files: <code>name</code>,
+<code>description</code>, <code>lon</code>, and <code>lat</code>. It defines <code>name</code> as the return value of the
+<code>json_filename _to_parler_id()</code> function, meaning the name of the
+point will be the video&rsquo;s Parler ID. It defines <code>description</code> as the video&rsquo;s download URL. Using the
+<code>gps_degrees_to_decimal()</code>
+function, it defines <code>lon</code> and
+<code>lat</code> as the longitude and
+latitude, in decimal format, of the GPS coordinates found in the
+metadata.</p>
+<p>After defining these variables, the code runs
+<code>kml_all.newpoint()</code> to add
+the GPS point to the KML object. It sets the point&rsquo;s name to
+<code>name</code>, its description to
+<code>description</code>, and its
+coordinates to a list of points; in this case, the list has only one
+point, a tuple containing <code>lon</code> and <code>lat</code>. Finally, when the <code>for</code> loop is complete, the code calls the
+<code>kml_all.save()</code> function to
+save all of these GPS points into the file <em>parler-videos-all.kml</em>.</p>
+<p>Run the final script, changing the path in the argument to the path to
+your Parler <em>metadata</em> folder:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-11 % python3 exercise-11-4.py /Volumes/datasets/Parler/metadata
+Adding point 2XpiJFsho2do to kml_all: -117.6683, 33.490500000000004
+Adding point bcHZhpDOFnXd to kml_all: -1.3391, 52.04648888888889
+--snip--
+</code></pre></div>
+
+<p>Since the Parler dataset contains about 64,000 videos with GPS
+coordinates, the script should return about 64,000 lines of output, each
+including a video&rsquo;s Parler ID, longitude, and latitude. When the script
+finishes running, it should also create a 20MB KML file called
+<em>parler-videos-all.kml</em> in the same folder as the script.</p>
+<p>Open <em>parler-videos-all.kml</em> in a text editor. The file&rsquo;s contents
+should look like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span class="nt">&lt;kml</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/kml/2.2&quot;</span> <span class="na">xmlns:gx=</span><span class="s">&quot;http://www.google.com/kml/ext/2.2&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Document</span> <span class="na">id=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;Placemark</span> <span class="na">id=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;name&gt;</span>2XpiJFsho2do<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;description&gt;</span>URL:https://data.ddosecrets.com/Parler/Videos/2XpiJFsho2do<span class="nt">&lt;/description&gt;</span>
+            <span class="nt">&lt;Point</span> <span class="na">id=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;coordinates&gt;</span>-117.6683,33.490500000000004,0.0<span class="nt">&lt;/coordinates&gt;</span>
+            <span class="nt">&lt;/Point&gt;</span>
+        <span class="nt">&lt;/Placemark&gt;</span>
+        <span class="nt">&lt;Placemark</span> <span class="na">id=</span><span class="s">&quot;5&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;name&gt;</span>bcHZhpDOFnXd<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;description&gt;</span>URL:https://data.ddosecrets.com/Parler/Videos/bcHZhpDOFnXd<span class="nt">&lt;/description&gt;</span>
+            <span class="nt">&lt;Point</span> <span class="na">id=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;coordinates&gt;</span>-1.3391,52.04648888888889,0.0<span class="nt">&lt;/coordinates&gt;</span>
+            <span class="nt">&lt;/Point&gt;</span>
+        <span class="nt">&lt;/Placemark&gt;</span>
+--snip--
+</code></pre></div>
+
+<p>This file should contains 64,000 <code>&lt;Placemark&gt;</code> tags, each representing a different
+Parler video with GPS coordinates.</p>
+<p>Now that you&rsquo;ve created a KML file that contains <em>all</em> of the Parler
+location data, you&rsquo;ll modify your script further to create a KML file
+with just the videos from January 6, 2021.</p>
+<h4>Create KML Files for Videos from January 6, 2021</h4>
+<p>Your script so far has a KML object called <code>kml_all</code>, and the code adds all of the GPS
+points in the Parler metadata to it. Make the following changes to your
+code to create another KML object, <code>kml_january6</code>, and just add GPS points from videos
+filmed on January 6, 2021, to it. Since this script is getting long,
+I&rsquo;ll quote just the <code>main()</code>
+function, the only part that is modified:</p>
+<div class="codehilite"><pre><span></span><code><span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create KML files of GPS coordinates from Parler metadata&quot;&quot;&quot;</span>
+    <span class="n">kml_all</span> <span class="o">=</span> <span class="n">simplekml</span><span class="o">.</span><span class="n">Kml</span><span class="p">()</span>
+    <span class="n">kml_january6</span> <span class="o">=</span> <span class="n">simplekml</span><span class="o">.</span><span class="n">Kml</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
+        <span class="n">abs_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">)</span> <span class="ow">and</span> <span class="n">abs_filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="s2">&quot;GPSLongitude&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="s2">&quot;GPSLatitude&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLongitude&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span>
+                <span class="ow">and</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLatitude&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span>
+            <span class="p">):</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">json_filename_to_parler_id</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;URL: https://data.ddosecrets.com/Parler/Videos/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&lt;br&gt;&quot;</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span>
+                    <span class="s2">&quot;CreateDate&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;FileTypeExtension&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Duration&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Make&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Model&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Software&quot;</span><span class="p">,</span>
+                <span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                        <span class="n">description</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;br&gt;&quot;</span>
+                <span class="n">lon</span> <span class="o">=</span> <span class="n">gps_degrees_to_decimal</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLongitude&quot;</span><span class="p">])</span>
+                <span class="n">lat</span> <span class="o">=</span> <span class="n">gps_degrees_to_decimal</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;GPSLatitude&quot;</span><span class="p">])</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adding point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> to kml_all: </span><span class="si">{</span><span class="n">lon</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">kml_all</span><span class="o">.</span><span class="n">newpoint</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)])</span>
+
+                <span class="k">if</span> <span class="s2">&quot;CreateDate&quot;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;CreateDate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span>
+                    <span class="s2">&quot;2021:01:06&quot;</span>
+                <span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adding point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> to kml_january6: </span><span class="si">{</span><span class="n">lon</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">lat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">kml_january6</span><span class="o">.</span><span class="n">newpoint</span><span class="p">(</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)]</span>
+                    <span class="p">)</span>
+
+    <span class="n">kml_all</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;parler-videos-all.kml&quot;</span><span class="p">)</span>
+    <span class="n">kml_january6</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;parler-videos-january6.kml&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>At the top of the <code>main()</code>
+function, this script adds another KML object called
+<code>kml_january6</code>. The code will
+add points to this file only from January 6, 2021. Next, the
+<code>for</code> loop will loop through
+each Parler metadata file, parse the JSON, and determine whether or not
+it has GPS coordinates. If so, the code will prepare variables so it can
+add the point to the KML objects. But this time, instead of the
+<code>description</code> variable
+containing just the video&rsquo;s download URL, it will also include metadata.</p>
+<p>When defining <code>description</code>,
+the code adds <code>&lt;br&gt;</code> at the
+end, which is the HTML tag for a line break. This way, when you
+visualize this KML file, the description will show the URL on the first
+line, and the metadata will start on the next line. The code then loops
+through a list of metadata keys to add to the description, including
+<code>CreateDate</code>,
+<code>FileTypeExtension</code>,
+<code>Duration</code>, <code>Make</code>, <code>Model</code>, and <code>Software</code>. If there are any other pieces of
+metadata you&rsquo;d like to include, feel free to add them to your script.</p>
+<p>In each loop, the code checks to see if the metadata for the current
+video includes that key, and if so, adds its value to
+<code>description</code>, inserting a
+line break after each piece of metadata. For example, if the code is
+looking at the JSON file <em>meta-g09yZZCplavI.json</em>, <code>description</code> will appear as follows:</p>
+<div class="codehilite"><pre><span></span><code>URL: https://data.ddosecrets.com/Parler/Videos/g09yZZCplavI
+CreateDate: 2021:01:06 20:08:25
+FileTypeExtension: mov
+Duration: 25.24 s
+Make: Apple
+Model: iPhone XS Max
+Software: 14.3
+</code></pre></div>
+
+<p>(The actual value of the <code>description</code> string will contain <code>&lt;br&gt;</code> for the line breaks, but this is how
+the description will look in Google Earth.)</p>
+<p>Next, the code uses another <code>if</code> statement to see if that video was
+created on January 6, 2021, and if so, adds that point to
+<code>kml_january6</code>. It does this
+by checking that the file has a <code>CreateDate</code> metadata field and that the date in
+that field is from January 6, 2021, just as you did in Exercise 11-2.
+Finally, when the script finishes looping through all of the Parler
+videos, after saving the points in <code>kml_all</code> to <em>parler-videos-all.kml</em>, it also
+saves the points in <code>kml_january6</code> to <em>parler-videos-january6.kml</em>.</p>
+<p>You can find the final script in the book&rsquo;s GitHub repo at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-11/exercise-11-4.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-11/exercise-11-4.py</a>.
+Run your complete script like so:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-11 % python3 exercise-11-4.py /Volumes/datasets/Parler/metadata
+Adding point 2XpiJFsho2do to kml_all: -117.6683, 33.490500000000004
+Adding point bcHZhpDOFnXd to kml_all: -1.3391, 52.04648888888889
+--snip--
+Adding point VNYtKrEURiZs to kml_all: -97.0244, 33.1528
+Adding point VNYtKrEURiZs to kml_january6: -97.0244, 33.1528
+Adding point KptnQksS5Xr8 to kml_all: -77.0142, 38.8901
+--snip--
+</code></pre></div>
+
+<p>When the script is finished running, it should have created two KML
+files: a 31MB file called <em>parler-videos-all.kml</em> (the file is bigger
+this time because the descriptions are longer) and a 929KB file called
+<em>parler-videos -january6.kml</em>.</p>
+<p>Now that you&rsquo;ve put in the hard work of generating KML files full of GPS
+coordinates, you can move on to the fun part: visualizing this data
+using Google Earth. This will allow you to scroll around the globe
+picking which videos you&rsquo;d like to watch.</p>
+<h3>Visualizing Location Data with Google Earth</h3>
+<p>In this section, you&rsquo;ll learn how to visualize location data in the KML
+files that you just created using Google Earth, marking each Parler
+video with a pin on a map. Not only will this let you visualize exactly
+where all of the videos with GPS coordinates were filmed, but this will
+also make it considerably simpler to download these videos to watch.</p>
+<p>When you created those KML files, you set the description for each
+Parler video to include its download URL. Once you load a KML file into
+Google Earth and turn it into pins on a map, you can click on a video&rsquo;s
+pin to see its description and then click the link in the description to
+download the video. In a web browser, load Google Earth at
+<a href="https://earth.google.com">https://earth.google.com</a>.
+(You don&rsquo;t have to log in to a Google account, though doing so enables
+you to save your work and revisit it later.) In the menu bar on the
+left, choose <strong>Projects</strong>[▸]<strong>Open</strong>[▸]<strong>Import
+KML File from Computer</strong>. Browse for the <em>parler -videos-all.kml</em> file
+you created in the previous exercise and open it. When it&rsquo;s done
+loading, click the pencil icon to edit the title of this project, name
+it <em>All Parler Videos</em>, and press <strong>ENTER</strong>.
+This should create a pin on the map for each Parler video in the entire
+dataset, labeled by its ID.</p>
+<p>Repeat this process for <em>parler-videos-january6.kml</em>, and name this one
+<strong>Parler Videos from January 6, 2021</strong>. In the Projects panel on the
+left of the screen, you should see your two projects.</p>
+<p>By clicking the eye icon, you can show and hide Google Earth projects to
+choose which KML files you want displayed. With the pins you want
+displayed, you can rotate the Earth and zoom in on whatever you&rsquo;d like.
+You can double-click on the map, click the plus ([+])
+button to zoom in, and click the minus ([−]) button to
+zoom out.</p>
+<p>For example, to investigate just the insurrection videos, show that
+project and hide the others. Figure 11-6
+shows Google Earth zoomed in on the US Capitol building in Washington,
+DC, with just the videos from the January 6 insurrection showing. The
+pins in the figure are all videos of the January 6 insurrection, and the
+pins located over the Capitol building itself are videos filmed by Trump
+supporters who were actively trespassing inside the US Capitol that day.</p>
+<p><img alt="Figure 11-6: Google Earth, focused on the US Capitol building, with pins at the GPS points in" src="media/images/Figure11-6.png" /><br />
+<em>Figure 11-6: Google Earth, focused on the US Capitol building, with pins at the GPS points in</em></p>
+<p>When you find a video you&rsquo;re interested in, click its pin to view its
+description. You should see the URL to download the video, and you can
+watch it using software like VLC Media Player.</p>
+<p>You can also use Google Earth to search for a location so you can see
+the individual pins there. For example, you could hide the Parler Videos
+from January 6, 2021, project and instead show pins for the All Parler
+Videos project, then search for <em>Moscow</em>. Figure
+11-7 shows Google Earth zoomed in on the city
+of Moscow, Russia. As the figure indicates, only a handful of videos
+whose metadata included GPS coordinates were filmed there and uploaded
+to Parler.</p>
+<p><img alt="Figure 11-7: Parler videos filmed in Moscow" src="media/images/Figure11-7.png" /><br />
+<em>Figure 11-7: Parler videos filmed in Moscow</em></p>
+<p>Click the pin for the video labeled <em>ykAXApWbiZuM</em>. You should see the
+following description:</p>
+<div class="codehilite"><pre><span></span><code>URL: https://data.ddosecrets.com/Parler/Videos/ykAXApWbiZuM
+CreateDate: 2020:06:28 21:56:41
+FileTypeExtension: mov
+Duration: 0:06:51
+Make: Apple
+Model: iPhone 7 Plus
+Software: 13.5.1
+</code></pre></div>
+
+<p>As you can see, this video was filmed on June 28, 2020 (during the Black
+Lives Matter uprising), with an iPhone 7 Plus running iOS 13.5.1.
+Right-click the link to see the option to download the video. This way,
+your web browser won&rsquo;t try opening it directly in a new tab, where it
+might not display properly.</p>
+<p>If you&rsquo;re interested, you can open the video file using VLC Media Player
+to watch it. In the recording, a tattooed American white supremacist who
+runs a Confederate-themed barber shop in Moscow goes on a racist and
+homophobic rant, in part explaining why he moved to Russia. &ldquo;I voted
+Trump in office in 2016,&rdquo; he said. &ldquo;But the fact is, nothing&rsquo;s gonna
+change. The fact is, all these Trump supporters in America all the time
+can&rsquo;t see the real problem. Your real problem is fucking Jews in
+America.&rdquo; Figure 11-8 shows a screenshot
+from the video where he&rsquo;s telling Parler users that he&rsquo;s a real white
+supremacist and not a liberal troll, as people were accusing him of
+being.</p>
+<p><img alt="Figure 11-8: A screenshot from a Parler video filmed by an American white supremacist in Moscow" src="media/images/Figure11-8.png" /><br />
+<em>Figure 11-8: A screenshot from a Parler video filmed by an American white supremacist in Moscow</em></p>
+<p>He goes on to fantasize about mass shooting Black Lives Matter
+protesters. &ldquo;I watch the news in America. I see all these fucking
+[N-word]s, antifa fucking scum. Ripping down the monuments. It angers
+me more than anything. What I don&rsquo;t understand is where&rsquo;s the fucking
+police to stop any of this?&rdquo; he asks. &ldquo;How come nobody&rsquo;s shooting these
+motherfuckers? If I was in Los Angeles still, seeing all this rioting
+and looting going on, I&rsquo;d be up on a motherfucking building with my
+AK-47 just spraying the fucking crowd.&rdquo;</p>
+<p>If you&rsquo;re curious about the complete metadata from this video, you can
+check the original file at <em>meta-ykAXApWbiZuM.json</em>. If you wanted to
+see more videos posted by this Parler user, you could modify your script
+to filter videos that were filmed on the exact device by checking for
+the same <code>Make</code>,
+<code>Model</code>, and
+<code>Software</code> fields. You might
+find some other users&rsquo; videos, but chances are you&rsquo;ll also find more
+videos from this poster as well.</p>
+<p>The media spent the bulk of its time focusing on Parler videos they knew
+were taken in Washington, DC, on the day of the insurrection. If you&rsquo;re
+interested in further exploring this dataset, you might try to find
+videos from other far-right protests, or events with far-right
+counterprotesters. For example, you could create a KML file that
+includes the date ranges of the specific 2020 Black Lives Matters
+protests and explore those videos. You might find video evidence of
+other crimes.</p>
+<h3>Viewing Metadata with ExifTool</h3>
+<p>When @donk_enby downloaded the Parler videos and
+extracted metadata from them in JSON format, she used a command line
+program called <code>exiftool</code>.
+This program is one of the investigation tools I use most frequently,
+and this section explains how to use it.</p>
+<p>If you run <code>exiftool</code> followed
+by a filepath, it will attempt to find metadata stored in that file and
+show it to you. It works on a variety of file formats, including
+Microsoft Office documents, PDFs, images, and videos. You can use it to
+find hidden information in the metadata of those documents,
+such as the author of a Word document, which
+type of phone or camera was used to take a photo, and much more.</p>
+<p>You don&rsquo;t need to run <code>exiftool</code> on the Parler videos since
+@donk_enby did it for you, but most of the time, you
+won&rsquo;t be so lucky. If you want to search for hidden information in
+BlueLeaks documents, for example, you&rsquo;d need to run <code>exiftool</code> on them yourself. In this subsection,
+to learn how <code>exiftool</code> works,
+you&rsquo;ll use it to view the metadata on one of the Parler videos in JSON
+format.</p>
+<p>Mac users, install <code>exiftool</code>
+by running the <code>brew install exiftool</code> command; users of Linux or Windows with
+WSL, install it with the
+<code>sudo apt install libimage-exiftool-perl</code> command. In your terminal, change to
+the <em>videos</em> folder in your Parler dataset folder and use <code>wget</code> to download the Parler video with the
+ID <em>HS34fpbzqg2b</em>:</p>
+<div class="codehilite"><pre><span></span><code>wget https://data.ddosecrets.com/Parler/Videos/HS34fpbzqg2b
+</code></pre></div>
+
+<p>You can use <code>exiftool</code> to look
+at the metadata of a file by running <code>exiftool filename</code>. Run it on the <em>HS34fpbzqg2b</em>
+file that you just downloaded with the following command:</p>
+<div class="codehilite"><pre><span></span><code>exiftool HS34fpbzqg2b
+</code></pre></div>
+
+<p>The output should show all the metadata for this video file:</p>
+<div class="codehilite"><pre><span></span><code>--snip--
+File Type Extension             : mov
+--snip--
+Model                           : iPhone XR
+Software                        : 14.2
+Creation Date                   : 2021:01:06 13:57:49-05:00
+--snip--
+GPS Position                    : 38 deg 53&#39; 26.52&quot; N, 77 deg 0&#39; 28.44&quot; W
+</code></pre></div>
+
+<p>Along with other information, the metadata shows that this video&rsquo;s file
+extension is <em>.mov</em>, it was recorded using an iPhone XR running iOS 14.2
+on January 6, 2021, at 1:57 [PM], and it was filmed at the GPS
+coordinates 38 deg 53[′] 26.52[″] N, 77 deg
+0[′] 28.44[″] W.</p>
+<p>Since the file extension for this video is <em>.mov</em>, rename it by running
+<code>mv HS34fpbzqg2b HS34fpbzqg2b.mov</code>. You can open <em>HS34fpbzqg2b.mov</em> in a
+program like VLC Media Player just to see what it contains: police
+officers stepping out of the way while Trump supporters remove
+barricades surrounding the Capitol building.</p>
+<p>When @donk_enby used <code>exiftool</code> to extract the metadata from the
+Parler videos, she used the <code>-json</code> argument to extract it in JSON format.
+Here&rsquo;s how you do that for <em>HS34fpbzqg2b</em>:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor videos % exiftool HS34fpbzqg2b -json
+[{
+  &quot;SourceFile&quot;: &quot;HS34fpbzqg2b&quot;,
+  &quot;ExifToolVersion&quot;: 12.42,
+  &quot;FileName&quot;: &quot;HS34fpbzqg2b&quot;,
+--snip--
+  &quot;GPSLatitude&quot;: &quot;38 deg 53&#39; 26.52\&quot; N&quot;,
+  &quot;GPSLongitude&quot;: &quot;77 deg 0&#39; 28.44\&quot; W&quot;,
+  &quot;Rotation&quot;: 180,
+  &quot;GPSPosition&quot;: &quot;38 deg 53&#39; 26.52\&quot; N, 77 deg 0&#39; 28.44\&quot; W&quot;
+}]
+</code></pre></div>
+
+<p>The <code>-json</code> argument makes the
+output much easier to work with than <code>exiftool</code>&lsquo;s default output.</p>
+<h3>Summary</h3>
+<p>In this chapter, you&rsquo;ve learned about the secrets hidden in the metadata
+of over a million videos uploaded to Parler, many of them by
+insurrectionists filming themselves during the January 6 riot in
+Washington, DC. You&rsquo;ve learned the syntax of the JSON file format and
+how to work with JSON data in your own Python scripts. You&rsquo;ve written a
+series of scripts that filtered the list of a million videos down to
+just the ones that were, according to their metadata, filmed on January
+6, 2021, in Washington, DC, during the attack on the US Capitol by
+supporters of Donald Trump. You now have the skills necessary to write
+code that analyzes JSON in your own investigations. Finally, you&rsquo;ve seen
+how you can convert GPS coordinates from degrees to decimal and plot
+them on a map, an invaluable skill for future investigations that
+involve location data.</p>
+<p>In the next chapter, you&rsquo;ll explore one more technology that&rsquo;s common in
+hacked and leaked datasets: SQL databases. You&rsquo;ll use the SQL skills you
+learn to dig into the hacked databases of Epik, a hosting and domain
+name company that provides service to much of the American fascist
+movement.</p>
         </div>
     </section>
     <section class="pagination">
