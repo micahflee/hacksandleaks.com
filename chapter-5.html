@@ -221,7 +221,7 @@ images on the Ubuntu container image to access all Ubuntu software that
 apt can install. An Ubuntu container is also a convenient way to access
 a shell on a clean Ubuntu system, allowing you to install software or
 test programs.</p>
-<p>Docker commands use the <code>docker</code> <code>command</code> syntax. Run the following to
+<p>Docker commands use the <code>docker command</code> syntax. Run the following to
 start your own Ubuntu container (if you&rsquo;re using Linux, remember to add
 <code>sudo</code>):</p>
 <div class="codehilite"><pre><span></span><code>docker run -it ubuntu:latest bash
@@ -276,7 +276,7 @@ the output I get, for example:</p>
 
 <p>When you start a container with
 <code>docker run</code>, you can give it
-a name with the arguments <code>--name</code> <code>your_container_name</code>. Otherwise, it will be
+a name with the arguments <code>--name your_container_name</code>. Otherwise, it will be
 assigned a random name. The container in my <code>docker ps</code> output is called <code>epic_borg</code>.</p>
 <p>To <em>kill</em> a container, or force it to quit, you run
 <code>docker kill</code>
@@ -299,7 +299,7 @@ get when I run this command:</p>
 337a795a53b2   ubuntu:latest ...   Exited (0) 43 minutes ago            nostalgic_keldysh
 </code></pre></div>
 
-<p>It&rsquo;s good practice to run <code>docker rm</code> <code>container_name</code> to prune your stopped Docker
+<p>It&rsquo;s good practice to run <code>docker rm container_name</code> to prune your stopped Docker
 containers when you&rsquo;re done using them. For example, I&rsquo;d run
 <code>docker rm nostalgic_keldysh</code>
 to remove my <code>nostalgic_keldysh</code> container.</p>
@@ -422,7 +422,7 @@ Are you sure you want to continue? [y/N]
 Total reclaimed space: 82B
 </code></pre></div>
 
-<p>You can now run <code>docker volume rm</code> <code>volume-name</code> to remove any volumes attached
+<p>You can now run <code>docker volume rm volume-name</code> to remove any volumes attached
 to those containers, or run <code>docker volume prune</code> to delete all volumes that Docker
 containers aren&rsquo;t currently using. Run
 <code>docker volume rm test-data</code> to
@@ -738,7 +738,7 @@ my language.</p>
 title, a username, and a password, and then explore your new WordPress
 site.</p>
 <p>To open a shell and run commands in an active container with Docker
-Compose, you use the <code>docker-compose exec</code> <code>container_name command</code> syntax. For example, this is
+Compose, you use the <code>docker-compose exec container_name command</code> syntax. For example, this is
 how you&rsquo;d get a shell in the <code>wordpress</code> container:</p>
 <div class="codehilite"><pre><span></span><code>docker-compose <span class="nb">exec</span> wordpress bash
 </code></pre></div>
@@ -1092,7 +1092,7 @@ the web interface to make investigations, they get assigned completely
 random foreign IDs. When you use <code>aleph crawldir</code> to create them, the
 <code>Foreign ID</code> is based on the
 filesystem path that you&rsquo;re indexing; alternatively, you can use the
-<code>-f</code> <code>foreign_id</code> arguments to specify your own
+<code>-f foreign_id</code> arguments to specify your own
 if you like.</p>
 <p>Next, run the following command while indexing <em>icefishx</em> to check the
 status of the indexing:</p>

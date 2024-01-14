@@ -37,13 +37,1767 @@
     </header>
     <section class="intro bookIntro">
         <div class="wrapper" id="intro-wrapper">
-          <div id="reading-time">~0 min read</div>
+          <div id="reading-time">~61 min read</div>
           <h1>Chapter 8: Working with Data in Python</h1>
-          
+          <p>The basics of Python are behind you, but there&rsquo;s still a lot to learn.
+In this chapter, you&rsquo;ll expand your programming skills and start to
+directly investigate datasets, including BlueLeaks and chat logs leaked
+from a pro-Putin ransomware gang after Russia invaded Ukraine in 2022.</p>
         </div>
     </section>
     <section id="content" data-content="chapter-8">
-        <div class="wrapper" id="about-content">
+        <div class="wrapper" id="about-content"><p>We&rsquo;ll go over some more advanced Python topics, like how to use modules,
+how to traverse the filesystem, and how to create your own command line
+programs in Python. You&rsquo;ll write programs that look through all of the
+files in a folder, including the hundreds of thousands of files in the
+BlueLeaks dataset, and learn to add arguments to your programs. You&rsquo;ll
+also start working with a new type of variable in Python, the
+dictionary, which will prove handy for working with data that&rsquo;s too
+complex to store in simple lists. As with the previous chapter, future
+chapters rely on your understanding of the topics covered here.</p>
+<h3>Modules</h3>
+<p>As you learned in Chapter 7, functions are
+reusable blocks of code that you can run as many times as you want
+without having to rewrite any code. Python <em>modules</em> are similar, but
+instead of making a single block of code reusable, they make an entire
+Python file (or multiple files) reusable. You can think of a module as a
+separate Python file that you can load into the file you&rsquo;re currently
+working on.</p>
+<p>Python includes a wealth of features, but most of them aren&rsquo;t available
+to every Python script by default. Instead, they&rsquo;re stored in <em>built-in</em>
+modules, those that come with Python. Once you import a module into your
+script using an <code>import</code>
+statement, you can access all of the functions, variables, and other
+Python objects defined in that module using the syntax
+<code>module_name</code>
+<code>.``item_name</code>.</p>
+<p>For example, the <code>time</code> module
+includes the function <code>time.sleep()</code> (pronounced &ldquo;time dot sleep&rdquo;), which
+makes your program wait a given number of seconds before continuing to
+the next line of code. Run the following commands to import the
+<code>time</code> module and then have it
+tell Python to wait five seconds:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">time</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Your Python interpreter should wait five seconds before the prompt
+appears again.</p>
+<p>Here are a few of the built-in modules I use the most:</p>
+<p><code>os</code> Includes useful functions
+for browsing the filesystem, like <code>os.listdir()</code> and <code>os.walk()</code>. It also includes the submodule
+<code>os.path</code>, which is full of
+functions to inspect files. For example, it includes
+<code>os.path.isfile()</code> and
+<code>os.path.isdir()</code>, which help
+determine whether a specific path is a file or a folder.</p>
+<p><code>csv</code> Lets you work with CSV
+spreadsheet data.</p>
+<p><code>json</code> Lets you work with JSON
+data.</p>
+<p><code>datetime</code> Includes useful
+Python features for working with dates and times. For example, it allows
+you to convert strings like <code>February 24, 2022 5:07:20 UTC+3</code> (the exact time that Russia invaded
+Ukraine) into a timestamp that Python can understand and compare with
+other timestamps, then convert it back into strings of any format you
+choose.</p>
+<p>You&rsquo;ll use the <code>os</code> module
+extensively later in this chapter, the <code>csv</code> module in Chapter 9, and the <code>json</code> module in Chapter 11. You&rsquo;ll briefly see how <code>datetime</code> works later in this chapter when you
+take a look at chat logs from a ransomware gang, as well as in the
+Chapter 14 case study, where you&rsquo;ll analyze
+leaked neo-Nazi chat logs.</p>
+<p>As your programs get more complex, you might find it useful to split
+them up into multiple files, with each file containing a different part
+of your code. When you do this, you&rsquo;re creating your own modules. The
+name of the module is the same as its filename. For
+example, if you define some functions in a file called <em>helpers.py</em>,
+another Python file can access those functions by importing the
+<code>helpers</code> module. The
+<em>helpers.py</em> file could contain the following code:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_tax</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">tax_rate</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">price</span> <span class="o">*</span> <span class="n">tax_rate</span>
+
+<span class="k">def</span> <span class="nf">get_net_price</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">tax_rate</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">price</span> <span class="o">+</span> <span class="n">get_tax</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">tax_rate</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This module contains two functions for calculating sales tax,
+<code>get_tax()</code> and
+<code>get_net_price()</code>. The
+following Python script, <em>price.py</em>, imports it like so:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">helpers</span>
+<span class="n">total_price</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_net_price</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A book that costs $50, and has 6% sales tax, costs $</span><span class="si">{</span><span class="n">total_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The first line, <code>import helpers</code>, makes the functions defined in the
+<code>helpers</code> module accessible to
+this script. The second line calls the
+<code>helpers.get_net _price()</code>
+function from that module and stores the return value in the variable
+<code>total_price</code>. The third line
+displays the value of <code>total_price</code>.</p>
+<p>Here&rsquo;s what it looks like when I run this script:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor module % python3 price.py
+A book that costs $50, and has 6% sales tax, costs $53.0
+</code></pre></div>
+
+<p>Running the <em>price.py</em> script executes the code defined in the
+<code>helpers</code> module. Inside that
+module, the <code>get_net_price()</code>
+function calls <code>get_tax()</code> and
+uses its return value to calculate the net price, then returns <em>that</em>
+value back into the <em>price.py</em> script.</p>
+<p>Before you write your first advanced Python script in Exercise 8-1,
+let&rsquo;s look at the best way to start new Python scripts.</p>
+<h3>Python Script Template</h3>
+<p>I use the same basic template for all my Python scripts, putting my code
+into a function called <code>main()</code>, then calling that function at the
+bottom of the file. This isn&rsquo;t required (you didn&rsquo;t do this for any of
+the scripts you wrote in Chapter 7, after
+all), but it&rsquo;s a good way to organize your code. Here&rsquo;s what it looks
+like:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>The template defines the <code>main()</code> function with a <code>pass</code> statement that tells Python, &ldquo;Skip
+this line.&rdquo; I later replace <code>pass</code> with the real body of the script.</p>
+<p>Next, the <code>if</code> statement tells
+Python under which conditions it should run <code>main()</code>. Python automatically defines the
+<code>__name__</code> variable, and the
+definition differs depending on what Python file is being run. If you&rsquo;re
+running the currently executing Python file directly, then Python sets
+the value of <code>__name__</code> to the
+<code>__main__</code> string. But if you
+imported the currently executing Python file from another script, Python
+sets the value of <code>__name__</code>
+to the name of the imported module. Using the example from the previous
+section, if you run the <em>helpers.py</em> script directly, the value of
+<code>__name__</code> inside that script
+will be <code>__main__</code>, but if you
+run the <em>price.py</em> script, then the value of <code>__name__</code> will be <code>__main__</code> inside <em>price.py</em> and the value of
+<code>__name__</code> will be
+<code>helpers</code> inside <em>helpers.py</em>.</p>
+<p>In short, if you run your script directly, the <code>main()</code> function will run. But if you import
+your script as a module into another script or into the Python
+interpreter, the <code>main()</code>
+function won&rsquo;t run unless you call it yourself. This way, if you have
+multiple Python scripts in the same folder, you can have one script
+import another script to call the functions defined within it without
+worrying about calling the latter script&rsquo;s <code>main()</code> function.</p>
+<p>After I create this template script, I start filling in the
+<code>main()</code> function with
+whatever I want the script to do. Putting the main logic of your script
+inside a function allows you to use the <code>return</code> statement to end <code>main()</code> early, which will quit the script
+early. You can&rsquo;t use <code>return</code>
+when you&rsquo;re not in a function.</p>
+<p>In the following exercise, you&rsquo;ll put this into practice by writing a
+script to start investigating BlueLeaks.</p>
+<h3>Exercise 8-1: Traverse the Files in BlueLeaks</h3>
+<p>To efficiently investigate datasets, you need to be able to write code
+that looks through large collections&mdash;sometimes thousands or
+millions&mdash;of files for you. In this exercise, you&rsquo;ll learn various ways
+to traverse the filesystem in Python using functions in the <code>os</code> module, working with the BlueLeaks
+dataset. You&rsquo;ll also rely on the foundational skills you learned in
+Chapter 7, like using variables,
+<code>for</code> loops, and <code>if</code> statements.</p>
+<p>As you read along and run the scripts, feel free to modify the code
+however you&rsquo;d like and try running those versions too. You might
+discover revelations I didn&rsquo;t think to look for.</p>
+<h4>List the Filenames in a Folder</h4>
+<p>Start by using <code>os.listdir()</code>
+to list the files in the <em>BlueLeaks-extracted</em> folder. In your text
+editor, create a file called <em>list-files1.py</em> and enter this short
+script (or copy and paste it from
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/list-files1.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/list-files1.py</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/datasets/BlueLeaks-extracted&quot;</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>First, the script imports the <code>os</code> module. It then defines the variable
+<code>blueleaks_path</code> with the path
+of the <em>BlueLeaks-extracted</em> folder (update the script to include the
+path of this folder on your own computer). The <code>os.listdir()</code> function takes the path to the folder
+as an argument and returns a list of filenames in that folder. The code
+uses a <code>for</code> loop to loop
+through the output of <code>os.listdir(blueleaks_path)</code>, displaying each filename.</p>
+<p><strong>NOTE</strong> <em>Windows paths include the backslash character (<code>\</code>), which Python strings
+consider an escape character. For example, if your <code>BlueLeaks-extracted</code> folder is located at <code>D:\BlueLeaks-extracted</code>, Python will misinterpret the string <code>"D:\BlueLeaks-extracted"</code>, assuming that <code>\B</code> is a special character. To
+escape your backslashes for any Windows path you store as a string, use <code>\\</code> instead of <code>\</code>. In this case,
+set the <code>blueleaks_path</code> string to <code>"D:\\BlueLeaks-extracted"</code>.</em></p>
+<p>Run this script. Here&rsquo;s what the output looks like on my computer:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 list-files1.py
+211sfbay
+Securitypartnership
+acprlea
+acticaz
+akorca
+--snip--
+</code></pre></div>
+
+<p>Next, you&rsquo;ll try something slightly more advanced. Instead of just
+listing the filenames in BlueLeaks, you&rsquo;ll check each filename to see
+whether it&rsquo;s a folder, and if so, you&rsquo;ll open each of those folders and
+count how many files and subfolders they contain.</p>
+<h4>Count the Files and Folders in a Folder</h4>
+<p>Create a file called <em>list-files2.py</em> and enter the following code (or
+copy and paste it from
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/list-files2.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/list-files2.py</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/datasets/BlueLeaks-extracted&quot;</span>
+  <span class="err">❶</span> <span class="k">for</span> <span class="n">bl_folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+        <span class="n">bl_folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">bl_folder</span><span class="p">)</span>
+
+      <span class="err">❷</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">bl_folder_path</span><span class="p">):</span>
+            <span class="k">continue</span>
+
+      <span class="err">❸</span> <span class="n">files_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">folders_count</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="err">❹</span> <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">bl_folder_path</span><span class="p">):</span>
+            <span class="n">filename_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bl_folder_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+          <span class="err">❺</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename_path</span><span class="p">):</span>
+                <span class="n">files_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">filename_path</span><span class="p">):</span>
+                <span class="n">folders_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+      <span class="err">❻</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bl_folder</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">files_count</span><span class="si">}</span><span class="s2"> files, </span><span class="si">{</span><span class="n">folders_count</span><span class="si">}</span><span class="s2"> folders&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This script counts the number of files and folders it finds within each
+BlueLeaks folder. It starts like <em>list-files1.py</em> does, importing
+<code>os</code> and defining the
+<code>blueleaks_path</code> variable
+(remember to update the variable&rsquo;s value to match the correct path on
+your computer).</p>
+<p>The first <code>for</code> loop cycles
+through the filenames in your <em>BlueLeaks-extracted</em> folder, this time
+saving each filename in the <code>bl_folder</code> variable, so its value will be
+something like <code>miacx</code> or
+<code>ncric</code> ❶. The script then sets the value of the new
+<code>bl_folder_path</code> variable
+accordingly. The <code>os.path.join()</code> function connects filenames together
+to make complete paths. Its first argument is the starting path, and it
+adds all other arguments to the end of that path. For example, if the
+value of <code>bl_folder</code> is
+<code>miacx</code>, then this function
+will return the string
+<code>/Volumes/datasets/BlueLeaks-extracted/miacx</code> on my computer (the output will be
+different if your <code>blueleaks_path</code> is different or if you&rsquo;re using
+Windows and your filenames use backslashes instead of slashes).</p>
+<p>Since you want to look inside <code>bl_folder_path</code> and count the number of files and
+folders it contains, the script needs to check that it&rsquo;s actually a
+folder and not a file, using the <code>os.path.isdir()</code> function ❷. If <code>bl_folder_path</code> isn&rsquo;t a folder, the script runs the
+<code>continue</code> statement. This
+statement, which can run only inside of loops, tells Python to
+immediately continue on to the next iteration of the loop. In short, if
+the script comes across a file instead of a folder, it ignores it and
+moves on.</p>
+<p>The script then prepares to count the number of files and folders within
+each individual BlueLeaks folder as the code loops by defining the
+variables <code>files_count</code> and
+<code>folders_count</code> with a value
+of <code>0</code> ❸.</p>
+<p>A second <code>for</code> loop loops
+through the files in the BlueLeaks folder from the first <code>for</code> loop, saving each filename in the
+<code>filename</code> variable
+❹. Inside this loop, the
+script defines <code>filename_path</code>
+as the absolute path for the filename under consideration. For instance,
+if the value of <code>filename</code> is
+a string like <code>Directory.csv</code>,
+then the value of <code>filename_path</code> would be a string like
+<code>/Volumes/datasets/BlueLeaks-extracted/211sfbay/Directory.csv</code>.</p>
+<p>The script then checks to see if this absolute
+path is a file or a folder, using the <code>os.path.isfile()</code> and <code>os.path.isdir()</code> functions ❺. If the path is a file, the script increments
+the <code>files_count</code> variable by
+1; if it&rsquo;s a folder, the script increments <code>folders_count</code> by 1. When the second <code>for</code> loop finishes running, these two
+variables should contain the total count of files and folders for the
+BlueLeaks folder you&rsquo;re currently looping through in the first
+<code>for</code> loop. Finally, the
+script displays an f-string that shows these numbers ❻.</p>
+<p>Try running the script. The output should show how many files and
+folders are contained in each BlueLeaks folder, potentially with the
+list of folders in a different order:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 list-files2.py
+bostonbric has 506 files, 10 folders
+terrorismtip has 207 files, 0 folders
+ociac has 216 files, 1 folders
+usao has 0 files, 84 folders
+alertmidsouth has 512 files, 10 folders
+chicagoheat has 499 files, 10 folders
+--snip--
+</code></pre></div>
+
+<p>So far, you&rsquo;ve combined various functions in the <code>os</code> module to make a list of filenames in
+your BlueLeaks folder and check whether each name actually refers to a
+file or to another folder. Now it&rsquo;s time to learn to write code that can
+also traverse the BlueLeaks folder&rsquo;s nested folders.</p>
+<h3>Traverse Folders with os.walk()</h3>
+<p>Let&rsquo;s say you want to write a program that displays all of the files in
+a folder and its subfolders, and its subsubfolders, and so on. When you
+have nested folders but don&rsquo;t actually know how deep the folder
+structure goes, listing all of the filenames just by using
+<code>os.listdir()</code>,
+<code>os.path.isfile()</code>, and
+<code>os.path .isdir()</code> isn&rsquo;t so
+simple. Python&rsquo;s <code>os.walk()</code>
+function solves this problem.</p>
+<p>The <code>os.walk()</code> function takes
+a path to a folder as an argument and returns a list of <em>tuples</em>, or
+multiple values contained in a single value. To define a tuple, you
+place all of the values, separated by commas, within parentheses. For
+example, <code>(3, 4)</code> is a tuple,
+as is <code>("cinco", "seis", "siete")</code>. Tuples can also contain mixed types
+like <code>(1, "dos")</code> and can
+contain any number of values.</p>
+<p>The <code>os.walk()</code> function
+returns a list of tuples where each tuple contains three values:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span><span class="p">)</span>
+</code></pre></div>
+
+<p>where <code>dirname</code> is a string,
+<code>subdirnames</code> is a list of
+strings, and <code>filenames</code> is a
+list of strings. For example, the following code loops through the
+return value of <code>os.walk(path)</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The folder </span><span class="si">{</span><span class="n">dirname</span><span class="si">}</span><span class="s2"> has subfolders: </span><span class="si">{</span><span class="n">subdirnames</span><span class="si">}</span><span class="s2"> and files: </span><span class="si">{</span><span class="n">filenames</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>When you use <code>for</code> loops to loop through lists, you
+normally assign just a single variable to each item in the list.
+However, since each item is a tuple, you can assign three variables to
+it: <code>dirname</code>,
+<code>subdirnames</code>, and
+<code>filenames</code>. In each loop, the
+values for this set of variables will be different: the value of
+<code>dirname</code> is the path to a
+folder, the value of <code>subdirnames</code> is a list of subfolders inside that
+folder, and the value of <code>filenames</code> is a list of files inside that folder.</p>
+<p>For example, suppose you have a folder called <em>example</em> that contains
+these subfolders and files:</p>
+<div class="codehilite"><pre><span></span><code>example
+├── downloads
+│   ├── screenshot.png
+│   └── paper.pdf
+└── documents
+    ├── work
+    │   └── finances.xlsx
+    └── personal
+</code></pre></div>
+
+<p>This folder has two subfolders: <em>downloads</em> (containing <em>screenshot.png</em>
+and <em>paper.pdf</em>) and <em>documents</em>. The <em>documents</em> folder has its own
+subfolders: <em>work</em> (containing <em>finances.xlsx</em>) and <em>personal</em>.</p>
+<p>The following commands loop through the return value of
+<code>os.walk ("./example")</code>, where
+<em>./example</em> is the path to this <em>example</em> folder, to find the values of
+<code>dirname</code>,
+<code>subdirnames</code>, and
+<code>filenames</code> for each loop:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="s2">&quot;./example&quot;</span><span class="p">):</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The folder </span><span class="si">{</span><span class="n">dirname</span><span class="si">}</span><span class="s2"> has subfolders: </span><span class="si">{</span><span class="n">subdirnames</span><span class="si">}</span><span class="s2"> and files: </span><span class="si">{</span><span class="n">filenames</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
+
+<p>Running this command returns the following output:</p>
+<div class="codehilite"><pre><span></span><code>The folder ./example has subfolders: [&#39;documents&#39;, &#39;downloads&#39;] and files: []
+The folder ./example/documents has subfolders: [&#39;personal&#39;, &#39;work&#39;] and files: []
+The folder ./example/documents/personal has subfolders: [] and files: []
+The folder ./example/documents/work has subfolders: [] and files: [&#39;finances.xlsx&#39;]
+The folder ./example/downloads has subfolders: [] and files: [&#39;paper.pdf&#39;, &#39;screenshot.png&#39;]
+</code></pre></div>
+
+<p>This code loops once for each folder, including all subfolders, with the
+path to that folder stored in <code>dirname</code>. The list of subfolders in that folder
+is stored in <code>subdirnames</code>,
+and the list of files is stored in <code>filenames</code>. Once you&rsquo;ve looped through the folder
+and all of its subfolders, the <code>for</code> loop ends.</p>
+<p>Any time you need to traverse all of the files in a dataset that
+contains lots of nested folders, you&rsquo;ll want to use <code>os.walk()</code>. With a single <code>for</code> loop, you&rsquo;ll be able to write code
+that inspects each file in the entire dataset. The <code>os.walk()</code> function has many uses, including
+figuring out which files are the largest or smallest, as you&rsquo;ll see
+next.</p>
+<h3>Exercise 8-2: Find the Largest Files in BlueLeaks</h3>
+<p>In this exercise, you&rsquo;ll use <code>os.walk()</code> to write a script that looks through
+all the files, folders, and subfolders in BlueLeaks; measures the size
+of each file; and displays the filenames for files over 100MB. This code
+allows you to loop through all of the files in a folder, no matter how
+deep the folder structure.</p>
+<p>Create a file called <em>find-big-files.py</em> and enter the following code
+(or copy and paste it from
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/find-big-files.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/find-big-files.py</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/datasets/BlueLeaks-extracted&quot;</span>
+    <span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="n">absolute_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="n">size_in_bytes</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">absolute_filename</span><span class="p">)</span>
+            <span class="n">size_in_mb</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size_in_bytes</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">size_in_mb</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">absolute_filename</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">size_in_mb</span><span class="si">}</span><span class="s2">MB&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Inside the <code>main()</code> function,
+the script first defines the <code>blueleaks_path</code> variable as the path of the
+<em>BlueLeaks-extracted</em> folder and loops through all of the files in the
+entire BlueLeaks dataset using the <code>os.walk()</code> function. Inside each loop in the
+first <code>for</code> loop are the
+<code>dirname</code>,
+<code>subdirnames</code>, and
+<code>filenames</code> variables. Each
+item in the list that <code>os.walk()</code> returns represents a different folder
+or subfolder in the BlueLeaks dataset, so by the time this loop
+finishes, the code will have traversed the entire dataset.</p>
+<p>To find the biggest files, the next step is to look at each file with
+another <code>for</code> loop, this time
+looping through <code>filenames</code>.
+Inside this second <code>for</code> loop,
+the script defines <code>absolute_filename</code> to be the absolute path to the
+filename. Since <code>dirname</code>
+tells the script which folder it&rsquo;s looking in, and <code>filename</code> tells the script which file it&rsquo;s
+looking at, the script passes these values into <code>os.path.join()</code> to combine them, creating the absolute
+path to the filename.</p>
+<p>A new function, <code>os.path.getsize()</code>, returns the size, in bytes, of the
+file under consideration and stores it in the variable
+<code>size_in_bytes</code>. The script
+then converts this value from bytes to megabytes (storing that in the
+variable <code>size_in_mb</code>) and
+checks if it&rsquo;s greater than or equal to 100MB. If it is, the output
+displays its filename and file size in megabytes with the
+<code>print()</code> function.</p>
+<p>Try running the script. It will take longer than the previous scripts in
+this chapter, because this time, you&rsquo;re measuring the size of every
+single file in BlueLeaks. Here&rsquo;s what the output looks like when I run
+it (your output may be displayed in a different order):</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 find-big-files.py
+/Volumes/datasets/BlueLeaks-extracted/usao/usaoflntraining/files/VVSF00000/001.mp4 is 644MB
+/Volumes/datasets/BlueLeaks-extracted/chicagoheat/html/ZA-CHICAGO HEaT_LR-20160830-034_Final
+Files.pdf is 102MB
+/Volumes/datasets/BlueLeaks-extracted/nmhidta/files/RFIF300000/722.pdf is 148MB
+/Volumes/datasets/BlueLeaks-extracted/nmhidta/files/RFIF200000/543.pdf is 161MB
+/Volumes/datasets/BlueLeaks-extracted/nmhidta/files/RFIF100000/723.pdf is 206MB
+/Volumes/datasets/BlueLeaks-extracted/fbicahouston/files/VVSF00000/002.mp4 is 145MB
+/Volumes/datasets/BlueLeaks-extracted/fbicahouston/files/PSAVF100000/009.mp4 is 146MB
+/Volumes/datasets/BlueLeaks-extracted/fbicahouston/files/PSAVF100000/026.mp4 is 105MB
+--snip--
+</code></pre></div>
+
+<p>The script should display the absolute paths of the 101 files in
+BlueLeaks that are at least 100MB, along with each file&rsquo;s size.</p>
+<h3>Third-Party Modules</h3>
+<p>In addition to built-in modules, Python also supports third-party
+modules that you can easily incorporate into your own code. Most Python
+scripts that I write, even simple ones, rely on at least one third-party
+module (when a Python program depends on third-party modules, they&rsquo;re
+called <em>dependencies</em>). In this section, you&rsquo;ll learn how to install
+third-party modules and use them in your own scripts.</p>
+<p>The Python Package Index (PyPI) contains hundreds of thousands of
+third-party Python <em>packages</em>, or bundles of Python modules, and
+subpackages. Pip, which stands for Package Installer for Python, is a
+package manager similar to Ubuntu&rsquo;s apt or macOS&rsquo;s Homebrew used to
+install packages hosted on PyPI. You can search for packages on PyPI&rsquo;s
+website
+(<a href="https://pypi.org">https://pypi.org</a>),
+then install a package by running the <code>python3 -m pip install package_name</code> command.</p>
+<p>For example, I frequently use a package called Click, which stands for
+Command Line Interface Creation Kit. The <code>click</code> Python module makes it simple to add
+command line arguments to your scripts. To see what happens when you try
+importing this module before you&rsquo;ve installed it, open a Python
+interpreter and run <code>import click</code>. Assuming you don&rsquo;t already have the
+package installed, you should see a <code>ModuleNotFoundError</code> error message:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">ModuleNotFoundError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="s1">&#39;click&#39;</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div>
+
+<p>Now exit the Python interpreter and install <code>click</code> with pip by running the following
+command:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % python3 -m pip install click
+Collecting click
+  Using cached click-8.1.3-py3-none-any.whl (96 kB)
+Installing collected packages: click
+Successfully installed click-8.1.3
+</code></pre></div>
+
+<p>Open the Python interpreter again and try
+importing <code>click</code> once more:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">click</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div>
+
+<p>If no error messages pop up, you&rsquo;ve successfully imported the
+<code>click</code> module, and its
+additional features are now available for you to use.</p>
+<p>The command to uninstall a package is <code>python3 -m pip uninstall  package_name</code>. Try uninstalling
+<code>click</code>:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % python3 -m pip uninstall click
+Found existing installation: click 8.1.3
+Uninstalling click-8.1.3:
+  Would remove:
+    /usr/local/lib/python3.10/site-packages/click-8.1.3.dist-info/*
+    /usr/local/lib/python3.10/site-packages/click/*
+Proceed (Y/n)? y
+  Successfully uninstalled click-8.1.3
+</code></pre></div>
+
+<p>As you can see, when I ran this command, the output listed the files
+that pip would need to delete to uninstall the <code>click</code> module, then asked if I wanted to
+proceed. I entered <code>y</code> and
+pressed <strong>ENTER</strong>, and the files were deleted and the module
+uninstalled.</p>
+<p>You can install multiple Python packages at once like so:</p>
+<div class="codehilite"><pre><span></span><code>python3 -m pip install package_name1 package_name2 package_name3
+</code></pre></div>
+
+<p>The same is true of uninstalling.</p>
+<p>It&rsquo;s common to define the Python packages that your script requires
+inside a file called <em>requirements.txt</em>, then install all of them at
+once with the <code>python3 -m pip install -r requirements.txt</code> command. For example, suppose in
+addition to using <code>click</code>, you
+want to use the HTTP client <code>httpx</code> to load web pages inside Python and
+the <code>sqlalchemy</code> module to
+work with SQL databases. To include all three in your Python script,
+first create a <em>requirements .txt</em> file with each package name on its
+own line:</p>
+<div class="codehilite"><pre><span></span><code>click
+httpx
+sqlalchemy
+</code></pre></div>
+
+<p>Then run the following command to install them simultaneously:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 -m pip install -r requirements.txt
+Collecting click
+  Using cached click-8.1.3-py3-none-any.whl (96 kB)
+Collecting httpx
+  Using cached httpx-0.23.0-py3-none-any.whl (84 kB)
+--snip--
+Successfully installed anyio-3.6.1 certifi-2022.9.24 click-8.1.3 h11-0.12.0 httpcore-0.15.0
+httpx-0.23.0 idna-3.4 rfc3986-1.5.0 sniffio-1.3.0 sqlalchemy-1.4.41
+</code></pre></div>
+
+<p>As you can see, this command installs more than
+just those three Python packages: <code>rfc3986</code>, <code>certifi</code>, <code>sniffio</code>, and so on are also included. That&rsquo;s
+because <code>click</code>,
+<code>httpx</code>, and
+<code>sqlachemy</code> have dependencies
+of their own. For example, <code>httpcore</code> is a dependency of the <code>httpx</code> package, so it installs that as well.
+To summarize, the <em>requirements.txt</em> file defines your project&rsquo;s
+dependencies, each of which might depend on its own list of packages.</p>
+<p><strong>NOTE</strong> <em>To learn more about how to use</em> <em>httpx</em> <em>and other Python modules to automate interacting with websites, check out Appendix B. I recommend waiting until you complete Chapters 7, 8, 9, and 11, however, since the instructions covered in Appendix B rely on the skills you&rsquo;ll pick up in those chapters.</em></p>
+<blockquote>
+<h4>VIRTUAL ENVIRONMENTS</h4>
+<p>It’s not unusual to have multiple versions of Python and multiple versions of the same dependencies for different projects installed on the same computer. If you routinely install Python packages with pip for various projects, this can get very messy over time. For example, different projects might depend on different versions of the same module to work, but you can’t have two versions of a module installed at the same time—at least not without <em>virtual environments</em>, which are like stand-alone folders containing your Python dependencies for a specific project. This way, different projects’ dependencies won’t trip each other up.</p>
+<p>To keep things simple, this book doesn’t use virtual environments, and it uses only pip to install Python packages. As long as you don’t have multiple Python projects requiring specific versions of the few third-party modules this book uses, you should be fine without using a virtual environment.</p>
+<p>You can learn more about virtual environments at <a href="https://docs.python.org/3/tutorial/venv.html">https://docs.python.org/3/tutorial/venv.html</a>. For larger Python projects, you might also consider using Python package management programs such as Poetry (<a href="https://python-poetry.org">https://python-poetry.org</a>) or Pipenv (<a href="https://github.com/pypa/pipenv">https://github.com/pypa/pipenv</a>), which handle the complicated parts of keeping track of Python packages and virtual environments for you.</p>
+</blockquote>
+<p>Now that you know how to install third-party modules, you&rsquo;ll practice using Click.</p>
+<h3>Exercise 8-3: Practice Command Line Arguments with Click</h3>
+<p>As you learned in the previous section, the Click package makes it
+simple to add command line arguments to your scripts. You can use it to
+define variables to pass into your <code>main()</code> function from the terminal, without
+having to define those variables in your code. In this exercise, you&rsquo;ll
+learn how to use Click by writing a sample script in preparation for
+using this module in later exercises.</p>
+<p>First, install the Click package with pip again
+by running <code>python3 -m pip install click</code>. Next, open your text editor and enter
+the following Python script, <em>exercise-8-3.py</em> (or copy and paste it
+from
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-3.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-3.py</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simple program that greets NAME&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>First, the script imports the <code>click</code> module. It then runs a few
+<em>decorators</em>, function calls that begin with <code>@</code> and add functionality to another
+function you&rsquo;re about to define&mdash;the <code>main()</code> function, in this case. The
+<code>@click.command()</code> decorator
+tells Click that <code>main()</code> is a
+command, and the <code>@click .argument("name")</code> decorator tells Click that this
+command has an argument called <code>name</code>.</p>
+<p>Next, the script defines the <code>main()</code> function, which takes <code>name</code> as an argument. This function has a
+docstring, <code>Simple program that greets NAME</code>. Click uses this docstring for its
+commands when it builds the output for <code>--help</code>, as you&rsquo;ll see shortly. The
+<code>main()</code> function simply
+displays a string with the name you passed in as an argument.</p>
+<p>Finally, the script calls the <code>main()</code> function. Notice that even though
+<code>main()</code> requires an argument
+(<code>name</code>), the script doesn&rsquo;t
+explicitly pass that argument in when calling the function. This is
+where the magic of the Click decorators comes in. When the script calls
+<code>main()</code>, Click will figure
+out what arguments it needs to pass in, find their values from the CLI
+arguments, and pass them in for you.</p>
+<p>Run the script as follows:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-3.py
+Usage: click-example.py [OPTIONS] NAME
+Try &#39;click-example.py --help&#39; for help.
+
+Error: Missing argument &#39;NAME&#39;.
+</code></pre></div>
+
+<p>When you run the program, if you don&rsquo;t pass in the correct CLI
+arguments, Click tells you what you did wrong. As you can see, you&rsquo;re
+missing the required <code>NAME</code>
+argument. Click also tells you that you can get help by running the
+script again with the <code>--help</code>
+argument.</p>
+<p>Try running the <code>--help</code> command:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-3.py --help
+Usage: click-example.py [OPTIONS] NAME
+
+  Simple program that greets NAME
+
+Options:
+  --help  Show this message and exit.
+</code></pre></div>
+
+<p>This time, the output shows a description of the program based on the
+docstring. Any CLI program that uses Click will display the docstring
+for the command when you run it with <code>--help</code>.</p>
+<p>Try running the command again, this time passing in a name. For example,
+here&rsquo;s what happens when I pass in <code>Eve</code> as the name:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-3.py Eve
+Hello Eve!
+</code></pre></div>
+
+<p><strong>NOTE</strong> <em>You can read more about using Click at <a href="https://click.palletsprojects.com">https://click.palletsprojects.com</a>.</em></p>
+<h3>Avoiding Hardcoding with Command Line Arguments</h3>
+<p>As you&rsquo;ve seen in previous chapters, CLI arguments let you run the same
+program in many different ways, targeting different data. For example,
+in Chapter 4, you used the <code>du</code> command to estimate the disk space of
+a folder by adding the folder&rsquo;s path as an argument. In
+<code>du -sh --apparent-size</code>
+<code>path</code>, the arguments
+are <code>-sh</code>,
+<code>--apparent-size</code>, and
+<code>path</code>.</p>
+<p>The <code>du</code> command would be much
+less useful if it could measure disk space for only a single hardcoded
+folder. <em>Hardcoding</em> means embedding information, like a path, directly
+into source code. You can avoid hardcoding anything in your CLI programs
+by having the user provide this information as arguments when running
+them.</p>
+<p>Passing paths into scripts, rather than hardcoding them, makes for a
+better user experience. In previous exercises in this chapter, you
+hardcoded the path to your copy of the BlueLeaks dataset into your
+Python scripts. If you were to pass the appropriate path in as an
+argument, however, other people could use your script without editing
+it&mdash;they could just pass in <em>their</em> path when they ran it.</p>
+<p>Using arguments rather than hardcoding can also make your scripts more
+universally useful. For example, in Exercise 8-2, you wrote a
+script to find all of the files that are at least 100MB in the BlueLeaks
+dataset. Using CLI arguments, you could make this script work for any
+dataset you get your hands on, not just BlueLeaks, and for any minimum
+file size, allowing you to run it in a variety of situations. You&rsquo;d just
+need to pass in the dataset path and the minimum file size as CLI
+arguments. You&rsquo;ll try this out in the next exercise.</p>
+<h3>Exercise 8-4: Find the Largest Files in Any Dataset</h3>
+<p>In this exercise, you&rsquo;ll modify the script you wrote in Exercise
+8-2 to make it work for any dataset, and for any minimum file
+size, using CLI arguments. In the following chapters, you&rsquo;ll write
+simple Python scripts that use Click for CLI arguments, so you can
+provide the paths to the datasets you&rsquo;ll be working with.</p>
+<p>Create a new file called <em>exercise-8-4.py</em>, and copy and paste the
+<em>exercise-8-2 .py</em> code into it. Next, make the following modifications
+to the code, highlighted in bold (or find the full modified script at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-4.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-4.py</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">click</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;min_file_size&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">INT</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">min_file_size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find files in PATH that are at least MIN_FILE_SIZE MB big&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="n">absolute_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="n">size_in_bytes</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">absolute_filename</span><span class="p">)</span>
+            <span class="n">size_in_mb</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size_in_bytes</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">size_in_mb</span> <span class="o">&gt;=</span> <span class="n">min_file_size</span><span class="p">:</span>
+                  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">absolute_filename</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">size_in_mb</span><span class="si">}</span><span class="s2">MB&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This code imports the <code>click</code>
+module at the top of the file. Next, it adds Click decorators before the
+<code>main()</code> function:
+<code>@click.command()</code> makes the
+<code>main()</code> function a Click
+command, and <code>@click.argument()</code> adds <code>path</code> and <code>min_file_size</code> as arguments. The script specifies
+with <code>type=click.INT</code> that the
+<code>min_file_size</code> argument
+should be an <em>integer</em>, or a whole number, as opposed to a string. Then
+it adds <code>path</code> and
+<code>min_file_size</code> as arguments
+to the <code>main()</code> function and
+adds a docstring that describes what this command does.</p>
+<p>The new script uses arguments instead of hardcoded values. It deletes
+the line that defines the <code>blueleaks_path</code> variable, and in the
+<code>os.walk()</code> function call, it
+changes <code>blueleaks_path</code> to
+just <code>path</code>, which is the
+argument. Finally, it changes <code>100</code> in <code>size_in_mb  &gt;=  100</code> to <code>min_file_size</code>.</p>
+<p>You can now use this program to find big files in any folder in the
+BlueLeaks dataset or elsewhere. For example, here&rsquo;s what it looks like
+when I search for all files that are at least 500MB in <em>/Applications</em>
+on my Mac:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-4.py /Applications 500
+/Applications/Dangerzone.app/Contents/Resources/share/container.tar.gz is 668MB
+/Applications/Docker.app/Contents/Resources/linuxkit/services.iso is 602MB
+</code></pre></div>
+
+<p>As you can see, I have only two apps installed
+that include files this big: Dangerzone and Docker Desktop.</p>
+<p>Now that you&rsquo;ve seen how to add CLI arguments to your Python scripts
+using Click, you should be able to avoid hardcoding information like
+dataset paths in your future programs.</p>
+<p>Next, we&rsquo;ll switch gears and explore a new powerful type of Python
+variable called dictionaries.</p>
+<h3>Dictionaries</h3>
+<p>In the course of your investigations, sometimes you&rsquo;ll need to keep
+track of data with more structure than a simple list. To do so, you can
+use Python dictionaries. Instead of a collection of items, a
+<em>dictionary</em> (<em>dict</em> for short) is a collection of keys that map to
+values. <em>Keys</em> are labels that you use to save or retrieve information
+in a dictionary, and <em>values</em> are the actual information being saved or
+retrieved. Nearly every Python script I write that deals with data uses
+dictionaries. In this section, you&rsquo;ll learn how to define dictionaries,
+get values from them, add values to them, and update existing values in
+them.</p>
+<h4>Defining Dictionaries</h4>
+<p>Dictionaries are defined using braces (<code>{</code>and <code>}</code>), sometimes referred to as curly
+brackets. Inside the braces is a list of key-value pairs in the format
+<code>key: value</code>, where each pair is separated
+from the next by commas&mdash;for example,
+<code>{"country": "Italy", "drinking_age": 18}</code>. For longer dictionaries, you can make
+your code more readable by putting each key-value pair on its own line.</p>
+<p>Listing 8-1 shows an example dictionary
+stored in the variable <code>capitals</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">capitals</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;United States&quot;</span><span class="p">:</span> <span class="s2">&quot;Washington, DC&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;India&quot;</span><span class="p">:</span> <span class="s2">&quot;New Delhi&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;South Africa&quot;</span><span class="p">:</span> <span class="s2">&quot;Cape Town&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Brazil&quot;</span><span class="p">:</span> <span class="s2">&quot;Brasília&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Germany&quot;</span><span class="p">:</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Russia&quot;</span><span class="p">:</span> <span class="s2">&quot;Moscow&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;China&quot;</span><span class="p">:</span> <span class="s2">&quot;Beijing&quot;</span>  
+<span class="p">}</span>
+</code></pre></div>
+
+<p><em>Listing 8-1: A dictionary stored in the <code>capitals</code> variable</em></p>
+<p>In this case, the keys are country names and the values are the capitals
+of those countries.</p>
+<p>Each key in a dictionary can have only one value. If you try to set the
+same key more than once, Python will save the version you last set. For
+example, if you define a dictionary and use the <code>name</code> key more than once, the dictionary
+will overwrite the previous value with the most recent one:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;hobby&quot;</span><span class="p">:</span> <span class="s2">&quot;cryptography&quot;</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">test_dict</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;hobby&#39;</span><span class="p">:</span> <span class="s1">&#39;cryptography&#39;</span><span class="p">}</span>
+</code></pre></div>
+
+<p>However, you can also use lists, or other dictionaries, as values:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">],</span> <span class="s2">&quot;hobby&quot;</span><span class="p">:</span> <span class="s2">&quot;cryptography&quot;</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">test_dict</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">],</span> <span class="s1">&#39;hobby&#39;</span><span class="p">:</span> <span class="s1">&#39;cryptography&#39;</span><span class="p">}</span>
+</code></pre></div>
+
+<p>In this case, the value for the key <code>names</code> is <code>['Alice', 'Bob']</code>, which itself is a list. You can use a
+combination of lists and dictionaries to organize pretty much any type
+of data, no matter how complicated, allowing you to more easily work
+with it in Python.</p>
+<h4>Getting and Setting Values</h4>
+<p>To retrieve an item you&rsquo;ve stored inside a dictionary, add square
+brackets containing the item&rsquo;s key to the end of the dictionary name. If
+you try to use a key you haven&rsquo;t defined, your script will crash with a
+<code>KeyError</code>. For example,
+here&rsquo;s how to look up the capitals of certain countries in the
+<code>capitals</code> dictionary:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">&quot;United States&quot;</span><span class="p">]</span>
+<span class="s1">&#39;Washington, DC&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">&quot;China&quot;</span><span class="p">]</span>
+<span class="s1">&#39;Beijing&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">&quot;Kenya&quot;</span><span class="p">]</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">KeyError</span><span class="p">:</span> <span class="s1">&#39;Kenya&#39;</span>
+</code></pre></div>
+
+<p>When you run <code>capitals["Kenya"]</code>, Python throws the error message
+<code>KeyError: 'Kenya'</code>. This
+means that <code>Kenya</code> isn&rsquo;t a
+valid key in the <code>capitals</code>
+dictionary. You can see that the only keys defined in Listing
+8-1 are <code>United States</code>, <code>India</code>, <code>South Africa</code>, <code>Brazil</code>, <code>Germany</code>, <code>Russia</code>, and <code>China</code>. Because <code>Kenya</code> isn&rsquo;t a key in this dictionary, you
+can&rsquo;t retrieve its value.</p>
+<p>You can add new key-value pairs to a dictionary, or update an existing
+one, like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">&quot;Kenya&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Nairobi&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">&quot;United States&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Mar-a-Lago&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">capitals</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;United States&#39;</span><span class="p">:</span> <span class="s1">&#39;Mar-a-Lago&#39;</span><span class="p">,</span> <span class="s1">&#39;India&#39;</span><span class="p">:</span> <span class="s1">&#39;New Delhi&#39;</span><span class="p">,</span> <span class="s1">&#39;South Africa&#39;</span><span class="p">:</span> <span class="s1">&#39;Cape Town&#39;</span><span class="p">,</span> <span class="s1">&#39;Brazil&#39;</span><span class="p">:</span> <span class="s1">&#39;Brasília&#39;</span><span class="p">,</span> <span class="s1">&#39;Germany&#39;</span><span class="p">:</span> <span class="s1">&#39;Berlin&#39;</span><span class="p">,</span> <span class="s1">&#39;Russia&#39;</span><span class="p">:</span> <span class="s1">&#39;Moscow&#39;</span><span class="p">,</span> <span class="s1">&#39;China&#39;</span><span class="p">:</span> <span class="s1">&#39;Beijing&#39;</span><span class="p">,</span> <span class="s1">&#39;Kenya&#39;</span><span class="p">:</span> <span class="s1">&#39;Nairobi&#39;</span><span class="p">}</span>
+</code></pre></div>
+
+<p>This code defines a new key, <code>Kenya</code>, with the value <code>Nairobi</code>. It also updates an existing key,
+<code>United States</code>, to have the
+value <code>Mar-a-Lago</code>,
+overwriting its old value, which used to be <code>Washington, DC</code>.</p>
+<h3>Navigating Dictionaries and Lists in the Conti Chat Logs</h3>
+<p>You can combine dictionaries and lists in a single flexible data
+structure that allows you to represent a wide variety of information. If
+you&rsquo;re writing Python code to work with datasets, chances are you&rsquo;re
+going to need both. You might directly load the data in this format, or
+you might create your own dictionaries and lists to store aspects of the
+data.</p>
+<p>To describe how to use data structures that include a combination of
+dictionaries and lists, I&rsquo;ll use an example from a real dataset. The day
+after Russia invaded Ukraine on February 24, 2022, the notorious Russian
+ransomware gang Conti, known for hacking companies around the world and
+extorting millions of dollars from them, published a statement on its
+website throwing its full support behind the Russian government. It
+threatened any &ldquo;enemy&rdquo; who launched cyberattacks against Russia with
+retaliation against their &ldquo;critical infrastructure.&rdquo; Three days later, a
+Ukrainian security researcher anonymously leaked 30GB of internal data
+from Conti: hacking tools, training documentation, source code, and chat
+logs. The Conti chat logs originally came in the form of JSON files,
+which is structured data. When you load JSON files into Python, they&rsquo;ll
+automatically be loaded as a combination of dictionaries and lists.</p>
+<p>In this section, you&rsquo;ll look through some of these chat logs in order to
+practice working with real leaked data stored in dictionaries and lists.
+Using Python code, you&rsquo;ll learn how to navigate these structures to
+access specific pieces of data as well as how to quickly loop through
+the chat logs and select just the parts you&rsquo;re interested in.</p>
+<h4>Exploring Dictionaries and Lists Full of Data in Python</h4>
+<p>You can download the complete Conti dataset from
+<a href="https://ddosecrets.com/wiki/Conti_ransomware_chats">https://ddosecrets.com/wiki/Conti_ransomware_chats</a>.
+However, for this section, you&rsquo;ll use just one file from the dataset,
+<em>2022-02-24-general.json</em>, which the Ukranian security researcher
+extracted from a chat system called RocketChat.</p>
+<p>Download <em>2022-02-24-general.json</em> from
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/2022-02-24-general.json">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/2022-02-24-general.json</a>.
+Open a terminal, change to the folder where you stored this file, and
+open a Python interpreter. Load this file into a dictionary with the
+following commands:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">json</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;2022-02-24-general.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
+
+<p>This code uses the <code>json</code>
+module and loads the data from <em>2022-02-24-general.json</em> into the
+<code>data</code> variable. The chat logs
+from this file are too long to display in their entirety, but Listing
+8-2 shows a snippet of the value of the
+<code>data</code> dictionary that
+demonstrates its structure.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">❶</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FmFZbde9ACs3gtw27&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;rid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GENERAL&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Некоторые американские сенаторы предлагают помимо соцсетей блокировать в</span>
+<span class="s2">Россииещё и PornHub!&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;ts&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-02-24T22:02:38.276Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;u&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NKrXj9edAPWNrYv5r&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;thomas&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;thomas&quot;</span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;urls&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;mentions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;md&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PARAGRAPH&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                        </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PLAIN_TEXT&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Некоторые американские сенаторы предлагают помимо</span>
+<span class="s2">соцсетейблокировать в России ещё и PornHub!&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="p">}</span><span class="w"></span>
+<span class="w">                  </span><span class="p">],</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">],</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;_updatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-02-24T22:02:38.293Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">True</span><span class="w"> </span><span class="err">❷</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p><em>Listing 8-2: Conti chat logs from RocketChat</em></p>
+<p>The <code>data</code> variable is a
+dictionary with two keys, <code>messages</code> and <code>success</code>. You access the value of the
+<code>messages</code> key, which is a
+list of dictionaries, using the expression <code>data["messages"]</code> ❶. You can tell that the value of
+<code>data["messages"]</code> is a list
+because it&rsquo;s enclosed in square brackets (<code>[</code> and <code>]</code>), and you can tell
+that the items inside it are dictionaries because they&rsquo;re enclosed in
+braces (<code>{</code>and <code>}</code>). Almost all
+of the data in this file is stored in this list.</p>
+<p>Each dictionary in the <code>data["messages"]</code> list describes a chat message. This
+snippet of code includes only one of the dictionaries, the ninth chat
+message in the list (I snipped out the first eight messages, so you
+can&rsquo;t tell that it&rsquo;s the ninth without looking at the original file).
+You can access the dictionary that contains that specific chat message
+using the expression <code>data["messages"][8]</code>. (Remember, in programming we start
+counting at 0, not 1, so the first item is at index 0, the second item
+is at index 1, and so on.) If you run the command
+<code>print(data["messages"][8])</code>
+to display the dictionary for the ninth message, the
+output should match the message in the listing. Notice that just as you
+place index numbers within brackets to select from lists, you place keys
+within brackets to select from dictionaries, like <code>["messages"]</code> or <code>["success"]</code>.</p>
+<p>You can also access the value of the <code>success</code> key with <code>data["success"]</code>. Its value is the Boolean
+<code>True</code> ❷. I&rsquo;m not entirely sure what this means, but I
+suspect that the <code>success</code> key
+was left over from whatever system the Ukrainian researcher used to
+export these chat messages from RocketChat, confirming that exporting
+the data was successful and that there were no errors.</p>
+<p>The file from which I loaded this code contained 604 different chat
+messages, each in its own dictionary, that were sent in Conti&rsquo;s
+#general RocketChat channel on February 24, 2022. I discovered that
+this list has 604 items by measuring its length with the <code>len()</code> function, like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">])</span>
+<span class="mi">604</span>
+</code></pre></div>
+
+<p>The dictionary for each chat message has many keys: <code>_id</code>, <code>rid</code>, <code>msg</code>, <code>u</code>, <code>urls</code>, and so on.</p>
+<p>You can find out what types of data these keys contain using the
+<code>for key_variable in dictionary</code> syntax, and you can determine
+a variable&rsquo;s data type using the <code>type()</code> function. Try this out using the
+following commands:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="mi">8</span><span class="p">]:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;messages&#39;</span><span class="p">][</span><span class="mi">8</span><span class="p">][</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
+
+<p>This command loops through the <code>data["messages"][8]</code> dictionary and stores each key in the
+<code>key</code> variable. Then, using
+the <code>print()</code> function and an
+f-string, it displays the key (<code>key</code>) and the type of data stored in that
+key, as shown in the following output:</p>
+<div class="codehilite"><pre><span></span><code>_id: &lt;class &#39;str&#39;&gt;
+rid: &lt;class &#39;str&#39;&gt;
+msg: &lt;class &#39;str&#39;&gt;
+ts: &lt;class &#39;str&#39;&gt;
+u: &lt;class &#39;dict&#39;&gt;
+urls: &lt;class &#39;list&#39;&gt;
+mentions: &lt;class &#39;list&#39;&gt;
+channels: &lt;class &#39;list&#39;&gt;
+md: &lt;class &#39;list&#39;&gt;
+_updatedAt: &lt;class &#39;str&#39;&gt;
+</code></pre></div>
+
+<p>In the output, the values at the <code>_id</code>, <code>rid</code>, <code>msg</code>, <code>ts</code>, and <code>_updatedAt</code> keys are all strings. The value at the
+<code>u</code> key is a dictionary. The
+value at the <code>urls</code>,
+<code>mentions</code>, <code>channels</code>, and <code>md</code> keys are lists.</p>
+<p>You can get the value of the data at the key using
+<code>data['messages'][8][key]</code>.
+Remember that to retrieve the value of a key in a dictionary, you put
+the key in square brackets. In this case, the key itself is stored in
+the variable <code>key</code>, so you can
+get its value by putting <code>key</code>
+inside the square brackets. To find
+out what type of data that is, then, just pass the value into the
+<code>type()</code> function.</p>
+<h4>Selecting Values in Dictionaries and Lists</h4>
+<p>When working with datasets, you often end up with structures like this:
+a mess of dictionaries and lists that you need to make sense of. Being
+able to select the exact values you&rsquo;re looking for is an important
+skill. To practice navigating through dictionaries and lists, take a
+closer look at the value of just one of these keys, the <code>md</code> key, by running the following command:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="mi">8</span><span class="p">][</span><span class="s2">&quot;md&quot;</span><span class="p">])</span>
+</code></pre></div>
+
+<p>In the output, you can tell that this value is a list because it&rsquo;s
+surrounded by square brackets:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;PARAGRAPH&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;PLAIN_TEXT&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;Некоторые американские сенаторы предлагают помимо соцсетей блокировать в России ещё и PornHub!&#39;</span><span class="p">}]}]</span>
+</code></pre></div>
+
+<p>The list&rsquo;s single item is a dictionary, which is surrounded by braces.
+The dictionary has a <code>type</code>
+key whose value is <code>PARAGRAPH</code>, as well as a <code>value</code> key. The value of <code>value</code> is another list with one item
+containing another dictionary; that dictionary itself contains
+<code>type</code> and <code>value</code> keys, where the value of
+<code>type</code> is <code>PLAIN_TEXT</code>.</p>
+<p>These data structures can have as many sublists and subdictionaries as
+you&rsquo;d like. To select specific values, after the <code>data</code> variable keep adding square brackets
+containing an index (if it&rsquo;s a list) or a key (if it&rsquo;s a dictionary)
+until you get to the value you&rsquo;re looking for. For example, use the
+following command to access the value of the <code>value</code> key in the inner dictionary within the
+inner list, which is in another <code>value</code> key in the outer dictionary in the
+outer list:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="mi">8</span><span class="p">][</span><span class="s2">&quot;md&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+</code></pre></div>
+
+<p>You already know that <code>data["messages"][8]</code> is a dictionary that represents a chat
+message. To find the value of the <code>md</code> key in that dictionary, you
+include<code>["md"]</code> in the
+command. As you can tell from inspecting the structure in Listing 8-2, this is a list with one item, so adding
+<code>[0]</code> selects that item. This
+item is a dictionary, and you select the value of its <code>value</code> key by adding <code>["value"]</code>. This item is another list with one
+item, so you again add <code>[0]</code>
+to select that one item. This is yet another dictionary, so you can
+select the value of the final inner <code>value</code> key by adding another
+<code>["value"]</code>.</p>
+<p>You should get the following output:</p>
+<div class="codehilite"><pre><span></span><code>Некоторые американские сенаторы предлагают помимо соцсетей блокировать в России ещё и PornHub!
+</code></pre></div>
+
+<p>In English, the message that you just displayed says, &ldquo;Some American
+Senators suggest blocking PornHub in Russia in addition to social
+networks!&rdquo; It was posted right after Russia started its invasion of
+Ukraine, and US and European leaders
+immediately began imposing economic sanctions on Russia. After invading
+Ukraine, the Russian government censored access to Twitter and Facebook
+from the Russian internet. Rumors spread that PornHub, a popular
+American porn website, would block access to Russian users (though this
+didn&rsquo;t happen). This same user followed up their first post with &ldquo;That&rsquo;s
+it, we&rsquo;re done,&rdquo; and then &ldquo;They will take away our last joys!&rdquo;</p>
+<h4>Analyzing Data Stored in Dictionaries and Lists</h4>
+<p>Whenever I work with any sort of structured data, I find myself looping
+through a list of dictionaries and selecting specific pieces of data. As
+long as you understand its structure, you can write your own similar
+code to quickly pull out the relevant information, no matter what
+dataset you&rsquo;re working with. For example, you might want to view the
+chat logs in the format <code>timestamp username``: message</code> in order to hide the
+unimportant sections of data so that you can directly copy and paste the
+relevant parts into machine translation systems like DeepL or Google
+Translate. Run the following commands to display all of the messages in
+<code>data["messages"]</code> in that
+format:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;ts&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">][</span><span class="s1">&#39;username&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;msg&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
+
+<p>You should get the following output:</p>
+<div class="codehilite"><pre><span></span><code>--snip--
+2022-02-24T22:02:49.448Z thomas: последние радости у нас заберут
+2022-02-24T22:02:44.463Z thomas: ну все, приплыли)
+2022-02-24T22:02:38.276Z thomas: Некоторые американские сенаторы предлагают помимо соцсетей
+блокировать в России ещё и PornHub!
+2022-02-24T22:00:00.347Z thomas:
+2022-02-24T21:58:56.152Z rags: угу :(
+--snip--
+</code></pre></div>
+
+<p>Since <code>data["messages"]</code> is a
+list, each time the <code>for</code> loop
+in this command runs, it updates the value of the <code>message</code> variable to a different item in that
+list. In this case, each item is a different dictionary. Inside the
+<code>for</code> loop, the
+<code>print()</code> function displays
+three values: the timestamp (<code>message['ts']</code>), the username
+(<code>message['u']['username']</code>),
+and the message itself (<code>message['msg']</code>).</p>
+<p>You can change this command to display whatever information you&rsquo;d like
+from each message. Maybe you&rsquo;re interested is the user&rsquo;s ID rather than
+their username. In that case, you could display
+<code>message['u']['_id']</code>.</p>
+<p>The previous output shows the same messages about PornHub just
+discussed, as well as a message posted just before that from another
+user, <code>rags</code>. If you&rsquo;re
+interested in seeing only the messages posted by <code>rags</code>, view those by running the following
+commands:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
+<span class="o">...</span>     <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">][</span><span class="s2">&quot;username&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;rags&quot;</span><span class="p">:</span>
+<span class="o">...</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;ts&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">][</span><span class="s1">&#39;username&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;msg&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
+
+<p>This code is similar to the previous example. A <code>for</code> loop loops through each message in
+<code>data["messages"]</code>, and then a
+<code>print()</code> statement displays
+specific pieces of information from that message. This time, though,
+each loop also contains an <code>if</code> statement. Each time the code finds
+another message, it checks to see if the username is <code>rags</code> and, if so, displays the message.
+Otherwise, it moves on to the next message. You should get the following
+output:</p>
+<div class="codehilite"><pre><span></span><code>2022-02-24T22:08:49.684Z rags: давай бро спокойной ночи
+2022-02-24T22:03:50.131Z rags: сча посмотрю спасиб =)
+2022-02-24T21:58:56.152Z rags: угу :(
+--snip--
+</code></pre></div>
+
+<p>Finally, suppose you want to figure out how many messages each person
+posted, perhaps to find the most active poster in the #general chatroom
+on this day. The simplest way to do this is to create a new empty
+dictionary yourself and then write code to fill it up. Run the following
+command to create an empty dictionary called <code>user_posts</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">user_posts</span> <span class="o">=</span> <span class="p">{}</span>
+</code></pre></div>
+
+<p>The keys in this dictionary will be usernames, and the values will be
+the number of posts from that user. Fill up the <code>user_posts</code> dictionary with the following code:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
+<span class="o">...</span>     <span class="n">username</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">][</span><span class="s2">&quot;username&quot;</span><span class="p">]</span>
+<span class="o">...</span>     <span class="k">if</span> <span class="n">username</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">user_posts</span><span class="p">:</span>
+<span class="o">...</span>         <span class="n">user_posts</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="o">...</span>     <span class="k">else</span><span class="p">:</span>
+<span class="o">...</span>         <span class="n">user_posts</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div>
+
+<p>Again, this code uses a <code>for</code>
+loop to loop through the messages. Next, it defines the
+<code>username</code> variable as
+<code>message["u"]["username"]</code>,
+the username of the person who posted the message the code is currently
+looping through. Next, using an <code>if</code> statement, the code checks to see if
+this username is already a key in the <code>user_posts</code> dictionary. (It&rsquo;s not checking to see
+if the string <code>username</code> is a
+key, but rather if the <em>value</em> of the <code>username</code> variable, like <code>thomas</code> or <code>rags</code>, is a key.)</p>
+<p>If this user doesn&rsquo;t exist in the <code>user_posts</code> dictionary, the program adds a key to
+this dictionary and sets the value at that key to <code>1</code>, with the line
+<code>user_posts[username] = 1</code>. Otherwise, it increases the value by
+1, with <code>user_posts[username] += 1</code>. By the time the <code>for</code> loop finishes running, the
+<code>user_posts</code> dictionary should
+be complete. The keys should be all of the usernames found in the
+messages, and the values should be the total number of messages for that
+user.</p>
+<p>Use the following code to display the information inside the
+<code>user_posts</code> dictionary,
+viewing the data you just collected:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">user_posts</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> posted </span><span class="si">{</span><span class="n">user_posts</span><span class="p">[</span><span class="n">username</span><span class="p">]</span><span class="si">}</span><span class="s2"> times&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
+
+<p>You should get the following output:</p>
+<div class="codehilite"><pre><span></span><code>weldon posted 64 times
+patrick posted 62 times
+rags posted 38 times
+thomas posted 58 times
+ryan posted 2 times
+kermit posted 151 times
+biggie posted 39 times
+stanton posted 12 times
+angelo posted 102 times
+Garfield posted 61 times
+jaime posted 2 times
+grem posted 5 times
+jefferson posted 1 times
+elijah posted 6 times
+chad posted 1 times
+</code></pre></div>
+
+<p>These are the users who posted in Conti&rsquo;s #general chatroom, in their
+RocketChat server, on the day Russia invaded Ukraine in 2022. The user
+<em>kermit</em> posted 151 times, more than any other user.</p>
+<p>In these examples, you looped through hundreds of chat messages, but the
+same concepts would work with millions or billions of messages or with
+data representing any sort of information.</p>
+<blockquote>
+<h5>REVELATIONS IN THE CONTI DATASET</h5>
+<p>This dataset includes far more chat logs than just a few messages worrying about a porn site getting blocked. The example I used in this section included the chat logs for the #general channel for a single day, but the logs for this RocketChat server span from July 24, 2021, to February 26, 2022. The leak also includes many logs from the chat service known as Jabber, including some where Conti hackers discuss hacking a contributor to the OSINT-based investigative journalism group Bellingcat. The hackers were hoping to find information about Alexei Navalny, the imprisoned Russian opposition leader who survived an FSB assassination attempt.</p>
+<p>The anonymous Ukrainian researcher who leaked the Conti dataset told CNN, “I cannot shoot anything, but I can fight with a keyboard and mouse.” According to CNN, a few weeks after leaking the data, the researcher successfully slipped out of Ukraine during Russia’s invasion, laptop in hand.</p>
+<p>From reading the chat logs, I learned that many of the Conti hackers are Russian ultranationalists. Many of them believe Putin’s conspiratorial lies about Ukraine, like that it’s run by a “neo-Nazi junta,” while at the same time making antisemitic comments about Volodymyr Zelenskyy, Ukraine’s Jewish president. You can see my full reporting on this dataset at <a href="https://theintercept.com/2022/03/14/russia-ukraine-conti-russian-hackers/">https://theintercept.com/2022/03/14/russia-ukraine-conti-russian-hackers/</a>.</p>
+</blockquote>
+<p>In this section, you learned how to work with flexible data structures
+that combine dictionaries and lists, including how to pick out specific
+elements that you&rsquo;re interested in and how to quickly traverse them by
+looping through them. These skills will often prove useful when you&rsquo;re
+writing Python scripts to help you analyze data.</p>
+<p>Now that you&rsquo;re familiar with data structures that combine dictionaries
+and lists, it&rsquo;s time to create your own to map out the CSV files in
+BlueLeaks.</p>
+<h3>Exercise 8-5: Map Out the CSVs in BlueLeaks</h3>
+<p>Each folder in BlueLeaks includes data from a single hacked law
+enforcement website in the form of hundreds of CSV files. These files
+contain some of the most interesting information in all of BlueLeaks,
+such as the contents of bulk email that fusion centers sent to local
+cops, or &ldquo;suspicious activity reports.&rdquo; In this exercise, you&rsquo;ll
+construct a map of the contents of the dataset.</p>
+<p>By manually looking in different BlueLeaks folders, I noticed that each
+folder seems to have a file called <em>Company.csv</em> (each containing
+different content), but only one folder, <em>ncric</em>, has a file called
+<em>911Centers.csv</em>. Clearly, not all of the BlueLeaks sites have the same
+data. Which CSV files are in every folder in BlueLeaks, which are in
+some folders, and which are unique to a single folder? Let&rsquo;s write a
+Python script to find out.</p>
+<p>As with most programming problems, there are multiple ways you could
+write a script that answers this question. If you feel comfortable
+enough with Python by now that you&rsquo;d like a challenge, try writing one
+on your own. Otherwise, follow along with this exercise. Either way, the
+program must meet the following requirements:</p>
+<ul>
+<li>Make the script accept an argument called <code>blueleaks_path</code> using Click.</li>
+<li>Create an empty dictionary called <code>csv_to_folders</code>. Your script should fill this
+    dictionary with data. The keys should be CSV filenames,
+    and the values should be lists of BlueLeaks
+    folders that contain this CSV.</li>
+<li>Loop through all of the files and folders in
+    <code>blueleaks_path</code>. For each
+    folder, loop through all of the files it contains. For each CSV
+    file, add data to the <code>csv_to_folders</code> dictionary.</li>
+<li>Display the contents of the <code>csv_to_folders</code> dictionary.</li>
+</ul>
+<p>In each step that follows, I&rsquo;ll quote a snippet of code, explain how it
+works, and give you a chance to run it as is. You&rsquo;ll then add more
+features to that code and run it again. It&rsquo;s good practice to write code
+in small batches, pausing frequently to test that it works as you
+expect. This will help you catch bugs early, making the process of
+debugging much simpler.</p>
+<h4>Accept a Command Line Argument</h4>
+<p>Create an <em>exercise-8-5.py</em> file and enter the Python template:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Next, instead of hardcoding the path to the BlueLeaks data like you did
+in Exercise 8-2, let&rsquo;s use Click to pass in the path as a command line
+argument, <code>blueleaks_path</code>. To
+do so, make the following modifications to your code (the added syntax
+is highlighted in bold):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;blueleaks_path is: </span><span class="si">{</span><span class="n">blueleaks_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This code modifies the template to import the <code>click</code> module, adds the correct decorators
+before the <code>main()</code> function,
+adds the <code>blueleaks_path</code>
+argument to the <code>main()</code>
+function, and adds a simple docstring to the <code>main()</code> function so that running this script
+with <code>--help</code> will be more
+useful. Finally, it includes a line to display the value of
+<code>blueleaks_path</code>, so that you
+can confirm the code is working when you run it.</p>
+<p>Try running your script with <code>--help</code> to see if the help text works, and
+with a value for <code>blueleaks_path</code> to see if the argument is successfully
+sent to the <code>main()</code> function:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-5.py --help
+Usage: exercise-8-4.py [OPTIONS] BLUELEAKS_PATH
+
+  Map out the CSVs in BlueLeaks
+
+Options:
+  --help  Show this message and exit.
+micah@trapdoor chapter-8 % python3 exercise-8-5.py test-path
+blueleaks_path is: test-path
+</code></pre></div>
+
+<p>If your output looks like this, everything is working correctly so far.</p>
+<h4>Loop Through the BlueLeaks Folders</h4>
+<p>Now that you can use the <code>blueleaks_path</code> CLI argument, make the following
+modifications to your code to have it loop through all of the folders it
+finds in that path:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+        <span class="n">blueleaks_folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">blueleaks_folder_path</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;folder: </span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">, path: </span><span class="si">{</span><span class="n">blueleaks_folder_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>First, you import the <code>os</code>
+module in order to be able to list all of the files in the
+<em>BlueLeaks-extracted</em> folder using the <code>os.listdir()</code> function. Inside the <code>main()</code> function, a <code>for</code> loop loops through the return value of
+<code>os.listdir (blueleaks_path)</code>,
+the list of filenames inside the folder at <code>blueleaks_path</code>.</p>
+<p>Inside the loop, the code defines <code>blueleaks_folder_path</code> as the path of the specific BlueLeaks
+folder for the current loop. For example, if the value of
+<code>blueleaks_path</code> is
+<em>/Volumes/datasets/BlueLeaks-extracted</em>, and at this point in the
+<code>for</code> loop, the value of
+<code>folder</code> is <em>icefishx</em>, then
+the value of <code>blueleaks_folder_path</code> will be
+<em>/Volumes/datasets/BlueLeaks-extracted/icefishx</em>.</p>
+<p>You want to look inside subfolders in the <em>BlueLeaks-extracted</em> folder,
+not inside files. If there are any files in that folder, you want to
+skip them. To meet these requirements, the code includes an <code>if</code> statement that checks whether
+<code>blueleaks_folder_path</code> is
+actually a folder. Finally, the code displays the current value of
+<code>folder</code> and
+<code>blueleaks_folder_path</code>.</p>
+<p>Run your script again. This time, pass in the
+real path to your <em>BlueLeaks -extracted</em> folder:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-5.py /Volumes/datasets/BlueLeaks-extracted
+folder: bostonbric, path: /Volumes/datasets/BlueLeaks-extracted/bostonbric
+folder: terrorismtip, path: /Volumes/datasets/BlueLeaks-extracted/terrorismtip
+folder: ociac, path: /Volumes/datasets/BlueLeaks-extracted/ociac
+--snip--
+</code></pre></div>
+
+<p>The output should show that the <code>folder</code> variable holds just the name of the
+folder, like <em>bostonbric</em>, and the <code>blueleaks_folder_path</code> variable includes the full path to
+that folder, like <em>/Volumes/datasets/BlueLeaks-extracted/bostonbric</em>.
+When you run this on your own computer, you may see these values in a
+different order than what&rsquo;s shown here.</p>
+<h4>Fill Up the Dictionary</h4>
+<p>You now have a script that accepts <code>blueleaks_path</code> as an argument and then loops through
+every folder in that path. Adding the code in bold creates the
+<code>csv_to_folders</code> dictionary
+and starts to fill it up with data:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
+    <span class="n">csv_to_folders</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+        <span class="n">blueleaks_folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">blueleaks_folder_path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_folder_path</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">filename</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">csv_to_folders</span><span class="p">:</span>
+                        <span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+                    <span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Your goal with this script is to map out which CSV files are in which
+BlueLeaks folders. To store this data, the code creates the empty
+dictionary <code>csv_to_folders</code> at
+the top of the <code>main()</code>
+function. The next step is to fill up that dictionary.</p>
+<p>The code loops through all of the filenames in <code>blueleaks_path</code>, checking each to see if it&rsquo;s a
+folder. Removing the <code>print()</code>
+statement in the previous iteration of the code, this code instead adds
+a second <code>for</code> loop that loops
+through all of the files in that specific BlueLeaks folder.</p>
+<p>In this second <code>for</code> loop, an <code>if</code> statement checks whether the filename
+ends in <em>.csv</em>. This <code>if</code>
+statement calls the <code>lower()</code>
+method on the <code>filename</code>
+string, which returns a lowercase-only version of the string. The code
+then calls the <code>endswith()</code>
+method on that lowercase string, which returns a Boolean describing
+whether the string ends with the string that was passed in. If the
+string <code>filename</code> ends with
+<em>.csv</em>, <em>.CSV</em>, or <em>.cSv</em>, the <code>lower()</code> method will convert the file extension
+to <em>.csv</em>, and <code>endswith()</code>
+will return <code>True</code>. If
+<code>filename</code> ends with anything
+else, like <em>.docx</em>, then <code>endswith()</code> will return <code>False</code>.</p>
+<p>Each time the code following this <code>if</code> statement runs, it means the program
+has found a CSV (called <code>filename</code>) in the current BlueLeaks folder
+(called <code>folder</code>). You want
+<code>csv_to_folders</code> to be a
+dictionary where the keys are CSV filenames and the values are lists of
+folders. This code checks to see if the key <code>filename</code> has been created in
+<code>csv_to_folders</code>, and if it
+hasn&rsquo;t, creates it and set its value to an empty list (<code>[]</code>). Finally, after the code has
+confirmed that the <code>filename</code>
+key has been created and is a list, it appends the value of
+<code>folder</code> to that list.</p>
+<p>These last lines are tricky, so let&rsquo;s dig in a little more. The first
+time the script comes across a CSV filename (like <em>CatalogRelated.csv</em>),
+the script sets the value of that key in <code>csv_to_folders</code> to an empty list. If the same filename
+exists in another BlueLeaks folder later on, the expression
+<code>filename not in csv_to_folders</code> will evaluate to <code>False</code> (meaning
+<code>csv_to_folders["CatalogRelated .csv"]</code> already exists), so the code following
+the <code>if</code> statement won&rsquo;t run.
+Finally, the code appends <code>folder</code>, the name of the BlueLeaks folder it&rsquo;s
+currently looking in, to the list of folders that include that filename.</p>
+<p>Pause and try running the script so far:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-5.py /Volumes/datasets/BlueLeaks-extracted
+</code></pre></div>
+
+<p>This should take a moment to run but displays nothing, since you&rsquo;re not
+yet using the <code>print()</code>
+function anywhere. The code is simply creating the
+<code>csv_to_folders</code> dictionary
+and filling it up with data.</p>
+<h4>Display the Output</h4>
+<p>By the time the previous version of the script runs, the
+<code>csv_to_folders</code> dictionary
+should contain a complete set of CSV filenames, mapped to the BlueLeaks
+sites where they were found. The following code should show you what the
+program found:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
+    <span class="n">csv_to_folders</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+        <span class="n">blueleaks_folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+
+          <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">blueleaks_folder_path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_folder_path</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">filename</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">csv_to_folders</span><span class="p">:</span>
+                        <span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+                    <span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">csv_to_folders</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">])</span><span class="si">}</span><span class="s2"> folders | </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>The added code in bold loops through all of the keys (each a CSV
+filename) in <code>csv_to_folders</code>,
+then displays the number of BlueLeaks folders that contain that file
+(<code>len(csv_to_folders[filename])</code>) along with the filename itself.</p>
+<p>You can find this final script at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-5.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-5.py</a>.
+When you run it, the output should look like this:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-5.py /Volumes/datasets/BlueLeaks-extracted
+161 folders | CatalogRelated.csv
+161 folders | Blog.csv
+161 folders | EmailBuilderOptions.csv
+--snip--
+1 folders | HIDTAAgentCategory.csv
+1 folders | Lost.csv
+1 folders | AgencyContacts.csv
+</code></pre></div>
+
+<p>Since this script displays the number of folders at the beginning of
+each line of output, you can pipe the output into <code>sort -n</code> to sort it numerically in ascending
+order, like so:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-5.py /Volumes/datasets/BlueLeaks-extracted | sort
+-n
+1 folders | 1Cadets.csv
+1 folders | 1Mentors.csv
+1 folders | 1Unit.csv
+--snip--
+161 folders | VideoDownload.csv
+161 folders | VideoHistory.csv
+161 folders | VideoOptions.csv
+</code></pre></div>
+
+<p>Most of the CSV files are in either a single folder or all 161 folders.
+However, there are a few exceptions: <em>Donations.csv</em> should be in 10
+folders, <em>SARs.csv</em> should be in 25, and so on. This information would
+have taken you many hours of busywork to find manually.</p>
+<p>At this point, you&rsquo;ve learned the basics of navigating the filesystem in
+Python. You&rsquo;ve seen how to loop through folders using
+<code>os.listdir()</code>, loop through
+entire folder structures using <code>os.walk()</code>, and look up information
+about the files and folders you find. In the
+next section, you&rsquo;ll learn how to actually read the contents of a file
+you find and create new files yourself.</p>
+<h3>Reading and Writing Files</h3>
+<p>To follow the rest of this book, you&rsquo;ll need to know one more major
+Python concept: how to read and write files. During a data
+investigation, you&rsquo;ll almost certainly need to read the contents of
+files, especially CSV and JSON files. You&rsquo;ll also probably want to be
+able to create new files, by calculating some data of your own and
+saving it to a spreadsheet, for example. In this section you&rsquo;ll learn
+how to open files and write or read content to them.</p>
+<p>In programming, to work with a file, you first need to open it and
+specify the <em>mode</em>&mdash;that is, whether you&rsquo;re planning on <em>reading</em> from
+or <em>writing</em> to this file. To open an existing file and access its
+contents, open it for reading using mode <code>r</code>. To create a new file and put data in
+it, open it for writing using mode <code>w</code>.</p>
+<h4>Opening Files</h4>
+<p>To prepare to work with a file, whether for writing or reading, you use
+the built-in Python function <code>open()</code>. To open it for reading, you use the
+following code:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;some_file.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This code uses a <code>with</code>
+statement, which tells Python that after the <code>open()</code> function is done running, it should
+set the variable <code>f</code> to that
+function&rsquo;s return value. The <code>f</code> variable is a <em>file object</em>, a type of
+variable that allows you to read or write data to a file. The first
+argument to the <code>open()</code>
+function is a path, and the second argument is the mode, which in this
+example is <code>"r"</code> for reading.</p>
+<p>In the code block after the <code>with</code> statement, you can call methods on
+<code>f</code> to interact with the file.
+For example, <code>f.read()</code> will
+read all of the data in the file and return it&mdash;in this case, storing
+it in the <code>text</code> variable.</p>
+<p>To open a file for writing, you set the mode to <code>"w"</code> like so:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The <code>open()</code> function returns
+the file object <code>f</code>. To write
+data into the file, you can use the <code>f.write()</code> method. Here, this code is opening a
+file called <em>output.txt</em> and writing the string <code>hello world</code> to it.</p>
+<p>In the next two sections, you&rsquo;ll learn more about using
+<code>f.write()</code> to write to files
+and <code>f.read()</code> and
+<code>f.readlines()</code> to read from
+files.</p>
+<h4>Writing Lines to a File</h4>
+<p>Text files are made up of a series of individual characters. Consider a
+text file with these contents:</p>
+<div class="codehilite"><pre><span></span><code>Hello World
+Hola Mundo
+</code></pre></div>
+
+<p>You could also represent the entire contents of this file as a Python
+string:</p>
+<div class="codehilite"><pre><span></span><code>&quot;Hello World\nHola Mundo\n&quot;
+</code></pre></div>
+
+<p>The first character of the string is <code>H</code>, then <code>e</code>, then <code>l</code>, and so on. The 12th character
+(counting the space), <code>\n</code>, is
+a special character known as a <em>newline</em> that represents a break between
+lines. As with shell scripting, the backslash is the escape character in
+Python, so a backslash followed by another character represents a single
+special character.</p>
+<p>Newlines are used to write lines to a file. Try running these commands
+in your Python interpreter:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello World</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hola Mundo</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="mi">12</span>
+<span class="mi">11</span>
+</code></pre></div>
+
+<p>The <code>12</code> and <code>11</code> in the output represent the number of
+bytes written. The first <code>f.write()</code> call wrote 12 bytes, because the
+string <code>Hello World</code> takes 11
+bytes of memory: it has 11 characters, plus 1 for the newline character.
+The second call wrote 11 bytes, since <code>Hola Mundo</code> takes 10 bytes of memory, plus 1 for
+the newline character.</p>
+<p>In your terminal, use the following command to view the file you just
+wrote:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % cat output.txt
+Hello World
+Hola Mundo
+</code></pre></div>
+
+<p>If you had written the same code but without the newlines, the output
+would have been <code>Hello WorldHola Mundo</code>, with no line breaks.</p>
+<h4>Reading Lines from a File</h4>
+<p>Run the following command to read the file you just created:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="o">...</span>
+</code></pre></div>
+
+<p>This code reads all of the data from the file
+and saves it in the string <code>text</code>. In fact, this might look familiar:
+earlier in this chapter, in the Exploring Dictionaries and Lists Full
+of Data in Python section, we used similar code to load the
+leaked Conti chat logs into a Python dictionary.</p>
+<p>Since splitting text files into multiple lines is so common, file
+objects also have a convenient method called <code>readlines()</code>. Instead of reading all of the data
+into a file, it reads only one line at a time, and you can loop over the
+lines in a <code>for</code> loop. Try
+this out by running the following commands:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+<span class="o">...</span>         <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">Hello</span> <span class="n">World</span>
+
+<span class="n">Hola</span> <span class="n">Mundo</span>
+</code></pre></div>
+
+<p>This code opens the file for reading, then loops through each line in
+the file. Each line is stored in the variable <code>line</code>, then displayed with the
+<code>print()</code> function. Because
+the <code>line</code> variable in each
+loop ends in <code>\n</code> (for
+example, the first line is <code>Hello World\n</code>, not <code>Hello World</code>), and the <code>print()</code> function automatically adds an extra
+<code>\n</code>, the output shows an
+extra hard return after each line.</p>
+<p>If you don&rsquo;t want to display these extra newlines, you can use the
+<code>strip()</code> method to get rid of
+any whitespace (spaces, tabs, or newlines) from the beginning and end of
+the string. Run the same code, but this time strip out the newline
+characters on each line:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+<span class="o">...</span>         <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="o">...</span>         <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">Hello</span> <span class="n">World</span>
+<span class="n">Hola</span> <span class="n">Mundo</span>
+</code></pre></div>
+
+<p>You&rsquo;ll practice the basics of how to read and write files in Python in
+the following exercise.</p>
+<h3>Exercise 8-6: Practice Reading and Writing Files</h3>
+<p>In Exercise 7-5, you wrote a function that converts a string to an
+alternating caps version, like <code>This book is amazing</code> to <code>ThIs bOoK Is aMaZiNg</code>. To practice your newfound reading and
+writing files, in this exercise, you&rsquo;ll write a script to create an
+alternating caps version of all of the text in an entire text file.</p>
+<p>If you&rsquo;d like a challenge, you can try
+programming your own script to meet the following requirements:</p>
+<ul>
+<li>Accepts two arguments, <code>input_filename</code> and <code>output_filename</code>, using Click</li>
+<li>Opens the file <code>input_filename</code> for reading and loads its contents
+    into the string <code>text</code></li>
+<li>Opens the file <code>output_filename</code> for writing and saves the
+    alternating caps version of <code>text</code> to that new file</li>
+</ul>
+<p>Otherwise, follow along with my explanation of the following code, which
+implements this iNcReDiBlY uSeFuL command line program.</p>
+<p>Start by copying the <code>alternating_caps()</code> function that you wrote in Exercise
+7-5 into a new Python script called <em>exercise-8-6.py</em>. Next, make the
+modifications highlighted in bold here (or copy the final script at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-6.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-6.py</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+
+<span class="k">def</span> <span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
+    <span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">should_be_capital</span><span class="p">:</span>
+            <span class="n">alternating_caps_text</span> <span class="o">+=</span> <span class="n">character</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">alternating_caps_text</span> <span class="o">+=</span> <span class="n">character</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">alternating_caps_text</span>
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;input_filename&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_filename&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="n">output_filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts a text file to an aLtErNaTiNg cApS version&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+      <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<p>This code first imports the <code>click</code> module, used for the arguments, and
+then defines the <code>alternating_caps()</code> function. Again, the <code>main()</code> function is a Click command, but this
+time it takes two arguments, <code>input_filename</code> and <code>output_filename</code>.</p>
+<p>Once the <code>main()</code> function runs, the section for reading
+and writing files runs. The code opens <code>input_filename</code> for reading and loads all of the
+contents of that file into the string <code>text</code>. It then opens
+<code>output_filename</code> for writing
+and saves the alternating caps version of that string into the new file.
+It does so by running <code>alternating_caps(text)</code>, which takes <code>text</code> as an argument and returns its
+alternating caps version, and then passes that return value directly
+into <code>f.write()</code>, writing it
+to the file.</p>
+<p>To demonstrate how this script works, try running it on the famous &ldquo;To
+be, or not to be&rdquo; soliloquy from <em>Hamlet</em>. First, save a copy of the
+soliloquy found at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/shakespeare.txt">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/shakespeare.txt</a>
+to a file called <em>shakespeare.txt</em>. Here are the original contents of
+<em>shakespeare.txt</em>, displayed using the <code>cat</code> command:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % cat shakespeare.txt
+To be, or not to be, that is the question:
+Whether &#39;tis nobler in the mind to suffer
+The slings and arrows of outrageous fortune,
+Or to take Arms against a Sea of troubles,
+And by opposing end them: to die, to sleep
+No more; and by a sleep, to say we end
+--snip--
+</code></pre></div>
+
+<p>Next, pass that filename into your script to create an alternating caps
+version of that file. Here&rsquo;s what happens when I do it:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-5.py shakespeare.txt shakespeare-mocking.txt
+micah@trapdoor chapter-8 % cat shakespeare-mocking.txt
+To bE, oR NoT To bE, tHaT Is tHe qUeStIoN:
+wHeThEr &#39;TiS NoBlEr iN ThE MiNd tO SuFfEr
+tHe sLiNgS AnD ArRoWs oF OuTrAgEoUs fOrTuNe,
+Or tO TaKe aRmS AgAiNsT A SeA Of tRoUbLeS,
+aNd bY OpPoSiNg eNd tHeM: tO DiE, tO SlEeP
+No mOrE; aNd bY A SlEeP, tO SaY We eNd
+--snip--
+</code></pre></div>
+
+<p>First, I ran the script, passing in <em>shakespeare.txt</em> as
+<code>input_filename</code> and
+<em>shakespeare-mocking.txt</em> as <code>output_filename</code>. The script itself displayed no output
+(it doesn&rsquo;t include any <code>print()</code> statements), but it did create a new
+file. I then used <code>cat</code> to
+display the contents of that new file, which is indeed an alternating
+caps version of Hamlet&rsquo;s soliloquy.</p>
+<h3>Summary</h3>
+<p>Congratulations on making it through a crash course in the fundamentals
+of Python programming! You&rsquo;ve learned how to bring extra functionality
+to your scripts with built-in and third-party Python modules. You&rsquo;ve
+also learned how to make your own CLI programs using Click, how to write
+code that traverses the filesystem, how to work with structured data
+using dictionaries and lists, and how to read and write files.</p>
+<p>You&rsquo;ll use these skills throughout the
+following chapters as you dig through various datasets, uncovering
+revelations you&rsquo;d never discover otherwise. In the next chapter, you&rsquo;ll
+write Python programs that loop through rows in the BlueLeaks CSV
+spreadsheets, transforming the data into a more workable format. You&rsquo;ll
+get practice writing the content of law enforcement bulk email messages
+to files, and you&rsquo;ll use Python to create your own CSV spreadsheets.</p>
         </div>
     </section>
     <section class="pagination">

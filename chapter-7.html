@@ -37,13 +37,1511 @@
     </header>
     <section class="intro bookIntro">
         <div class="wrapper" id="intro-wrapper">
-          <div id="reading-time">~0 min read</div>
+          <div id="reading-time">~48 min read</div>
           <h1>Chapter 7: An Introduction to Python</h1>
-          
+          <p>The skills you&rsquo;ve learned in the last few chapters are instrumental for
+investigating leaked datasets, but having basic programming knowledge is
+even more powerful. Using Python or other programming languages, you can
+give your computer precise instructions for performing tasks that
+existing tools or shell scripts don&rsquo;t allow. For example, you could
+write a Python script that scours a million pieces of video metadata to
+determine where the videos were filmed. In my experience, Python is also
+simpler, easier to understand, and less error-prone than shell scripts.</p>
         </div>
     </section>
     <section id="content" data-content="chapter-7">
-        <div class="wrapper" id="about-content">
+        <div class="wrapper" id="about-content"><p>This chapter provides a crash course on the fundamentals of Python
+programming. You&rsquo;ll learn to write and execute Python scripts and use
+the interactive Python interpreter. You&rsquo;ll also use Python to do math,
+define variables, work with strings and Boolean logic, loop through
+lists of items, and use functions. Future
+chapters rely on your understanding of these basic skills.</p>
+<h3>Exercise 7-1: Install Python</h3>
+<p>Some operating systems, including most versions of Linux and macOS, come
+with Python preinstalled, and it&rsquo;s common to have multiple versions of
+Python installed at once. This book uses Python 3. After you follow the
+Python installation instructions for your operating system in this
+exercise, you should be able to run Python scripts with the
+<code>python3</code> (for Linux and Mac)
+or <code>python</code> (for Windows)
+command.</p>
+<h4>Windows</h4>
+<p>Download and install the latest version of Python 3 for Windows from
+<a href="https://www.python.org">https://www.python.org</a>.
+During installation, check the box <strong>Add Python 3.<em>x</em></strong> <strong>to PATH</strong>
+(where <strong>3.<em>x</em></strong> is the latest Python 3 version), which allows you to
+run the <code>python</code> command in
+PowerShell without using the Python program&rsquo;s absolute path.</p>
+<p>Wherever this chapter instructs you to open a terminal,
+use PowerShell instead of an Ubuntu terminal. You can also learn to use
+Python in Ubuntu with WSL by following this chapter&rsquo;s Linux
+instructions, but running Python directly in Windows makes reading and
+writing data on your Windows-formatted USB disk much faster.</p>
+<p>Windows users should replace all instances of <code>python3</code> with <code>python</code> when running the example code in this
+chapter.</p>
+<h4>Linux</h4>
+<p>Open a terminal and make sure the <code>python3</code>, <code>python3-pip</code>, and <code>python3-venv</code> packages are installed, using this
+<code>apt</code> command:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt install python3 python3-pip python3-venv
+</code></pre></div>
+
+<p>This command either installs the latest version of Python 3 available in
+the Ubuntu repositories (as well as a few related packages you&rsquo;ll need
+for this chapter) or does nothing if the packages are already installed.</p>
+<h4>macOS</h4>
+<p>Open a terminal and run the following Homebrew command to make sure
+<code>python3</code> is installed:</p>
+<div class="codehilite"><pre><span></span><code>brew install python3
+</code></pre></div>
+
+<p>This command either installs the latest version of Python 3 available in
+Homebrew or does nothing if it&rsquo;s already installed.</p>
+<h3>Exercise 7-2: Write Your First Python Script</h3>
+<p>Now that you&rsquo;ve downloaded Python, you&rsquo;ll write and run a simple Python
+script that displays some text in your terminal.</p>
+<p>In your text editor, create a new file called <em>exercise-7-2.py</em> (all
+Python scripts end in <em>.py</em>). The first time you open a Python script in
+VS Code, it asks if you want to install the Python extension. I
+recommend doing so in order to enable VS Code to make suggestions as
+you&rsquo;re typing. The extension also has various features for highlighting
+syntax errors and helping you format your code nicely.</p>
+<p>Enter the following code (or copy and paste it from
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-2.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-2.py</a>),
+then save the file:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hacks&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;leaks&quot;</span><span class="p">)</span>
+<span class="n">revelations</span> <span class="o">=</span> <span class="s2">&quot;revelations&quot;</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">revelations</span><span class="p">)</span>
+</code></pre></div>
+
+<p>As with shell scripts, Python scripts run instructions one line at a
+time, starting at the top. When you run this code,
+<code>print("hacks")</code> calls a
+function called <code>print()</code> and
+passes the string <code>hacks</code> into
+it, displaying <code>hacks</code> in your
+terminal window. The second line similarly displays <code>leaks</code>. (I&rsquo;ll explain strings in greater
+detail in the Python Basics section on page 172, and
+functions in the Functions section on page 192.)</p>
+<p>Next, the script defines a variable called <code>revelations</code> and sets its value to the uppercase
+version of the string <code>revelations</code>. To find the uppercase version of that
+string, the program calls the <code>upper()</code> method, which is a type of function.
+The final line then displays what&rsquo;s stored in the <code>revelations</code> variable: <code>REVELATIONS</code>.</p>
+<p><strong>NOTE</strong> <em>I have fond memories of retyping snippets of code from books. When I
+was a teenager, I taught myself web and video game development by
+reading programming books and typing the code samples I found into my
+own editor. I always found that actually retyping the code, rather than
+copying and pasting it, helped make the concepts stick, so I recommend
+doing that for the exercises in this book.</em></p>
+<p>In a terminal, change to your <em>exercises</em> folder and run the script you
+just created with the following command (Windows users, remember to
+replace <code>python3</code> with
+<code>python</code>):</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-7 % python3 exercise-7-2.py
+</code></pre></div>
+
+<p>The argument in this command is the path to the script that you want to
+run, <em>exercise-7-2.py</em>. You should get the following output:</p>
+<div class="codehilite"><pre><span></span><code>hacks
+leaks
+REVELATIONS
+</code></pre></div>
+
+<p>Try making the following changes to your
+script, running it after each change to see the results:</p>
+<ul>
+<li>Change the text in the <code>print()</code> functions.</li>
+<li>Add new <code>print()</code> functions to display more text.</li>
+<li>Use the string methods <code>lower()</code> and <code>capitalize()</code> instead of <code>upper()</code>.</li>
+</ul>
+<h3>Python Basics</h3>
+<p>In this section, you&rsquo;ll learn to write code in the interactive Python
+interpreter, comment your code, start doing simple math in Python, and
+use strings and lists. This gentle introduction to Python syntax will
+let you quickly try out some code on your own, before you dive into more
+advanced topics.</p>
+<p>As you read, don&rsquo;t be shy about searching online for answers to any
+Python questions you might have beyond what this book covers. I
+frequently find solutions to Python problems on websites like Stack
+Overflow, a forum where people can ask technical questions and others
+can answer them.</p>
+<h4>The Interactive Python Interpreter</h4>
+<p>The <em>Python interpreter</em> is a command line program that lets you run
+Python code in real time, without writing scripts first, allowing you to
+quickly test commands. To open the Python interpreter, you run the
+<code>python3</code> command without any
+arguments, like so:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % python3
+--snip--
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;
+</code></pre></div>
+
+<p>The interpreter starts by telling you exactly which version of Python
+you&rsquo;re using. Similar to a command line interface, it gives you the
+prompt <code>&gt;&gt;&gt;</code> and waits for you
+to enter a Python command.</p>
+<p>Run the following command:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>
+<span class="n">Hello</span> <span class="n">World</span><span class="err">!</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div>
+
+<p>Entering <code>print("Hello World!")</code> and pressing <strong>ENTER</strong> should
+immediately run your code, displaying <code>Hello World!</code> on the next line. Exit the interpreter
+and return to the shell by running <code>exit()</code> or pressing
+<strong>CTRL</strong>[-D]{.Character_20_style}.</p>
+<p>In the remainder of this book, if my examples include the <code>&gt;&gt;&gt;</code> prompt, that means they&rsquo;re running in
+the Python interpreter. Run the same code in your own interpreter as you
+follow along.</p>
+<h4>Comments</h4>
+<p>Writing code can be confusing even to experienced programmers, so it&rsquo;s
+always a good idea to <em>comment</em> your code: add inline notes to yourself
+or to others who might read your program. If you describe the purpose of
+a specific portion of code in plain English (or whatever language you
+speak), whoever looks at this code in the future can understand the gist
+of what it&rsquo;s doing at a glance.</p>
+<p>If a line of code starts with a hash mark (<code>#</code>), the whole line is a comment. You can
+also add a hash mark after some code, followed by your comment. For
+example, run the following lines of code:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="c1"># This is a comment</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># This sets the variable x to the value 10</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="mi">10</span>
+</code></pre></div>
+
+<p>This is exactly the same as comments in shell scripting, which you
+learned about in Chapter 3. Python ignores
+comments, since they&rsquo;re intended for humans.</p>
+<h4>Math with Python</h4>
+<p>Computers, which are technically complicated calculators, are great at
+doing math. It might not be immediately apparent, but investigating
+datasets means constantly dealing with basic math: calculating disk
+space, counting files, searching for keywords, and sorting lists. Here&rsquo;s
+how a few basic mathematical operations work in Python:</p>
+<p><strong>Operators</strong></p>
+<p>The arithmetic operators for addition (+), subtraction
+([−]{.listplain_symbol}), multiplication ([×]{.listplain_symbol}), and
+division (/) are mostly the same in Python: <code>+</code>, <code>-</code>, and <code>/</code>, with an asterisk <code>*</code> for multiplication.</p>
+<p><strong>Variables</strong></p>
+<p>In math, a variable is a placeholder, normally a letter like <em>x</em>.
+Variables in math often represent something unknown and it&rsquo;s your job to
+solve for it, but Python variables are never unknown&mdash;they always have
+a value. Name your Python variables something descriptive like
+<code>price</code> or
+<code>number_of_retweets</code> rather
+than single letters without clear meanings. Variables in Python can
+represent much more than just numbers, as you&rsquo;ll see later in this
+chapter.</p>
+<p><strong>Expressions</strong></p>
+<p>An expression is a bit like a sentence made up of numbers, variables,
+and operators. For example, here are a few expressions:</p>
+<div class="codehilite"><pre><span></span><code>1 + 1
+100 / 5
+x * 3 + 5
+</code></pre></div>
+
+<p>Like sentences, expressions need to have the
+correct syntax. Just like &ldquo;potato the inside&rdquo; isn&rsquo;t a valid sentence, 1
+1 + isn&rsquo;t a valid expression. Enter the following expressions in the
+Python interpreter to see how it evaluates them:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">100</span> <span class="o">/</span> <span class="mi">5</span>
+<span class="mf">20.0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="mf">6.28</span>
+</code></pre></div>
+
+<p>Just like a calculator, Python respects the order of operations. It also
+supports using parentheses:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">100</span> <span class="o">-</span> <span class="mi">12</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="mi">76</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="mi">12</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="mi">176</span>
+</code></pre></div>
+
+<p>As in the rest of math, Python won&rsquo;t allow you to divide by zero:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">15</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">ZeroDivisionError</span><span class="p">:</span> <span class="n">division</span> <span class="n">by</span> <span class="n">zero</span>
+</code></pre></div>
+
+<p>You define a variable in Python by saving a value inside that variable
+with the equal sign (<code>=</code>). Try
+defining <code>price</code> and
+<code>sales_tax</code> variables and then
+using them in an expression:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">price</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sales_tax</span> <span class="o">=</span> <span class="mf">.05</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">total</span> <span class="o">=</span> <span class="n">price</span> <span class="o">+</span> <span class="p">(</span><span class="n">price</span> <span class="o">*</span> <span class="n">sales_tax</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="mf">105.0</span>
+</code></pre></div>
+
+<p>You can&rsquo;t use variables that you haven&rsquo;t yet defined. For example, if
+you use an undefined variable <code>x</code> in an expression, you&rsquo;ll get an error:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;x&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</code></pre></div>
+
+<p>Instead of just setting a variable equal to some value, you&rsquo;ll often
+want to modify its existing value by a certain amount. For example, if
+you&rsquo;re keeping track of the total price of items in a shopping cart in
+the <code>total</code>
+variable and want to add 10 dollars to that
+total, you would define the variable like so:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="mi">10</span>
+</code></pre></div>
+
+<p>Python&rsquo;s <code>+=</code> operator
+performs the same operation:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">total</span> <span class="o">+=</span> <span class="mi">10</span>
+</code></pre></div>
+
+<p>The <code>+=</code> operator adds the
+number on the right to the variable on the left. The Python operators
+<code>-=</code>, <code>*=</code>, and <code>/=</code> work the same way. In your Python
+interpreter, define a variable, then try changing its value using these
+operators.</p>
+<h4>Strings</h4>
+<p>A <em>string</em> is a sequence of characters. Any time you need to load,
+modify, or display text, you store it in a string. If you load the
+contents of a text file into a variable in Python (for example, a 5MB
+EML file that includes attachments), that&rsquo;s a string. But strings are
+also often very short: in Exercise 7-2, you used the strings
+<code>"hacks"</code>, <code>"leaks"</code>, and <code>"revelations"</code>.</p>
+<p>In Python, strings must be enclosed in either single quotes (<code>'</code>) or double quotes (<code>"</code>). Run the following examples, which
+demonstrate how to use each type of quote. Here is a string with double
+quotes:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;apple&quot;</span> 
+<span class="s1">&#39;apple&#39;</span>
+</code></pre></div>
+
+<p>Here is the same string with single quotes:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;apple&#39;</span> <span class="c1"># The same string with single quotes</span>
+<span class="s1">&#39;apple&#39;</span>
+</code></pre></div>
+
+<p>Use double quotes if you have single quotes within the string:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;She&#39;s finished!&quot;</span>
+<span class="s2">&quot;She&#39;s finished!&quot;</span>
+</code></pre></div>
+
+<p>Use single quotes if you have double quotes within the string:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;She said, &quot;Hello&quot; &#39;</span>
+<span class="s1">&#39;She said, &quot;Hello&quot; &#39;</span>
+</code></pre></div>
+
+<p>Some of the same techniques you learned in Chapter
+3 to work with strings in your shell also
+apply to strings in Python. If your string uses double quotes, you can
+escape them like so:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;She said, </span><span class="se">\&quot;</span><span class="s2">Hello</span><span class="se">\&quot;</span><span class="s2"> &quot;</span>
+</code></pre></div>
+
+<p>You can similarly escape single quotes in a
+single-quote string:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;She</span><span class="se">\&#39;</span><span class="s1">s finished!&#39;</span>
+</code></pre></div>
+
+<p>Like numbers, strings can be stored in variables. Run the following code
+to define <code>first_name</code> and
+<code>last_name</code> variables,
+replacing my name with yours:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">first_name</span> <span class="o">=</span> <span class="s2">&quot;Micah&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">last_name</span> <span class="o">=</span> <span class="s2">&quot;Lee&quot;</span>
+</code></pre></div>
+
+<p>In Python, <em>f-strings</em> are strings that can contain variables. To use an
+f-string, put the letter <code>f</code>
+before the quotes, then put variable names in braces (<code>{</code>and}). For example, run the following
+commands to display the values of the variables you just defined:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">last_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">Micah</span> <span class="n">Lee</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">full_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">last_name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2">&#39;s full name is </span><span class="si">{</span><span class="n">full_name</span><span class="si">}</span><span class="s2">, but he goes by </span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">Micah</span><span class="s1">&#39;s full name is Micah Lee, but he goes by Micah</span>
+</code></pre></div>
+
+<p>Place expressions inside f-strings in order to evaluate them:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1 + 2 + 3 + 4 + 5 = </span><span class="si">{</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">=</span> <span class="mi">15</span>
+</code></pre></div>
+
+<p>Python will evaluate the expression for you, in this case <code>1 + 2 + 3 + 4 + 5</code>, and just print the result, which is
+<code>15</code>.</p>
+<h3>Exercise 7-3: Write a Python Script with Variables, Math, and Strings</h3>
+<p>In this exercise, you&rsquo;ll practice the concepts you&rsquo;ve learned so far by
+writing a simple Python script that uses variables and a few basic math
+expressions and prints some strings. The script calculates how old a
+person is in months, days, hours, minutes, and seconds, given their name
+and an age (in years), and then displays this information. In your text
+editor, create a new file called <em>exercise-7-3.py</em> and define these two
+variables:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Micah&quot;</span>
+<span class="n">age_years</span> <span class="o">=</span> <span class="mi">38</span>
+</code></pre></div>
+
+<p>Replace the values of <code>name</code>
+and <code>age_years</code> with your own
+name and age.</p>
+<p>Next, define some more variables that represent age in different units:
+months, days, hours, minutes, and seconds. Start with months:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">age_months</span> <span class="o">=</span> <span class="n">age_years</span> <span class="o">*</span> <span class="mi">12</span>
+</code></pre></div>
+
+<p>Add a days variable:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">age_days</span> <span class="o">=</span> <span class="n">age_years</span> <span class="o">*</span> <span class="mi">365</span>
+</code></pre></div>
+
+<p>Finally, define variables for hour, minutes, and seconds:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">age_hours</span> <span class="o">=</span> <span class="n">age_days</span> <span class="o">*</span> <span class="mi">24</span>
+<span class="n">age_minutes</span> <span class="o">=</span> <span class="n">age_hours</span> <span class="o">*</span> <span class="mi">60</span>
+<span class="n">age_seconds</span> <span class="o">=</span> <span class="n">age_minutes</span> <span class="o">*</span> <span class="mi">60</span>
+</code></pre></div>
+
+<p>Now that you&rsquo;ve defined the variables, you can display them to the user.
+Since the numbers in this exercise are going to get big, you&rsquo;ll include
+commas to make them easier to read. For example, run this code in the
+interpreter to display the variable <code>number</code> with commas using an f-string, adding
+<code>:,</code> after the variable name
+within the braces:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;the number is: </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">the</span> <span class="n">number</span> <span class="ow">is</span><span class="p">:</span> <span class="mi">1000000</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;the number is: </span><span class="si">{</span><span class="n">number</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">the</span> <span class="n">number</span> <span class="ow">is</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span><span class="mi">000</span><span class="p">,</span><span class="mi">000</span>
+</code></pre></div>
+
+<p>Back in the Python script, add code to display all of the values, like
+this:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">age_years</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> years old&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;That would be </span><span class="si">{</span><span class="n">age_months</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> months old&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Which is </span><span class="si">{</span><span class="n">age_days</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> days old&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Which is </span><span class="si">{</span><span class="n">age_hours</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> hours old&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Which is </span><span class="si">{</span><span class="n">age_minutes</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> minutes old&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Which is </span><span class="si">{</span><span class="n">age_seconds</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> seconds old&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This code uses <code>{name}</code> to
+display the value of the name variable. That variable is a string, so it
+doesn&rsquo;t make sense to try to separate it with commas. The rest of the
+variables are numbers, though, so the code includes <code>:,</code> inside the braces for all of them to
+include commas in the output. (The <code>age_years</code> values don&rsquo;t need commas, unless you
+happen to be older than 1,000, but it doesn&rsquo;t hurt to use the
+<code>:,</code> syntax&mdash;it adds a comma
+only if one is needed.)</p>
+<p>Save the file in your text editor. (A complete copy of the script is
+available at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-3.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-3.py</a>.)
+In a terminal, change to your <em>exercises</em> folder for this exercise and
+run the script. Here&rsquo;s what happens when I do so:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-7 % python3 exercise-7-3.py
+Micah is 38 years old
+That would be 456 months old
+Which is 13,870 days old
+Which is 332,880 hours old
+Which is 19,972,800 minutes old
+Which is 1,198,368,000 seconds old
+</code></pre></div>
+
+<p>When you run the script with your name and age,
+try changing the age and running it again to see how the numbers change.</p>
+<h3>Lists and Loops</h3>
+<p>You&rsquo;ll often need to manage lists when investigating datasets. For
+example, you might work with lists of filenames or rows in a
+spreadsheet. In this section, you&rsquo;ll learn how to store lists as
+variables and loop through those lists in order to run the same code for
+each list item. You did something similar in Chapter
+4 with <code>for</code> loops in the shell, but this time
+you&rsquo;ll be working in Python.</p>
+<h4>Defining and Printing Lists</h4>
+<p>In Python, lists are defined with brackets (<code>[</code>and]), with each item in the list
+separated by commas (<code>,</code>). You
+might have a list of numbers:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Or of strings:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Or an empty list:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">[]</span>
+</code></pre></div>
+
+<p>Just as variables can contain numbers or strings, they can also contain
+lists. Use this line of code to store a list of letters in the Hebrew
+alphabet, spelled out using Latin characters, in the
+<code>hebrew_letters</code> variable:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">hebrew_letters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;aleph&quot;</span><span class="p">,</span> <span class="s2">&quot;bet&quot;</span><span class="p">,</span> <span class="s2">&quot;gimel&quot;</span><span class="p">,</span> <span class="s2">&quot;dalet&quot;</span><span class="p">,</span> <span class="s2">&quot;he&quot;</span><span class="p">,</span> <span class="s2">&quot;vav&quot;</span><span class="p">,</span> <span class="s2">&quot;zayin&quot;</span><span class="p">,</span>
+<span class="s2">&quot;chet&quot;</span><span class="p">,</span> <span class="s2">&quot;tet&quot;</span><span class="p">,</span> <span class="s2">&quot;yod&quot;</span><span class="p">,</span> <span class="s2">&quot;kaf&quot;</span><span class="p">,</span> <span class="s2">&quot;lamed&quot;</span><span class="p">,</span> <span class="s2">&quot;mem&quot;</span><span class="p">,</span> <span class="s2">&quot;nun&quot;</span><span class="p">,</span> <span class="s2">&quot;samech&quot;</span><span class="p">,</span> <span class="s2">&quot;ayin&quot;</span><span class="p">,</span> <span class="s2">&quot;pe&quot;</span><span class="p">,</span>
+<span class="s2">&quot;tsadi&quot;</span><span class="p">,</span> <span class="s2">&quot;qof&quot;</span><span class="p">,</span> <span class="s2">&quot;resh&quot;</span><span class="p">,</span> <span class="s2">&quot;shin&quot;</span><span class="p">,</span> <span class="s2">&quot;tav&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>Now use the <code>print()</code> function
+to display the items in the <code>hebrew_letters</code> variable:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">hebrew_letters</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;aleph&#39;</span><span class="p">,</span> <span class="s1">&#39;bet&#39;</span><span class="p">,</span> <span class="s1">&#39;gimel&#39;</span><span class="p">,</span> <span class="s1">&#39;dalet&#39;</span><span class="p">,</span> <span class="s1">&#39;he&#39;</span><span class="p">,</span> <span class="s1">&#39;vav&#39;</span><span class="p">,</span> <span class="s1">&#39;zayin&#39;</span><span class="p">,</span> <span class="s1">&#39;chet&#39;</span><span class="p">,</span> <span class="s1">&#39;tet&#39;</span><span class="p">,</span> <span class="s1">&#39;yod&#39;</span><span class="p">,</span>
+<span class="s1">&#39;kaf&#39;</span><span class="p">,</span> <span class="s1">&#39;lamed&#39;</span><span class="p">,</span> <span class="s1">&#39;mem&#39;</span><span class="p">,</span> <span class="s1">&#39;nun&#39;</span><span class="p">,</span> <span class="s1">&#39;samech&#39;</span><span class="p">,</span> <span class="s1">&#39;ayin&#39;</span><span class="p">,</span> <span class="s1">&#39;pe&#39;</span><span class="p">,</span> <span class="s1">&#39;tsadi&#39;</span><span class="p">,</span> <span class="s1">&#39;qof&#39;</span><span class="p">,</span> <span class="s1">&#39;resh&#39;</span><span class="p">,</span>
+<span class="s1">&#39;shin&#39;</span><span class="p">,</span> <span class="s1">&#39;tav&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>You can make long lists easier to read by entering each item in the list
+on its own line, indented, like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">hebrew_letters</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;aleph&quot;</span><span class="p">,</span>
+<span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+    <span class="s2">&quot;tav&quot;</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>Each item in a list has an <em>index</em>, a number
+that represents where in the list that item is located. The index of the
+first item is 0, the second is 1, the third is 2, and so on. To select a
+list item, you append brackets with the item&rsquo;s index to the end of the
+list. For example, to select the first letter in the
+<code>hebrew_letters</code> list, use
+<code>hebrew_letters[0]</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">hebrew_letters</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">aleph</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">hebrew_letters</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">bet</span>
+</code></pre></div>
+
+<p>The first line of code uses the <code>print()</code> function to display the item from the
+<code>hebrew_letters</code> list at index
+0 (<code>aleph</code>), and the second
+line displays the item at index 1 (<code>bet</code>).</p>
+<p>Now use negative numbers to select items starting from the end of the
+list, like so:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">hebrew_letters</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">tav</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">hebrew_letters</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">shin</span>
+</code></pre></div>
+
+<p>You can use the <code>len()</code>
+function to count the number of items in a list. For example, run the
+following code to get the number of items in the
+<code>hebrew_letters</code> list:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hebrew_letters</span><span class="p">))</span>
+<span class="mi">22</span>
+</code></pre></div>
+
+<p>This code uses the <code>print()</code>
+function to display the output of the <code>len()</code> function. You could get the same
+result by storing the output of the <code>len()</code> function in a variable:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">length_of_hebrew_alphabet</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hebrew_letters</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">length_of_hebrew_alphabet</span><span class="p">)</span>
+<span class="mi">22</span>
+</code></pre></div>
+
+<p>The first line of code runs <code>len(hebrew_letters)</code> and stores the result in the
+<code>length_of_hebrew_alphabet</code>
+variable. The second line uses the <code>print()</code> function to display that result.</p>
+<p>You don&rsquo;t have to store a list in a variable to select items from it.
+For example, run this code to display the second item (at index 1) in
+the list <code>[1,2,3]</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+<span class="mi">2</span>
+</code></pre></div>
+
+<p>The <code>append()</code> method lets you add items to lists.
+For example, run the following code to add a new color to a list of
+favorites:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">favorite_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">favorite_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">favorite_colors</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>This code defines the variable <code>favorite_colors</code> as a list of strings containing
+<code>red</code>, <code>green</code>, and <code>blue</code>. It then adds another string,
+<code>black</code>, to the list by using
+the <code>append()</code> method, before
+finally displaying the value of the <code>favorite_colors</code> variable, using the <code>print()</code> function.</p>
+<p>When writing code that analyzes datasets, you&rsquo;ll often create an empty
+list and then append items to that list to make the data easier to work
+with. For example, you&rsquo;ll learn in Chapter
+13 about the code I wrote while investigating
+America&rsquo;s Frontline Doctors, an anti-vaccine group. To properly analyze
+a dataset of hundreds of thousands of files containing patient
+information, I wrote code that created an empty list, opened each file,
+and appended the pertinent patient data to that list.</p>
+<h4>Running for Loops</h4>
+<p>In Chapter 4, you used a <code>for</code> loop to unzip each BlueLeaks ZIP file.
+Python also has <code>for</code> loops,
+and they work the same way they do in shell scripting: by running a
+snippet of code, called a <em>block</em>, on each item in a list. A
+<code>for</code> loop has the following
+syntax:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">variable_name</span> <span class="ow">in</span> <span class="n">list_name</span><span class="p">:</span>
+</code></pre></div>
+
+<p>This syntax is followed by a block of indented code. Once you choose a
+new variable to define in <code>variable_name</code>, you can use it in your code
+block.</p>
+<p>For example, run the following code to loop through the
+<code>hebrew_letters</code> list, store
+each item in the variable <code>letter</code>, and then display that item:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">hebrew_letters</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
+
+<p>After you enter the <code>for</code>
+loop, which ends in a colon (<code>:</code>), the Python interpreter changes the
+prompt from <code>&gt;&gt;&gt;</code> to
+<code>…</code> and waits for you to enter
+the code block that will run for each item. Indent every line in your
+block with the same number of spaces, then end your block with a blank
+line. In this example, the code block that runs is just one line:
+<code>print(letter)</code>.</p>
+<p>The code should return the following output:</p>
+<div class="codehilite"><pre><span></span><code>aleph
+bet
+--snip--
+shin
+tav
+</code></pre></div>
+
+<p>In this example, the <code>for</code> loop runs 22 times, once for each item
+in the list, and stores the item in the variable <code>letter</code>. The first time it loops, the value of
+<code>letter</code> is <code>aleph</code>. The second time, the value is
+<code>bet</code>, and so on.</p>
+<p><strong>NOTE</strong> <em>Indentation tells Python which lines of code are part of your code
+blocks. If some lines are indented with four spaces, but others with two
+or three spaces, your Python code won&rsquo;t work. To keep things simple, I
+recommend always indenting with four spaces. When writing scripts in VS
+Code, you can indent multiple lines of code by selecting them with your
+mouse and then pressing </em><em>TAB</em><em> (which indents four spaces for
+you) or unindent by selecting a line and pressing
+</em><em>SHIFT-TAB</em><em>.</em></p>
+<p>The following, slightly more complicated, example uses the
+<code>len()</code> function to count not
+the number of items in a list but characters in a string:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">hebrew_letters</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The letter </span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">The</span> <span class="n">letter</span> <span class="n">aleph</span> <span class="n">has</span> <span class="mi">4</span> <span class="n">characters</span>
+<span class="n">The</span> <span class="n">letter</span> <span class="n">bet</span> <span class="n">has</span> <span class="mi">3</span> <span class="n">characters</span>
+<span class="n">The</span> <span class="n">letter</span> <span class="n">gimel</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">characters</span>
+<span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+<span class="n">The</span> <span class="n">letter</span> <span class="n">resh</span> <span class="n">has</span> <span class="mi">4</span> <span class="n">characters</span>
+<span class="n">The</span> <span class="n">letter</span> <span class="n">shin</span> <span class="n">has</span> <span class="mi">4</span> <span class="n">characters</span>
+<span class="n">The</span> <span class="n">letter</span> <span class="n">tav</span> <span class="n">has</span> <span class="mi">3</span> <span class="n">characters</span>
+</code></pre></div>
+
+<p>This code tells you how many characters are used to spell the word for
+each Hebrew letter in the Latin alphabet.</p>
+<p>You can use <code>for</code> loops to
+loop through strings as well, since a string is essentially a list of
+characters:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;hola&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">character</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">h</span>
+<span class="n">o</span>
+<span class="n">l</span>
+<span class="n">a</span>
+</code></pre></div>
+
+<p>You can run a single <code>for</code>
+loop as many times as you need for the dataset you&rsquo;re working on. For
+example, in Chapter 9, you&rsquo;ll write code
+that can open each of the hundreds of spreadsheets in the BlueLeaks
+dataset and uses a <code>for</code> loop
+to run your block of code on each row.</p>
+<p>In the next section, you&rsquo;ll learn to make your programs more dynamic and
+useful by determining which blocks of code should run under which
+circumstances.</p>
+<h3>Control Flow</h3>
+<p>Python scripts start at the top and run one line of code at a time, but
+they don&rsquo;t always run these lines consecutively. In <code>for</code> loops, for example, the same block of
+code might run over and over again before the loop completes and the
+program continues to the next line. The order in which your lines of
+code run is your program&rsquo;s <em>control flow</em>.</p>
+<p>As you start writing code, you&rsquo;ll often alter the control flow by
+telling your computer to do different things in different situations. If
+you write a program that loops through a list of files in a dataset, for
+instance, you may want to run different code when the program reaches a
+PDF document than when it encounters an MP4 video.</p>
+<p>This section teaches you how to run certain blocks of code under certain
+conditions. To do this, you&rsquo;ll learn how to compare values, use
+<code>if</code> statements based on these
+comparisons, and express arbitrarily complicated conditions using
+Boolean logic, all of which allow you to control the flow of your
+program. You&rsquo;ll need this sort of logic whenever you write code that
+searches a dataset for something specific and then responds according to
+what it finds.</p>
+<h4>Comparison Operators</h4>
+<p>As mentioned earlier in this chapter, expressions that use the
+arithmetic operators <code>+</code>,
+<code>-</code>, <code>/</code>, and <code>*</code> generally evaluate to numbers:
+<code>1 + 1</code> evaluates to <code>2</code>, for example. Expressions in Python
+also use the following <em>comparison operators</em> to compare terms:</p>
+<p><code>&lt;</code> Less than</p>
+<p><code>&lt;=</code> Less than or equal to</p>
+<p><code>&gt;</code> Greater than</p>
+<p><code>&gt;=</code> Greater than or equal to</p>
+<p><code>==</code> Equal to (not to be
+confused with a single equal sign (<code>=</code>), which defines a variable)</p>
+<p><code>!=</code> Not equal to</p>
+<p>A <em>Boolean</em> is a type of variable that is either <code>True</code> or <code>False</code>. Expressions that use comparison
+operators evaluate to Booleans instead of numbers, as in the following
+examples:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">100</span> <span class="o">&gt;</span> <span class="mi">5</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">100</span> <span class="o">&lt;</span> <span class="mi">5</span>
+<span class="kc">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">100</span> <span class="o">&gt;</span> <span class="mi">100</span>
+<span class="kc">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">100</span> <span class="o">&gt;=</span> <span class="mi">100</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">0.5</span> <span class="o">&lt;</span> <span class="mi">1</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">0.999999</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="kc">False</span>
+</code></pre></div>
+
+<p>You can use these same operators to compare
+strings, too. In Python, saying that one string is less than another
+means that the former comes before the latter in alphabetical order, as
+in the following examples:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;Alice&quot;</span> <span class="o">==</span> <span class="s2">&quot;Bob&quot;</span>
+<span class="kc">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;Alice&quot;</span> <span class="o">!=</span> <span class="s2">&quot;Bob&quot;</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;Alice&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;Bob&quot;</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;Alice&quot;</span> <span class="o">&gt;</span> <span class="s2">&quot;Bob&quot;</span>
+<span class="kc">False</span>
+</code></pre></div>
+
+<p>Strings are case sensitive. If you don&rsquo;t care about capitalization and
+want to just see whether the strings are made up of the same words, make
+them both lowercase before you compare them:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">name1</span> <span class="o">=</span> <span class="s2">&quot;Vladimir Putin&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">name2</span> <span class="o">=</span> <span class="s2">&quot;vladimir putin&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">name1</span> <span class="o">==</span> <span class="n">name2</span>
+<span class="kc">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">name1</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">name2</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="kc">True</span>
+</code></pre></div>
+
+<p>This technique allows you to determine whether the data you&rsquo;re
+evaluating fulfills a given condition. For example, in Chapter
+11, you&rsquo;ll write code to analyze the metadata
+of over a million videos uploaded to the far-right social network
+Parler. Using comparison operators, you&rsquo;ll determine which videos were
+filmed on January 6, 2021, in Washington, DC, during the insurrection
+after Trump lost the 2020 election.</p>
+<h4>if Statements</h4>
+<p>You use <code>if</code> statements to
+tell your code to do something under certain conditions but not others.
+The syntax for an <code>if</code>
+statement is <code>if</code>
+<code>expression``:</code> followed by an indented block of code.
+If the expression evaluates to <code>True</code>, then the code block runs. If the
+expression evaluates to <code>False</code>, the code doesn&rsquo;t run, and the flow
+moves on to the next line.</p>
+<p>For example, run the following code:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;letmein&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS GRANTED&quot;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">ACCESS</span> <span class="n">GRANTED</span>
+<span class="n">Welcome</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div>
+
+<p>This code sets the value of the
+<code>password</code> variable to
+<code>letmein</code>. That means the
+expression in the <code>if</code>
+statement (<code>password</code>
+<code>== "letmein"</code>) evaluates to <code>True</code> and the code block runs, so it
+displays <code>ACCESS GRANTED</code> and
+<code>Welcome</code>.</p>
+<p>Now try including the wrong password in your <code>if</code> statement:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;yourefired&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS GRANTED&quot;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div>
+
+<p>This time, because you set the password to <code>"yourefired"</code>, the expression <code>password == "letmein"</code> evaluates to <code>False</code>, and Python doesn&rsquo;t run the
+<code>if</code> statement&rsquo;s code block.</p>
+<p>An <code>if</code> statement can
+optionally incorporate an <code>else</code> block so that if the condition is
+true, one code block runs, and if it&rsquo;s false, another block runs:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS GRANTED&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS DENIED&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>You can also incorporate <code>elif</code> blocks, short for &ldquo;else if.&rdquo; These let
+you make another comparison if the first comparison is false, as shown
+in Listing 7-1.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS GRANTED&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;open sesame&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SECRET AREA ACCESS GRANTED&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS DENIED&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><em>Listing 7-1: Comparing <code>if</code>, <code>elif</code>, and <code>else</code> statements</em></p>
+<p>In this code, the <code>if</code>
+statement evaluates the <code>password == "letmein"</code> expression. If it evaluates to
+<code>True</code>, the code block runs
+and displays the <code>ACCESS GRANTED</code> and <code>Welcome</code> messages. If the expression evaluates
+to <code>False</code>, the program moves
+on to the <code>elif</code> block, which
+evaluates the <code>password</code>
+<code>== "open sesame"</code> expression. If that evaluates to
+<code>True</code>, it runs the block of
+code that displays <code>SECRET AREA ACCESS GRANTED</code>. If it evaluates to <code>False</code>, the program moves on to the
+<code>else</code> code block, which
+displays <code>ACCESS DENIED</code>.</p>
+<h4>Nested Code Blocks</h4>
+<p>You can also accomplish the results of Listing 7-1 with multiple <code>if</code> statements and no <code>elif</code>, using <em>nested</em> code blocks, or
+indented blocks of code inside other indented blocks of code:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS GRANTED&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;open sesame&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SECRET AREA ACCESS GRANTED&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS DENIED&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This code is functionally the same as Listing 7-1.</p>
+<p>The more complicated your code, the more nested code blocks may come in
+handy. You might include <code>for</code>
+loops inside your <code>if</code>
+statement code blocks, or <code>if</code>
+statements inside <code>for</code> loops,
+or even <code>for</code> loops inside
+<code>for</code> loops.</p>
+<p>You might prefer <code>elif</code>
+statements to nested <code>if</code>
+statements purely for readability purposes: it&rsquo;s easier to read and
+write code with 100 <code>elif</code>
+statements than code that&rsquo;s indented 100 times because it has 100 nested
+<code>if</code> statements.</p>
+<h4>Searching Lists</h4>
+<p>The Python <code>in</code> operator,
+which tells you whether an item appears in a list, is useful for working
+with lists. For example, to check whether the number 42 appears in a
+list of numbers, you can use <code>in</code> as follows:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">favorite_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">101</span><span class="p">]</span>
+<span class="k">if</span> <span class="mi">42</span> <span class="ow">in</span> <span class="n">favorite_numbers</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;life, the universe, and everything&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>To the left of the <code>in</code>
+operator is a potential item inside a list, and to the right is the
+list. If the item is in the list, then the expression evaluates to
+<code>True</code>. If not, it evaluates
+to <code>False</code>.</p>
+<p>You can also use <code>not in</code> to
+check if an item <em>isn&rsquo;t</em> in a list:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="mi">1337</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">favorite_numbers</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mess with the best, die like the rest&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Additionally, you can use <code>in</code>
+to search for smaller strings inside of larger strings:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot;What happens in the coming hours will decide how bad the Ukraine</span>
+<span class="n">crisis</span> <span class="n">gets</span> <span class="k">for</span> <span class="n">the</span> <span class="n">vulnerable</span> <span class="n">democracy</span> <span class="ow">in</span> <span class="n">Russian</span> <span class="n">President</span> <span class="n">Vladimir</span> <span class="n">Putin</span><span class="s1">&#39;s</span>
+<span class="n">sights</span> <span class="n">but</span> <span class="n">also</span> <span class="n">its</span> <span class="n">potentially</span> <span class="n">huge</span> <span class="n">impact</span> <span class="n">on</span> <span class="n">Americans</span> <span class="ow">and</span> <span class="n">an</span> <span class="n">already</span> <span class="n">deeply</span>
+<span class="n">unstable</span> <span class="n">world</span><span class="o">.</span><span class="s2">&quot;</span>
+<span class="k">if</span> <span class="s2">&quot;putin&quot;</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Putin is mentioned&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This code defines the variable
+<code>sentence</code>, then checks to see
+if the string <code>putin</code> is
+inside the lowercase version of that sentence.</p>
+<h4>Logical Operators</h4>
+<p>It&rsquo;s possible to describe any scenario, no matter how complicated, using
+the <em>logical operators</em> <code>and</code>,
+<code>or</code>, and <code>not</code>. Like comparison operators, logical
+operators also evaluate to <code>True</code> or <code>False</code>, and they let you combine comparisons.</p>
+<p>For example, say you like astronomy and want to know if it&rsquo;s a good time
+for stargazing. Let&rsquo;s set this up as a logical expression: if ((it&rsquo;s
+dark out) <strong>and</strong> (it&rsquo;s <strong>not</strong> raining) <strong>and</strong> (it&rsquo;s <strong>not</strong> cloudy))
+<strong>or</strong> (you have access to the James Webb Space Telescope), then yes.
+Otherwise, no. Logical operators let you define this sort of logic in
+your Python code.</p>
+<p>Like other operators, the <code>and</code> and <code>or</code> operators compare an expression on the
+left with an expression on the right. With <code>and</code>, if both sides are true, the whole
+expression is true. If either is false, the whole expression is false.
+For example:</p>
+<ul>
+<li><code>True and True == True</code></li>
+<li><code>True and False == False</code></li>
+<li><code>False and True == False</code></li>
+<li><code>False and False == False</code></li>
+</ul>
+<p>With <code>or</code>, if either
+expression is true, the whole expression is true. The whole expression
+is false only when both expressions are false. For example:</p>
+<ul>
+<li><code>True or True == True</code></li>
+<li><code>True or False == True</code></li>
+<li><code>False or True == True</code></li>
+<li><code>False or False == False</code></li>
+</ul>
+<p>The <code>not</code> expression differs
+from the others in that it doesn&rsquo;t use an expression to the left, just
+to the right. It flips true to false, and false to true. For example:</p>
+<ul>
+<li><code>not True == False</code></li>
+<li><code>not False == True</code></li>
+</ul>
+<p>In sum, use <code>and</code> to determine
+whether two things are both true, use <code>or</code> to determine whether at least one of
+two things is true, and use <code>not</code> to change a true to a false or vice
+versa. For example, consider this code:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;US&quot;</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can legally drink alcohol&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">country</span> <span class="o">!=</span> <span class="s2">&quot;US&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t know about your country&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You&#39;re too young to legally drink alcohol&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The first <code>if</code> statement has an expression that
+compares two other expressions, <code>country == "US"</code> and <code>age &gt;= 21</code>. If <code>country</code> is <code>US</code> and <code>age</code> is greater than or equal to
+<code>21</code>, the expression
+simplifies to <code>True and True</code>.
+Since both Booleans are true, this evaluates to simply <code>True</code>, and the code block after the
+<code>if</code> statement runs, printing
+<code>You can legally drink alcohol</code> to the screen.</p>
+<p>The first <code>else</code> block
+determines what happens if that expression evaluates to <code>False</code>. For example, if <code>country</code> is <code>Italy</code>, but <code>age</code> is <code>30</code>, the expression simplifies to
+<code>False and True</code>. Since at
+least one of the Booleans is false, this evaluates to simply
+<code>False</code>, so the code block
+after <code>else</code> runs. Likewise,
+if <code>country</code> is <code>US</code> but <code>age</code> is <code>18</code>, then the expression simplifies to
+<code>True and False</code>. This, too,
+evaluates to <code>False</code>, so the
+code block after <code>else</code> runs.</p>
+<p>Inside the second <code>else</code> block
+is a simple <code>if</code> statement
+without Boolean logic: if <code>country</code> isn&rsquo;t <code>US</code>, the screen displays
+<code>I don't know about your country</code>. Otherwise (meaning <code>country</code> is <code>US</code>), it displays
+<code>You're too young to legally drink alcohol</code>.</p>
+<p>Just like with math, you can use parentheses in <code>if</code> statements to compare multiple
+expressions. For example, the drinking age in the US is 21 and the
+drinking age in Italy is 18. Let&rsquo;s add Italy to this program, this time
+incorporating an <code>or</code>
+operator:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;US&quot;</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;Italy&quot;</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can legally drink alcohol&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">country</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;US&quot;</span><span class="p">,</span> <span class="s2">&quot;Italy&quot;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t know about your country&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You&#39;re too young to legally drink alcohol&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>In plain English, the first <code>if</code> statement tells the program that if
+your country is the US and you&rsquo;re at least 21 <em>or</em> if your country is
+Italy and you&rsquo;re at least 18, then you can legally drink. In either
+case, the whole expression in the <code>if</code> statement is true, and the program
+prints <code>You can legally drink alcohol</code>. If just one of those is true and not
+the other (for instance, if you&rsquo;re a 19-year-old Italian), the whole
+statement is still true. That&rsquo;s what <code>or</code> means: if either of the things you&rsquo;re
+comparing is true, then the whole expression is true.</p>
+<p>Use the operator <code>not</code> to turn
+<code>True</code> values into
+<code>False</code> or <code>False</code> values into <code>True</code>. For example:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;US&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sorry, the drinking age in the US is 21&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>You could replace <code>not age</code>
+<code>&gt;= 21</code> with <code>age &lt; 21</code> for the same result.</p>
+<h4>Exception Handling</h4>
+<p>Python programs may abruptly quit with an error called an <em>exception</em>.
+This is typically known as &ldquo;throwing an exception.&rdquo; <em>Exception handling</em>
+ensures that your Python code will run
+another code block when your code catches an exception, instead of
+quitting with an error.</p>
+<p>You&rsquo;ve seen a few examples of exceptions already in this chapter, like
+when you tried dividing by zero (something you can&rsquo;t do in math) or
+using a variable that hasn&rsquo;t been defined:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">15</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">ZeroDivisionError</span><span class="p">:</span> <span class="n">division</span> <span class="n">by</span> <span class="n">zero</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;x&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</code></pre></div>
+
+<p>In these cases, Python threw a <code>ZeroDivisionError</code> exception and a <code>NameError</code> exception, respectively.</p>
+<p>You can write code that catches exceptions when they&rsquo;re thrown, allowing
+you to handle them gracefully. For example, let&rsquo;s say you have a list of
+names called <code>names</code>, and you
+want display the first name in the list:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">The</span> <span class="n">first</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Alice</span>
+</code></pre></div>
+
+<p>This code displays the value at <code>names[0]</code>, or the first item in the
+<code>names</code> list. This works as
+expected if there are a few names in the list. But what if
+<code>names</code> is empty?</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">IndexError</span><span class="p">:</span> <span class="nb">list</span> <span class="n">index</span> <span class="n">out</span> <span class="n">of</span> <span class="nb">range</span>
+</code></pre></div>
+
+<p>In this case, since the index 0 doesn&rsquo;t exist because the list is empty,
+Python throws an <code>IndexError</code>
+exception.</p>
+<p>You can catch this exception using <code>try</code> and <code>except</code> statements, like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The list of names is empty&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This code first runs a <code>try</code>
+statement, followed by a code block. It attempts to run the code in that
+block, and if it succeeds without hitting an exception, it moves on to
+the next line of code after the <code>except</code> block. However, if it hits an
+exception, then it runs the code in the <code>except</code> block before moving on.</p>
+<p>Here&rsquo;s what it looks like when there&rsquo;s no
+exception:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">try</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">...</span> <span class="k">except</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The list of names is empty&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">The</span> <span class="n">first</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Alice</span>
+</code></pre></div>
+
+<p>In this case, the code block after the <code>try</code> statement ran successfully, so the
+control flow moved on past the <code>except</code> block.</p>
+<p>Here&rsquo;s what it looks like when the exception is thrown, but the code
+catches it and handles it gracefully:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">try</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">...</span> <span class="k">except</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The list of names is empty&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">The</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">names</span> <span class="ow">is</span> <span class="n">empty</span>
+</code></pre></div>
+
+<p>The code block after the <code>try</code>
+statement ran, but Python threw an <code>IndexError</code> exception when it evaluated
+<code>names[0]</code>. Instead of
+crashing and displaying an error, this code caught the exception and the
+<code>except</code> block ran. In this
+case, the <code>except</code> statement
+runs if any exception is thrown in the <code>try</code> block, but you can get more granular
+than that by using different <code>except</code> statements for different types of
+exceptions. Consider the following example:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="c1"># This catches ZeroDivisionError exception</span>
+    <span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="c1"># This catches NameError exceptions</span>
+    <span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+<span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+    <span class="c1"># This catches IndexError exceptions</span>
+    <span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># This catches any other exceptions that haven&#39;t been caught yet</span>
+    <span class="o">--</span><span class="n">snip</span><span class="o">--</span>
+</code></pre></div>
+
+<p>By using <code>except</code>
+<code>Exception``:</code>, where you replace <code>Exception</code> with a specific exception
+you&rsquo;re interested in catching, you can write different code to handle
+different types of exceptions. You&rsquo;ll revisit exception handling in
+Chapter 10, when you learn how to work with
+JSON data, and in the Chapter 14 case study
+on neo-Nazi chat logs.</p>
+<p>Now that you know how control flow works in
+Python, you&rsquo;ll practice some basic Python syntax and make comparisons
+using <code>if</code> statements and
+Boolean logic in the next exercise.</p>
+<h3>Exercise 7-4: Practice Loops and Control Flow</h3>
+<p>In social media slang, a common form of mockery is to employ
+<em>alternating caps</em>, or switching from uppercase to lowercase and back to
+uppercase, when quoting people. For example, here&rsquo;s the text of a viral
+tweet from the now-suspended Twitter account \@BigWangTheoryy:</p>
+<blockquote>
+<p>*failing classes*<br />
+Me: &ldquo;Can I get some extra credit?&rdquo;<br />
+Professor: &ldquo;cAn i GEt SomE eXtRa creDiT?&rdquo;</p>
+</blockquote>
+<p>In this exercise, you&rsquo;ll write a Python script that starts with some
+text and converts it into alternating caps style, using the control flow
+concepts you learned in the previous section.</p>
+<p>In your text editor, create a new file called <em>exercise-7-4.py</em>, and
+start by defining the variable <code>text</code>, like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;One does not simply walk into Mordor&quot;</span>
+</code></pre></div>
+
+<p>The simplest way to write this script is to start with an empty string,
+called <code>alternating_caps_text</code>, and then loop through the characters
+in <code>text</code>, adding characters
+to <code>alternating_caps_text</code> one
+at a time and alternating their capitalization as you do so. Add a
+second line to your script defining that variable, like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+</code></pre></div>
+
+<p>Next, you&rsquo;ll define a Boolean variable called
+<code>should_be_capital</code>. Each time
+you loop through a character in <code>text</code>, you&rsquo;ll use this Boolean to keep track
+of whether the current character should be capital or lowercase. For
+this example, start with a capital letter:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p>Beneath that line, add the main part of the script:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">should_be_capital</span><span class="p">:</span>
+        <span class="n">alternating_caps_text</span> <span class="o">+=</span> <span class="n">character</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+         <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+         <span class="n">alternating_caps_text</span> <span class="o">+=</span> <span class="n">character</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+         <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p>Using a <code>for</code> loop, this code loops through the
+characters in <code>text</code>, storing
+each character in the <code>character</code> variable. It then adds these
+characters to <code>alternating_caps_text</code>, switching between upper- and
+lowercase.</p>
+<p>During each iteration of the <code>for</code> loop, <code>character</code> is another character in <code>text</code>, the variable containing the
+<code>"One does not simply walk into Mordor"</code> string. The first time the code loops,
+<code>character</code> is <code>O</code>. When the code reaches the
+<code>if</code> statement,
+<code>should_be_capital</code> evaluates
+to <code>True</code> for this character,
+so the code block runs. The <code>+=</code> operator adds
+<code>character.upper()</code> (or the
+uppercase version of <code>character</code>) to <code>alternating_caps_text</code>. Since the code began by adding a
+capital letter, you want it to add a lowercase letter next, so you set
+<code>should_be _capital</code> to
+<code>False</code>. The code block ends,
+and the code starts its second loop.</p>
+<p>During the second iteration, <code>character</code> is <code>n</code> and <code>should_be_capital</code> evaluates to <code>False</code>. When the code reaches the
+<code>if</code> statement, the expression
+evaluates to <code>False</code>, so the
+<code>else</code> block runs. This is
+similar to the other block, except that it appends the lowercase version
+of character, <code>character.lower()</code>, to <code>alternative_caps_text</code> and sets <code>should_be_capital</code> back to <code>True</code>. So far,
+<code>alternating_caps_text</code> is
+<code>On</code>.</p>
+<p>During the third iteration, <code>character</code> is <code>e</code> and <code>should_be_capital</code> evaluates to <code>True</code>. When the code reaches the
+<code>if</code> statement, the expression
+evaluates to <code>True</code>, so that
+code block runs again, adding a capital <code>E</code> to <code>alternating _caps_text</code> and setting
+<code>should_be_capital</code> to
+<code>False</code> again. The code
+continues in this way for the rest of the characters in <code>text</code>. Note that the uppercase and lowercase
+versions of the space character, <code>" ".upper()</code> and <code>" ".lower()</code>, are identical. The <code>upper()</code> and <code>lower()</code> methods also don&rsquo;t change punctuation
+characters like <code>,</code>,
+<code>.</code>, <code>!</code>, and so on.</p>
+<p>When this <code>for</code> loop is
+finished, all you have left to do is display the value of
+<code>alternating_caps_text</code> by
+adding this line to your script:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">alternating_caps_text</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Your Python script is complete (you can also find a complete copy at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-4.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-4.py</a>).
+Run your script. Here&rsquo;s the output I get:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-7 % python3 exercise-7-4.py
+OnE DoEs nOt sImPlY WaLk iNtO MoRdOr
+</code></pre></div>
+
+<p>Now change the value of <code>text</code>
+and run the script again. For example, I changed the value to
+<code>"There are very fine people on both sides"</code>:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-7 % python3 exercise-7-4.py
+ThErE ArE VeRy fInE PeOpLe oN BoTh sIdEs
+</code></pre></div>
+
+<p>You&rsquo;ve gained a beginner&rsquo;s understanding of using lists and loops and
+controlling the flow of execution. I&rsquo;ll conclude the chapter with one
+more fundamental programming skill: breaking your code down into simpler
+chunks using functions.</p>
+<h3>Functions</h3>
+<p>The more complicated your programs get, the more important it is to
+break the problems you&rsquo;re trying to solve down into smaller chunks and
+work on them individually. This allows you to focus on the bigger
+picture, using those smaller chunks of code as building blocks. In this
+section, you&rsquo;ll learn how to do this using functions.</p>
+<p><em>Functions</em>, fundamental building blocks of programming, are reusable
+chunks of code. They take <em>arguments</em>&mdash;the variables that you pass into
+a function&mdash;as input and can <em>return</em> a value after they finish
+running. You&rsquo;ve already used a few functions that come with Python, like
+<code>print()</code> and <code>len()</code>, but you can also define your own
+function and use it as many times as you want without having to rewrite
+that code. You&rsquo;ll learn how to do that in this section.</p>
+<h4>The def Keyword</h4>
+<p>You can define a new function using the <code>def</code> keyword. For example, this code
+defines a function called <code>test()</code>, which prints a string to your
+terminal:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this is a test function&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">test</span><span class="p">()</span>
+<span class="n">this</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">test</span> <span class="n">function</span>
+</code></pre></div>
+
+<p>Function definition lines end with a colon and are followed by an
+indented code block that defines exactly what the function does: in this
+case, it displays the string <code>this is a test function</code>. This <code>test()</code> function doesn&rsquo;t include any
+arguments, which means every time you run it, it will do the exact same
+thing.</p>
+<p>Listing 7-2 defines a slightly more complicated function, <code>sum()</code>, that adds two numbers together.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div>
+
+<p><em>Listing 7-2: Defining an example function</em></p>
+<p>This new function takes <code>a</code>
+and <code>b</code> as arguments and
+returns the sum of those two variables. For any function that takes more
+than one argument, like this one, you separate the arguments with commas
+(<code>,</code>).</p>
+<p>Each variable has a <em>scope</em>, which describes which parts of your code
+can use that variable. The arguments of a function (in this case,
+<code>a</code> and <code>b</code>), as well as any variables defined
+inside the function, have a scope that can be accessed only by code in
+that function&rsquo;s code block. In other words, you can use these
+<code>a</code> and <code>b</code> variables only inside the
+<code>sum()</code> function, and they
+won&rsquo;t be defined outside of that code block.</p>
+<p>You can think of defining a function as telling Python, &ldquo;I&rsquo;m making a
+new function with this name, and here&rsquo;s what it does.&rdquo; However, the
+function itself won&rsquo;t run until you <em>call</em> it. Consider the following
+Python script:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="n">red_apples</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">green_apples</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">total_apples</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">red_apples</span><span class="p">,</span> <span class="n">green_apples</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">total_apples</span><span class="si">}</span><span class="s2"> apples&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>First, the code defines a function called <code>sum()</code> to be a code block with just a
+<code>return</code> statement. This
+function doesn&rsquo;t run yet. The code then defines the <code>red_apples</code> variable, setting its value to
+<code>10</code>, and the
+<code>green_apples</code> variable,
+setting its value to <code>6</code>.</p>
+<p>The next line starts with <code>total_apples =</code>, but before Python can set the value
+of that variable, it needs to learn what that value should be. To do
+that, the code first calls the <code>sum()</code> function, passing in the arguments
+<code>red_apples</code> and
+<code>green_apples</code> as <code>a</code> and <code>b</code>. Now that the code is finally calling
+this function, <code>return a</code>
+<code>+ b</code> runs. In this function call,
+<code>a</code> is <code>red_apples</code> and <code>b</code> is <code>green_apples</code>. The function returns <code>a + b</code>, which is <code>16</code>. Now that the <code>sum()</code> function has returned, the code
+defines a variable called <code>total_apples</code>, setting its value to the return value
+of the <code>sum()</code> function,
+<code>16</code>.</p>
+<p>Finally, the code calls the <code>print()</code> function, passing in an f-string as an
+argument, which displays the <code>total_apples</code> variable. It will display the message
+<code>There are 16 apples</code>.</p>
+<h4>Default Arguments</h4>
+<p>Function definitions can also have <em>default arguments</em>, which means
+defining their value is optional. If you haven&rsquo;t passed in any values
+for them when the function is called, the default value is used instead.</p>
+<p>For example, consider this function, which, given a number and
+optionally a number of exclamation marks and question marks, prints a
+greeting using its arguments:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">num_exclamations</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">exclamations</span> <span class="o">=</span> <span class="s2">&quot;!&quot;</span> <span class="o">*</span> <span class="n">num_exclamations</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="s2">&quot;?&quot;</span> <span class="o">*</span> <span class="n">num_questions</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">exclamations</span><span class="si">}{</span><span class="n">questions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The argument <code>name</code> is a
+<em>positional argument</em>, which means when you call this function, the
+first argument you pass in always has to be <code>name</code>. However, <code>num_exclamations</code> and <code>num_questions</code> are default arguments, so passing
+values in for those is optional. The <code>greet()</code> function defines the strings
+<code>exclamations</code> and
+<code>questions</code> and sets them to a
+series of exclamation points and question marks. (In Python, when you
+multiply a string by a number, you get the original string repeated
+multiple times; for example, <code>"A" * 3</code> evaluates to the string <code>AAA</code>.) The code then displays
+<code>Hello</code>, followed by the value
+of <code>name</code>, followed by the
+number of exclamation points and question marks passed into the
+function.</p>
+<p>This function has one positional argument
+(<code>name</code>) and two default
+arguments (<code>num_exclamations</code>
+and <code>num_questions</code>). You can
+call it just passing in <code>name</code>, without passing values in for the
+default arguments, and they will automatically be set to 3 and 2,
+respectively:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+<span class="n">Hello</span> <span class="n">Alice</span><span class="err">!!!??</span>
+</code></pre></div>
+
+<p>You can also keep the default value for one of the default arguments,
+but choose a value for another. When you manually choose a value for a
+default argument, you&rsquo;re using a <em>keyword argument</em>. For example:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="n">num_exclamations</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">Hello</span> <span class="n">Bob</span><span class="err">!!!!!?????</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Hello</span> <span class="n">Charlie</span><span class="err">!!!</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Eve&quot;</span><span class="p">,</span> <span class="n">num_exclamations</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Hello</span> <span class="n">Eve</span><span class="err">??</span>
+</code></pre></div>
+
+<p>The first function call uses keyword arguments for both
+<code>num_exclamation</code> and
+<code>num_questions</code>; the second
+function call uses a keyword argument only for <code>num_questions</code> and uses the default argument for
+<code>num_exclamations</code>; and the
+third function call uses a keyword argument for
+<code>num_exclamations</code> and uses
+the default argument for <code>num_questions</code>.</p>
+<h4>Return Values</h4>
+<p>Functions become a lot more useful when they take some input, do some
+computation, and then return a value, known as the <em>return value</em>. The
+<code>greet()</code> function just
+described displays output, but it doesn&rsquo;t return a value that I could
+save in a variable or pass into further functions. However, the
+<code>len()</code> function you used
+earlier takes input (a list or a string), does some computation
+(calculates the length of the list or string), and returns a value (the
+length).</p>
+<p>Here&rsquo;s an example of a function that takes a string <code>s</code> as an argument and returns the number
+of vowels in the string:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">count_vowels</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">number_of_vowels</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">vowels</span> <span class="o">=</span> <span class="s2">&quot;aeiouAEIOU&quot;</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">:</span>
+            <span class="n">number_of_vowels</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">number_of_vowels</span>
+</code></pre></div>
+
+<p>This function brings together many of the concepts covered in this
+chapter so far: it defines the variable <code>number_of_vowels</code> as <code>0</code>, then defines the variable
+<code>vowels</code> as a string
+containing lowercase and uppercase English vowels. Next, it uses a
+<code>for</code> loop to loop through
+each character in <code>s</code>, the
+string that&rsquo;s passed into the function.</p>
+<p>In each loop, the code uses an <code>if</code> statement to check whether the
+character is a vowel (since <code>vowels</code> contains both lowercase and uppercase
+letters, this code considers both <code>a</code> and <code>A</code> to be vowels). If the character is a
+vowel, the code increases the <code>number_of_vowels</code> variable by one. Finally, it returns
+<code>number_of_vowels</code>, which
+equals however many vowels it counted in <code>s</code>.</p>
+<p>Here are a few examples of calling this function and passing in
+different strings:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">&quot;THINK&quot;</span><span class="p">)</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">&quot;lizard&quot;</span><span class="p">)</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">&quot;zzzzzzz&quot;</span><span class="p">)</span>
+<span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div>
+
+<p>When you define a variable, you can set its value to the return value of
+a function just by setting the variable equal to that function call:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">num_vowels_think</span> <span class="o">=</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">&quot;THINK&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">num_vowels_lizard</span> <span class="o">=</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">&quot;lizard&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This code defines the variable <code>num_vowels_think</code> and sets its value to the return value
+of <code>count_vowels("THINK")</code>, or
+the number of vowels in the string <code>THINK</code>. It also defines the variable
+<code>num_vowels_lizard</code> and sets
+its value to the return value of <code>count_vowels("lizard")</code>.</p>
+<p>You can then use those variables to define new variables:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">total_vowels</span> <span class="o">=</span> <span class="n">num_vowels_think</span> <span class="o">+</span> <span class="n">num_vowels_lizard</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">total_vowels</span><span class="p">)</span>
+<span class="mi">3</span>
+</code></pre></div>
+
+<p>This code adds those two variables together, saving their sum in a new
+variable called <code>total_vowels</code>. It then prints the value of
+<code>total_vowels</code> to the
+terminal.</p>
+<p>When a <code>return</code> statement
+runs, the function immediately ends, so <code>return</code> is also useful if you want to stop a
+function early. For example, the following <code>is_exciting()</code> function loops through all the
+characters in a string <code>s</code> to
+check whether the character is an exclamation point:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">is_exciting</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">character</span> <span class="o">==</span> <span class="s2">&quot;!&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+
+<p>If the function finds an exclamation point, it returns <code>True</code>, immediately stopping the function. If
+it checks each character and finds no exclamation points, it returns
+<code>False</code>. For example, if you
+call this function and pass in the
+string <code>!@#$</code>, the function
+will return <code>True</code> during the
+first iteration of the loop and immediately end&mdash;it will never even get
+to the second iteration. If you pass in the string <code>hello!</code>, it won&rsquo;t return <code>True</code> until the last iteration of the loop,
+since it doesn&rsquo;t find the <code>!</code>
+until the end of the string. And if you pass in the string
+<code>goodbye</code>, it will loop
+through the entire string and not find an exclamation point, so it will
+return <code>False</code>.</p>
+<h4>Docstrings</h4>
+<p>In <em>self-documenting</em> code, documentation is defined as part of the code
+as docstrings rather than in a separate document. <em>Docstrings</em> are
+strings enclosed by three double quotes (<code>"""</code>) or three single quotes (<code>'``''</code>) on either side, placed as the first
+line of code after a function definition. When you run the function, the
+program ignores the docstring, but Python can use it to pull up
+documentation about the function on request. Docstrings are optional,
+but they can help other people understand your code.</p>
+<p>For example, here&rsquo;s how you&rsquo;d define the <code>sum()</code> function with a docstring:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="o">...</span>     <span class="s2">&quot;&quot;&quot;This function returns the sum of a and b&quot;&quot;&quot;</span>
+<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div>
+
+<p>This is exactly the same as the <code>sum()</code> function defined in Listing
+7-2, except it includes a docstring.</p>
+<p>If you run the <code>help()</code>
+function, passing in the name of a function (without arguments) as the
+argument, the Python interpreter will display documentation for that
+function. For example, running <code>help(sum)</code> gives you the following output:</p>
+<div class="codehilite"><pre><span></span><code>Help on function sum in module __main__:
+
+sum(a, b)
+    This function returns the sum of a and b
+</code></pre></div>
+
+<p>The <code>help()</code> function works
+for any function, though it&rsquo;s useful only if the programmer who wrote
+that function included a docstring. In this case, it tells you that it&rsquo;s
+showing you help for the function called <code>sum()</code> in the <code>__main__</code> module. You&rsquo;ll learn more about
+modules in Chapter 8, but they&rsquo;re
+essentially functions you write yourself. Try running
+<code>help(print)</code> or
+<code>help(len)</code> to view the
+docstrings for the <code>print()</code>
+and <code>len()</code> functions.</p>
+<p>Press Q to get out of the help interface and back to the Python
+interpreter.</p>
+<h3>Exercise 7-5: Practice Writing Functions</h3>
+<p>In this exercise, you&rsquo;ll turn the script you wrote in Exercise 7-4 into
+a function. You can then call this function multiple times, passing text
+into it so that it returns an alternating caps version of that text each
+time.</p>
+<p>In your text editor, create a new file called
+<em>exercise-7-5.py</em> and create a new function called
+<code>alternating_caps()</code>, which
+takes in the argument <code>text</code>,
+like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p>Next, copy the code from Exercise 7-4 and paste it into this function,
+making sure to indent it so that it aligns with the docstring. Delete
+the line that defines the <code>text</code> value; instead, define <code>text</code> by passing it into the function as an
+argument. Also change the last line of the Exercise 7-4 code from
+<code>print(alternating_caps_text)</code>
+to <code>return alternating_caps_text</code>. This function shouldn&rsquo;t display the
+alternating caps version of a string; it should create a variable
+containing this version of a string and return it.</p>
+<p>Your complete function should look like this (you can also find a copy
+at
+<a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-5.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-5.py</a>):</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
+    <span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+    <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">should_be_capital</span><span class="p">:</span>
+            <span class="n">alternating_caps_text</span> <span class="o">+=</span> <span class="n">character</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">alternating_caps_text</span> <span class="o">+=</span> <span class="n">character</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">alternating_caps_text</span>
+</code></pre></div>
+
+<p>Now that you have a function&mdash;a reusable chunk of code&mdash;you can use it
+as many times as you want. Call this function a few times, remembering
+to display its return value using the <code>print()</code> function, like this:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hacks, Leaks, and Revelations&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">alternating_caps</span><span class="p">(</span><span class="s2">&quot;This book is amazing&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">alternating_caps</span><span class="p">(</span><span class="s2">&quot;I&#39;m learning so much&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<p>You can change the text that you pass in to the
+<code>alternating_caps()</code> function
+calls to whatever you want.</p>
+<p>Here&rsquo;s what it looks like when I run this script:</p>
+<div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-7 % python3 exercise-7-5.py
+Hacks, Leaks, and Revelations
+ThIs bOoK Is aMaZiNg
+I&#39;M LeArNiNg sO MuCh
+</code></pre></div>
+
+<p>While the output of this script is displayed in
+a mocking tone, I hope that the sentiment is true for you!</p>
+<h3>Summary</h3>
+<p>This chapter has covered several basic Python programming concepts
+you&rsquo;ll rely upon in future investigations. You learned to write simple
+Python scripts that incorporate the major features of the language,
+including variables, <code>if</code>
+statements, <code>for</code> loops, and
+functions. You&rsquo;re ready to continue your Python programming journey in
+the next chapter, this time writing code to directly investigate
+datasets.</p>
         </div>
     </section>
     <section class="pagination">

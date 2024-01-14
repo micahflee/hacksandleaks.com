@@ -78,10 +78,7 @@ different, because the value of the variable changes with each loop.</p>
 <span class="k">done</span>
 </code></pre></div>
 
-<p>This <code>for</code> loop starts with
-the syntax <code>for</code>
-<code>variable_name</code>
-<code>in</code> <code>list_of_items</code>, followed by <code>do</code>, followed by the commands to run for
+<p>This <code>for</code> loop starts with the syntax <code>for variable_name in list_of_items</code>, followed by <code>do</code>, followed by the commands to run for
 each item in the list, followed by <code>done</code>. In this case, <code>variable_name</code> is <code>NUMBER</code> and <code>list_of_items</code> is <code>1 2 3</code>. The value of the <code>NUMBER</code> variable will be <code>1</code> the first time the code loops,
 <code>2</code> during the second loop,
 and <code>3</code> during the third loop.</p>
@@ -116,10 +113,8 @@ following code:</p>
 machine to run the <code>ls *.zip</code>
 command. This command outputs a list of all of the ZIP files in the
 current folder, producing a list of filenames. The <code>for</code> loop cycles through that list and runs
-the code between <code>do</code> and
-<code>done</code> for each filename. In
-this case, the <code>echo</code> command
-prints the filenames to the terminal in <code>ZIP filename:</code> <code>filename</code> format.</p>
+the code between <code>do</code> and <code>done</code> for each filename. In
+this case, the <code>echo</code> command prints the filenames to the terminal in <code>ZIP filename: filename</code> format.</p>
 <p>For example, here&rsquo;s what it looks like when I run this code in the
 <em>BlueLeaks</em> folder in my terminal on macOS:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor BlueLeaks % for FILENAME in $(ls *.zip)
@@ -1197,7 +1192,7 @@ shell.</p>
 <p><strong>NOTE</strong> <em>See <a href="https://www.byobu.org">https://www.byobu.org</a> for more complete documentation about this program, including a video tutorial.</em></p>
 <p>Completely close your terminal window and click through any warnings
 saying that your active programs will close if you do this. Open a new
-terminal window and SSH back into your server using the <code>ssh</code> <code>username@hostname</code> command. Then run
+terminal window and SSH back into your server using the <code>ssh username@hostname</code> command. Then run
 <code>byobu</code> again to attach your
 previous session. Any programs you run inside this Byobu session won&rsquo;t
 quit when you disconnect from SSH.</p>
