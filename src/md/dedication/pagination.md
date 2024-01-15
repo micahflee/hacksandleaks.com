@@ -1,4 +1,4 @@
 [Buy Now](buy.html)
 [Contents](contents.html)
-[Acknowledgements ➡️](acknowledgements.html)
+[About ➡️](about.html)
 [Back Home](/)

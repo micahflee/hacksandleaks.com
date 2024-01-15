@@ -1,0 +1,5 @@
+[Buy Now](buy.html)
+[Contents](contents.html)
+[⬅️ Dedication](dedication.html)
+[Acknowledgements ➡️](acknowledgements.html)
+[Back Home](/)
