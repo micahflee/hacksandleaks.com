@@ -72,9 +72,9 @@ different problems, but in shell scripting, the values can be text or
 numbers. Even though each loop runs the same code, the results may be
 different, because the value of the variable changes with each loop.</p>
 <p>For example, the following <code>for</code> loop displays the numbers 1, 2, and 3:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span> NUMBER <span class="k">in</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>NUMBER<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span>
 <span class="k">do</span>
-    <span class="nb">echo</span> <span class="nv">$NUMBER</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$NUMBER</span>
 <span class="k">done</span>
 </code></pre></div>
 
@@ -101,9 +101,9 @@ the following output:</p>
 <p>You can also use a <code>for</code> loop
 to loop through the output of another shell command, as shown in the
 following code:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span> FILENAME <span class="k">in</span> <span class="k">$(</span>ls *.zip<span class="k">)</span>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>FILENAME<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>*.zip<span class="k">)</span>
 <span class="k">do</span>
-    <span class="nb">echo</span> <span class="s2">&quot;ZIP filename: </span><span class="nv">$FILENAME</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ZIP filename: </span><span class="nv">$FILENAME</span><span class="s2">&quot;</span>
 <span class="k">done</span>
 </code></pre></div>
 
@@ -142,26 +142,26 @@ Unzip Files on Windows on page 92.</p>
 <h4>Unzip Files on macOS or Linux</h4>
 <p>Open a terminal and navigate to your <em>BlueLeaks</em> folder by running the
 following command, replacing <code>blueleaks_path</code> with your own folder path:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> blueleaks_path
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>blueleaks_path
 </code></pre></div>
 
 <p>On Linux, I&rsquo;d use this command (your path will be different):</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /media/micah/datasets/BlueLeaks
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/media/micah/datasets/BlueLeaks
 </code></pre></div>
 
 <p>On macOS, I&rsquo;d use the following (again, your path will vary):</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets/BlueLeaks
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/Volumes/datasets/BlueLeaks
 </code></pre></div>
 
 <p>Run <code>ls</code> to see the list of files in this folder
 and <code>ls -lh</code> to see detailed
 information about these files, like their sizes.</p>
 <p>To unzip single files, you use the following syntax:</p>
-<div class="codehilite"><pre><span></span><code>unzip filename
+<div class="codehilite"><pre><span></span><code>unzip<span class="w"> </span>filename
 </code></pre></div>
 
 <p>For example, run this command to unzip the first file in BlueLeaks:</p>
-<div class="codehilite"><pre><span></span><code>unzip 211sfbay.zip
+<div class="codehilite"><pre><span></span><code>unzip<span class="w"> </span>211sfbay.zip
 </code></pre></div>
 
 <p>This should extract the 2.6GB <em>211sfbay.zip</em> file into the folder called
@@ -170,7 +170,7 @@ you should see the new folder containing all of the hacked data from one
 of the BlueLeaks sites.</p>
 <p>However, you want to unzip <em>all</em> of the BlueLeaks files. Delete the
 <em>211sfbay</em> folder:</p>
-<div class="codehilite"><pre><span></span><code>rm -r 211sfbay
+<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span>-r<span class="w"> </span>211sfbay
 </code></pre></div>
 
 <p>The <code>rm</code> command on its own
@@ -183,10 +183,10 @@ folder called <em>exercise -4-1-unzip.sh</em>. (Storing your script in a
 separate folder prevents you from polluting the dataset with your own
 files.) In your new file, enter the following code:</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-<span class="k">for</span> FILENAME <span class="k">in</span> <span class="k">$(</span>ls *.zip<span class="k">)</span>
+<span class="k">for</span><span class="w"> </span>FILENAME<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>*.zip<span class="k">)</span>
 <span class="k">do</span>
-    <span class="nb">echo</span> <span class="s2">&quot;Unzipping </span><span class="nv">$FILENAME</span><span class="s2">...&quot;</span>
-    unzip -o <span class="nv">$FILENAME</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unzipping </span><span class="nv">$FILENAME</span><span class="s2">...&quot;</span>
+<span class="w">    </span>unzip<span class="w"> </span>-o<span class="w"> </span><span class="nv">$FILENAME</span>
 <span class="k">done</span>
 </code></pre></div>
 
@@ -209,8 +209,8 @@ the script will replace it with the newer version.</p>
 <code>FILENAME</code> during the first
 loop is <code>211sfbay.zip</code>. The
 code that runs in this loop is equivalent to the following commands:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">echo</span> <span class="s2">&quot;Unzipping 211sfbay.zip...&quot;</span>
-unzip -o 211sfbay.zip
+<div class="codehilite"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unzipping 211sfbay.zip...&quot;</span>
+unzip<span class="w"> </span>-o<span class="w"> </span>211sfbay.zip
 </code></pre></div>
 
 <p>The second time the code loops, it runs the same
@@ -218,11 +218,11 @@ code with <code>acprlea.zip</code> as the
 <code>FILENAME</code> value, and so on.</p>
 <p>Change to your <em>BlueLeaks</em> folder. On my Mac, I do this by running the
 following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets/BlueLeaks
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/Volumes/datasets/BlueLeaks
 </code></pre></div>
 
 <p>Next, make this shell script executable and run it as follows:</p>
-<div class="codehilite"><pre><span></span><code>chmod +x ../exercises/chapter-4/exercise-4-1-unzip.sh
+<div class="codehilite"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>../exercises/chapter-4/exercise-4-1-unzip.sh
 ../exercises/chapter-4/exercise-4-1-unzip.sh
 </code></pre></div>
 
@@ -242,10 +242,10 @@ command outputs a string like <code>readme.txt\nWork Documents.zip</code>.</p>
 <p>To work with filenames with spaces, you change the value of the <code>IFS</code> variable so that it splits strings only on newline characters, but not on spaces or tabs. Then you change it back after the loop. Here’s an example:</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="nv">ORIGINAL_IFS</span><span class="o">=</span><span class="nv">$IFS</span>
-<span class="nv">IFS</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -n <span class="s2">&quot;\n&quot;</span><span class="k">)</span>
-<span class="k">for</span> FILENAME <span class="k">in</span> <span class="k">$(</span>ls<span class="k">)</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="k">)</span>
+<span class="k">for</span><span class="w"> </span>FILENAME<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="k">)</span>
 <span class="k">do</span>
-    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$FILENAME</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$FILENAME</span><span class="s2">&quot;</span>
 <span class="k">done</span>
 <span class="nv">IFS</span><span class="o">=</span><span class="nv">$ORIGINAL_IFS</span>
 </code></pre></div>
@@ -340,9 +340,9 @@ seed the torrent with them if you like.</p>
 <p>Open a terminal (if you&rsquo;re in Windows, switch to a WSL Ubuntu terminal
 again), change folders to your <em>datasets</em> USB disk, and run the
 following commands:</p>
-<div class="codehilite"><pre><span></span><code>mv BlueLeaks BlueLeaks-extracted
-mkdir BlueLeaks
-mv BlueLeaks-extracted/*.zip BlueLeaks
+<div class="codehilite"><pre><span></span><code>mv<span class="w"> </span>BlueLeaks<span class="w"> </span>BlueLeaks-extracted
+mkdir<span class="w"> </span>BlueLeaks
+mv<span class="w"> </span>BlueLeaks-extracted/*.zip<span class="w"> </span>BlueLeaks
 </code></pre></div>
 
 <p>The <code>mv</code> command moves or
@@ -447,7 +447,7 @@ replace <code>du</code> with
 <p>To find out how much space the extracted BlueLeaks dataset takes, open
 your terminal and run this command, using the path to the
 <em>BlueLeaks-extracted</em> folder on your computer:</p>
-<div class="codehilite"><pre><span></span><code>du -sh --apparent-size /media/micah/datasets/BlueLeaks-extracted
+<div class="codehilite"><pre><span></span><code>du<span class="w"> </span>-sh<span class="w"> </span>--apparent-size<span class="w"> </span>/media/micah/datasets/BlueLeaks-extracted
 </code></pre></div>
 
 <p>The <code>-s</code> argument in this
@@ -471,7 +471,7 @@ example, I&rsquo;d run <code>cd /media/micah/datasets/BlueLeaks-extracted</code>
 the following command to measure the size of the <em>ncric</em> folder, which
 contains documents from the Northern California Regional Intelligence
 Center (NCRIC), the fusion center I&rsquo;ve spent the most time researching:</p>
-<div class="codehilite"><pre><span></span><code>du -sh --apparent-size ncric
+<div class="codehilite"><pre><span></span><code>du<span class="w"> </span>-sh<span class="w"> </span>--apparent-size<span class="w"> </span>ncric
 </code></pre></div>
 
 <p>The output should tell you that the <em>ncric</em> folder takes 19GB.</p>
@@ -480,7 +480,7 @@ Center (NCRIC), the fusion center I&rsquo;ve spent the most time researching:</p
 <code>path</code> command for
 each folder, but it&rsquo;s quicker to use another <code>for</code> loop. Run the following code in the
 terminal:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span> FOLDER <span class="k">in</span> <span class="k">$(</span>ls<span class="k">)</span><span class="p">;</span> <span class="k">do</span> du -sh --apparent-size <span class="nv">$FOLDER</span><span class="p">;</span> <span class="k">done</span>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>FOLDER<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>du<span class="w"> </span>-sh<span class="w"> </span>--apparent-size<span class="w"> </span><span class="nv">$FOLDER</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
 </code></pre></div>
 
 <p>As shown here, you can run multiple commands on the same line by
@@ -526,7 +526,7 @@ When you pipe input into the <code>sort</code> command, it outputs a sorted vers
 of that input. Run the <code>for</code>
 loop from the previous subsection, this time piping the output into
 <code>sort</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span> FOLDER <span class="k">in</span> <span class="k">$(</span>ls<span class="k">)</span><span class="p">;</span> <span class="k">do</span> du -sh –apparent-size <span class="nv">$FOLDER</span><span class="p">;</span> <span class="k">done</span> <span class="p">|</span> sort -h
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>FOLDER<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>du<span class="w"> </span>-sh<span class="w"> </span>–apparent-size<span class="w"> </span><span class="nv">$FOLDER</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h
 </code></pre></div>
 
 <p>This line first runs the <code>for</code>
@@ -579,7 +579,7 @@ through the much slower process of looping through the dataset itself.</p>
 <p>You can create this inventory with the <code>find</code> command, which outputs a list of files
 and folders in a folder. From within the <em>BlueLeaks-extracted</em> folder,
 run the following command to list all of the files in BlueLeaks:</p>
-<div class="codehilite"><pre><span></span><code>find . -type f
+<div class="codehilite"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f
 </code></pre></div>
 
 <p>The first argument after <code>find</code> is the folder whose contents you want
@@ -590,7 +590,7 @@ includes only files. (To include only folders, add the <code>-type d</code> argu
 should start rapidly scrolling across your terminal. To make the output
 more manageable, run the command again, this time redirecting the output
 into the file <em>../BlueLeaks-filenames.txt</em>:</p>
-<div class="codehilite"><pre><span></span><code>find . -type f &gt; ../BlueLeaks-filenames.txt
+<div class="codehilite"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>&gt;<span class="w"> </span>../BlueLeaks-filenames.txt
 </code></pre></div>
 
 <p>As discussed in Chapter 3, redirection tells
@@ -602,7 +602,7 @@ shell sends the list of filenames from the <code>find</code> command to the
 displaying the filenames across your terminal.</p>
 <p>To read through these filenames at your leisure, open
 <em>BlueLeaks-filenames.txt</em> in VS Code by running this command:</p>
-<div class="codehilite"><pre><span></span><code>code ../BlueLeaks-filenames.txt
+<div class="codehilite"><pre><span></span><code>code<span class="w"> </span>../BlueLeaks-filenames.txt
 </code></pre></div>
 
 <p>It&rsquo;s easier to slowly scroll through these
@@ -616,7 +616,7 @@ When used with the <code>-l</code> (or
 the number of lines. To count the lines in the <em>BlueLeaks-filenames.txt</em>
 file you created, and by extension count the number of files in
 BlueLeaks, run the following command:</p>
-<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> wc -l
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>../BlueLeaks-filenames.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 </code></pre></div>
 
 <p>The <code>cat</code> command outputs the
@@ -626,7 +626,7 @@ contains. It should tell you that there are just over <em>one million</em>
 files in BlueLeaks.</p>
 <p>Another way to get the same result is to run the <code>find</code> command from the previous section
 again, and pipe its output into <code>wc</code>, like this:</p>
-<div class="codehilite"><pre><span></span><code>find . -type f <span class="p">|</span> wc -l
+<div class="codehilite"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 </code></pre></div>
 
 <p>That command takes longer to run, though, since it searches through the
@@ -650,7 +650,7 @@ about antifa during the protests.</p>
 the word <em>antifa</em>. From the <em>BlueLeaks-extracted</em> folder, search the
 <em>BlueLeaks-filenames.txt</em> file that you created in Exercise 4-2 by
 running the following command:</p>
-<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep antifa
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>../BlueLeaks-filenames.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>antifa
 </code></pre></div>
 
 <p>This command pipes the output of
@@ -660,7 +660,7 @@ This should filter the huge list of filenames to show you only those
 that include the word <em>antifa</em>. However, it returns no results.</p>
 <p>Since the <code>grep</code> command is
 case sensitive, try again using the <code>-i</code> (or <code>--ignore-case</code>) argument:</p>
-<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep -i antifa
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>../BlueLeaks-filenames.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>antifa
 </code></pre></div>
 
 <p>When I run this command, I get the following output:</p>
@@ -708,7 +708,7 @@ Trafficking Area site. To quickly find any documents that have the word
 list of filenames to include only certain file types. Grep for Microsoft
 Word documents, filenames that end in <em>.docx</em>, by running the following
 command:</p>
-<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep -i .docx
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>../BlueLeaks-filenames.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>.docx
 </code></pre></div>
 
 <p>This command uses <code>cat</code> to
@@ -716,7 +716,7 @@ display the list of filenames in BlueLeaks, then filters it down for
 those that contain <em>.docx</em>. You should see thousands of filenames scroll
 by. To learn exactly how many, run the command again, this time piping
 the output into <code>wc -l</code>:</p>
-<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep -i .docx <span class="p">|</span> wc -l
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>../BlueLeaks-filenames.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>.docx<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 </code></pre></div>
 
 <p>The <code>wc</code> command should tell
@@ -738,7 +738,7 @@ only results that begin with <em>something</em>.</p>
 <p>To search just for filenames that end with <em>.docx</em>, add a dollar sign
 (<code>$</code>) to the end of the text
 you&rsquo;re grepping for. For example, try running the following command:</p>
-<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep -i .docx$ <span class="p">|</span> wc -l
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>../BlueLeaks-filenames.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>.docx$<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 </code></pre></div>
 
 <p>The output should tell you that there are 8,737 results, 124 less than
@@ -746,7 +746,7 @@ the previous command. That means there are 8,737 Word docs in this
 dataset.</p>
 <p>Run the following command to find out how many Word docs are in the
 <em>ncric</em> folder:</p>
-<div class="codehilite"><pre><span></span><code>cat ../BlueLeaks-filenames.txt <span class="p">|</span> grep ^./ncric/ <span class="p">|</span> grep -i .docx$ <span class="p">|</span> wc -l
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>../BlueLeaks-filenames.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>^./ncric/<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>.docx$<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 </code></pre></div>
 
 <p>The <code>cat</code> command outputs the
@@ -768,7 +768,7 @@ with other file types.</p>
 <h4>Search Files in Bulk with grep</h4>
 <p>In addition to piping output from other commands into <code>grep</code>, you can use <code>grep</code> to search directly within text files
 by using the following syntax:</p>
-<div class="codehilite"><pre><span></span><code>grep search_term filename
+<div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>search_term<span class="w"> </span>filename
 </code></pre></div>
 
 <p>For example, Linux comes with a file called <em>/etc/passwd</em>, which
@@ -796,7 +796,7 @@ contents of the websites&rsquo; databases. Now that you&rsquo;ve grepped for
 filenames that contain the keyword <em>antifa</em>, use the following command
 to bulk-search the term <em>Black Lives Matter</em> in the contents of the
 files, not just in their filenames:</p>
-<div class="codehilite"><pre><span></span><code>grep -i <span class="s2">&quot;black lives matter&quot;</span> */*.csv
+<div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;black lives matter&quot;</span><span class="w"> </span>*/*.csv
 </code></pre></div>
 
 <p>The <code>-i</code> argument in this
@@ -885,11 +885,11 @@ is a folder that holds backup data. Restic repositories contain a
 in restic format. To find out what&rsquo;s inside this backup, I installed the
 <code>restic</code> package. Users of
 Linux or Windows with WSL can install <code>restic</code> using apt:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt install restic
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>restic
 </code></pre></div>
 
 <p>Mac users can install <code>restic</code> from Homebrew with the following command:</p>
-<div class="codehilite"><pre><span></span><code>brew install restic
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>restic
 </code></pre></div>
 
 <p>I ran <code>restic --help</code> and
@@ -897,7 +897,7 @@ found that I could view the snapshots in a repository with the
 <code>restic snapshots</code> command,
 which I then used to try to view the snapshots in the <em>repo</em> folder like
 so:</p>
-<div class="codehilite"><pre><span></span><code>restic snapshots --repo repo/
+<div class="codehilite"><pre><span></span><code>restic<span class="w"> </span>snapshots<span class="w"> </span>--repo<span class="w"> </span>repo/
 </code></pre></div>
 
 <p>I was then confronted with a password prompt:</p>
@@ -954,7 +954,7 @@ remotely. You can connect to a VPS remotely by running the <code>ssh</code> comm
 address or domain name of the server to which you want to connect. For
 example, to log in as the root user to the server with the hostname
 <em>example.com</em>, you run:</p>
-<div class="codehilite"><pre><span></span><code>ssh root@example.com
+<div class="codehilite"><pre><span></span><code>ssh<span class="w"> </span>root@example.com
 </code></pre></div>
 
 <p>You then need to <em>authenticate</em> to the server, or prove that you have
@@ -1013,7 +1013,7 @@ two-factor authentication.</p>
 <h4>Generate an SSH Key</h4>
 <p>To generate an SSH key, open a terminal on your local computer (if
 you&rsquo;re using Windows, use a WSL terminal) and run:</p>
-<div class="codehilite"><pre><span></span><code>ssh-keygen -t ed25519
+<div class="codehilite"><pre><span></span><code>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519
 </code></pre></div>
 
 <p>The <code>ssh-keygen</code> command
@@ -1052,7 +1052,7 @@ Security tab. Click <strong>Add SSH Key</strong>, then copy and paste your SSH p
 key into the form.</p>
 <p>Back in your terminal, display the content of your public key by running
 this command:</p>
-<div class="codehilite"><pre><span></span><code>cat ~/.ssh/id_ed25519.pub
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>~/.ssh/id_ed25519.pub
 </code></pre></div>
 
 <p>Here&rsquo;s the output I get:</p>
@@ -1109,7 +1109,7 @@ account with my new server&rsquo;s IP address, 178.128.22.151.</p>
 <p>Click the IP address to copy it to your clipboard.</p>
 <h4>SSH into Your Server</h4>
 <p>Run the following command to SSH into your server:</p>
-<div class="codehilite"><pre><span></span><code>ssh username@hostname
+<div class="codehilite"><pre><span></span><code>ssh<span class="w"> </span>username@hostname
 </code></pre></div>
 
 <p>Here, <code>username</code> is
@@ -1199,8 +1199,8 @@ quit when you disconnect from SSH.</p>
 <h4>Install Updates</h4>
 <p>Always install updates when you set up a new server to keep it secure.
 Run the following commands (you don&rsquo;t need to use <code>sudo</code>, since you&rsquo;re the root user):</p>
-<div class="codehilite"><pre><span></span><code>apt update
-apt upgrade
+<div class="codehilite"><pre><span></span><code>apt<span class="w"> </span>update
+apt<span class="w"> </span>upgrade
 </code></pre></div>
 
 <p>Follow the instructions to finish installing updates.</p>
@@ -1233,7 +1233,7 @@ to your laptop and then upload it to your remote server. To download the
 dataset directly to your VPS, you&rsquo;ll use <code>transmission-cli</code>, the command line version of the
 BitTorrent client you used to download BlueLeaks in Chapter 2. In your VPS, run the following command to
 install <code>transmission-cli</code>:</p>
-<div class="codehilite"><pre><span></span><code>apt install transmission-cli
+<div class="codehilite"><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>transmission-cli
 </code></pre></div>
 
 <p>You can now use the <code>transmission-cli</code> command to download files. You must
@@ -1241,15 +1241,15 @@ pass in either the path to a <em>.torrent</em> file or a magnet link as an
 argument. In this exercise, you&rsquo;ll use the torrent file available at
 <a href="https://ddosecrets.com/wiki/Oath_Keepers">https://ddosecrets.com/wiki/Oath_Keepers</a>.</p>
 <p>Run the following commands:</p>
-<div class="codehilite"><pre><span></span><code>mkdir ~/datasets
-<span class="nb">cd</span> ~/datasets
+<div class="codehilite"><pre><span></span><code>mkdir<span class="w"> </span>~/datasets
+<span class="nb">cd</span><span class="w"> </span>~/datasets
 </code></pre></div>
 
 <p>This creates a new folder called <em>datasets</em> on your server, then changes
 to it. Download the torrent file from the link on the DDoSecrets page
 and load it into your BitTorrent client with the following commands:</p>
-<div class="codehilite"><pre><span></span><code>wget https://ddosecrets.com/images/0/02/Oath_Keepers.torrent
-transmission-cli -w . Oath_Keepers.torrent
+<div class="codehilite"><pre><span></span><code>wget<span class="w"> </span>https://ddosecrets.com/images/0/02/Oath_Keepers.torrent
+transmission-cli<span class="w"> </span>-w<span class="w"> </span>.<span class="w"> </span>Oath_Keepers.torrent
 </code></pre></div>
 
 <p>The <code>wget</code> command downloads files&mdash;in this
@@ -1271,7 +1271,7 @@ want to continue seeding the torrent, you can work on your VPS in a
 separate Byobu shell.</p>
 <p>To check how much free space your server has left, run the following
 command after the download is complete:</p>
-<div class="codehilite"><pre><span></span><code>df -h
+<div class="codehilite"><pre><span></span><code>df<span class="w"> </span>-h
 </code></pre></div>
 
 <p>The <code>df</code> command tells you how
@@ -1292,7 +1292,7 @@ has 19GB free.</p>
 <p>Change your working directory to <em>\~/datasets/Oath Keepers</em>, remembering
 to put the filepath in quotes or escape the space in the path. For
 example, you could run this command from the <em>\~/datasets</em> folder:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> Oath<span class="se">\ </span>Keepers
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>Oath<span class="se">\ </span>Keepers
 </code></pre></div>
 
 <p>Run the following command to find that the Oath Keepers dataset takes up
@@ -1337,16 +1337,16 @@ whether <code>rsync</code> is installed.
 If so, the command returns the path to the program, something like
 <em>/usr/bin/rsync</em>. If not, you&rsquo;ll see no output. Windows with WSL and
 Linux users can install <code>rsync</code> with the following command:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt install rsync
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>rsync
 </code></pre></div>
 
 <p>macOS users can install it with the following command:</p>
-<div class="codehilite"><pre><span></span><code>brew install rsync
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>rsync
 </code></pre></div>
 
 <p>To copy a file from a remote server to your
 local computer, run the following command:</p>
-<div class="codehilite"><pre><span></span><code>rsync -av --progress remote_user@remote_host:remote_path local_path
+<div class="codehilite"><pre><span></span><code>rsync<span class="w"> </span>-av<span class="w"> </span>--progress<span class="w"> </span>remote_user@remote_host:remote_path<span class="w"> </span>local_path
 </code></pre></div>
 
 <p>The <code>-av</code> argument is a
@@ -1362,7 +1362,7 @@ successfully, it will download the file or folder at
 save it on your computer at <code>local_path</code>.</p>
 <p>For example, here&rsquo;s how I&rsquo;d download the Oath Keepers dataset from my
 VPS to my <em>datasets</em> USB disk:</p>
-<div class="codehilite"><pre><span></span><code>rsync -av --progress root@178.128.22.151:<span class="s2">&quot;~/datasets/Oath\ Keepers&quot;</span> /Volumes/datasets/
+<div class="codehilite"><pre><span></span><code>rsync<span class="w"> </span>-av<span class="w"> </span>--progress<span class="w"> </span>root@178.128.22.151:<span class="s2">&quot;~/datasets/Oath\ Keepers&quot;</span><span class="w"> </span>/Volumes/datasets/
 </code></pre></div>
 
 <p>In this case, <code>root@178.128.22.151:"~/datasets/Oath\ Keepers"</code> is the <code>remote _user``@``remote_host``:``remote_path</code> argument, since the <em>Oath

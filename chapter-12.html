@@ -275,22 +275,22 @@ databases.</p>
 file in that folder. Type the following code into the file (or copy and
 paste it from
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-12/docker-compose.yaml">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-12/docker-compose.yaml</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.9&#39;</span><span class="w"></span>
-<span class="nt">services</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">db</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:10.9</span><span class="w"></span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">MARIADB_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">this-is-your-root-password</span><span class="w"></span>
-<span class="w">      </span><span class="nt">MARIADB_ROOT_HOST</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3306:3306</span><span class="w"></span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./db_data:/var/lib/mysql</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.9&#39;</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:10.9</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">MARIADB_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">this-is-your-root-password</span>
+<span class="w">      </span><span class="nt">MARIADB_ROOT_HOST</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%&quot;</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3306:3306</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./db_data:/var/lib/mysql</span>
 
-<span class="w">  </span><span class="nt">adminer</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adminer</span><span class="w"></span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080:8080</span><span class="w"></span>
+<span class="w">  </span><span class="nt">adminer</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adminer</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080:8080</span>
 </code></pre></div>
 
 <p>The <em>docker-compose.yaml</em> file in Exercise 5-3 used a <code>db</code> service running MariaDB, and a
@@ -314,7 +314,7 @@ port 8080, so you can load Adminer in a web browser at
 <em>http://localhost:8080</em>.</p>
 <p>Open a terminal, change to the folder for this chapter&rsquo;s exercises, and
 start the containers with the following command:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose up
+<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up
 </code></pre></div>
 
 <p>The first time you start the containers, your computer downloads the
@@ -408,16 +408,16 @@ password from the previous exercise. When you&rsquo;re ready, click the
 <p>So far the <code>books</code> database
 you created in Exercise 12-1 includes the tables <code>authors</code> and <code>books</code>, but those tables don&rsquo;t have any rows.</p>
 <p>To add new rows to your tables, you use the <code>INSERT</code> verb as follows:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span>
 </code></pre></div>
 
 <p>In Adminer, click the <strong>SQL Command</strong> link in the left sidebar. In the
 empty field that pops up, enter the following <code>INSERT</code> queries:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Micah Lee&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Carl Sagan&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Hacks, Leaks, and Revelations&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Pale Blue Dot&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Contact: A Novel&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Micah Lee&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Carl Sagan&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Hacks, Leaks, and Revelations&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Pale Blue Dot&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">author_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Contact: A Novel&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 </code></pre></div>
 
 <p>These commands insert all of the rows into the two tables in the
@@ -470,13 +470,13 @@ spend most of your time writing <code>SELECT</code> statements.</p>
 statement to select all of the books by a certain author or, in the case
 of Epik data, all of the domain names registered by a specific person.
 Here&rsquo;s the general syntax:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...;</span>
 </code></pre></div>
 
 <p>When your SQL client runs a <code>SELECT</code> statement, the SQL server returns a
 table of data. To select everything in the <code>books</code> table, click the <strong>SQL Command</strong> link
 in Adminer&rsquo;s left sidebar and run the following query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This command uses an asterisk (<code>*</code>) as a wildcard character, which means
@@ -505,7 +505,7 @@ columns in a table, but you can also choose only specific columns. Say
 you want to return only a list of titles in the table. Select the
 <code>title</code> field alone with this
 query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Instead of including all columns, this table includes only the book
@@ -537,7 +537,7 @@ need so your queries will finish faster.</p>
 sort the results of your queries. For example, to select all of the
 columns in the <code>books</code> table,
 with the results sorted by the book title, run this query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">title</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
 </code></pre></div>
 
 <p>The results of this query will be ordered alphabetically by the title
@@ -574,7 +574,7 @@ ordered alphabetically; number fields are ordered from smallest to
 largest; and date fields are ordered from earliest to latest. You can
 sort the results in descending order by using the <code>DESC</code> keyword. For example, use the
 following query to select all of the books, ordered by <code>title</code> column in reverse alphabetical order:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
 </code></pre></div>
 
 <p>You can also sort results by more than one column. For example, to first
@@ -582,7 +582,7 @@ order the books by <code>author_id</code>
 (so the results will include all books by author 1 first, then by author
 2, and so on), and then by <code>title</code> (so that within each author&rsquo;s list of
 books, the books are sorted by title), run this query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">author_id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">author_id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This should order the results first by <code>author_id</code>, then by <code>title</code>, as shown in Table
@@ -622,7 +622,7 @@ for each author are then sorted alphabetically by <code>title</code>.</p>
 queries. For example, to find out how many rows are in the
 <code>books</code> table, use the
 <code>COUNT()</code> function:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="p">;</span>
 </code></pre></div>
 
 <p>After you run this command, the SQL server should return the results
@@ -646,7 +646,7 @@ table and then counting them.</p>
 <h5>Filtering SELECT Results with WHERE Clauses</h5>
 <p>You can also filter the results you get back using the <code>WHERE</code> clause. For instance, to find the
 titles of books written by Micah Lee, run the following query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author_id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author_id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
 </code></pre></div>
 
 <p>The SQL server should return the results shown in Table 12-7.</p>
@@ -671,20 +671,20 @@ operators greater than (<code>&gt;</code>), greater than or equal to
 (<code>&lt;=</code>). For example, say you
 want to search for books with an <code>id</code> between 10 and 100, including the
 number 10 but not the number 100. Try that out with the following query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
 </code></pre></div>
 
 <p>You can use the equals (<code>=</code>)
 operator to search for exact strings. For example, run the following
 command to find all of the authors with the name Carl Sagan:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Carl Sagan&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Carl Sagan&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This search is case sensitive, so while it would find authors named Carl
 Sagan, it wouldn&rsquo;t find authors named CARL SAGAN or carl sagan. For a
 case-insensitive search, use the <code>LIKE</code> operator. Try running the following
 command:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;carl sagan&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;carl sagan&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This command finds authors named Carl Sagan, CARL SAGAN, carl sagan, or
@@ -697,13 +697,13 @@ search for rows where <code>name</code>
 contains any number of characters (<code>%</code>), followed by <code>lee</code>, followed by any number of characters
 again (<code>%</code>). For example, to
 find all of the authors with Lee in their names, run:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%lee%&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%lee%&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This query returns the row with the name <code>Micah Lee</code>, but it would also return Stan Lee,
 Lee Young-ae, and Andrea Leeds.</p>
 <p>To search just for people with the last name Lee, run this query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;% lee&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;% lee&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>In this case, there&rsquo;s only one wildcard character at the beginning of
@@ -716,21 +716,21 @@ after <code>lee</code>.</p>
 <p>Using logical operators, you can combine as many conditions as you want.
 For example, to look for books written by Carl Sagan that have the word
 <em>blue</em> in their titles, run this query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author_id</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%blue%&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author_id</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%blue%&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>You could expand on that query by running the
 following query to also check for books with <em>green</em> or <em>red</em> in their
 titles:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"></span>
-<span class="w">    </span><span class="n">author_id</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%red%&#39;</span><span class="w"> </span><span class="k">OR</span><span class="w"></span>
-<span class="w">        </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%green%&#39;</span><span class="w"> </span><span class="k">OR</span><span class="w"></span>
-<span class="w">        </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%blue%&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="p">);</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">WHERE</span>
+<span class="w">    </span><span class="n">author_id</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span>
+<span class="w">    </span><span class="p">(</span>
+<span class="w">        </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%red%&#39;</span><span class="w"> </span><span class="k">OR</span>
+<span class="w">        </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%green%&#39;</span><span class="w"> </span><span class="k">OR</span>
+<span class="w">        </span><span class="n">title</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%blue%&#39;</span>
+<span class="w">    </span><span class="p">);</span>
 </code></pre></div>
 
 <p>This query uses both the logical operators <code>AND</code> and <code>OR</code>, as well as parentheses. When you run
@@ -753,11 +753,11 @@ into a single table, then selecting rows from that combined table.</p>
 <p>For example, say you want to write a single query that will return a
 table of book titles and their authors, relying on the <code>title</code> field in the <code>books</code> table and the <code>name</code> field in the <code>authors</code> table. Run the query in Listing 12-1 to select a table of results from
 columns in those two tables at once.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">    </span><span class="n">books</span><span class="p">.</span><span class="n">title</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">authors</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"></span>
-<span class="k">JOIN</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">id</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">books</span><span class="p">.</span><span class="n">title</span><span class="p">,</span>
+<span class="w">    </span><span class="n">authors</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
 </code></pre></div>
 
 <p><em>Listing 12-1: Selecting from both the <code>books</code> and the <code>authors</code> tables using the <code>JOIN</code> clause</em></p>
@@ -881,15 +881,15 @@ those rows won&rsquo;t be included in the results.</p>
 the <code>authors</code> table, replacing
 <code>Your Name</code> with your
 own name:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Your Name&#39;</span><span class="p">);</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Your Name&#39;</span><span class="p">);</span>
 </code></pre></div>
 
 <p>Now run the query in Listing 12-2.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">    </span><span class="n">books</span><span class="p">.</span><span class="n">title</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">authors</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">authors</span><span class="w"></span>
-<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">id</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">books</span><span class="p">.</span><span class="n">title</span><span class="p">,</span>
+<span class="w">    </span><span class="n">authors</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">authors</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
 </code></pre></div>
 
 <p><em>Listing 12-2: Selecting from the <code>authors</code> table and doing a <code>LEFT JOIN</code> to the <code>books</code> table</em></p>
@@ -956,10 +956,10 @@ find all titles written by Carl Sagan without knowing what his
 <code>id</code> is in the
 <code>authors</code> table, run this
 query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">title</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"></span>
-<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Carl Sagan&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">title</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">books</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">books</span><span class="p">.</span><span class="n">author_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">authors</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Carl Sagan&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This query selects the column <code>books.title</code> from the <code>books</code> table and joins it with the
@@ -991,14 +991,14 @@ information. Next, we&rsquo;ll discuss two more simple SQL verbs:
 <code>UPDATE</code> and <code>DELETE</code>.</p>
 <h4>UPDATE Statements</h4>
 <p>You can update rows in a table using the <code>UPDATE</code> verb, which uses this syntax:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">column1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">column1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span>
 </code></pre></div>
 
 <p>For example, try updating this book&rsquo;s title to include its subtitle by
 running the follow query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">books</span><span class="w"></span>
-<span class="k">SET</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data&#39;</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">books</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This should have updated the <code>title</code> of the book with the <code>id</code> of <code>1</code> from
@@ -1007,14 +1007,14 @@ running the follow query:</p>
 <h4>DELETE Statements</h4>
 <p>To delete rows in a table, use the <code>DELETE</code> verb, which takes the following
 syntax:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span>
 </code></pre></div>
 
 <p>For example, you could delete the
 <code>Hacks, Leaks, and Revelations</code> book from the database by running this
 query (but don&rsquo;t do this now, as you&rsquo;ll want to keep this row for
 exercises later in the chapter):</p>
-<div class="codehilite"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
 </code></pre></div>
 
 <p>In this case, the condition is <code>id``=1</code>, so this query finds any rows with an
@@ -1065,18 +1065,18 @@ line client <code>mysql</code>, which has
 the same name and works in the same way as the official MySQL client.</p>
 <p>Start by opening a terminal. If you&rsquo;re using a Mac, install it in
 Homebrew by running this command:</p>
-<div class="codehilite"><pre><span></span><code>brew install mariadb
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>mariadb
 </code></pre></div>
 
 <p>If you&rsquo;re using Linux or Windows with WSL, install it by running this
 command:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt install mariadb-client
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mariadb-client
 </code></pre></div>
 
 <p>You can now use the <code>mysql</code>
 command to connect to your MySQL database. To do so, run the following
 command:</p>
-<div class="codehilite"><pre><span></span><code>mysql -h localhost --protocol<span class="o">=</span>tcp -u root -p
+<div class="codehilite"><pre><span></span><code>mysql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>--protocol<span class="o">=</span>tcp<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
 </code></pre></div>
 
 <p>The <code>-h</code> argument (short for
@@ -1341,7 +1341,7 @@ if a domain uses a WHOIS privacy service, you won&rsquo;t get to see who
 actually owns it. For example, you would run the following command to
 find the ownership information about the Oath Keepers domain name,
 oathkeepers.org:</p>
-<div class="codehilite"><pre><span></span><code>whois oathkeepers.org
+<div class="codehilite"><pre><span></span><code>whois<span class="w"> </span>oathkeepers.org
 </code></pre></div>
 
 <p>When I ran this command, I got the following output:</p>
@@ -1440,7 +1440,7 @@ total 0
 <em>.sql.gz</em>, meaning that it was compressed using GZIP discussed in
 Chapter 11. To extract the
 <em>api_system.sql.gz</em> file, run the following command:</p>
-<div class="codehilite"><pre><span></span><code>gunzip api_system.sql.gz
+<div class="codehilite"><pre><span></span><code>gunzip<span class="w"> </span>api_system.sql.gz
 </code></pre></div>
 
 <p>SQL data compresses very well: the original <em>api_system.sql.gz</em> file is
@@ -1483,7 +1483,7 @@ Bye
 <p>The simplest way to import a MySQL backup into a MySQL client is to pipe
 the data into the <code>mysql</code>
 program, by running the following command:</p>
-<div class="codehilite"><pre><span></span><code>cat filename.sql <span class="p">|</span> mysql -h localhost --protocol<span class="o">=</span>tcp -u root -p database_name
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>filename.sql<span class="w"> </span><span class="p">|</span><span class="w"> </span>mysql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>--protocol<span class="o">=</span>tcp<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>database_name
 </code></pre></div>
 
 <p>The problem is that you&rsquo;d see no output&mdash;no progress bars or any other
@@ -1496,16 +1496,16 @@ stands for &ldquo;Pipe Viewer,&rdquo; to display a progress bar. The <code>pv</c
 displays useful output so you can be sure your command is running.</p>
 <p>If you&rsquo;re using a Mac, install <code>pv</code> in Homebrew by running the following
 command:</p>
-<div class="codehilite"><pre><span></span><code>brew install pv
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>pv
 </code></pre></div>
 
 <p>If you&rsquo;re using Linux or Windows with WSL, install <code>pv</code> by running the following command:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt install pv
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>pv
 </code></pre></div>
 
 <p>Once you&rsquo;ve installed <code>pv</code>, make sure you&rsquo;re in the <em>Epik</em> folder
 and run this command:</p>
-<div class="codehilite"><pre><span></span><code>pv api_system.sql <span class="p">|</span> mysql -h localhost --protocol<span class="o">=</span>tcp -u root -p epikfail_api_system
+<div class="codehilite"><pre><span></span><code>pv<span class="w"> </span>api_system.sql<span class="w"> </span><span class="p">|</span><span class="w"> </span>mysql<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>--protocol<span class="o">=</span>tcp<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>epikfail_api_system
 </code></pre></div>
 
 <p>Just like <code>cat</code>, <code>pv</code> should load data from
@@ -1528,8 +1528,8 @@ import <em>api_system.sql</em>.</p>
 <h5>TROUBLESHOOTING DURING DATABASE IMPORTS</h5>
 <p>Something can always go wrong while you’re in the middle of importing a database. You could accidentally close your terminal window, stopping the import partway through. Your laptop could run out of battery, or you could accidentally unplug your USB disk. You might need to cancel the import midway through (by pressing CTRL-C). If anything like this happens, don’t worry. It’s fairly simple to delete your database, create a new one, and start the import over again. Unfortunately, though, you can’t continue where you left off.</p>
 <p>To restart an interrupted import, you can drop the database using the <code>DROP DATABASE database_name;</code> statement. This deletes the whole database and all of its tables. Create a new database and import the data again. For example, if your <code>epikfail_api_system</code> import was interrupted, you start over by running these MySQL queries as the root user with the following commands:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">epikfail_api_system</span><span class="p">;</span><span class="w"></span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">epikfail_api_system</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">epikfail_api_system</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">epikfail_api_system</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Then start the import again.</p>
@@ -1565,7 +1565,7 @@ following along when you&rsquo;re done.</p>
 has over 1.6 million rows in it and is clearly a list of domain names in
 Epik&rsquo;s system. Count the number of rows in this table using the
 following query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">domain</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">domain</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Table 12-12 shows the results from that query.</p>
@@ -1589,10 +1589,10 @@ domain name&rsquo;s creation date), and <code>exp_date</code> (presumably the do
 expiration date).</p>
 <p>To look at the 10 most recently created domains in this table, run the
 following query:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">cr_date</span><span class="p">,</span><span class="w"> </span><span class="n">exp_date</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="k">domain</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cr_date</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">cr_date</span><span class="p">,</span><span class="w"> </span><span class="n">exp_date</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">domain</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cr_date</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This command uses the
@@ -1681,10 +1681,10 @@ operator in the <code>WHERE</code>
 clause. For example, try using the following queries to search for
 domains that mention the word <em>Trump</em>, ordered by the most recently
 created domains:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">cr_date</span><span class="p">,</span><span class="w"> </span><span class="n">exp_date</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="k">domain</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%trump%&#39;</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cr_date</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">cr_date</span><span class="p">,</span><span class="w"> </span><span class="n">exp_date</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">domain</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%trump%&#39;</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cr_date</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
 </code></pre></div>
 
 <p>As you learned earlier, using <code>LIKE</code> makes the search case insensitive, and
@@ -1790,7 +1790,7 @@ system.</p>
 In the aftermath of the terrorist attack, 8chan moved its domain name
 hosting to Epik. With that in mind, search the data for 8chan.co,
 8chan&rsquo;s domain name, to see who is behind the site:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">domain</span><span class="o">=</span><span class="s1">&#39;8CHAN.CO&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">domain</span><span class="o">=</span><span class="s1">&#39;8CHAN.CO&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Table 12-15 shows partial results from this
@@ -1835,7 +1835,7 @@ if he or his company, Loki Technology, owned any other domain names on
 Epik. To find out, try running this query in the
 <code>epikfail_api_system</code>
 database:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_email</span><span class="o">=</span><span class="s1">&#39;domains@nttec.com&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_email</span><span class="o">=</span><span class="s1">&#39;domains@nttec.com&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This query searches for domains that list <code>admin_email</code> as <code>domains@nttec.com</code>, which is the administrator email
@@ -1844,7 +1844,7 @@ domain. Run the following query, modified with the expression
 <code>admin_email LIKE '%@nttec.com'</code> to check for domains where
 <code>admin_email</code> is any email
 address at the nttec.com domain:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_email</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%@nttec.com&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_email</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%@nttec.com&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>However, this query has the same results. For your next query, switch
@@ -1853,12 +1853,12 @@ Technology, using the <code>admin_org LIKE '%Loki Technology%'</code> expression
 wildcard characters, just in case Watkins listed his company slightly
 differently on different domains, like &ldquo;Loki Technology, Inc.&rdquo; instead
 of &ldquo;Loki Technology, Incorporated&rdquo;:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_org</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Loki Technology%&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_org</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Loki Technology%&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This query returns the same result. For a final
 query, search the domains that list <code>admin_name</code> as <code>Jim Watkins</code>, using <code>LIKE</code> to make the search case insensitive:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;Jim Watkins&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">privacy</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;Jim Watkins&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Unfortunately, all these queries return just one result: the 8chan.co
@@ -1875,10 +1875,10 @@ for, not just the domain name registration. Columns include
 what these usernames and passwords are for), <code>plan</code> (like silver, gold, or platinum),
 <code>server_id</code>, and others. Run
 the following query to view the most recent rows:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">domain</span><span class="p">,</span><span class="w"> </span><span class="n">cr_date</span><span class="p">,</span><span class="w"> </span><span class="n">plan</span><span class="p">,</span><span class="w"> </span><span class="n">server_id</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">hosting</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cr_date</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">domain</span><span class="p">,</span><span class="w"> </span><span class="n">cr_date</span><span class="p">,</span><span class="w"> </span><span class="n">plan</span><span class="p">,</span><span class="w"> </span><span class="n">server_id</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">hosting</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">cr_date</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Since the query uses the <code>ORDER BY cr_date DESC</code> clause, the results will be sorted
@@ -1943,8 +1943,8 @@ began to run queries on that.</p>
 <p>The <code>hosting_server</code> table has only six rows, each a
 different server that Epik uses to host websites. Run this query to see
 the data in this table:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">api_host</span><span class="p">,</span><span class="w"> </span><span class="n">login_host</span><span class="p">,</span><span class="w"> </span><span class="n">login_port</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">hosting_server</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">api_host</span><span class="p">,</span><span class="w"> </span><span class="n">login_host</span><span class="p">,</span><span class="w"> </span><span class="n">login_port</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">password</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">hosting_server</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Table 12-17 shows the query results.</p>
@@ -2024,22 +2024,22 @@ data breach.</p>
 <p>All of the recent websites in the <code>hosting</code> table have a <code>server_id</code> of <code>23</code>. Check how many websites are hosted on
 that server by running a query to join it with the
 <code>hosting_server</code> table:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">hosting</span><span class="w"></span>
-<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">hosting_server</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hosting_server</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span><span class="o">=</span><span class="mi">23</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">hosting</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">hosting_server</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hosting_server</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span><span class="o">=</span><span class="mi">23</span><span class="p">;</span>
 </code></pre></div>
 
 <p>The result is 1,155, so that&rsquo;s the number of websites the server with ID
 23 hosts.</p>
 <p>What about the rest of the servers? The quickest way to figure out how
 many websites each server hosts is to use a <code>GROUP BY</code> clause, like this:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">    </span><span class="n">server_id</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">server_count</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">hosting</span><span class="w"></span>
-<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">hosting_server</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hosting_server</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">server_id</span><span class="p">,</span>
+<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">server_count</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">hosting</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">hosting_server</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hosting_server</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">hosting</span><span class="p">.</span><span class="n">server_id</span><span class="p">;</span>
 </code></pre></div>
 
 <p>This query groups by
@@ -2152,7 +2152,7 @@ your MySQL server.</p>
 <p>Here&rsquo;s the query I ran to search the <code>domains_whois</code> table in the
 <code>epikfail _intrust</code> database
 for domains owned by Jim Watkins&rsquo;s company:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">domains_whois</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_email</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%@nttec.com&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">domains_whois</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">admin_email</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%@nttec.com&#39;</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Table 12-19 lists the truncated results of

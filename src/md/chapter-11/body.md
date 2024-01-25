@@ -77,7 +77,7 @@ through every ID, make a web request to download every post, and then
 find the URLs for every video and image to download. While Parler did
 strip metadata from videos uploaded by its users, they also left
 original copies of videos that contained this metadata at predictable
-URLs. \@donk\_enby downloaded versions of the videos that contained a
+URLs. @donk_enby downloaded versions of the videos that contained a
 wealth of hidden information, including, in many cases, the GPS
 coordinates of where the video was filmed.
 
