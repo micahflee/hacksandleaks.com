@@ -135,7 +135,7 @@ spare&mdash;to be sure Docker&rsquo;s Linux VM has enough memory to handle Aleph
 Click <strong>Apply &amp; Restart</strong>.</p>
 <p>For either operating system, to test whether Docker is working, open a
 terminal and run this command:</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>hello-world
+<div class="codehilite"><pre><span></span><code>docker run hello-world
 </code></pre></div>
 
 <p>This command should run a Docker container image called
@@ -173,7 +173,7 @@ Engine documentation for instructions on adding your Linux user to the
 in mind that doing so decreases your computer&rsquo;s security and isn&rsquo;t
 recommended.</p>
 <p>Once Docker is installed, open a terminal and run:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>hello-world
+<div class="codehilite"><pre><span></span><code>sudo docker run hello-world
 </code></pre></div>
 
 <p>This command runs a Docker container image called <code>hello-world</code>. If you don&rsquo;t already have the
@@ -195,7 +195,7 @@ This message shows that your installation appears to be working correctly.
 ran successfully, you can now use the <code>docker</code> command on your computer. Next, run
 the following command to install the <code>docker-compose</code> package, which will give you access to
 the <code>docker-compose</code> command:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>docker-compose
+<div class="codehilite"><pre><span></span><code>sudo apt install docker-compose
 </code></pre></div>
 
 <p>Your computer is now ready to run Linux containers.</p>
@@ -224,7 +224,7 @@ test programs.</p>
 <p>Docker commands use the <code>docker command</code> syntax. Run the following to
 start your own Ubuntu container (if you&rsquo;re using Linux, remember to add
 <code>sudo</code>):</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>ubuntu:latest<span class="w"> </span>bash
+<div class="codehilite"><pre><span></span><code>docker run -it ubuntu:latest bash
 </code></pre></div>
 
 <p>This command runs <code>ubuntu:latest</code>, the latest version of the <code>ubuntu</code> image. If that image
@@ -283,7 +283,7 @@ assigned a random name. The container in my <code>docker ps</code> output is cal
 <code>container_name</code>. For
 example, running the following command in my other terminal window quits
 my <code>epic_borg</code> container:</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>epic_borg
+<div class="codehilite"><pre><span></span><code>docker <span class="nb">kill</span> epic_borg
 </code></pre></div>
 
 <p>Run this command for your own container. If you switch back to your
@@ -356,11 +356,11 @@ that container is running. In Exercise 5-5, you&rsquo;ll bind-mount your
 <em>datasets</em> USB disk as a folder in an Aleph container. This way, your
 container can access the BlueLeaks dataset, allowing you to index it.</p>
 <p>Use this command to start a container with a volume:</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>volume,src<span class="o">=</span>volume-name,dst<span class="o">=</span>/container/path<span class="w"> </span>image
+<div class="codehilite"><pre><span></span><code>docker run --mount <span class="nv">type</span><span class="o">=</span>volume,src<span class="o">=</span>volume-name,dst<span class="o">=</span>/container/path image
 </code></pre></div>
 
 <p>Use this command to start a container with a bind mount:</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/path/on/host,dst<span class="o">=</span>/container/path<span class="w"> </span>image
+<div class="codehilite"><pre><span></span><code>docker run --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/path/on/host,dst<span class="o">=</span>/container/path image
 </code></pre></div>
 
 <p>The <code>--mount</code> argument tells
@@ -437,8 +437,8 @@ which people hack into systems with permission from
 the system owners to find and fix security flaws.</p>
 <p>If you&rsquo;re a Mac or Linux user, run the following command, replacing the
 path with the appropriate path on your machine:</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/Volumes/datasets/BlueLeaks-extracted,dst<span class="o">=</span>/blueleaks
-kalilinux/kali-rolling<span class="w"> </span>bash
+<div class="codehilite"><pre><span></span><code>docker run -it --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/Volumes/datasets/BlueLeaks-extracted,dst<span class="o">=</span>/blueleaks
+kalilinux/kali-rolling bash
 </code></pre></div>
 
 <p>This should run a <code>kalilinux/kali-rolling</code> container, mounting your
@@ -458,14 +458,14 @@ A for more information.)</p>
 run the following command to mount the folder that contains the
 BlueLeaks data into <em>/datasets</em>, replacing
 <code>D:/BlueLeaks-extracted</code> with the appropriate path:</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>–mount<span class="w"> </span>type-bind,src<span class="o">=</span>D:/BlueLeaks-extracted,dst<span class="o">=</span>/blueleaks<span class="w"> </span>kalilinux/
-kali-rolling<span class="w"> </span>bash
+<div class="codehilite"><pre><span></span><code>docker run -it –mount type-bind,src<span class="o">=</span>D:/BlueLeaks-extracted,dst<span class="o">=</span>/blueleaks kalilinux/
+kali-rolling bash
 </code></pre></div>
 
 <p>If you&rsquo;re using Ubuntu with WSL in Windows, mount the <em>BlueLeaks</em> folder
 by accessing the <em>D:</em> drive from <em>/mnt/d</em> with the following syntax:</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/mnt/d/BlueLeaks-extracted,dst<span class="o">=</span>/blueleaks<span class="w"> </span>kalilinux/
-kali-rolling<span class="w"> </span>bash
+<div class="codehilite"><pre><span></span><code>docker run -it --mount <span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span>/mnt/d/BlueLeaks-extracted,dst<span class="o">=</span>/blueleaks kalilinux/
+kali-rolling bash
 </code></pre></div>
 
 <p>From within your Kali container, you can now use the tools that come
@@ -496,7 +496,7 @@ credentials into containers. When starting up a container, you pass an
 environment variable into it using the <code>-e variable_name = value</code> (the <code>-e</code> is short for <code>--env</code>) arguments. Programs in the container
 can then access the value of that variable.</p>
 <p>For example, run the following command:</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-e<span class="w"> </span><span class="nv">DB_USER</span><span class="o">=</span>root<span class="w"> </span>-e<span class="w"> </span><span class="nv">DB_PASSWORD</span><span class="o">=</span>yourefired<span class="w"> </span>ubuntu:latest<span class="w"> </span>bash
+<div class="codehilite"><pre><span></span><code>docker run -it -e <span class="nv">DB_USER</span><span class="o">=</span>root -e <span class="nv">DB_PASSWORD</span><span class="o">=</span>yourefired ubuntu:latest bash
 </code></pre></div>
 
 <p>This starts an Ubuntu container with the variable <code>DB_USER</code> set to <code>root</code> and the variable <code>DB_PASSWORD</code> set to <code>yourefired</code>. From inside the container, try
@@ -547,7 +547,7 @@ your connection will be forwarded to <code>container_port</code> inside the cont
 <p>Let&rsquo;s look at an example of running server software and publishing a
 port so that you can connect to it from your host computer. Run the
 following command:</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8888<span class="w"> </span>jupyter/scipy-notebook:latest
+<div class="codehilite"><pre><span></span><code>docker run -p <span class="m">8000</span>:8888 jupyter/scipy-notebook:latest
 </code></pre></div>
 
 <p>This command should download and run the latest version of the
@@ -609,7 +609,7 @@ website in Exercise 5-3.</p>
 the following command to delete all of the container images you&rsquo;ve
 downloaded from Docker Hub and other data that Docker stores (besides
 volumes):</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>system<span class="w"> </span>prune<span class="w"> </span>-a
+<div class="codehilite"><pre><span></span><code>docker system prune -a
 </code></pre></div>
 
 <p>Since this command doesn&rsquo;t delete volumes, it won&rsquo;t delete any of your
@@ -647,33 +647,33 @@ called <em>wordpress</em> for this exercise and then, using your text editor,
 make a file in that folder called <em>docker-compose.yaml</em>. Enter the
 following code into <em>that</em> file (or copy and paste it from
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-5/wordpress/docker-compose.yaml">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-5/wordpress/docker-compose.yaml</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">wordpress</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wordpress:latest</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wordpress_data:/var/www/html</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8000:80</span>
-<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
-<span class="w">  </span><span class="nt">❶ environment</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WORDPRESS_DB_HOST=db</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WORDPRESS_DB_USER=wordpress</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WORDPRESS_DB_PASSWORD=yourefired</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WORDPRESS_DB_NAME=wordpress</span>
-<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:10.9</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_data:/var/lib/mysql</span>
-<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
-<span class="w">  </span><span class="nt">❷ environment</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=supersecurepassword</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_USER=wordpress</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_PASSWORD=yourefired</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_DATABASE=wordpress</span>
+<div class="codehilite"><pre><span></span><code><span class="nt">services</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">wordpress</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wordpress:latest</span><span class="w"></span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wordpress_data:/var/www/html</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8000:80</span><span class="w"></span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span><span class="w"></span>
+<span class="w">  </span><span class="nt">❶ environment</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WORDPRESS_DB_HOST=db</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WORDPRESS_DB_USER=wordpress</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WORDPRESS_DB_PASSWORD=yourefired</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WORDPRESS_DB_NAME=wordpress</span><span class="w"></span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:10.9</span><span class="w"></span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db_data:/var/lib/mysql</span><span class="w"></span>
+<span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span><span class="w"></span>
+<span class="w">  </span><span class="nt">❷ environment</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=supersecurepassword</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_USER=wordpress</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_PASSWORD=yourefired</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_DATABASE=wordpress</span><span class="w"></span>
 
-<span class="nt">volumes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">db_data</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">wordpress_data</span><span class="p">:</span>
+<span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">db_data</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">wordpress_data</span><span class="p">:</span><span class="w"></span>
 </code></pre></div>
 
 <p>YAML files are whitespace sensitive, meaning that indentations affect
@@ -706,7 +706,7 @@ See the documentation for a more thorough description of how to use Docker Compo
 <h4>Start Your WordPress Site</h4>
 <p>In your terminal, change to the folder you created for this exercise and
 run the following command to start both containers at the same time:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up
+<div class="codehilite"><pre><span></span><code>docker-compose up
 </code></pre></div>
 
 <p>The first time you run it, Docker should download the
@@ -740,7 +740,7 @@ site.</p>
 <p>To open a shell and run commands in an active container with Docker
 Compose, you use the <code>docker-compose exec container_name command</code> syntax. For example, this is
 how you&rsquo;d get a shell in the <code>wordpress</code> container:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>wordpress<span class="w"> </span>bash
+<div class="codehilite"><pre><span></span><code>docker-compose <span class="nb">exec</span> wordpress bash
 </code></pre></div>
 
 <p>While <code>docker-compose run</code>
@@ -830,7 +830,7 @@ in a few ways.</p>
 <p>First, run the following command to generate a random value for
 <code>ALEPH_SECRET_KEY</code> (Windows
 users, run this in your Ubuntu terminal):</p>
-<div class="codehilite"><pre><span></span><code>openssl<span class="w"> </span>rand<span class="w"> </span>-hex<span class="w"> </span><span class="m">24</span>
+<div class="codehilite"><pre><span></span><code>openssl rand -hex <span class="m">24</span>
 </code></pre></div>
 
 <p>Since you&rsquo;re running Aleph on your computer instead of setting it up on
@@ -845,17 +845,17 @@ data in memory. Linux&rsquo;s default memory management setting
 low for Elasticsearch to work properly. If you&rsquo;re using Linux or Windows
 with WSL, run the following command to increase the value of
 <code>vm.max_map_count</code>:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.max_map_count<span class="o">=</span><span class="m">262144</span>
+<div class="codehilite"><pre><span></span><code>sudo sysctl -w vm.max_map_count<span class="o">=</span><span class="m">262144</span>
 </code></pre></div>
 
 <p>If you&rsquo;re using macOS, run <code>sysctl -w vm.max_map_count=262144</code> inside of your Linux VM managed by
 Docker Desktop. To do this, run the following command to start a shell
 directly in your Linux VM:</p>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--privileged<span class="w"> </span>--pid<span class="o">=</span>host<span class="w"> </span>alpine:edge<span class="w"> </span>nsenter<span class="w"> </span>-t<span class="w"> </span><span class="m">1</span><span class="w"> </span>-m<span class="w"> </span>-u<span class="w"> </span>-n<span class="w"> </span>-i<span class="w"> </span>sh
+<div class="codehilite"><pre><span></span><code>docker run -it --rm --privileged --pid<span class="o">=</span>host alpine:edge nsenter -t <span class="m">1</span> -m -u -n -i sh
 </code></pre></div>
 
 <p>Once you&rsquo;re in this shell, run this command:</p>
-<div class="codehilite"><pre><span></span><code>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.max_map_count<span class="o">=</span><span class="m">262144</span>
+<div class="codehilite"><pre><span></span><code>sysctl -w vm.max_map_count<span class="o">=</span><span class="m">262144</span>
 </code></pre></div>
 
 <p>Run <code>exit</code> to exit the Linux VM
@@ -867,9 +867,9 @@ Desktop box to speed up this process in the future.)</p>
 <h4>INCREASING ELASTICSEARCH MEMORY IN DOCKER DESKTOP</h4>
 <p>If you’re using macOS, you’ll need to change settings before starting the Aleph containers. Instead of referring to this chapter to remember what commands to run, store them as the following shell script (which you can also find at <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-5/aleph/fix-es-memory.sh">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-5/aleph/fix-es-memory.sh</a>):</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--privileged<span class="w"> </span>--pid<span class="o">=</span>host<span class="w"> </span>alpine:edge<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>nsenter<span class="w"> </span>-t<span class="w"> </span><span class="m">1</span><span class="w"> </span>-m<span class="w"> </span>-u<span class="w"> </span>-n<span class="w"> </span>-i<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>sysctl<span class="w"> </span>-w<span class="w"> </span>vm.max_map_count<span class="o">=</span><span class="m">262144</span>
+docker run -it --rm --privileged --pid<span class="o">=</span>host alpine:edge <span class="se">\</span>
+    nsenter -t <span class="m">1</span> -m -u -n -i <span class="se">\</span>
+    sysctl -w vm.max_map_count<span class="o">=</span><span class="m">262144</span>
 </code></pre></div>
 
 <p>Save a copy of this script in the same folder as your <code>docker-compose.yml</code> file for Aleph, and run <code>chmod +x fix-es-memory.sh</code> to make sure it’s executable. You can now run the script before starting the Aleph containers with just these two commands:</p>
@@ -881,7 +881,7 @@ docker-compose up
 </blockquote>
 <p>Finally, for all operating systems, run the
 following command to start Aleph:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up
+<div class="codehilite"><pre><span></span><code>docker-compose up
 </code></pre></div>
 
 <p>The first time you run this command, you&rsquo;ll download a few gigabytes of
@@ -891,7 +891,7 @@ boots up; wait for it to stop.</p>
 and whenever you upgrade your version of it. Once Aleph finishes
 booting, open a second terminal, change to the <em>exercises</em> folder, and
 run:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>shell<span class="w"> </span>aleph<span class="w"> </span>upgrade
+<div class="codehilite"><pre><span></span><code>docker-compose run --rm shell aleph upgrade
 </code></pre></div>
 
 <p>This command initializes the databases that Aleph uses by running the
@@ -937,7 +937,7 @@ indexing folders of data, which you&rsquo;ll do later in this chapter.</p>
 <p>To use the command line interface, run <code>bash</code> inside the container called
 <code>shell</code> to start an Aleph
 shell like so:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>shell<span class="w"> </span>bash
+<div class="codehilite"><pre><span></span><code>docker-compose run --rm shell bash
 </code></pre></div>
 
 <p>When you first opened a shell in a container using Docker Compose, you
@@ -997,14 +997,14 @@ docs about police violence or the protests that it triggered.</p>
 <h4>Mount Your Datasets into the Aleph Shell</h4>
 <p>If you don&rsquo;t already have Aleph running, change to your <em>aleph</em> folder
 and enter the following command:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up
+<div class="codehilite"><pre><span></span><code>docker-compose up
 </code></pre></div>
 
 <p>Wait for Aleph to boot up.</p>
 <p>In a separate terminal, start an Aleph shell. This time, however,
 bind-mount your <em>datasets</em> USB disk into the container, using the
 following command, substituting the correct path for your USB disk:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span>/Volumes/datasets:/datasets:ro<span class="w"> </span>shell<span class="w"> </span>bash
+<div class="codehilite"><pre><span></span><code>docker-compose run --rm -v /Volumes/datasets:/datasets:ro shell bash
 </code></pre></div>
 
 <p>The arguments in this command are similar to the <code>--mount</code> argument you used earlier to mount a
@@ -1024,7 +1024,7 @@ Linux, it&rsquo;s <em>/media/micah/datasets</em> or similar; and in Windows with
 it&rsquo;s <em>/mnt/d</em> or similar. If you&rsquo;re using Windows with PowerShell, mount
 the <em>D:</em> drive into the container at the path <em>/datasets</em> with this
 command:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span>D:/datasets:ro<span class="w"> </span>shell<span class="w"> </span>bash
+<div class="codehilite"><pre><span></span><code>docker-compose run --rm -v D:/datasets:ro shell bash
 </code></pre></div>
 
 <p>Altogether, this command runs a new <code>shell</code> container and executes the
@@ -1041,7 +1041,7 @@ index the <em>icefishx</em> data.</p>
 each subfolder it finds and index each file in that, and so on, until
 everything in the original folder has been indexed.</p>
 <p>Run the following command to start indexing the <em>icefishx</em> folder:</p>
-<div class="codehilite"><pre><span></span><code>aleph<span class="w"> </span>crawldir<span class="w"> </span>-l<span class="w"> </span>eng<span class="w"> </span>/datasets/BlueLeaks-extracted/icefishx
+<div class="codehilite"><pre><span></span><code>aleph crawldir -l eng /datasets/BlueLeaks-extracted/icefishx
 </code></pre></div>
 
 <p>This command tells Aleph to index data in the

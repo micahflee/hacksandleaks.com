@@ -7,7 +7,7 @@
     - [Chapter 2: Acquiring Datasets](chapter-2.html)
 - **Part II: Tools of the Trade**
     - [Chapter 3: The Command Line Interface](chapter-3.html)
-    - [Chapter 4: Exporing Datasets in the Terminal](chapter-4.html)
+    - [Chapter 4: Exploring Datasets in the Terminal](chapter-4.html)
     - [Chapter 5: Docker, Aleph, and Making Datasets Searchable](chapter-5.html)
     - [Chapter 6: Reading Other People's Email](chapter-6.html)
 - **Part III: Python Programming**

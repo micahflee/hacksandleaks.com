@@ -188,7 +188,7 @@ to make the following examples easier to read.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;meta&quot;</span><span class="p">:{</span><span class="nt">&quot;users&quot;</span><span class="p">:{</span><span class="nt">&quot;231148326249037824&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;D&#39;Marcus Liebowitz&quot;</span><span class="p">},</span><span class="nt">&quot;232213403974893569&quot;</span><span class="p">:{</span><span class="nt">&quot;nam</span>
 <span class="nt">e&quot;</span><span class="p">:</span><span class="s2">&quot;northern_confederate&quot;</span><span class="p">},</span><span class="nt">&quot;279620004641767424&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;☇Unlimited Power☇&quot;</span><span class="p">},</span><span class="nt">&quot;23338059623405977</span>
 <span class="nt">6&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;OrwellHuxley&quot;</span><span class="p">},</span><span class="nt">&quot;289851780521787392&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;badtanman&quot;</span><span class="p">},</span><span class="nt">&quot;337421867700715524&quot;</span><span class="p">:{</span><span class="nt">&quot;nam</span>
-<span class="nt">e&quot;</span><span class="p">:</span><span class="s2">&quot;spadegunner&quot;</span><span class="p">},</span><span class="nt">&quot;315936522656546818&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;erz1871&quot;</span><span class="p">},</span><span class="nt">&quot;122932975724789761&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Archer&quot;</span>
+<span class="nt">e&quot;</span><span class="p">:</span><span class="s2">&quot;spadegunner&quot;</span><span class="p">},</span><span class="nt">&quot;315936522656546818&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;erz1871&quot;</span><span class="p">},</span><span class="nt">&quot;122932975724789761&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Archer&quot;</span><span class="w"></span>
 <span class="p">},</span><span class="nt">&quot;201547638129164290&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;SLUG2_&quot;</span><span class="p">},</span><span class="nt">&quot;288899711929286667&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;million plus&quot;</span><span class="p">},</span><span class="err">&quot;25019824</span>
 <span class="err">--snip--</span>
 </code></pre></div>
@@ -225,22 +225,22 @@ file was one large JSON object, and one of that object&rsquo;s keys was
 <code>meta</code>. I ran the following
 <code>jq</code> command to see what other
 keys there were:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;keys&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;keys&#39;</span>
 </code></pre></div>
 
 <p>The output told me that the data for each Discord server includes two
 parts, <code>data</code> and
 <code>meta</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="s2">&quot;data&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;meta&quot;</span>
-<span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;meta&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
 
 <p>Guessing that <code>meta</code> included
 the metadata for the server, I ran the following command to determine
 the keys of the <code>meta</code> object:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta | keys&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta | keys&#39;</span>
 </code></pre></div>
 
 <p>This command piped the output of <code>cat VibrantDiversity.json</code> as input into the
@@ -256,30 +256,30 @@ pipes it into <code>keys</code>, which
 outputs the keys from that value.</p>
 <p>The output showed me that the metadata included
 information about channels, servers, and users:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="s2">&quot;channels&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;servers&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;userindex&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;users&quot;</span>
-<span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;channels&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;servers&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;userindex&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;users&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
 
 <p>So far, I had only looked at the keys of JSON objects. It was time to
 look at some of the content, starting with the servers. By running
 <code>jq '.meta .servers'</code>, I could
 look at the value of the <code>servers</code> key inside the <code>meta</code> object:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.servers&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.servers&#39;</span>
 </code></pre></div>
 
 <p>The output in Listing 14-1 showed that
 <em>VibrantDiversity.json</em> lists a single server in the metadata sections,
 Vibrant Diversity, just as I expected.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vibrant Diversity&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SERVER&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vibrant Diversity&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SERVER&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
 
 <p><em>Listing 14-1: The list of servers in <code>VibrantDiversity.json</code></em></p>
@@ -287,48 +287,48 @@ Vibrant Diversity, just as I expected.</p>
 surrounded by brackets ([ and ]).</p>
 <p>Next, I wanted to see what channels this server had, so I ran the
 following command to view the value of the <code>channels</code> key in the <code>meta</code> object:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.channels&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.channels&#39;</span>
 </code></pre></div>
 
 <p>Listing 14-2 shows the output of this command.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;274024266435919872&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rules&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;274262571367006208&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;general&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;292812979555139589&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;effortposting&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;288508006990348299&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;problematic_oven&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;274055625988898816&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;music&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;343979974241550337&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gun-posting-goes-here&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;328841016352440320&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;food-posting&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;274025126641795074&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;share_contact_info&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;288901961313550336&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;recruiting&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;274024266435919872&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rules&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;274262571367006208&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;general&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;292812979555139589&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;effortposting&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;288508006990348299&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;problematic_oven&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;274055625988898816&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;music&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;343979974241550337&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gun-posting-goes-here&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;328841016352440320&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;food-posting&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;274025126641795074&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;share_contact_info&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;288901961313550336&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;recruiting&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p><em>Listing 14-2: The list of channels in the Vibrant Diversity server</em></p>
@@ -350,21 +350,21 @@ and Nazi memes, and the word <em>oven</em> was clearly a reference to the
 Holocaust. This was definitely a neo-Nazi chat server.</p>
 <p>I wanted to see a list of this server&rsquo;s users, so I ran the following
 command to view the value of the <code>users</code> key in the <code>meta</code> object:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.users&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.users&#39;</span>
 </code></pre></div>
 
 <p>Listing 14-3 shows my output.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;231148326249037824&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;D&#39;Marcus Liebowitz&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;232213403974893569&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;northern_confederate&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;279620004641767424&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;☇Unlimited Power☇&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;231148326249037824&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;D&#39;Marcus Liebowitz&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;232213403974893569&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;northern_confederate&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;279620004641767424&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;☇Unlimited Power☇&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
 </code></pre></div>
 
 <p><em>Listing 14-3: The list of users in the Vibrant Diversity server</em></p>
@@ -374,15 +374,15 @@ just a single key, the user&rsquo;s name.</p>
 <p>So far, I had explored the metadata keys <code>channels</code>, <code>servers</code>, and <code>users</code>, but there was one left: the
 <code>userindex</code> key. I ran the
 following command to view the <code>userindex</code> key&rsquo;s value:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.userindex&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.userindex&#39;</span>
 </code></pre></div>
 
 <p>Listing 14-4 shows my output.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="s2">&quot;231148326249037824&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;232213403974893569&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;279620004641767424&quot;</span><span class="p">,</span>
-<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;231148326249037824&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;232213403974893569&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;279620004641767424&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
 </code></pre></div>
 
 <p><em>Listing 14-4: The list of user IDs for each user in the Vibrant Diversity server</em></p>
@@ -395,21 +395,21 @@ At this point I didn&rsquo;t fully understand the purpose of
 clear, as you&rsquo;ll see later in this section.</p>
 <p>Armed with a basic understanding of the server&rsquo;s metadata, I ran the
 following command to find the keys for the <code>data</code> object:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.data | keys&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.data | keys&#39;</span>
 </code></pre></div>
 
 <p>Listing 14-5 shows my output.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="s2">&quot;274024266435919872&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;274025126641795074&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;274055625988898816&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;274262571367006208&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;288508006990348299&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;288901961313550336&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;292812979555139589&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;328841016352440320&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;343979974241550337&quot;</span>
-<span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;274024266435919872&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;274025126641795074&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;274055625988898816&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;274262571367006208&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;288508006990348299&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;288901961313550336&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;292812979555139589&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;328841016352440320&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s2">&quot;343979974241550337&quot;</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
 
 <p><em>Listing 14-5: The keys to the <code>data</code> object in the Vibrant Diversity server</em></p>
@@ -417,7 +417,7 @@ following command to find the keys for the <code>data</code> object:</p>
 of each key contained the actual messages in those chat channels.
 Because I needed to start somewhere, I decided to view the chat messages
 from the #problematic_oven channel, so I ran the following command:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.data.&quot;288508006990348299&quot;&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.data.&quot;288508006990348299&quot;&#39;</span>
 </code></pre></div>
 
 <p>The full argument for this <code>jq</code> command is surrounded by single
@@ -537,7 +537,7 @@ was actually an index of the <code>userindex</code> array.</p>
 <code>userindex</code> at index
 <code>4</code> by running the following
 command:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.userindex[4]&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.userindex[4]&#39;</span>
 </code></pre></div>
 
 <p>This command is similar to the one in Listing 14-4, but because it uses
@@ -547,21 +547,21 @@ of the <code>.meta.userindex</code> array
 and just displays that result. My output showed that this value was the
 string <code>289851780521787392</code>,
 an 18-digit user ID:</p>
-<div class="codehilite"><pre><span></span><code><span class="s2">&quot;289851780521787392&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="s2">&quot;289851780521787392&quot;</span><span class="w"></span>
 </code></pre></div>
 
 <p>Now that I had a user ID, I used it in the following command to find the
 matching username:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.users.&quot;289851780521787392&quot;&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat VibrantDiversity.json <span class="p">|</span> jq <span class="s1">&#39;.meta.users.&quot;289851780521787392&quot;&#39;</span>
 </code></pre></div>
 
 <p>Like the previous command, this command selects just one value to
 output. In this case, it selects the <code>meta</code> key, then the <code>users</code> key, then the
 <code>289851780521787392</code> key. The
 result is an object that includes a <code>name</code> key:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;badtanman&quot;</span>
-<span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;badtanman&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>The name <em>badtanman</em> was the username I was looking for.</p>
@@ -677,11 +677,11 @@ initial Discord JSON search script worked.</p>
 <p>For example, I knew my script needed to be able to display chat messages
 based on what I searched for. Let&rsquo;s say I wanted my code to display the
 following chat message from Listing 14-6:</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">&quot;352992491282366485&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;u&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1504230368205</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;we need more white girls with nice asses&quot;</span>
-<span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="nt">&quot;352992491282366485&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;u&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1504230368205</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;we need more white girls with nice asses&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>The value of the <code>u</code> key is
@@ -693,9 +693,9 @@ is the user ID <code>289851780521787392</code>. My code then would look again in
 JSON&rsquo;s <code>meta</code> object, this
 time for the <code>users</code> key, and
 use that user ID as the key to get this user object:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;badtanman&quot;</span>
-<span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;badtanman&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>My code would select the <code>name</code> string from that object to get the
@@ -841,7 +841,7 @@ search term underlined using <code>click.style()</code>. It then returned
 to the terminal in the <code>display()</code> function.</p>
 <p>For example, if I wanted to search <em>VibrantDiversity.json</em> for the term
 <em>berkeley</em>, I could run:</p>
-<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>discord-json-search.py<span class="w"> </span>~/datasets/Discord-JSON-Scrapes/VibrantDiversity.json<span class="w"> </span><span class="s2">&quot;berkeley&quot;</span>
+<div class="codehilite"><pre><span></span><code>python3 discord-json-search.py ~/datasets/Discord-JSON-Scrapes/VibrantDiversity.json <span class="s2">&quot;berkeley&quot;</span>
 </code></pre></div>
 
 <p>The output listed over a hundred chat messages that mentioned Berkeley.
@@ -1326,7 +1326,7 @@ it would import only the new messages.</p>
 all of the JSON Discord files that I had received from Unicorn Riot. To
 import data from the Vibrant Diversity channel, I would run this
 command:</p>
-<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>admin.py<span class="w"> </span>import-json<span class="w"> </span>~/datasets/Discord-JSON-Scrapes/VibrantDiversity.json
+<div class="codehilite"><pre><span></span><code>python3 admin.py import-json ~/datasets/Discord-JSON-Scrapes/VibrantDiversity.json
 </code></pre></div>
 
 <p>And here is the output:</p>
@@ -1353,7 +1353,7 @@ had, including chat logs from Anticom, 4th Reich, Ethnoserver, and other
 leaked servers. For example, next I imported one of the smaller servers
 called Pony Power, which I&rsquo;ll discuss further later in this chapter,
 like so:</p>
-<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>admin.py<span class="w"> </span>import-json<span class="w"> </span>~/datasets/Discord-JSON-Scrapes/PonyPowerComplete-Sept5at155PM.txt
+<div class="codehilite"><pre><span></span><code>python3 admin.py import-json ~/datasets/Discord-JSON-Scrapes/PonyPowerComplete-Sept5at155PM.txt
 </code></pre></div>
 
 <p>And here is the output from that command (in this case, I&rsquo;d already

@@ -308,7 +308,7 @@ automatically log in as an unprivileged user. To fix this, you&rsquo;ll create
 a file called <em>/etc/wsl.conf</em>, using the nano text editor described in
 Chapter 4.</p>
 <p>Run the following command to open nano:</p>
-<div class="codehilite"><pre><span></span><code>nano<span class="w"> </span>/etc/wsl.conf
+<div class="codehilite"><pre><span></span><code>nano /etc/wsl.conf
 </code></pre></div>
 
 <p>Enter the following two lines into the text editor file to set your
@@ -413,7 +413,7 @@ Leaving DiskPart...
 need to expand the actual Linux partition on this disk. To do that, you
 need to determine the path to the virtual disk itself.</p>
 <p>First, open an Ubuntu terminal and run the following command:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>devtmpfs<span class="w"> </span>none<span class="w"> </span>/dev
+<div class="codehilite"><pre><span></span><code>sudo mount -t devtmpfs none /dev
 </code></pre></div>
 
 <p>This command checks to be sure that <em>/dev</em> is mounted in WSL. This is a
@@ -429,7 +429,7 @@ password to proceed. If you see the warning message
 <code>mount: /dev: none already mounted on /dev</code> you can safely ignore it; this means
 that <em>/dev</em> was already mounted.</p>
 <p>Run the following command:</p>
-<div class="codehilite"><pre><span></span><code>mount<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ext4
+<div class="codehilite"><pre><span></span><code>mount <span class="p">|</span> grep ext4
 </code></pre></div>
 
 <p>This command runs <code>mount</code>, which outputs all of the filesystems
@@ -443,7 +443,7 @@ drive. For example, my output tells me the path to my hard drive is
 <p>Finally, resize your Linux partition to take up as much space as it can
 by running the following command, making sure to use the correct path to
 your virtual hard drive from the previous command:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>resize2fs<span class="w"> </span>/dev/sdc
+<div class="codehilite"><pre><span></span><code>sudo resize2fs /dev/sdc
 </code></pre></div>
 
 <p>When I run this, I get the following output:</p>

@@ -526,28 +526,28 @@ MBOX files. You can access the program by installing the
 the <code>pst-utils</code> package in
 Ubuntu. Start by opening a terminal. Mac users, run the following
 command:</p>
-<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>libpst
+<div class="codehilite"><pre><span></span><code>brew install libpst
 </code></pre></div>
 
 <p>Linux and Windows with WSL users, run these commands:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>pst-utils
+<div class="codehilite"><pre><span></span><code>sudo apt update
+sudo apt install pst-utils
 </code></pre></div>
 
 <p>Next, change to the folder that contains the
 <em>backup.pst</em> file. For example, on my macOS computer, I run:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/Volumes/datasets/Heritage<span class="se">\ </span>Foundation
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets/Heritage<span class="se">\ </span>Foundation
 </code></pre></div>
 
 <p>To convert a PST file into EML file, you use the following command,
 where the <code>-e</code> argument tells
 <code>readpst</code> to output as EML
 files:</p>
-<div class="codehilite"><pre><span></span><code>readpst<span class="w"> </span>-e<span class="w"> </span>filename.pst
+<div class="codehilite"><pre><span></span><code>readpst -e filename.pst
 </code></pre></div>
 
 <p>Run that command on the <em>backup.pst</em> file like so:</p>
-<div class="codehilite"><pre><span></span><code>readpst<span class="w"> </span>-e<span class="w"> </span>backup.pst
+<div class="codehilite"><pre><span></span><code>readpst -e backup.pst
 </code></pre></div>
 
 <p>This command creates a folder called <em>Personal Folders</em>, which contains

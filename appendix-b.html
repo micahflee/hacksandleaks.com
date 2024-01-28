@@ -247,12 +247,12 @@ that user. In order to write it, I had to spend some time looking at the
 JSON in these responses to understand how it was structured and what
 information I was interested in. For example, since I wanted to start
 with a Gab username, my script would first need to load the URL
-<em>https://gab.com/api/v1/account_by_username/&lt;username&gt;</em>,
-replacing <em>&lt;username&gt;</em> with my target username. It would then need to
+<em>https://gab.com/api/v1/account_by_username/&lt;username></em>,
+replacing <em>&lt;username></em> with my target username. It would then need to
 parse the JSON it receives to extract this Gab user&rsquo;s ID. Then, using
 that ID, it would need to load the URL
-<em>https://gab.com/api/v1/accounts/&lt;id&gt;/statuses?sort_by=newest</em>,
-replacing <em>&lt;id&gt;</em> with the Gab ID of the target account. Finally, it
+<em>https://gab.com/api/v1/accounts/&lt;id>/statuses?sort_by=newest</em>,
+replacing <em>&lt;id></em> with the Gab ID of the target account. Finally, it
 would need to parse that JSON response to display the latest Gab posts.</p>
 <p>Based on this research, I wrote the following script to scrape the
 latest posts from any target Gab account. Here&rsquo;s the code for this web
@@ -264,7 +264,7 @@ scraping script,
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;gab_username&quot;</span><span class="p">)</span> <span class="err">❶</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">gab_username</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download a user&#39;s posts from Gab&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Download a user&#39;s posts from Gab&quot;&quot;&quot;</span>
 
     <span class="c1"># Get information about the user</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://gab.com/api/v1/account_by_username/</span><span class="si">{</span><span class="n">gab_username</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="err">❷</span>
@@ -301,8 +301,8 @@ of the target Gab user ❶.</p>
 runs, it downloads information about the target user by calling the
 <code>httpx.get()</code> function and
 passing in the URL
-<em>https://gab.com/api/v1/account_by_username/&lt;gab_username&gt;</em>,
-replacing <em>&lt;gab_username&gt;</em> with the value of the CLI argument and
+<em>https://gab.com/api/v1/account_by_username/&lt;gab_username></em>,
+replacing <em>&lt;gab_username></em> with the value of the CLI argument and
 storing the result in the variable <code>r</code> ❷. As my browser&rsquo;s developer tools made clear,
 the response should be a JSON object, so the script next calls
 <code>r.json()</code> on it to make HTTPX
@@ -654,7 +654,7 @@ skip to the Testing Selenium in the Python Interpreter section.</p>
 <p>For this task, Windows users should work with native Windows tools
 rather than WSL. Install the <code>selenium</code> Python module by opening PowerShell
 and running the following command:</p>
-<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>selenium
+<div class="codehilite"><pre><span></span><code>python -m pip install selenium
 </code></pre></div>
 
 <p>Also make sure you have Firefox installed (see <a href="https://www.mozilla.org/en-US/firefox/new/">https://www.mozilla.org/en-US/firefox/new/</a>).</p>
@@ -667,23 +667,23 @@ working directory is.</p>
 <h4>Installing Selenium and geckodriver on macOS</h4>
 <p>If you&rsquo;re using macOS, open a terminal. Install the <code>selenium</code> Python module by running the
 following:</p>
-<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>selenium
+<div class="codehilite"><pre><span></span><code>python3 -m pip install selenium
 </code></pre></div>
 
 <p>Then install geckodriver by running the following:</p>
-<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>geckodriver
+<div class="codehilite"><pre><span></span><code>brew install geckodriver
 </code></pre></div>
 
 <p>This should give you everything you need to use Selenium in Python.</p>
 <h4>Installing Selenium and geckodriver on Linux</h4>
 <p>If you&rsquo;re using Linux, open a terminal. Install the <code>selenium</code> Python module by running the
 following:</p>
-<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>selenium
+<div class="codehilite"><pre><span></span><code>python3 -m pip install selenium
 </code></pre></div>
 
 <p>Install geckodriver by running the following:</p>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>firefox-geckodriver
+<div class="codehilite"><pre><span></span><code>sudo apt update
+sudo apt install firefox-geckodriver
 </code></pre></div>
 
 <p>This should give you everything you need to use Selenium in Python.</p>
@@ -831,7 +831,7 @@ When it&rsquo;s done, it quits Firefox.</p>
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/appendix-b/selenium-example.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/appendix-b/selenium-example.py</a>.</p>
 <p>You can use <em>selenium-example.py</em> to generate Google Maps screenshots of
 any location you like. For example, I ran the following command:</p>
-<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>selenium-example.py<span class="w"> </span><span class="s2">&quot;great pyramid of giza&quot;</span><span class="w"> </span>giza.png
+<div class="codehilite"><pre><span></span><code>python3 selenium-example.py <span class="s2">&quot;great pyramid of giza&quot;</span> giza.png
 </code></pre></div>
 
 <p>This opened a Firefox window that was controlled by Selenium. It loaded Google Maps, searched for <em>great
