@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Micah Lee">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Buy Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data by Micah Lee.">
+    <meta name="apple-mobile-web-app-title" content="Hacks, Leaks, and Revelations">
+    <meta name="application-name" content="Hacks, Leaks, and Revelations">
+    <meta name="theme-color" content="#86D58D">
+
+    <title>Hello, hackers at HOPE - Hacks, Leaks, and Revelations</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="images/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="images/favicon/android-chrome-512x512.png" sizes="512x512">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pygments.css">
+    <script defer data-domain="hacksandleaks.com" data-api="https://deniability.brisk.workers.dev/deniability/event" src="https://deniability.brisk.workers.dev/deniability/script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="wrapper">
+           <h1><a href="/">Hacks, Leaks, and Revelations</a></h1>
+            <nav>
+                <div id="nav"><ul>
+<li><a href="contents.html">Contents</a></li>
+</ul></div>
+                <a class="mobileNav btnIcon"></a>
+                <a href="buy.html" role="button" class="primaryBtn btn">Buy Now</a>
+            </nav>
+        </div>
+    </header>
+    <section class="intro bookIntro">
+        <div class="wrapper" id="intro-wrapper">
+          <div id="reading-time">~4 min read</div>
+          <h1>Hello, hackers at HOPE</h1>
+          <p>To do this workshop you will need a computer running Linux, macOS, or Windows, an internet connection (to download data and dependencies), and <strong>at least 10GB</strong> of free disk space (though <strong>preferably about 530GB</strong>).</p>
+        </div>
+    </section>
+    <section id="content" data-content="hope-xv">
+        <div class="wrapper" id="about-content"><p>Much of what is covered in this workshop is covered in <a href="https://hacksandleaks.com/chapter-10.html">Chapter 10</a>, so it may be a useful resource as you follow along.</p>
+<h3>Download the BlueLeaks data</h3>
+<p>Ideally, you will have a full copy of the <a href="https://ddosecrets.com/wiki/BlueLeaks">BlueLeaks dataset</a>. While not required, it would be helpful if you can download it and extract it <em>before</em> the workshop, as it&rsquo;s unlikely that you&rsquo;ll have the time to download it and extract it <em>during</em> the workshop.</p>
+<h4>Already at HOPE?</h4>
+<p>If you&rsquo;re already at HOPE, you should just download the BlueLeaks Explorer data (about 1GB compressed) that is necessary for the workshop. After tonight, you can spend the rest of the conference downloading the full BlueLeaks dataset.</p>
+<p>Download the BlueLeaks Explorer data for the workshop here: <a href="https://drive.google.com/drive/folders/1IuTYt5tZ216GUDwg54SIkZpAYIG87rZc">https://drive.google.com/drive/folders/1IuTYt5tZ216GUDwg54SIkZpAYIG87rZc</a></p>
+<h4>The full BlueLeaks dataset</h4>
+<p>BlueLeaks is 250GB compressed. Here&rsquo;s where to download it:</p>
+<p><strong>BitTorrent magnet link:</strong></p>
+<div class="codehilite"><pre><span></span><code>magnet:?xt=urn:btih:8cf92b7cd3f022fa5478b84963e89c1dd0af090f&amp;dn=BlueLeaks&amp;tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&amp;tr=udp%3A%2F%2F9.rarbg.to%3A2920%2Fannounce&amp;tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&amp;tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&amp;tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce
+</code></pre></div>
+
+<p><strong>Direct download over HTTPS:</strong> <a href="https://data.ddosecrets.com/BlueLeaks/">https://data.ddosecrets.com/BlueLeaks/</a> (download all 168 files)</p>
+<p>Uncompressed, BlueLeaks is 269GB of data. If you download it compressed and then uncompress it, you&rsquo;ll need 519GB of data. I recommend that you use an external USB SSD with at least 1TB of disk space.</p>
+<p>(If you want to learn a quick way to uncompress hundreds of zip files, check out the first exercise in <a href="https://hacksandleaks.com/chapter-4.html">Chapter 4</a>.</p>
+<h3>Install Docker</h3>
+<p>Install <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>, or <a href="https://docs.docker.com/engine/install/">Docker Engine</a> in Linux if you prefer.</p>
+<p>After installing, make sure it works by opening a terminal and run:</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>hello-world
+</code></pre></div>
+
+<h3>Install a text editor</h3>
+<p>If you don&rsquo;t already have one, install a text editor like <a href="https://code.visualstudio.com/">Visual Studio Code</a>. Or use vim, nano, gedit, notepad, or whatever you prefer.</p>
+<h3>Set up your files</h3>
+<p>Make a folder called <code>blueleaks-explorer</code>.</p>
+<p>Inside that folder, make two folders:</p>
+<ul>
+<li><code>databases</code></li>
+<li>
+<p><code>structures</code></p>
+</li>
+<li>
+<p><strong>If you don&rsquo;t have the full BLueLeaks dataset</strong>, extract the data you downloaded earlier into the <code>databases</code> folder. Also make a new folder called <code>blueleaks-data</code> as a placeholder for where the dataset will go. Then, inside the <code>blueleaks-data</code> folder, create empty folder for each site in BlueLeaks. You can do this by running the following commands:</p>
+</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Make the blueleaks-data folder</span>
+mkdir<span class="w"> </span>blueleaks-data
+
+<span class="c1"># Change to it</span>
+<span class="nb">cd</span><span class="w"> </span>blueleaks-data
+
+<span class="c1"># Make folders for each BlueLeaks site</span>
+mkdir<span class="w"> </span>211sfbay<span class="w"> </span>cnoatraining<span class="w"> </span>houstonhidta<span class="w"> </span>miacxold<span class="w"> </span>northtexashidta<span class="w"> </span>ruralcountysummit<span class="w"> </span>stopeasttexasgangs<span class="w"> </span>acprlea<span class="w"> </span>cnyorca<span class="w"> </span>houstonhidtatraining<span class="w"> </span>millvalleypolice<span class="w"> </span>novatopolicedept<span class="w"> </span>sacrttac<span class="w"> </span>stophoustondrugs<span class="w"> </span>acticaz<span class="w"> </span>coorca<span class="w"> </span>hpdlineup<span class="w"> </span>miorca<span class="w"> </span>ntacnv<span class="w"> </span>safecityabq<span class="w"> </span>stoplubbockgangs<span class="w"> </span>akorca<span class="w"> </span>corca<span class="w"> </span>hpdretired<span class="w"> </span>mlrin<span class="w"> </span>nvhidta<span class="w"> </span>safecityfw<span class="w"> </span>stopnorthtexasgangs<span class="w"> </span>alabamafusioncenter<span class="w"> </span>counterdrugtraining<span class="w"> </span>icefishx<span class="w"> </span>mnorca<span class="w"> </span>nymorca<span class="w"> </span>sanbrunopolice<span class="w"> </span>stopsanantoniogangs<span class="w"> </span>alabamalecc<span class="w"> </span>crimestopperslea<span class="w"> </span>ilcrime<span class="w"> </span>morciu<span class="w"> </span>oaklandsheriffshield<span class="w"> </span>sccpca<span class="w"> </span>stopseattledrugs<span class="w"> </span>alertmidsouth<span class="w"> </span>cvchidta<span class="w"> </span>ileatraining<span class="w"> </span>mtorca<span class="w"> </span>oaktac<span class="w"> </span>scgcsandiego<span class="w"> </span>stopspokanegangs<span class="w"> </span>aorca<span class="w"> </span>dediac<span class="w"> </span>iowaintex<span class="w"> </span>mvpddoc<span class="w"> </span>ociac<span class="w"> </span>sciic<span class="w"> </span>stopwesttexasgangs<span class="w"> </span>arictexas<span class="w"> </span>dvicphila<span class="w"> </span>jerseyvillagepd<span class="w"> </span>mvpdtx<span class="w"> </span>okorca<span class="w"> </span>sdciaa<span class="w"> </span>stxhidta<span class="w"> </span>atlantahidta<span class="w"> </span>energysecuritycouncil<span class="w"> </span>jric<span class="w"> </span>ncric<span class="w"> </span>orcaid<span class="w"> </span>sdfusion<span class="w"> </span>sunnyvalebriefing<span class="w"> </span>attackwa<span class="w"> </span>eousa<span class="w"> </span>kcpers<span class="w"> </span>ncric-history-good<span class="w"> </span>orcaor<span class="w"> </span>sdorca<span class="w"> </span>swtxfusion<span class="w"> </span>azhidta<span class="w"> </span>fbicahouston<span class="w"> </span>kyorca<span class="w"> </span>ncricSteveBackup<span class="w"> </span>orocc<span class="w"> </span>sduasi<span class="w"> </span>terrorismtip<span class="w"> </span>azorca<span class="w"> </span>fbinaakansaswmissouri<span class="w"> </span>lacleartraining<span class="w"> </span>nctccounterdrug<span class="w"> </span>otewg<span class="w"> </span>seattleshield<span class="w"> </span>texasorca<span class="w"> </span>bostonbric<span class="w"> </span>fbinaamichigan<span class="w"> </span>lapdtraining<span class="w"> </span>ndslic<span class="w"> </span>pchidta<span class="w"> </span>Securitypartnership<span class="w"> </span>tnoa<span class="w"> </span>burlingamepolice<span class="w"> </span>fbinaatexas<span class="w"> </span>leapsla<span class="w"> </span>nehidta<span class="w"> </span>phillymostwanted<span class="w"> </span>seffc<span class="w"> </span>twnsg<span class="w"> </span>calema<span class="w"> </span>fcpddoc<span class="w"> </span>losaltospdbc<span class="w"> </span>neorca<span class="w"> </span>pleasantonpolice<span class="w"> </span>semacp<span class="w"> </span>unmpd<span class="w"> </span>cal-orca<span class="w"> </span>flinttownshippolice<span class="w"> </span>lupd<span class="w"> </span>nevadacyberexchange<span class="w"> </span>prvihidta<span class="w"> </span>sfbay-infragard<span class="w"> </span>usao<span class="w"> </span>calstas<span class="w"> </span>fwintex<span class="w"> </span>mactf<span class="w"> </span>nhiac<span class="w"> </span>pspddoc<span class="w"> </span>sicrime<span class="w"> </span>utahsiac<span class="w"> </span>cbaghidta<span class="w"> </span>gatlinburglec<span class="w"> </span>maorca<span class="w"> </span>njuasi<span class="w"> </span>publicsafetycadets<span class="w"> </span>sltew<span class="w"> </span>utorca<span class="w"> </span>ccroc<span class="w"> </span>graorca<span class="w"> </span>membersfaithbased-isao<span class="w"> </span>nmfisoa<span class="w"> </span>richlandshield<span class="w"> </span>snctc<span class="w"> </span>vlnsn<span class="w"> </span>chicagoheat<span class="w"> </span>hcsovcp<span class="w"> </span>memiac<span class="w"> </span>nmhidta<span class="w"> </span>rlpsaroc<span class="w"> </span>snorca<span class="w"> </span>vslea<span class="w"> </span>chicagolandfsg<span class="w"> </span>hennepincountyshield<span class="w"> </span>metrohoustonpolice<span class="w"> </span>nnorca<span class="w"> </span>rmhidta<span class="w"> </span>sogtraining<span class="w"> </span>wifusion<span class="w"> </span>ciacco<span class="w"> </span>hidtatraining<span class="w"> </span>mhidta<span class="w"> </span>nnric<span class="w"> </span>rockhillyorkcountyconnect<span class="w"> </span>spottinglies<span class="w"> </span>wsorca<span class="w"> </span>cnoa3<span class="w"> </span>hiorca<span class="w"> </span>miacx<span class="w"> </span>northtexasfusion<span class="w"> </span>ruasi<span class="w"> </span>stopabqgangs<span class="w"> </span>usaeo<span class="w"> </span>usaoalmtraining<span class="w"> </span>usaoalntraining<span class="w"> </span>usaoaretraining<span class="w"> </span>usaoarwtraining<span class="w"> </span>usaoaztraining<span class="w"> </span>usaocaclea<span class="w"> </span>usaocactraining<span class="w"> </span>usaocaetraining<span class="w"> </span>usaocantraining<span class="w"> </span>usaocaslea<span class="w"> </span>usaocastraining<span class="w"> </span>usaocotraining<span class="w"> </span>usaocrimevictims<span class="w"> </span>usaoctlea<span class="w"> </span>usaocttraining<span class="w"> </span>usaodelea<span class="w"> </span>usaodetraining<span class="w"> </span>usaoflmtraining<span class="w"> </span>usaoflntraining<span class="w"> </span>usaogamtraining<span class="w"> </span>usaogantraining<span class="w"> </span>usaogastraining<span class="w"> </span>usaogutraining<span class="w"> </span>usaohitraining<span class="w"> </span>usaoiantraining<span class="w"> </span>usaoidtraining<span class="w"> </span>usaoilctraining<span class="w"> </span>usaoilntraining<span class="w"> </span>usaoinntraining<span class="w"> </span>usaokstraining<span class="w"> </span>usaokyelea<span class="w"> </span>usaokyetraining<span class="w"> </span>usaokywtraining<span class="w"> </span>usaolaetraining<span class="w"> </span>usaolamtraining<span class="w"> </span>usaolawtraining<span class="w"> </span>usaomatraining<span class="w"> </span>usaomdtraining<span class="w"> </span>usaometraining<span class="w"> </span>usaomietraining<span class="w"> </span>usaomiwtraining<span class="w"> </span>usaomnlea<span class="w"> </span>usaomntraining<span class="w"> </span>usaomoetraining<span class="w"> </span>usaomsstraining<span class="w"> </span>usaomttraining<span class="w"> </span>usaoncetraining<span class="w"> </span>usaoncmtraining<span class="w"> </span>usaoncwtraining<span class="w"> </span>usaonetraining<span class="w"> </span>usaonjtraining<span class="w"> </span>usaonmlea<span class="w"> </span>usaonmtraining<span class="w"> </span>usaonvtraining<span class="w"> </span>usaonyetraining<span class="w"> </span>usaonystraining<span class="w"> </span>usaoohntraining<span class="w"> </span>usaoohstraining<span class="w"> </span>usaooketraining<span class="w"> </span>usaookntraining<span class="w"> </span>usaookwtraining<span class="w"> </span>usaoortraining<span class="w"> </span>usaopaetraining<span class="w"> </span>usaoritraining<span class="w"> </span>usaosctraining<span class="w"> </span>usaoscvw<span class="w"> </span>usaosdtraining<span class="w"> </span>usaotnetraining<span class="w"> </span>usaotnmtraining<span class="w"> </span>usaotnwtraining<span class="w"> </span>usaotxetraining<span class="w"> </span>usaotxntraining<span class="w"> </span>usaotxwtraining<span class="w"> </span>usaouttraining<span class="w"> </span>usaovawtraining<span class="w"> </span>usaovttraining<span class="w"> </span>usaowaetraining<span class="w"> </span>usaowawtraining<span class="w"> </span>usaowietraining<span class="w"> </span>usaowitraining<span class="w"> </span>usaowvntraining<span class="w"> </span>usaowvstraining<span class="w"> </span>usaowytraining
+</code></pre></div>
+
+<ul>
+<li><strong>If you have the full BlueLeaks dataset</strong>, make sure it&rsquo;s all extracted, and you know the filesystem path of it on your computer.</li>
+</ul>
+<p>Next, in your text editor, create a new file called <code>docker-compose.yaml</code> and copy and paste this:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">micahflee/blueleaks-explorer:latest</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:80&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./blueleaks-data:/data/blueleaks</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./databases:/data/databases</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./structures:/data/structures</span>
+</code></pre></div>
+
+<p>Replace <code>./blueleaks-data</code> with the path to your extracted BlueLeaks folder.</p>
+<h3>Start BlueLeaks Explorer</h3>
+<p>Open a terminal, go to your <code>blueleaks-explorer</code> folder, and run:</p>
+<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>pull
+docker-compose<span class="w"> </span>up
+</code></pre></div>
+
+<p>Then open a web browser and go to <a href="http://localhost:8000/">http://localhost:8000/</a>.</p>
+<p>You should now be able to look at the data in NCRIC.</p>
+<p><strong>If you don&rsquo;t have the BlueLeaks dataset downloaded</strong>, but you want to access the NCRIC files, you need to download https://data.ddosecrets.com/BlueLeaks/ncric.zip (16GB), and extract it to your <code>blueleaks-data/ncric</code> folder.</p>
+<h3>The rest of the workshop</h3>
+<p>With the help of <a href="https://hacksandleaks.com/chapter-10.html">Chapter 10</a>, explore BlueLeaks&hellip;</p>
+        </div>
+    </section>
+    <section class="pagination">
+        <div class="wrapper" id="pagination-content"></div>
+    </section>
+    <section class="buy">
+        <div class="wrapper">
+            <h3>Information Wants to be Free</h3>
+            <p><strong>Everyone should have access to the information in this book.</strong> To remove barriers to access, I've made Hacks, Leaks, and Revelations available for free online under a <a href="license.html">Creative Commons license</a>. If you can afford it, show your support and <a href="buy.html">buy a copy</a> today!</p>
+        </div>
+    </section>
+    <footer id="footer">
+        <div class="wrapper" id="footer-content"><p>This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
+        4.0</a> / Follow Micah on <a href="https://infosec.exchange/@micahflee" rel="me">Mastodon</a> and
+    <a href="https://bsky.app/profile/micahflee.com" rel="me">Bluesky</a>, and contact him at micah@micahflee.com /
+    Found a typo or formatting issue? Let me know!
+</p></div>
+    </footer>
+</body>
+</html>

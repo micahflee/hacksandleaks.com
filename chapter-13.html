@@ -324,52 +324,52 @@ files with numeric filenames and no file extensions:</p>
 <p>When I opened one of these files in VS Code, I could quickly see that it
 was a JSON file. Each of these files, I discovered, was a record for a
 different user in Cadence Health&rsquo;s system. For example, Listing 13-1 shows a redacted version of the file <em>244273</em>.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;provider_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;npi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;spi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;partner_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">244273</span><span class="p">,</span><span class="w"> </span><span class="err">❶</span><span class="w"></span>
-<span class="w">        </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;fname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;lname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;work_phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;work_phone_ext&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted@hotmail.com&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CA&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;certified_states&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;gender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;fax&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;ssn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">999999999</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;birthdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;addressLine1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;zipcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;avatar&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;avatar\/default_avatar.png&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">78410</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;partner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;,3,&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">❷</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;America\/Los_Angeles&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;role_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;alcohol_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;alcohol_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;current_physician&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;consultationNotes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">❸</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">179820</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;09\/04\/2021 13:47:28&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">❹</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;provider_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;npi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;spi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;partner_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">244273</span><span class="p">,</span><span class="w"> </span><span class="err">❶</span>
+<span class="w">        </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
+<span class="w">        </span><span class="nt">&quot;fname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;lname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;work_phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;work_phone_ext&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted@hotmail.com&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CA&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;certified_states&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="nt">&quot;gender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;fax&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ssn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">999999999</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;birthdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;addressLine1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;zipcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;avatar&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;avatar\/default_avatar.png&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">78410</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;partner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;,3,&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">❷</span>
+<span class="w">        </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;America\/Los_Angeles&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;role_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
+<span class="w">        </span><span class="nt">&quot;alcohol_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;alcohol_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;current_physician&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;consultationNotes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">❸</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">179820</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;09\/04\/2021 13:47:28&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">❹</span>
 <span class="w">                </span><span class="nt">&quot;note&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This visit was performed via telemedicine.\nThe patient confirmed knowledge of the limitations of the use of telemedicine were verbally confirmed by the provider.\nVerification of patient identity was established.\nVerbal consent was obtained for medical treatment obtained\n\nThe patient is being interviewed via phone Platform\n\nPatient has need for covid meds in regards to: ivermectin\nSymptoms onset date: 7 days\n\nOccupation:\nChronic Medical illnesses: denies heart lung or liver problems\</span>
 <span class="s2">--snip--</span>
-<span class="s2">be required.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;practice&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;covid19_treatment&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">],</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;internalNotes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="s2">be required.&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;practice&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;covid19_treatment&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;internalNotes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p><em>Listing 13-1: An example JSON file from <code>hipaa_special</code></em></p>
@@ -469,30 +469,30 @@ information about every Cadence Health patient, including much of the
 same data listed in the <em>hipaa_special</em> patient records. Listing
 13-2 shows a redacted section of the data
 from this file for a single patient.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">168692</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;fname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;mname&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;lname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted@gmail.com&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted_password_hash&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;ssn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">999999999</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;fax&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;birthdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;gender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;maritalStatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;addressLine1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;addressLine2&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;zipcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NJ&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-08-18 14:04:58&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-08-18 14:04:58&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">168692</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;fname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;mname&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted@gmail.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted_password_hash&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ssn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">999999999</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;fax&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;birthdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;gender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;maritalStatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;addressLine1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;addressLine2&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;zipcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NJ&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
+<span class="w">    </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-08-18 14:04:58&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-08-18 14:04:58&quot;</span><span class="p">,</span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
 </code></pre></div>
 
 <p><em>Listing 13-2: An example JSON object describing a patient in <code>cadence_allpatients_all.json</code></em></p>
@@ -516,20 +516,20 @@ examining the smaller files.</p>
 list of 17 of Cadence&rsquo;s partners, such as America&rsquo;s Frontline Doctors,
 SpeakWithAnMD, and Dr. Zelenko. Listing 13-3 shows a redacted example of the AFLDS
 partner from that file.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;America&#39;s Frontline Doctors&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;practices&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;covid19,followupvisit&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;one_merchant_security_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;stripe_publishable_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dev+admin@cadencehealth.us&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;stripe_secret_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;virtual_visit_price&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;covid19&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;90.00&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;followupvisit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;59.99&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;America&#39;s Frontline Doctors&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
+<span class="w">    </span><span class="nt">&quot;practices&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;covid19,followupvisit&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
+<span class="w">    </span><span class="nt">&quot;one_merchant_security_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;stripe_publishable_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dev+admin@cadencehealth.us&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;stripe_secret_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;virtual_visit_price&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;covid19&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;90.00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;followupvisit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;59.99&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
 </code></pre></div>
 
 <p><em>Listing 13-3: An example JSON object describing a partner in <code>cadence_health_partners.json</code></em></p>

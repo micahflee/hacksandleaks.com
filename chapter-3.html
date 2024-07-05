@@ -166,7 +166,7 @@ commands you run.</p>
 <p>Most users have limited privileges in an operating system. However, the
 <em>root user</em> in Linux and macOS and the <em>administrator user</em> in Windows
 have absolute power. While <em>alice</em> may not be able to save files into
-<em>bob</em>&lsquo;s home folder, for example, the root user has permissions to save
+<em>bob</em>&rsquo;s home folder, for example, the root user has permissions to save
 files anywhere on the computer. When a Mac asks you to enter your user
 password to change system preferences or install software, or when a
 Windows machine asks if you want to allow a program to make changes to
@@ -388,7 +388,7 @@ If there are no files or only hidden files, <code>ls</code> won&rsquo;t list any
 hidden files, modify the <code>ls</code>
 command using <code>-a</code> (short for
 <code>--all</code>):</p>
-<div class="codehilite"><pre><span></span><code>ls -a
+<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-a
 </code></pre></div>
 
 <p>When you add anything to the end of a command, like <code>-a</code>, you&rsquo;re using a <em>command line
@@ -405,7 +405,7 @@ whether it&rsquo;s a folder. Using the <code>-l</code> argument (short for
 output as a list.</p>
 <p>You can use both <code>-a</code> and
 <code>-l</code> at the same time like so:</p>
-<div class="codehilite"><pre><span></span><code>ls -al
+<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-al
 </code></pre></div>
 
 <p>Running this command on my Mac gives me the following output:</p>
@@ -445,7 +445,7 @@ the file was last modified, and the final column shows the filename.</p>
 add the path to that folder to the end of the <code>ls</code> command. For example, this is how I&rsquo;d
 create a listing of files in my <em>code/hacks-leaks-and-revelations</em>
 folder, which contains the files released with this book:</p>
-<div class="codehilite"><pre><span></span><code>ls -la code/hacks-leaks-and-revelations
+<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-la<span class="w"> </span>code/hacks-leaks-and-revelations
 </code></pre></div>
 
 <p>I&rsquo;d get the following output:</p>
@@ -498,7 +498,7 @@ folder).</p>
 <p>The <code>cd</code> command (which stands
 for &ldquo;change directory&rdquo;) allows you to change to a different folder. To
 change your working directory to the folder, run:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> path
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>path
 </code></pre></div>
 
 <p>For <code>path</code>,
@@ -508,12 +508,12 @@ use either a relative or an absolute path.</p>
 USB disk plugged into my machine. After opening a terminal, I can run
 the following command to change my working directory
 to the <em>BlueLeaks</em> folder, using the absolute path to the folder:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets/BlueLeaks
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/Volumes/datasets/BlueLeaks
 </code></pre></div>
 
 <p>Alternatively, I can use a relative path to the folder, running the
 following command from my home folder:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ../../Volumes/datasets/BlueLeaks
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>../../Volumes/datasets/BlueLeaks
 </code></pre></div>
 
 <p>Why does the relative path start with <code>../..</code> in this example? When I open the
@@ -524,16 +524,16 @@ would be <em>/</em>; the relative path <code>../../Volumes</code> would be <em>/
 <p>As noted earlier, the tilde symbol (<code>~</code>) represents your home folder. No
 matter what your working directory is, you can run the following to go
 back to your home folder:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ~
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~
 </code></pre></div>
 
 <p>Use the following syntax to move to a folder inside your home folder:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ~/folder_name
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/folder_name
 </code></pre></div>
 
 <p>For example, the following command would move you to your <em>Documents</em>
 folder:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ~/Documents
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/Documents
 </code></pre></div>
 
 <p>If you run <code>ls</code> again after a
@@ -543,7 +543,7 @@ should show you the files in the folder to which you just moved.</p>
 <p>Most commands let you use the argument <code>-h</code>, or <code>--help</code>, which displays detailed instructions
 explaining what the command does and how to use it. For example, try
 running the following:</p>
-<div class="codehilite"><pre><span></span><code>unzip --help
+<div class="codehilite"><pre><span></span><code>unzip<span class="w"> </span>--help
 </code></pre></div>
 
 <p>This command should show instructions on all of the different arguments
@@ -569,11 +569,11 @@ actually unzipping it.</p>
 <p>Many commands also have manuals, otherwise known as <em>man pages</em>, which
 give more detail about how to use those commands. Run the following to
 access a command&rsquo;s man page:</p>
-<div class="codehilite"><pre><span></span><code>man command_name
+<div class="codehilite"><pre><span></span><code>man<span class="w"> </span>command_name
 </code></pre></div>
 
 <p>For example, to read the manual for the <code>unzip</code> command, run:</p>
-<div class="codehilite"><pre><span></span><code>man unzip
+<div class="codehilite"><pre><span></span><code>man<span class="w"> </span>unzip
 </code></pre></div>
 
 <p>The output should display a longer explanation of how to use the
@@ -668,7 +668,7 @@ them as root. When this happens, I press the up arrow, then
 don&rsquo;t explicitly tell your shell that a space is part of a filename, the
 shell assumes that the space is there to separate parts of your command.
 For example, this command lists the files in the <em>Documents</em> folder:</p>
-<div class="codehilite"><pre><span></span><code>ls -lh ~/Documents
+<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span>~/Documents
 </code></pre></div>
 
 <p>Under the hood, your shell takes this string of characters and splits it
@@ -682,7 +682,7 @@ argument means you want to list the files in that folder.</p>
 <p>Suppose you want to use the same command to list the files in a folder
 with a space in its name, like <em>\~/My Documents</em>. You&rsquo;ll run into
 problems if you enter this command:</p>
-<div class="codehilite"><pre><span></span><code>ls -lh ~/My Documents
+<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span>~/My<span class="w"> </span>Documents
 </code></pre></div>
 
 <p>When your shell tries to separate this command into parts, it will come
@@ -692,7 +692,7 @@ and <code>Documents</code>. It will try
 to list the files in the folder <em>\~/My</em> (which doesn&rsquo;t exist), then also
 list files in the folder <em>Documents</em>, which isn&rsquo;t what you intended.</p>
 <p>To solve this problem, put the name of the folder in quotes:</p>
-<div class="codehilite"><pre><span></span><code>ls -lh <span class="s2">&quot;~/My Documents&quot;</span>
+<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span><span class="s2">&quot;~/My Documents&quot;</span>
 </code></pre></div>
 
 <p>The shell sees anything within quotes as a single entity. In this case,
@@ -701,7 +701,7 @@ arguments are <code>-lh</code> followed
 by <code>~/My Documents</code>.</p>
 <p>Alternatively, you can use a backslash
 (<code>\</code>) to <em>escape</em> the space:</p>
-<div class="codehilite"><pre><span></span><code>ls -lh ~/My<span class="se">\ </span>Documents
+<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span>~/My<span class="se">\ </span>Documents
 </code></pre></div>
 
 <p>In the Unix family of operating systems, the backslash is called the
@@ -717,18 +717,18 @@ arguments.</p>
 want to delete a filename that has a space <em>and</em> quotes in it, like <em>Say
 &ldquo;Hello&rdquo;.txt.</em> You can use the <code>rm</code> command to delete files, but the
 following syntax won&rsquo;t work:</p>
-<div class="codehilite"><pre><span></span><code>rm Say <span class="s2">&quot;Hello&quot;</span>.txt
+<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span>Say<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>.txt
 </code></pre></div>
 
 <p>Your shell will split this command into the words <code>rm</code>, <code>Say</code>, and <code>Hello.txt</code>. You might think you could solve this
 by simply adding more quotes</p>
-<div class="codehilite"><pre><span></span><code>rm <span class="s2">&quot;Say &quot;</span>Hello<span class="s2">&quot;.txt&quot;</span>
+<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span><span class="s2">&quot;Say &quot;</span>Hello<span class="s2">&quot;.txt&quot;</span>
 </code></pre></div>
 
 <p>but that won&rsquo;t work either, since you&rsquo;re quoting something that contains
 quotes already. Instead, surround the argument with single quotes ('),
 like this:</p>
-<div class="codehilite"><pre><span></span><code>rm <span class="s1">&#39;Say &quot;Hello&quot;.txt&#39;</span>
+<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span><span class="s1">&#39;Say &quot;Hello&quot;.txt&#39;</span>
 </code></pre></div>
 
 <p>Your shell will read this command as <code>rm</code> and the argument as
@@ -777,7 +777,7 @@ Homebrew&rsquo;s website at
 <a href="https://brew.sh">https://brew.sh</a>,
 where you should find the command to install the tool. Copy and paste
 the installation command into your terminal and press <strong>RETURN</strong>:</p>
-<div class="codehilite"><pre><span></span><code>/bin/bash -c <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+<div class="codehilite"><pre><span></span><code>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
 </code></pre></div>
 
 <p>This command uses a program called cURL, which I&rsquo;ll discuss later in
@@ -808,12 +808,12 @@ sources you trust.</em></p>
 <code>brew</code> command, which you can
 use to install more software. To check whether Homebrew has a certain
 program available to install, run:</p>
-<div class="codehilite"><pre><span></span><code>brew search program_name
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>search<span class="w"> </span>program_name
 </code></pre></div>
 
 <p>For example, Neofetch is a CLI program that displays information about
 your computer. To see if it&rsquo;s available in Homebrew, run:</p>
-<div class="codehilite"><pre><span></span><code>brew search neofetch
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>search<span class="w"> </span>neofetch
 </code></pre></div>
 
 <p>The output should list the packages that have <em>neofetch</em> in their names
@@ -821,11 +821,11 @@ or descriptions; in this case, Neofetch should be listed. Similarly
 combine <code>brew search</code> with other program names to check
 whether they&rsquo;re available to install.</p>
 <p>When you find a package you want to install, run:</p>
-<div class="codehilite"><pre><span></span><code>brew install program_name
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>program_name
 </code></pre></div>
 
 <p>For example, to install Neofetch, run:</p>
-<div class="codehilite"><pre><span></span><code>brew install neofetch
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>neofetch
 </code></pre></div>
 
 <p>This should download and install the <code>neofetch</code> tool. Try running it:</p>
@@ -839,12 +839,12 @@ your computer, you should see a rainbow of colors.</p>
 <em>Figure 3-5: Running Neofetch on my Mac</em></p>
 <p>Uninstall programs with the <code>brew uninstall</code> command. For example, run the
 following to uninstall Neofetch:</p>
-<div class="codehilite"><pre><span></span><code>brew uninstall neofetch
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>uninstall<span class="w"> </span>neofetch
 </code></pre></div>
 
 <p>To update all programs you&rsquo;ve installed with Homebrew to their latest
 versions, run:</p>
-<div class="codehilite"><pre><span></span><code>brew upgrade --greedy
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>upgrade<span class="w"> </span>--greedy
 </code></pre></div>
 
 <p>Run <code>brew help</code> to see some examples of how to use this command.</p>
@@ -854,7 +854,7 @@ command line in Exercise 3-4.</p>
 <p>You must run most apt commands as root. Before installing or updating
 software, make sure your operating system has an up-to-date list of
 available software by opening a terminal and running the following:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt update
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
 </code></pre></div>
 
 <p>When I run that command on my Linux computer, I get this output:</p>
@@ -870,7 +870,7 @@ Reading state information... Done
 
 <p>This tells me I have 178 packages that can be upgraded. Run the
 following to upgrade your own software:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt upgrade
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
 </code></pre></div>
 
 <p>Here&rsquo;s the output when I run that command:</p>
@@ -890,26 +890,26 @@ Do you want to continue? [Y/n]
 <p>Type Y and press <strong>ENTER</strong> to install the updates.</p>
 <p>You&rsquo;re now ready to install new software. To check whether the package
 manager has a certain program available to install, run:</p>
-<div class="codehilite"><pre><span></span><code>apt search program_name
+<div class="codehilite"><pre><span></span><code>apt<span class="w"> </span>search<span class="w"> </span>program_name
 </code></pre></div>
 
 <p>You don&rsquo;t need to use <code>sudo</code> with this search command because it&rsquo;s
 not installing or uninstalling anything. However, once you find a
 package you want to install, run:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt install program_name
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>program_name
 </code></pre></div>
 
 <p>For example, Neofetch is a CLI program that displays information about
 your computer. To see if Neofetch is available in your package manager,
 run:</p>
-<div class="codehilite"><pre><span></span><code>apt search neofetch
+<div class="codehilite"><pre><span></span><code>apt<span class="w"> </span>search<span class="w"> </span>neofetch
 </code></pre></div>
 
 <p>The output should show a list of packages that have <em>neofetch</em> in their
 names or descriptions; in this case, Neofetch should be listed.</p>
 <p>To install the <code>Neofetch</code>
 tool, run:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt install neofetch
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>neofetch
 </code></pre></div>
 
 <p>You should see a list of packages that you must install in order to use
@@ -927,7 +927,7 @@ colors.</p>
 <em>Figure 3-6: Running Neofetch on my Ubuntu computer</em></p>
 <p>Uninstall packages with the <code>sudo apt remove</code> command. For
 example, to uninstall Neofetch, run:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt remove neofetch
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>remove<span class="w"> </span>neofetch
 </code></pre></div>
 
 <p>Now that you have a package manager installed, you&rsquo;ll practice using the
@@ -940,11 +940,11 @@ redirection, and view the contents of files directly from the terminal.</p>
 line. To load all of the HTML code for the website
 <a href="https://www.torproject.org">https://www.torproject.org</a>,
 for example, run the following command:</p>
-<div class="codehilite"><pre><span></span><code>curl https://www.torproject.org
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>https://www.torproject.org
 </code></pre></div>
 
 <p>To see if cURL is installed, use the <code>which</code> command:</p>
-<div class="codehilite"><pre><span></span><code>which curl
+<div class="codehilite"><pre><span></span><code>which<span class="w"> </span>curl
 </code></pre></div>
 
 <p>If cURL is installed, the output should show you the path where the
@@ -960,7 +960,7 @@ version of its content based on the page&rsquo;s HTML, CSS, and JavaScript
 code. To see the raw HTML content from the web page hosted at
 <em>https://example.com</em>,
 run the following command in your terminal:</p>
-<div class="codehilite"><pre><span></span><code>curl example.com
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>example.com
 </code></pre></div>
 
 <p>If you load that site in a browser and then view the HTML source by
@@ -974,11 +974,11 @@ HTML. For example,
 will tell you your IP address, geolocate it, and
 tell you what country and city it thinks you&rsquo;re in. Try running the
 following command:</p>
-<div class="codehilite"><pre><span></span><code>curl https://ifconfig.co
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>https://ifconfig.co
 </code></pre></div>
 
 <p>This should display your IP address. Next, run the following:</p>
-<div class="codehilite"><pre><span></span><code>curl https://ifconfig.co/country
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>https://ifconfig.co/country
 </code></pre></div>
 
 <p>When I run this command, my output is <code>United States</code>. You can try connecting to a VPN
@@ -988,8 +988,8 @@ web traffic as coming from that other country.</p>
 <p>Run the following commands to load
 <em>https://example.com</em>
 and save it to a file:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /tmp
-curl https://example.com &gt; example.html
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/tmp
+curl<span class="w"> </span>https://example.com<span class="w"> </span>&gt;<span class="w"> </span>example.html
 </code></pre></div>
 
 <p>The first line of code changes your working directory to <em>/tmp</em>, a
@@ -1005,14 +1005,14 @@ right. This is called <em>redirection</em>. Since you changed to the <em>/tmp</e
 folder before running the <code>curl</code> command and the filename you provided
 was a relative path, it saved to the file <em>/tmp/example.html</em>.</p>
 <p>Run a directory listing to make sure you&rsquo;ve stored the file correctly:</p>
-<div class="codehilite"><pre><span></span><code>ls -lh
+<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-lh
 </code></pre></div>
 
 <p>This should list all the files in <em>/tmp</em>, which should include a file
 called <em>example.html</em>. Try displaying the contents of that file in your
 terminal using the <code>cat</code>
 command:</p>
-<div class="codehilite"><pre><span></span><code>cat /tmp/example.html
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>/tmp/example.html
 </code></pre></div>
 
 <p>The terminal isn&rsquo;t always a good place to view a file&rsquo;s contents. For
@@ -1080,8 +1080,8 @@ feel free to keep using that one instead.)</p>
 <code>code</code> that makes it easy to
 open files in VS Code directly from your terminal. Once VS Code is
 finished installing, run the following commands:</p>
-<div class="codehilite"><pre><span></span><code>curl https://example.com &gt; /tmp/example.html
-code /tmp/example.html
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>https://example.com<span class="w"> </span>&gt;<span class="w"> </span>/tmp/example.html
+code<span class="w"> </span>/tmp/example.html
 </code></pre></div>
 
 <p>The first line of code saves the HTML from
@@ -1101,8 +1101,8 @@ without using Restricted Mode.</p>
     <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span> <span class="p">/&gt;</span>
     <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">”Content-type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span> <span class="p">/&gt;</span>
     <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">style</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span><span class="p">&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+    <span class="p">&lt;</span><span class="nt">style</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
         background-color: #f0f0f2;
         margin: 0;
         padding: 0;
@@ -1147,7 +1147,7 @@ drive letters. Note your USB disk&rsquo;s drive letter, then change your
 working directory to the disk by running the following command,
 substituting <code>d</code> for
 the correct drive letter:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /mnt/d/
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/mnt/d/
 </code></pre></div>
 
 <p>Your shell&rsquo;s working directory should now be your <em>datasets</em> USB disk.
@@ -1156,7 +1156,7 @@ files on this disk.</p>
 <h5>macOS</h5>
 <p>After mounting your <em>datasets</em> USB disk, open a terminal and change your
 working directory to the disk by running the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/Volumes/datasets
 </code></pre></div>
 
 <p>Your shell&rsquo;s working directory should now be your <em>datasets</em> USB disk.
@@ -1166,9 +1166,9 @@ files on this disk.</p>
 <p>After mounting your <em>datasets</em> USB disk, open a terminal and change your
 working directory to the disk. In Linux, the path to your disk is
 probably something like
-<em>/media/</em>[\&lt;]{.symbol_Italic}<em>username</em>[>]{.symbol_Italic}<em>/datasets</em>.
+<em>/media/</em>[\&lt;]{.symbol_Italic}<em>username</em>[&gt;]{.symbol_Italic}<em>/datasets</em>.
 For example, my username is <em>micah</em>, so I would run this command:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /media/micah/datasets
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/media/micah/datasets
 </code></pre></div>
 
 <p>Your shell&rsquo;s working directory should now be
@@ -1178,13 +1178,13 @@ your <em>datasets</em> USB disk. To check, run <code>ls</code> to view the files
 new folder. Now that you&rsquo;re in your USB disk drive in your terminal, run
 the following commands to create a new folder called <em>exercises</em>, and
 then switch to it:</p>
-<div class="codehilite"><pre><span></span><code>mkdir exercises
-<span class="nb">cd</span> exercises
+<div class="codehilite"><pre><span></span><code>mkdir<span class="w"> </span>exercises
+<span class="nb">cd</span><span class="w"> </span>exercises
 </code></pre></div>
 
 <p>Now make a folder for your Chapter 3
 exercises:</p>
-<div class="codehilite"><pre><span></span><code>mkdir chapter-3
+<div class="codehilite"><pre><span></span><code>mkdir<span class="w"> </span>chapter-3
 </code></pre></div>
 
 <p>Next, you&rsquo;ll open the <em>exercises</em> folder in VS Code.</p>
@@ -1193,7 +1193,7 @@ exercises:</p>
 workspace, which allows you to easily open any files in that folder or
 create new ones. To open a VS Code workspace for your <em>exercises</em>
 folder, run the following command:</p>
-<div class="codehilite"><pre><span></span><code>code .
+<div class="codehilite"><pre><span></span><code>code<span class="w"> </span>.
 </code></pre></div>
 
 <p>If the argument that you pass into <code>code</code> is a folder, like <code>.</code> (the current working directory), VS
@@ -1220,12 +1220,12 @@ your shell script.</p>
 <p>Enter the following text into <em>exercise-3-6.sh</em> in VS Code and save the
 file:</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-<span class="nb">echo</span> <span class="s2">&quot;Hello world! This is my first shell script.&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello world! This is my first shell script.&quot;</span>
 <span class="c1"># Display the current user</span>
-<span class="nb">echo</span> <span class="s2">&quot;The current user is:&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The current user is:&quot;</span>
 whoami
 <span class="c1"># Display the current working directory</span>
-<span class="nb">echo</span> <span class="s2">&quot;The current working directory is:&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The current working directory is:&quot;</span>
 <span class="nb">pwd</span>
 </code></pre></div>
 
@@ -1258,7 +1258,7 @@ files with the following syntax:</p>
 
 <p>To mark a file as executable, use <code>+x</code> as the <code>permissions</code> argument. Run the following
 command in your terminal (from within your <em>exercises</em> folder):</p>
-<div class="codehilite"><pre><span></span><code>chmod +x ./chapter-3/exercise-3-6.sh
+<div class="codehilite"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>./chapter-3/exercise-3-6.sh
 </code></pre></div>
 
 <p>You can now run the script by entering either its absolute path or its
@@ -1328,7 +1328,7 @@ appendixes. In this exercise, you&rsquo;ll clone this repo and store the copy
 locally on your computer.</p>
 <p>First, check whether the <code>git</code>
 program is installed on your machine:</p>
-<div class="codehilite"><pre><span></span><code>which git
+<div class="codehilite"><pre><span></span><code>which<span class="w"> </span>git
 </code></pre></div>
 
 <p>If git is installed, you&rsquo;ll see its path in the output, like
@@ -1339,14 +1339,14 @@ appropriate command for your operating system:
 users, or <code>sudo apt install git</code> for Linux and WSL users.</p>
 <p>Next, in your terminal, change to your USB disk folder. On my macOS
 computer, I do this with the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> /Volumes/datasets
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/Volumes/datasets
 </code></pre></div>
 
 <p>If necessary, replace the path in my command with the appropriate path
 to your <em>datasets</em> USB disk for your operating system.</p>
 <p>Once you&rsquo;re in the <em>datasets</em> disk, run this
 command to clone the repo:</p>
-<div class="codehilite"><pre><span></span><code>git clone https://github.com/micahflee/hacks-leaks-and-revelations.git
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/micahflee/hacks-leaks-and-revelations.git
 </code></pre></div>
 
 <p>This should create a new folder called <em>hacks-leaks-and-revelations</em>

@@ -182,7 +182,7 @@ with 32TB of data, and no one would be able to connect to the swarm to
 download it because no one has 32TB of disk space lying around. Instead,
 DDoSecrets hosts the Parler data on its public data web server. If you
 know the filename of a Parler video, you can download it from
-<em>https://data.ddosecrets.com/Parler/Videos/&lt;filename></em>.</p>
+<em>https://data.ddosecrets.com/Parler/Videos/&lt;filename&gt;</em>.</p>
 <p>You can also download a full list of filenames,
 <em>ddosecrets-parler-listing.txt.gz</em>, and metadata for all of the video
 files, <em>metadata.tar.gz</em>. Files ending in <em>.gz</em> are compressed using a
@@ -233,7 +233,7 @@ ddosecrets-parler-listin 100%[==================================&gt;]  16.97M  2
 -parler-listing.txt.gz</em> file. The <code>wget</code> program shows you a progress bar of
 your download in your terminal.</p>
 <p>Next, download the video metadata by running the following command:</p>
-<div class="codehilite"><pre><span></span><code>wget https://data.ddosecrets.com/Parler/Videos/metadata.tar.gz
+<div class="codehilite"><pre><span></span><code>wget<span class="w"> </span>https://data.ddosecrets.com/Parler/Videos/metadata.tar.gz
 </code></pre></div>
 
 <p>Check to make sure you&rsquo;ve successfully downloaded the files by running
@@ -252,7 +252,7 @@ file and leaves you with the uncompressed version without the <em>.gz</em> file
 extension.</p>
 <p>Uncompress the <em>ddosecrets-parler-listing.txt.gz</em> file by running the
 following command:</p>
-<div class="codehilite"><pre><span></span><code>gunzip ddosecrets-parler-listing.txt.gz
+<div class="codehilite"><pre><span></span><code>gunzip<span class="w"> </span>ddosecrets-parler-listing.txt.gz
 </code></pre></div>
 
 <p>Your original 17MB file, <em>ddosecrets-parler-listing.txt.gz</em>, should be
@@ -267,7 +267,7 @@ something like this:</p>
 
 <p>Count the number of files in <em>ddosecrets-parler-listing.txt</em> with the
 following command:</p>
-<div class="codehilite"><pre><span></span><code>cat ddosecrets-parler-listing.txt <span class="p">|</span> wc -l
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>ddosecrets-parler-listing.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 </code></pre></div>
 
 <p>As you learned in Chapter 4, the
@@ -296,7 +296,7 @@ original IDs that Parler used for each video, and they don&rsquo;t have file
 extensions.</p>
 <p>Now that you know the filenames of each Parler
 video, you can download individual files from
-<em>https://data.ddosecrets.com/Parler/Videos/&lt;filename></em>.
+<em>https://data.ddosecrets.com/Parler/Videos/&lt;filename&gt;</em>.
 Let&rsquo;s try downloading one of the first videos listed in
 <em>ddosecrets-parler-listing .txt</em>. First, use the following commands to
 create a <em>videos</em> folder and switch to that folder:</p>
@@ -306,14 +306,14 @@ micah@trapdoor Parler % cd videos
 
 <p>Next, run the following command to download the Parler file
 <em>0003lx5cSwSB</em>:</p>
-<div class="codehilite"><pre><span></span><code>wget https://data.ddosecrets.com/Parler/Videos/0003lx5cSwSB
+<div class="codehilite"><pre><span></span><code>wget<span class="w"> </span>https://data.ddosecrets.com/Parler/Videos/0003lx5cSwSB
 </code></pre></div>
 
 <p>You can normally tell the format of a file based on its file extension,
 but since these Parler video filenames don&rsquo;t have extensions, use the
 following <code>file</code> command to
 determine the format of <em>0003lx5cSwSB</em>:</p>
-<div class="codehilite"><pre><span></span><code>file 0003lx5cSwSB
+<div class="codehilite"><pre><span></span><code>file<span class="w"> </span>0003lx5cSwSB
 </code></pre></div>
 
 <p>The output, <code>0003lx5cSwSB: ISO Media, MP4 v2 [ISO 14496-14]</code>, shows that the file is an MP4 video.
@@ -323,7 +323,7 @@ command <code>mv</code>
 <code>source_path dest_path</code>, which moves a file from a
 source path to a destination path. To rename <em>0003lx5cSwSB</em> to
 <em>0003lx5cSwSB.mp4</em>, run the following command:</p>
-<div class="codehilite"><pre><span></span><code>mv 0003lx5cSwSB 0003lx5cSwSB.mp4
+<div class="codehilite"><pre><span></span><code>mv<span class="w"> </span>0003lx5cSwSB<span class="w"> </span>0003lx5cSwSB.mp4
 </code></pre></div>
 
 <p>You can now watch <em>0003lx5cSwSB.mp4</em> in software like VLC Media Player.
@@ -343,7 +343,7 @@ closer look at the metadata.</p>
 <p>To view the Parler metadata, you&rsquo;ll need to extract the
 <em>metadata.tar.gz</em> tarball. In your terminal, uncompress and extract
 <em>metadata.tar.gz</em> using the <code>tar</code> command:</p>
-<div class="codehilite"><pre><span></span><code>tar -xvf metadata.tar.gz
+<div class="codehilite"><pre><span></span><code>tar<span class="w"> </span>-xvf<span class="w"> </span>metadata.tar.gz
 </code></pre></div>
 
 <p>Because it&rsquo;s so common to gzip tar archives, the <code>tar</code> command will automatically detect if
@@ -379,7 +379,7 @@ command to finish running on my computer). Figure
 11-2 shows the files in the <em>metadata</em> folder
 in Finder on macOS.</p>
 <p>The files in this folder are all named
-<em>meta-&lt;ID>.json</em>, where <em>ID</em>
+<em>meta-&lt;ID&gt;.json</em>, where <em>ID</em>
 is the original video ID from Parler. For example, you can find the
 metadata for the file <em>0003lx5cSwSB</em>, the video you downloaded in the
 previous section, at <em>metadata/meta-0003lx5cSwSB.json</em>. All of these
@@ -419,25 +419,25 @@ in any other programming language.</p>
 <p>To get an idea of the structure of a JSON file, run the following
 command in your terminal to display the metadata for the Parler video
 with the filename <em>0003lx5cSwSB</em>:</p>
-<div class="codehilite"><pre><span></span><code>cat metadata/meta-0003lx5cSwSB.json
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>metadata/meta-0003lx5cSwSB.json
 </code></pre></div>
 
 <p>The output should look like Listing 11-1.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">[{</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;SourceFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;ExifToolVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.00</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;FileType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MP4&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;FileTypeExtension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mp4&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;MIMEType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;video/mp4&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;MajorBrand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MP4 v2 [ISO 14496-14]&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;MinorVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;CompatibleBrands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mp42&quot;</span><span class="p">,</span><span class="s2">&quot;mp41&quot;</span><span class="p">,</span><span class="s2">&quot;iso4&quot;</span><span class="p">],</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;MovieHeaderVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;CreateDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020:10:15 09:35:29&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;ModifyDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020:10:15 09:35:29&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;TimeScale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">48000</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0:01:59&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="p">[{</span>
+<span class="w">  </span><span class="nt">&quot;SourceFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ExifToolVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.00</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;FileType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MP4&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;FileTypeExtension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mp4&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;MIMEType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;video/mp4&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;MajorBrand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MP4 v2 [ISO 14496-14]&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;MinorVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;CompatibleBrands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mp42&quot;</span><span class="p">,</span><span class="s2">&quot;mp41&quot;</span><span class="p">,</span><span class="s2">&quot;iso4&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;MovieHeaderVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;CreateDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020:10:15 09:35:29&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ModifyDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020:10:15 09:35:29&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;TimeScale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">48000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0:01:59&quot;</span><span class="p">,</span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
 </code></pre></div>
 
 <p><em>Listing 11-1: Video metadata for the file <code>0003lx5cSwSB</code></em></p>
@@ -488,27 +488,27 @@ double quotes or using the Boolean <code>True</code> instead of <code>true</code
 <p>Unlike in Python code, whitespace isn&rsquo;t important in JSON data. For
 example, consider this JSON string:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;abolitionists&quot;</span><span class="p">:[{</span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="s2">&quot;Frederick&quot;</span><span class="p">,</span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="s2">&quot;Douglass&quot;</span><span class="p">},{</span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="s2">&quot;John&quot;</span><span class="p">,</span><span class="nt">&quot;last</span>
-<span class="nt">_name&quot;</span><span class="p">:</span><span class="s2">&quot;Brown&quot;</span><span class="p">},{</span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="s2">&quot;Harriet&quot;</span><span class="p">,</span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="s2">&quot;Tubman&quot;</span><span class="p">}]}</span><span class="w"></span>
+<span class="nt">_name&quot;</span><span class="p">:</span><span class="s2">&quot;Brown&quot;</span><span class="p">},{</span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="s2">&quot;Harriet&quot;</span><span class="p">,</span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="s2">&quot;Tubman&quot;</span><span class="p">}]}</span>
 </code></pre></div>
 
 <p>To write the same JSON string in a more human-readable format, you can
 split it into multiple lines and add indentation:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;abolitionists&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Frederick&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Douglass&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Brown&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Harriet&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tubman&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;abolitionists&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Frederick&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Douglass&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Brown&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Harriet&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tubman&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>You might encounter JSON files in datasets that
@@ -668,7 +668,7 @@ this:</p>
     <span class="n">obj</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_decode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="n">_w</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">end</span><span class="p">())</span>
   <span class="n">File</span> <span class="s2">&quot;/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/json/decoder.py&quot;</span><span class="p">,</span>
 <span class="n">line</span> <span class="mi">355</span><span class="p">,</span> <span class="ow">in</span> <span class="n">raw_decode</span>
-    <span class="k">raise</span> <span class="n">JSONDecodeError</span><span class="p">(</span><span class="s2">&quot;Expecting value&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">err</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
+    <span class="k">raise</span> <span class="n">JSONDecodeError</span><span class="p">(</span><span class="s2">&quot;Expecting value&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">err</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
 <span class="n">json</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span> <span class="n">Expecting</span> <span class="n">value</span><span class="p">:</span> <span class="n">line</span> <span class="mi">1</span> <span class="n">column</span> <span class="mi">1</span> <span class="p">(</span><span class="n">char</span> <span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
 
@@ -800,7 +800,7 @@ Linux or Windows with WSL users, run the <code>sudo apt install jq</code> comman
 to indent JSON data and show syntax highlighting in your terminal,
 making the data easier to read. For example, try running this command in
 your terminal:</p>
-<div class="codehilite"><pre><span></span><code>cat metadata/meta-HS34fpbzqg2b.json <span class="p">|</span> jq
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>metadata/meta-HS34fpbzqg2b.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
 </code></pre></div>
 
 <p>The first part of the command,
@@ -809,25 +809,25 @@ file, which contains the metadata for a single Parler video. The second
 part, <code>| jq</code>, pipes that
 output as input into <code>jq</code>.</p>
 <p>The output should look like this:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;SourceFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;ExifToolVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;FileType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MOV&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;FileTypeExtension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mov&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;MIMEType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;video/quicktime&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;MajorBrand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Apple QuickTime (.MOV/QT)&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;MinorVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;CompatibleBrands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">      </span><span class="s2">&quot;qt  &quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;GPSLatitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;38 deg 53&#39; 26.52\&quot; N&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;GPSLongitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;77 deg 0&#39; 28.44\&quot; W&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">&quot;Rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;GPSPosition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;38 deg 53&#39; 26.52\&quot; N, 77 deg 0&#39; 28.44\&quot; W&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;SourceFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ExifToolVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;FileType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MOV&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;FileTypeExtension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mov&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;MIMEType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;video/quicktime&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;MajorBrand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Apple QuickTime (.MOV/QT)&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;MinorVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CompatibleBrands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;qt  &quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
+<span class="w">    </span><span class="nt">&quot;GPSLatitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;38 deg 53&#39; 26.52\&quot; N&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;GPSLongitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;77 deg 0&#39; 28.44\&quot; W&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">&quot;Rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;GPSPosition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;38 deg 53&#39; 26.52\&quot; N, 77 deg 0&#39; 28.44\&quot; W&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
 
 <p>This version includes syntax highlighting (as in VS Code) and formats
@@ -916,7 +916,7 @@ bold:</p>
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parler metadata path: </span><span class="si">{</span><span class="n">parler_metadata_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -949,7 +949,7 @@ structured data in Python. Modify your code as follows:</p>
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
         <span class="n">abs_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_filename</span><span class="p">)</span> <span class="ow">and</span> <span class="n">abs_filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
@@ -1021,7 +1021,7 @@ modifications:</p>
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
@@ -1105,7 +1105,7 @@ code:</p>
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter Parler videos with GPS that were filmed Jan 6, 2021&quot;&quot;&quot;</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
@@ -1432,7 +1432,7 @@ modify <em>exercise-11-3.py</em> to match the following code:</p>
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Filter Parler videos that were filmed in Washington DC and on Jan 6, 2021&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Filter Parler videos that were filmed in Washington DC and on Jan 6, 2021&quot;&quot;&quot;</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
@@ -1567,16 +1567,16 @@ map. KML was created in 2004 specifically for use with Google Earth, and
 it became a standard file format for describing geographic data in 2008.</p>
 <p>Listing 11-4 shows an example KML file.</p>
 <div class="codehilite"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
-<span class="nt">&lt;kml</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/kml/2.2&quot;</span> <span class="na">xmlns:gx=</span><span class="s">&quot;http://www.google.com/kml/ext/2.2&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Document</span> <span class="na">id=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;Placemark</span> <span class="na">id=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;name&gt;</span>New York City<span class="nt">&lt;/name&gt;</span>
-            <span class="nt">&lt;description&gt;</span>The Big Apple<span class="nt">&lt;/description&gt;</span>
-            <span class="nt">&lt;Point</span> <span class="na">id=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;coordinates&gt;</span>-74.006393,40.714172,0.0<span class="nt">&lt;/coordinates&gt;</span>
-          <span class="nt">&lt;/Point&gt;</span>
-      <span class="nt">&lt;/Placemark&gt;</span>
-    <span class="nt">&lt;/Document&gt;</span>
+<span class="nt">&lt;kml</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/kml/2.2&quot;</span><span class="w"> </span><span class="na">xmlns:gx=</span><span class="s">&quot;http://www.google.com/kml/ext/2.2&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Document</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;Placemark</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;name&gt;</span>New<span class="w"> </span>York<span class="w"> </span>City<span class="nt">&lt;/name&gt;</span>
+<span class="w">            </span><span class="nt">&lt;description&gt;</span>The<span class="w"> </span>Big<span class="w"> </span>Apple<span class="nt">&lt;/description&gt;</span>
+<span class="w">            </span><span class="nt">&lt;Point</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;coordinates&gt;</span>-74.006393,40.714172,0.0<span class="nt">&lt;/coordinates&gt;</span>
+<span class="w">          </span><span class="nt">&lt;/Point&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/Placemark&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/Document&gt;</span>
 <span class="nt">&lt;/kml&gt;</span>
 </code></pre></div>
 
@@ -1599,7 +1599,7 @@ video with GPS coordinates, and then save that KML object to a <em>.kml</em>
 file.</p>
 <p>Install the <code>simplekml</code> module
 by running the following command:</p>
-<div class="codehilite"><pre><span></span><code>python3 -m pip install simplekml
+<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>simplekml
 </code></pre></div>
 
 <p>Now use the module in the Python interpreter to generate the <em>example
@@ -1707,7 +1707,7 @@ modifications:</p>
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create KML files of GPS coordinates from Parler metadata&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create KML files of GPS coordinates from Parler metadata&quot;&quot;&quot;</span>
     <span class="n">kml_all</span> <span class="o">=</span> <span class="n">simplekml</span><span class="o">.</span><span class="n">Kml</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
@@ -1818,22 +1818,22 @@ finishes running, it should also create a 20MB KML file called
 <p>Open <em>parler-videos-all.kml</em> in a text editor. The file&rsquo;s contents
 should look like this:</p>
 <div class="codehilite"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
-<span class="nt">&lt;kml</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/kml/2.2&quot;</span> <span class="na">xmlns:gx=</span><span class="s">&quot;http://www.google.com/kml/ext/2.2&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;Document</span> <span class="na">id=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;Placemark</span> <span class="na">id=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;name&gt;</span>2XpiJFsho2do<span class="nt">&lt;/name&gt;</span>
-            <span class="nt">&lt;description&gt;</span>URL:https://data.ddosecrets.com/Parler/Videos/2XpiJFsho2do<span class="nt">&lt;/description&gt;</span>
-            <span class="nt">&lt;Point</span> <span class="na">id=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;coordinates&gt;</span>-117.6683,33.490500000000004,0.0<span class="nt">&lt;/coordinates&gt;</span>
-            <span class="nt">&lt;/Point&gt;</span>
-        <span class="nt">&lt;/Placemark&gt;</span>
-        <span class="nt">&lt;Placemark</span> <span class="na">id=</span><span class="s">&quot;5&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;name&gt;</span>bcHZhpDOFnXd<span class="nt">&lt;/name&gt;</span>
-            <span class="nt">&lt;description&gt;</span>URL:https://data.ddosecrets.com/Parler/Videos/bcHZhpDOFnXd<span class="nt">&lt;/description&gt;</span>
-            <span class="nt">&lt;Point</span> <span class="na">id=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;coordinates&gt;</span>-1.3391,52.04648888888889,0.0<span class="nt">&lt;/coordinates&gt;</span>
-            <span class="nt">&lt;/Point&gt;</span>
-        <span class="nt">&lt;/Placemark&gt;</span>
+<span class="nt">&lt;kml</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/kml/2.2&quot;</span><span class="w"> </span><span class="na">xmlns:gx=</span><span class="s">&quot;http://www.google.com/kml/ext/2.2&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;Document</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Placemark</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;name&gt;</span>2XpiJFsho2do<span class="nt">&lt;/name&gt;</span>
+<span class="w">            </span><span class="nt">&lt;description&gt;</span>URL:https://data.ddosecrets.com/Parler/Videos/2XpiJFsho2do<span class="nt">&lt;/description&gt;</span>
+<span class="w">            </span><span class="nt">&lt;Point</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;coordinates&gt;</span>-117.6683,33.490500000000004,0.0<span class="nt">&lt;/coordinates&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/Point&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Placemark&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Placemark</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;5&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;name&gt;</span>bcHZhpDOFnXd<span class="nt">&lt;/name&gt;</span>
+<span class="w">            </span><span class="nt">&lt;description&gt;</span>URL:https://data.ddosecrets.com/Parler/Videos/bcHZhpDOFnXd<span class="nt">&lt;/description&gt;</span>
+<span class="w">            </span><span class="nt">&lt;Point</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;coordinates&gt;</span>-1.3391,52.04648888888889,0.0<span class="nt">&lt;/coordinates&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/Point&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/Placemark&gt;</span>
 --snip--
 </code></pre></div>
 
@@ -1852,7 +1852,7 @@ function, the only part that is modified:</p>
 <div class="codehilite"><pre><span></span><code><span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;parler_metadata_path&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">parler_metadata_path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create KML files of GPS coordinates from Parler metadata&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create KML files of GPS coordinates from Parler metadata&quot;&quot;&quot;</span>
     <span class="n">kml_all</span> <span class="o">=</span> <span class="n">simplekml</span><span class="o">.</span><span class="n">Kml</span><span class="p">()</span>
     <span class="n">kml_january6</span> <span class="o">=</span> <span class="n">simplekml</span><span class="o">.</span><span class="n">Kml</span><span class="p">()</span>
 
@@ -2101,13 +2101,13 @@ WSL, install it with the
 <code>sudo apt install libimage-exiftool-perl</code> command. In your terminal, change to
 the <em>videos</em> folder in your Parler dataset folder and use <code>wget</code> to download the Parler video with the
 ID <em>HS34fpbzqg2b</em>:</p>
-<div class="codehilite"><pre><span></span><code>wget https://data.ddosecrets.com/Parler/Videos/HS34fpbzqg2b
+<div class="codehilite"><pre><span></span><code>wget<span class="w"> </span>https://data.ddosecrets.com/Parler/Videos/HS34fpbzqg2b
 </code></pre></div>
 
 <p>You can use <code>exiftool</code> to look
 at the metadata of a file by running <code>exiftool filename</code>. Run it on the <em>HS34fpbzqg2b</em>
 file that you just downloaded with the following command:</p>
-<div class="codehilite"><pre><span></span><code>exiftool HS34fpbzqg2b
+<div class="codehilite"><pre><span></span><code>exiftool<span class="w"> </span>HS34fpbzqg2b
 </code></pre></div>
 
 <p>The output should show all the metadata for this video file:</p>
@@ -2148,7 +2148,7 @@ Here&rsquo;s how you do that for <em>HS34fpbzqg2b</em>:</p>
 </code></pre></div>
 
 <p>The <code>-json</code> argument makes the
-output much easier to work with than <code>exiftool</code>&lsquo;s default output.</p>
+output much easier to work with than <code>exiftool</code>&rsquo;s default output.</p>
 <h3>Summary</h3>
 <p>In this chapter, you&rsquo;ve learned about the secrets hidden in the metadata
 of over a million videos uploaded to Parler, many of them by

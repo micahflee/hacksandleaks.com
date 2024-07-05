@@ -82,7 +82,7 @@ chapter.</p>
 <h4>Linux</h4>
 <p>Open a terminal and make sure the <code>python3</code>, <code>python3-pip</code>, and <code>python3-venv</code> packages are installed, using this
 <code>apt</code> command:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt install python3 python3-pip python3-venv
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3<span class="w"> </span>python3-pip<span class="w"> </span>python3-venv
 </code></pre></div>
 
 <p>This command either installs the latest version of Python 3 available in
@@ -91,7 +91,7 @@ for this chapter) or does nothing if the packages are already installed.</p>
 <h4>macOS</h4>
 <p>Open a terminal and run the following Homebrew command to make sure
 <code>python3</code> is installed:</p>
-<div class="codehilite"><pre><span></span><code>brew install python3
+<div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>python3
 </code></pre></div>
 
 <p>This command either installs the latest version of Python 3 available in
@@ -368,7 +368,7 @@ commands to display the values of the variables you just defined:</p>
 </code></pre></div>
 
 <p>Place expressions inside f-strings in order to evaluate them:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1 + 2 + 3 + 4 + 5 = </span><span class="si">{</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1 + 2 + 3 + 4 + 5 = </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">=</span> <span class="mi">15</span>
 </code></pre></div>
 
@@ -1483,7 +1483,7 @@ time.</p>
 takes in the argument <code>text</code>,
 like this:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
 </code></pre></div>
 
 <p>Next, copy the code from Exercise 7-4 and paste it into this function,
@@ -1498,7 +1498,7 @@ containing this version of a string and return it.</p>
 at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-5.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-5.py</a>):</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
     <span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
     <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
 

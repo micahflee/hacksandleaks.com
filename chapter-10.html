@@ -133,16 +133,16 @@ micah@trapdoor blueleaks-explorer % code docker-compose.yaml
 <p>Add the following code to your <em>docker-compose.yaml</em> file, replacing
 <code>/Volumes/datasets/BlueLeaks-extracted</code> with the path that maps to
 <em>/data /blueleaks</em> in your own <em>BlueLeaks-extracted</em> folder:</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.9&quot;</span><span class="w"></span>
-<span class="nt">services</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">micahflee/blueleaks-explorer:latest</span><span class="w"></span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:80&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/Volumes/datasets/BlueLeaks-extracted:/data/blueleaks</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./databases:/data/databases</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./structures:/data/structures</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.9&quot;</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">micahflee/blueleaks-explorer:latest</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:80&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/Volumes/datasets/BlueLeaks-extracted:/data/blueleaks</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./databases:/data/databases</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./structures:/data/structures</span>
 </code></pre></div>
 
 <p>This file describes the settings for the BlueLeaks Explorer Docker
@@ -159,7 +159,7 @@ on your machine to folders inside the container.</p>
 <p>In a terminal window, change to the <em>blueleaks-explorer</em> folder that you
 just made, then run this command to download the BlueLeaks Explorer
 Docker image and start the server:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose up
+<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up
 </code></pre></div>
 
 <p>The first time you run the command, the output should end with something
@@ -194,7 +194,7 @@ BlueLeaks Explorer might search all the BriefSummary fields in the SARs
 table, trying to find reports that mention that string.</p>
 <p>To initialize BlueLeaks Explorer, open a separate terminal window,
 change to your <em>blueleaks-explorer</em> folder, and run this command:</p>
-<div class="codehilite"><pre><span></span><code>docker-compose <span class="nb">exec</span> app poetry run python ./initialize.py
+<div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>./initialize.py
 </code></pre></div>
 
 <p>This will run
@@ -723,7 +723,7 @@ list of sites that already have structures, it can load <em>/api/sites</em> on
 the backend, which returns this data in JSON format. If it wants to
 retrieve data in JSON format from a specific table on a specific site,
 it can load
-<em>/api/</em>[\&lt;]<em>site</em>[>]<em>/</em>[\&lt;]<em>table</em>[>].
+<em>/api/</em>[\&lt;]<em>site</em>[&gt;]<em>/</em>[\&lt;]<em>table</em>[&gt;].
 In this case, the Python code uses the <code>sqlite3</code> module to look up this data in the
 SQlite3 database for that BlueLeaks site, and then returns what it finds
 to the frontend.</p>

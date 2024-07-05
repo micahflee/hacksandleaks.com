@@ -1,0 +1,1 @@
+To do this workshop you will need a computer running Linux, macOS, or Windows, an internet connection (to download data and dependencies), and **at least 10GB** of free disk space (though **preferably about 530GB**).
