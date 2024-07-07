@@ -742,7 +742,7 @@ find . -type f | wc -l
 ```
 
 That command takes longer to run, though, since it searches through the
-whole dataset again (press **CTRL**[-C]{.Character_20_style} to
+whole dataset again (press **CTRL**-C to
 cancel this command before it finishes).
 
 
