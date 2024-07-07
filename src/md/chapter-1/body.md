@@ -850,7 +850,7 @@ that.
 
 > #### DONALD TRUMP’S TWITTER PASSWORD
 > 
-> I learned from an episode of the excellent podcast Darknet Diaries, hosted by Jack Rhysider, thatDonald Trump’s LinkedIn password was exposed in a 2012 data breach. His password, `yourefired`, was his signature phrase from *The Apprentice*, the reality TV show he hosted. While he was running for president in 2016, three Dutch hackers, Victor, Edwin, and Matt, who are part of a group called the Guild of the Grumpy Old Hackers, discovered his LinkedIn password in the dataset from that breach. They tried it on Trump’s @realDonaldTrump Twitter account and … it worked.
+> I learned from an episode of the excellent podcast Darknet Diaries, hosted by Jack Rhysider, that Donald Trump’s LinkedIn password was exposed in a 2012 data breach. His password, `yourefired`, was his signature phrase from *The Apprentice*, the reality TV show he hosted. While he was running for president in 2016, three Dutch hackers, Victor, Edwin, and Matt, who are part of a group called the Guild of the Grumpy Old Hackers, discovered his LinkedIn password in the dataset from that breach. They tried it on Trump’s @realDonaldTrump Twitter account and … it worked.
 
 You might be thinking, "Isn't using a password manager just putting all
 my eggs in one basket? If it gets hacked, doesn't that give the hacker
