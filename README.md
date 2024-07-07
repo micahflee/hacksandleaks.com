@@ -1,4 +1,10 @@
-Hacks, Leaks, and Revelations is available [for purchase](https://hacksandleaks.com/buy.html). In addition, the full book is released under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) license. This means you are free to:
+# hacksandleaks.com
+
+![book cover](./images/book.png)
+
+Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data is available [for purchase](https://hacksandleaks.com/buy.html). In addition, the full book is released under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/) (CC BY-NC-SA 4.0) license.
+
+This means you are free to:
 
 * __Share__ - copy and redistribute the material in any medium or format
 * __Adapt__ - remix, transform, and build upon the material.
@@ -13,4 +19,4 @@ If you'd like to read the complete book, for free, under the CC BY-NC-SA 4.0 lic
 
 [Start Reading](https://hacksandleaks.com/contents.html)
 
-I hope you find this book useful and enjoyable! Tell your friends. If you can afford it, consider buying a copy.
+I hope you find this book useful and enjoyable! Tell your friends. If you can afford it, consider [buying a copy](https://hacksandleaks.com/buy.html).
