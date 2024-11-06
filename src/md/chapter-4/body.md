@@ -613,7 +613,7 @@ loop from the previous subsection, this time piping the output into
 `sort`:
 
 ```sh
-for FOLDER in $(ls); do du -sh –apparent-size $FOLDER; done | sort -h
+for FOLDER in $(ls); do du -sh -–apparent-size $FOLDER; done | sort -h
 ```
 
 This line first runs the `for`

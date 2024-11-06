@@ -196,7 +196,7 @@ April 2022, hackers made off with 786GB of data from the All-Russia
 State Television and Broadcasting Company (VGTRK), the largest
 state-owned media company in Russia, and leaked it to DDoSecrets. This
 dataset includes 252 PST files, each representing a different email
-address. One file, *intercoord\@vgtrk.ru.pst*, is 48GB alone.
+address. One file, *intercoord@vgtrk.ru.pst*, is 48GB alone.
 
 In Exercise 6-1 you'll download a 1GB PST file containing email from the
 Heritage Foundation.
@@ -734,7 +734,7 @@ counts you'll see are the actual counts of unread email for each folder
 at the time the PST file was exported.
 
 As an example, I set up a Windows VM, installed Outlook, logged in to it
-using my Microsoft 365 account, and added *intercoord\@vgtrk.ru.pst*
+using my Microsoft 365 account, and added *intercoord@vgtrk.ru.pst*
 (the 48GB PST file hacked from VGTRK mentioned earlier in this chapter).
 
 Figure 6-5 shows this VGTRK inbox, where I've

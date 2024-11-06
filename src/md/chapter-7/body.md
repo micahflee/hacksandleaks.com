@@ -1331,7 +1331,7 @@ Boolean logic in the next exercise.
 In social media slang, a common form of mockery is to employ
 *alternating caps*, or switching from uppercase to lowercase and back to
 uppercase, when quoting people. For example, here's the text of a viral
-tweet from the now-suspended Twitter account \@BigWangTheoryy:
+tweet from the now-suspended Twitter account @BigWangTheoryy:
 
 > \*failing classes\*  
 > Me: "Can I get some extra credit?"  

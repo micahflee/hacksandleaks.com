@@ -1446,7 +1446,7 @@ company, run by Edward Durfee, that did tech work for the Oath Keepers.
 None of this information was available in the WHOIS records, but now
 it's all public, thanks to the Epik hack. If you check out the email in
 the *sentmail648* folder you imported in Chapter 6, you'll find messages from the address
-*oksupport\@oathkeepers.org* all signed by Edward Durfee, IT Support.
+*oksupport@oathkeepers.org* all signed by Edward Durfee, IT Support.
 
 **NOTE** *In Chapter 1, I discussed not revealing unnecessary
 PII. In this case, I believe that publishing Durfee's name, the city he

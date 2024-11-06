@@ -406,7 +406,7 @@ caught my eye:
 > 
 > **File1Name** Letter.pdf
 > 
-> **EmailAddress** *\[redacted\]*\@marincounty.org
+> **EmailAddress** *\[redacted\]*@marincounty.org
 > 
 > **PhoneNumber** *\[redacted phone number\]*
 

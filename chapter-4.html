@@ -526,7 +526,7 @@ When you pipe input into the <code>sort</code> command, it outputs a sorted vers
 of that input. Run the <code>for</code>
 loop from the previous subsection, this time piping the output into
 <code>sort</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>FOLDER<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>du<span class="w"> </span>-sh<span class="w"> </span>–apparent-size<span class="w"> </span><span class="nv">$FOLDER</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>FOLDER<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>du<span class="w"> </span>-sh<span class="w"> </span>-–apparent-size<span class="w"> </span><span class="nv">$FOLDER</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-h
 </code></pre></div>
 
 <p>This line first runs the <code>for</code>

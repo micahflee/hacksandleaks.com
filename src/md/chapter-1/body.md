@@ -923,7 +923,7 @@ Figure 1-2 shows Bitwarden's password
 generator, which is configured to create a passphrase with five words,
 separated by dashes, capitalized, and including a number.
 
-Bitwarden can also make strong passwords, such as *Frz6ioX4o\@cCY*. All
+Bitwarden can also make strong passwords, such as *Frz6ioX4o@cCY*. All
 of your passwords should either be strong passphrases or passwords like
 this.
 
@@ -1380,7 +1380,7 @@ US election, for example. First, the Main Directorate of the General
 Staff of the Armed Forces of the Russian Federation (GRU) hacked a US
 election vendor known as VR Systems and got its client list of election
 workers in swing states. It then sent 122 email messages to VR Systems'
-clients from the email address *vrelections\@gmail.com*, with the
+clients from the email address *vrelections@gmail.com*, with the
 attachment *New EViD User Guides.docm*. If any of the election workers
 who got this email opened the attachment using a vulnerable version of
 Microsoft Word in Windows, the malware would have created a backdoor
