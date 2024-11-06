@@ -985,4 +985,9 @@ p+.strong {
     }
 }
 
+.affiliate-note {
+    font-size: .875rem;
+    color: #595959;
+    margin: 1rem;
+    width: inherit;
 }
