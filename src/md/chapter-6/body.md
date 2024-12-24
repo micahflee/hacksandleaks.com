@@ -690,7 +690,7 @@ Unlike Thunderbird, Microsoft's desktop email program, Outlook, supports
 importing email dumps directly in PST format. However, Outlook has some
 downsides. First, it's not free; the cheapest way to get Outlook is to
 buy a Microsoft 365 license, which, at the time of writing, costs around
-\$7 per month or \$70 per year. Second, Outlook is available only for
+$7 per month or $70 per year. Second, Outlook is available only for
 Windows and macOS, not Linux (though Linux users can run Outlook in a
 Windows VM). Still, you might find Outlook useful if you're familiar
 with the program and understand its advanced
@@ -748,7 +748,7 @@ claims that Ukraine is not an independent country, but rather is
 controlled by the US Democratic Party. The quote also includes the false
 claim that in 2016, then Vice President Joe Biden fired Ukraine's
 attorney general for investigating Biden's son Hunter. (In fact, Biden
-leveraged \$1 billion in US aid to persuade Ukraine to oust its top
+leveraged $1 billion in US aid to persuade Ukraine to oust its top
 prosecutor, Viktor Shokin, who refused to investigate corruption from
 powerful Ukrainians. Biden worked in tandem with anti-corruption efforts
 across Europe: European leaders, as well as civil society groups within

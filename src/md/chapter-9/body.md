@@ -1035,7 +1035,7 @@ an internet hoax from late May 2020. In fact, I found multiple articles
 debunking this hoax on fact-checking sites, including Snopes,
 PolitiFact, and *Reuters*, dated a week before the FBI distributed this
 memo. The fake recruitment flyer offers to compensate "professional
-anarchists" with \$200 per direct action, and includes the text "Funded
+anarchists" with $200 per direct action, and includes the text "Funded
 by George Soros." (Antisemitic right-wing Americans frequently and
 falsely claim that Soros, a Jewish billionaire, funds left-wing
 protesters.) The flyer also included the phone number for a local branch

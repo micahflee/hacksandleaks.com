@@ -1052,7 +1052,7 @@ encryption tab to check whether it's enabled; if not, enable it.
 If you see no Device encryption tab, your PC doesn't support device
 encryption, unfortunately. You have a few options. The easiest option is
 to upgrade to the Pro version of Windows, which typically costs about
-\$100, and then use BitLocker. Alternatively, use VeraCrypt.
+$100, and then use BitLocker. Alternatively, use VeraCrypt.
 
 
 

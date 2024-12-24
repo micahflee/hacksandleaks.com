@@ -886,7 +886,7 @@ For example, OCCRP, along with the International Consortium of
 Investigative Journalists (ICIJ), was part of a coalition investigating
 the Panama Papers, an offshore tax haven dataset that led to over 40
 stories about corruption. One of those stories implicated a close friend
-of Vladimir Putin who had embezzled \$230 million from Russian
+of Vladimir Putin who had embezzled $230 million from Russian
 taxpayers. Because OCCRP deals with so much data, it developed Aleph as
 an investigation tool to make it easier to track white-collar crime,
 follow the money, and cross-reference various datasets.

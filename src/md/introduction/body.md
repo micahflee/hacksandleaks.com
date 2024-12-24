@@ -243,7 +243,7 @@ analyzed and reported on massive datasets of leaked neo-Nazi chat logs.
 I also discuss my role in developing a public investigation tool for
 such datasets, called DiscordLeaks. This tool aided in a successful
 lawsuit against the organizers of the deadly Unite the Right rally in 2017, resulting in a settlement of
-over \$25 million in damages against the leaders of the American fascist
+over $25 million in damages against the leaders of the American fascist
 movement.
 
 **Appendixes**
