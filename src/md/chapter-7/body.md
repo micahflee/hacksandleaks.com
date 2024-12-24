@@ -186,7 +186,7 @@ Hello World!
 Entering `print("Hello World!")` and pressing **ENTER** should
 immediately run your code, displaying `Hello World!` on the next line. Exit the interpreter
 and return to the shell by running `exit()` or pressing
-**CTRL**[-D]{.Character_20_style}.
+**CTRL**-D.
 
 In the remainder of this book, if my examples include the `>>>` prompt, that means they're running in
 the Python interpreter. Run the same code in your own interpreter as you
@@ -231,7 +231,7 @@ how a few basic mathematical operations work in Python:
 **Operators**
 
 The arithmetic operators for addition (+), subtraction
-([−]{.listplain_symbol}), multiplication ([×]{.listplain_symbol}), and
+(−), multiplication (×), and
 division (/) are mostly the same in Python: `+`, `-`, and `/`, with an asterisk `*` for multiplication.
 
 **Variables**

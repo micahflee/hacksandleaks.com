@@ -1459,7 +1459,7 @@ files on this disk.
 After mounting your *datasets* USB disk, open a terminal and change your
 working directory to the disk. In Linux, the path to your disk is
 probably something like
-*/media/*[\<]{.symbol_Italic}*username*[\>]{.symbol_Italic}*/datasets*.
+*/media/<username\>/datasets*.
 For example, my username is *micah*, so I would run this command:
 
 ```sh

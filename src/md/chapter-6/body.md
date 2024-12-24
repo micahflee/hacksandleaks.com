@@ -75,7 +75,7 @@ in the message. Just as you can convert any decimal number (that is, one
 conveyed using 10 digits) into a binary number (conveyed using 2 digits)
 and back, you can convert any binary data into Base64 data (conveyed
 using 64 characters). For example, here's how a PNG image containing a
-1[×]{.symbol}1 transparent pixel looks with each of its 86 bytes of data
+1×1 transparent pixel looks with each of its 86 bytes of data
 represented as binary digits:
 
 ```
