@@ -238,7 +238,7 @@ I often use graphical spreadsheet programs to search CSVs. In
 LibreOffice, as well as in other spreadsheet programs, you can find
 specific cells using the Find feature. Press
 **CTRL**-F (or, in macOS,
-[`<?ace 1a ?>`{=html}]{.code_symbol-alt}-F), enter your search term, and
+**&#x2318;**-F), enter your search term, and
 press **ENTER**. This should search every cell in the spreadsheet
 for your term. You can use this method to find a row containing, for
 example, a specific ID number or email address.
