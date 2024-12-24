@@ -1918,7 +1918,7 @@ The output said that the Flask web server started and was running at the
 URL
 *http://127.0.0.1:5000*.
 The web server continued to run until I was ready to quit it by pressing
-**CTRL-C**. I loaded that URL in my web browser to view the web
+**CTRL**-C. I loaded that URL in my web browser to view the web
 app. As I made web requests, my terminal output showed me web service
 logs. For example, when I loaded the home page, my app produced these
 logs:
