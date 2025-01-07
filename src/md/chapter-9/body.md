@@ -238,7 +238,7 @@ I often use graphical spreadsheet programs to search CSVs. In
 LibreOffice, as well as in other spreadsheet programs, you can find
 specific cells using the Find feature. Press
 **CTRL**-F (or, in macOS,
-[`<?ace 1a ?>`{=html}]{.code_symbol-alt}-F), enter your search term, and
+**&#x2318;**-F), enter your search term, and
 press **ENTER**. This should search every cell in the spreadsheet
 for your term. You can use this method to find a row containing, for
 example, a specific ID number or email address.
@@ -1035,7 +1035,7 @@ an internet hoax from late May 2020. In fact, I found multiple articles
 debunking this hoax on fact-checking sites, including Snopes,
 PolitiFact, and *Reuters*, dated a week before the FBI distributed this
 memo. The fake recruitment flyer offers to compensate "professional
-anarchists" with \$200 per direct action, and includes the text "Funded
+anarchists" with $200 per direct action, and includes the text "Funded
 by George Soros." (Antisemitic right-wing Americans frequently and
 falsely claim that Soros, a Jewish billionaire, funds left-wing
 protesters.) The flyer also included the phone number for a local branch

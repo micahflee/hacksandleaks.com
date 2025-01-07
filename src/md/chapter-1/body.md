@@ -1052,7 +1052,7 @@ encryption tab to check whether it's enabled; if not, enable it.
 If you see no Device encryption tab, your PC doesn't support device
 encryption, unfortunately. You have a few options. The easiest option is
 to upgrade to the Pro version of Windows, which typically costs about
-\$100, and then use BitLocker. Alternatively, use VeraCrypt.
+$100, and then use BitLocker. Alternatively, use VeraCrypt.
 
 
 
@@ -1142,7 +1142,7 @@ piece of paper kept in a secure location.
 
 Linux uses technology called LUKS for disk encryption. You can check the
 Disks program (in most versions of Linux, to open this program, press
-the Windows key, type **disks**, and press [ENTER]{.small}) to see
+the Windows key, type **disks**, and press **ENTER**) to see
 whether your internal disk is encrypted. The program shows you all of
 the disks attached to your computer and allows you to format them (see
 Figure 1-3. If your internal disk has an
@@ -1340,7 +1340,7 @@ Open the Disks app as you did in Exercise 1-1. Select your USB disk in
 the list of disks on the left, then click the menu button and choose
 **Format Disk**. This will delete all of the data on the USB.
 
-Click the [+]{.symbol_Bold} button to add a new partition and set the
+Click the **+** button to add a new partition and set the
 partition size to the largest option. Name your disk *datasets*, choose
 **Internal Disk for Use with Linux Systems Only**, and check the box
 **Password Protect Volume (LUKS)**. It will prompt you to enter a

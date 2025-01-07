@@ -331,8 +331,8 @@ before you moved *ext4 .vhdx* to a USB disk:
 default=micah
 ```
 
-Press **CTRL-O**, followed by **ENTER**, to save the file,
-and then press **CTRL-X** to exit. Back in your PowerShell
+Press **CTRL**-O, followed by **ENTER**, to save the file,
+and then press **CTRL**-X to exit. Back in your PowerShell
 terminal, shut down WSL by running this command:
 
 ```powershell

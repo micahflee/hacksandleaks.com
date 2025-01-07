@@ -855,7 +855,7 @@ list of sites that already have structures, it can load */api/sites* on
 the backend, which returns this data in JSON format. If it wants to
 retrieve data in JSON format from a specific table on a specific site,
 it can load
-*/api/*[\<]*site*[\>]*/*[\<]*table*[\>].
+*/api/<site\>/<table\>*.
 In this case, the Python code uses the `sqlite3` module to look up this data in the
 SQlite3 database for that BlueLeaks site, and then returns what it finds
 to the frontend.
