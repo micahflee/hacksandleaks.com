@@ -26,11 +26,14 @@ def calculate_read_time(text):
 
 
 def build():
-    extensions = extensions = ["extra", "smarty", "codehilite"]
+    extensions = extensions = ["extra", "smarty", "codehilite", "toc"]
     extension_configs = {
         "codehilite": {
             "guess_lang": False,
-        }
+        },
+        "toc": {
+            "permalink": True
+        },
     }
 
     if not os.path.exists(output_dir):

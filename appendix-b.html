@@ -64,7 +64,7 @@ websites. Finally, I describe three different techniques that allow you
 to scrape different types of websites. Complete Chapters 7, 8, 9, and 11
 before following along, since you&rsquo;ll need the basic knowledge of Python
 programming, CSVs, HTML, and JSON covered there.</p>
-<h2>Legal Considerations</h2>
+<h2 id="legal-considerations">Legal Considerations<a class="headerlink" href="#legal-considerations" title="Permanent link">&para;</a></h2>
 <p>Web scraping isn&rsquo;t a crime, but its legality is still murky. In general,
 using computer systems with permission (like visiting a public website)
 is perfectly fine, but accessing them without authorization (like
@@ -97,7 +97,7 @@ read the full article at
 <a href="https://themarkup.org/news/2020/12/03/why-web-scraping-is-vital-to-democracy">https://themarkup.org/news/2020/12/03/why-web-scraping-is-vital-to-democracy</a>.</p>
 <p>Before you can start writing code to scrape the web yourself, you&rsquo;ll
 need to understand what HTTP requests are.</p>
-<h2>HTTP Requests</h2>
+<h2 id="http-requests">HTTP Requests<a class="headerlink" href="#http-requests" title="Permanent link">&para;</a></h2>
 <p>When you load a web page, your web browser makes an <em>HTTP request</em>. You
 can think of this as the browser sending a message to the website&rsquo;s
 server, saying, &ldquo;I&rsquo;d like to download the content for the page at this
@@ -138,7 +138,7 @@ site came back online with a message: the owner was overjoyed to learn
 how much traffic the site was getting, but to keep up with it, they had
 to raise money to keep the site online. I felt bad about it, and we
 never ended up launching that lyrics site.</em></p>
-<h2>Scraping Techniques</h2>
+<h2 id="scraping-techniques">Scraping Techniques<a class="headerlink" href="#scraping-techniques" title="Permanent link">&para;</a></h2>
 <p>This section describes three different techniques for web scraping, each
 introducing a different Python module. You&rsquo;ll use a Python package
 called HTTPX to make HTTP requests, then use another called Beautiful
@@ -150,7 +150,7 @@ understanding of the layout of the website that you&rsquo;re scraping data
 from. This appendix gives you just a few examples, not a comprehensive
 overview, but they should give you a head start on writing your own web
 scraping scripts in the future.</p>
-<h3>Loading Pages with HTTPX</h3>
+<h3 id="loading-pages-with-httpx">Loading Pages with HTTPX<a class="headerlink" href="#loading-pages-with-httpx" title="Permanent link">&para;</a></h3>
 <p>HTTPX is a third-party Python package that lets you make your own HTTP
 requests with Python. In this section, you&rsquo;ll learn how to use it to
 scrape the most recent posts from any given user on the far-right social
@@ -165,7 +165,7 @@ text data. For example, Listing B-1 shows Python code to make an HTTP
 request to
 <em>https://example.com</em>
 and view its content.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="o">&lt;</span><span class="err">!</span><span class="n">doctype</span> <span class="n">html</span><span class="o">&gt;</span>
@@ -258,12 +258,12 @@ would need to parse that JSON response to display the latest Gab posts.</p>
 latest posts from any target Gab account. Here&rsquo;s the code for this web
 scraping script,
 <em>httpx-example.py</em>:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">httpx</span>
-<span class="kn">import</span> <span class="nn">click</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;gab_username&quot;</span><span class="p">)</span> <span class="err">❶</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">gab_username</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">gab_username</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Download a user&#39;s posts from Gab&quot;&quot;&quot;</span>
 
     <span class="c1"># Get information about the user</span>
@@ -378,7 +378,7 @@ have your scraper make requests while you&rsquo;re logged in. The more web
 scraping scripts like these you write, the better at it you&rsquo;ll get.</p>
 <p>To learn more about using the HTTPX package, check out its documentation
 at <a href="https://www.python-httpx.org">https://www.python-httpx.org</a>.</p>
-<h3>Parsing HTML with Beautiful Soup</h3>
+<h3 id="parsing-html-with-beautiful-soup">Parsing HTML with Beautiful Soup<a class="headerlink" href="#parsing-html-with-beautiful-soup" title="Permanent link">&para;</a></h3>
 <p>Scraping Gab was simple because the responses to the HTTP requests were
 in JSON format, but pulling specific information out of the HTML in a
 web page is more challenging. The easiest way to parse HTML in Python is
@@ -387,8 +387,8 @@ the <code>bs4</code> module by running
 <code>python3 -m pip install bs4</code>.</p>
 <p>For example, here&rsquo;s some code that uses the <code>httpx</code> module to download the HTML from
 <em>https://example.com</em>, like you did in the last section:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">httpx</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
 </code></pre></div>
 
@@ -491,12 +491,12 @@ contains the actual link, the <code>&lt;a&gt;</code> tag.</p>
 the first five pages of the most popular posts recently posted on Hacker
 News, saving them in a CSV spreadsheet and also displaying them to the
 terminal:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">httpx</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">])</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
@@ -618,12 +618,12 @@ run into hurdles like this while you&rsquo;re writing scrapers, but it&rsquo;s a
 often a simple matter of modifying your script like this to get around
 these roadblocks.</p>
 <blockquote>
-<h4>BS4 WEB SCRAPING FOR TRAVEL</h4>
+<h4 id="bs4-web-scraping-for-travel">BS4 WEB SCRAPING FOR TRAVEL<a class="headerlink" href="#bs4-web-scraping-for-travel" title="Permanent link">&para;</a></h4>
 <p>In 2014, shortly after Edward Snowden leaked his massive dataset of top-secret NSA documents to Laura Poitras and Glenn Greenwald, I scheduled a trip to Rio de Janeiro, where Greenwald lived, to help him with computer security and to look through the Snowden docs myself. (This was several years before Greenwald unfortunately became a far-right pundit who openly supports the American fascist movement.) At the time, Americans could travel to Brazil only if they had a visa, and they needed to visit a consulate in person to get one. However, the San Francisco consulate’s website told me that all appointments were booked for the next two months.</p>
 <p>To solve this problem, I wrote a simple Python script that scraped the consulate’s availability calendar web page, using BS4 to loop through each cell in the calendar and see if any appointment slots were open. If it found an opening, my script would send me a text message. I then configured a VPS to run this script every 10 minutes so I’d be the first to know if someone canceled their appointment. In less than two days, I got a text, snagged an appointment, and got my visa. I flew to Rio a few days later.</p>
 </blockquote>
 <p>To learn more about using the BS4 package, check out its documentation at <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">https://www.crummy.com/software/BeautifulSoup/bs4/doc/</a>.</p>
-<h3>Automating Web Browsers with Selenium</h3>
+<h3 id="automating-web-browsers-with-selenium">Automating Web Browsers with Selenium<a class="headerlink" href="#automating-web-browsers-with-selenium" title="Permanent link">&para;</a></h3>
 <p>Sometimes scraping websites is too challenging for Beautiful Soup alone.
 This is often the case with sites that are JavaScript-heavy, where
 viewing the HTML source doesn&rsquo;t result in much information you&rsquo;re
@@ -650,7 +650,7 @@ supports Chrome, Firefox, Safari, and Edge. The example in this section
 uses the Firefox driver, which is called geckodriver.</p>
 <p>To continue, follow the instructions for your operating system, then
 skip to the Testing Selenium in the Python Interpreter section.</p>
-<h4>Installing Selenium and geckodriver on Windows</h4>
+<h4 id="installing-selenium-and-geckodriver-on-windows">Installing Selenium and geckodriver on Windows<a class="headerlink" href="#installing-selenium-and-geckodriver-on-windows" title="Permanent link">&para;</a></h4>
 <p>For this task, Windows users should work with native Windows tools
 rather than WSL. Install the <code>selenium</code> Python module by opening PowerShell
 and running the following command:</p>
@@ -664,7 +664,7 @@ You should end up with a single file called <em>geckodriver.exe</em>. In File
 Explorer, copy this file and paste it into <em>C:\Windows\System32</em>. This
 will allow you to run geckodriver from PowerShell no matter what your
 working directory is.</p>
-<h4>Installing Selenium and geckodriver on macOS</h4>
+<h4 id="installing-selenium-and-geckodriver-on-macos">Installing Selenium and geckodriver on macOS<a class="headerlink" href="#installing-selenium-and-geckodriver-on-macos" title="Permanent link">&para;</a></h4>
 <p>If you&rsquo;re using macOS, open a terminal. Install the <code>selenium</code> Python module by running the
 following:</p>
 <div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>selenium
@@ -675,7 +675,7 @@ following:</p>
 </code></pre></div>
 
 <p>This should give you everything you need to use Selenium in Python.</p>
-<h4>Installing Selenium and geckodriver on Linux</h4>
+<h4 id="installing-selenium-and-geckodriver-on-linux">Installing Selenium and geckodriver on Linux<a class="headerlink" href="#installing-selenium-and-geckodriver-on-linux" title="Permanent link">&para;</a></h4>
 <p>If you&rsquo;re using Linux, open a terminal. Install the <code>selenium</code> Python module by running the
 following:</p>
 <div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>selenium
@@ -687,11 +687,11 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 </code></pre></div>
 
 <p>This should give you everything you need to use Selenium in Python.</p>
-<h4>Testing Selenium in the Python Interpreter</h4>
+<h4 id="testing-selenium-in-the-python-interpreter">Testing Selenium in the Python Interpreter<a class="headerlink" href="#testing-selenium-in-the-python-interpreter" title="Permanent link">&para;</a></h4>
 <p>Now that you have Selenium and geckodriver installed, test them out in
 the Python interpreter by loading this book&rsquo;s git repo website on GitHub
 to get a feel for how Selenium allows you to control a web browser:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">selenium</span><span class="w"> </span><span class="kn">import</span> <span class="n">webdriver</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://github.com/micahflee/hacks-leaks-and-revelations&quot;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
@@ -713,7 +713,7 @@ complicated components, you can write code to control it. In this case,
 the code just displays the title of the page in the terminal with
 <code>print(driver.title)</code>.
 Finally, it quits Firefox.</p>
-<h4>Automating Screenshots with Selenium</h4>
+<h4 id="automating-screenshots-with-selenium">Automating Screenshots with Selenium<a class="headerlink" href="#automating-screenshots-with-selenium" title="Permanent link">&para;</a></h4>
 <p>Now let&rsquo;s try something slightly more complicated. In this section,
 we&rsquo;ll go over a script that will take two arguments: a location name and
 the filename of a screenshot to save. Using Selenium, the script will
@@ -750,16 +750,16 @@ with the search box, I tested clicking this icon in the Python
 interpreter until I got it working.</p>
 <p>The following script, <em>selenium-example.py,</em> uses Selenium to take
 satellite image screenshots from Google Maps for you:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
-<span class="kn">from</span> <span class="nn">selenium.webdriver.common.keys</span> <span class="kn">import</span> <span class="n">Keys</span>
-<span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">selenium</span><span class="w"> </span><span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">selenium.webdriver.common.keys</span><span class="w"> </span><span class="kn">import</span> <span class="n">Keys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">selenium.webdriver.common.by</span><span class="w"> </span><span class="kn">import</span> <span class="n">By</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;screenshot_filename&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">screenshot_filename</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">screenshot_filename</span><span class="p">):</span>
     <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">()</span>
     <span class="n">driver</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
@@ -852,7 +852,7 @@ and store them in CSV spreadsheets or any other format you&rsquo;d like, just
 like you can with BS4.</p>
 <p>To learn more about Selenium for Python, check out its documentation at
 <a href="https://selenium-python.readthedocs.io">https://selenium-python.readthedocs.io</a>.</p>
-<h2>Next Steps</h2>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <p>In this appendix, I&rsquo;ve gone over a few techniques for web scraping and
 provided some simple example scripts to show off the basics of how they
 work. However, in order to write code for your future web scraping

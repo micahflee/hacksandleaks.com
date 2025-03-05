@@ -991,3 +991,9 @@ p+.strong {
     margin: 1rem;
     width: inherit;
 }
+
+a.headerlink {
+    margin-left: 1rem;
+    text-decoration: none;
+    color: #909090;
+}

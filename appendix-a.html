@@ -68,7 +68,7 @@ here. You might need to reference this appendix in Chapter 5, while you&rsquo;re
 while you&rsquo;re using Linux tools to extract over a million files; and in
 Chapter 12, while you&rsquo;re importing 20GB of
 data into a SQL database running in Docker.</p>
-<h2>Understanding WSL’s Linux Filesystem</h2>
+<h2 id="understanding-wsls-linux-filesystem">Understanding WSL’s Linux Filesystem<a class="headerlink" href="#understanding-wsls-linux-filesystem" title="Permanent link">&para;</a></h2>
 <p>Before solving any problems that you might encounter with WSL, you&rsquo;ll
 need to understand how and where WSL stores your Linux files. In this
 section, you&rsquo;ll learn how the WSL Linux filesystem works in Windows, how
@@ -146,7 +146,7 @@ terminals and stop any running Docker containers. Afterward, open an
 Ubuntu terminal again, and you should be able to access that USB disk.</p>
 <p>With the basics of WSL out of the way, let&rsquo;s discuss the primary problem
 you might encounter: disk performance.</p>
-<h2>The Disk Performance Problem</h2>
+<h2 id="the-disk-performance-problem">The Disk Performance Problem<a class="headerlink" href="#the-disk-performance-problem" title="Permanent link">&para;</a></h2>
 <p>Using Windows files in WSL, like the disks mounted in <em>/mnt</em>, has major
 performance issues. Reading from and writing to disks takes considerably
 longer when you&rsquo;re working with files on a Windows disk than when you&rsquo;re
@@ -198,7 +198,7 @@ native Windows alternatives. For instance, you can&rsquo;t run Docker
 containers, which are required for running software like Aleph, without
 WSL. For those cases, you&rsquo;re better off storing your data in a Linux
 filesystem using one of the following solutions.</p>
-<h2>Solving the Disk Performance Problem</h2>
+<h2 id="solving-the-disk-performance-problem">Solving the Disk Performance Problem<a class="headerlink" href="#solving-the-disk-performance-problem" title="Permanent link">&para;</a></h2>
 <p>This section covers two potential solutions to the WSL disk performance
 problem: storing only datasets you&rsquo;re actively working with in your WSL
 Linux partition, or storing your entire WSL Linux partition on a USB
@@ -207,7 +207,7 @@ recommend the first, simpler option if you just want to be able to
 easily work through this book. The second option is a better long-term
 solution if you plan to routinely work with large datasets using Linux
 tools in Windows in the future.</p>
-<h3>Storing Only Active Datasets in Linux</h3>
+<h3 id="storing-only-active-datasets-in-linux">Storing Only Active Datasets in Linux<a class="headerlink" href="#storing-only-active-datasets-in-linux" title="Permanent link">&para;</a></h3>
 <p>If you don&rsquo;t have enough free space for all your datasets on your <em>C:</em>
 drive, you can store just those you need for your current work in your
 Linux filesystem, keeping the rest on your USB disk. For example, you
@@ -216,7 +216,7 @@ Ubuntu home folder (that is, in <em>~/datasets</em>) and keep them there while
 you&rsquo;re conducting a specific investigation. When you no longer need to
 work with these files, copy them back to your external Windows disk and
 delete them from your home folder to clear up space.</p>
-<h3>Storing Your Linux Filesystem on a USB Disk</h3>
+<h3 id="storing-your-linux-filesystem-on-a-usb-disk">Storing Your Linux Filesystem on a USB Disk<a class="headerlink" href="#storing-your-linux-filesystem-on-a-usb-disk" title="Permanent link">&para;</a></h3>
 <p>Another option is to move your whole Ubuntu installation&mdash;that is, the
 <em>ext4 .vhdx</em> file that contains your Linux filesystem&mdash;to a USB disk
 with lots of free space. This way, if you store all your datasets in
@@ -457,7 +457,7 @@ The filesystem on /dev/sdc is now 268435456 (4k) blocks long.
 has been resized and is now as large as the full virtual disk. You&rsquo;re
 done! You&rsquo;ve expanded your Linux filesystem so that you can fit many
 more datasets on it.</p>
-<h2>Next Steps</h2>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <p>In my opinion, Microsoft made Windows a considerably more useful
 operating system by building WSL into it, particularly when you need to
 analyze hacked and leaked datasets. If you&rsquo;re going to use WSL on a

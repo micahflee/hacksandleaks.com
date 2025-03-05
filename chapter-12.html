@@ -75,7 +75,7 @@ a community-maintained version of MySQL. Finally, you&rsquo;ll learn to run a
 SQL server (software that allows you to host SQL databases), import the
 data, and write your own code to search it, skills that will prepare you
 for investigating your own SQL datasets in the future.</p>
-<h3>The Structure of SQL Databases</h3>
+<h3 id="the-structure-of-sql-databases">The Structure of SQL Databases<a class="headerlink" href="#the-structure-of-sql-databases" title="Permanent link">&para;</a></h3>
 <p>I have briefly discussed SQL databases in previous chapters, including
 Chapter 10, where you converted CSVs into
 SQLite databases for BlueLeaks Explorer. There are many types of SQL
@@ -98,7 +98,7 @@ SQLite database, for example.</p>
 <p>Next we&rsquo;ll look at what relational databases are, how SQL servers
 typically work, and the terminology used to describe SQL databases and
 the data they contain.</p>
-<h4>Relational Databases</h4>
+<h4 id="relational-databases">Relational Databases<a class="headerlink" href="#relational-databases" title="Permanent link">&para;</a></h4>
 <p>SQL databases are made up of tables, which you can think of as
 spreadsheets comprising a list of rows, with each row containing the
 same columns, or <em>fields</em>. SQL databases are useful because they&rsquo;re
@@ -181,7 +181,7 @@ Sagan.</p>
 become huge and complicated. For example, instead of two authors, you
 might find a database with 10 million users and all sorts of tables that
 relate to it using a field called <code>user_id</code>.</p>
-<h4>Clients and Servers</h4>
+<h4 id="clients-and-servers">Clients and Servers<a class="headerlink" href="#clients-and-servers" title="Permanent link">&para;</a></h4>
 <p>Most types of SQL databases are <em>server</em> software, meaning you install a
 SQL server to hold all of the data. Other computers then use a SQL
 <em>client</em> to communicate with that server to search for, add, or update
@@ -223,7 +223,7 @@ database, you should use non-root database users with restricted
 permissions. This way, if one of those strangers hacks your database,
 they&rsquo;ll have access only to what that specific database user has
 permissions for.</p>
-<h4>Tables, Columns, and Types</h4>
+<h4 id="tables-columns-and-types">Tables, Columns, and Types<a class="headerlink" href="#tables-columns-and-types" title="Permanent link">&para;</a></h4>
 <p>You can store only a single type of data in each column in a SQL table.
 For example, you can store strings, but not numerals, in the
 <code>title</code> column of Table 12-2 (though you could get around this by
@@ -250,7 +250,7 @@ database, <code>id</code> would be type
 server would respond with an error message, because the data isn&rsquo;t an
 integer.</p>
 <blockquote>
-<h5>THE HISTORY OF MARIADB</h5>
+<h5 id="the-history-of-mariadb">THE HISTORY OF MARIADB<a class="headerlink" href="#the-history-of-mariadb" title="Permanent link">&para;</a></h5>
 <p>MySQL was first released in 1995 as open source SQL database software maintained by the Swedish company MySQL AB. For nearly two decades it reigned as the most popular database for web apps, ushering in the early internet’s Web 2.0 era. Wildly popular web app software like WordPress, Drupal, Joomla, and MediaWiki (which powers Wikipedia) were all built on MySQL databases and developed in the PHP programming language.`</p>
 <p>In 2008, Sun Microsystems acquired MySQL AB, and with it the MySQL software. In 2009, Oracle announced that it was acquiring Sun Microsystems. The MySQL community had many concerns about the future of the project in Oracle’s hands, including that it would cease to be open source. In response, the database’s original creator, Michael “Monty” Widenius, forked MySQL into a new version, MariaDB, that would remain open forever. (<em>Forking</em> an open source project means starting a whole new open source project that’s based on the code of an existing project.) Many of the original MySQL developers stopped working on MySQL and moved to the MariaDB project.</p>
 <p>MariaDB is completely compatible with MySQL, and you can seamlessly switch between the two database servers and clients. The command line client that comes with MySQL will connect to a MariaDB server, and the command line client that comes with MariaDB will connect to a MySQL server. I’ve found that it’s easier to get MariaDB up and running than the original MySQL software, so you’ll use a MariaDB server for the exercises in this chapter. However, since MariaDB is completely compatible with MySQL, it’s common to use the terms interchangeably. I’ll refer to both as MySQL for the remainder of the chapter, except when referring to specific MariaDB software packages.</p>
@@ -261,7 +261,7 @@ Docker containers, like you did in Exercise 5-3 when you set up a local
 WordPress website as practice using Docker Compose. In the following
 exercises, you&rsquo;ll get a MySQL server up and running, connect to your new
 server using MySQL clients, and practice using SQL.</p>
-<h3>Exercise 12-1: Create and Test a MySQL Server Using Docker and Adminer</h3>
+<h3 id="exercise-12-1-create-and-test-a-mysql-server-using-docker-and-adminer">Exercise 12-1: Create and Test a MySQL Server Using Docker and Adminer<a class="headerlink" href="#exercise-12-1-create-and-test-a-mysql-server-using-docker-and-adminer" title="Permanent link">&para;</a></h3>
 <p>With Docker, you can quickly run different types of SQL servers on your
 computer, no matter what operating system you&rsquo;re running. In this
 exercise, you&rsquo;ll run a MariaDB server on your computer using Docker
@@ -270,7 +270,7 @@ MySQL client to add the contents of Tables 12-1 and 12-2 to
 it as a test. You&rsquo;ll move on to working with real leaked data later in
 the chapter, but you&rsquo;ll start by experimenting with some simple example
 databases.</p>
-<h4>Run the Server</h4>
+<h4 id="run-the-server">Run the Server<a class="headerlink" href="#run-the-server" title="Permanent link">&para;</a></h4>
 <p>Create a folder for this chapter&rsquo;s exercises and a <em>docker-compose.yaml</em>
 file in that folder. Type the following code into the file (or copy and
 paste it from
@@ -322,7 +322,7 @@ container images from Docker Hub, if you don&rsquo;t already have them. After
 the containers start, you should see that a <em>db_data</em> folder containing
 all of the data stored in the database so far has been added to your
 <em>exercises</em> folder.</p>
-<h4>Connect to the Database with Adminer</h4>
+<h4 id="connect-to-the-database-with-adminer">Connect to the Database with Adminer<a class="headerlink" href="#connect-to-the-database-with-adminer" title="Permanent link">&para;</a></h4>
 <p>You just started two containers, one for your MySQL server and the other
 for your MySQL client, Adminer. Now you&rsquo;ll connect to Adminer and use it
 to log in to your MySQL server. To access Adminer, open a browser and
@@ -344,7 +344,7 @@ you shouldn&rsquo;t touch them. Instead, you&rsquo;ll create new databases and w
 with them.</p>
 <p><img alt="Figure 12-1: The Adminer login page" src="media/images/Figure12-1.png" /><br />
 <em>Figure 12-1: The Adminer login page</em></p>
-<h4>Create a Test Database</h4>
+<h4 id="create-a-test-database">Create a Test Database<a class="headerlink" href="#create-a-test-database" title="Permanent link">&para;</a></h4>
 <p>To test out your new MySQL server, you&rsquo;ll create a brand-new database
 and enter Tables 12-1 and
 12-2. Click the <strong>Create Database</strong> link,
@@ -391,7 +391,7 @@ like once you&rsquo;ve added these columns.</p>
 to the Adminer MySQL client, you&rsquo;re ready to run your own SQL queries.
 Your first queries will add the data from Tables 12-1 and 12-2
 into their corresponding MySQL tables.</p>
-<h3>Exercise 12-2: Query Your SQL Database</h3>
+<h3 id="exercise-12-2-query-your-sql-database">Exercise 12-2: Query Your SQL Database<a class="headerlink" href="#exercise-12-2-query-your-sql-database" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll learn the syntax of SQL queries. You&rsquo;ll be
 using MySQL, but the syntax is nearly identical to that of all other
 types of SQL, so this section should give you a solid foundation for
@@ -404,7 +404,7 @@ load Adminer in your web browser at
 you&rsquo;ve logged in to your MySQL server as the root user, using the same
 password from the previous exercise. When you&rsquo;re ready, click the
 <strong>books</strong> database to begin.</p>
-<h4>INSERT Statements</h4>
+<h4 id="insert-statements">INSERT Statements<a class="headerlink" href="#insert-statements" title="Permanent link">&para;</a></h4>
 <p>So far the <code>books</code> database
 you created in Exercise 12-1 includes the tables <code>authors</code> and <code>books</code>, but those tables don&rsquo;t have any rows.</p>
 <p>To add new rows to your tables, you use the <code>INSERT</code> verb as follows:</p>
@@ -461,7 +461,7 @@ view the new data in the database. Figure
 <code>SELECT * from 'books' LIMIT 50</code> <code>(0.0002 s)</code>, which is the SQL statement Adminer
 executed to retrieve this data from the MySQL database, followed by the
 amount of time it took for the query to run.</p>
-<h4>SELECT Statements</h4>
+<h4 id="select-statements">SELECT Statements<a class="headerlink" href="#select-statements" title="Permanent link">&para;</a></h4>
 <p>While <code>INSERT</code> statements add
 information to SQL databases, <code>SELECT</code> statements ask a database for specific
 information. When investigating leaked SQL databases, you&rsquo;ll likely
@@ -499,7 +499,7 @@ characters.</p>
 Excel or LibreOffice Calc and work with the data using that software.
 This makes it easier to share the data with colleagues or use advanced
 features like visualizing the data.</p>
-<h5>Selecting Individual Fields</h5>
+<h5 id="selecting-individual-fields">Selecting Individual Fields<a class="headerlink" href="#selecting-individual-fields" title="Permanent link">&para;</a></h5>
 <p>You previously ran the <code>SELECT * FROM table_name</code> query to select all the
 columns in a table, but you can also choose only specific columns. Say
 you want to return only a list of titles in the table. Select the
@@ -532,7 +532,7 @@ queries as tables in text rather than Adminer screenshots.)</p>
 </table>
 <p>When you&rsquo;re working with larger databases, select only the columns you
 need so your queries will finish faster.</p>
-<h5>Sorting Results</h5>
+<h5 id="sorting-results">Sorting Results<a class="headerlink" href="#sorting-results" title="Permanent link">&para;</a></h5>
 <p>Use the <code>ORDER BY</code> clause to
 sort the results of your queries. For example, to select all of the
 columns in the <code>books</code> table,
@@ -617,7 +617,7 @@ books, the books are sorted by title), run this query:</p>
 <p>In this case, all of the books by the author with <code>author_id</code> of <code>1</code> (Micah Lee) are shown first, and the
 books by the author with <code>author_id</code> of <code>2</code> (Carl Sagan) are shown next. The books
 for each author are then sorted alphabetically by <code>title</code>.</p>
-<h5>Counting Rows in a Table</h5>
+<h5 id="counting-rows-in-a-table">Counting Rows in a Table<a class="headerlink" href="#counting-rows-in-a-table" title="Permanent link">&para;</a></h5>
 <p>SQL databases have built-in functions you can run as part of your
 queries. For example, to find out how many rows are in the
 <code>books</code> table, use the
@@ -643,7 +643,7 @@ shown in Table 12-6.</p>
 <p>Selecting <code>COUNT(*)</code> from a
 table is considerably faster than selecting all of the rows in that
 table and then counting them.</p>
-<h5>Filtering SELECT Results with WHERE Clauses</h5>
+<h5 id="filtering-select-results-with-where-clauses">Filtering SELECT Results with WHERE Clauses<a class="headerlink" href="#filtering-select-results-with-where-clauses" title="Permanent link">&para;</a></h5>
 <p>You can also filter the results you get back using the <code>WHERE</code> clause. For instance, to find the
 titles of books written by Micah Lee, run the following query:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">books</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">author_id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
@@ -744,7 +744,7 @@ indenting your queries in the following sections.</p>
 <p>You should now have a basic understanding of how to select data from a
 table in a SQL database. In the next section, you&rsquo;ll learn to select
 data from multiple tables at once.</p>
-<h4>JOIN Clauses</h4>
+<h4 id="join-clauses">JOIN Clauses<a class="headerlink" href="#join-clauses" title="Permanent link">&para;</a></h4>
 <p>Because SQL databases are relational, you can select data from and
 receive results from columns from multiple tables simultaneously using
 <code>JOIN</code> clauses. You can think
@@ -858,7 +858,7 @@ from both tables, based on the <code>books.author_id=authors.id</code> relations
 <code>INNER JOIN</code>, which is the
 default type of join in MySQL. In addition to <code>INNER</code> joins, however, you can also use
 <code>LEFT</code> and <code>RIGHT</code> joins.</p>
-<h5>Using LEFT and RIGHT Joins</h5>
+<h5 id="using-left-and-right-joins">Using LEFT and RIGHT Joins<a class="headerlink" href="#using-left-and-right-joins" title="Permanent link">&para;</a></h5>
 <p>There are two additional ways to join tables together in SQL:
 <code>LEFT JOIN</code> and
 <code>RIGHT JOIN</code> queries. Each
@@ -949,7 +949,7 @@ to use depends on the type of analysis you&rsquo;re trying to do.
 <code>INNER JOIN</code> is a reasonable
 default, but if the SQL results you&rsquo;re getting are missing data that you
 want, then you&rsquo;ll probably want to use a <code>LEFT JOIN</code> instead.</p>
-<h5>Using WHERE Clauses with Joins</h5>
+<h5 id="using-where-clauses-with-joins">Using WHERE Clauses with Joins<a class="headerlink" href="#using-where-clauses-with-joins" title="Permanent link">&para;</a></h5>
 <p>As with other <code>SELECT</code>
 statements, you can use the <code>WHERE</code> clause along with <code>JOIN</code> clauses to filter your results. To
 find all titles written by Carl Sagan without knowing what his
@@ -989,7 +989,7 @@ by title, you&rsquo;d add <code>ORDER BY books.title</code> to the query.</p>
 <p>You&rsquo;ve now learned the trickiest parts of searching SQL databases for
 information. Next, we&rsquo;ll discuss two more simple SQL verbs:
 <code>UPDATE</code> and <code>DELETE</code>.</p>
-<h4>UPDATE Statements</h4>
+<h4 id="update-statements">UPDATE Statements<a class="headerlink" href="#update-statements" title="Permanent link">&para;</a></h4>
 <p>You can update rows in a table using the <code>UPDATE</code> verb, which uses this syntax:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">column1</span><span class="o">=</span><span class="n">value1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="o">=</span><span class="n">value2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span>
 </code></pre></div>
@@ -1004,7 +1004,7 @@ running the follow query:</p>
 <p>This should have updated the <code>title</code> of the book with the <code>id</code> of <code>1</code> from
 <code>Hacks, Leaks, and Revelations</code> to
 <code>Hacks, Leaks, and Revelations: The Art of Analyzing Hacked and Leaked Data</code>.</p>
-<h4>DELETE Statements</h4>
+<h4 id="delete-statements">DELETE Statements<a class="headerlink" href="#delete-statements" title="Permanent link">&para;</a></h4>
 <p>To delete rows in a table, use the <code>DELETE</code> verb, which takes the following
 syntax:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span>
@@ -1023,7 +1023,7 @@ Alternatively, if you wanted to delete all of the books with me as the
 author, the condition could be <code>author_id=1</code>. Or if you wanted to delete all of the
 books with <em>blue</em> in their titles, the condition could be
 <code>title LIKE '%blue%'</code>.</p>
-<h3>Introducing the MySQL Command Line Client</h3>
+<h3 id="introducing-the-mysql-command-line-client">Introducing the MySQL Command Line Client<a class="headerlink" href="#introducing-the-mysql-command-line-client" title="Permanent link">&para;</a></h3>
 <p>So far, you&rsquo;ve run all of your SQL queries through Adminer for a simpler
 user experience as you learned the basics of SQL. MySQL clients like
 Adminer work well for everyday tasks like browsing data in databases,
@@ -1053,13 +1053,13 @@ running many queries, it might be cumbersome to scroll back through your
 terminal history to find specific results that you ran previously. For
 everyday queries, it&rsquo;s easier to use a graphical client like Adminer.</p>
 <blockquote>
-<h4>PYTHON AND MYSQL</h4>
+<h4 id="python-and-mysql">PYTHON AND MYSQL<a class="headerlink" href="#python-and-mysql" title="Permanent link">&para;</a></h4>
 <p>You can also consider writing Python code that interacts with MySQL databases, where your Python script acts as the SQL client. For example, you wrote Python scripts in Chapter 9 that loop through every row in a CSV and then run a block of code; you might want to similarly loop through every row returned in response to a <code>SELECT</code> query. To write Python code that connects to a MySQL database and runs queries, you can use a module called <code>PyMySQL</code>. For Python code that runs SQL queries, the table of data often isn’t displayed—instead, it’s stored in a variable, typically a list of dictionaries that you can loop through. For more information, see the documentation for the <code>PyMySQL</code> module at <a href="https://pymysql.readthedocs.io">https://pymysql.readthedocs.io</a>.</p>
 </blockquote>
 <p>So far, you&rsquo;ve seen SQL query results displayed in Adminer as HTML
 tables. If you run the same queries using the <code>mysql</code> client, the data will be displayed as
 text in your terminal. You&rsquo;ll test this in Exercise 12-3.</p>
-<h3>Exercise 12-3: Install and Test the Command Line MySQL Client</h3>
+<h3 id="exercise-12-3-install-and-test-the-command-line-mysql-client">Exercise 12-3: Install and Test the Command Line MySQL Client<a class="headerlink" href="#exercise-12-3-install-and-test-the-command-line-mysql-client" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll install and practice using the MariaDB command
 line client <code>mysql</code>, which has
 the same name and works in the same way as the official MySQL client.</p>
@@ -1110,7 +1110,7 @@ MariaDB [(none)]&gt;
 <p>From here, you can run all the same SQL queries you did in Adminer.
 However, to work in the command line client, you&rsquo;ll need to know a few
 additional queries.</p>
-<h3>MySQL-Specific Queries</h3>
+<h3 id="mysql-specific-queries">MySQL-Specific Queries<a class="headerlink" href="#mysql-specific-queries" title="Permanent link">&para;</a></h3>
 <p>Queries like <code>INSERT</code> and
 <code>SELECT</code> are typically nearly
 identical between different versions of SQL, but each version has unique
@@ -1225,7 +1225,7 @@ Bye
 tackling real data! In the rest of the chapter, you&rsquo;ll learn more about
 Epik and its massive data breach, then download and analyze a MySQL
 database backup from the Epik dataset.</p>
-<h3>The History of Epik</h3>
+<h3 id="the-history-of-epik">The History of Epik<a class="headerlink" href="#the-history-of-epik" title="Permanent link">&para;</a></h3>
 <p>Epik, a Seattle-area company founded by Rob Monster in 2009, has long
 provided domain name and web hosting services to neo-Nazi and far-right
 websites. Its customers have included the notorious neo-Nazi website
@@ -1259,7 +1259,7 @@ the following chapter, has also registered its domains with Epik, though
 it&rsquo;s not at risk of being deplatformed.</p>
 <p>In this section, you&rsquo;ll learn about the history and motivation behind
 the Epik hack and the type of information this dataset contains.</p>
-<h4>The Epik Hack</h4>
+<h4 id="the-epik-hack">The Epik Hack<a class="headerlink" href="#the-epik-hack" title="Permanent link">&para;</a></h4>
 <p>On September 1, 2021, less than a year before the US Supreme Court&rsquo;s
 2022 decision to overturn the constitutional right to abortion, the
 state of Texas passed the most restrictive abortion law in the US&mdash;more
@@ -1310,7 +1310,7 @@ passwords, and more.</p>
 <p>The most important data in the Epik dataset, in
 my opinion, is the WHOIS privacy data containing information on the
 owners behind the domain names Epik hosts.</p>
-<h4>Epik’s WHOIS Data</h4>
+<h4 id="epiks-whois-data">Epik’s WHOIS Data<a class="headerlink" href="#epiks-whois-data" title="Permanent link">&para;</a></h4>
 <p><em>WHOIS</em> (pronounced &ldquo;who is&rdquo;) data is the public ownership information
 you&rsquo;re required to provide when buying a domain name. This generally
 includes contact details like names, email addresses, phone numbers, and
@@ -1410,7 +1410,7 @@ read Thalen&rsquo;s reporting at
 <a href="https://www.dailydot.com/debug/ali-alexander-epik-hack-web-domains-capitol-riot/">https://www.dailydot.com/debug/ali-alexander-epik-hack-web-domains-capitol-riot/</a>.</p>
 <p>In Exercise 12-4, you&rsquo;ll download part of the Epik dataset and get ready
 to start exploring it yourself.</p>
-<h3>Exercise 12-4: Download and Extract Part of the Epik Dataset</h3>
+<h3 id="exercise-12-4-download-and-extract-part-of-the-epik-dataset">Exercise 12-4: Download and Extract Part of the Epik Dataset<a class="headerlink" href="#exercise-12-4-download-and-extract-part-of-the-epik-dataset" title="Permanent link">&para;</a></h3>
 <p>The Epik dataset is split into three folders: <em>EpikFail</em>,
 <em>EpikFailTheB:Sides</em>, and <em>EpikFailYouLostTheGame,</em> which you can
 download either using BitTorrent or from DDoSecrets&rsquo; public data server
@@ -1448,14 +1448,14 @@ Chapter 11. To extract the
 16 times as much disk space.</p>
 <p>Now that you&rsquo;ve extracted the file, the next step is to import it into
 your MySQL database in Exercise 12-5.</p>
-<h3>Exercise 12-5: Import Epik Data into MySQL</h3>
+<h3 id="exercise-12-5-import-epik-data-into-mysql">Exercise 12-5: Import Epik Data into MySQL<a class="headerlink" href="#exercise-12-5-import-epik-data-into-mysql" title="Permanent link">&para;</a></h3>
 <p>The Epik dataset includes nine separate MySQL databases. To keep things
 simple, the exercises in this chapter require you to import and explore
 data only in the <em>api_system.sql</em> database into your MySQL server. Each
 <em>.sql</em> file in the Epik dataset represents a full database containing
 several tables. In order to import one of these
 files into MySQL, first you&rsquo;ll need to create a database for it.</p>
-<h4>Create a Database for api_system</h4>
+<h4 id="create-a-database-for-api_system">Create a Database for api_system<a class="headerlink" href="#create-a-database-for-api_system" title="Permanent link">&para;</a></h4>
 <p>You&rsquo;ll use the <code>mysql</code> command
 line client to create a new database called
 <code>epikfail_api_system</code>.
@@ -1479,7 +1479,7 @@ Bye
 </code></pre></div>
 
 <p>Congrats, you&rsquo;ve just created a new database!</p>
-<h4>Import api_system Data</h4>
+<h4 id="import-api_system-data">Import api_system Data<a class="headerlink" href="#import-api_system-data" title="Permanent link">&para;</a></h4>
 <p>The simplest way to import a MySQL backup into a MySQL client is to pipe
 the data into the <code>mysql</code>
 program, by running the following command:</p>
@@ -1525,7 +1525,7 @@ of 587KB per second (though import speed varies greatly depending on
 which query is currently running). It took me a total of four hours to
 import <em>api_system.sql</em>.</p>
 <blockquote>
-<h5>TROUBLESHOOTING DURING DATABASE IMPORTS</h5>
+<h5 id="troubleshooting-during-database-imports">TROUBLESHOOTING DURING DATABASE IMPORTS<a class="headerlink" href="#troubleshooting-during-database-imports" title="Permanent link">&para;</a></h5>
 <p>Something can always go wrong while you’re in the middle of importing a database. You could accidentally close your terminal window, stopping the import partway through. Your laptop could run out of battery, or you could accidentally unplug your USB disk. You might need to cancel the import midway through (by pressing CTRL-C). If anything like this happens, don’t worry. It’s fairly simple to delete your database, create a new one, and start the import over again. Unfortunately, though, you can’t continue where you left off.</p>
 <p>To restart an interrupted import, you can drop the database using the <code>DROP DATABASE database_name;</code> statement. This deletes the whole database and all of its tables. Create a new database and import the data again. For example, if your <code>epikfail_api_system</code> import was interrupted, you start over by running these MySQL queries as the root user with the following commands:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">epikfail_api_system</span><span class="p">;</span>
@@ -1538,7 +1538,7 @@ import <em>api_system.sql</em>.</p>
 move on to the next section. (It&rsquo;s possible to run queries on the
 database before it&rsquo;s fully imported, but you&rsquo;ll only get results from
 the data that&rsquo;s been imported so far.)</p>
-<h3>Exploring Epik’s SQL Database</h3>
+<h3 id="exploring-epiks-sql-database">Exploring Epik’s SQL Database<a class="headerlink" href="#exploring-epiks-sql-database" title="Permanent link">&para;</a></h3>
 <p>Once <em>api_system.sql</em> has finished importing, it&rsquo;s time to dive in and
 take a look at the <code>epikfail_api_system</code> database. With databases like this, a
 good tactic is to manually view each table and try to determine if it
@@ -1559,7 +1559,7 @@ queries as well. It&rsquo;s good practice to refrain from running
 you&rsquo;re investigating. However, <code>SELECT</code> queries don&rsquo;t modify anything in the
 database, so you can run as many as you want at any point, then continue
 following along when you&rsquo;re done.</p>
-<h4>The domain Table</h4>
+<h4 id="the-domain-table">The domain Table<a class="headerlink" href="#the-domain-table" title="Permanent link">&para;</a></h4>
 <p>The <code>domain</code> table in the
 <code>epikfail_api_system</code> database
 has over 1.6 million rows in it and is clearly a list of domain names in
@@ -1769,7 +1769,7 @@ though. To find that missing information, let&rsquo;s take a look at the
 </tr>
 </tbody>
 </table>
-<h4>The privacy Table</h4>
+<h4 id="the-privacy-table">The privacy Table<a class="headerlink" href="#the-privacy-table" title="Permanent link">&para;</a></h4>
 <p>The <code>privacy</code> table has
 721,731 rows of data. Like the <code>domain</code> table, it has a <code>domain</code> column that lists domain names, but it
 also includes columns with all of the private WHOIS details. Relevant
@@ -1867,7 +1867,7 @@ row.</p>
 information about domains owned by Jim Watkins in the Epik dataset, just
 not in the <code>epikfail_api_system</code> database. For now, let&rsquo;s look at some
 final interesting tables in this database.</p>
-<h4>The hosting and hosting_server Tables</h4>
+<h4 id="the-hosting-and-hosting_server-tables">The hosting and hosting_server Tables<a class="headerlink" href="#the-hosting-and-hosting_server-tables" title="Permanent link">&para;</a></h4>
 <p>The <code>hosting</code> table has 3,934
 rows and appears to show websites that Epik actually runs the servers
 for, not just the domain name registration. Columns include
@@ -2077,7 +2077,7 @@ means each row of the results will show the number of rows in the
 <p>While there&rsquo;s always more to learn, you should now have the SQL skills
 to write powerful queries that can help you quickly find what you&rsquo;re
 looking for, even in tables with millions of rows.</p>
-<h3>Working with Epik Data in the Cloud</h3>
+<h3 id="working-with-epik-data-in-the-cloud">Working with Epik Data in the Cloud<a class="headerlink" href="#working-with-epik-data-in-the-cloud" title="Permanent link">&para;</a></h3>
 <p>The MySQL databases from Epik contain an overwhelming amount of data
 that&rsquo;s useful for extremism research, and only a fraction of that data
 is in the <em>api_system.sql.gz</em> backup that you&rsquo;ve imported for this
@@ -2227,7 +2227,7 @@ next&mdash;as you&rsquo;ve seen, I used the email that Watkins registered 8chan.
 with to find his other domains, for example. When you don&rsquo;t find what
 you&rsquo;re looking for, tweak your queries to make them more broad, or
 search a different field that might give you similar information.</p>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>In this chapter, you&rsquo;ve learned how to run your own MySQL server on your
 computer using Docker containers. You took a crash course in SQL, the
 language used to communicate with SQL servers, and were introduced to

@@ -55,7 +55,7 @@ also start working with a new type of variable in Python, the
 dictionary, which will prove handy for working with data that&rsquo;s too
 complex to store in simple lists. As with the previous chapter, future
 chapters rely on your understanding of the topics covered here.</p>
-<h3>Modules</h3>
+<h3 id="modules">Modules<a class="headerlink" href="#modules" title="Permanent link">&para;</a></h3>
 <p>As you learned in Chapter 7, functions are
 reusable blocks of code that you can run as many times as you want
 without having to rewrite any code. Python <em>modules</em> are similar, but
@@ -77,7 +77,7 @@ makes your program wait a given number of seconds before continuing to
 the next line of code. Run the following commands to import the
 <code>time</code> module and then have it
 tell Python to wait five seconds:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">time</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </code></pre></div>
 
@@ -114,10 +114,10 @@ example, if you define some functions in a file called <em>helpers.py</em>,
 another Python file can access those functions by importing the
 <code>helpers</code> module. The
 <em>helpers.py</em> file could contain the following code:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_tax</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">tax_rate</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_tax</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">tax_rate</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">price</span> <span class="o">*</span> <span class="n">tax_rate</span>
 
-<span class="k">def</span> <span class="nf">get_net_price</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">tax_rate</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_net_price</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">tax_rate</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">price</span> <span class="o">+</span> <span class="n">get_tax</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">tax_rate</span><span class="p">)</span>
 </code></pre></div>
 
@@ -125,7 +125,7 @@ another Python file can access those functions by importing the
 <code>get_tax()</code> and
 <code>get_net_price()</code>. The
 following Python script, <em>price.py</em>, imports it like so:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">helpers</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">helpers</span>
 <span class="n">total_price</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_net_price</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A book that costs $50, and has 6% sales tax, costs $</span><span class="si">{</span><span class="n">total_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
@@ -150,14 +150,14 @@ uses its return value to calculate the net price, then returns <em>that</em>
 value back into the <em>price.py</em> script.</p>
 <p>Before you write your first advanced Python script in Exercise 8-1,
 let&rsquo;s look at the best way to start new Python scripts.</p>
-<h3>Python Script Template</h3>
+<h3 id="python-script-template">Python Script Template<a class="headerlink" href="#python-script-template" title="Permanent link">&para;</a></h3>
 <p>I use the same basic template for all my Python scripts, putting my code
 into a function called <code>main()</code>, then calling that function at the
 bottom of the file. This isn&rsquo;t required (you didn&rsquo;t do this for any of
 the scripts you wrote in Chapter 7, after
 all), but it&rsquo;s a good way to organize your code. Here&rsquo;s what it looks
 like:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">pass</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -197,7 +197,7 @@ early. You can&rsquo;t use <code>return</code>
 when you&rsquo;re not in a function.</p>
 <p>In the following exercise, you&rsquo;ll put this into practice by writing a
 script to start investigating BlueLeaks.</p>
-<h3>Exercise 8-1: Traverse the Files in BlueLeaks</h3>
+<h3 id="exercise-8-1-traverse-the-files-in-blueleaks">Exercise 8-1: Traverse the Files in BlueLeaks<a class="headerlink" href="#exercise-8-1-traverse-the-files-in-blueleaks" title="Permanent link">&para;</a></h3>
 <p>To efficiently investigate datasets, you need to be able to write code
 that looks through large collections&mdash;sometimes thousands or
 millions&mdash;of files for you. In this exercise, you&rsquo;ll learn various ways
@@ -208,15 +208,15 @@ Chapter 7, like using variables,
 <p>As you read along and run the scripts, feel free to modify the code
 however you&rsquo;d like and try running those versions too. You might
 discover revelations I didn&rsquo;t think to look for.</p>
-<h4>List the Filenames in a Folder</h4>
+<h4 id="list-the-filenames-in-a-folder">List the Filenames in a Folder<a class="headerlink" href="#list-the-filenames-in-a-folder" title="Permanent link">&para;</a></h4>
 <p>Start by using <code>os.listdir()</code>
 to list the files in the <em>BlueLeaks-extracted</em> folder. In your text
 editor, create a file called <em>list-files1.py</em> and enter this short
 script (or copy and paste it from
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/list-files1.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/list-files1.py</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/datasets/BlueLeaks-extracted&quot;</span>
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
@@ -250,13 +250,13 @@ akorca
 listing the filenames in BlueLeaks, you&rsquo;ll check each filename to see
 whether it&rsquo;s a folder, and if so, you&rsquo;ll open each of those folders and
 count how many files and subfolders they contain.</p>
-<h4>Count the Files and Folders in a Folder</h4>
+<h4 id="count-the-files-and-folders-in-a-folder">Count the Files and Folders in a Folder<a class="headerlink" href="#count-the-files-and-folders-in-a-folder" title="Permanent link">&para;</a></h4>
 <p>Create a file called <em>list-files2.py</em> and enter the following code (or
 copy and paste it from
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/list-files2.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/list-files2.py</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/datasets/BlueLeaks-extracted&quot;</span>
   <span class="err">❶</span> <span class="k">for</span> <span class="n">bl_folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
         <span class="n">bl_folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">bl_folder</span><span class="p">)</span>
@@ -350,7 +350,7 @@ chicagoheat has 499 files, 10 folders
 your BlueLeaks folder and check whether each name actually refers to a
 file or to another folder. Now it&rsquo;s time to learn to write code that can
 also traverse the BlueLeaks folder&rsquo;s nested folders.</p>
-<h3>Traverse Folders with os.walk()</h3>
+<h3 id="traverse-folders-with-oswalk">Traverse Folders with os.walk()<a class="headerlink" href="#traverse-folders-with-oswalk" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s say you want to write a program that displays all of the files in
 a folder and its subfolders, and its subsubfolders, and so on. When you
 have nested folders but don&rsquo;t actually know how deep the folder
@@ -436,7 +436,7 @@ contains lots of nested folders, you&rsquo;ll want to use <code>os.walk()</code>
 that inspects each file in the entire dataset. The <code>os.walk()</code> function has many uses, including
 figuring out which files are the largest or smallest, as you&rsquo;ll see
 next.</p>
-<h3>Exercise 8-2: Find the Largest Files in BlueLeaks</h3>
+<h3 id="exercise-8-2-find-the-largest-files-in-blueleaks">Exercise 8-2: Find the Largest Files in BlueLeaks<a class="headerlink" href="#exercise-8-2-find-the-largest-files-in-blueleaks" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll use <code>os.walk()</code> to write a script that looks through
 all the files, folders, and subfolders in BlueLeaks; measures the size
 of each file; and displays the filenames for files over 100MB. This code
@@ -445,9 +445,9 @@ deep the folder structure.</p>
 <p>Create a file called <em>find-big-files.py</em> and enter the following code
 (or copy and paste it from
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/find-big-files.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/find-big-files.py</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/datasets/BlueLeaks-extracted&quot;</span>
     <span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
@@ -508,7 +508,7 @@ Files.pdf is 102MB
 
 <p>The script should display the absolute paths of the 101 files in
 BlueLeaks that are at least 100MB, along with each file&rsquo;s size.</p>
-<h3>Third-Party Modules</h3>
+<h3 id="third-party-modules">Third-Party Modules<a class="headerlink" href="#third-party-modules" title="Permanent link">&para;</a></h3>
 <p>In addition to built-in modules, Python also supports third-party
 modules that you can easily incorporate into your own code. Most Python
 scripts that I write, even simple ones, rely on at least one third-party
@@ -546,7 +546,7 @@ Successfully installed click-8.1.3
 
 <p>Open the Python interpreter again and try
 importing <code>click</code> once more:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">click</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 <span class="o">&gt;&gt;&gt;</span>
 </code></pre></div>
 
@@ -610,13 +610,13 @@ To summarize, the <em>requirements.txt</em> file defines your project&rsquo;s
 dependencies, each of which might depend on its own list of packages.</p>
 <p><strong>NOTE</strong> <em>To learn more about how to use</em> <em>httpx</em> <em>and other Python modules to automate interacting with websites, check out Appendix B. I recommend waiting until you complete Chapters 7, 8, 9, and 11, however, since the instructions covered in Appendix B rely on the skills you&rsquo;ll pick up in those chapters.</em></p>
 <blockquote>
-<h4>VIRTUAL ENVIRONMENTS</h4>
+<h4 id="virtual-environments">VIRTUAL ENVIRONMENTS<a class="headerlink" href="#virtual-environments" title="Permanent link">&para;</a></h4>
 <p>It’s not unusual to have multiple versions of Python and multiple versions of the same dependencies for different projects installed on the same computer. If you routinely install Python packages with pip for various projects, this can get very messy over time. For example, different projects might depend on different versions of the same module to work, but you can’t have two versions of a module installed at the same time—at least not without <em>virtual environments</em>, which are like stand-alone folders containing your Python dependencies for a specific project. This way, different projects’ dependencies won’t trip each other up.</p>
 <p>To keep things simple, this book doesn’t use virtual environments, and it uses only pip to install Python packages. As long as you don’t have multiple Python projects requiring specific versions of the few third-party modules this book uses, you should be fine without using a virtual environment.</p>
 <p>You can learn more about virtual environments at <a href="https://docs.python.org/3/tutorial/venv.html">https://docs.python.org/3/tutorial/venv.html</a>. For larger Python projects, you might also consider using Python package management programs such as Poetry (<a href="https://python-poetry.org">https://python-poetry.org</a>) or Pipenv (<a href="https://github.com/pypa/pipenv">https://github.com/pypa/pipenv</a>), which handle the complicated parts of keeping track of Python packages and virtual environments for you.</p>
 </blockquote>
 <p>Now that you know how to install third-party modules, you&rsquo;ll practice using Click.</p>
-<h3>Exercise 8-3: Practice Command Line Arguments with Click</h3>
+<h3 id="exercise-8-3-practice-command-line-arguments-with-click">Exercise 8-3: Practice Command Line Arguments with Click<a class="headerlink" href="#exercise-8-3-practice-command-line-arguments-with-click" title="Permanent link">&para;</a></h3>
 <p>As you learned in the previous section, the Click package makes it
 simple to add command line arguments to your scripts. You can use it to
 define variables to pass into your <code>main()</code> function from the terminal, without
@@ -628,11 +628,11 @@ by running <code>python3 -m pip install click</code>. Next, open your text edito
 the following Python script, <em>exercise-8-3.py</em> (or copy and paste it
 from
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-3.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-3.py</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple program that greets NAME&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
 
@@ -694,7 +694,7 @@ Hello Eve!
 </code></pre></div>
 
 <p><strong>NOTE</strong> <em>You can read more about using Click at <a href="https://click.palletsprojects.com">https://click.palletsprojects.com</a>.</em></p>
-<h3>Avoiding Hardcoding with Command Line Arguments</h3>
+<h3 id="avoiding-hardcoding-with-command-line-arguments">Avoiding Hardcoding with Command Line Arguments<a class="headerlink" href="#avoiding-hardcoding-with-command-line-arguments" title="Permanent link">&para;</a></h3>
 <p>As you&rsquo;ve seen in previous chapters, CLI arguments let you run the same
 program in many different ways, targeting different data. For example,
 in Chapter 4, you used the <code>du</code> command to estimate the disk space of
@@ -724,7 +724,7 @@ dataset you get your hands on, not just BlueLeaks, and for any minimum
 file size, allowing you to run it in a variety of situations. You&rsquo;d just
 need to pass in the dataset path and the minimum file size as CLI
 arguments. You&rsquo;ll try this out in the next exercise.</p>
-<h3>Exercise 8-4: Find the Largest Files in Any Dataset</h3>
+<h3 id="exercise-8-4-find-the-largest-files-in-any-dataset">Exercise 8-4: Find the Largest Files in Any Dataset<a class="headerlink" href="#exercise-8-4-find-the-largest-files-in-any-dataset" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll modify the script you wrote in Exercise
 8-2 to make it work for any dataset, and for any minimum file
 size, using CLI arguments. In the following chapters, you&rsquo;ll write
@@ -734,13 +734,13 @@ provide the paths to the datasets you&rsquo;ll be working with.</p>
 <em>exercise-8-2 .py</em> code into it. Next, make the following modifications
 to the code, highlighted in bold (or find the full modified script at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-4.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-4.py</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">click</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;min_file_size&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">INT</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">min_file_size</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">min_file_size</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find files in PATH that are at least MIN_FILE_SIZE MB big&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
@@ -789,7 +789,7 @@ using Click, you should be able to avoid hardcoding information like
 dataset paths in your future programs.</p>
 <p>Next, we&rsquo;ll switch gears and explore a new powerful type of Python
 variable called dictionaries.</p>
-<h3>Dictionaries</h3>
+<h3 id="dictionaries">Dictionaries<a class="headerlink" href="#dictionaries" title="Permanent link">&para;</a></h3>
 <p>In the course of your investigations, sometimes you&rsquo;ll need to keep
 track of data with more structure than a simple list. To do so, you can
 use Python dictionaries. Instead of a collection of items, a
@@ -800,7 +800,7 @@ retrieved. Nearly every Python script I write that deals with data uses
 dictionaries. In this section, you&rsquo;ll learn how to define dictionaries,
 get values from them, add values to them, and update existing values in
 them.</p>
-<h4>Defining Dictionaries</h4>
+<h4 id="defining-dictionaries">Defining Dictionaries<a class="headerlink" href="#defining-dictionaries" title="Permanent link">&para;</a></h4>
 <p>Dictionaries are defined using braces (<code>{</code>and <code>}</code>), sometimes referred to as curly
 brackets. Inside the braces is a list of key-value pairs in the format
 <code>key: value</code>, where each pair is separated
@@ -842,7 +842,7 @@ will overwrite the previous value with the most recent one:</p>
 combination of lists and dictionaries to organize pretty much any type
 of data, no matter how complicated, allowing you to more easily work
 with it in Python.</p>
-<h4>Getting and Setting Values</h4>
+<h4 id="getting-and-setting-values">Getting and Setting Values<a class="headerlink" href="#getting-and-setting-values" title="Permanent link">&para;</a></h4>
 <p>To retrieve an item you&rsquo;ve stored inside a dictionary, add square
 brackets containing the item&rsquo;s key to the end of the dictionary name. If
 you try to use a key you haven&rsquo;t defined, your script will crash with a
@@ -878,7 +878,7 @@ one, like this:</p>
 <code>United States</code>, to have the
 value <code>Mar-a-Lago</code>,
 overwriting its old value, which used to be <code>Washington, DC</code>.</p>
-<h3>Navigating Dictionaries and Lists in the Conti Chat Logs</h3>
+<h3 id="navigating-dictionaries-and-lists-in-the-conti-chat-logs">Navigating Dictionaries and Lists in the Conti Chat Logs<a class="headerlink" href="#navigating-dictionaries-and-lists-in-the-conti-chat-logs" title="Permanent link">&para;</a></h3>
 <p>You can combine dictionaries and lists in a single flexible data
 structure that allows you to represent a wide variety of information. If
 you&rsquo;re writing Python code to work with datasets, chances are you&rsquo;re
@@ -903,7 +903,7 @@ practice working with real leaked data stored in dictionaries and lists.
 Using Python code, you&rsquo;ll learn how to navigate these structures to
 access specific pieces of data as well as how to quickly loop through
 the chat logs and select just the parts you&rsquo;re interested in.</p>
-<h4>Exploring Dictionaries and Lists Full of Data in Python</h4>
+<h4 id="exploring-dictionaries-and-lists-full-of-data-in-python">Exploring Dictionaries and Lists Full of Data in Python<a class="headerlink" href="#exploring-dictionaries-and-lists-full-of-data-in-python" title="Permanent link">&para;</a></h4>
 <p>You can download the complete Conti dataset from
 <a href="https://ddosecrets.com/wiki/Conti_ransomware_chats">https://ddosecrets.com/wiki/Conti_ransomware_chats</a>.
 However, for this section, you&rsquo;ll use just one file from the dataset,
@@ -914,7 +914,7 @@ extracted from a chat system called RocketChat.</p>
 Open a terminal, change to the folder where you stored this file, and
 open a Python interpreter. Load this file into a dictionary with the
 following commands:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">json</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;2022-02-24-general.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="o">...</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="o">...</span>
@@ -1041,7 +1041,7 @@ get its value by putting <code>key</code>
 inside the square brackets. To find
 out what type of data that is, then, just pass the value into the
 <code>type()</code> function.</p>
-<h4>Selecting Values in Dictionaries and Lists</h4>
+<h4 id="selecting-values-in-dictionaries-and-lists">Selecting Values in Dictionaries and Lists<a class="headerlink" href="#selecting-values-in-dictionaries-and-lists" title="Permanent link">&para;</a></h4>
 <p>When working with datasets, you often end up with structures like this:
 a mess of dictionaries and lists that you need to make sense of. Being
 able to select the exact values you&rsquo;re looking for is an important
@@ -1095,7 +1095,7 @@ from the Russian internet. Rumors spread that PornHub, a popular
 American porn website, would block access to Russian users (though this
 didn&rsquo;t happen). This same user followed up their first post with &ldquo;That&rsquo;s
 it, we&rsquo;re done,&rdquo; and then &ldquo;They will take away our last joys!&rdquo;</p>
-<h4>Analyzing Data Stored in Dictionaries and Lists</h4>
+<h4 id="analyzing-data-stored-in-dictionaries-and-lists">Analyzing Data Stored in Dictionaries and Lists<a class="headerlink" href="#analyzing-data-stored-in-dictionaries-and-lists" title="Permanent link">&para;</a></h4>
 <p>Whenever I work with any sort of structured data, I find myself looping
 through a list of dictionaries and selecting specific pieces of data. As
 long as you understand its structure, you can write your own similar
@@ -1231,7 +1231,7 @@ RocketChat server, on the day Russia invaded Ukraine in 2022. The user
 same concepts would work with millions or billions of messages or with
 data representing any sort of information.</p>
 <blockquote>
-<h5>REVELATIONS IN THE CONTI DATASET</h5>
+<h5 id="revelations-in-the-conti-dataset">REVELATIONS IN THE CONTI DATASET<a class="headerlink" href="#revelations-in-the-conti-dataset" title="Permanent link">&para;</a></h5>
 <p>This dataset includes far more chat logs than just a few messages worrying about a porn site getting blocked. The example I used in this section included the chat logs for the #general channel for a single day, but the logs for this RocketChat server span from July 24, 2021, to February 26, 2022. The leak also includes many logs from the chat service known as Jabber, including some where Conti hackers discuss hacking a contributor to the OSINT-based investigative journalism group Bellingcat. The hackers were hoping to find information about Alexei Navalny, the imprisoned Russian opposition leader who survived an FSB assassination attempt.</p>
 <p>The anonymous Ukrainian researcher who leaked the Conti dataset told CNN, “I cannot shoot anything, but I can fight with a keyboard and mouse.” According to CNN, a few weeks after leaking the data, the researcher successfully slipped out of Ukraine during Russia’s invasion, laptop in hand.</p>
 <p>From reading the chat logs, I learned that many of the Conti hackers are Russian ultranationalists. Many of them believe Putin’s conspiratorial lies about Ukraine, like that it’s run by a “neo-Nazi junta,” while at the same time making antisemitic comments about Volodymyr Zelenskyy, Ukraine’s Jewish president. You can see my full reporting on this dataset at <a href="https://theintercept.com/2022/03/14/russia-ukraine-conti-russian-hackers/">https://theintercept.com/2022/03/14/russia-ukraine-conti-russian-hackers/</a>.</p>
@@ -1244,7 +1244,7 @@ writing Python scripts to help you analyze data.</p>
 <p>Now that you&rsquo;re familiar with data structures that combine dictionaries
 and lists, it&rsquo;s time to create your own to map out the CSV files in
 BlueLeaks.</p>
-<h3>Exercise 8-5: Map Out the CSVs in BlueLeaks</h3>
+<h3 id="exercise-8-5-map-out-the-csvs-in-blueleaks">Exercise 8-5: Map Out the CSVs in BlueLeaks<a class="headerlink" href="#exercise-8-5-map-out-the-csvs-in-blueleaks" title="Permanent link">&para;</a></h3>
 <p>Each folder in BlueLeaks includes data from a single hacked law
 enforcement website in the form of hundreds of CSV files. These files
 contain some of the most interesting information in all of BlueLeaks,
@@ -1281,9 +1281,9 @@ features to that code and run it again. It&rsquo;s good practice to write code
 in small batches, pausing frequently to test that it works as you
 expect. This will help you catch bugs early, making the process of
 debugging much simpler.</p>
-<h4>Accept a Command Line Argument</h4>
+<h4 id="accept-a-command-line-argument">Accept a Command Line Argument<a class="headerlink" href="#accept-a-command-line-argument" title="Permanent link">&para;</a></h4>
 <p>Create an <em>exercise-8-5.py</em> file and enter the Python template:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">pass</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -1295,11 +1295,11 @@ in Exercise 8-2, let&rsquo;s use Click to pass in the path as a command line
 argument, <code>blueleaks_path</code>. To
 do so, make the following modifications to your code (the added syntax
 is highlighted in bold):</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;blueleaks_path is: </span><span class="si">{</span><span class="n">blueleaks_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -1331,16 +1331,16 @@ blueleaks_path is: test-path
 </code></pre></div>
 
 <p>If your output looks like this, everything is working correctly so far.</p>
-<h4>Loop Through the BlueLeaks Folders</h4>
+<h4 id="loop-through-the-blueleaks-folders">Loop Through the BlueLeaks Folders<a class="headerlink" href="#loop-through-the-blueleaks-folders" title="Permanent link">&para;</a></h4>
 <p>Now that you can use the <code>blueleaks_path</code> CLI argument, make the following
 modifications to your code to have it loop through all of the folders it
 finds in that path:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
         <span class="n">blueleaks_folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
@@ -1386,17 +1386,17 @@ folder, like <em>bostonbric</em>, and the <code>blueleaks_folder_path</code> var
 that folder, like <em>/Volumes/datasets/BlueLeaks-extracted/bostonbric</em>.
 When you run this on your own computer, you may see these values in a
 different order than what&rsquo;s shown here.</p>
-<h4>Fill Up the Dictionary</h4>
+<h4 id="fill-up-the-dictionary">Fill Up the Dictionary<a class="headerlink" href="#fill-up-the-dictionary" title="Permanent link">&para;</a></h4>
 <p>You now have a script that accepts <code>blueleaks_path</code> as an argument and then loops through
 every folder in that path. Adding the code in bold creates the
 <code>csv_to_folders</code> dictionary
 and starts to fill it up with data:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
     <span class="n">csv_to_folders</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -1468,18 +1468,18 @@ yet using the <code>print()</code>
 function anywhere. The code is simply creating the
 <code>csv_to_folders</code> dictionary
 and filling it up with data.</p>
-<h4>Display the Output</h4>
+<h4 id="display-the-output">Display the Output<a class="headerlink" href="#display-the-output" title="Permanent link">&para;</a></h4>
 <p>By the time the previous version of the script runs, the
 <code>csv_to_folders</code> dictionary
 should contain a complete set of CSV filenames, mapped to the BlueLeaks
 sites where they were found. The following code should show you what the
 program found:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
     <span class="n">csv_to_folders</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -1543,7 +1543,7 @@ entire folder structures using <code>os.walk()</code>, and look up information
 about the files and folders you find. In the
 next section, you&rsquo;ll learn how to actually read the contents of a file
 you find and create new files yourself.</p>
-<h3>Reading and Writing Files</h3>
+<h3 id="reading-and-writing-files">Reading and Writing Files<a class="headerlink" href="#reading-and-writing-files" title="Permanent link">&para;</a></h3>
 <p>To follow the rest of this book, you&rsquo;ll need to know one more major
 Python concept: how to read and write files. During a data
 investigation, you&rsquo;ll almost certainly need to read the contents of
@@ -1556,7 +1556,7 @@ specify the <em>mode</em>&mdash;that is, whether you&rsquo;re planning on <em>re
 or <em>writing</em> to this file. To open an existing file and access its
 contents, open it for reading using mode <code>r</code>. To create a new file and put data in
 it, open it for writing using mode <code>w</code>.</p>
-<h4>Opening Files</h4>
+<h4 id="opening-files">Opening Files<a class="headerlink" href="#opening-files" title="Permanent link">&para;</a></h4>
 <p>To prepare to work with a file, whether for writing or reading, you use
 the built-in Python function <code>open()</code>. To open it for reading, you use the
 following code:</p>
@@ -1591,7 +1591,7 @@ file called <em>output.txt</em> and writing the string <code>hello world</code> 
 and <code>f.read()</code> and
 <code>f.readlines()</code> to read from
 files.</p>
-<h4>Writing Lines to a File</h4>
+<h4 id="writing-lines-to-a-file">Writing Lines to a File<a class="headerlink" href="#writing-lines-to-a-file" title="Permanent link">&para;</a></h4>
 <p>Text files are made up of a series of individual characters. Consider a
 text file with these contents:</p>
 <div class="codehilite"><pre><span></span><code>Hello World
@@ -1634,7 +1634,7 @@ Hola Mundo
 
 <p>If you had written the same code but without the newlines, the output
 would have been <code>Hello WorldHola Mundo</code>, with no line breaks.</p>
-<h4>Reading Lines from a File</h4>
+<h4 id="reading-lines-from-a-file">Reading Lines from a File<a class="headerlink" href="#reading-lines-from-a-file" title="Permanent link">&para;</a></h4>
 <p>Run the following command to read the file you just created:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="o">...</span>     <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -1684,7 +1684,7 @@ characters on each line:</p>
 
 <p>You&rsquo;ll practice the basics of how to read and write files in Python in
 the following exercise.</p>
-<h3>Exercise 8-6: Practice Reading and Writing Files</h3>
+<h3 id="exercise-8-6-practice-reading-and-writing-files">Exercise 8-6: Practice Reading and Writing Files<a class="headerlink" href="#exercise-8-6-practice-reading-and-writing-files" title="Permanent link">&para;</a></h3>
 <p>In Exercise 7-5, you wrote a function that converts a string to an
 alternating caps version, like <code>This book is amazing</code> to <code>ThIs bOoK Is aMaZiNg</code>. To practice your newfound reading and
 writing files, in this exercise, you&rsquo;ll write a script to create an
@@ -1704,9 +1704,9 @@ implements this iNcReDiBlY uSeFuL command line program.</p>
 7-5 into a new Python script called <em>exercise-8-6.py</em>. Next, make the
 modifications highlighted in bold here (or copy the final script at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-6.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-8/exercise-8-6.py</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
-<span class="k">def</span> <span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
     <span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1724,7 +1724,7 @@ modifications highlighted in bold here (or copy the final script at
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;input_filename&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_filename&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="n">output_filename</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="n">output_filename</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts a text file to an aLtErNaTiNg cApS version&quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -1784,7 +1784,7 @@ No mOrE; aNd bY A SlEeP, tO SaY We eNd
 file. I then used <code>cat</code> to
 display the contents of that new file, which is indeed an alternating
 caps version of Hamlet&rsquo;s soliloquy.</p>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>Congratulations on making it through a crash course in the fundamentals
 of Python programming! You&rsquo;ve learned how to bring extra functionality
 to your scripts with built-in and third-party Python modules. You&rsquo;ve

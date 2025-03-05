@@ -64,7 +64,7 @@ converts those words into text that you can search or copy and paste.</p>
 using Docker and Docker Compose, the software required for running
 Aleph. In the second half, you&rsquo;ll use your new Docker skills to run an
 Aleph server, then index and search part of the BlueLeaks dataset.</p>
-<h3>Introducing Docker and Linux Containers</h3>
+<h3 id="introducing-docker-and-linux-containers">Introducing Docker and Linux Containers<a class="headerlink" href="#introducing-docker-and-linux-containers" title="Permanent link">&para;</a></h3>
 <p>Docker is the most popular software for running <em>Linux containers</em>, a
 type of software package. Linux containers can organize ready-to-go
 Linux software&mdash;complete with all of its dependencies, configuration,
@@ -112,7 +112,7 @@ Desktop. Linux users, turn to Exercise 5-2 to install Docker Engine.</p>
 recommend it for this chapter. Without a VM, Docker will be free to use
 all of your computer&rsquo;s memory and processors, which will make indexing
 datasets in Aleph much faster.</em></p>
-<h3>Exercise 5-1: Initialize Docker Desktop on Windows and macOS</h3>
+<h3 id="exercise-5-1-initialize-docker-desktop-on-windows-and-macos">Exercise 5-1: Initialize Docker Desktop on Windows and macOS<a class="headerlink" href="#exercise-5-1-initialize-docker-desktop-on-windows-and-macos" title="Permanent link">&para;</a></h3>
 <p>When you installed Dangerzone in Exercise 1-3, Docker Desktop also
 should have been installed, since Dangerzone requires it. Confirm that
 Docker Desktop is installed by checking whether your <em>Applications</em>
@@ -156,7 +156,7 @@ This message shows that your installation appears to be working correctly.
 
 <p>Your computer is ready to run Linux containers. Skip to the Running
 Containers with Docker section on page 123.</p>
-<h3>Exercise 5-2: Initialize Docker Engine on Linux</h3>
+<h3 id="exercise-5-2-initialize-docker-engine-on-linux">Exercise 5-2: Initialize Docker Engine on Linux<a class="headerlink" href="#exercise-5-2-initialize-docker-engine-on-linux" title="Permanent link">&para;</a></h3>
 <p>Follow the detailed instructions for Server rather than Desktop at
 <a href="https://docs.docker.com/engine/install/">https://docs.docker.com/engine/install/</a>
 to install Docker Engine for your version of Linux. In Ubuntu, the
@@ -200,10 +200,10 @@ the <code>docker-compose</code> command:</p>
 
 <p>Your computer is now ready to run Linux containers.</p>
 <blockquote>
-<h4>PODMAN</h4>
+<h4 id="podman">PODMAN<a class="headerlink" href="#podman" title="Permanent link">&para;</a></h4>
 <p>Podman (<a href="https://podman.io">https://podman.io</a> is another software solution for running Linux containers. It’s lightweight and doesn’t require root access, which makes it more secure than Docker. I prefer Podman—in fact, Dangerzone for Linux uses it instead of Docker. However, Docker is more popular, and some containers that work in Docker may not run properly in Podman. I recommend sticking with Docker while you follow along with this chapter. If you become a Linux container nerd, you can try out Podman on your own later.</p>
 </blockquote>
-<h3>Running Containers with Docker</h3>
+<h3 id="running-containers-with-docker">Running Containers with Docker<a class="headerlink" href="#running-containers-with-docker" title="Permanent link">&para;</a></h3>
 <p>The <code>docker</code> command you&rsquo;ve
 just installed allows you to run Linux containers on your computer. In
 this section you&rsquo;ll learn how to use this command to open a shell inside
@@ -214,7 +214,7 @@ your container. This foundational understanding of Docker will prepare
 you to run Docker containers in Exercise 5-3 and help you troubleshoot
 any problems you later encounter with Aleph.</p>
 <p><strong>NOTE</strong> <em>For additional information on Docker commands, run <code>docker help</code> or check the documentation at <a href="https://docs.docker.com">https://docs.docker.com</a>.</em></p>
-<h4>Running an Ubuntu Container</h4>
+<h4 id="running-an-ubuntu-container">Running an Ubuntu Container<a class="headerlink" href="#running-an-ubuntu-container" title="Permanent link">&para;</a></h4>
 <p>You&rsquo;ll begin by learning how to run a Linux container with the Ubuntu
 operating system in it. People often base more complicated container
 images on the Ubuntu container image to access all Ubuntu software that
@@ -264,7 +264,7 @@ root@e8888f73a106:/#
 container to persist when you rerun the container image, you need to use
 volumes, as we&rsquo;ll discuss in Mounting and Removing Volumes on
 page 125.</p>
-<h4>Listing and Killing Containers</h4>
+<h4 id="listing-and-killing-containers">Listing and Killing Containers<a class="headerlink" href="#listing-and-killing-containers" title="Permanent link">&para;</a></h4>
 <p>If you&rsquo;ve exited your Ubuntu container, run a new one. With that
 container running in the background, open a second terminal window and
 run the <code>docker ps</code> command.
@@ -320,7 +320,7 @@ Total reclaimed space: 5B
 <p>This displays the container ID, a long string of random-looking text,
 for each container that&rsquo;s deleted. In my case, I deleted a single
 container.</p>
-<h4>Mounting and Removing Volumes</h4>
+<h4 id="mounting-and-removing-volumes">Mounting and Removing Volumes<a class="headerlink" href="#mounting-and-removing-volumes" title="Permanent link">&para;</a></h4>
 <p>Containers support <em>volumes</em>, which you can think of as folders in your
 container designed to store persistent data. You can use volumes to save
 changes you&rsquo;ve made to your container after you quit and remove it.</p>
@@ -490,7 +490,7 @@ acticaz                kcpers                  publicsafetycadets
 </code></pre></div>
 
 <p><strong>NOTE</strong> <em>You can learn more about volumes and bind mounts at <a href="https://docs.docker.com/storage/">https://docs.docker.com/storage/</a>.</em></p>
-<h4>Passing Environment Variables</h4>
+<h4 id="passing-environment-variables">Passing Environment Variables<a class="headerlink" href="#passing-environment-variables" title="Permanent link">&para;</a></h4>
 <p>You can also use environment variables, introduced in Chapter 4, to pass sensitive information like database
 credentials into containers. When starting up a container, you pass an
 environment variable into it using the <code>-e variable_name = value</code> (the <code>-e</code> is short for <code>--env</code>) arguments. Programs in the container
@@ -510,7 +510,7 @@ yourefired
 
 <p>You&rsquo;ll practice passing environment variables to containers further in
 Exercise 5-3.</p>
-<h4>Running Server Software</h4>
+<h4 id="running-server-software">Running Server Software<a class="headerlink" href="#running-server-software" title="Permanent link">&para;</a></h4>
 <p>You can also run robust, fully configured software on the operating
 systems running in containers. This technique is mostly used to access
 <em>server software</em>, software to which you can connect over a network
@@ -604,7 +604,7 @@ container.</p>
 your new understanding of running server software to run a WordPress
 website in Exercise 5-3.</p>
 <p><strong>NOTE</strong> <em>For more information about Jupyter Notebook, visit <a href="https://jupyter.org">https://jupyter.org</a>, and for thorough documentation on running Jupyter Notebook in Docker, see <a href="https://jupyter-docker-stacks.readthedocs.io">https://jupyter-docker-stacks.readthedocs.io</a>.</em></p>
-<h4>Freeing Up Disk Space</h4>
+<h4 id="freeing-up-disk-space">Freeing Up Disk Space<a class="headerlink" href="#freeing-up-disk-space" title="Permanent link">&para;</a></h4>
 <p>Docker images take up a lot of disk space. To free up space quickly, use
 the following command to delete all of the container images you&rsquo;ve
 downloaded from Docker Hub and other data that Docker stores (besides
@@ -615,7 +615,7 @@ volumes):</p>
 <p>Since this command doesn&rsquo;t delete volumes, it won&rsquo;t delete any of your
 important data. The next time you use <code>docker run</code> commands, you&rsquo;ll just redownload the
 container images you need from Docker Hub.</p>
-<h3>Exercise 5-3: Run a WordPress Site with Docker Compose</h3>
+<h3 id="exercise-5-3-run-a-wordpress-site-with-docker-compose">Exercise 5-3: Run a WordPress Site with Docker Compose<a class="headerlink" href="#exercise-5-3-run-a-wordpress-site-with-docker-compose" title="Permanent link">&para;</a></h3>
 <p>More complicated software like Aleph requires running multiple
 containers that interact with each other. To do that, you&rsquo;ll need to
 learn to use Docker Compose, as the <code>docker run</code> command&rsquo;s arguments quickly become
@@ -635,7 +635,7 @@ Aleph server.</p>
 using it to run WordPress. You won&rsquo;t need WordPress for the remainder of
 this book, but here it serves as an example to prepare you for using
 Docker Compose with Aleph.</p>
-<h4>Make a docker-compose.yaml File</h4>
+<h4 id="make-a-docker-composeyaml-file">Make a docker-compose.yaml File<a class="headerlink" href="#make-a-docker-composeyaml-file" title="Permanent link">&para;</a></h4>
 <p>The YAML file format
 (<a href="https://yaml.org">https://yaml.org</a>)
 is popular among programmers for storing configuration files because
@@ -703,7 +703,7 @@ when trying to connect to the database.</p>
 <p><strong>NOTE</strong> <em>The WordPress </em>docker-compose.yaml<em> file in this example is a slightly modified version of a sample file in the Docker
 documentation at <a href="https://docs.docker.com/samples/wordpress/">https://docs.docker.com/samples/wordpress/</a>.
 See the documentation for a more thorough description of how to use Docker Compose.</em></p>
-<h4>Start Your WordPress Site</h4>
+<h4 id="start-your-wordpress-site">Start Your WordPress Site<a class="headerlink" href="#start-your-wordpress-site" title="Permanent link">&para;</a></h4>
 <p>In your terminal, change to the folder you created for this exercise and
 run the following command to start both containers at the same time:</p>
 <div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up
@@ -752,7 +752,7 @@ container.</p>
 <strong>CTRL</strong>-C to shut down the containers. Now you&rsquo;re ready to use
 your new Docker and Docker Compose skills to make your datasets
 searchable with Aleph.</p>
-<h3>Introducing Aleph</h3>
+<h3 id="introducing-aleph">Introducing Aleph<a class="headerlink" href="#introducing-aleph" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><em>Truth cannot penetrate a closed mind. If all places in the universe
 are in the Aleph, then all stars, all lamps, all sources of light are
@@ -798,7 +798,7 @@ data with a third party: OCCRP. That&rsquo;s why I help run a private Aleph
 server for The Intercept. You won&rsquo;t use OCCRP&rsquo;s public Aleph server
 further in this book. Instead, in Exercise 5-4, you&rsquo;ll run a small Aleph
 server and bring up Aleph containers on your own laptop.</p>
-<h3>Exercise 5-4: Run Aleph Locally in Linux Containers</h3>
+<h3 id="exercise-5-4-run-aleph-locally-in-linux-containers">Exercise 5-4: Run Aleph Locally in Linux Containers<a class="headerlink" href="#exercise-5-4-run-aleph-locally-in-linux-containers" title="Permanent link">&para;</a></h3>
 <p>This exercise prepares you to run your own server directly on your
 computer with Docker Compose. Instead of accessing Aleph at
 <a href="https://data.occrp.org">https://data.occrp.org</a>,
@@ -864,7 +864,7 @@ you&rsquo;ll need to run these commands again to continue using Elasticsearch.
 (Refer to the Increasing Elasticsearch Memory in Docker
 Desktop box to speed up this process in the future.)</p>
 <blockquote>
-<h4>INCREASING ELASTICSEARCH MEMORY IN DOCKER DESKTOP</h4>
+<h4 id="increasing-elasticsearch-memory-in-docker-desktop">INCREASING ELASTICSEARCH MEMORY IN DOCKER DESKTOP<a class="headerlink" href="#increasing-elasticsearch-memory-in-docker-desktop" title="Permanent link">&para;</a></h4>
 <p>If you’re using macOS, you’ll need to change settings before starting the Aleph containers. Instead of referring to this chapter to remember what commands to run, store them as the following shell script (which you can also find at <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-5/aleph/fix-es-memory.sh">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-5/aleph/fix-es-memory.sh</a>):</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--privileged<span class="w"> </span>--pid<span class="o">=</span>host<span class="w"> </span>alpine:edge<span class="w"> </span><span class="se">\</span>
@@ -901,7 +901,7 @@ for this command to completely finish; you&rsquo;ll know it&rsquo;s done when th
 program stops displaying output and you end up back at your terminal&rsquo;s
 command prompt.</p>
 <p><strong>NOTE</strong> <em>For more detailed documentation for Aleph, see <a href="https://docs.aleph.occrp.org">https://docs.aleph.occrp.org</a>.</em></p>
-<h3>Using Aleph’s Web and Command Line Interfaces</h3>
+<h3 id="using-alephs-web-and-command-line-interfaces">Using Aleph’s Web and Command Line Interfaces<a class="headerlink" href="#using-alephs-web-and-command-line-interfaces" title="Permanent link">&para;</a></h3>
 <p>Now that you have a local Aleph server, you can explore its two
 different interfaces: the web interface, which you&rsquo;ll use to investigate
 datasets, and the CLI interface, which you&rsquo;ll use to index new datasets
@@ -963,7 +963,7 @@ run <code>docker-compose up</code> to
 start the containers again, all the data in Aleph&mdash;including any
 datasets that you&rsquo;ve added to it&mdash;will still be there, because that
 data is stored in Docker volumes, making it persistent.</p>
-<h3>Indexing Data in Aleph</h3>
+<h3 id="indexing-data-in-aleph">Indexing Data in Aleph<a class="headerlink" href="#indexing-data-in-aleph" title="Permanent link">&para;</a></h3>
 <p>Adding data to Aleph is called <em>indexing</em>. By loading and processing
 every file in a dataset, Aleph allows you to extract useful information,
 which you can browse and search via its web-based user interface.</p>
@@ -985,7 +985,7 @@ file with an attachment that contains another ZIP file, and so on.</p>
 of the dataset and the computational resources available to your Aleph
 server. In Exercise 5-5, you&rsquo;ll index a single BlueLeaks folder called
 <em>icefishx</em>.</p>
-<h3>Exercise 5-5: Index a BlueLeaks Folder in Aleph</h3>
+<h3 id="exercise-5-5-index-a-blueleaks-folder-in-aleph">Exercise 5-5: Index a BlueLeaks Folder in Aleph<a class="headerlink" href="#exercise-5-5-index-a-blueleaks-folder-in-aleph" title="Permanent link">&para;</a></h3>
 <p>The <em>icefishx</em> folder contains data from an American police intelligence
 network called Intelligence Communications Enterprise for Information
 Sharing and Exchange (ICEFISHX), a partnership between law enforcement
@@ -994,7 +994,7 @@ because it covers the state where Minneapolis cop Derek Chauvin murdered
 George Floyd, sparking the 2020 Black Lives Matter uprising. Searching
 this dataset for <em>George Floyd</em> might reveal some interesting internal
 docs about police violence or the protests that it triggered.</p>
-<h4>Mount Your Datasets into the Aleph Shell</h4>
+<h4 id="mount-your-datasets-into-the-aleph-shell">Mount Your Datasets into the Aleph Shell<a class="headerlink" href="#mount-your-datasets-into-the-aleph-shell" title="Permanent link">&para;</a></h4>
 <p>If you don&rsquo;t already have Aleph running, change to your <em>aleph</em> folder
 and enter the following command:</p>
 <div class="codehilite"><pre><span></span><code>docker-compose<span class="w"> </span>up
@@ -1035,7 +1035,7 @@ read-only mode, preventing the container from modifying anything on the
 USB disk.</p>
 <p>Now that you have access to your datasets within the Aleph shell, you&rsquo;ll
 index the <em>icefishx</em> data.</p>
-<h4>Index the icefishx Folder</h4>
+<h4 id="index-the-icefishx-folder">Index the icefishx Folder<a class="headerlink" href="#index-the-icefishx-folder" title="Permanent link">&para;</a></h4>
 <p>To index a dataset, you use the <code>aleph crawldir</code> command. Aleph&rsquo;s use of the term
 <em>crawl</em> means to open the folder and index each file in it, then open
 each subfolder it finds and index each file in that, and so on, until
@@ -1068,7 +1068,7 @@ codes in Tesseract&rsquo;s documentation, see <a href="https://tesseract-ocr.git
 half to index on my Mac. It also used about 17GB worth of Docker
 volumes. Indexing larger quantities of data could take days and require
 much more disk space.</p>
-<h4>Check Indexing Status</h4>
+<h4 id="check-indexing-status">Check Indexing Status<a class="headerlink" href="#check-indexing-status" title="Permanent link">&para;</a></h4>
 <p>After <code>aleph crawldir</code> has
 finished running, while you&rsquo;re waiting for the indexing to complete, try
 a few more Aleph commands to query your Aleph server and check the
@@ -1153,7 +1153,7 @@ indexing is complete, but it&rsquo;s best to wait for the full index to finish
 before digging too deep. If you don&rsquo;t, you&rsquo;ll search only the data
 that&rsquo;s been indexed to that point, so your searches might miss important
 documents.</em></p>
-<h3>Explore BlueLeaks with Aleph</h3>
+<h3 id="explore-blueleaks-with-aleph">Explore BlueLeaks with Aleph<a class="headerlink" href="#explore-blueleaks-with-aleph" title="Permanent link">&para;</a></h3>
 <p>Once you&rsquo;ve finished indexing the <em>icefishx</em> folder, navigate to the
 ICEFISHX dataset you&rsquo;ve just imported in the Aleph web interface. It
 should be listed under the Investigations link at the top of the page.
@@ -1192,7 +1192,7 @@ example, on someone&rsquo;s name or email&mdash;you should be taken to search
 results that list all of the documents mentioning that person.</p>
 <p>When you&rsquo;re done exploring <em>icefishx</em>, try indexing additional folders
 in BlueLeaks or even the entire <em>BlueLeaks-extracted</em> folder.</p>
-<h3>Additional Aleph Features</h3>
+<h3 id="additional-aleph-features">Additional Aleph Features<a class="headerlink" href="#additional-aleph-features" title="Permanent link">&para;</a></h3>
 <p>There&rsquo;s a lot more to Aleph than what we&rsquo;ve covered so far. This section
 will introduce a few of the other cool things it can do, which you&rsquo;ll
 find useful in the future as you continue to analyze hacked and leaked
@@ -1270,7 +1270,7 @@ interested in, try downloading it and indexing it in Aleph. Explore
 searching multiple datasets at once as well as using the
 cross-referencing feature. Aleph&rsquo;s documentation is available at
 <a href="https://docs.aleph.occrp.org">https://docs.aleph.occrp.org</a>.</p>
-<h3>Dedicated Aleph Servers</h3>
+<h3 id="dedicated-aleph-servers">Dedicated Aleph Servers<a class="headerlink" href="#dedicated-aleph-servers" title="Permanent link">&para;</a></h3>
 <p>Running Aleph in containers on your computer works well if you want to
 search just a few small datasets yourself. However, to index a large
 amount of data (such as all of BlueLeaks) that will stretch your
@@ -1301,14 +1301,14 @@ the data it contains. For the highest-security datasets, you&rsquo;ll have to
 download Linux containers on a computer with internet access, export the
 datasets, and import them on an air-gapped server.</p>
 <blockquote>
-<h4>INTELLA AND DATASHARE</h4>
+<h4 id="intella-and-datashare">INTELLA AND DATASHARE<a class="headerlink" href="#intella-and-datashare" title="Permanent link">&para;</a></h4>
 <p>You can use software besides Aleph to help you make datasets searchable. As mentioned in Chapter 1, the first leaked dataset I worked on was the Snowden Archive. At that time, Aleph didn’t exist. To index and search the Snowden Archive, we used proprietary software called Intella, installed on air-gapped Windows laptops. Intella, developed by Vound Software, is investigation software that was designed for law firms and law enforcement to explore large datasets, like email dumps or the contents of seized computers.</p>
 <p>The Intercept used to have a license for Intella Connect, a web-based version of Intella. This software has a few advantages over Aleph: it rarely has technical issues, it comes with tech support, and it allows you to index and search large datasets faster. Like Aleph, Intella Connect supports collaborating with multiple users. After Russia invaded Ukraine in 2022 and hackers started
 dumpingnterabytes of data from Russian companies online, I began downloading and indexing all of these datasets into Intella Connect. I quickly found that this project was far too complicated for The Intercept alone to handle, especially considering that all of the data was in Russian. I helped spearhead a project to invite outside journalists who spoke Russian or were interested in these datasets to use our Intella service. This project grew into a major international collaboration with OCCRP and dozens of reporters around the world, including both Russian and Ukrainian journalists, to research the Russian datasets. The project’s collaborators used both Intella Connect and OCCRP’s Aleph server, and we organized our findings on an internal wiki.</p>
 <p>The Intercept has now decided to stop paying for Intella Connect and uses Aleph exclusively instead. Intella has some disadvantages: it doesn’t have Aleph’s ability to cross-reference between datasets and map out relationships between entities, it’s quite expensive, and it requires Windows.</p>
 <p>Another open source tool for indexing datasets is Datashare, developed by ICIJ, the group that worked in a coalition on the Panama Papers dataset along with OCCRP. Datashare is similar to Aleph but is designed for a single user to run it locally on their computer, rather than on a server. Like Aleph, Datashare runs inside of Docker containers. While it’s a very promising project, I ran into issues trying to install it at the time of writing. Because it’s open source and actively developed, however, I expect this will improve over time. You can read more about Datashare at <a href="https://datashare.icij.org">https://datashare.icij.org</a> and <a href="https://github.com/ICIJ/datashare">https://github.com/ICIJ/datashare</a>.</p>
 </blockquote>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>In this chapter, you&rsquo;ve learned how to run software in Linux containers
 using Docker, then applied those skills to run Aleph on your computer
 and index the <em>icefishx</em> folder from BlueLeaks, making it searchable. A

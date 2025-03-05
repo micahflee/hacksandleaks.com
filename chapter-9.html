@@ -60,7 +60,7 @@ years ago, but there are over a hundred other folders in the dataset
 full of newsworthy revelations. By the end of this chapter, you&rsquo;ll have
 the tools to continue investigating these folders, as well as similar
 datasets loaded with CSVs.</p>
-<h3>Installing Spreadsheet Software</h3>
+<h3 id="installing-spreadsheet-software">Installing Spreadsheet Software<a class="headerlink" href="#installing-spreadsheet-software" title="Permanent link">&para;</a></h3>
 <p>The most user-friendly way to view the contents of a CSV file is to open
 it using spreadsheet software such as LibreOffice Calc, Microsoft Excel,
 Apple Numbers, or Google Sheets. Spreadsheet software is a great option
@@ -94,7 +94,7 @@ or line graphs. None of these features are supported in CSV files,
 though, so I won&rsquo;t discuss them in this book.</p>
 <p>Once you have your spreadsheet software installed, you&rsquo;re ready to learn
 more about the structure of CSV files.</p>
-<h3>Introducing the CSV File Format</h3>
+<h3 id="introducing-the-csv-file-format">Introducing the CSV File Format<a class="headerlink" href="#introducing-the-csv-file-format" title="Permanent link">&para;</a></h3>
 <p>You can think of spreadsheets as tables of data. The top row normally
 has headers for each column, and the rest of the rows represent data
 that matches those headers. CSV is the simplest spreadsheet format. You
@@ -229,7 +229,7 @@ databases in Chapter 12; for now, you&rsquo;ll
 work with the exported CSVs.)</p>
 <p>Now that you understand a bit about the CSV file format, let&rsquo;s take a
 look at some real CSV data from BlueLeaks.</p>
-<h3>Exploring CSV Files with Spreadsheet Software and Text Editors</h3>
+<h3 id="exploring-csv-files-with-spreadsheet-software-and-text-editors">Exploring CSV Files with Spreadsheet Software and Text Editors<a class="headerlink" href="#exploring-csv-files-with-spreadsheet-software-and-text-editors" title="Permanent link">&para;</a></h3>
 <p>In your graphical file browser (such as Explorer in Windows or Finder in
 macOS), browse to the <em>BlueLeaks-extracted</em> folder on your USB disk.
 You&rsquo;ll start by examining the <em>dediac</em> subfolder, which contains data
@@ -328,14 +328,14 @@ dictionaries, allowing you to manipulate it in any way you choose, as
 you&rsquo;ll do later in this chapter.</p>
 <p>Now that you&rsquo;re familiar with the structure of CSVs, you&rsquo;re ready to see
 how I began my investigation into the BlueLeaks dataset.</p>
-<h3>My BlueLeaks Investigation</h3>
+<h3 id="my-blueleaks-investigation">My BlueLeaks Investigation<a class="headerlink" href="#my-blueleaks-investigation" title="Permanent link">&para;</a></h3>
 <p>I didn&rsquo;t even realize that my local police intelligence agency, the
 Northern California Regional Intelligence Center (NCRIC, pronounced
 &ldquo;nick-rick&rdquo;), existed until I discovered it in the BlueLeaks dataset in
 June 2020. In this section I describe how I went about my investigation
 into BlueLeaks, what I discovered in the NCRIC portion of the dataset,
 and a specific revelation I found in one of the NCRIC CSV files.</p>
-<h4>Focusing on a Fusion Center</h4>
+<h4 id="focusing-on-a-fusion-center">Focusing on a Fusion Center<a class="headerlink" href="#focusing-on-a-fusion-center" title="Permanent link">&para;</a></h4>
 <p>After downloading BlueLeaks, I indexed it in The Intercept&rsquo;s Intella
 server to make it easier to search. This allowed me and journalists I
 worked with to quickly search it for keywords and find interesting
@@ -356,7 +356,7 @@ data, because I guessed they were the largest or most active fusion
 centers. I quickly discovered that the <em>ncric</em> folder, one of the
 largest in the dataset, held documents for NCRIC, so that&rsquo;s where I
 decided to focus my digging.</p>
-<h4>Introducing NCRIC</h4>
+<h4 id="introducing-ncric">Introducing NCRIC<a class="headerlink" href="#introducing-ncric" title="Permanent link">&para;</a></h4>
 <p>NCRIC, based in San Francisco, shares information between federal
 agencies, local police departments across Northern California, and
 private industry partners, including tech companies. As I discovered by
@@ -376,7 +376,7 @@ requested NCRIC&rsquo;s help with monitoring the social media accounts of
 protest organizers and, in two instances, with identifying threats
 against white female teenagers who were facing harassment after making
 racist statements and using anti-Black slurs.</p>
-<h4>Investigating a SAR</h4>
+<h4 id="investigating-a-sar">Investigating a SAR<a class="headerlink" href="#investigating-a-sar" title="Permanent link">&para;</a></h4>
 <p>By investigating a row from a CSV file, I found a PDF of a scanned
 letter that turned out to be newsworthy. The letter, written by an
 unhinged San Francisco&ndash;area lawyer to a local district attorney&rsquo;s
@@ -500,14 +500,14 @@ way to easily read the long blocks of text in those CSV cells without
 having to copy and paste them into a text editor. We&rsquo;ll cover that in
 Exercise 9-1, but first, let&rsquo;s have a quick tutorial on how to write
 code that works with CSV files.</p>
-<h3>Reading and Writing CSV Files in Python</h3>
+<h3 id="reading-and-writing-csv-files-in-python">Reading and Writing CSV Files in Python<a class="headerlink" href="#reading-and-writing-csv-files-in-python" title="Permanent link">&para;</a></h3>
 <p>As you learned in Chapter 8, Python modules
 bring extra functionality into the script that you&rsquo;re writing. It&rsquo;s easy
 to load CSVs and turn each row into a Python dictionary using Python&rsquo;s
 built-in <code>csv</code> module. You&rsquo;ll
 need <code>csv</code> for this chapter&rsquo;s
 exercises, so import it using the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 </code></pre></div>
 
 <p>After importing it, you can take advantage of its functionality. The
@@ -575,7 +575,7 @@ same as the headers for the CSV: <code>City</code>, <code>Country</code>, and <c
 to write scripts that make the data hidden in BlueLeaks CSVs easier to
 read and understand.</p>
 <p><strong>NOTE</strong> <em>To learn more about the <code>csv</code> module, you can find the full documentation, including plenty of example code, at <a href="https://docs.python.org/3/library/csv.html">https://docs.python.org/3/library/csv.html</a>.</em></p>
-<h3>Exercise 9-1: Make BlueLeaks CSVs More Readable</h3>
+<h3 id="exercise-9-1-make-blueleaks-csvs-more-readable">Exercise 9-1: Make BlueLeaks CSVs More Readable<a class="headerlink" href="#exercise-9-1-make-blueleaks-csvs-more-readable" title="Permanent link">&para;</a></h3>
 <p>While it&rsquo;s easier to read <em>SARs.csv</em> in a spreadsheet program than in a
 text editor, it&rsquo;s still quite difficult. As mentioned earlier, there are
 91 columns (though most of their values are blank), and some of the text
@@ -608,7 +608,7 @@ following requirements:</p>
 <p>Alternatively, follow along with the rest of this exercise and I&rsquo;ll walk
 you through the programming process. Start with the usual Python script
 template in a file called <em>exercise-9-1.py</em>:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">pass</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -616,15 +616,15 @@ template in a file called <em>exercise-9-1.py</em>:</p>
 </code></pre></div>
 
 <p>Next, you&rsquo;ll modify your script to accept the <code>csv_path</code> argument.</p>
-<h4>Accept the CSV Path as an Argument</h4>
+<h4 id="accept-the-csv-path-as-an-argument">Accept the CSV Path as an Argument<a class="headerlink" href="#accept-the-csv-path-as-an-argument" title="Permanent link">&para;</a></h4>
 <p>Instead of hardcoding the path to a specific CSV, let&rsquo;s use Click to
 accept the path as an argument. Here&rsquo;s the code that does that (with
 modifications shown in bold):</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;csv_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make BlueLeaks CSVs easier to read&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CSV path: </span><span class="si">{</span><span class="n">csv_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -643,16 +643,16 @@ CSV path: some-csv-path.csv
 
 <p>The script just displays the CSV path that was passed in. So far, so
 good.</p>
-<h4>Loop Through the CSV Rows</h4>
+<h4 id="loop-through-the-csv-rows">Loop Through the CSV Rows<a class="headerlink" href="#loop-through-the-csv-rows" title="Permanent link">&para;</a></h4>
 <p>Next, you&rsquo;ll modify the code to open the CSV in <code>csv_path</code>, and, using the <code>csv</code> module, create a
 <code>csv.DictReader()</code> object to
 loop through the rows of that CSV:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">csv</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;csv_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make BlueLeaks CSVs easier to read&quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -699,14 +699,14 @@ the values for that row. So far, the code is simply displaying this
 whole dictionary. This is a good start, but it still doesn&rsquo;t make the
 text much easier to read. To do that, you&rsquo;ll display each field on its
 own row.</p>
-<h4>Display CSV Fields on Separate Lines</h4>
+<h4 id="display-csv-fields-on-separate-lines">Display CSV Fields on Separate Lines<a class="headerlink" href="#display-csv-fields-on-separate-lines" title="Permanent link">&para;</a></h4>
 <p>The following modified code displays each row separately:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">csv</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;csv_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make BlueLeaks CSVs easier to read&quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -793,7 +793,7 @@ it for keywords to learn about the &ldquo;suspicious activity&rdquo; that occurr
 in Northern California from May 6 to June 6, 2020.</p>
 <p>Next we&rsquo;ll move on from SARs to explore another important spreadsheet in
 NCRIC: <em>EmailBuilder.csv</em>.</p>
-<h3>How to Read Bulk Email from Fusion Centers</h3>
+<h3 id="how-to-read-bulk-email-from-fusion-centers">How to Read Bulk Email from Fusion Centers<a class="headerlink" href="#how-to-read-bulk-email-from-fusion-centers" title="Permanent link">&para;</a></h3>
 <p>The primary purpose of fusion centers is to share information between
 local, state, and federal law enforcement agencies. They do this,
 essentially, by sending bulk email to a large list of local police
@@ -816,7 +816,7 @@ use a web browser. In this section, you&rsquo;ll learn to more easily read the
 HTML content of NCRIC&rsquo;s bulk email, find the recipients of each email,
 and find the documents attached to the email messages. Open
 <em>ncric/EmailBuilder.csv</em> in your spreadsheet software to follow along.</p>
-<h4>Lists of Black Lives Matter Demonstrations</h4>
+<h4 id="lists-of-black-lives-matter-demonstrations">Lists of Black Lives Matter Demonstrations<a class="headerlink" href="#lists-of-black-lives-matter-demonstrations" title="Permanent link">&para;</a></h4>
 <p>Most of the intelligence on Black Lives Matter protests flowed through
 NCRIC&rsquo;s Terrorism Liaison Officer (TLO) program, whose purpose is to
 keep the intelligence center&rsquo;s members &ldquo;engaged &amp; knowledgeable about
@@ -859,7 +859,7 @@ a web browser to view it, but before you do that, you may want to read
 the Covering Your Tracks with a VPN Service box to consider
 mitigating what information you might leak by opening it.</p>
 <blockquote>
-<h5>COVERING YOUR TRACKS WITH A VPN SERVICE</h5>
+<h5 id="covering-your-tracks-with-a-vpn-service">COVERING YOUR TRACKS WITH A VPN SERVICE<a class="headerlink" href="#covering-your-tracks-with-a-vpn-service" title="Permanent link">&para;</a></h5>
 <p>The BlueLeaks CSV files are full of HTML code, such as the EmailBody field in the <code>EmailBuilder.csv</code> files. Many of these blocks of HTML include embedded images. If you read through the HTML code in the EmailBody cell in the preceding example, you’ll see that it loads an image hosted on NCRIC’s server at the URL https://ncric.org/html/Picture2.jpg?135653. Viewing HTML from BlueLeaks in a web browser makes it much easier to read and understand compared to trying to read the HTML code directly, but it will also cause your computer to make an internet request to the law enforcement servers themselves. These servers will most likely log your IP address, leaving clues that you’re investigating them.</p>
 <p>For the BlueLeaks dataset, it doesn’t matter much if the fusion center servers track your IP address. It’s not illegal to load images off of law enforcement websites. For more sensitive datasets, however, it’s prudent to hide your IP address from organizations you’re investigating. You can load these images while hiding your real IP address by connecting to a <em>virtual private network (VPN) service</em>, which reroutes your internet traffic through its own server, then forwards your traffic to those websites. This leaves the VPN server’s IP address, rather than your own, in the websites’ web logs.</p>
 <p>For example, say you load the <em>EmailBuilder-6170.html</em> file in your web browser from your home in San Francisco. If you load images hosted on https://ncric.org, a San Francisco IP address from a residential neighborhood will show up in the website’s logs. The site might be able to determine that this IP address belongs to you by sending a data request to your internet service provider, for example. If you first connect to a VPN, however—one in New York, let’s say—then they’ll see a New York IP address from a data center in their logs instead. They’ll still know that someone loaded the image, but it won’t be immediately obvious that <em>you</em> loaded the image. Everyone using that VPN service shares its IP address, making it harder to track down individual users.</p>
@@ -925,7 +925,7 @@ file. The BlueLeaks dataset includes this information about everyone who
 received bulk email through any of the websites. In Exercise 9-3, when
 you read through bulk email found in BlueLeaks, you&rsquo;ll be able to look
 up exactly who received these email messages.</p>
-<h4>“Intelligence” Memos from the FBI and DHS</h4>
+<h4 id="intelligence-memos-from-the-fbi-and-dhs">“Intelligence” Memos from the FBI and DHS<a class="headerlink" href="#intelligence-memos-from-the-fbi-and-dhs" title="Permanent link">&para;</a></h4>
 <p>As mentioned earlier, in addition to detailed lists of upcoming
 protests, NCRIC also frequently forwarded memos from its federal
 partners&mdash;agencies like the FBI and DHS&mdash;to its list of over 14,000
@@ -994,7 +994,7 @@ activity, and it&rsquo;s untethered to any basis in the law.&rdquo;</p>
 especially because of the HTML email bodies. Soon you&rsquo;ll write some code
 to make all of the bulk email easier to read. To do that, first you will
 need to learn the basics of HTML.</p>
-<h3>A Brief HTML Primer</h3>
+<h3 id="a-brief-html-primer">A Brief HTML Primer<a class="headerlink" href="#a-brief-html-primer" title="Permanent link">&para;</a></h3>
 <p>In the following exercise, you&rsquo;ll write some Python code that in turn
 writes some HTML code. This section covers just enough HTML syntax to
 get you through this chapter.</p>
@@ -1065,7 +1065,7 @@ in their own way. For example, you&rsquo;d use <code>&amp;amp;</code> to escape 
 messages in <em>EmailBuilder.csv</em> easier to read by writing a script that
 automatically saves an HTML file for each one. This will also make it
 much simpler for you to find the newsworthy ones.</p>
-<h3>Exercise 9-2: Make Bulk Email Readable</h3>
+<h3 id="exercise-9-2-make-bulk-email-readable">Exercise 9-2: Make Bulk Email Readable<a class="headerlink" href="#exercise-9-2-make-bulk-email-readable" title="Permanent link">&para;</a></h3>
 <p>For this exercise, you&rsquo;ll write a script similar to the one you wrote in
 Exercise 9-1, but instead of displaying text output to the screen,
 you&rsquo;ll save HTML output to files. This allows you to look through a
@@ -1095,7 +1095,7 @@ following requirements:</p>
 <p>Otherwise, follow along with the rest of this exercise and I&rsquo;ll walk you
 through the programming process. Start with the usual Python script
 template in a file called <em>exercise-9-2.py</em>:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">pass</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -1104,15 +1104,15 @@ template in a file called <em>exercise-9-2.py</em>:</p>
 
 <p>Next, you&rsquo;ll modify your script to make the script accept command line
 arguments using Click.</p>
-<h4>Accept the Command Line Arguments</h4>
+<h4 id="accept-the-command-line-arguments">Accept the Command Line Arguments<a class="headerlink" href="#accept-the-command-line-arguments" title="Permanent link">&para;</a></h4>
 <p>The following code has been modified to import the <code>click</code> module and accept some command line
 arguments:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;emailbuilder_csv_path&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_folder_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make bulk email in BlueLeaks easier to read&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Path to EmailBuilder.csv: </span><span class="si">{</span><span class="n">emailbuilder_csv_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output folder path: </span><span class="si">{</span><span class="n">output_folder_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1142,15 +1142,15 @@ Output folder path: output
 </code></pre></div>
 
 <p>As expected, the script displays the values of the two arguments.</p>
-<h4>Create the Output Folder</h4>
+<h4 id="create-the-output-folder">Create the Output Folder<a class="headerlink" href="#create-the-output-folder" title="Permanent link">&para;</a></h4>
 <p>Next, use Python to create the folder in <code>output_folder_path</code> where you&rsquo;ll save the HTML files:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;emailbuilder_csv_path&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_folder_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make bulk emails in BlueLeaks easier to read&quot;&quot;&quot;</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -1173,21 +1173,21 @@ the folder that&rsquo;s already there.</p>
 <p>When you run the complete script at the end of this exercise, you&rsquo;ll be
 able to browse the files in this folder to read through the bulk-email
 messages sent by a fusion center.</p>
-<h4>Define the Filename for Each Row</h4>
+<h4 id="define-the-filename-for-each-row">Define the Filename for Each Row<a class="headerlink" href="#define-the-filename-for-each-row" title="Permanent link">&para;</a></h4>
 <p>The goal of this script is to save an HTML file for each row in the
 spreadsheet. To do this, you&rsquo;ll need to load the CSV, loop through its
 rows, and figure out the filename for each HTML file that you&rsquo;re going
 to save. Next, define the <code>filename</code> variable, naming each HTML file based
 on data that you found in that row. To do so, make the following
 modifications:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">csv</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;emailbuilder_csv_path&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_folder_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make bulk emails in BlueLeaks easier to read&quot;&quot;&quot;</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -1260,7 +1260,7 @@ output/4870_09-05-18 12:57:23_(U--LES) Officer Safety-Welfare Check Bulletin - W
 <p>The output should show a unique filename for each row in the
 <em>EmailBuilder.csv</em> spreadsheet. All you need to do now is actually write
 those HTML files.</p>
-<h4>Write the HTML Version of Each Bulk Email</h4>
+<h4 id="write-the-html-version-of-each-bulk-email">Write the HTML Version of Each Bulk Email<a class="headerlink" href="#write-the-html-version-of-each-bulk-email" title="Permanent link">&para;</a></h4>
 <p>The purpose of saving each row of <em>EmailBuilder.csv</em> as an HTML file is
 to more easily read these bulk-email messages by loading the HTML in a
 web browser. You&rsquo;ll obviously want to see the email body, but it would
@@ -1268,15 +1268,15 @@ also be helpful to display some basic metadata about the email: the date
 it was sent, the subject, and so on. The following code writes the HTML
 files, automatically filling in both the metadata and
 the email body with data from the CSV:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">import</span> <span class="nn">html</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">html</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;emailbuilder_csv_path&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_folder_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make bulk emails in BlueLeaks easier to read&quot;&quot;&quot;</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -1445,7 +1445,7 @@ appropriate <em>EmailBuilder.csv</em> file.</p>
 folders belong to which organizations. Let&rsquo;s fix that by creating a
 spreadsheet that associates each BlueLeaks folder with its organization
 name, website title, and URL.</p>
-<h3>Discovering the Names and URLs of BlueLeaks Sites</h3>
+<h3 id="discovering-the-names-and-urls-of-blueleaks-sites">Discovering the Names and URLs of BlueLeaks Sites<a class="headerlink" href="#discovering-the-names-and-urls-of-blueleaks-sites" title="Permanent link">&para;</a></h3>
 <p>It&rsquo;s obvious what organization some BlueLeaks folders belong to based on
 the folder name. You can reasonably guess that the <em>alabamafusioncenter</em>
 folder has data from the Alabama Fusion Center. But most aren&rsquo;t so
@@ -1588,7 +1588,7 @@ listing all of the sites associated with that folder, we can write a
 script to automatically extract this information and format it as a CSV
 file. This will open the door for you to pick which fusion center you
 want to research&mdash;perhaps there&rsquo;s one in a city near you.</p>
-<h3>Exercise 9-3: Make a CSV of BlueLeaks Sites</h3>
+<h3 id="exercise-9-3-make-a-csv-of-blueleaks-sites">Exercise 9-3: Make a CSV of BlueLeaks Sites<a class="headerlink" href="#exercise-9-3-make-a-csv-of-blueleaks-sites" title="Permanent link">&para;</a></h3>
 <p>The script you write in this exercise will loop through each BlueLeaks
 folder, open its <em>Company.csv</em> file, and save information about the
 organizations whose websites are hosted in that folder into a CSV file
@@ -1620,7 +1620,7 @@ script to do the following:</p>
 <p>Otherwise, the rest of this exercise will walk
 you through the programming process. Start with the usual Python script
 template in a file called <em>exercise-9-3.py</em>:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">pass</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -1628,12 +1628,12 @@ template in a file called <em>exercise-9-3.py</em>:</p>
 </code></pre></div>
 
 <p>Next, modify your script to accept the <code>blueleaks_path</code> and <code>output_csv_path</code> command line arguments:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_csv_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a CSV that describes all the BlueLeaks folders&quot;&quot;&quot;</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -1642,18 +1642,18 @@ template in a file called <em>exercise-9-3.py</em>:</p>
 
 <p>You&rsquo;ve done this enough times at this point that you can safely assume
 the arguments are working properly without testing the script.</p>
-<h4>Open a CSV for Writing</h4>
+<h4 id="open-a-csv-for-writing">Open a CSV for Writing<a class="headerlink" href="#open-a-csv-for-writing" title="Permanent link">&para;</a></h4>
 <p>The simplest way to program this script is to first open a CSV file for
 writing and then loop through each folder in BlueLeaks, adding rows to
 this CSV. Start by just opening the CSV file for writing, using the
 following code:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">csv</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_csv_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a CSV that describes all the BlueLeaks folders&quot;&quot;&quot;</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BlueLeaksFolder&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyID&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyName&quot;</span><span class="p">,</span> <span class="s2">&quot;WebsiteTitle&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">]</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_csv_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_f</span><span class="p">:</span>
@@ -1688,18 +1688,18 @@ BlueLeaksFolder,CompanyID,CompanyName,WebsiteTitle,URL
 </code></pre></div>
 
 <p>You should see that the file currently contains only header rows.</p>
-<h4>Find All the Company.csv Files</h4>
+<h4 id="find-all-the-companycsv-files">Find All the Company.csv Files<a class="headerlink" href="#find-all-the-companycsv-files" title="Permanent link">&para;</a></h4>
 <p>Now that you can write rows to your CSV, the next step is to loop
 through the BlueLeaks sites, looking for <em>Company.csv</em> files, using the
 following code:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_csv_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a CSV that describes all the BlueLeaks folders&quot;&quot;&quot;</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BlueLeaksFolder&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyID&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyName&quot;</span><span class="p">,</span> <span class="s2">&quot;WebsiteTitle&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">]</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_csv_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_f</span><span class="p">:</span>
@@ -1736,18 +1736,18 @@ path.</p>
 <p>As you can see, the script displays paths for all of the <em>Company.csv</em>
 files in BlueLeaks. (Yours might display them in a different order than
 mine.)</p>
-<h4>Add BlueLeaks Sites to the CSV</h4>
+<h4 id="add-blueleaks-sites-to-the-csv">Add BlueLeaks Sites to the CSV<a class="headerlink" href="#add-blueleaks-sites-to-the-csv" title="Permanent link">&para;</a></h4>
 <p>The final step is to open all the <em>Company.csv</em> files whose paths you&rsquo;ve
 just listed, loop through their rows, and add new rows to your output
 CSV file based on them:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_csv_path&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a CSV that describes all the BlueLeaks folders&quot;&quot;&quot;</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BlueLeaksFolder&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyID&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyName&quot;</span><span class="p">,</span> <span class="s2">&quot;WebsiteTitle&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">]</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_csv_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_f</span><span class="p">:</span>
@@ -1817,7 +1817,7 @@ fusion center easier to work with.</p>
 recommend reading Chapter 10, where I&rsquo;ll
 introduce you to software that might save you time and allow you to
 uncover more interesting revelations.</p>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>In this chapter, you started investigating CSV spreadsheets. You&rsquo;ve
 learned how to open and examine them using spreadsheet software, as well
 as how to read and write them using Python code, sharpening your

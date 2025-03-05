@@ -56,7 +56,7 @@ the interactive Python interpreter. You&rsquo;ll also use Python to do math,
 define variables, work with strings and Boolean logic, loop through
 lists of items, and use functions. Future
 chapters rely on your understanding of these basic skills.</p>
-<h3>Exercise 7-1: Install Python</h3>
+<h3 id="exercise-7-1-install-python">Exercise 7-1: Install Python<a class="headerlink" href="#exercise-7-1-install-python" title="Permanent link">&para;</a></h3>
 <p>Some operating systems, including most versions of Linux and macOS, come
 with Python preinstalled, and it&rsquo;s common to have multiple versions of
 Python installed at once. This book uses Python 3. After you follow the
@@ -65,7 +65,7 @@ exercise, you should be able to run Python scripts with the
 <code>python3</code> (for Linux and Mac)
 or <code>python</code> (for Windows)
 command.</p>
-<h4>Windows</h4>
+<h4 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h4>
 <p>Download and install the latest version of Python 3 for Windows from
 <a href="https://www.python.org">https://www.python.org</a>.
 During installation, check the box <strong>Add Python 3.<em>x</em></strong> <strong>to PATH</strong>
@@ -79,7 +79,7 @@ instructions, but running Python directly in Windows makes reading and
 writing data on your Windows-formatted USB disk much faster.</p>
 <p>Windows users should replace all instances of <code>python3</code> with <code>python</code> when running the example code in this
 chapter.</p>
-<h4>Linux</h4>
+<h4 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h4>
 <p>Open a terminal and make sure the <code>python3</code>, <code>python3-pip</code>, and <code>python3-venv</code> packages are installed, using this
 <code>apt</code> command:</p>
 <div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3<span class="w"> </span>python3-pip<span class="w"> </span>python3-venv
@@ -88,7 +88,7 @@ chapter.</p>
 <p>This command either installs the latest version of Python 3 available in
 the Ubuntu repositories (as well as a few related packages you&rsquo;ll need
 for this chapter) or does nothing if the packages are already installed.</p>
-<h4>macOS</h4>
+<h4 id="macos">macOS<a class="headerlink" href="#macos" title="Permanent link">&para;</a></h4>
 <p>Open a terminal and run the following Homebrew command to make sure
 <code>python3</code> is installed:</p>
 <div class="codehilite"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>python3
@@ -96,7 +96,7 @@ for this chapter) or does nothing if the packages are already installed.</p>
 
 <p>This command either installs the latest version of Python 3 available in
 Homebrew or does nothing if it&rsquo;s already installed.</p>
-<h3>Exercise 7-2: Write Your First Python Script</h3>
+<h3 id="exercise-7-2-write-your-first-python-script">Exercise 7-2: Write Your First Python Script<a class="headerlink" href="#exercise-7-2-write-your-first-python-script" title="Permanent link">&para;</a></h3>
 <p>Now that you&rsquo;ve downloaded Python, you&rsquo;ll write and run a simple Python
 script that displays some text in your terminal.</p>
 <p>In your text editor, create a new file called <em>exercise-7-2.py</em> (all
@@ -154,7 +154,7 @@ script, running it after each change to see the results:</p>
 <li>Add new <code>print()</code> functions to display more text.</li>
 <li>Use the string methods <code>lower()</code> and <code>capitalize()</code> instead of <code>upper()</code>.</li>
 </ul>
-<h3>Python Basics</h3>
+<h3 id="python-basics">Python Basics<a class="headerlink" href="#python-basics" title="Permanent link">&para;</a></h3>
 <p>In this section, you&rsquo;ll learn to write code in the interactive Python
 interpreter, comment your code, start doing simple math in Python, and
 use strings and lists. This gentle introduction to Python syntax will
@@ -165,7 +165,7 @@ Python questions you might have beyond what this book covers. I
 frequently find solutions to Python problems on websites like Stack
 Overflow, a forum where people can ask technical questions and others
 can answer them.</p>
-<h4>The Interactive Python Interpreter</h4>
+<h4 id="the-interactive-python-interpreter">The Interactive Python Interpreter<a class="headerlink" href="#the-interactive-python-interpreter" title="Permanent link">&para;</a></h4>
 <p>The <em>Python interpreter</em> is a command line program that lets you run
 Python code in real time, without writing scripts first, allowing you to
 quickly test commands. To open the Python interpreter, you run the
@@ -194,7 +194,7 @@ and return to the shell by running <code>exit()</code> or pressing
 <p>In the remainder of this book, if my examples include the <code>&gt;&gt;&gt;</code> prompt, that means they&rsquo;re running in
 the Python interpreter. Run the same code in your own interpreter as you
 follow along.</p>
-<h4>Comments</h4>
+<h4 id="comments">Comments<a class="headerlink" href="#comments" title="Permanent link">&para;</a></h4>
 <p>Writing code can be confusing even to experienced programmers, so it&rsquo;s
 always a good idea to <em>comment</em> your code: add inline notes to yourself
 or to others who might read your program. If you describe the purpose of
@@ -213,7 +213,7 @@ example, run the following lines of code:</p>
 <p>This is exactly the same as comments in shell scripting, which you
 learned about in Chapter 3. Python ignores
 comments, since they&rsquo;re intended for humans.</p>
-<h4>Math with Python</h4>
+<h4 id="math-with-python">Math with Python<a class="headerlink" href="#math-with-python" title="Permanent link">&para;</a></h4>
 <p>Computers, which are technically complicated calculators, are great at
 doing math. It might not be immediately apparent, but investigating
 datasets means constantly dealing with basic math: calculating disk
@@ -307,7 +307,7 @@ number on the right to the variable on the left. The Python operators
 <code>-=</code>, <code>*=</code>, and <code>/=</code> work the same way. In your Python
 interpreter, define a variable, then try changing its value using these
 operators.</p>
-<h4>Strings</h4>
+<h4 id="strings">Strings<a class="headerlink" href="#strings" title="Permanent link">&para;</a></h4>
 <p>A <em>string</em> is a sequence of characters. Any time you need to load,
 modify, or display text, you store it in a string. If you load the
 contents of a text file into a variable in Python (for example, a 5MB
@@ -374,7 +374,7 @@ commands to display the values of the variables you just defined:</p>
 
 <p>Python will evaluate the expression for you, in this case <code>1 + 2 + 3 + 4 + 5</code>, and just print the result, which is
 <code>15</code>.</p>
-<h3>Exercise 7-3: Write a Python Script with Variables, Math, and Strings</h3>
+<h3 id="exercise-7-3-write-a-python-script-with-variables-math-and-strings">Exercise 7-3: Write a Python Script with Variables, Math, and Strings<a class="headerlink" href="#exercise-7-3-write-a-python-script-with-variables-math-and-strings" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll practice the concepts you&rsquo;ve learned so far by
 writing a simple Python script that uses variables and a few basic math
 expressions and prints some strings. The script calculates how old a
@@ -451,7 +451,7 @@ Which is 1,198,368,000 seconds old
 
 <p>When you run the script with your name and age,
 try changing the age and running it again to see how the numbers change.</p>
-<h3>Lists and Loops</h3>
+<h3 id="lists-and-loops">Lists and Loops<a class="headerlink" href="#lists-and-loops" title="Permanent link">&para;</a></h3>
 <p>You&rsquo;ll often need to manage lists when investigating datasets. For
 example, you might work with lists of filenames or rows in a
 spreadsheet. In this section, you&rsquo;ll learn how to store lists as
@@ -459,7 +459,7 @@ variables and loop through those lists in order to run the same code for
 each list item. You did something similar in Chapter
 4 with <code>for</code> loops in the shell, but this time
 you&rsquo;ll be working in Python.</p>
-<h4>Defining and Printing Lists</h4>
+<h4 id="defining-and-printing-lists">Defining and Printing Lists<a class="headerlink" href="#defining-and-printing-lists" title="Permanent link">&para;</a></h4>
 <p>In Python, lists are defined with brackets (<code>[</code>and]), with each item in the list
 separated by commas (<code>,</code>). You
 might have a list of numbers:</p>
@@ -573,7 +573,7 @@ America&rsquo;s Frontline Doctors, an anti-vaccine group. To properly analyze
 a dataset of hundreds of thousands of files containing patient
 information, I wrote code that created an empty list, opened each file,
 and appended the pertinent patient data to that list.</p>
-<h4>Running for Loops</h4>
+<h4 id="running-for-loops">Running for Loops<a class="headerlink" href="#running-for-loops" title="Permanent link">&para;</a></h4>
 <p>In Chapter 4, you used a <code>for</code> loop to unzip each BlueLeaks ZIP file.
 Python also has <code>for</code> loops,
 and they work the same way they do in shell scripting: by running a
@@ -662,7 +662,7 @@ to run your block of code on each row.</p>
 <p>In the next section, you&rsquo;ll learn to make your programs more dynamic and
 useful by determining which blocks of code should run under which
 circumstances.</p>
-<h3>Control Flow</h3>
+<h3 id="control-flow">Control Flow<a class="headerlink" href="#control-flow" title="Permanent link">&para;</a></h3>
 <p>Python scripts start at the top and run one line of code at a time, but
 they don&rsquo;t always run these lines consecutively. In <code>for</code> loops, for example, the same block of
 code might run over and over again before the loop completes and the
@@ -681,7 +681,7 @@ Boolean logic, all of which allow you to control the flow of your
 program. You&rsquo;ll need this sort of logic whenever you write code that
 searches a dataset for something specific and then responds according to
 what it finds.</p>
-<h4>Comparison Operators</h4>
+<h4 id="comparison-operators">Comparison Operators<a class="headerlink" href="#comparison-operators" title="Permanent link">&para;</a></h4>
 <p>As mentioned earlier in this chapter, expressions that use the
 arithmetic operators <code>+</code>,
 <code>-</code>, <code>/</code>, and <code>*</code> generally evaluate to numbers:
@@ -743,7 +743,7 @@ of over a million videos uploaded to the far-right social network
 Parler. Using comparison operators, you&rsquo;ll determine which videos were
 filmed on January 6, 2021, in Washington, DC, during the insurrection
 after Trump lost the 2020 election.</p>
-<h4>if Statements</h4>
+<h4 id="if-statements">if Statements<a class="headerlink" href="#if-statements" title="Permanent link">&para;</a></h4>
 <p>You use <code>if</code> statements to
 tell your code to do something under certain conditions but not others.
 The syntax for an <code>if</code>
@@ -817,7 +817,7 @@ evaluates the <code>password</code>
 code that displays <code>SECRET AREA ACCESS GRANTED</code>. If it evaluates to <code>False</code>, the program moves on to the
 <code>else</code> code block, which
 displays <code>ACCESS DENIED</code>.</p>
-<h4>Nested Code Blocks</h4>
+<h4 id="nested-code-blocks">Nested Code Blocks<a class="headerlink" href="#nested-code-blocks" title="Permanent link">&para;</a></h4>
 <p>You can also accomplish the results of Listing 7-1 with multiple <code>if</code> statements and no <code>elif</code>, using <em>nested</em> code blocks, or
 indented blocks of code inside other indented blocks of code:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
@@ -844,7 +844,7 @@ statements purely for readability purposes: it&rsquo;s easier to read and
 write code with 100 <code>elif</code>
 statements than code that&rsquo;s indented 100 times because it has 100 nested
 <code>if</code> statements.</p>
-<h4>Searching Lists</h4>
+<h4 id="searching-lists">Searching Lists<a class="headerlink" href="#searching-lists" title="Permanent link">&para;</a></h4>
 <p>The Python <code>in</code> operator,
 which tells you whether an item appears in a list, is useful for working
 with lists. For example, to check whether the number 42 appears in a
@@ -879,7 +879,7 @@ to search for smaller strings inside of larger strings:</p>
 <code>sentence</code>, then checks to see
 if the string <code>putin</code> is
 inside the lowercase version of that sentence.</p>
-<h4>Logical Operators</h4>
+<h4 id="logical-operators">Logical Operators<a class="headerlink" href="#logical-operators" title="Permanent link">&para;</a></h4>
 <p>It&rsquo;s possible to describe any scenario, no matter how complicated, using
 the <em>logical operators</em> <code>and</code>,
 <code>or</code>, and <code>not</code>. Like comparison operators, logical
@@ -982,7 +982,7 @@ comparing is true, then the whole expression is true.</p>
 
 <p>You could replace <code>not age</code>
 <code>&gt;= 21</code> with <code>age &lt; 21</code> for the same result.</p>
-<h4>Exception Handling</h4>
+<h4 id="exception-handling">Exception Handling<a class="headerlink" href="#exception-handling" title="Permanent link">&para;</a></h4>
 <p>Python programs may abruptly quit with an error called an <em>exception</em>.
 This is typically known as &ldquo;throwing an exception.&rdquo; <em>Exception handling</em>
 ensures that your Python code will run
@@ -1097,7 +1097,7 @@ on neo-Nazi chat logs.</p>
 Python, you&rsquo;ll practice some basic Python syntax and make comparisons
 using <code>if</code> statements and
 Boolean logic in the next exercise.</p>
-<h3>Exercise 7-4: Practice Loops and Control Flow</h3>
+<h3 id="exercise-7-4-practice-loops-and-control-flow">Exercise 7-4: Practice Loops and Control Flow<a class="headerlink" href="#exercise-7-4-practice-loops-and-control-flow" title="Permanent link">&para;</a></h3>
 <p>In social media slang, a common form of mockery is to employ
 <em>alternating caps</em>, or switching from uppercase to lowercase and back to
 uppercase, when quoting people. For example, here&rsquo;s the text of a viral
@@ -1203,7 +1203,7 @@ ThErE ArE VeRy fInE PeOpLe oN BoTh sIdEs
 controlling the flow of execution. I&rsquo;ll conclude the chapter with one
 more fundamental programming skill: breaking your code down into simpler
 chunks using functions.</p>
-<h3>Functions</h3>
+<h3 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h3>
 <p>The more complicated your programs get, the more important it is to
 break the problems you&rsquo;re trying to solve down into smaller chunks and
 work on them individually. This allows you to focus on the bigger
@@ -1216,11 +1216,11 @@ running. You&rsquo;ve already used a few functions that come with Python, like
 <code>print()</code> and <code>len()</code>, but you can also define your own
 function and use it as many times as you want without having to rewrite
 that code. You&rsquo;ll learn how to do that in this section.</p>
-<h4>The def Keyword</h4>
+<h4 id="the-def-keyword">The def Keyword<a class="headerlink" href="#the-def-keyword" title="Permanent link">&para;</a></h4>
 <p>You can define a new function using the <code>def</code> keyword. For example, this code
 defines a function called <code>test()</code>, which prints a string to your
 terminal:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">():</span>
 <span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this is a test function&quot;</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">test</span><span class="p">()</span>
@@ -1233,7 +1233,7 @@ case, it displays the string <code>this is a test function</code>. This <code>te
 arguments, which means every time you run it, it will do the exact same
 thing.</p>
 <p>Listing 7-2 defines a slightly more complicated function, <code>sum()</code>, that adds two numbers together.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 </code></pre></div>
 
@@ -1255,7 +1255,7 @@ won&rsquo;t be defined outside of that code block.</p>
 new function with this name, and here&rsquo;s what it does.&rdquo; However, the
 function itself won&rsquo;t run until you <em>call</em> it. Consider the following
 Python script:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 
 <span class="n">red_apples</span> <span class="o">=</span> <span class="mi">10</span>
@@ -1285,14 +1285,14 @@ of the <code>sum()</code> function,
 <p>Finally, the code calls the <code>print()</code> function, passing in an f-string as an
 argument, which displays the <code>total_apples</code> variable. It will display the message
 <code>There are 16 apples</code>.</p>
-<h4>Default Arguments</h4>
+<h4 id="default-arguments">Default Arguments<a class="headerlink" href="#default-arguments" title="Permanent link">&para;</a></h4>
 <p>Function definitions can also have <em>default arguments</em>, which means
 defining their value is optional. If you haven&rsquo;t passed in any values
 for them when the function is called, the default value is used instead.</p>
 <p>For example, consider this function, which, given a number and
 optionally a number of exclamation marks and question marks, prints a
 greeting using its arguments:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">num_exclamations</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">num_exclamations</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
     <span class="n">exclamations</span> <span class="o">=</span> <span class="s2">&quot;!&quot;</span> <span class="o">*</span> <span class="n">num_exclamations</span>
     <span class="n">questions</span> <span class="o">=</span> <span class="s2">&quot;?&quot;</span> <span class="o">*</span> <span class="n">num_questions</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">exclamations</span><span class="si">}{</span><span class="n">questions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1341,7 +1341,7 @@ function call uses a keyword argument only for <code>num_questions</code> and us
 third function call uses a keyword argument for
 <code>num_exclamations</code> and uses
 the default argument for <code>num_questions</code>.</p>
-<h4>Return Values</h4>
+<h4 id="return-values">Return Values<a class="headerlink" href="#return-values" title="Permanent link">&para;</a></h4>
 <p>Functions become a lot more useful when they take some input, do some
 computation, and then return a value, known as the <em>return value</em>. The
 <code>greet()</code> function just
@@ -1353,7 +1353,7 @@ earlier takes input (a list or a string), does some computation
 length).</p>
 <p>Here&rsquo;s an example of a function that takes a string <code>s</code> as an argument and returns the number
 of vowels in the string:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">count_vowels</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">count_vowels</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="n">number_of_vowels</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">vowels</span> <span class="o">=</span> <span class="s2">&quot;aeiouAEIOU&quot;</span>
     <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
@@ -1413,7 +1413,7 @@ runs, the function immediately ends, so <code>return</code> is also useful if yo
 function early. For example, the following <code>is_exciting()</code> function loops through all the
 characters in a string <code>s</code> to
 check whether the character is an exclamation point:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">is_exciting</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">is_exciting</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">character</span> <span class="o">==</span> <span class="s2">&quot;!&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
@@ -1434,7 +1434,7 @@ until the end of the string. And if you pass in the string
 <code>goodbye</code>, it will loop
 through the entire string and not find an exclamation point, so it will
 return <code>False</code>.</p>
-<h4>Docstrings</h4>
+<h4 id="docstrings">Docstrings<a class="headerlink" href="#docstrings" title="Permanent link">&para;</a></h4>
 <p>In <em>self-documenting</em> code, documentation is defined as part of the code
 as docstrings rather than in a separate document. <em>Docstrings</em> are
 strings enclosed by three double quotes (<code>"""</code>) or three single quotes (<code>'``''</code>) on either side, placed as the first
@@ -1443,7 +1443,7 @@ program ignores the docstring, but Python can use it to pull up
 documentation about the function on request. Docstrings are optional,
 but they can help other people understand your code.</p>
 <p>For example, here&rsquo;s how you&rsquo;d define the <code>sum()</code> function with a docstring:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="o">...</span>     <span class="s2">&quot;&quot;&quot;This function returns the sum of a and b&quot;&quot;&quot;</span>
 <span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 </code></pre></div>
@@ -1472,7 +1472,7 @@ docstrings for the <code>print()</code>
 and <code>len()</code> functions.</p>
 <p>Press Q to get out of the help interface and back to the Python
 interpreter.</p>
-<h3>Exercise 7-5: Practice Writing Functions</h3>
+<h3 id="exercise-7-5-practice-writing-functions">Exercise 7-5: Practice Writing Functions<a class="headerlink" href="#exercise-7-5-practice-writing-functions" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll turn the script you wrote in Exercise 7-4 into
 a function. You can then call this function multiple times, passing text
 into it so that it returns an alternating caps version of that text each
@@ -1482,7 +1482,7 @@ time.</p>
 <code>alternating_caps()</code>, which
 takes in the argument <code>text</code>,
 like this:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
 </code></pre></div>
 
@@ -1497,7 +1497,7 @@ containing this version of a string and return it.</p>
 <p>Your complete function should look like this (you can also find a copy
 at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-5.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-5.py</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
     <span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
     <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1533,7 +1533,7 @@ I&#39;M LeArNiNg sO MuCh
 
 <p>While the output of this script is displayed in
 a mocking tone, I hope that the sentiment is true for you!</p>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>This chapter has covered several basic Python programming concepts
 you&rsquo;ll rely upon in future investigations. You learned to write simple
 Python scripts that incorporate the major features of the language,

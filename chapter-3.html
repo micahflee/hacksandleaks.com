@@ -70,11 +70,11 @@ macOS, or Linux, you&rsquo;ll learn how to install and uninstall software via
 the command line, how filepaths work, how to navigate around the folders
 on your computer, and how to use text editors. You&rsquo;ll also write your
 first <em>shell script</em>, a file containing a series of commands.</p>
-<h3>Introducing the Command Line</h3>
+<h3 id="introducing-the-command-line">Introducing the Command Line<a class="headerlink" href="#introducing-the-command-line" title="Permanent link">&para;</a></h3>
 <p>To prepare you to start working on the command line, this section
 explains some fundamentals: what shells are, how users and paths work in
 different operating systems, and the concept of privilege escalation.</p>
-<h4>The Shell</h4>
+<h4 id="the-shell">The Shell<a class="headerlink" href="#the-shell" title="Permanent link">&para;</a></h4>
 <p>The <em>shell</em> is the program that lets you run text-based commands, while
 the terminal is the graphical program that runs your shell. When you
 open a terminal and see a blinking text cursor waiting for commands,
@@ -104,7 +104,7 @@ work. Typos usually result in nothing more serious than error messages,
 however, and it&rsquo;s easy to go back and fix a mistake in a command. I&rsquo;ll
 explain how to do so in the Editing Commands section on page
 68.</p>
-<h4>Users and Paths</h4>
+<h4 id="users-and-paths">Users and Paths<a class="headerlink" href="#users-and-paths" title="Permanent link">&para;</a></h4>
 <p>Although operating systems like Windows, macOS, and Linux are different
 in some ways, they all share basic building blocks, including users and
 paths.</p>
@@ -162,7 +162,7 @@ as follows:</p>
 <p>It&rsquo;s important to understand how to read paths, since you&rsquo;ll need to
 include the location of your dataset or files it contains in the
 commands you run.</p>
-<h4>User Privileges</h4>
+<h4 id="user-privileges">User Privileges<a class="headerlink" href="#user-privileges" title="Permanent link">&para;</a></h4>
 <p>Most users have limited privileges in an operating system. However, the
 <em>root user</em> in Linux and macOS and the <em>administrator user</em> in Windows
 have absolute power. While <em>alice</em> may not be able to save files into
@@ -213,7 +213,7 @@ from his XKCD website that succinctly demonstrates the power of
 <p>Before learning more command line code, Windows users must install
 Ubuntu (see Exercise 3-1). Mac or Linux users can skip to the Basic
 Command Line Usage section on page 62.</p>
-<h3>Exercise 3-1: Install Ubuntu in Windows</h3>
+<h3 id="exercise-3-1-install-ubuntu-in-windows">Exercise 3-1: Install Ubuntu in Windows<a class="headerlink" href="#exercise-3-1-install-ubuntu-in-windows" title="Permanent link">&para;</a></h3>
 <p>To work with Ubuntu on a Windows machine, you could install both Windows
 and Linux or use a virtual machine within Windows, as mentioned in
 Chapter 1. However, for this book&rsquo;s
@@ -308,7 +308,7 @@ performance issues and various ways to deal with them, check out
 Appendix A. Wait until you&rsquo;ve worked through at least Chapter 4 to start implementing these solutions, since
 the instructions involve more advanced command line concepts introduced
 in that chapter.</p>
-<h3>Basic Command Line Usage</h3>
+<h3 id="basic-command-line-usage">Basic Command Line Usage<a class="headerlink" href="#basic-command-line-usage" title="Permanent link">&para;</a></h3>
 <p>In this section, you&rsquo;ll learn to use the command line to explore files
 and folders on your computer. This is a prerequisite to working with
 datasets, which are just folders full of files and other folders. You&rsquo;ll
@@ -319,11 +319,11 @@ shell, and look up documentation on commands from within your terminal.</p>
 run into problems&mdash;I still do this every day. You&rsquo;re likely not the
 first person to encounter any given command line issue, so with a few
 well-worded internet searches, you can find someone else&rsquo;s solution.</em></p>
-<h4>Opening a Terminal</h4>
+<h4 id="opening-a-terminal">Opening a Terminal<a class="headerlink" href="#opening-a-terminal" title="Permanent link">&para;</a></h4>
 <p>To get started, skip to the subsection for your operating system to
 learn how to open a terminal. Throughout this chapter, keep a terminal
 open while you&rsquo;re reading to test all the commands.</p>
-<h5>The Windows Terminal</h5>
+<h5 id="the-windows-terminal">The Windows Terminal<a class="headerlink" href="#the-windows-terminal" title="Permanent link">&para;</a></h5>
 <p>Open the Ubuntu app by clicking <strong>Start</strong> in the bottom-left corner of
 the screen, searching for <strong>ubuntu</strong>, and clicking <strong>Ubuntu</strong>.</p>
 <p>You&rsquo;ll use Ubuntu most often for this book, but you may need to open the
@@ -337,7 +337,7 @@ install it, you can open it the same way.</p>
 <p>Pin the Ubuntu app or Windows Terminal app to your taskbar so you can
 quickly open it in the future: right-click its icon and select <strong>Pin to
 Taskbar</strong>.</p>
-<h5>The macOS Terminal</h5>
+<h5 id="the-macos-terminal">The macOS Terminal<a class="headerlink" href="#the-macos-terminal" title="Permanent link">&para;</a></h5>
 <p>Open the Terminal app by opening Finder, going to the <em>Applications</em>
 folder, double-clicking the <em>Utilities</em> folder, and double-clicking
 <strong>Terminal</strong>. Figure 3-4 shows my macOS
@@ -349,14 +349,14 @@ and the name of my Mac is <em>trapdoor</em>.</p>
 future. To do so, after you open Terminal, press <strong>CTRL</strong> and
 click the Terminal icon on your dock, then choose
 <strong>Options</strong> ▸ <strong>Keep in Dock</strong>.</p>
-<h5>The Linux Terminal</h5>
+<h5 id="the-linux-terminal">The Linux Terminal<a class="headerlink" href="#the-linux-terminal" title="Permanent link">&para;</a></h5>
 <p>In most Linux distributions, open the Terminal app by pressing the
 Windows key, typing <strong>terminal</strong>, and pressing <strong>ENTER</strong>. If
 you&rsquo;re running Ubuntu (or any other Linux distribution that uses the
 GNOME graphical environment), pin the Terminal app to your dock so you
 can quickly open it in the future. To do so, right-click the Terminal
 icon and select <strong>Add to Favorites</strong>.</p>
-<h4>Clearing Your Screen and Exiting the Shell</h4>
+<h4 id="clearing-your-screen-and-exiting-the-shell">Clearing Your Screen and Exiting the Shell<a class="headerlink" href="#clearing-your-screen-and-exiting-the-shell" title="Permanent link">&para;</a></h4>
 <p>As you practice using the terminal in the following sections, you&rsquo;ll
 sometimes want to start fresh, without having to see all the previous
 commands you ran or their output or error messages. Run this simple
@@ -375,7 +375,7 @@ instead of <code>clear</code>.)</p>
 
 <p>You can also close the terminal window to exit. If you&rsquo;re running a
 program when you close the terminal, that program will quit as well.</p>
-<h4>Exploring Files and Directories</h4>
+<h4 id="exploring-files-and-directories">Exploring Files and Directories<a class="headerlink" href="#exploring-files-and-directories" title="Permanent link">&para;</a></h4>
 <p>When you open a terminal, your shell starts out in your user&rsquo;s home
 folder, represented as a tilde (<code>~</code>). The folder you&rsquo;re currently in is
 your <em>current working directory</em>, or just <em>working directory</em>. If you
@@ -475,7 +475,7 @@ drwxr-xr-x  14 micah  staff    448 Jul 27 09:28 chapter-9
 </code></pre></div>
 
 <p>You&rsquo;ll download your own copy of these files in Exercise 3-7.</p>
-<h4>Navigating Relative and Absolute Paths</h4>
+<h4 id="navigating-relative-and-absolute-paths">Navigating Relative and Absolute Paths<a class="headerlink" href="#navigating-relative-and-absolute-paths" title="Permanent link">&para;</a></h4>
 <p>Programs often require you to provide paths to files or folders, usually
 when you run a program that works with specific files on your computer.
 The path that I passed into <code>ls</code> in the previous section,
@@ -494,7 +494,7 @@ path.</p>
 relative path to the current folder, and <code>..</code> (dot dot), which represents a relative
 path to the <em>parent folder</em> (the folder that contains the current
 folder).</p>
-<h4>Changing Directories</h4>
+<h4 id="changing-directories">Changing Directories<a class="headerlink" href="#changing-directories" title="Permanent link">&para;</a></h4>
 <p>The <code>cd</code> command (which stands
 for &ldquo;change directory&rdquo;) allows you to change to a different folder. To
 change your working directory to the folder, run:</p>
@@ -539,7 +539,7 @@ folder:</p>
 <p>If you run <code>ls</code> again after a
 <code>cd</code> command, the output
 should show you the files in the folder to which you just moved.</p>
-<h4>Using the help Argument</h4>
+<h4 id="using-the-help-argument">Using the help Argument<a class="headerlink" href="#using-the-help-argument" title="Permanent link">&para;</a></h4>
 <p>Most commands let you use the argument <code>-h</code>, or <code>--help</code>, which displays detailed instructions
 explaining what the command does and how to use it. For example, try
 running the following:</p>
@@ -565,7 +565,7 @@ bug reports using http://www.info-zip.org/zip-bug.html; see README for details.
 the <code>-l</code> argument, the command
 shows a list of all of the files and folders inside the ZIP file without
 actually unzipping it.</p>
-<h4>Accessing Man Pages</h4>
+<h4 id="accessing-man-pages">Accessing Man Pages<a class="headerlink" href="#accessing-man-pages" title="Permanent link">&para;</a></h4>
 <p>Many commands also have manuals, otherwise known as <em>man pages</em>, which
 give more detail about how to use those commands. Run the following to
 access a command&rsquo;s man page:</p>
@@ -585,13 +585,13 @@ example, to learn more details about how the <code>unzip</code> command&rsquo;s 
 should bring you to the first time <code>-l</code> appears on the man page. Press N to
 move on to the next occurrence of your search term.</p>
 <p>When you&rsquo;re finished, press Q to quit the man page.</p>
-<h3>Tips for Navigating the Terminal</h3>
+<h3 id="tips-for-navigating-the-terminal">Tips for Navigating the Terminal<a class="headerlink" href="#tips-for-navigating-the-terminal" title="Permanent link">&para;</a></h3>
 <p>This section introduces ways to make working on the command line more
 convenient and efficient, along with tips for avoiding and fixing
 errors. It also shows how to handle problematic filenames, such as those
 with spaces, quotes, or other special characters. A basic understanding
 of these concepts will save you a lot of time in the future.</p>
-<h4>Entering Commands with Tab Completion</h4>
+<h4 id="entering-commands-with-tab-completion">Entering Commands with Tab Completion<a class="headerlink" href="#entering-commands-with-tab-completion" title="Permanent link">&para;</a></h4>
 <p>Shells have a feature called <em>tab completion</em> that saves time and
 prevents errors: enter the first few letters of a command or a path,
 then press <strong>TAB</strong>. Your shell will fill in the rest if possible.</p>
@@ -645,7 +645,7 @@ press <strong>TAB</strong>, which gives me:</p>
 </code></pre></div>
 
 <p>Finally, I press <strong>ENTER</strong> to change to that folder.</p>
-<h4>Editing Commands</h4>
+<h4 id="editing-commands">Editing Commands<a class="headerlink" href="#editing-commands" title="Permanent link">&para;</a></h4>
 <p>You can also edit commands. When you start typing a command, you can
 press the left and right arrow keys to move the cursor, allowing you to
 edit the command before running it. You can also
@@ -663,7 +663,7 @@ them as root. When this happens, I press the up arrow, then
 <strong>CONTROL</strong>-A to go to the beginning of the line, add
 <code>sudo</code>, and press
 <strong>ENTER</strong> to successfully run the command.</p>
-<h4>Dealing with Spaces in Filenames</h4>
+<h4 id="dealing-with-spaces-in-filenames">Dealing with Spaces in Filenames<a class="headerlink" href="#dealing-with-spaces-in-filenames" title="Permanent link">&para;</a></h4>
 <p>Sometimes filenames contain multiple words separated by spaces. If you
 don&rsquo;t explicitly tell your shell that a space is part of a filename, the
 shell assumes that the space is there to separate parts of your command.
@@ -712,7 +712,7 @@ followed by a space) as a part of the name. Again, the shell reads
 <code>-lh</code> and
 <code>~/My Documents</code> as its
 arguments.</p>
-<h4>Using Single Quotes Around Double Quotes</h4>
+<h4 id="using-single-quotes-around-double-quotes">Using Single Quotes Around Double Quotes<a class="headerlink" href="#using-single-quotes-around-double-quotes" title="Permanent link">&para;</a></h4>
 <p>You can use the escape character to escape more than spaces. Suppose you
 want to delete a filename that has a space <em>and</em> quotes in it, like <em>Say
 &ldquo;Hello&rdquo;.txt.</em> You can use the <code>rm</code> command to delete files, but the
@@ -743,7 +743,7 @@ for you. To delete a file in your working directory called <em>Say
 &ldquo;Hello&rdquo;.txt</em>, for example, entering <code>rm Sa</code>, then pressing <strong>TAB</strong>,
 completes the command to <code>rm Say\ \"Hello\".txt</code> with the correct escape characters
 included, so you don&rsquo;t have to provide the proper syntax yourself.</p>
-<h3>Installing and Uninstalling Software with Package Managers</h3>
+<h3 id="installing-and-uninstalling-software-with-package-managers">Installing and Uninstalling Software with Package Managers<a class="headerlink" href="#installing-and-uninstalling-software-with-package-managers" title="Permanent link">&para;</a></h3>
 <p>Of the many powerful command line tools that let you quickly work with
 datasets, only some come preinstalled; you&rsquo;ll need to install the rest
 yourself. While you&rsquo;re likely used to installing software by downloading
@@ -760,7 +760,7 @@ as well as all of the Linux distributions based on them (including
 Ubuntu in WSL). If your Linux distribution doesn&rsquo;t use apt, you&rsquo;ll need
 to look up the package manager documentation for your operating system.</p>
 <blockquote>
-<h4>PACKAGE MANAGEMENT FOR NON-UBUNTU LINUX USERS</h4>
+<h4 id="package-management-for-non-ubuntu-linux-users">PACKAGE MANAGEMENT FOR NON-UBUNTU LINUX USERS<a class="headerlink" href="#package-management-for-non-ubuntu-linux-users" title="Permanent link">&para;</a></h4>
 <p>You should be able to follow along with this book no matter what version of Linux you’re using. Several other Debian-based Linux distributions also rely on apt, like Linux Mint, Pop! OS, and others. If you’re using one of these, the apt commands in this book should work, though the names of software packages may be slightly different. If you encounter that issue, run <code>apt search [software_name]</code>
 to find the name of the package that you should be installing for your operating system.</p>
 <p>If you’re using a version of Linux that doesn’t use apt as its package manager, you’ll need to slightly modify this book’s commands to use your Linux distribution’s package manager. For example, if you’re running Fedora, Red Hat, CentOS, or other similar Linux distributions, you’ll use a package manager called DNF (for older versions of these distributions, the package manager is called yum). See Fedora’s documentation at <a href="https://docs.fedoraproject.org/en-US/quick-docs/dnf/">https://docs.fedoraproject.org/en-US/quick-docs/dnf/</a> for more details on using DNF. Arch Linux uses a package manager called pacman (<a href="https://wiki.archlinux.org/title/Pacman">https://wiki.archlinux.org/title/Pacman</a>).</p>
@@ -771,7 +771,7 @@ Homebrew. If you&rsquo;re using Linux or Windows with WSL, skip to Exercise
 3-3 to learn how to use apt. This book mostly uses Unix shells and
 doesn&rsquo;t cover Chocolately, which installs Windows software instead of
 Linux software.</p>
-<h3>Exercise 3-2: Manage Packages with Homebrew on macOS</h3>
+<h3 id="exercise-3-2-manage-packages-with-homebrew-on-macos">Exercise 3-2: Manage Packages with Homebrew on macOS<a class="headerlink" href="#exercise-3-2-manage-packages-with-homebrew-on-macos" title="Permanent link">&para;</a></h3>
 <p>To install Homebrew, macOS&rsquo;s package manager, open a browser and go to
 Homebrew&rsquo;s website at
 <a href="https://brew.sh">https://brew.sh</a>,
@@ -850,7 +850,7 @@ versions, run:</p>
 <p>Run <code>brew help</code> to see some examples of how to use this command.</p>
 <p>Now that you have a package manager installed, you&rsquo;ll practice using the
 command line in Exercise 3-4.</p>
-<h3>Exercise 3-3: Manage Packages with apt on Windows or Linux</h3>
+<h3 id="exercise-3-3-manage-packages-with-apt-on-windows-or-linux">Exercise 3-3: Manage Packages with apt on Windows or Linux<a class="headerlink" href="#exercise-3-3-manage-packages-with-apt-on-windows-or-linux" title="Permanent link">&para;</a></h3>
 <p>You must run most apt commands as root. Before installing or updating
 software, make sure your operating system has an up-to-date list of
 available software by opening a terminal and running the following:</p>
@@ -932,7 +932,7 @@ example, to uninstall Neofetch, run:</p>
 
 <p>Now that you have a package manager installed, you&rsquo;ll practice using the
 command line in Exercise 3-4.</p>
-<h3>Exercise 3-4: Practice Using the Command Line with cURL</h3>
+<h3 id="exercise-3-4-practice-using-the-command-line-with-curl">Exercise 3-4: Practice Using the Command Line with cURL<a class="headerlink" href="#exercise-3-4-practice-using-the-command-line-with-curl" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll learn how to determine whether you have a
 command installed, download web pages, save the output from a file using
 redirection, and view the contents of files directly from the terminal.</p>
@@ -954,7 +954,7 @@ If not, the output should return you to the shell prompt.</p>
 <code>sudo apt install curl</code> for
 Windows with WSL and Linux machines or <code>brew install curl</code> for Macs. Then run <code>which curl</code> again, and you should see the path to
 the cURL program.</p>
-<h4>Download a Web Page with cURL</h4>
+<h4 id="download-a-web-page-with-curl">Download a Web Page with cURL<a class="headerlink" href="#download-a-web-page-with-curl" title="Permanent link">&para;</a></h4>
 <p>When you load a web page, your web browser renders a human-readable
 version of its content based on the page&rsquo;s HTML, CSS, and JavaScript
 code. To see the raw HTML content from the web page hosted at
@@ -984,7 +984,7 @@ following command:</p>
 <p>When I run this command, my output is <code>United States</code>. You can try connecting to a VPN
 server in another country and then run it again; it should detect your
 web traffic as coming from that other country.</p>
-<h4>Save a Web Page to a File</h4>
+<h4 id="save-a-web-page-to-a-file">Save a Web Page to a File<a class="headerlink" href="#save-a-web-page-to-a-file" title="Permanent link">&para;</a></h4>
 <p>Run the following commands to load
 <em>https://example.com</em>
 and save it to a file:</p>
@@ -1020,7 +1020,7 @@ example, long lines will wrap, which may make them difficult to
 comprehend. In the following section, you&rsquo;ll learn more about the
 different types of files and how to work with them more easily in the
 command line.</p>
-<h3>Text Files vs. Binary Files</h3>
+<h3 id="text-files-vs-binary-files">Text Files vs. Binary Files<a class="headerlink" href="#text-files-vs-binary-files" title="Permanent link">&para;</a></h3>
 <p>There are many different types of files, but they all fit into one of
 two categories: <em>text files</em> and <em>binary files</em>.</p>
 <p>Text files are made up of letters, numbers,
@@ -1069,7 +1069,7 @@ designed to view images.</p>
 code, you&rsquo;ll need a <em>text editor</em>, a program designed to edit text
 files. You&rsquo;ll install a text editor in Exercise 3-5 to prepare for
 writing your first shell script.</p>
-<h3>Exercise 3-5: Install the VS Code Text Editor</h3>
+<h3 id="exercise-3-5-install-the-vs-code-text-editor">Exercise 3-5: Install the VS Code Text Editor<a class="headerlink" href="#exercise-3-5-install-the-vs-code-text-editor" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll download the free and open source text editor
 Visual Studio Code (VS Code) and practice using it to view a file.
 Download VS Code from
@@ -1130,17 +1130,17 @@ Restricted Mode, check out the documentation at
 <p>Now that you have some experience running
 commands in a shell and have set up a text editor, you&rsquo;ll write your
 first shell script in Exercise 3-6.</p>
-<h3>Exercise 3-6: Write Your First Shell Script</h3>
+<h3 id="exercise-3-6-write-your-first-shell-script">Exercise 3-6: Write Your First Shell Script<a class="headerlink" href="#exercise-3-6-write-your-first-shell-script" title="Permanent link">&para;</a></h3>
 <p>As mentioned earlier, a shell script is a text file that contains a list
 of shell commands. When you tell your shell to run the script, it runs
 those commands one at a time. Many commands are themselves shell
 scripts, such as the <code>man</code>
 command you used earlier in this chapter.</p>
-<h4>Navigate to Your USB Disk</h4>
+<h4 id="navigate-to-your-usb-disk">Navigate to Your USB Disk<a class="headerlink" href="#navigate-to-your-usb-disk" title="Permanent link">&para;</a></h4>
 <p>Make sure your <em>datasets</em> USB disk is plugged in and mounted, and open
 up a terminal. To change your working directory to the <em>datasets</em> disk,
 skip to the subsection for your operating system.</p>
-<h5>Windows</h5>
+<h5 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h5>
 <p>After mounting your USB disk, open File Explorer by clicking <strong>This PC</strong>
 on the left. This page will show all of your connected drives and their
 drive letters. Note your USB disk&rsquo;s drive letter, then change your
@@ -1153,7 +1153,7 @@ the correct drive letter:</p>
 <p>Your shell&rsquo;s working directory should now be your <em>datasets</em> USB disk.
 To check, run <code>ls</code> to view the
 files on this disk.</p>
-<h5>macOS</h5>
+<h5 id="macos">macOS<a class="headerlink" href="#macos" title="Permanent link">&para;</a></h5>
 <p>After mounting your <em>datasets</em> USB disk, open a terminal and change your
 working directory to the disk by running the following command:</p>
 <div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/Volumes/datasets
@@ -1162,7 +1162,7 @@ working directory to the disk by running the following command:</p>
 <p>Your shell&rsquo;s working directory should now be your <em>datasets</em> USB disk.
 To check, run <code>ls</code> to view the
 files on this disk.</p>
-<h5>Linux</h5>
+<h5 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h5>
 <p>After mounting your <em>datasets</em> USB disk, open a terminal and change your
 working directory to the disk. In Linux, the path to your disk is
 probably something like
@@ -1173,7 +1173,7 @@ For example, my username is <em>micah</em>, so I would run this command:</p>
 
 <p>Your shell&rsquo;s working directory should now be
 your <em>datasets</em> USB disk. To check, run <code>ls</code> to view the files on this disk.</p>
-<h4>Create an Exercises Folder</h4>
+<h4 id="create-an-exercises-folder">Create an Exercises Folder<a class="headerlink" href="#create-an-exercises-folder" title="Permanent link">&para;</a></h4>
 <p>The <code>mkdir</code> command creates a
 new folder. Now that you&rsquo;re in your USB disk drive in your terminal, run
 the following commands to create a new folder called <em>exercises</em>, and
@@ -1188,7 +1188,7 @@ exercises:</p>
 </code></pre></div>
 
 <p>Next, you&rsquo;ll open the <em>exercises</em> folder in VS Code.</p>
-<h4>Open a VS Code Workspace</h4>
+<h4 id="open-a-vs-code-workspace">Open a VS Code Workspace<a class="headerlink" href="#open-a-vs-code-workspace" title="Permanent link">&para;</a></h4>
 <p>Each VS Code window is called a <em>workspace</em>. You can add folders to your
 workspace, which allows you to easily open any files in that folder or
 create new ones. To open a VS Code workspace for your <em>exercises</em>
@@ -1216,7 +1216,7 @@ created. The right side of the window is the editor, where you&rsquo;ll enter
 your shell script.</p>
 <p><img alt="Figure 3-7: VS Code with the exercises folder open in a workspace" src="media/images/Figure3-7.png" /><br />
 <em>Figure 3-7: VS Code with the exercises folder open in a workspace</em></p>
-<h4>Write the Shell Script</h4>
+<h4 id="write-the-shell-script">Write the Shell Script<a class="headerlink" href="#write-the-shell-script" title="Permanent link">&para;</a></h4>
 <p>Enter the following text into <em>exercise-3-6.sh</em> in VS Code and save the
 file:</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
@@ -1249,7 +1249,7 @@ reason.</p>
 The <code>whoami</code> command displays
 the name of the user running the script. The <code>pwd</code> command displays the current working
 directory.</p>
-<h4>Run the Shell Script</h4>
+<h4 id="run-the-shell-script">Run the Shell Script<a class="headerlink" href="#run-the-shell-script" title="Permanent link">&para;</a></h4>
 <p>Before you can run a script, you need to make it <em>executable</em> by giving
 it permission to run as a program. The <code>chmod</code> command lets you change permissions on
 files with the following syntax:</p>
@@ -1311,7 +1311,7 @@ your own computer.</p>
 <p>You&rsquo;ll write many more scripts throughout this book. I&rsquo;ve included a
 copy of the code for every exercise in this book&rsquo;s online resources. In
 Exercise 3-7, you&rsquo;ll download a copy of all of this code.</p>
-<h3>Exercise 3-7: Clone the Book’s GitHub Repository</h3>
+<h3 id="exercise-3-7-clone-the-books-github-repository">Exercise 3-7: Clone the Book’s GitHub Repository<a class="headerlink" href="#exercise-3-7-clone-the-books-github-repository" title="Permanent link">&para;</a></h3>
 <p>Programmers store source code in <em>git repositories</em> (or <em>git repos</em> for
 short), which are composed of a collection of files (usually source
 code) and the history of how they have changed over time. By storing
@@ -1360,7 +1360,7 @@ easily browse through all of the files.</p>
 following chapters, I&rsquo;ll walk you through the process of writing your
 own scripts from scratch, but you can also run the complete scripts
 taken from the git repo or copy and paste their code into your own code.</p>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>In this chapter, you&rsquo;ve learned the basics of command line theory,
 including how to use the shell in a terminal, run various shell
 commands, and navigate the shell using features like tab completion. You

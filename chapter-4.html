@@ -54,7 +54,7 @@ securely for faster internet and extra disk space. As practice, you&rsquo;ll
 use a remote server to download and briefly examine hacked data from the
 Oath Keepers militia, a far-right extremist group that participated in
 the January 6, 2021, US Capitol insurrection.</p>
-<h3>Introducing for Loops</h3>
+<h3 id="introducing-for-loops">Introducing for Loops<a class="headerlink" href="#introducing-for-loops" title="Permanent link">&para;</a></h3>
 <p>The BlueLeaks torrent you downloaded in Exercise 2-1 is 269GB and
 contains 168 different ZIP files ranging from 49GB to half a kilobyte
 each. In theory, you could manually unzip these 168 files one at a time
@@ -130,7 +130,7 @@ ZIP filename: acprlea.zip
 <p>Each time the code loops, the value of <code>FILENAME</code> is the name of one of the ZIP files.
 When the <code>echo</code> command runs,
 it displays those filenames, one after another.</p>
-<h3>Exercise 4-1: Unzip the BlueLeaks Dataset</h3>
+<h3 id="exercise-4-1-unzip-the-blueleaks-dataset">Exercise 4-1: Unzip the BlueLeaks Dataset<a class="headerlink" href="#exercise-4-1-unzip-the-blueleaks-dataset" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll write a script to unzip all the ZIP files in
 BlueLeaks so you can work with the data they contain. Once unzipped, the
 files will take 271GB of additional space on your <em>datasets</em> USB.</p>
@@ -139,7 +139,7 @@ on macOS or Linux next. If you&rsquo;re using Windows, read that
 subsection to learn how to write <code>for</code> loops in bash since you&rsquo;ll need that
 skill later in the book, but you won&rsquo;t need to follow along until
 Unzip Files on Windows on page 92.</p>
-<h4>Unzip Files on macOS or Linux</h4>
+<h4 id="unzip-files-on-macos-or-linux">Unzip Files on macOS or Linux<a class="headerlink" href="#unzip-files-on-macos-or-linux" title="Permanent link">&para;</a></h4>
 <p>Open a terminal and navigate to your <em>BlueLeaks</em> folder by running the
 following command, replacing <code>blueleaks_path</code> with your own folder path:</p>
 <div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>blueleaks_path
@@ -234,7 +234,7 @@ saved is <em>../exercises/chapter-4/exercise-4-1-unzip.sh</em>.</p>
 BlueLeaks files. Sit back, relax, and perhaps enjoy a beverage while you
 wait for it to finish, which could take hours.</p>
 <blockquote>
-<h5>LOOPING THROUGH FILENAMES WITH SPACES</h5>
+<h5 id="looping-through-filenames-with-spaces">LOOPING THROUGH FILENAMES WITH SPACES<a class="headerlink" href="#looping-through-filenames-with-spaces" title="Permanent link">&para;</a></h5>
 <p>Looping over the output of <code>ls</code> as you’ve just done works only if the filenames don’t contain spaces. If they did, your script would fail due to invalid filenames. For example, if you had a file called <code>Work Documents.zip</code> in the folder, the <code>for</code> loop would consider it two files, <code>Work</code> and <code>Documents.zip</code>, as discussed in Chapter 3.</p>
 <p>The output of the <code>ls</code> command is a string—that is, a list of characters—with each filename separated by a newline character (<code>\n</code>), which represents a line break. If you have two files in a folder, <code>readme.txt</code> and <code>Work Documents.zip</code>, the <code>ls</code>
 command outputs a string like <code>readme.txt\nWork Documents.zip</code>.</p>
@@ -254,12 +254,12 @@ command outputs a string like <code>readme.txt\nWork Documents.zip</code>.</p>
 <p>None of the ZIP filenames in the BlueLeaks data have spaces, but you may need to use this script on filenames with spaces for future projects.</p>
 </blockquote>
 <p>If you&rsquo;re not using Windows, skip ahead to the Organize Your Files section on page 93. Otherwise, read on.</p>
-<h4>Unzip Files on Windows</h4>
+<h4 id="unzip-files-on-windows">Unzip Files on Windows<a class="headerlink" href="#unzip-files-on-windows" title="Permanent link">&para;</a></h4>
 <p>Unzipping files in WSL from a USB disk formatted for Windows might be
 <em>very</em> slow, due to WSL performance problems. Fortunately, there&rsquo;s a
 much faster way to unzip all 168 files in BlueLeaks, using PowerShell
 and a program called 7-Zip.</p>
-<h5>Install 7-Zip</h5>
+<h5 id="install-7-zip">Install 7-Zip<a class="headerlink" href="#install-7-zip" title="Permanent link">&para;</a></h5>
 <p>The open source Windows archiving program 7-Zip lets you extract various
 types of compressed files<em>.</em> Download and install 7-Zip from
 <a href="https://www.7-zip.org">https://www.7-zip.org</a>.
@@ -289,7 +289,7 @@ PowerShell window open, close PowerShell and open
 it again, forcing the shell to use the new changes to the <code>Path</code> environment variable.</p>
 <p>You can now use the <code>7z</code>
 command to run 7-Zip.</p>
-<h5>Unzip in PowerShell with 7-Zip</h5>
+<h5 id="unzip-in-powershell-with-7-zip">Unzip in PowerShell with 7-Zip<a class="headerlink" href="#unzip-in-powershell-with-7-zip" title="Permanent link">&para;</a></h5>
 <p>In a PowerShell terminal, change to the <em>BlueLeaks</em> folder on your
 <em>datasets</em> USB disk. For example, on my computer, I run:</p>
 <div class="codehilite"><pre><span></span><code><span class="nb">cd </span><span class="n">D</span><span class="p">:\</span><span class="n">BlueLeaks</span>
@@ -331,7 +331,7 @@ avoiding WSL performance problems to make it easier to work with big
 datasets like BlueLeaks in Windows going forward. You&rsquo;ll use WSL for the
 remainder of the book, so you&rsquo;ll need a plan to resolve any issues you
 encounter.</em></p>
-<h4>Organize Your Files</h4>
+<h4 id="organize-your-files">Organize Your Files<a class="headerlink" href="#organize-your-files" title="Permanent link">&para;</a></h4>
 <p>Your <em>BlueLeaks</em> folder should now be full of both ZIP files and
 extracted folders. Now you&rsquo;ll make a separate <em>BlueLeaks-extracted</em>
 folder for the extracted data and keep the ZIP
@@ -354,7 +354,7 @@ renames files. On the first line, it renames the <em>BlueLeaks</em> folder
 <p>Your <em>datasets</em> USB disk should now contain a folder called <em>BlueLeaks</em>
 with 250GB of ZIP files, along with another folder called
 <em>BlueLeaks-extracted</em> with 269GB of extracted hacked police data.</p>
-<h3>How the Hacker Obtained the BlueLeaks Data</h3>
+<h3 id="how-the-hacker-obtained-the-blueleaks-data">How the Hacker Obtained the BlueLeaks Data<a class="headerlink" href="#how-the-hacker-obtained-the-blueleaks-data" title="Permanent link">&para;</a></h3>
 <p>We don&rsquo;t know how the hacker hacked and leaked the BlueLeaks files, but
 we can make an educated guess based on clues from the dataset.</p>
 <p>Imagine that it&rsquo;s June 6, 2020, less than two weeks after Minneapolis
@@ -426,11 +426,11 @@ targeting all 251 websites, uploading hundreds of gigabytes of data to
 themselves, in a single Saturday evening. They then likely forgot to
 delete the <em>blug.aspx</em>, <em>pscp64.exe</em>, <em>7z.exe</em>, and <em>ntdaddy.aspx</em> files
 before submitting the dataset to DDoSecrets.</p>
-<h3>Exercise 4-2: Explore BlueLeaks on the Command Line</h3>
+<h3 id="exercise-4-2-explore-blueleaks-on-the-command-line">Exercise 4-2: Explore BlueLeaks on the Command Line<a class="headerlink" href="#exercise-4-2-explore-blueleaks-on-the-command-line" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll start exploring the contents of your unzipped
 BlueLeaks files, using commands and advanced shell features that let you
 quickly measure file and folder size and sort and count lines of output.</p>
-<h4>Calculate How Much Disk Space Folders Use</h4>
+<h4 id="calculate-how-much-disk-space-folders-use">Calculate How Much Disk Space Folders Use<a class="headerlink" href="#calculate-how-much-disk-space-folders-use" title="Permanent link">&para;</a></h4>
 <p>The <code>du</code> command (short for
 &ldquo;disk usage&rdquo;) is a powerful tool for assessing a new dataset. Linux and
 macOS come with slightly different versions of <code>du</code>. The Linux version, which is part of a
@@ -501,7 +501,7 @@ inside each iteration of the loop, runs the
 </code></pre></div>
 
 <p>This shows you how much disk space each folder uses.</p>
-<h4>Use Pipes and Sort Output</h4>
+<h4 id="use-pipes-and-sort-output">Use Pipes and Sort Output<a class="headerlink" href="#use-pipes-and-sort-output" title="Permanent link">&para;</a></h4>
 <p>You now know the size of each folder in the BlueLeaks dataset. Next,
 you&rsquo;ll sort the 168 folders in order of disk space. By determining which
 folders are the largest, you can quickly tell which fusion centers have
@@ -557,7 +557,7 @@ subfolders. The <em>repo</em> folder, the largest folder in BlueLeaks, should
 appear at the bottom of the list, right after <em>miacx</em>, the
 second-largest folder.</p>
 <blockquote>
-<h5>FILE SIZE UNITS AND CONVERSIONS</h5>
+<h5 id="file-size-units-and-conversions">FILE SIZE UNITS AND CONVERSIONS<a class="headerlink" href="#file-size-units-and-conversions" title="Permanent link">&para;</a></h5>
 <p>You’re likely familiar with file size units like megabytes and gigabytes, and you might have a mental model of how much information those units can hold: Office documents are often a few megabytes, a two-hour video file might be a gigabyte or two, and a video game might be hundreds of gigabytes. Being able to convert between the different units of disk space is an important skill for working with large datasets.</p>
 <p>Units like kilobyte, megabyte, gigabyte, and terabyte sound metric, but they’re not. For instance, the <code>kilo-</code> prefix denotes a factor of 1,000, but there are 1,024 bytes in a kilobyte. Here’s a list of common conversions:</p>
 <ul>
@@ -570,7 +570,7 @@ second-largest folder.</p>
 </ul>
 <p>As an example, the <code>ncric</code> folder in BlueLeaks is 20,008,051,852 bytes, which is 19,539,113.1KB, or 19,081.2MB, or 18.6GB—about 160 billion bits.`</p>
 </blockquote>
-<h4>Create an Inventory of Filenames in a Dataset</h4>
+<h4 id="create-an-inventory-of-filenames-in-a-dataset">Create an Inventory of Filenames in a Dataset<a class="headerlink" href="#create-an-inventory-of-filenames-in-a-dataset" title="Permanent link">&para;</a></h4>
 <p>When you&rsquo;re working with an enormous dataset like BlueLeaks, it&rsquo;s
 helpful to create an inventory of all of the files it contains by
 listing them in a text file. This way you can easily count the number of
@@ -608,7 +608,7 @@ displaying the filenames across your terminal.</p>
 <p>It&rsquo;s easier to slowly scroll through these
 files in your text editor, but there are too many to count with the
 naked eye.</p>
-<h4>Count the Files in a Dataset</h4>
+<h4 id="count-the-files-in-a-dataset">Count the Files in a Dataset<a class="headerlink" href="#count-the-files-in-a-dataset" title="Permanent link">&para;</a></h4>
 <p>The <code>wc</code> command takes some
 input and tells you how many characters, words, or lines it contains.
 When used with the <code>-l</code> (or
@@ -632,7 +632,7 @@ again, and pipe its output into <code>wc</code>, like this:</p>
 <p>That command takes longer to run, though, since it searches through the
 whole dataset again (press <strong>CTRL</strong>-C to
 cancel this command before it finishes).</p>
-<h3>Exercise 4-3: Find Revelations in BlueLeaks with grep</h3>
+<h3 id="exercise-4-3-find-revelations-in-blueleaks-with-grep">Exercise 4-3: Find Revelations in BlueLeaks with grep<a class="headerlink" href="#exercise-4-3-find-revelations-in-blueleaks-with-grep" title="Permanent link">&para;</a></h3>
 <p>In the summer of 2020, while American society was going through a
 long-due reckoning about the scale of racist police killings, right-wing
 media (and police) instead focused on the dangers of the protesters
@@ -645,7 +645,7 @@ mainstreaming of white supremacy in the US.</p>
 input for keywords, letting you search the content of datasets for
 newsworthy information. In this exercise, you&rsquo;ll use <code>grep</code> to find out what police had to say
 about antifa during the protests.</p>
-<h4>Filter for Documents Mentioning Antifa</h4>
+<h4 id="filter-for-documents-mentioning-antifa">Filter for Documents Mentioning Antifa<a class="headerlink" href="#filter-for-documents-mentioning-antifa" title="Permanent link">&para;</a></h4>
 <p>You&rsquo;ll start by grepping your list of filenames to find any that include
 the word <em>antifa</em>. From the <em>BlueLeaks-extracted</em> folder, search the
 <em>BlueLeaks-filenames.txt</em> file that you created in Exercise 4-2 by
@@ -702,7 +702,7 @@ Trafficking Area site. To quickly find any documents that have the word
 <code>find azhidta | grep -i marijuana</code>. To count the number of files with
 <em>marijuana</em> in the filenames, you could pipe all of that into the
 <code>wc -l</code> command.</p>
-<h4>Filter for Certain Types of Files</h4>
+<h4 id="filter-for-certain-types-of-files">Filter for Certain Types of Files<a class="headerlink" href="#filter-for-certain-types-of-files" title="Permanent link">&para;</a></h4>
 <p>In addition to searching for keywords like <em>antifa</em> or <em>marijuana</em>,
 <code>grep</code> can help you filter a
 list of filenames to include only certain file types. Grep for Microsoft
@@ -721,7 +721,7 @@ the output into <code>wc -l</code>:</p>
 
 <p>The <code>wc</code> command should tell
 you that the previous command had 8,861 results.</p>
-<h4>Use grep with Regular Expressions</h4>
+<h4 id="use-grep-with-regular-expressions">Use grep with Regular Expressions<a class="headerlink" href="#use-grep-with-regular-expressions" title="Permanent link">&para;</a></h4>
 <p>If you scroll through the <em>.docx</em> filenames you just found, you&rsquo;ll see
 that a few of them aren&rsquo;t actually Word documents. For example, the
 filename <em>./arictexas/files/DDF/2014 Austin City Limits Festival - APD
@@ -765,7 +765,7 @@ folder.</p>
 <code>grep</code>, and <code>wc</code> to find out how many PDFs (<em>.pdf</em>) and
 Excel documents (<em>.xlsx</em>) are in the dataset. You can also experiment
 with other file types.</p>
-<h4>Search Files in Bulk with grep</h4>
+<h4 id="search-files-in-bulk-with-grep">Search Files in Bulk with grep<a class="headerlink" href="#search-files-in-bulk-with-grep" title="Permanent link">&para;</a></h4>
 <p>In addition to piping output from other commands into <code>grep</code>, you can use <code>grep</code> to search directly within text files
 by using the following syntax:</p>
 <div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>search_term<span class="w"> </span>filename
@@ -855,7 +855,7 @@ antifa that spans different centers. Individual documents may contain
 law enforcement lingo you can use as search terms for related documents.
 Take detailed notes on what&rsquo;s most revealing in each document, then rely
 on these notes if you decide to write about your findings.</p>
-<h3>Encrypted Data in the BlueLeaks Dataset</h3>
+<h3 id="encrypted-data-in-the-blueleaks-dataset">Encrypted Data in the BlueLeaks Dataset<a class="headerlink" href="#encrypted-data-in-the-blueleaks-dataset" title="Permanent link">&para;</a></h3>
 <p>As you dig around in the BlueLeaks dataset, you&rsquo;ll notice some patterns.
 Most folders contain many CSVs, as well as.<em>aspx</em> files, the source code
 of the hacked websites. They also contain <em>files</em> subfolders containing
@@ -912,7 +912,7 @@ Office documents or ZIP files. I can&rsquo;t help but imagine that the most
 interesting details in any dataset might be the encrypted parts.
 Password-cracking is outside the scope of this book, but if you can
 figure out the password for <em>repo</em>, please let me know.</p>
-<h3>Data Analysis with Servers in the Cloud</h3>
+<h3 id="data-analysis-with-servers-in-the-cloud">Data Analysis with Servers in the Cloud<a class="headerlink" href="#data-analysis-with-servers-in-the-cloud" title="Permanent link">&para;</a></h3>
 <p>So far, you&rsquo;ve used the CLI <em>locally</em> on your own computer, but you can
 also use it <em>remotely</em> via servers to which you connect through a cloud
 network. DigitalOcean, AWS, Microsoft Azure, and countless other cloud
@@ -998,7 +998,7 @@ more powerful but has a steeper learning curve. For simplicity&rsquo;s sake,
 in the following exercise you&rsquo;ll use nano.</p>
 <p><strong>NOTE</strong> <em>Technically, you can use VS Code to edit files remotely over SSH, but
 there are some limitations. See <a href="https://code.visualstudio.com/docs/remote/ssh">https://code.visualstudio.com/docs/remote/ssh</a> for more information on VS Code&rsquo;s support for editing files over SSH.</em></p>
-<h3>Exercise 4-4: Set Up a VPS</h3>
+<h3 id="exercise-4-4-set-up-a-vps">Exercise 4-4: Set Up a VPS<a class="headerlink" href="#exercise-4-4-set-up-a-vps" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll create an account on a cloud hosting provider,
 generate an SSH key, create a VPS on your cloud provider, SSH into it,
 start a Byobu session, and install updates. To follow along you&rsquo;ll need
@@ -1010,7 +1010,7 @@ be slightly different.</p>
 and create an account, providing a credit card number while signing up.
 Use a strong password, store it in your password manager, and turn on
 two-factor authentication.</p>
-<h4>Generate an SSH Key</h4>
+<h4 id="generate-an-ssh-key">Generate an SSH Key<a class="headerlink" href="#generate-an-ssh-key" title="Permanent link">&para;</a></h4>
 <p>To generate an SSH key, open a terminal on your local computer (if
 you&rsquo;re using Windows, use a WSL terminal) and run:</p>
 <div class="codehilite"><pre><span></span><code>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519
@@ -1045,7 +1045,7 @@ key in <em>\~/.ssh/id_ed25519.pub</em>.</p>
 install the OpenSSH client directly in Windows. Open a PowerShell window
 as an administrator and run <code>Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0</code> to enable using the ssh
 command from PowerShell.</em></p>
-<h4>Add Your Public Key to the Cloud Provider</h4>
+<h4 id="add-your-public-key-to-the-cloud-provider">Add Your Public Key to the Cloud Provider<a class="headerlink" href="#add-your-public-key-to-the-cloud-provider" title="Permanent link">&para;</a></h4>
 <p>Next, add your public key to your new DigitalOcean account. After
 logging in to the web console, go to the Settings page and switch to the
 Security tab. Click <strong>Add SSH Key</strong>, then copy and paste your SSH public
@@ -1071,7 +1071,7 @@ it into DigitalOcean, then give it a name, as shown in Figure
 you generated them, since they&rsquo;re allowing this specific computer to
 access remote computers. For example, I&rsquo;ve called my key <em>trapdoor</em>, the
 name of my Mac.</p>
-<h4>Create a VPS</h4>
+<h4 id="create-a-vps">Create a VPS<a class="headerlink" href="#create-a-vps" title="Permanent link">&para;</a></h4>
 <p>Now that DigitalOcean has your SSH public key, you can create a new VPS.
 Click <strong>Create</strong> at the top of the DigitalOcean console and follow the
 instructions to create a new <em>droplet</em>, DigitalOcean&rsquo;s term for a VPS.
@@ -1107,7 +1107,7 @@ account with my new server&rsquo;s IP address, 178.128.22.151.</p>
 <p><img alt="Figure 4-4: My test-vps IP address" src="media/images/Figure4-4.png" /><br />
 <em>Figure 4-4: My test-vps IP address</em></p>
 <p>Click the IP address to copy it to your clipboard.</p>
-<h4>SSH into Your Server</h4>
+<h4 id="ssh-into-your-server">SSH into Your Server<a class="headerlink" href="#ssh-into-your-server" title="Permanent link">&para;</a></h4>
 <p>Run the following command to SSH into your server:</p>
 <div class="codehilite"><pre><span></span><code>ssh<span class="w"> </span>username@hostname
 </code></pre></div>
@@ -1150,7 +1150,7 @@ your remote server:</p>
 to enter a password to log in. If anyone else tries SSHing to your
 server, they&rsquo;ll get the <code>Permission denied (publickey)</code> error.</p>
 <p>Take a look around your new cloud-based system. Run <code>ls</code> to list files, <code>ls -al</code> to see hidden files, and <code>cd</code> to change to folders.</p>
-<h4>Start a Byobu Session</h4>
+<h4 id="start-a-byobu-session">Start a Byobu Session<a class="headerlink" href="#start-a-byobu-session" title="Permanent link">&para;</a></h4>
 <p>If you used the Ubuntu image to set up your droplet, the Byobu window
 manager should be installed. Run the <code>byobu</code> command to start a Byobu session. (If
 you&rsquo;re using a different operating system, or if for some reason Byobu
@@ -1196,7 +1196,7 @@ terminal window and SSH back into your server using the <code>ssh username@hostn
 <code>byobu</code> again to attach your
 previous session. Any programs you run inside this Byobu session won&rsquo;t
 quit when you disconnect from SSH.</p>
-<h4>Install Updates</h4>
+<h4 id="install-updates">Install Updates<a class="headerlink" href="#install-updates" title="Permanent link">&para;</a></h4>
 <p>Always install updates when you set up a new server to keep it secure.
 Run the following commands (you don&rsquo;t need to use <code>sudo</code>, since you&rsquo;re the root user):</p>
 <div class="codehilite"><pre><span></span><code>apt<span class="w"> </span>update
@@ -1210,7 +1210,7 @@ command. You&rsquo;ll get kicked out of your SSH session,
 but you should be able to SSH back in shortly when the reboot completes. You can also reboot your VPS from
 DigitalOcean&rsquo;s web console&mdash;for example, if the entire server crashed
 and you can&rsquo;t SSH into it.</p>
-<h3>Exercise 4-5: Explore the Oath Keepers Dataset Remotely</h3>
+<h3 id="exercise-4-5-explore-the-oath-keepers-dataset-remotely">Exercise 4-5: Explore the Oath Keepers Dataset Remotely<a class="headerlink" href="#exercise-4-5-explore-the-oath-keepers-dataset-remotely" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll use BitTorrent to download the Oath Keepers
 dataset to your cloud server and explore it using the skills you&rsquo;ve
 gained in this chapter. You&rsquo;ll also learn to copy data from your remote
@@ -1413,7 +1413,7 @@ email dumps.</p>
 <p><strong>WARNING</strong> <em>Destroy your VPS from the DigitalOcean web console when you&rsquo;re done
 with it. Using it for an hour or two should cost you only a few cents,
 but the bill can get expensive if you don&rsquo;t pay attention.</em></p>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>In this chapter, you&rsquo;ve put your command line skills to the test,
 unzipping the compressed files in BlueLeaks and learning to quickly
 search and sort datasets. You also worked with servers in the cloud and

@@ -66,7 +66,7 @@ start researching BlueLeaks with it. I&rsquo;ll conclude the chapter by
 explaining the technology behind the app and pointing you to its Python
 source code on GitHub. If you ever need to develop an app to investigate
 a specific dataset, you can use this chapter as inspiration.</p>
-<h3>Undiscovered Revelations in BlueLeaks</h3>
+<h3 id="undiscovered-revelations-in-blueleaks">Undiscovered Revelations in BlueLeaks<a class="headerlink" href="#undiscovered-revelations-in-blueleaks" title="Permanent link">&para;</a></h3>
 <p>As discussed in the previous chapter, my BlueLeaks investigation focused
 on the data from the <em>ncric</em> folder. Even within that folder, I
 concentrated on the final two weeks of data, focusing on police
@@ -105,7 +105,7 @@ the end of this chapter, you&rsquo;ll have all the tools you need to do a deep
 dive on any BlueLeaks folder you choose and search for newsworthy
 revelations. To start, you&rsquo;ll install BlueLeaks Explorer in Exercise
 10-1.</p>
-<h3>Exercise 10-1: Install BlueLeaks Explorer</h3>
+<h3 id="exercise-10-1-install-blueleaks-explorer">Exercise 10-1: Install BlueLeaks Explorer<a class="headerlink" href="#exercise-10-1-install-blueleaks-explorer" title="Permanent link">&para;</a></h3>
 <p>You can find BlueLeaks Explorer&rsquo;s source code at
 <a href="https://github.com/micahflee/blueleaks-explorer">https://github.com/micahflee/blueleaks-explorer</a>.
 That GitHub page includes instructions on how to get it up and running
@@ -118,7 +118,7 @@ You&rsquo;ll run it locally on your computer using Docker and point it at your
 BlueLeaks folder. Before you begin, make sure you&rsquo;ve completed the
 exercises in Chapter 5 so that you
 understand how to use Docker and Docker Compose.</p>
-<h4>Create the Docker Compose Configuration File</h4>
+<h4 id="create-the-docker-compose-configuration-file">Create the Docker Compose Configuration File<a class="headerlink" href="#create-the-docker-compose-configuration-file" title="Permanent link">&para;</a></h4>
 <p>Start by creating a new folder called <em>blueleaks-explorer</em>. This folder
 will require about 5GB of disk space. Create a new file in that folder
 called <em>docker-compose.yaml</em> and open it in your text editor.</p>
@@ -155,7 +155,7 @@ BlueLeaks Explorer app is running, you can load it on your browser at
 <code>volumes</code> section maps folders
 on your machine to folders inside the container.</p>
 <p>Save the <em>docker-compose.yaml</em> file.</p>
-<h4>Bring Up the Containers</h4>
+<h4 id="bring-up-the-containers">Bring Up the Containers<a class="headerlink" href="#bring-up-the-containers" title="Permanent link">&para;</a></h4>
 <p>In a terminal window, change to the <em>blueleaks-explorer</em> folder that you
 just made, then run this command to download the BlueLeaks Explorer
 Docker image and start the server:</p>
@@ -179,7 +179,7 @@ blueleaks-explorer-app-1  |  Press CTRL+C to quit
 hasn&rsquo;t been initialized. If you load
 <em>http://localhost:8000</em> in your browser,
 you should get an error telling you as much.</p>
-<h4>Initialize the Databases</h4>
+<h4 id="initialize-the-databases">Initialize the Databases<a class="headerlink" href="#initialize-the-databases" title="Permanent link">&para;</a></h4>
 <p>The first time you use BlueLeaks Explorer, you must run a script to
 convert the many CSV files in BlueLeaks into SQLite databases. SQLite is
 lightweight SQL database software that can store a whole database in a
@@ -240,7 +240,7 @@ content within it might load images from fusion center sites, and
 clicking links could bring you to those sites.</em></p>
 <p>In the following section, you&rsquo;ll begin by exploring the data for the
 NCRIC site using a structure that I&rsquo;ve already created.</p>
-<h3>The Structure of NCRIC</h3>
+<h3 id="the-structure-of-ncric">The Structure of NCRIC<a class="headerlink" href="#the-structure-of-ncric" title="Permanent link">&para;</a></h3>
 <p>BlueLeaks Explorer allows you to browse and search all of the tables in
 any BlueLeaks site that you have a structure for. To demonstrate the
 features of the app&mdash;including listing the tables in a BlueLeaks site,
@@ -248,7 +248,7 @@ viewing and searching the data in those tables, viewing data from
 related tables, and viewing images and documents associated with rows of
 data&mdash;you&rsquo;ll start by exploring the NCRIC data. This will help you
 understand how structures are constructed before you make your own.</p>
-<h4>Exploring Tables and Relationships</h4>
+<h4 id="exploring-tables-and-relationships">Exploring Tables and Relationships<a class="headerlink" href="#exploring-tables-and-relationships" title="Permanent link">&para;</a></h4>
 <p>As directed in Exercise 10-1, make sure your BlueLeaks Explorer Docker
 container is running and load
 <em>http://localhost:8000</em> in your browser.
@@ -327,7 +327,7 @@ row. I&rsquo;ve configured the Documents table to show only a handful of
 fields: DocTitle, DateEntered, DocFilename, URL, PreviewImage, and the
 DocumentCategory relationship. Clicking Show All will show you the
 remaining hidden fields as well.</p>
-<h4>Searching for Keywords</h4>
+<h4 id="searching-for-keywords">Searching for Keywords<a class="headerlink" href="#searching-for-keywords" title="Permanent link">&para;</a></h4>
 <p>For a concrete example of how BlueLeaks Explorer makes it easier to
 investigate the BlueLeaks documents, let&rsquo;s revisit the SAR described in
 Investigating a SAR in Chapter 9
@@ -346,7 +346,7 @@ immediately be able to read the PDF in another browser tab.</p>
 <p>Now that you have an idea of how to navigate
 BlueLeaks Explorer, it&rsquo;s your turn to explore other parts of the
 BlueLeaks dataset beyond NCRIC.</p>
-<h3>Building Your Own BlueLeaks Structure</h3>
+<h3 id="building-your-own-blueleaks-structure">Building Your Own BlueLeaks Structure<a class="headerlink" href="#building-your-own-blueleaks-structure" title="Permanent link">&para;</a></h3>
 <p>In this section, you&rsquo;ll learn how to define your own structure for
 another BlueLeaks site, the Los Angeles Joint Regional Intelligence
 Center (JRIC). By the end of this section, you&rsquo;ll have the tools you
@@ -358,7 +358,7 @@ them, looking for newsworthy revelations. As you read, you&rsquo;ll probably
 end up tweaking the structure to help you in your research, and you&rsquo;ll
 also likely start cleaning up new tables as you discover relationships
 to them.</p>
-<h4>Defining the JRIC Structure</h4>
+<h4 id="defining-the-jric-structure">Defining the JRIC Structure<a class="headerlink" href="#defining-the-jric-structure" title="Permanent link">&para;</a></h4>
 <p>Some structures, like the one I constructed for NCRIC, are already
 included with BlueLeaks Explorer. To either edit existing structures or
 define new ones, load BlueLeaks Explorer in your browser and click
@@ -406,7 +406,7 @@ BlueLeaks Explorer in general, keep two tabs open: the Explore Data and
 Define Structure pages. This way, when you save changes in the Define
 Structure tab, you can refresh the Explore Data tab to see them
 implemented.</p>
-<h4>Showing Useful Fields</h4>
+<h4 id="showing-useful-fields">Showing Useful Fields<a class="headerlink" href="#showing-useful-fields" title="Permanent link">&para;</a></h4>
 <p>In Exercise 9-3, you wrote a Python script to automatically create a
 spreadsheet mapping the names of BlueLeaks folders to their associated
 organizations. You found this information in <em>Company.csv</em>, a
@@ -447,7 +447,7 @@ discover that a field you chose to hide is actually useful, in which
 case you can edit the structure again to display it.</p>
 <p><img alt="Figure 10-9: Viewing JRIC’s Company table with the irrelevant fields hidden" src="media/images/Figure10-9.png" /><br />
 <em>Figure 10-9: Viewing JRIC’s Company table with the irrelevant fields hidden</em></p>
-<h4>Changing Field Types</h4>
+<h4 id="changing-field-types">Changing Field Types<a class="headerlink" href="#changing-field-types" title="Permanent link">&para;</a></h4>
 <p>The Explore Data page is much more readable now, but it&rsquo;s still not
 perfect. The SiteHeader field is hard to read because it&rsquo;s a block of
 HTML. It would also be nice if CompanyName appeared at the top of the
@@ -477,7 +477,7 @@ BlueLeaks Explorer renders it as HTML and loads the JRIC header
 image hosted from JRIC&rsquo;s web server. Figure
 10-10 also shows that the CompanyName field
 is now listed first for each row.</p>
-<h4>Adding JRIC’s Leads Table</h4>
+<h4 id="adding-jrics-leads-table">Adding JRIC’s Leads Table<a class="headerlink" href="#adding-jrics-leads-table" title="Permanent link">&para;</a></h4>
 <p>In your Explore Data tab, go back to the JRIC table listing. This time,
 click the Leads table. If you read through its rows, you&rsquo;ll see that
 this table is full of SARs. It&rsquo;s similar to NCRIC&rsquo;s SARs table, except
@@ -531,7 +531,7 @@ guess is that this field describes which form was filled out to add this
 lead to JRIC&rsquo;s database. Most of the values for NSFormName appear to be
 PublicCountyLeadSheet or LeadSheetPrivateSectorAndPublic. Is the Leads
 table related to some other table that describes forms? Let&rsquo;s find out.</p>
-<h4>Building a Relationship</h4>
+<h4 id="building-a-relationship">Building a Relationship<a class="headerlink" href="#building-a-relationship" title="Permanent link">&para;</a></h4>
 <p>Go back to the page listing all of the tables in JRIC and click the
 table named FormBuilder. This table doesn&rsquo;t have a field called
 NSFormName, but it does have one called FormName. If you search the
@@ -603,7 +603,7 @@ LeadSheetPrivateSectorAndPublic form in the FormBuilder table. Because
 of the Submissions relationship you created, this page should show you
 everything that was submitted to JRIC using this form&mdash;all 1,949 leads
 submitted by the public.</p>
-<h3>Verifying BlueLeaks Data</h3>
+<h3 id="verifying-blueleaks-data">Verifying BlueLeaks Data<a class="headerlink" href="#verifying-blueleaks-data" title="Permanent link">&para;</a></h3>
 <p>Whenever you&rsquo;re looking at leaked or hacked data, you should always do
 additional research outside of the dataset itself to help verify that
 the data is authentic and put it into context. By looking at the Company
@@ -629,7 +629,7 @@ table.</p>
 <p>You&rsquo;ve only explored a small amount of content in the JRIC data so far.
 Now it&rsquo;s time to finish building the structure so you can explore the
 rest.</p>
-<h3>Exercise 10-2: Finish Building the Structure for JRIC</h3>
+<h3 id="exercise-10-2-finish-building-the-structure-for-jric">Exercise 10-2: Finish Building the Structure for JRIC<a class="headerlink" href="#exercise-10-2-finish-building-the-structure-for-jric" title="Permanent link">&para;</a></h3>
 <p>In the previous sections, you started building the structure for the
 JRIC data. You cleaned up the Company, Leads, and FormBuilder tables and
 created a relationship between the latter two tables, allowing you to
@@ -681,7 +681,7 @@ for keywords. If you index all of the data in BlueLeaks, you can search
 it all at once to find documents in various BlueLeaks sites. Then, once
 you discover the sites you&rsquo;re interested in, you can do a deep dive on
 them using BlueLeaks Explorer.</p>
-<h3>The Technology Behind BlueLeaks Explorer</h3>
+<h3 id="the-technology-behind-blueleaks-explorer">The Technology Behind BlueLeaks Explorer<a class="headerlink" href="#the-technology-behind-blueleaks-explorer" title="Permanent link">&para;</a></h3>
 <p>Sometimes a dataset is so complicated&mdash;and so newsworthy&mdash;that it&rsquo;s
 worth writing a custom application just to help you make sense of it.
 BlueLeaks Explorer is one such application. The information covered in
@@ -701,7 +701,7 @@ section provides just a brief introduction to inspire future research.</p>
 <p>If you feel confident in your programming skills and are inclined to do
 so, you can make improvements to my BlueLeaks Explorer code in the git
 repo and submit them back into the project, since it&rsquo;s open source.</p>
-<h4>The Backend</h4>
+<h4 id="the-backend">The Backend<a class="headerlink" href="#the-backend" title="Permanent link">&para;</a></h4>
 <p>I developed the backend of BlueLeaks Explorer in Python, relying on a
 third-party Python package called Flask, a simple framework for building
 web apps. You can learn more about using Flask at
@@ -727,7 +727,7 @@ it can load
 In this case, the Python code uses the <code>sqlite3</code> module to look up this data in the
 SQlite3 database for that BlueLeaks site, and then returns what it finds
 to the frontend.</p>
-<h4>The Frontend</h4>
+<h4 id="the-frontend">The Frontend<a class="headerlink" href="#the-frontend" title="Permanent link">&para;</a></h4>
 <p>To develop web applications, you&rsquo;ll have to program not in Python but in
 JavaScript, since this is the programming language that web browsers
 understand. I developed the frontend of BlueLeaks Explorer using a
@@ -742,7 +742,7 @@ includes a series of pages designed to display data it retrieves by
 making HTTP requests to the backend. When you save a structure that
 you&rsquo;re working on in BlueLeaks Explorer, the frontend also sends data to
 the backend, which then saves the structure as a JSON file.</p>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>In this chapter, you got BlueLeaks Explorer up and running locally on
 your computer using Docker. You&rsquo;ve learned how to define structures for
 each BlueLeaks site, make the data in the tables easier to read, and

@@ -67,7 +67,7 @@ downloaded in Chapter 4, in addition to
 datasets from Australian offshore detention centers and the conservative
 US think tank the Heritage Foundation. We&rsquo;ll begin by taking a look at
 the standard composition of an email message.</p>
-<h3>The Email Protocol and Message Structure</h3>
+<h3 id="the-email-protocol-and-message-structure">The Email Protocol and Message Structure<a class="headerlink" href="#the-email-protocol-and-message-structure" title="Permanent link">&para;</a></h3>
 <p>A <em>protocol</em> is a shared language that software developers agree upon to
 make their code interoperate. The email protocol we use today was first
 implemented in the early 1980s, got a major revamp in 1995, and hasn&rsquo;t
@@ -147,11 +147,11 @@ Although email messages are text files, you can&rsquo;t rely on <code>grep</code
 content you&rsquo;re hunting for might be Base64-encoded.</p>
 <p>Keeping in mind those basics, let&rsquo;s turn now to the specific formats
 typically encountered in email leaks.</p>
-<h3>File Formats for Email Dumps</h3>
+<h3 id="file-formats-for-email-dumps">File Formats for Email Dumps<a class="headerlink" href="#file-formats-for-email-dumps" title="Permanent link">&para;</a></h3>
 <p>The most common file formats for email <em>dumps</em>, or collections of email
 messages, are EML files, MBOX files, and PST Outlook data files. You&rsquo;ll
 download email in each format in the upcoming exercise.</p>
-<h4>EML Files</h4>
+<h4 id="eml-files">EML Files<a class="headerlink" href="#eml-files" title="Permanent link">&para;</a></h4>
 <p>The simplest type of email dump is a folder full of EML files, the
 standard email message format. An EML file is a text file with the
 extension <em>.eml</em> that contains the raw email message&mdash;the headers
@@ -181,7 +181,7 @@ inbox. Sometimes they organize the files from each inbox into
 subfolders, too.</p>
 <p>In Exercise 6-1, you&rsquo;ll download email messages in EML format from the
 Nauru Police Force dataset.</p>
-<h4>MBOX Files</h4>
+<h4 id="mbox-files">MBOX Files<a class="headerlink" href="#mbox-files" title="Permanent link">&para;</a></h4>
 <p>In an MBOX email dump, each file is a collection of many email messages,
 generally representing a full folder of email. MBOX files often have the
 file extension <em>.mbox</em>, but sometimes they have no file extension at
@@ -194,7 +194,7 @@ file.</p>
 <p>The Oath Keepers dataset is a series of MBOX files, one for each hacked
 inbox. I&rsquo;ll give more detail on the structure of this dataset in
 Exercise 6-1.</p>
-<h4>PST Outlook Data Files</h4>
+<h4 id="pst-outlook-data-files">PST Outlook Data Files<a class="headerlink" href="#pst-outlook-data-files" title="Permanent link">&para;</a></h4>
 <p>Email dumps may also come in the form of PST files, a proprietary format
 that represents a Microsoft Outlook inbox with the <em>.pst</em> file
 extension. Microsoft&rsquo;s email server is called Microsoft Exchange.
@@ -210,13 +210,13 @@ dataset includes 252 PST files, each representing a different email
 address. One file, <em>intercoord@vgtrk.ru.pst</em>, is 48GB alone.</p>
 <p>In Exercise 6-1 you&rsquo;ll download a 1GB PST file containing email from the
 Heritage Foundation.</p>
-<h3>Exercise 6-1: Download Email Dumps from Three Datasets</h3>
+<h3 id="exercise-6-1-download-email-dumps-from-three-datasets">Exercise 6-1: Download Email Dumps from Three Datasets<a class="headerlink" href="#exercise-6-1-download-email-dumps-from-three-datasets" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll work with three different datasets from the
 Nauru Police Force, the Oath Keepers, and the Heritage Foundation. You
 should already have the Oath Keepers dataset from Chapter
 4, so you&rsquo;ll download the other two next.
 You&rsquo;ll also learn more about their contents and structure.</p>
-<h4>The Nauru Police Force Dataset</h4>
+<h4 id="the-nauru-police-force-dataset">The Nauru Police Force Dataset<a class="headerlink" href="#the-nauru-police-force-dataset" title="Permanent link">&para;</a></h4>
 <p>Nauru is a tiny island in the Pacific with a population of about 10,000.
 While technically it&rsquo;s an independent country, it hosts abuse-ridden
 offshore detention centers that the Australian government uses to hold
@@ -234,7 +234,7 @@ on your <em>datasets</em> USB disk and unzip it. You should end up with a
 folder called <em>iven-notte</em> containing the subfolders <em>calendar</em>,
 <em>contacts</em>, <em>deleteditems</em>, <em>drafts</em>, <em>inbox</em>, and more. Each of these
 subfolders is full of EML files.</p>
-<h4>The Oath Keepers Dataset</h4>
+<h4 id="the-oath-keepers-dataset">The Oath Keepers Dataset<a class="headerlink" href="#the-oath-keepers-dataset" title="Permanent link">&para;</a></h4>
 <p>The public part of the Oath Keepers dataset is a 3.9GB torrent of MBOX
 files taken from the server that hosted email for the oathkeepers.org
 domain. This dataset has a folder called <em>Oath Keepers.sbd</em>, containing
@@ -256,7 +256,7 @@ Keepers at <a href="https://ddosecrets.com/wiki/Oath_Keepers">https://ddosecrets
 This page includes a link to the torrent file as well as the magnet
 link. Add the torrent to your BitTorrent client and download the full
 dataset, saving it to your <em>datasets</em> USB disk.</p>
-<h4>The Heritage Foundation Dataset</h4>
+<h4 id="the-heritage-foundation-dataset">The Heritage Foundation Dataset<a class="headerlink" href="#the-heritage-foundation-dataset" title="Permanent link">&para;</a></h4>
 <p>The Heritage Foundation is a conservative think tank that played a major
 role in US politics during the Reagan administration. This dataset, a
 1GB file called <em>backup.pst</em>, is a backup of a personal email account
@@ -279,7 +279,7 @@ and save it into a folder called <em>Heritage Foundation</em> on your
 <em>datasets</em> USB disk.</p>
 <p>While you&rsquo;re waiting for these email dumps to finish downloading, read
 on to learn about the tools you can use to research them.</p>
-<h3>Researching Email Dumps with Thunderbird</h3>
+<h3 id="researching-email-dumps-with-thunderbird">Researching Email Dumps with Thunderbird<a class="headerlink" href="#researching-email-dumps-with-thunderbird" title="Permanent link">&para;</a></h3>
 <p>Before you start reading the email you&rsquo;ve downloaded, you&rsquo;ll install and
 configure <em>Thunderbird</em>, an open source email program for Windows,
 macOS, and Linux that allows you to work with email dumps in different
@@ -312,7 +312,7 @@ bulk-search all of the email you&rsquo;ve imported. However, you can&rsquo;t use
 Thunderbird to search the content of attachments&mdash;for that, you&rsquo;ll need
 a tool like Aleph, which we&rsquo;ll discuss in Other Tools for Researching
 Email Dumps on page 163.</p>
-<h3>Exercise 6-2: Configure Thunderbird for Email Dumps</h3>
+<h3 id="exercise-6-2-configure-thunderbird-for-email-dumps">Exercise 6-2: Configure Thunderbird for Email Dumps<a class="headerlink" href="#exercise-6-2-configure-thunderbird-for-email-dumps" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll install Thunderbird and configure it in order
 to analyze the three email dumps you&rsquo;ve downloaded.</p>
 <p>Download Thunderbird from <a href="https://www.thunderbird.net">https://www.thunderbird.net</a>
@@ -363,7 +363,7 @@ individual email messages if you&rsquo;d like, but I recommend that you
 connect to a VPN beforehand so that the VPN&rsquo;s IP address, rather than
 your IP address, will be tracked (see the &ldquo;Covering Your Tracks with a
 VPN Service&rdquo; box on page 255).</em></p>
-<h3>Reading Individual EML Files with Thunderbird</h3>
+<h3 id="reading-individual-eml-files-with-thunderbird">Reading Individual EML Files with Thunderbird<a class="headerlink" href="#reading-individual-eml-files-with-thunderbird" title="Permanent link">&para;</a></h3>
 <p>During your own investigations, you may find only a few EML files in a
 dataset, or someone might forward email messages to you as attachments.
 Thunderbird is a good tool for inspecting these messages individually
@@ -383,7 +383,7 @@ dumps, because they could hack your computer. Refer back to Chapter
 1 for tips on how to open such documents
 safely.</p>
 <blockquote>
-<h4>EXTRACTING ATTACHMENTS FROM EML FILES</h4>
+<h4 id="extracting-attachments-from-eml-files">EXTRACTING ATTACHMENTS FROM EML FILES<a class="headerlink" href="#extracting-attachments-from-eml-files" title="Permanent link">&para;</a></h4>
 <p>A single EML file could contain several file attachments, all Base64-encoded. The <code>munpack</code>
 program lets you extract these attachments without needing to use an email client. Install <code>munpack</code> with <code>sudo apt install mpack</code>
 in Linux or Windows with WSL, or use <code>brew install mpack</code> in Homebrew on macOS. You can then run the command <code>munpack filename.eml</code>
@@ -393,7 +393,7 @@ to extract the attachments from an email.</p>
 <p>In the following exercises, you&rsquo;ll import each of the email dumps you
 just downloaded into Thunderbird, starting with the EML files from the
 Nauru Police Force dataset.</p>
-<h3>Exercise 6-3: Import the Nauru Police Force EML Email Dump</h3>
+<h3 id="exercise-6-3-import-the-nauru-police-force-eml-email-dump">Exercise 6-3: Import the Nauru Police Force EML Email Dump<a class="headerlink" href="#exercise-6-3-import-the-nauru-police-force-eml-email-dump" title="Permanent link">&para;</a></h3>
 <p>To import an email dump with the ImportExportTools NG add-on, select the
 folder into which you&rsquo;d like to import it. Always import email dumps
 into a local folder, rather than a remote folder on an email server.
@@ -436,7 +436,7 @@ answer them.&rdquo;</p>
 Nauru Police Force dataset and revealed &ldquo;the appalling disregard for
 refugees and asylum seekers detained there.&rdquo; You can read Wilson&rsquo;s
 reporting on Crikey&rsquo;s website, <a href="https://www.crikey.com.au">https://www.crikey.com.au</a>.</p>
-<h3>Searching Email in Thunderbird</h3>
+<h3 id="searching-email-in-thunderbird">Searching Email in Thunderbird<a class="headerlink" href="#searching-email-in-thunderbird" title="Permanent link">&para;</a></h3>
 <p>Now that you&rsquo;ve got Thunderbird configured and loaded with data, you&rsquo;re
 ready to explore that data. For example, you may want to search the
 Nauru Police Force dataset for other email from President Aingimea or
@@ -444,7 +444,7 @@ from Australian politicians. You could also search for email that
 contains keywords like <em>refugee</em> or was written on specific days. This
 section covers search methods you can use on any email dump you import
 into Thunderbird.</p>
-<h4>Quick Filter Searches</h4>
+<h4 id="quick-filter-searches">Quick Filter Searches<a class="headerlink" href="#quick-filter-searches" title="Permanent link">&para;</a></h4>
 <p>The simplest search option is to filter the email that shows up in the
 currently selected folder. When viewing a folder, near the top of the
 Thunderbird window, make sure the Quick Filter button is toggled on so
@@ -461,7 +461,7 @@ Aingimea in the <em>inbox</em> folder. I could also put his email address in
 the search box and filter for messages where he&rsquo;s the sender or the
 recipient (though he won&rsquo;t be the recipient of any of this email,
 because this is Iven Notte&rsquo;s inbox, not his).</p>
-<h4>The Search Messages Dialog</h4>
+<h4 id="the-search-messages-dialog">The Search Messages Dialog<a class="headerlink" href="#the-search-messages-dialog" title="Permanent link">&para;</a></h4>
 <p>The Quick Filter search is essentially a more limited version of the
 Search Messages dialog, which is the most powerful way to search for
 email in Thunderbird. Open this dialog by clicking the <strong>Edit</strong> menu and
@@ -478,7 +478,7 @@ quickly search the full email account. I find this feature less useful
 than the Search Messages dialog. If I can&rsquo;t find what I&rsquo;m looking for
 with Quick Filter, I move on to Search Messages, which lets me make my
 searches as granular as necessary.</p>
-<h3>Exercise 6-4: Import the Oath Keepers MBOX Email Dump</h3>
+<h3 id="exercise-6-4-import-the-oath-keepers-mbox-email-dump">Exercise 6-4: Import the Oath Keepers MBOX Email Dump<a class="headerlink" href="#exercise-6-4-import-the-oath-keepers-mbox-email-dump" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll import email from the Oath Keepers dataset into
 Thunderbird. The Oath Keepers dataset contains the files <em>messages.json</em>
 and <em>messages_old.json</em>, which are chat logs, and the <em>Oath
@@ -514,7 +514,7 @@ email accounts you imported and try out Thunderbird&rsquo;s search tools to
 see if you can find anything interesting I missed.</p>
 <p><img alt="Figure 6-3: An email from the Oath Keepers email dump" src="media/images/Figure6-3.png" /><br />
 <em>Figure 6-3: An email from the Oath Keepers email dump</em></p>
-<h3>Exercise 6-5: Import the Heritage Foundation PST Email Dump</h3>
+<h3 id="exercise-6-5-import-the-heritage-foundation-pst-email-dump">Exercise 6-5: Import the Heritage Foundation PST Email Dump<a class="headerlink" href="#exercise-6-5-import-the-heritage-foundation-pst-email-dump" title="Permanent link">&para;</a></h3>
 <p>In this exercise, you&rsquo;ll import the Heritage Foundation email dump, a
 Microsoft Outlook PST file called <em>backup.pst</em>, into Thunderbird. Since
 the ImportExportTools NG add-on doesn&rsquo;t support PST files, first you&rsquo;ll
@@ -583,7 +583,7 @@ DeBuhr had forwarded from his official heritage.org address account to
 his personal one.</p>
 <p><img alt="Figure 6-4: A Heritage Foundation email in Thunderbird" src="media/images/Figure6-4.png" /><br />
 <em>Figure 6-4: A Heritage Foundation email in Thunderbird</em></p>
-<h3>Other Tools for Researching Email Dumps</h3>
+<h3 id="other-tools-for-researching-email-dumps">Other Tools for Researching Email Dumps<a class="headerlink" href="#other-tools-for-researching-email-dumps" title="Permanent link">&para;</a></h3>
 <p>This chapter has focused on using Thunderbird as a tool for researching
 email dumps, but in your future work, you might find two alternative
 tools helpful: Microsoft Outlook and Aleph. In this section I&rsquo;ll go over
@@ -591,7 +591,7 @@ how you can use each tool to import and search email dumps. You don&rsquo;t
 need to follow the instructions in this section to work through the rest
 of the book, but reading along will give you a sense of what the options
 are and when to use them.</p>
-<h4>Microsoft Outlook</h4>
+<h4 id="microsoft-outlook">Microsoft Outlook<a class="headerlink" href="#microsoft-outlook" title="Permanent link">&para;</a></h4>
 <p>Unlike Thunderbird, Microsoft&rsquo;s desktop email program, Outlook, supports
 importing email dumps directly in PST format. However, Outlook has some
 downsides. First, it&rsquo;s not free; the cheapest way to get Outlook is to
@@ -663,7 +663,7 @@ contents of the leak with a third-party service. I&rsquo;ve also found the
 Google Translate phone app useful: if you hold your phone&rsquo;s camera up to
 your screen, it will translate text in real time. This works even with
 scanned documents that aren&rsquo;t OCR&rsquo;d.</em></p>
-<h4>Aleph</h4>
+<h4 id="aleph">Aleph<a class="headerlink" href="#aleph" title="Permanent link">&para;</a></h4>
 <p>As you learned in Chapter 5, you can use
 Aleph to index and browse a wide variety of email, including PST or EML
 files. When you index a folder containing PSTs, Aleph recognizes the
@@ -705,7 +705,7 @@ good choice if you&rsquo;re working with groups of people or want to
 cross-reference an email dump with other datasets. However, Thunderbird
 is the simplest way to quickly start your email dump investigation, and
 it supports all email formats.</p>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>In this chapter, you learned how to import email dumps in the EML, MBOX,
 and PST formats into Thunderbird to read and search them. You read an
 email from the president of Nauru, got insights into the type of email

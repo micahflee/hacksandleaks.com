@@ -95,7 +95,7 @@ future. With the rise of remote work and the increasing popularity of
 chat platforms like Discord, Slack, and RocketChat, this type of leak is
 only getting more common.</p>
 <p>I&rsquo;ll start with a brief description of how these chat logs were leaked.</p>
-<h3>How Antifascists Infiltrated Neo-Nazi Discord Servers</h3>
+<h3 id="how-antifascists-infiltrated-neo-nazi-discord-servers">How Antifascists Infiltrated Neo-Nazi Discord Servers<a class="headerlink" href="#how-antifascists-infiltrated-neo-nazi-discord-servers" title="Permanent link">&para;</a></h3>
 <p>Unicorn Riot reporters covered the Unite the Right gathering on the
 ground in Charlottesville. In the following days, the collective
 announced that it had received anonymously leaked chat logs from the
@@ -142,7 +142,7 @@ doesn&rsquo;t sell user data, and we know exactly how the data was leaked:
 antifascists were invited into the group by pretending to be racists.</p>
 <p>A few weeks after Unite the Right, I got a hold of some of these chat
 logs myself and began to analyze them.</p>
-<h3>Analyzing Leaked Chat Logs</h3>
+<h3 id="analyzing-leaked-chat-logs">Analyzing Leaked Chat Logs<a class="headerlink" href="#analyzing-leaked-chat-logs" title="Permanent link">&para;</a></h3>
 <p>In late August of 2017, after Unicorn Riot had started publishing
 articles based on leaked chats, someone from the collective asked me if
 I&rsquo;d like to cover the fascist chat logs for The Intercept. While
@@ -178,7 +178,7 @@ keywords. This might be helpful in locating specific messages, but in
 the end, it&rsquo;s still not as useful as structured data. If I were dealing
 with this data today and only had screenshots without access to JSON
 data, I would definitely rely on Aleph.</em></p>
-<h4>Making JSON Files Readable</h4>
+<h4 id="making-json-files-readable">Making JSON Files Readable<a class="headerlink" href="#making-json-files-readable" title="Permanent link">&para;</a></h4>
 <p>Each JSON file within the ZIP file sent by my source contained the
 entire archive of chat logs from a given Discord server. For example,
 one 29MB JSON file was called <em>VibrantDiversityComplete-Sept5at327PM</em>.
@@ -219,7 +219,7 @@ like so:</p>
 file&rsquo;s contents, but still resulted in 29MB of text madly scrolling
 through my terminal. To understand the data better, I needed to run more
 specific commands that would reveal its overall structure.</p>
-<h4>Exploring Objects, Keys, and Values with jq</h4>
+<h4 id="exploring-objects-keys-and-values-with-jq">Exploring Objects, Keys, and Values with jq<a class="headerlink" href="#exploring-objects-keys-and-values-with-jq" title="Permanent link">&para;</a></h4>
 <p>I could tell by looking at the beginning of the JSON data that the whole
 file was one large JSON object, and one of that object&rsquo;s keys was
 <code>meta</code>. I ran the following
@@ -479,7 +479,7 @@ messages are from a user with the ID of <code>1</code>. Because the value of <co
 appear to be displayed in chronological order. I decided to take a
 closer look at the message <code>352992512752746496</code>, from user <code>4</code>, with the timestamp
 <code>1504230373324</code>.</p>
-<h4>Converting Timestamps</h4>
+<h4 id="converting-timestamps">Converting Timestamps<a class="headerlink" href="#converting-timestamps" title="Permanent link">&para;</a></h4>
 <p>Unix timestamps are a useful way for computers to store an entire
 date&mdash;the year, month, day, and time of day&mdash;in a single number. I
 needed to convert the timestamp associated with that message into
@@ -488,7 +488,7 @@ posted.</p>
 <p>I used the following lines of code in the Python interpreter to convert
 the <code>1504230373324</code> timestamp
 into a more human-readable Python <code>datetime</code> object:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="mi">1504230373324</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
 </code></pre></div>
@@ -513,7 +513,7 @@ was posted on August 31, 2017, at 6:46 [PM]:</p>
 
 <p>I now had an idea of the timeframe in which this chat exchange took
 place. Next, I wanted to see which users were involved.</p>
-<h4>Finding Usernames</h4>
+<h4 id="finding-usernames">Finding Usernames<a class="headerlink" href="#finding-usernames" title="Permanent link">&para;</a></h4>
 <p>I wanted to find the username for person who&rsquo;d posted the
 <code>352992512752746496</code> message
 in Listing 14-6. The <code>u</code> value for this message was <code>4</code>, so I checked to see if <code>4</code> was a valid user ID from the output in
@@ -594,7 +594,7 @@ research.</p>
 chat logs, though, I noticed a file that I&rsquo;d missed before in the
 Unicorn Riot ZIP file that might make researching this dataset a lot
 easier.</p>
-<h3>The Discord History Tracker</h3>
+<h3 id="the-discord-history-tracker">The Discord History Tracker<a class="headerlink" href="#the-discord-history-tracker" title="Permanent link">&para;</a></h3>
 <p>The ZIP file from my Unicorn Riot contact had dozens of files in it,
 most of them JSON files and PNG screenshots, along with a few folders
 containing other JSON files. I&rsquo;d immediately zeroed in on the JSON files
@@ -661,7 +661,7 @@ Explorer. If I&rsquo;d had only screenshots of the Discord servers, a custom
 app with these features wouldn&rsquo;t have been possible. Screenshots aren&rsquo;t
 structured data, and there&rsquo;s no easy way to write software that allows
 you to browse the chat messages they contain.</p>
-<h3>A Script to Search the JSON Files</h3>
+<h3 id="a-script-to-search-the-json-files">A Script to Search the JSON Files<a class="headerlink" href="#a-script-to-search-the-json-files" title="Permanent link">&para;</a></h3>
 <p>As you&rsquo;ve learned throughout this book, understanding how the data is
 structured is a prerequisite to writing code that works with it.
 Therefore, I decided to use the knowledge I&rsquo;d gained from manually
@@ -706,12 +706,12 @@ to display the correct username for every message.</p>
 Here&rsquo;s my completed source code (you can also find it at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/discord-json-search.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/discord-json-search.py</a>):</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/python3</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">click</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="k">def</span> <span class="nf">highlight</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❶</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">highlight</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❶</span>
     <span class="n">new_message</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -730,7 +730,7 @@ Here&rsquo;s my completed source code (you can also find it at
 
     <span class="k">return</span> <span class="n">new_message</span>
 
-<span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">server_name</span><span class="p">,</span> <span class="n">user_name</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❷</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">display</span><span class="p">(</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">server_name</span><span class="p">,</span> <span class="n">user_name</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❷</span>
     <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
         <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s2">&quot;#</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel_name</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;bright_magenta&quot;</span><span class="p">),</span>
@@ -746,7 +746,7 @@ Here&rsquo;s my completed source code (you can also find it at
     <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">highlight</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">))</span>
     <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❸</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❸</span>
     <span class="c1"># Loop through each channel</span>
     <span class="k">for</span> <span class="n">channel_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]:</span> <span class="err">❹</span>
         <span class="c1"># Get the channel name and server name</span>
@@ -772,7 +772,7 @@ Here&rsquo;s my completed source code (you can also find it at
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 <span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;query&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❽</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❽</span>
     <span class="c1"># Load the JSON file</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -867,7 +867,7 @@ and there was no easy way to browse through and read the data
 sequentially or to save links to specific interesting messages. I
 started building out a web application to help me perform these missing
 tasks.</p>
-<h3>My Discord Analysis Code</h3>
+<h3 id="my-discord-analysis-code">My Discord Analysis Code<a class="headerlink" href="#my-discord-analysis-code" title="Permanent link">&para;</a></h3>
 <p>I&rsquo;ve found that after obtaining a large dataset full of structured data,
 building a custom web application to explore it, as I did with BlueLeaks
 Explorer, makes it much easier to find its hidden revelations. After
@@ -915,15 +915,15 @@ the book&rsquo;s GitHub repository at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/tree/main/chapter-14/discord-analysis">https://github.com/micahflee/hacks-leaks-and-revelations/tree/main/chapter-14/discord-analysis</a>.
 I recommend that you pull up the full source code for each file as I
 describe how it works.</p>
-<h4>Designing the SQL Database</h4>
+<h4 id="designing-the-sql-database">Designing the SQL Database<a class="headerlink" href="#designing-the-sql-database" title="Permanent link">&para;</a></h4>
 <p>I started my web app with a Python script called <em>app.py</em>. You can find
 the full source code for this file at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/app.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/app.py</a>.
 First, my code imported the appropriate Flask and SQLAlchemy modules,
 created a new Flask app object called <code>app</code>, and created a new Flask-SQLAlchemy
 object called <code>db</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">escape</span><span class="p">,</span> <span class="n">flash</span><span class="p">,</span> <span class="n">redirect</span>
-<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">escape</span><span class="p">,</span> <span class="n">flash</span><span class="p">,</span> <span class="n">redirect</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask_sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLAlchemy</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_DATABASE_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///database.sqlite3&quot;</span>
@@ -957,14 +957,14 @@ objects without needing to write the SQL queries yourself.</p>
 data for servers, users, channels, and messages. For example, the
 following code defines the <code>Server</code> class, which represents the SQL table
 to store data about servers:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Server</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Server</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">channels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Channel&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;server&quot;</span><span class="p">)</span>
     <span class="n">messages</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Message&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;server&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 </code></pre></div>
 
@@ -1073,7 +1073,7 @@ see which users posted in multiple servers and to be able to generate
 links to individual messages that I could store in my notes. Before
 building the web interface, though, I needed to load the database with
 data from the JSON files.</p>
-<h4>Importing Chat Logs into the SQL Database</h4>
+<h4 id="importing-chat-logs-into-the-sql-database">Importing Chat Logs into the SQL Database<a class="headerlink" href="#importing-chat-logs-into-the-sql-database" title="Permanent link">&para;</a></h4>
 <p>I wrote a separate script, <em>admin.py</em>, that I used to import data into
 the SQL database. This script took a command as its first argument. If I
 passed in <code>create-db</code>, it
@@ -1382,7 +1382,7 @@ the actual data first, I would have had to make up and import some test
 data so I&rsquo;d have something to troubleshoot with while building the web
 app. But I decided to import the real data first because I knew I&rsquo;d need
 to write that code eventually anyway.</p>
-<h4>Building the Web Interface</h4>
+<h4 id="building-the-web-interface">Building the Web Interface<a class="headerlink" href="#building-the-web-interface" title="Permanent link">&para;</a></h4>
 <p>When you build web apps, it&rsquo;s often useful to split your web pages into
 reusable components, like headers, footers, and sidebars. Individual
 pages may have their own reusable components, too. For example, the page
@@ -1512,7 +1512,7 @@ simplest one in my web app. This page displayed the message &ldquo;This is a
 web app that will let you research the alt-right chatroom leak,
 published by Unicorn Riot.&rdquo;</p>
 <div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
     <span class="n">servers</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;index.html&quot;</span><span class="p">,</span> <span class="n">servers</span><span class="o">=</span><span class="n">servers</span><span class="p">)</span>
 </code></pre></div>
@@ -1558,7 +1558,7 @@ top as defined in <em>layout.html</em>.</p>
 of the web app&rsquo;s core features&mdash;searching the chat logs&mdash;works. Here&rsquo;s
 the Python code:</p>
 <div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/search&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">search</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">():</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
@@ -1674,7 +1674,7 @@ name on the left and read its chat logs (using the <code>/channel/``channel_id</
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/app.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-14/discord-analysis/app.py</a>.</p>
 <p>Now that you know how the Discord Analysis web app works, let&rsquo;s look at
 how I went about using it to analyze the Discord leaks.</p>
-<h4>Using Discord Analysis to Find Revelations</h4>
+<h4 id="using-discord-analysis-to-find-revelations">Using Discord Analysis to Find Revelations<a class="headerlink" href="#using-discord-analysis-to-find-revelations" title="Permanent link">&para;</a></h4>
 <p>After I had built enough of the Discord Analysis web app that I could
 start using it for actual research, I started by reading a cross section
 of all of the Discord leaks I had imported and taking notes on what
@@ -1780,7 +1780,7 @@ your hands on large structured datasets like these.</p>
 reading some of the worst stuff on the internet, I ultimately decided to
 write about Pony Power, a server set up for the sole purpose of
 harassing and doxing people.</p>
-<h3>The Pony Power Discord Server</h3>
+<h3 id="the-pony-power-discord-server">The Pony Power Discord Server<a class="headerlink" href="#the-pony-power-discord-server" title="Permanent link">&para;</a></h3>
 <p>Pony Power was one of the smaller servers, with only 50 users and just
 over 1,000 messages posted over the course of just 10 days. More than
 any other server, it was full of PII for perceived members of antifa. I
@@ -1864,7 +1864,7 @@ virtual phone number I had created just for this purpose (today, I have
 a public phone number that I use solely for communicating with sources
 like this). I left messages, but he never responded.</p>
 <blockquote>
-<h4>MENTAL HEALTH AND EXTREMISM RESEARCH</h4>
+<h4 id="mental-health-and-extremism-research">MENTAL HEALTH AND EXTREMISM RESEARCH<a class="headerlink" href="#mental-health-and-extremism-research" title="Permanent link">&para;</a></h4>
 <p>While building Discord Analysis and developing a story based on the chat logs from my Unicorn Riot contact, I spent several hours a day for two weeks reading racist, antisemitic, misogynistic, and outright genocidal rants by neo-Nazis speaking to one another online. Among these, one message in particular stuck out to me. It was written by a man, probably in his 50s, well past midnight, and it was a rant about the Jews who he believed were secretly controlling the media and the banks. It was clear to me that he was expressing deeply held beliefs rather than just trying to post something edgy, like a lot of the younger fascists seemed to be doing. While writing this chapter, I searched my Discord Analysis app for the term <em>jew</em> to see if I could find that specific message, but it came back with over 11,000 results, all of them full of hate. I decided it wasn’t worth tracking it down after all.</p>
 <p>I knew about antisemitism, of course. I’d experienced antisemitic microaggressions myself. But reading through these neo-Nazi chat logs was the first time that I realized how many people—including thousands of Americans, many of whom lived in my city—really wished that we were all dead.</p>
 <p>After reading through a massive amount of this content, I had many ideas for articles I wanted to write, but I ended up writing only a single one, about the Pony Power server. After publishing the first article, I didn’t want to spend more time reading these chats. I found it much better for my mental health to instead focus on writing code to improve my Discord search tool so that others could do the research. As I describe in the following section, this code eventually became a collaboration with Unicorn Riot called DiscordLeaks.</p>
@@ -1905,7 +1905,7 @@ encouraging others to harass them and bring them harm.&rdquo;</p>
 <p>You can read my full reporting on the Pony
 Power Discord chat logs at
 <a href="https://theintercept.com/2017/09/06/how-right-wing-extremists-stalk-dox-and-harass-their-enemies/">https://theintercept.com/2017/09/06/how-right-wing-extremists-stalk-dox-and-harass-their-enemies/</a>.</p>
-<h3>The Launch of DiscordLeaks</h3>
+<h3 id="the-launch-of-discordleaks">The Launch of DiscordLeaks<a class="headerlink" href="#the-launch-of-discordleaks" title="Permanent link">&para;</a></h3>
 <p>After publishing my Pony Power article, I was sure that there were many
 more revelations spread throughout the hundreds of thousands of messages
 in the leaked chat logs, but I decided I needed a break from Nazis. I
@@ -1943,7 +1943,7 @@ Today, DiscordLeaks contains millions of messages from nearly 300
 Discord servers used by the far right, available for the public to
 research. It also contains chat logs from RocketChat servers, which I
 discuss in the next section.</p>
-<h3>The Aftermath</h3>
+<h3 id="the-aftermath">The Aftermath<a class="headerlink" href="#the-aftermath" title="Permanent link">&para;</a></h3>
 <p>By 2019, I had stopped writing code for DiscordLeaks myself, but I still
 kept in touch with the developers and promoted the website. I was proud
 of my role in developing this important tool for extremism research, but
@@ -1958,7 +1958,7 @@ DiscordLeaks. DiscordLeaks continues to be a vital tool for extremism
 researchers: in 2022, DiscordLeaks&rsquo; anonymous developers updated it to
 include another major leak of neo-Nazi chat logs, this time from the
 group Patriot Front.</p>
-<h4>The Lawsuit Against Unite the Right</h4>
+<h4 id="the-lawsuit-against-unite-the-right">The Lawsuit Against Unite the Right<a class="headerlink" href="#the-lawsuit-against-unite-the-right" title="Permanent link">&para;</a></h4>
 <p>In 1871, in response to the wave of racist terrorism against Black
 people that swept the South after the end of the Civil War, the US
 Congress passed the Ku Klux Klan Act. This law allows victims of racist
@@ -1999,7 +1999,7 @@ the speed and breadth of the initial complaint possible.&rdquo;</p>
 <p>In November 2021, the court found the fascist organizers guilty and
 ordered them to pay over $25 million in damages. In late 2022, IFA
 wound down its operations.</p>
-<h4>The Patriot Front Chat Logs</h4>
+<h4 id="the-patriot-front-chat-logs">The Patriot Front Chat Logs<a class="headerlink" href="#the-patriot-front-chat-logs" title="Permanent link">&para;</a></h4>
 <p>In the aftermath of the violent Unite the Right protests in
 Charlottesville, one of the neo-Nazi groups in attendance, Vanguard
 America, broke apart due to infighting. Out of the ashes of Vanguard
@@ -2033,7 +2033,7 @@ was over, yells, &ldquo;Seig fucking Heil!&rdquo;</p>
 has steadily grown since the election of Donald Trump in 2016. But
 there&rsquo;s a wealth of public datasets about this movement, just waiting
 for researchers like you to dig in and expose it.</p>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>In this chapter, you&rsquo;ve learned how antifascists infiltrated the Discord
 servers used by the American fascist movement, including organizers of
 the deadly Unite the Right rally in 2017, and leaked millions of chat

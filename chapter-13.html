@@ -108,7 +108,7 @@ Python code I wrote to make sense of it. If a similar dataset ever drops
 in your lap, the skills you&rsquo;ve learned in this book so far and the
 strategies described in this chapter, along with perhaps some additional
 independent study, should enable you to investigate it just like I did.</p>
-<h3>The Origins of AFLDS</h3>
+<h3 id="the-origins-of-aflds">The Origins of AFLDS<a class="headerlink" href="#the-origins-of-aflds" title="Permanent link">&para;</a></h3>
 <p>Before we get into the dataset, let&rsquo;s take a look at how AFLDS was
 founded, including its ties to Trump&rsquo;s 2020 reelection campaign and the
 conservative advocacy group the Tea Party Patriots, as well as exactly
@@ -154,7 +154,7 @@ of the press conference on Twitter, garnering millions of views before
 tech companies took them down for violating rules against pandemic
 misinformation.</p>
 <blockquote>
-<h4>SIMONE GOLD, INSURRECTIONIST</h4>
+<h4 id="simone-gold-insurrectionist">SIMONE GOLD, INSURRECTIONIST<a class="headerlink" href="#simone-gold-insurrectionist" title="Permanent link">&para;</a></h4>
 <p>Simone Gold isn’t just an anti-vaxxer quack doctor getting rich off of fake cures for COVID-19; she’s also one of the insurrectionists who stormed the US Capitol on January 6, 2021. After Gold pleaded guilty to misdemeanor trespassing, she was sentenced to two months in prison, a year of supervised release, and a $9,500 fine.</p>
 <p>In response to Gold’s arrest, AFLDS went on a fundraising spree, claiming that the charge against her was a politically motivated trampling of her free speech rights. The group raised more than $430,000 by the date of her sentencing, which the judge called “unseemly.” He also accused AFLDS of “mischaracterizing” her trial, “telling your supporters that this is a political prosecution of a law-abiding physician that’s designed to threaten and intimidate any American who dares to exercise their First Amendment rights.”</p>
 <p>After Gold reported to prison in July 2022, her California medical license was automatically placed on “inactive” status, meaning she was barred from practicing medicine (though it was reactivated after she was released). While she served her sentence, AFLDS continued to fundraise off of her plight, including sending a newsletter that unironically cited an article from The Intercept about privacy issues in her prison.</p>
@@ -210,14 +210,14 @@ happened to work with AFLDS?</p>
 <p>Next, I&rsquo;ll show you step-by-step how I unraveled this entire COVID-19
 pandemic profiteering scheme, starting with a description of the
 datasets that my hacker source sent me.</p>
-<h3>The Cadence Health and Ravkoo Datasets</h3>
+<h3 id="the-cadence-health-and-ravkoo-datasets">The Cadence Health and Ravkoo Datasets<a class="headerlink" href="#the-cadence-health-and-ravkoo-datasets" title="Permanent link">&para;</a></h3>
 <p>The 100MB of compressed data from my source included records for
 hundreds of thousands of patients, in two separate files. This section
 describes how I stored and extracted
 these sensitive documents, revisits some basic command line data
 analysis (as you learned about in Chapter 4), and describes some of the key types of
 data I discovered in the dataset.</p>
-<h4>Extracting the Data into an Encrypted File Container</h4>
+<h4 id="extracting-the-data-into-an-encrypted-file-container">Extracting the Data into an Encrypted File Container<a class="headerlink" href="#extracting-the-data-into-an-encrypted-file-container" title="Permanent link">&para;</a></h4>
 <p>Because patient records are more sensitive than other medium-sensitivity
 data, I took additional precautions to secure this dataset and my work
 with it. I created an encrypted file container, a 5GB encrypted file
@@ -271,7 +271,7 @@ micah@trapdoor horse_around_find_out % tar -xf ../horse_around_find_out.tar.zst
 
 <p>After extracting these folders, I did what I always do the first time I
 encounter any new dataset: start measuring it with command line tools.</p>
-<h4>Analyzing the Data with Command Line Tools</h4>
+<h4 id="analyzing-the-data-with-command-line-tools">Analyzing the Data with Command Line Tools<a class="headerlink" href="#analyzing-the-data-with-command-line-tools" title="Permanent link">&para;</a></h4>
 <p>First, I wanted to know how much disk space these files took up and how
 many files were in each folder. I used the command line tricks described
 in Chapter 4 to figure this out:</p>
@@ -294,7 +294,7 @@ command, which counted the number of files listed. My output showed that
 the <em>hipaa_special</em> folder took 493MB of space and contained 281,546
 files, and the <em>horse_around _find_out</em> folder took 691MB of space
 and contained 215 files. Let&rsquo;s look at one at a time.</p>
-<h5>Viewing the hipaa_special Folder</h5>
+<h5 id="viewing-the-hipaa_special-folder">Viewing the hipaa_special Folder<a class="headerlink" href="#viewing-the-hipaa_special-folder" title="Permanent link">&para;</a></h5>
 <p>It was clear at this point that <em>hipaa_special</em> contained far more
 files than I could manually read. I ran the following command to view
 the first few lines of filenames in the <em>hipaa_special</em> folder listing,
@@ -404,7 +404,7 @@ returned other users&rsquo; patient records. Therefore, my source simply wrote
 a script to download all 281,000 patient records and stored them in
 individual JSON files. The <em>hipaa_special.tar.zst</em> file contains the
 output of that script.</p>
-<h5>Viewing the horse_around_find_out Folder</h5>
+<h5 id="viewing-the-horse_around_find_out-folder">Viewing the horse_around_find_out Folder<a class="headerlink" href="#viewing-the-horse_around_find_out-folder" title="Permanent link">&para;</a></h5>
 <p>The <em>horse_around_find_out</em> folder is much smaller and easier to deal
 with. I ran the following command to find out what files it contained
 (this folder contains a small enough number of files that there was no
@@ -461,7 +461,7 @@ Appendix B for more information on web scraping.)</p>
 <p>I could see that the <em>horse_around_and_find_out</em> folder contained
 mostly JSON and CSV files, but I needed to do more research to determine
 their significance.</p>
-<h5>Viewing the cadence_allpatients_all.json File</h5>
+<h5 id="viewing-the-cadence_allpatients_alljson-file">Viewing the cadence_allpatients_all.json File<a class="headerlink" href="#viewing-the-cadence_allpatients_alljson-file" title="Permanent link">&para;</a></h5>
 <p>I started by looking at the largest file in
 <em>horse_around_and_find_out</em>, the 387MB
 <em>cadence_allpatients_all.json</em> file. This enormous JSON object lists
@@ -511,7 +511,7 @@ created their account.</p>
 <p>After reading through several patient records in my text editor, I had a
 decent understanding of the type of data in this file, so I moved on to
 examining the smaller files.</p>
-<h5>Viewing the cadence_health_partners.json File</h5>
+<h5 id="viewing-the-cadence_health_partnersjson-file">Viewing the cadence_health_partners.json File<a class="headerlink" href="#viewing-the-cadence_health_partnersjson-file" title="Permanent link">&para;</a></h5>
 <p>The <em>cadence_health_partners.json</em> file contains a JSON object with a
 list of 17 of Cadence&rsquo;s partners, such as America&rsquo;s Frontline Doctors,
 SpeakWithAnMD, and Dr. Zelenko. Listing 13-3 shows a redacted example of the AFLDS
@@ -550,7 +550,7 @@ COVID-19 visits and $59.99 for follow-up visits.</p>
 the <em>hipaa_special</em> folder, I noticed a relationship between the two.
 Each partner&rsquo;s JSON object has an <code>id</code>, and each patient has a
 <code>partner</code> field. Listing 13-3 shows that AFLDS&rsquo;s partner <code>id</code> is <code>3</code>, indicating that the patient in Listing 13-1 with a <code>partner</code> value of <code>,3,</code> was an AFLDS patient.</p>
-<h5>The ravkoo_rxdata.csv File</h5>
+<h5 id="the-ravkoo_rxdatacsv-file">The ravkoo_rxdata.csv File<a class="headerlink" href="#the-ravkoo_rxdatacsv-file" title="Permanent link">&para;</a></h5>
 <p>Of the six Ravkoo files, I found that <em>ravkoo_rxdata.csv</em> was by far
 the biggest. Figure 13-3 shows a portion of
 the data in this spreadsheet.</p>
@@ -566,7 +566,7 @@ might contain revelations about how much money AFLDS and the companies
 it worked with charged for bogus COVID-19 health care. However, its
 current format would make it difficult to work with. I needed to
 transform the data in order to more easily make sense of it.</p>
-<h3>Creating a Single Spreadsheet of Patients</h3>
+<h3 id="creating-a-single-spreadsheet-of-patients">Creating a Single Spreadsheet of Patients<a class="headerlink" href="#creating-a-single-spreadsheet-of-patients" title="Permanent link">&para;</a></h3>
 <p>I wanted to separate the AFLDS patients who had paid $90 for phone
 consultations from the total list of patients, many of whom had never
 paid, so I could get a clearer idea of the scale of AFLDS&rsquo;s scam. For
@@ -587,17 +587,17 @@ folder, pull out the information I was looking for, and save it all in a
 single CSV. Here&rsquo;s the Python code for my script (you can also find a
 copy in the book&rsquo;s GitHub repo at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-aflds-patients-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-aflds-patients-csv.py</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="c1"># Turn a JSON file into a Python dict or list</span>
-<span class="k">def</span> <span class="nf">data_from_json</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">data_from_json</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
 <span class="c1"># Export a CSV full of AFLDS patients</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="c1"># Load patient data from cadence_allpatients_all.json</span>
     <span class="n">patients_data</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span>
         <span class="s2">&quot;data/horse_around_find_out/cadence_allpatients_all.json&quot;</span>
@@ -740,7 +740,7 @@ However, I wasn&rsquo;t sure if Cadence Health, which provided a service to
 SpeakWithAnMD, had realized what its service was being used for. But
 before exploring that further, I decided to switch gears and start
 looking at Ravkoo&rsquo;s drug prescription data.</p>
-<h3>Calculating Revenue from Prescriptions Filled by Ravkoo</h3>
+<h3 id="calculating-revenue-from-prescriptions-filled-by-ravkoo">Calculating Revenue from Prescriptions Filled by Ravkoo<a class="headerlink" href="#calculating-revenue-from-prescriptions-filled-by-ravkoo" title="Permanent link">&para;</a></h3>
 <p>The <em>ravkoo_rxdata.csv</em> spreadsheet introduced earlier has 340,000
 rows, each representing a prescription that was filled. It includes a
 <code>DrugName</code> column with values
@@ -757,14 +757,14 @@ patient records, but nine months&rsquo; worth of prescription records. In this
 section I describe the Python code I wrote to gain a better
 understanding of what drugs Ravkoo sold and how much of them related to
 quack cures for COVID-19.</p>
-<h4>Finding the Price and Quantity of Drugs Sold</h4>
+<h4 id="finding-the-price-and-quantity-of-drugs-sold">Finding the Price and Quantity of Drugs Sold<a class="headerlink" href="#finding-the-price-and-quantity-of-drugs-sold" title="Permanent link">&para;</a></h4>
 <p>To find out how much money Ravkoo charged patients for each specific
 drug, I wrote another script, shown in Listing 13-4 (you can also find a copy of it at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ravkoo-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ravkoo-csv.py</a>).</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="c1"># Export a CSV that adds up prescriptions and their costs for each drug</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
         <span class="c1"># A dictionary that maps drug names to another dictionary containing the</span>
     <span class="c1"># prescription count and total cost for that drug</span>
     <span class="n">drugs</span> <span class="o">=</span> <span class="p">{}</span>
@@ -864,7 +864,7 @@ combine all of the ivermectin prescriptions into one row and do the same
 with the other drugs.</p>
 <p><img alt="Figure 13-5: Viewing ravkoo.csv in LibreOffice Calc" src="media/images/Figure13-5.png" /><br />
 <em>Figure 13-5: Viewing <code>ravkoo.csv</code> in LibreOffice Calc</em></p>
-<h4>Categorizing Prescription Data by Drug</h4>
+<h4 id="categorizing-prescription-data-by-drug">Categorizing Prescription Data by Drug<a class="headerlink" href="#categorizing-prescription-data-by-drug" title="Permanent link">&para;</a></h4>
 <p>Because I was investigating AFLDS, I was most interested in the drugs
 that the group promotes: ivermectin, hydroxychloroquine, and a few
 others. In addition to ivermectin, AFLDS promotes the <em>Zelenko
@@ -898,10 +898,10 @@ prescriptions and cost for each category. It then saved all of this data
 as a CSV called <em>ravkoo-categories.csv</em>.</p>
 <p>Here&rsquo;s my Python script (you can also find it at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ravkoo-categories-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ravkoo-categories-csv.py</a>):</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="c1"># Export a CSV that adds up prescriptions and their costs for each category of drug</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="c1"># A dictionary that maps drug categories to another dictionary containing the</span>
     <span class="c1"># prescription count and total cost for that drug category</span>
     <span class="n">drug_categories</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1022,7 +1022,7 @@ that AFLDS ran some Telegram channels, including one specifically for
 its patients. In this Telegram channel, I
 discovered that patients had posted messages about Ravkoo no longer
 working with SpeakWithAnMD or AFLDS.</p>
-<h3>A Deeper Look at the Cadence Health Patient Data</h3>
+<h3 id="a-deeper-look-at-the-cadence-health-patient-data">A Deeper Look at the Cadence Health Patient Data<a class="headerlink" href="#a-deeper-look-at-the-cadence-health-patient-data" title="Permanent link">&para;</a></h3>
 <p>At this point, I knew that 72,000 AFLDS patients paid for $90
 telehealth consultations and that 87 percent of Ravkoo&rsquo;s prescriptions
 were for fake COVID-19 cures. I wanted to further understand the patient
@@ -1031,7 +1031,7 @@ SpeakWithAnMD&rsquo;s other partners besides AFLDS, and how much of the
 company&rsquo;s business did they make up? And what could I learn about the
 AFLDS patients themselves? To answer these questions, I wrote more
 Python code.</p>
-<h4>Finding Cadence’s Partners</h4>
+<h4 id="finding-cadences-partners">Finding Cadence’s Partners<a class="headerlink" href="#finding-cadences-partners" title="Permanent link">&para;</a></h4>
 <p>I wanted to know how much of SpeakWithAnMD&rsquo;s business, and by extension
 Cadence Health&rsquo;s business, came from AFLDS. The file <em>cadence_health
 _partners.json</em> includes a list of all the partners, so I wrote a
@@ -1039,17 +1039,17 @@ Python script that counted the number of patients associated with each
 one, shown in Listing 13-5 (you can also
 find a copy at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-cadence-partners-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-cadence-partners-csv.py</a>).</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">csv</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="c1"># Turn a JSON file into a Python dict or list</span>
-<span class="k">def</span> <span class="nf">data_from_json</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">data_from_json</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
 <span class="c1"># Convert the comma-separated list of partners, like &quot;,3,&quot;, into a Python list</span>
 <span class="c1"># of partners, like [&quot;America&#39;s Frontline Doctors&quot;]</span>
-<span class="k">def</span> <span class="nf">get_partners</span><span class="p">(</span><span class="n">partner_lookup</span><span class="p">,</span> <span class="n">patient</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_partners</span><span class="p">(</span><span class="n">partner_lookup</span><span class="p">,</span> <span class="n">patient</span><span class="p">):</span>
     <span class="n">partners</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">partner_ids</span> <span class="o">=</span> <span class="n">patient</span><span class="p">[</span><span class="s2">&quot;partner&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">partner_id</span> <span class="ow">in</span> <span class="n">partner_ids</span><span class="p">:</span>
@@ -1059,7 +1059,7 @@ find a copy at
     <span class="k">return</span> <span class="n">partners</span>
 
 <span class="c1"># Export a CSV that lists Cadence partners</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">partner_rows</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># Load the Cadence patient data</span>
@@ -1255,7 +1255,7 @@ demons and witches.</p>
 <p>This spreadsheet confirmed that the bulk of the
 Cadence data was related to AFLDS patients. I decided to dig even deeper
 into AFLDS patient data to see what revelations could be hiding there.</p>
-<h4>Searching for Patients by City</h4>
+<h4 id="searching-for-patients-by-city">Searching for Patients by City<a class="headerlink" href="#searching-for-patients-by-city" title="Permanent link">&para;</a></h4>
 <p>The <em>aflds-patients.csv</em> spreadsheet I created from the original
 dataset, containing 72,000 rows of patients who were referred by AFLDS
 and who had at least one consultation, includes columns for
@@ -1272,15 +1272,15 @@ coordinates, a process called <em>geocoding</em>.</p>
 <p>Listing 13-6 shows my Python script (you
 can also find a copy at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-cities-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-cities-csv.py</a>).</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">httpx</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
 
 <span class="n">geocode_api_key</span> <span class="o">=</span> <span class="s2">&quot;PUT_GEOCODE_API_KEY_HERE&quot;</span>
 
 <span class="c1"># Export a CSV that for each city lists its GPS coordinates and the number of patients there</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="c1"># This dictionary maps names of cities (in format &quot;City, State&quot;, like &quot;New York, NY&quot;)</span>
     <span class="c1"># to a dictionary with info about that city (number of patients, GPS coordinates)</span>
     <span class="n">cities</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1442,7 +1442,7 @@ their birth dates, making it simple to calculate their ages. Since age
 is a major risk factor for COVID-19, I explored this data next.</p>
 <p><img alt="Figure 13-7: A map of cities in the US with AFLDS patients as of September 11, 2021" src="media/images/Figure13-7.png" /><br />
 <em>Figure 13-7: A map of cities in the US with AFLDS patients as of September 11, 2021</em></p>
-<h4>Searching for Patients by Age</h4>
+<h4 id="searching-for-patients-by-age">Searching for Patients by Age<a class="headerlink" href="#searching-for-patients-by-age" title="Permanent link">&para;</a></h4>
 <p>Your age plays a major role in how likely you are to get seriously sick
 or die from COVID-19. During the pandemic, the CDC published statistics
 that described individual risk for COVID-19 infection, hospitalization,
@@ -1467,11 +1467,11 @@ so that I could see their likelihood of getting hospitalized or dying.
 Listing 13-7 shows the Python code for that
 script (you can also find it at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ages-csv.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-13/create-ages-csv.py</a>).</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
 <span class="c1"># Export a CSV that shows how many patients are part of each age group</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="c1"># Age groups, the same ones used in CDC data</span>
     <span class="n">age_groups</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;&lt;0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -1706,7 +1706,7 @@ making them 90 times more likely to die. In just the two-month period
 covered by the Cadence patient data, <em>nearly 45,000 people</em> older than
 50 rejected science and instead put their trust in AFLDS during the
 COVID-19 pandemic. I wonder how many deaths AFLDS is responsible for.</p>
-<h3>Authenticating the Data</h3>
+<h3 id="authenticating-the-data">Authenticating the Data<a class="headerlink" href="#authenticating-the-data" title="Permanent link">&para;</a></h3>
 <p>While in the midst of analyzing the data, I knew I also needed to verify
 that this data was authentic before I could publish my findings. The
 data my source gave to me certainly appeared to be authentic, but I
@@ -1768,7 +1768,7 @@ fact been breached. We gave Patel ample opportunity to refute any of the
 information we planned on publishing, but it was all accurate.</p>
 <p>You can read my full investigative report at
 <a href="https://theintercept.com/2021/09/28/covid-telehealth-hydroxychloroquine-ivermectin-hacked/">https://theintercept.com/2021/09/28/covid-telehealth-hydroxychloroquine-ivermectin-hacked/</a>.</p>
-<h3>The Aftermath</h3>
+<h3 id="the-aftermath">The Aftermath<a class="headerlink" href="#the-aftermath" title="Permanent link">&para;</a></h3>
 <p>After completing this in-depth data-driven investigation, the day before
 The Intercept was ready to publish our findings, I reached out to
 everyone involved to explain the revelations that we had discovered and
@@ -1793,7 +1793,7 @@ He said that Cadence was paid a total of $17,500 for providing service
 to SpeakWithAnMD (he showed me the invoices he&rsquo;d sent). The latter
 company went on to rake in millions of dollars with the help of the
 services Cadence provided.</p>
-<h4>HIPAA’s Breach Notification Rule</h4>
+<h4 id="hipaas-breach-notification-rule">HIPAA’s Breach Notification Rule<a class="headerlink" href="#hipaas-breach-notification-rule" title="Permanent link">&para;</a></h4>
 <p>Espinal told me that Cadence Health didn&rsquo;t directly host AFLDS&rsquo;s patient
 database; instead, he said, SpeakWithAnMD hosted it in an AWS account.
 But Jim Flinn, a public relations agent working for SpeakWithAnMD,
@@ -1806,7 +1806,7 @@ of discovering it&mdash;neither SpeakWithAnMD nor Cadence Health has
 followed this rule, and at the time of writing, patients haven&rsquo;t been
 notified of the breach. One of these companies is in violation of
 HIPAA&rsquo;s breach notification rule.</p>
-<h4>Congressional Investigation</h4>
+<h4 id="congressional-investigation">Congressional Investigation<a class="headerlink" href="#congressional-investigation" title="Permanent link">&para;</a></h4>
 <p>In October 2021, the US House of Representative&rsquo;s Select Subcommittee on
 the Coronavirus Crisis launched an investigation into AFLDS and
 SpeakWithAnMD based on my reporting, as well as reporting on AFLDS by
@@ -1834,7 +1834,7 @@ requests.&rdquo; Then in February, after being stonewalled by SpeakWithAnMD,
 Clyburn expanded the committee&rsquo;s investigation to include Cadence Health
 as well. Unfortunately, nothing more resulted from Congress&rsquo;s
 investigation into AFLDS, SpeakWithAnMD, and Cadence Health.</p>
-<h4>Simone Gold’s New Business Venture</h4>
+<h4 id="simone-golds-new-business-venture">Simone Gold’s New Business Venture<a class="headerlink" href="#simone-golds-new-business-venture" title="Permanent link">&para;</a></h4>
 <p>With a federal investigation into AFLDS underway, the group apparently
 decided it was time to leave the snake oil business and stick to
 disinformation and anti-vax litigation. At the time of writing,
@@ -1853,7 +1853,7 @@ pay money every month just to play Russian Roulette, you will stop
 feeding the beast and join us. [&hellip;] Our system is ethical, of the
 highest quality, and will ultimately cost less than conventional
 insurance.&rdquo;</p>
-<h4>Scandal and Infighting at AFLDS</h4>
+<h4 id="scandal-and-infighting-at-aflds">Scandal and Infighting at AFLDS<a class="headerlink" href="#scandal-and-infighting-at-aflds" title="Permanent link">&para;</a></h4>
 <p>Under pressure from California investigators, Gold moved to Naples,
 Florida. As she prepared to serve two months in prison for storming the
 Capitol on January 6, 2021, she resigned from her position on the AFLDS
@@ -1895,7 +1895,7 @@ cetegorically [<em>sic</em>] false,&rdquo; and that &ldquo;under my leadership, 
 will never tolerate corruption, no matter the personal price.&rdquo; At the
 time of publication, the ultimate fate of AFLDS is still unknown, but
 Gold appears to control the reins.</p>
-<h3>Summary</h3>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
 <p>In this chapter, you&rsquo;ve seen how I turned 100MB of compressed files from
 an anonymous hacker into a groundbreaking report on AFLDS. That report
 resulted in a congressional investigation and contributed to the demise
