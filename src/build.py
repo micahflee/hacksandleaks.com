@@ -97,7 +97,7 @@ def build():
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" data-api="https://deniability.brisk.workers.dev/deniability/event" src="https://deniability.brisk.workers.dev/deniability/script.js"></script>
+    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
