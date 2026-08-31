@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -127,7 +126,7 @@ another Python file can access those functions by importing the
 following Python script, <em>price.py</em>, imports it like so:</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">helpers</span>
 <span class="n">total_price</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_net_price</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A book that costs $50, and has 6% sales tax, costs $</span><span class="si">{</span><span class="n">total_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"A book that costs $50, and has 6% sales tax, costs $</span><span class="si">{</span><span class="n">total_price</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>The first line, <code>import helpers</code>, makes the functions defined in the
@@ -160,7 +159,7 @@ like:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">pass</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -217,11 +216,11 @@ script (or copy and paste it from
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/datasets/BlueLeaks-extracted&quot;</span>
+    <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">"/Volumes/datasets/BlueLeaks-extracted"</span>
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -257,7 +256,7 @@ copy and paste it from
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/datasets/BlueLeaks-extracted&quot;</span>
+    <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">"/Volumes/datasets/BlueLeaks-extracted"</span>
   <span class="err">❶</span> <span class="k">for</span> <span class="n">bl_folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
         <span class="n">bl_folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">bl_folder</span><span class="p">)</span>
 
@@ -275,9 +274,9 @@ copy and paste it from
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">filename_path</span><span class="p">):</span>
                 <span class="n">folders_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-      <span class="err">❻</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bl_folder</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">files_count</span><span class="si">}</span><span class="s2"> files, </span><span class="si">{</span><span class="n">folders_count</span><span class="si">}</span><span class="s2"> folders&quot;</span><span class="p">)</span>
+      <span class="err">❻</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">bl_folder</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">files_count</span><span class="si">}</span><span class="s2"> files, </span><span class="si">{</span><span class="n">folders_count</span><span class="si">}</span><span class="s2"> folders"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -379,7 +378,7 @@ strings, and <code>filenames</code> is a
 list of strings. For example, the following code loops through the
 return value of <code>os.walk(path)</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The folder </span><span class="si">{</span><span class="n">dirname</span><span class="si">}</span><span class="s2"> has subfolders: </span><span class="si">{</span><span class="n">subdirnames</span><span class="si">}</span><span class="s2"> and files: </span><span class="si">{</span><span class="n">filenames</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The folder </span><span class="si">{</span><span class="n">dirname</span><span class="si">}</span><span class="s2"> has subfolders: </span><span class="si">{</span><span class="n">subdirnames</span><span class="si">}</span><span class="s2"> and files: </span><span class="si">{</span><span class="n">filenames</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>When you use <code>for</code> loops to loop through lists, you
@@ -413,17 +412,17 @@ subfolders: <em>work</em> (containing <em>finances.xlsx</em>) and <em>personal</
 <code>dirname</code>,
 <code>subdirnames</code>, and
 <code>filenames</code> for each loop:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="s2">&quot;./example&quot;</span><span class="p">):</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The folder </span><span class="si">{</span><span class="n">dirname</span><span class="si">}</span><span class="s2"> has subfolders: </span><span class="si">{</span><span class="n">subdirnames</span><span class="si">}</span><span class="s2"> and files: </span><span class="si">{</span><span class="n">filenames</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="s2">"./example"</span><span class="p">):</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The folder </span><span class="si">{</span><span class="n">dirname</span><span class="si">}</span><span class="s2"> has subfolders: </span><span class="si">{</span><span class="n">subdirnames</span><span class="si">}</span><span class="s2"> and files: </span><span class="si">{</span><span class="n">filenames</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="o">...</span>
 </code></pre></div>
 
 <p>Running this command returns the following output:</p>
-<div class="codehilite"><pre><span></span><code>The folder ./example has subfolders: [&#39;documents&#39;, &#39;downloads&#39;] and files: []
-The folder ./example/documents has subfolders: [&#39;personal&#39;, &#39;work&#39;] and files: []
+<div class="codehilite"><pre><span></span><code>The folder ./example has subfolders: ['documents', 'downloads'] and files: []
+The folder ./example/documents has subfolders: ['personal', 'work'] and files: []
 The folder ./example/documents/personal has subfolders: [] and files: []
-The folder ./example/documents/work has subfolders: [] and files: [&#39;finances.xlsx&#39;]
-The folder ./example/downloads has subfolders: [] and files: [&#39;paper.pdf&#39;, &#39;screenshot.png&#39;]
+The folder ./example/documents/work has subfolders: [] and files: ['finances.xlsx']
+The folder ./example/downloads has subfolders: [] and files: ['paper.pdf', 'screenshot.png']
 </code></pre></div>
 
 <p>This code loops once for each folder, including all subfolders, with the
@@ -448,16 +447,16 @@ deep the folder structure.</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/datasets/BlueLeaks-extracted&quot;</span>
+    <span class="n">blueleaks_path</span> <span class="o">=</span> <span class="s2">"/Volumes/datasets/BlueLeaks-extracted"</span>
     <span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
             <span class="n">absolute_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
             <span class="n">size_in_bytes</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">absolute_filename</span><span class="p">)</span>
             <span class="n">size_in_mb</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size_in_bytes</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">size_in_mb</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">absolute_filename</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">size_in_mb</span><span class="si">}</span><span class="s2">MB&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">absolute_filename</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">size_in_mb</span><span class="si">}</span><span class="s2">MB"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -530,8 +529,8 @@ importing this module before you&rsquo;ve installed it, open a Python
 interpreter and run <code>import click</code>. Assuming you don&rsquo;t already have the
 package installed, you should see a <code>ModuleNotFoundError</code> error message:</p>
 <div class="codehilite"><pre><span></span><code><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">ModuleNotFoundError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="s1">&#39;click&#39;</span>
+  <span class="n">File</span> <span class="s2">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">ModuleNotFoundError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="s1">'click'</span>
 <span class="o">&gt;&gt;&gt;</span>
 </code></pre></div>
 
@@ -631,12 +630,12 @@ from
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple program that greets NAME&quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""Simple program that greets NAME"""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -663,9 +662,9 @@ arguments, and pass them in for you.</p>
 <p>Run the script as follows:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-3.py
 Usage: click-example.py [OPTIONS] NAME
-Try &#39;click-example.py --help&#39; for help.
+Try 'click-example.py --help' for help.
 
-Error: Missing argument &#39;NAME&#39;.
+Error: Missing argument 'NAME'.
 </code></pre></div>
 
 <p>When you run the program, if you don&rsquo;t pass in the correct CLI
@@ -738,19 +737,19 @@ to the code, highlighted in bold (or find the full modified script at
 <span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;min_file_size&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">INT</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"path"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"min_file_size"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">INT</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">min_file_size</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find files in PATH that are at least MIN_FILE_SIZE MB big&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Find files in PATH that are at least MIN_FILE_SIZE MB big"""</span>
     <span class="k">for</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">subdirnames</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
             <span class="n">absolute_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
             <span class="n">size_in_bytes</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">absolute_filename</span><span class="p">)</span>
             <span class="n">size_in_mb</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">size_in_bytes</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">size_in_mb</span> <span class="o">&gt;=</span> <span class="n">min_file_size</span><span class="p">:</span>
-                  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">absolute_filename</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">size_in_mb</span><span class="si">}</span><span class="s2">MB&quot;</span><span class="p">)</span>
+                  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">absolute_filename</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">size_in_mb</span><span class="si">}</span><span class="s2">MB"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -810,13 +809,13 @@ your code more readable by putting each key-value pair on its own line.</p>
 <p>Listing 8-1 shows an example dictionary
 stored in the variable <code>capitals</code>.</p>
 <div class="codehilite"><pre><span></span><code><span class="n">capitals</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;United States&quot;</span><span class="p">:</span> <span class="s2">&quot;Washington, DC&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;India&quot;</span><span class="p">:</span> <span class="s2">&quot;New Delhi&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;South Africa&quot;</span><span class="p">:</span> <span class="s2">&quot;Cape Town&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Brazil&quot;</span><span class="p">:</span> <span class="s2">&quot;Brasília&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Germany&quot;</span><span class="p">:</span> <span class="s2">&quot;Berlin&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Russia&quot;</span><span class="p">:</span> <span class="s2">&quot;Moscow&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;China&quot;</span><span class="p">:</span> <span class="s2">&quot;Beijing&quot;</span>  
+    <span class="s2">"United States"</span><span class="p">:</span> <span class="s2">"Washington, DC"</span><span class="p">,</span>
+    <span class="s2">"India"</span><span class="p">:</span> <span class="s2">"New Delhi"</span><span class="p">,</span>
+    <span class="s2">"South Africa"</span><span class="p">:</span> <span class="s2">"Cape Town"</span><span class="p">,</span>
+    <span class="s2">"Brazil"</span><span class="p">:</span> <span class="s2">"Brasília"</span><span class="p">,</span>
+    <span class="s2">"Germany"</span><span class="p">:</span> <span class="s2">"Berlin"</span><span class="p">,</span>
+    <span class="s2">"Russia"</span><span class="p">:</span> <span class="s2">"Moscow"</span><span class="p">,</span>
+    <span class="s2">"China"</span><span class="p">:</span> <span class="s2">"Beijing"</span>  
 <span class="p">}</span>
 </code></pre></div>
 
@@ -827,15 +826,15 @@ of those countries.</p>
 same key more than once, Python will save the version you last set. For
 example, if you define a dictionary and use the <code>name</code> key more than once, the dictionary
 will overwrite the previous value with the most recent one:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;hobby&quot;</span><span class="p">:</span> <span class="s2">&quot;cryptography&quot;</span><span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"hobby"</span><span class="p">:</span> <span class="s2">"cryptography"</span><span class="p">}</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">test_dict</span><span class="p">)</span>
-<span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;hobby&#39;</span><span class="p">:</span> <span class="s1">&#39;cryptography&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Bob'</span><span class="p">,</span> <span class="s1">'hobby'</span><span class="p">:</span> <span class="s1">'cryptography'</span><span class="p">}</span>
 </code></pre></div>
 
 <p>However, you can also use lists, or other dictionaries, as values:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">],</span> <span class="s2">&quot;hobby&quot;</span><span class="p">:</span> <span class="s2">&quot;cryptography&quot;</span><span class="p">}</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"names"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">],</span> <span class="s2">"hobby"</span><span class="p">:</span> <span class="s2">"cryptography"</span><span class="p">}</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">test_dict</span><span class="p">)</span>
-<span class="p">{</span><span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">],</span> <span class="s1">&#39;hobby&#39;</span><span class="p">:</span> <span class="s1">&#39;cryptography&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">'names'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Alice'</span><span class="p">,</span> <span class="s1">'Bob'</span><span class="p">],</span> <span class="s1">'hobby'</span><span class="p">:</span> <span class="s1">'cryptography'</span><span class="p">}</span>
 </code></pre></div>
 
 <p>In this case, the value for the key <code>names</code> is <code>['Alice', 'Bob']</code>, which itself is a list. You can use a
@@ -849,14 +848,14 @@ you try to use a key you haven&rsquo;t defined, your script will crash with a
 <code>KeyError</code>. For example,
 here&rsquo;s how to look up the capitals of certain countries in the
 <code>capitals</code> dictionary:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">&quot;United States&quot;</span><span class="p">]</span>
-<span class="s1">&#39;Washington, DC&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">&quot;China&quot;</span><span class="p">]</span>
-<span class="s1">&#39;Beijing&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">&quot;Kenya&quot;</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">"United States"</span><span class="p">]</span>
+<span class="s1">'Washington, DC'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">"China"</span><span class="p">]</span>
+<span class="s1">'Beijing'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">"Kenya"</span><span class="p">]</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">KeyError</span><span class="p">:</span> <span class="s1">&#39;Kenya&#39;</span>
+  <span class="n">File</span> <span class="s2">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">KeyError</span><span class="p">:</span> <span class="s1">'Kenya'</span>
 </code></pre></div>
 
 <p>When you run <code>capitals["Kenya"]</code>, Python throws the error message
@@ -868,10 +867,10 @@ dictionary. You can see that the only keys defined in Listing
 can&rsquo;t retrieve its value.</p>
 <p>You can add new key-value pairs to a dictionary, or update an existing
 one, like this:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">&quot;Kenya&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Nairobi&quot;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">&quot;United States&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Mar-a-Lago&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">"Kenya"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Nairobi"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">capitals</span><span class="p">[</span><span class="s2">"United States"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Mar-a-Lago"</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">capitals</span><span class="p">)</span>
-<span class="p">{</span><span class="s1">&#39;United States&#39;</span><span class="p">:</span> <span class="s1">&#39;Mar-a-Lago&#39;</span><span class="p">,</span> <span class="s1">&#39;India&#39;</span><span class="p">:</span> <span class="s1">&#39;New Delhi&#39;</span><span class="p">,</span> <span class="s1">&#39;South Africa&#39;</span><span class="p">:</span> <span class="s1">&#39;Cape Town&#39;</span><span class="p">,</span> <span class="s1">&#39;Brazil&#39;</span><span class="p">:</span> <span class="s1">&#39;Brasília&#39;</span><span class="p">,</span> <span class="s1">&#39;Germany&#39;</span><span class="p">:</span> <span class="s1">&#39;Berlin&#39;</span><span class="p">,</span> <span class="s1">&#39;Russia&#39;</span><span class="p">:</span> <span class="s1">&#39;Moscow&#39;</span><span class="p">,</span> <span class="s1">&#39;China&#39;</span><span class="p">:</span> <span class="s1">&#39;Beijing&#39;</span><span class="p">,</span> <span class="s1">&#39;Kenya&#39;</span><span class="p">:</span> <span class="s1">&#39;Nairobi&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">'United States'</span><span class="p">:</span> <span class="s1">'Mar-a-Lago'</span><span class="p">,</span> <span class="s1">'India'</span><span class="p">:</span> <span class="s1">'New Delhi'</span><span class="p">,</span> <span class="s1">'South Africa'</span><span class="p">:</span> <span class="s1">'Cape Town'</span><span class="p">,</span> <span class="s1">'Brazil'</span><span class="p">:</span> <span class="s1">'Brasília'</span><span class="p">,</span> <span class="s1">'Germany'</span><span class="p">:</span> <span class="s1">'Berlin'</span><span class="p">,</span> <span class="s1">'Russia'</span><span class="p">:</span> <span class="s1">'Moscow'</span><span class="p">,</span> <span class="s1">'China'</span><span class="p">:</span> <span class="s1">'Beijing'</span><span class="p">,</span> <span class="s1">'Kenya'</span><span class="p">:</span> <span class="s1">'Nairobi'</span><span class="p">}</span>
 </code></pre></div>
 
 <p>This code defines a new key, <code>Kenya</code>, with the value <code>Nairobi</code>. It also updates an existing key,
@@ -915,7 +914,7 @@ Open a terminal, change to the folder where you stored this file, and
 open a Python interpreter. Load this file into a dictionary with the
 following commands:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;2022-02-24-general.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"2022-02-24-general.json"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="o">...</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="o">...</span>
 </code></pre></div>
@@ -928,39 +927,39 @@ from this file are too long to display in their entirety, but Listing
 <code>data</code> dictionary that
 demonstrates its structure.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">❶</span>
+<span class="w">    </span><span class="nt">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">❶</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FmFZbde9ACs3gtw27&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;rid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GENERAL&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Некоторые американские сенаторы предлагают помимо соцсетей блокировать в</span>
-<span class="s2">Россииещё и PornHub!&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;ts&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-02-24T22:02:38.276Z&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;u&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NKrXj9edAPWNrYv5r&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;thomas&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;thomas&quot;</span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;urls&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-<span class="w">            </span><span class="nt">&quot;mentions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-<span class="w">            </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-<span class="w">            </span><span class="nt">&quot;md&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FmFZbde9ACs3gtw27"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"rid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GENERAL"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Некоторые американские сенаторы предлагают помимо соцсетей блокировать в</span>
+<span class="s2">Россииещё и PornHub!"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-24T22:02:38.276Z"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"u"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NKrXj9edAPWNrYv5r"</span><span class="p">,</span><span class="w"> </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"thomas"</span><span class="p">,</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"thomas"</span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">            </span><span class="nt">"mentions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">            </span><span class="nt">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">            </span><span class="nt">"md"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                </span><span class="p">{</span>
-<span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PARAGRAPH&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PARAGRAPH"</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">                        </span><span class="p">{</span>
-<span class="w">                            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PLAIN_TEXT&quot;</span><span class="p">,</span>
-<span class="w">                            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Некоторые американские сенаторы предлагают помимо</span>
-<span class="s2">соцсетейблокировать в России ещё и PornHub!&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PLAIN_TEXT"</span><span class="p">,</span>
+<span class="w">                            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Некоторые американские сенаторы предлагают помимо</span>
+<span class="s2">соцсетейблокировать в России ещё и PornHub!"</span><span class="p">,</span>
 <span class="w">                        </span><span class="p">}</span>
 <span class="w">                  </span><span class="p">],</span>
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">],</span>
-<span class="w">            </span><span class="nt">&quot;_updatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-02-24T22:02:38.293Z&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"_updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-24T22:02:38.293Z"</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">True</span><span class="w"> </span><span class="err">❷</span>
+<span class="w">    </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="err">True</span><span class="w"> </span><span class="err">❷</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -997,7 +996,7 @@ the data was successful and that there were no errors.</p>
 messages, each in its own dictionary, that were sent in Conti&rsquo;s
 #general RocketChat channel on February 24, 2022. I discovered that
 this list has 604 items by measuring its length with the <code>len()</code> function, like this:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">])</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"messages"</span><span class="p">])</span>
 <span class="mi">604</span>
 </code></pre></div>
 
@@ -1006,8 +1005,8 @@ this list has 604 items by measuring its length with the <code>len()</code> func
 <code>for key_variable in dictionary</code> syntax, and you can determine
 a variable&rsquo;s data type using the <code>type()</code> function. Try this out using the
 following commands:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="mi">8</span><span class="p">]:</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;messages&#39;</span><span class="p">][</span><span class="mi">8</span><span class="p">][</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"messages"</span><span class="p">][</span><span class="mi">8</span><span class="p">]:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'messages'</span><span class="p">][</span><span class="mi">8</span><span class="p">][</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="o">...</span>
 </code></pre></div>
 
@@ -1016,16 +1015,16 @@ following commands:</p>
 the <code>print()</code> function and an
 f-string, it displays the key (<code>key</code>) and the type of data stored in that
 key, as shown in the following output:</p>
-<div class="codehilite"><pre><span></span><code>_id: &lt;class &#39;str&#39;&gt;
-rid: &lt;class &#39;str&#39;&gt;
-msg: &lt;class &#39;str&#39;&gt;
-ts: &lt;class &#39;str&#39;&gt;
-u: &lt;class &#39;dict&#39;&gt;
-urls: &lt;class &#39;list&#39;&gt;
-mentions: &lt;class &#39;list&#39;&gt;
-channels: &lt;class &#39;list&#39;&gt;
-md: &lt;class &#39;list&#39;&gt;
-_updatedAt: &lt;class &#39;str&#39;&gt;
+<div class="codehilite"><pre><span></span><code>_id: &lt;class 'str'&gt;
+rid: &lt;class 'str'&gt;
+msg: &lt;class 'str'&gt;
+ts: &lt;class 'str'&gt;
+u: &lt;class 'dict'&gt;
+urls: &lt;class 'list'&gt;
+mentions: &lt;class 'list'&gt;
+channels: &lt;class 'list'&gt;
+md: &lt;class 'list'&gt;
+_updatedAt: &lt;class 'str'&gt;
 </code></pre></div>
 
 <p>In the output, the values at the <code>_id</code>, <code>rid</code>, <code>msg</code>, <code>ts</code>, and <code>_updatedAt</code> keys are all strings. The value at the
@@ -1047,12 +1046,12 @@ a mess of dictionaries and lists that you need to make sense of. Being
 able to select the exact values you&rsquo;re looking for is an important
 skill. To practice navigating through dictionaries and lists, take a
 closer look at the value of just one of these keys, the <code>md</code> key, by running the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="mi">8</span><span class="p">][</span><span class="s2">&quot;md&quot;</span><span class="p">])</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"messages"</span><span class="p">][</span><span class="mi">8</span><span class="p">][</span><span class="s2">"md"</span><span class="p">])</span>
 </code></pre></div>
 
 <p>In the output, you can tell that this value is a list because it&rsquo;s
 surrounded by square brackets:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">[{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;PARAGRAPH&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;PLAIN_TEXT&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;Некоторые американские сенаторы предлагают помимо соцсетей блокировать в России ещё и PornHub!&#39;</span><span class="p">}]}]</span>
+<div class="codehilite"><pre><span></span><code><span class="p">[{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'PARAGRAPH'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">:</span> <span class="p">[{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'PLAIN_TEXT'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">:</span> <span class="s1">'Некоторые американские сенаторы предлагают помимо соцсетей блокировать в России ещё и PornHub!'</span><span class="p">}]}]</span>
 </code></pre></div>
 
 <p>The list&rsquo;s single item is a dictionary, which is surrounded by braces.
@@ -1068,7 +1067,7 @@ until you get to the value you&rsquo;re looking for. For example, use the
 following command to access the value of the <code>value</code> key in the inner dictionary within the
 inner list, which is in another <code>value</code> key in the outer dictionary in the
 outer list:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="mi">8</span><span class="p">][</span><span class="s2">&quot;md&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"messages"</span><span class="p">][</span><span class="mi">8</span><span class="p">][</span><span class="s2">"md"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"value"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"value"</span><span class="p">])</span>
 </code></pre></div>
 
 <p>You already know that <code>data["messages"][8]</code> is a dictionary that represents a chat
@@ -1107,8 +1106,8 @@ relevant parts into machine translation systems like DeepL or Google
 Translate. Run the following commands to display all of the messages in
 <code>data["messages"]</code> in that
 format:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;ts&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">][</span><span class="s1">&#39;username&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;msg&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"messages"</span><span class="p">]:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">'ts'</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">'u'</span><span class="p">][</span><span class="s1">'username'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">'msg'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="o">...</span>
 </code></pre></div>
 
@@ -1141,9 +1140,9 @@ discussed, as well as a message posted just before that from another
 user, <code>rags</code>. If you&rsquo;re
 interested in seeing only the messages posted by <code>rags</code>, view those by running the following
 commands:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
-<span class="o">...</span>     <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">][</span><span class="s2">&quot;username&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;rags&quot;</span><span class="p">:</span>
-<span class="o">...</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;ts&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">][</span><span class="s1">&#39;username&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;msg&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"messages"</span><span class="p">]:</span>
+<span class="o">...</span>     <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">"u"</span><span class="p">][</span><span class="s2">"username"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"rags"</span><span class="p">:</span>
+<span class="o">...</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">'ts'</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">'u'</span><span class="p">][</span><span class="s1">'username'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">'msg'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="o">...</span>
 </code></pre></div>
 
@@ -1171,8 +1170,8 @@ command to create an empty dictionary called <code>user_posts</code>:</p>
 
 <p>The keys in this dictionary will be usernames, and the values will be
 the number of posts from that user. Fill up the <code>user_posts</code> dictionary with the following code:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
-<span class="o">...</span>     <span class="n">username</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">][</span><span class="s2">&quot;username&quot;</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"messages"</span><span class="p">]:</span>
+<span class="o">...</span>     <span class="n">username</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s2">"u"</span><span class="p">][</span><span class="s2">"username"</span><span class="p">]</span>
 <span class="o">...</span>     <span class="k">if</span> <span class="n">username</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">user_posts</span><span class="p">:</span>
 <span class="o">...</span>         <span class="n">user_posts</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="o">...</span>     <span class="k">else</span><span class="p">:</span>
@@ -1202,7 +1201,7 @@ user.</p>
 <code>user_posts</code> dictionary,
 viewing the data you just collected:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">user_posts</span><span class="p">:</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> posted </span><span class="si">{</span><span class="n">user_posts</span><span class="p">[</span><span class="n">username</span><span class="p">]</span><span class="si">}</span><span class="s2"> times&quot;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> posted </span><span class="si">{</span><span class="n">user_posts</span><span class="p">[</span><span class="n">username</span><span class="p">]</span><span class="si">}</span><span class="s2"> times"</span><span class="p">)</span>
 <span class="o">...</span>
 </code></pre></div>
 
@@ -1286,7 +1285,7 @@ debugging much simpler.</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">pass</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1298,12 +1297,12 @@ is highlighted in bold):</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"blueleaks_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;blueleaks_path is: </span><span class="si">{</span><span class="n">blueleaks_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""Map out the CSVs in BlueLeaks"""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"blueleaks_path is: </span><span class="si">{</span><span class="n">blueleaks_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1339,16 +1338,16 @@ finds in that path:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"blueleaks_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Map out the CSVs in BlueLeaks"""</span>
     <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
         <span class="n">blueleaks_folder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">blueleaks_folder_path</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;folder: </span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">, path: </span><span class="si">{</span><span class="n">blueleaks_folder_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"folder: </span><span class="si">{</span><span class="n">folder</span><span class="si">}</span><span class="s2">, path: </span><span class="si">{</span><span class="n">blueleaks_folder_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1395,9 +1394,9 @@ and starts to fill it up with data:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"blueleaks_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Map out the CSVs in BlueLeaks"""</span>
     <span class="n">csv_to_folders</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
@@ -1405,13 +1404,13 @@ and starts to fill it up with data:</p>
 
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">blueleaks_folder_path</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_folder_path</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".csv"</span><span class="p">):</span>
                     <span class="k">if</span> <span class="n">filename</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">csv_to_folders</span><span class="p">:</span>
                         <span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
                     <span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1478,9 +1477,9 @@ program found:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"blueleaks_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Map out the CSVs in BlueLeaks&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Map out the CSVs in BlueLeaks"""</span>
     <span class="n">csv_to_folders</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
@@ -1488,16 +1487,16 @@ program found:</p>
 
           <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">blueleaks_folder_path</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_folder_path</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".csv"</span><span class="p">):</span>
                     <span class="k">if</span> <span class="n">filename</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">csv_to_folders</span><span class="p">:</span>
                         <span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
                     <span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">csv_to_folders</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">])</span><span class="si">}</span><span class="s2"> folders | </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">csv_to_folders</span><span class="p">[</span><span class="n">filename</span><span class="p">])</span><span class="si">}</span><span class="s2"> folders | </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1560,7 +1559,7 @@ it, open it for writing using mode <code>w</code>.</p>
 <p>To prepare to work with a file, whether for writing or reading, you use
 the built-in Python function <code>open()</code>. To open it for reading, you use the
 following code:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;some_file.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"some_file.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1578,8 +1577,8 @@ For example, <code>f.read()</code> will
 read all of the data in the file and return it&mdash;in this case, storing
 it in the <code>text</code> variable.</p>
 <p>To open a file for writing, you set the mode to <code>"w"</code> like so:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"output.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>The <code>open()</code> function returns
@@ -1600,7 +1599,7 @@ Hola Mundo
 
 <p>You could also represent the entire contents of this file as a Python
 string:</p>
-<div class="codehilite"><pre><span></span><code>&quot;Hello World\nHola Mundo\n&quot;
+<div class="codehilite"><pre><span></span><code>"Hello World\nHola Mundo\n"
 </code></pre></div>
 
 <p>The first character of the string is <code>H</code>, then <code>e</code>, then <code>l</code>, and so on. The 12th character
@@ -1611,9 +1610,9 @@ Python, so a backslash followed by another character represents a single
 special character.</p>
 <p>Newlines are used to write lines to a file. Try running these commands
 in your Python interpreter:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello World</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hola Mundo</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"output.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hello World</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="o">...</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hola Mundo</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="mi">12</span>
 <span class="mi">11</span>
@@ -1636,7 +1635,7 @@ Hola Mundo
 would have been <code>Hello WorldHola Mundo</code>, with no line breaks.</p>
 <h4 id="reading-lines-from-a-file">Reading Lines from a File<a class="headerlink" href="#reading-lines-from-a-file" title="Permanent link">&para;</a></h4>
 <p>Run the following command to read the file you just created:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"output.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="o">...</span>     <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="o">...</span>
 </code></pre></div>
@@ -1651,7 +1650,7 @@ objects also have a convenient method called <code>readlines()</code>. Instead o
 into a file, it reads only one line at a time, and you can loop over the
 lines in a <code>for</code> loop. Try
 this out by running the following commands:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"/tmp/output.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="o">...</span>     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
 <span class="o">...</span>         <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 <span class="o">...</span>
@@ -1673,7 +1672,7 @@ extra hard return after each line.</p>
 any whitespace (spaces, tabs, or newlines) from the beginning and end of
 the string. Run the same code, but this time strip out the newline
 characters on each line:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"/tmp/output.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="o">...</span>     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
 <span class="o">...</span>         <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 <span class="o">...</span>         <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
@@ -1707,8 +1706,8 @@ modifications highlighted in bold here (or copy the final script at
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
-    <span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Returns an aLtErNaTiNg cApS version of text"""</span>
+    <span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
@@ -1722,17 +1721,17 @@ modifications highlighted in bold here (or copy the final script at
     <span class="k">return</span> <span class="n">alternating_caps_text</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;input_filename&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_filename&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"input_filename"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"output_filename"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="n">output_filename</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts a text file to an aLtErNaTiNg cApS version&quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Converts a text file to an aLtErNaTiNg cApS version"""</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_filename</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
       <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1756,7 +1755,7 @@ to a file called <em>shakespeare.txt</em>. Here are the original contents of
 <em>shakespeare.txt</em>, displayed using the <code>cat</code> command:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % cat shakespeare.txt
 To be, or not to be, that is the question:
-Whether &#39;tis nobler in the mind to suffer
+Whether 'tis nobler in the mind to suffer
 The slings and arrows of outrageous fortune,
 Or to take Arms against a Sea of troubles,
 And by opposing end them: to die, to sleep
@@ -1769,7 +1768,7 @@ version of that file. Here&rsquo;s what happens when I do it:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-8 % python3 exercise-8-5.py shakespeare.txt shakespeare-mocking.txt
 micah@trapdoor chapter-8 % cat shakespeare-mocking.txt
 To bE, oR NoT To bE, tHaT Is tHe qUeStIoN:
-wHeThEr &#39;TiS NoBlEr iN ThE MiNd tO SuFfEr
+wHeThEr 'TiS NoBlEr iN ThE MiNd tO SuFfEr
 tHe sLiNgS AnD ArRoWs oF OuTrAgEoUs fOrTuNe,
 Or tO TaKe aRmS AgAiNsT A SeA Of tRoUbLeS,
 aNd bY OpPoSiNg eNd tHeM: tO DiE, tO SlEeP

@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -133,12 +132,12 @@ micah@trapdoor blueleaks-explorer % code docker-compose.yaml
 <p>Add the following code to your <em>docker-compose.yaml</em> file, replacing
 <code>/Volumes/datasets/BlueLeaks-extracted</code> with the path that maps to
 <em>/data /blueleaks</em> in your own <em>BlueLeaks-extracted</em> folder:</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.9&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">"3.9"</span>
 <span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">app</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">micahflee/blueleaks-explorer:latest</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:80&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"8000:80"</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/Volumes/datasets/BlueLeaks-extracted:/data/blueleaks</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./databases:/data/databases</span>
@@ -164,7 +163,7 @@ Docker image and start the server:</p>
 
 <p>The first time you run the command, the output should end with something
 like this:</p>
-<div class="codehilite"><pre><span></span><code>blueleaks-explorer-app-1  |  * Serving Flask app &#39;app&#39;
+<div class="codehilite"><pre><span></span><code>blueleaks-explorer-app-1  |  * Serving Flask app 'app'
 blueleaks-explorer-app-1  |  * Debug mode: off
 blueleaks-explorer-app-1  |    WARNING: This is a development server. Do not use
                               it in a production deployment. Use a production

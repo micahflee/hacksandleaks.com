@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -692,7 +691,7 @@ and <code>Documents</code>. It will try
 to list the files in the folder <em>\~/My</em> (which doesn&rsquo;t exist), then also
 list files in the folder <em>Documents</em>, which isn&rsquo;t what you intended.</p>
 <p>To solve this problem, put the name of the folder in quotes:</p>
-<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span><span class="s2">&quot;~/My Documents&quot;</span>
+<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span><span class="s2">"~/My Documents"</span>
 </code></pre></div>
 
 <p>The shell sees anything within quotes as a single entity. In this case,
@@ -717,18 +716,18 @@ arguments.</p>
 want to delete a filename that has a space <em>and</em> quotes in it, like <em>Say
 &ldquo;Hello&rdquo;.txt.</em> You can use the <code>rm</code> command to delete files, but the
 following syntax won&rsquo;t work:</p>
-<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span>Say<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>.txt
+<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span>Say<span class="w"> </span><span class="s2">"Hello"</span>.txt
 </code></pre></div>
 
 <p>Your shell will split this command into the words <code>rm</code>, <code>Say</code>, and <code>Hello.txt</code>. You might think you could solve this
 by simply adding more quotes</p>
-<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span><span class="s2">&quot;Say &quot;</span>Hello<span class="s2">&quot;.txt&quot;</span>
+<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span><span class="s2">"Say "</span>Hello<span class="s2">".txt"</span>
 </code></pre></div>
 
 <p>but that won&rsquo;t work either, since you&rsquo;re quoting something that contains
 quotes already. Instead, surround the argument with single quotes ('),
 like this:</p>
-<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span><span class="s1">&#39;Say &quot;Hello&quot;.txt&#39;</span>
+<div class="codehilite"><pre><span></span><code>rm<span class="w"> </span><span class="s1">'Say "Hello".txt'</span>
 </code></pre></div>
 
 <p>Your shell will read this command as <code>rm</code> and the argument as
@@ -777,7 +776,7 @@ Homebrew&rsquo;s website at
 <a href="https://brew.sh">https://brew.sh</a>,
 where you should find the command to install the tool. Copy and paste
 the installation command into your terminal and press <strong>RETURN</strong>:</p>
-<div class="codehilite"><pre><span></span><code>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+<div class="codehilite"><pre><span></span><code>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">"</span>
 </code></pre></div>
 
 <p>This command uses a program called cURL, which I&rsquo;ll discuss later in
@@ -785,7 +784,7 @@ this chapter, to download a shell script from GitHub. It then runs that
 script using the bash shell. The script itself uses <code>sudo</code>, meaning that if you enter your
 password, it will run commands as root on your computer.</p>
 <p>This is what the output looks like on my Mac:</p>
-<div class="codehilite"><pre><span></span><code>==&gt; Checking for &#39;sudo&#39; access (which may request your password)...
+<div class="codehilite"><pre><span></span><code>==&gt; Checking for 'sudo' access (which may request your password)...
 Password:
 </code></pre></div>
 
@@ -865,7 +864,7 @@ Hit:4 http://us.archive.ubuntu.com/ubuntu jammy-backports InRelease
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
-178 packages can be upgraded. Run &#39;apt list --upgradable&#39; to see them.
+178 packages can be upgraded. Run 'apt list --upgradable' to see them.
 </code></pre></div>
 
 <p>This tells me I have 178 packages that can be upgraded. Run the
@@ -1056,7 +1055,7 @@ like this:</p>
 IHDR?L??
 ?D?ؐ???? Pd@?????Y????????u???+?2???ע???@?!N???? ^?K??Eׂ?(??U?N????E??ł??.?ʛ?u_??|?????g?s?ܙ{?@;?
 ?sQ
- ?x?)b?hK&#39;?/??L???t?+???eC????+?@????L??????/@c@웗7?qĶ?F
+ ?x?)b?hK'?/??L???t?+???eC????+?@????L??????/@c@웗7?qĶ?F
                                                         ?L????N??4Ӈ4???!?????
 --snip--
 </code></pre></div>
@@ -1098,16 +1097,16 @@ without using Restricted Mode.</p>
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Example Domain<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
 
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">”Content-type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">style</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"utf-8"</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">”Content-type"</span> <span class="na">content</span><span class="o">=</span><span class="s">"text/html; charset=utf-8"</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">"viewport"</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width, initial-scale=1"</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span> <span class="na">type</span><span class="o">=</span><span class="s">"text/css"</span><span class="p">&gt;</span>
 <span class="w">    </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
         background-color: #f0f0f2;
         margin: 0;
         padding: 0;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Open Sans&quot;,
-&quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans",
+"Helvetica Neue", Helvetica, Arial, sans-serif;
 
     }
 --snip--
@@ -1220,12 +1219,12 @@ your shell script.</p>
 <p>Enter the following text into <em>exercise-3-6.sh</em> in VS Code and save the
 file:</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello world! This is my first shell script.&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Hello world! This is my first shell script."</span>
 <span class="c1"># Display the current user</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The current user is:&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"The current user is:"</span>
 whoami
 <span class="c1"># Display the current working directory</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The current working directory is:&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"The current working directory is:"</span>
 <span class="nb">pwd</span>
 </code></pre></div>
 

@@ -97,7 +97,6 @@ def build():
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>

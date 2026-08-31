@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -108,9 +107,9 @@ syntax errors and helping you format your code nicely.</p>
 <p>Enter the following code (or copy and paste it from
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-2.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-2.py</a>),
 then save the file:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hacks&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;leaks&quot;</span><span class="p">)</span>
-<span class="n">revelations</span> <span class="o">=</span> <span class="s2">&quot;revelations&quot;</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">"hacks"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"leaks"</span><span class="p">)</span>
+<span class="n">revelations</span> <span class="o">=</span> <span class="s2">"revelations"</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">revelations</span><span class="p">)</span>
 </code></pre></div>
 
@@ -173,7 +172,7 @@ quickly test commands. To open the Python interpreter, you run the
 arguments, like so:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % python3
 --snip--
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+Type "help", "copyright", "credits" or "license" for more information.
 &gt;&gt;&gt;
 </code></pre></div>
 
@@ -182,7 +181,7 @@ you&rsquo;re using. Similar to a command line interface, it gives you the
 prompt <code>&gt;&gt;&gt;</code> and waits for you
 to enter a Python command.</p>
 <p>Run the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"Hello World!"</span><span class="p">)</span>
 <span class="n">Hello</span> <span class="n">World</span><span class="err">!</span>
 <span class="o">&gt;&gt;&gt;</span>
 </code></pre></div>
@@ -264,7 +263,7 @@ supports using parentheses:</p>
 <p>As in the rest of math, Python won&rsquo;t allow you to divide by zero:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">15</span> <span class="o">/</span> <span class="mi">0</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+  <span class="n">File</span> <span class="s2">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">ZeroDivisionError</span><span class="p">:</span> <span class="n">division</span> <span class="n">by</span> <span class="n">zero</span>
 </code></pre></div>
 
@@ -284,8 +283,8 @@ using them in an expression:</p>
 you use an undefined variable <code>x</code> in an expression, you&rsquo;ll get an error:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">10</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;x&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+  <span class="n">File</span> <span class="s2">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">'x'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
 </code></pre></div>
 
 <p>Instead of just setting a variable equal to some value, you&rsquo;ll often
@@ -317,58 +316,58 @@ also often very short: in Exercise 7-2, you used the strings
 <p>In Python, strings must be enclosed in either single quotes (<code>'</code>) or double quotes (<code>"</code>). Run the following examples, which
 demonstrate how to use each type of quote. Here is a string with double
 quotes:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;apple&quot;</span> 
-<span class="s1">&#39;apple&#39;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">"apple"</span> 
+<span class="s1">'apple'</span>
 </code></pre></div>
 
 <p>Here is the same string with single quotes:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;apple&#39;</span> <span class="c1"># The same string with single quotes</span>
-<span class="s1">&#39;apple&#39;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s1">'apple'</span> <span class="c1"># The same string with single quotes</span>
+<span class="s1">'apple'</span>
 </code></pre></div>
 
 <p>Use double quotes if you have single quotes within the string:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;She&#39;s finished!&quot;</span>
-<span class="s2">&quot;She&#39;s finished!&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">"She's finished!"</span>
+<span class="s2">"She's finished!"</span>
 </code></pre></div>
 
 <p>Use single quotes if you have double quotes within the string:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;She said, &quot;Hello&quot; &#39;</span>
-<span class="s1">&#39;She said, &quot;Hello&quot; &#39;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s1">'She said, "Hello" '</span>
+<span class="s1">'She said, "Hello" '</span>
 </code></pre></div>
 
 <p>Some of the same techniques you learned in Chapter
 3 to work with strings in your shell also
 apply to strings in Python. If your string uses double quotes, you can
 escape them like so:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;She said, </span><span class="se">\&quot;</span><span class="s2">Hello</span><span class="se">\&quot;</span><span class="s2"> &quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">"She said, </span><span class="se">\"</span><span class="s2">Hello</span><span class="se">\"</span><span class="s2"> "</span>
 </code></pre></div>
 
 <p>You can similarly escape single quotes in a
 single-quote string:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;She</span><span class="se">\&#39;</span><span class="s1">s finished!&#39;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s1">'She</span><span class="se">\'</span><span class="s1">s finished!'</span>
 </code></pre></div>
 
 <p>Like numbers, strings can be stored in variables. Run the following code
 to define <code>first_name</code> and
 <code>last_name</code> variables,
 replacing my name with yours:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">first_name</span> <span class="o">=</span> <span class="s2">&quot;Micah&quot;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">last_name</span> <span class="o">=</span> <span class="s2">&quot;Lee&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">first_name</span> <span class="o">=</span> <span class="s2">"Micah"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">last_name</span> <span class="o">=</span> <span class="s2">"Lee"</span>
 </code></pre></div>
 
 <p>In Python, <em>f-strings</em> are strings that can contain variables. To use an
 f-string, put the letter <code>f</code>
 before the quotes, then put variable names in braces (<code>{</code>and}). For example, run the following
 commands to display the values of the variables you just defined:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">last_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">last_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">Micah</span> <span class="n">Lee</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">full_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">last_name</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2">&#39;s full name is </span><span class="si">{</span><span class="n">full_name</span><span class="si">}</span><span class="s2">, but he goes by </span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">Micah</span><span class="s1">&#39;s full name is Micah Lee, but he goes by Micah</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">full_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">last_name</span><span class="si">}</span><span class="s2">"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2">'s full name is </span><span class="si">{</span><span class="n">full_name</span><span class="si">}</span><span class="s2">, but he goes by </span><span class="si">{</span><span class="n">first_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">Micah</span><span class="s1">'s full name is Micah Lee, but he goes by Micah</span>
 </code></pre></div>
 
 <p>Place expressions inside f-strings in order to evaluate them:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1 + 2 + 3 + 4 + 5 = </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"1 + 2 + 3 + 4 + 5 = </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">=</span> <span class="mi">15</span>
 </code></pre></div>
 
@@ -382,7 +381,7 @@ person is in months, days, hours, minutes, and seconds, given their name
 and an age (in years), and then displays this information. In your text
 editor, create a new file called <em>exercise-7-3.py</em> and define these two
 variables:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Micah&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="n">name</span> <span class="o">=</span> <span class="s2">"Micah"</span>
 <span class="n">age_years</span> <span class="o">=</span> <span class="mi">38</span>
 </code></pre></div>
 
@@ -411,20 +410,20 @@ interpreter to display the variable <code>number</code> with commas using an f-s
 <code>:,</code> after the variable name
 within the braces:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">1000000</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;the number is: </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"the number is: </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">the</span> <span class="n">number</span> <span class="ow">is</span><span class="p">:</span> <span class="mi">1000000</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;the number is: </span><span class="si">{</span><span class="n">number</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"the number is: </span><span class="si">{</span><span class="n">number</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">the</span> <span class="n">number</span> <span class="ow">is</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span><span class="mi">000</span><span class="p">,</span><span class="mi">000</span>
 </code></pre></div>
 
 <p>Back in the Python script, add code to display all of the values, like
 this:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">age_years</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> years old&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;That would be </span><span class="si">{</span><span class="n">age_months</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> months old&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Which is </span><span class="si">{</span><span class="n">age_days</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> days old&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Which is </span><span class="si">{</span><span class="n">age_hours</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> hours old&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Which is </span><span class="si">{</span><span class="n">age_minutes</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> minutes old&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Which is </span><span class="si">{</span><span class="n">age_seconds</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> seconds old&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">age_years</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> years old"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"That would be </span><span class="si">{</span><span class="n">age_months</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> months old"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Which is </span><span class="si">{</span><span class="n">age_days</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> days old"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Which is </span><span class="si">{</span><span class="n">age_hours</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> hours old"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Which is </span><span class="si">{</span><span class="n">age_minutes</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> minutes old"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Which is </span><span class="si">{</span><span class="n">age_seconds</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> seconds old"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>This code uses <code>{name}</code> to
@@ -467,7 +466,7 @@ might have a list of numbers:</p>
 </code></pre></div>
 
 <p>Or of strings:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="s2">"one"</span><span class="p">,</span> <span class="s2">"two"</span><span class="p">,</span> <span class="s2">"three"</span><span class="p">]</span>
 </code></pre></div>
 
 <p>Or an empty list:</p>
@@ -478,25 +477,25 @@ might have a list of numbers:</p>
 lists. Use this line of code to store a list of letters in the Hebrew
 alphabet, spelled out using Latin characters, in the
 <code>hebrew_letters</code> variable:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">hebrew_letters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;aleph&quot;</span><span class="p">,</span> <span class="s2">&quot;bet&quot;</span><span class="p">,</span> <span class="s2">&quot;gimel&quot;</span><span class="p">,</span> <span class="s2">&quot;dalet&quot;</span><span class="p">,</span> <span class="s2">&quot;he&quot;</span><span class="p">,</span> <span class="s2">&quot;vav&quot;</span><span class="p">,</span> <span class="s2">&quot;zayin&quot;</span><span class="p">,</span>
-<span class="s2">&quot;chet&quot;</span><span class="p">,</span> <span class="s2">&quot;tet&quot;</span><span class="p">,</span> <span class="s2">&quot;yod&quot;</span><span class="p">,</span> <span class="s2">&quot;kaf&quot;</span><span class="p">,</span> <span class="s2">&quot;lamed&quot;</span><span class="p">,</span> <span class="s2">&quot;mem&quot;</span><span class="p">,</span> <span class="s2">&quot;nun&quot;</span><span class="p">,</span> <span class="s2">&quot;samech&quot;</span><span class="p">,</span> <span class="s2">&quot;ayin&quot;</span><span class="p">,</span> <span class="s2">&quot;pe&quot;</span><span class="p">,</span>
-<span class="s2">&quot;tsadi&quot;</span><span class="p">,</span> <span class="s2">&quot;qof&quot;</span><span class="p">,</span> <span class="s2">&quot;resh&quot;</span><span class="p">,</span> <span class="s2">&quot;shin&quot;</span><span class="p">,</span> <span class="s2">&quot;tav&quot;</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">hebrew_letters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"aleph"</span><span class="p">,</span> <span class="s2">"bet"</span><span class="p">,</span> <span class="s2">"gimel"</span><span class="p">,</span> <span class="s2">"dalet"</span><span class="p">,</span> <span class="s2">"he"</span><span class="p">,</span> <span class="s2">"vav"</span><span class="p">,</span> <span class="s2">"zayin"</span><span class="p">,</span>
+<span class="s2">"chet"</span><span class="p">,</span> <span class="s2">"tet"</span><span class="p">,</span> <span class="s2">"yod"</span><span class="p">,</span> <span class="s2">"kaf"</span><span class="p">,</span> <span class="s2">"lamed"</span><span class="p">,</span> <span class="s2">"mem"</span><span class="p">,</span> <span class="s2">"nun"</span><span class="p">,</span> <span class="s2">"samech"</span><span class="p">,</span> <span class="s2">"ayin"</span><span class="p">,</span> <span class="s2">"pe"</span><span class="p">,</span>
+<span class="s2">"tsadi"</span><span class="p">,</span> <span class="s2">"qof"</span><span class="p">,</span> <span class="s2">"resh"</span><span class="p">,</span> <span class="s2">"shin"</span><span class="p">,</span> <span class="s2">"tav"</span><span class="p">]</span>
 </code></pre></div>
 
 <p>Now use the <code>print()</code> function
 to display the items in the <code>hebrew_letters</code> variable:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">hebrew_letters</span><span class="p">)</span>
-<span class="p">[</span><span class="s1">&#39;aleph&#39;</span><span class="p">,</span> <span class="s1">&#39;bet&#39;</span><span class="p">,</span> <span class="s1">&#39;gimel&#39;</span><span class="p">,</span> <span class="s1">&#39;dalet&#39;</span><span class="p">,</span> <span class="s1">&#39;he&#39;</span><span class="p">,</span> <span class="s1">&#39;vav&#39;</span><span class="p">,</span> <span class="s1">&#39;zayin&#39;</span><span class="p">,</span> <span class="s1">&#39;chet&#39;</span><span class="p">,</span> <span class="s1">&#39;tet&#39;</span><span class="p">,</span> <span class="s1">&#39;yod&#39;</span><span class="p">,</span>
-<span class="s1">&#39;kaf&#39;</span><span class="p">,</span> <span class="s1">&#39;lamed&#39;</span><span class="p">,</span> <span class="s1">&#39;mem&#39;</span><span class="p">,</span> <span class="s1">&#39;nun&#39;</span><span class="p">,</span> <span class="s1">&#39;samech&#39;</span><span class="p">,</span> <span class="s1">&#39;ayin&#39;</span><span class="p">,</span> <span class="s1">&#39;pe&#39;</span><span class="p">,</span> <span class="s1">&#39;tsadi&#39;</span><span class="p">,</span> <span class="s1">&#39;qof&#39;</span><span class="p">,</span> <span class="s1">&#39;resh&#39;</span><span class="p">,</span>
-<span class="s1">&#39;shin&#39;</span><span class="p">,</span> <span class="s1">&#39;tav&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">'aleph'</span><span class="p">,</span> <span class="s1">'bet'</span><span class="p">,</span> <span class="s1">'gimel'</span><span class="p">,</span> <span class="s1">'dalet'</span><span class="p">,</span> <span class="s1">'he'</span><span class="p">,</span> <span class="s1">'vav'</span><span class="p">,</span> <span class="s1">'zayin'</span><span class="p">,</span> <span class="s1">'chet'</span><span class="p">,</span> <span class="s1">'tet'</span><span class="p">,</span> <span class="s1">'yod'</span><span class="p">,</span>
+<span class="s1">'kaf'</span><span class="p">,</span> <span class="s1">'lamed'</span><span class="p">,</span> <span class="s1">'mem'</span><span class="p">,</span> <span class="s1">'nun'</span><span class="p">,</span> <span class="s1">'samech'</span><span class="p">,</span> <span class="s1">'ayin'</span><span class="p">,</span> <span class="s1">'pe'</span><span class="p">,</span> <span class="s1">'tsadi'</span><span class="p">,</span> <span class="s1">'qof'</span><span class="p">,</span> <span class="s1">'resh'</span><span class="p">,</span>
+<span class="s1">'shin'</span><span class="p">,</span> <span class="s1">'tav'</span><span class="p">]</span>
 </code></pre></div>
 
 <p>You can make long lists easier to read by entering each item in the list
 on its own line, indented, like this:</p>
 <div class="codehilite"><pre><span></span><code><span class="n">hebrew_letters</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;aleph&quot;</span><span class="p">,</span>
+    <span class="s2">"aleph"</span><span class="p">,</span>
 <span class="o">--</span><span class="n">snip</span><span class="o">--</span>
-    <span class="s2">&quot;tav&quot;</span>
+    <span class="s2">"tav"</span>
 <span class="p">]</span>
 </code></pre></div>
 
@@ -554,10 +553,10 @@ the list <code>[1,2,3]</code>:</p>
 <p>The <code>append()</code> method lets you add items to lists.
 For example, run the following code to add a new color to a list of
 favorites:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">favorite_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">favorite_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">favorite_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">favorite_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"black"</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">favorite_colors</span><span class="p">)</span>
-<span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">,</span> <span class="s1">'blue'</span><span class="p">,</span> <span class="s1">'black'</span><span class="p">]</span>
 </code></pre></div>
 
 <p>This code defines the variable <code>favorite_colors</code> as a list of strings containing
@@ -627,7 +626,7 @@ you) or unindent by selecting a line and pressing
 the number of items in a list but characters in a string:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">hebrew_letters</span><span class="p">:</span>
 <span class="o">...</span>     <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The letter </span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The letter </span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> characters"</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="n">The</span> <span class="n">letter</span> <span class="n">aleph</span> <span class="n">has</span> <span class="mi">4</span> <span class="n">characters</span>
 <span class="n">The</span> <span class="n">letter</span> <span class="n">bet</span> <span class="n">has</span> <span class="mi">3</span> <span class="n">characters</span>
@@ -643,7 +642,7 @@ each Hebrew letter in the Latin alphabet.</p>
 <p>You can use <code>for</code> loops to
 loop through strings as well, since a string is essentially a list of
 characters:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;hola&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">word</span> <span class="o">=</span> <span class="s2">"hola"</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
 <span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="n">character</span><span class="p">)</span>
 <span class="o">...</span>
@@ -715,21 +714,21 @@ examples:</p>
 strings, too. In Python, saying that one string is less than another
 means that the former comes before the latter in alphabetical order, as
 in the following examples:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;Alice&quot;</span> <span class="o">==</span> <span class="s2">&quot;Bob&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="s2">"Alice"</span> <span class="o">==</span> <span class="s2">"Bob"</span>
 <span class="kc">False</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;Alice&quot;</span> <span class="o">!=</span> <span class="s2">&quot;Bob&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s2">"Alice"</span> <span class="o">!=</span> <span class="s2">"Bob"</span>
 <span class="kc">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;Alice&quot;</span> <span class="o">&lt;</span> <span class="s2">&quot;Bob&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s2">"Alice"</span> <span class="o">&lt;</span> <span class="s2">"Bob"</span>
 <span class="kc">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;Alice&quot;</span> <span class="o">&gt;</span> <span class="s2">&quot;Bob&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s2">"Alice"</span> <span class="o">&gt;</span> <span class="s2">"Bob"</span>
 <span class="kc">False</span>
 </code></pre></div>
 
 <p>Strings are case sensitive. If you don&rsquo;t care about capitalization and
 want to just see whether the strings are made up of the same words, make
 them both lowercase before you compare them:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">name1</span> <span class="o">=</span> <span class="s2">&quot;Vladimir Putin&quot;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">name2</span> <span class="o">=</span> <span class="s2">&quot;vladimir putin&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">name1</span> <span class="o">=</span> <span class="s2">"Vladimir Putin"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">name2</span> <span class="o">=</span> <span class="s2">"vladimir putin"</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">name1</span> <span class="o">==</span> <span class="n">name2</span>
 <span class="kc">False</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">name1</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">name2</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -753,10 +752,10 @@ If the expression evaluates to <code>True</code>, then the code block runs. If t
 expression evaluates to <code>False</code>, the code doesn&rsquo;t run, and the flow
 moves on to the next line.</p>
 <p>For example, run the following code:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;letmein&quot;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS GRANTED&quot;</span><span class="p">)</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">password</span> <span class="o">=</span> <span class="s2">"letmein"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">"letmein"</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">"ACCESS GRANTED"</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">"Welcome"</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="n">ACCESS</span> <span class="n">GRANTED</span>
 <span class="n">Welcome</span>
@@ -772,10 +771,10 @@ statement (<code>password</code>
 displays <code>ACCESS GRANTED</code> and
 <code>Welcome</code>.</p>
 <p>Now try including the wrong password in your <code>if</code> statement:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;yourefired&quot;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS GRANTED&quot;</span><span class="p">)</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">password</span> <span class="o">=</span> <span class="s2">"yourefired"</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">"letmein"</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">"ACCESS GRANTED"</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">"Welcome"</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="o">&gt;&gt;&gt;</span>
 </code></pre></div>
@@ -785,23 +784,23 @@ displays <code>ACCESS GRANTED</code> and
 <p>An <code>if</code> statement can
 optionally incorporate an <code>else</code> block so that if the condition is
 true, one code block runs, and if it&rsquo;s false, another block runs:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS GRANTED&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">"letmein"</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ACCESS GRANTED"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Welcome"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS DENIED&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ACCESS DENIED"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>You can also incorporate <code>elif</code> blocks, short for &ldquo;else if.&rdquo; These let
 you make another comparison if the first comparison is false, as shown
 in Listing 7-1.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS GRANTED&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome&quot;</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;open sesame&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SECRET AREA ACCESS GRANTED&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">"letmein"</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ACCESS GRANTED"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Welcome"</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">"open sesame"</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"SECRET AREA ACCESS GRANTED"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS DENIED&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ACCESS DENIED"</span><span class="p">)</span>
 </code></pre></div>
 
 <p><em>Listing 7-1: Comparing <code>if</code>, <code>elif</code>, and <code>else</code> statements</em></p>
@@ -820,14 +819,14 @@ displays <code>ACCESS DENIED</code>.</p>
 <h4 id="nested-code-blocks">Nested Code Blocks<a class="headerlink" href="#nested-code-blocks" title="Permanent link">&para;</a></h4>
 <p>You can also accomplish the results of Listing 7-1 with multiple <code>if</code> statements and no <code>elif</code>, using <em>nested</em> code blocks, or
 indented blocks of code inside other indented blocks of code:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;letmein&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS GRANTED&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome.&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">"letmein"</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"ACCESS GRANTED"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Welcome."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">&quot;open sesame&quot;</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SECRET AREA ACCESS GRANTED&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="s2">"open sesame"</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"SECRET AREA ACCESS GRANTED"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ACCESS DENIED&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"ACCESS DENIED"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>This code is functionally the same as Listing 7-1.</p>
@@ -851,7 +850,7 @@ with lists. For example, to check whether the number 42 appears in a
 list of numbers, you can use <code>in</code> as follows:</p>
 <div class="codehilite"><pre><span></span><code><span class="n">favorite_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">101</span><span class="p">]</span>
 <span class="k">if</span> <span class="mi">42</span> <span class="ow">in</span> <span class="n">favorite_numbers</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;life, the universe, and everything&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"life, the universe, and everything"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>To the left of the <code>in</code>
@@ -862,17 +861,17 @@ to <code>False</code>.</p>
 <p>You can also use <code>not in</code> to
 check if an item <em>isn&rsquo;t</em> in a list:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="mi">1337</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">favorite_numbers</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mess with the best, die like the rest&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"mess with the best, die like the rest"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>Additionally, you can use <code>in</code>
 to search for smaller strings inside of larger strings:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot;What happens in the coming hours will decide how bad the Ukraine</span>
-<span class="n">crisis</span> <span class="n">gets</span> <span class="k">for</span> <span class="n">the</span> <span class="n">vulnerable</span> <span class="n">democracy</span> <span class="ow">in</span> <span class="n">Russian</span> <span class="n">President</span> <span class="n">Vladimir</span> <span class="n">Putin</span><span class="s1">&#39;s</span>
+<div class="codehilite"><pre><span></span><code><span class="n">sentence</span> <span class="o">=</span> <span class="s2">"What happens in the coming hours will decide how bad the Ukraine</span>
+<span class="n">crisis</span> <span class="n">gets</span> <span class="k">for</span> <span class="n">the</span> <span class="n">vulnerable</span> <span class="n">democracy</span> <span class="ow">in</span> <span class="n">Russian</span> <span class="n">President</span> <span class="n">Vladimir</span> <span class="n">Putin</span><span class="s1">'s</span>
 <span class="n">sights</span> <span class="n">but</span> <span class="n">also</span> <span class="n">its</span> <span class="n">potentially</span> <span class="n">huge</span> <span class="n">impact</span> <span class="n">on</span> <span class="n">Americans</span> <span class="ow">and</span> <span class="n">an</span> <span class="n">already</span> <span class="n">deeply</span>
-<span class="n">unstable</span> <span class="n">world</span><span class="o">.</span><span class="s2">&quot;</span>
-<span class="k">if</span> <span class="s2">&quot;putin&quot;</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Putin is mentioned&quot;</span><span class="p">)</span>
+<span class="n">unstable</span> <span class="n">world</span><span class="o">.</span><span class="s2">"</span>
+<span class="k">if</span> <span class="s2">"putin"</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Putin is mentioned"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>This code defines the variable
@@ -920,13 +919,13 @@ to the right. It flips true to false, and false to true. For example:</p>
 whether two things are both true, use <code>or</code> to determine whether at least one of
 two things is true, and use <code>not</code> to change a true to a false or vice
 versa. For example, consider this code:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;US&quot;</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can legally drink alcohol&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">country</span> <span class="o">==</span> <span class="s2">"US"</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"You can legally drink alcohol"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">country</span> <span class="o">!=</span> <span class="s2">&quot;US&quot;</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t know about your country&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">country</span> <span class="o">!=</span> <span class="s2">"US"</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"I don't know about your country"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You&#39;re too young to legally drink alcohol&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"You're too young to legally drink alcohol"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>The first <code>if</code> statement has an expression that
@@ -956,13 +955,13 @@ expressions. For example, the drinking age in the US is 21 and the
 drinking age in Italy is 18. Let&rsquo;s add Italy to this program, this time
 incorporating an <code>or</code>
 operator:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;US&quot;</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;Italy&quot;</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can legally drink alcohol&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="n">country</span> <span class="o">==</span> <span class="s2">"US"</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">country</span> <span class="o">==</span> <span class="s2">"Italy"</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"You can legally drink alcohol"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">country</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;US&quot;</span><span class="p">,</span> <span class="s2">&quot;Italy&quot;</span><span class="p">]:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t know about your country&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">country</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"US"</span><span class="p">,</span> <span class="s2">"Italy"</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"I don't know about your country"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You&#39;re too young to legally drink alcohol&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"You're too young to legally drink alcohol"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>In plain English, the first <code>if</code> statement tells the program that if
@@ -976,8 +975,8 @@ comparing is true, then the whole expression is true.</p>
 <p>Use the operator <code>not</code> to turn
 <code>True</code> values into
 <code>False</code> or <code>False</code> values into <code>True</code>. For example:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">country</span> <span class="o">==</span> <span class="s2">&quot;US&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sorry, the drinking age in the US is 21&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">country</span> <span class="o">==</span> <span class="s2">"US"</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Sorry, the drinking age in the US is 21"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>You could replace <code>not age</code>
@@ -993,12 +992,12 @@ when you tried dividing by zero (something you can&rsquo;t do in math) or
 using a variable that hasn&rsquo;t been defined:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">15</span> <span class="o">/</span> <span class="mi">0</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+  <span class="n">File</span> <span class="s2">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">ZeroDivisionError</span><span class="p">:</span> <span class="n">division</span> <span class="n">by</span> <span class="n">zero</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">10</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;x&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+  <span class="n">File</span> <span class="s2">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">'x'</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
 </code></pre></div>
 
 <p>In these cases, Python threw a <code>ZeroDivisionError</code> exception and a <code>NameError</code> exception, respectively.</p>
@@ -1006,8 +1005,8 @@ using a variable that hasn&rsquo;t been defined:</p>
 you to handle them gracefully. For example, let&rsquo;s say you have a list of
 names called <code>names</code>, and you
 want display the first name in the list:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"Charlie"</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">The</span> <span class="n">first</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Alice</span>
 </code></pre></div>
 
@@ -1016,9 +1015,9 @@ want display the first name in the list:</p>
 expected if there are a few names in the list. But what if
 <code>names</code> is empty?</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+  <span class="n">File</span> <span class="s2">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">IndexError</span><span class="p">:</span> <span class="nb">list</span> <span class="n">index</span> <span class="n">out</span> <span class="n">of</span> <span class="nb">range</span>
 </code></pre></div>
 
@@ -1027,9 +1026,9 @@ Python throws an <code>IndexError</code>
 exception.</p>
 <p>You can catch this exception using <code>try</code> and <code>except</code> statements, like this:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The list of names is empty&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"The list of names is empty"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>This code first runs a <code>try</code>
@@ -1039,11 +1038,11 @@ the next line of code after the <code>except</code> block. However, if it hits a
 exception, then it runs the code in the <code>except</code> block before moving on.</p>
 <p>Here&rsquo;s what it looks like when there&rsquo;s no
 exception:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"Charlie"</span><span class="p">]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">try</span><span class="p">:</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="o">...</span> <span class="k">except</span><span class="p">:</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The list of names is empty&quot;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">"The list of names is empty"</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="n">The</span> <span class="n">first</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Alice</span>
 </code></pre></div>
@@ -1054,9 +1053,9 @@ control flow moved on past the <code>except</code> block.</p>
 catches it and handles it gracefully:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">try</span><span class="p">:</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The first name is </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="o">...</span> <span class="k">except</span><span class="p">:</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The list of names is empty&quot;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">"The list of names is empty"</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="n">The</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">names</span> <span class="ow">is</span> <span class="n">empty</span>
 </code></pre></div>
@@ -1082,7 +1081,7 @@ exceptions. Consider the following example:</p>
     <span class="c1"># This catches IndexError exceptions</span>
     <span class="o">--</span><span class="n">snip</span><span class="o">--</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="c1"># This catches any other exceptions that haven&#39;t been caught yet</span>
+    <span class="c1"># This catches any other exceptions that haven't been caught yet</span>
     <span class="o">--</span><span class="n">snip</span><span class="o">--</span>
 </code></pre></div>
 
@@ -1112,7 +1111,7 @@ text and converts it into alternating caps style, using the control flow
 concepts you learned in the previous section.</p>
 <p>In your text editor, create a new file called <em>exercise-7-4.py</em>, and
 start by defining the variable <code>text</code>, like this:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;One does not simply walk into Mordor&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"One does not simply walk into Mordor"</span>
 </code></pre></div>
 
 <p>The simplest way to write this script is to start with an empty string,
@@ -1121,7 +1120,7 @@ in <code>text</code>, adding characters
 to <code>alternating_caps_text</code> one
 at a time and alternating their capitalization as you do so. Add a
 second line to your script defining that variable, like this:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">" "</span>
 </code></pre></div>
 
 <p>Next, you&rsquo;ll define a Boolean variable called
@@ -1221,7 +1220,7 @@ that code. You&rsquo;ll learn how to do that in this section.</p>
 defines a function called <code>test()</code>, which prints a string to your
 terminal:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">():</span>
-<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this is a test function&quot;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">"this is a test function"</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">test</span><span class="p">()</span>
 <span class="n">this</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">test</span> <span class="n">function</span>
@@ -1262,7 +1261,7 @@ Python script:</p>
 <span class="n">green_apples</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="n">total_apples</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">red_apples</span><span class="p">,</span> <span class="n">green_apples</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">total_apples</span><span class="si">}</span><span class="s2"> apples&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"There are </span><span class="si">{</span><span class="n">total_apples</span><span class="si">}</span><span class="s2"> apples"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>First, the code defines a function called <code>sum()</code> to be a code block with just a
@@ -1293,9 +1292,9 @@ for them when the function is called, the default value is used instead.</p>
 optionally a number of exclamation marks and question marks, prints a
 greeting using its arguments:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">num_exclamations</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">exclamations</span> <span class="o">=</span> <span class="s2">&quot;!&quot;</span> <span class="o">*</span> <span class="n">num_exclamations</span>
-    <span class="n">questions</span> <span class="o">=</span> <span class="s2">&quot;?&quot;</span> <span class="o">*</span> <span class="n">num_questions</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">exclamations</span><span class="si">}{</span><span class="n">questions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">exclamations</span> <span class="o">=</span> <span class="s2">"!"</span> <span class="o">*</span> <span class="n">num_exclamations</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="s2">"?"</span> <span class="o">*</span> <span class="n">num_questions</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">exclamations</span><span class="si">}{</span><span class="n">questions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>The argument <code>name</code> is a
@@ -1318,18 +1317,18 @@ and <code>num_questions</code>). You can
 call it just passing in <code>name</code>, without passing values in for the
 default arguments, and they will automatically be set to 3 and 2,
 respectively:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">"Alice"</span><span class="p">)</span>
 <span class="n">Hello</span> <span class="n">Alice</span><span class="err">!!!??</span>
 </code></pre></div>
 
 <p>You can also keep the default value for one of the default arguments,
 but choose a value for another. When you manually choose a value for a
 default argument, you&rsquo;re using a <em>keyword argument</em>. For example:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="n">num_exclamations</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">"Bob"</span><span class="p">,</span> <span class="n">num_exclamations</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">Hello</span> <span class="n">Bob</span><span class="err">!!!!!?????</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">"Charlie"</span><span class="p">,</span> <span class="n">num_questions</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">Hello</span> <span class="n">Charlie</span><span class="err">!!!</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Eve&quot;</span><span class="p">,</span> <span class="n">num_exclamations</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">greet</span><span class="p">(</span><span class="s2">"Eve"</span><span class="p">,</span> <span class="n">num_exclamations</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">Hello</span> <span class="n">Eve</span><span class="err">??</span>
 </code></pre></div>
 
@@ -1355,7 +1354,7 @@ length).</p>
 of vowels in the string:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">count_vowels</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="n">number_of_vowels</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">vowels</span> <span class="o">=</span> <span class="s2">&quot;aeiouAEIOU&quot;</span>
+    <span class="n">vowels</span> <span class="o">=</span> <span class="s2">"aeiouAEIOU"</span>
     <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">:</span>
             <span class="n">number_of_vowels</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -1378,19 +1377,19 @@ vowel, the code increases the <code>number_of_vowels</code> variable by one. Fin
 equals however many vowels it counted in <code>s</code>.</p>
 <p>Here are a few examples of calling this function and passing in
 different strings:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">&quot;THINK&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">"THINK"</span><span class="p">)</span>
 <span class="mi">1</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">&quot;lizard&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">"lizard"</span><span class="p">)</span>
 <span class="mi">2</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">&quot;zzzzzzz&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">"zzzzzzz"</span><span class="p">)</span>
 <span class="mi">0</span>
 <span class="o">&gt;&gt;&gt;</span>
 </code></pre></div>
 
 <p>When you define a variable, you can set its value to the return value of
 a function just by setting the variable equal to that function call:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">num_vowels_think</span> <span class="o">=</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">&quot;THINK&quot;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">num_vowels_lizard</span> <span class="o">=</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">&quot;lizard&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">num_vowels_think</span> <span class="o">=</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">"THINK"</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">num_vowels_lizard</span> <span class="o">=</span> <span class="n">count_vowels</span><span class="p">(</span><span class="s2">"lizard"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>This code defines the variable <code>num_vowels_think</code> and sets its value to the return value
@@ -1415,7 +1414,7 @@ characters in a string <code>s</code> to
 check whether the character is an exclamation point:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">is_exciting</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">character</span> <span class="o">==</span> <span class="s2">&quot;!&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">character</span> <span class="o">==</span> <span class="s2">"!"</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">return</span> <span class="kc">False</span>
@@ -1444,7 +1443,7 @@ documentation about the function on request. Docstrings are optional,
 but they can help other people understand your code.</p>
 <p>For example, here&rsquo;s how you&rsquo;d define the <code>sum()</code> function with a docstring:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="o">...</span>     <span class="s2">&quot;&quot;&quot;This function returns the sum of a and b&quot;&quot;&quot;</span>
+<span class="o">...</span>     <span class="s2">"""This function returns the sum of a and b"""</span>
 <span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 </code></pre></div>
 
@@ -1483,7 +1482,7 @@ time.</p>
 takes in the argument <code>text</code>,
 like this:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Returns an aLtErNaTiNg cApS version of text"""</span>
 </code></pre></div>
 
 <p>Next, copy the code from Exercise 7-4 and paste it into this function,
@@ -1498,8 +1497,8 @@ containing this version of a string and return it.</p>
 at
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-5.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/chapter-7/exercise-7-5.py</a>):</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">alternating_caps</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an aLtErNaTiNg cApS version of text&quot;&quot;&quot;</span>
-    <span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+<span class="w">    </span><span class="sd">"""Returns an aLtErNaTiNg cApS version of text"""</span>
+    <span class="n">alternating_caps_text</span> <span class="o">=</span> <span class="s2">" "</span>
     <span class="n">should_be_capital</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
@@ -1516,9 +1515,9 @@ at
 <p>Now that you have a function&mdash;a reusable chunk of code&mdash;you can use it
 as many times as you want. Call this function a few times, remembering
 to display its return value using the <code>print()</code> function, like this:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hacks, Leaks, and Revelations&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">alternating_caps</span><span class="p">(</span><span class="s2">&quot;This book is amazing&quot;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">alternating_caps</span><span class="p">(</span><span class="s2">&quot;I&#39;m learning so much&quot;</span><span class="p">))</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">"Hacks, Leaks, and Revelations"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">alternating_caps</span><span class="p">(</span><span class="s2">"This book is amazing"</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">alternating_caps</span><span class="p">(</span><span class="s2">"I'm learning so much"</span><span class="p">))</span>
 </code></pre></div>
 
 <p>You can change the text that you pass in to the
@@ -1528,7 +1527,7 @@ calls to whatever you want.</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-7 % python3 exercise-7-5.py
 Hacks, Leaks, and Revelations
 ThIs bOoK Is aMaZiNg
-I&#39;M LeArNiNg sO MuCh
+I'M LeArNiNg sO MuCh
 </code></pre></div>
 
 <p>While the output of this script is displayed in

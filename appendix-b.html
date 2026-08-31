@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -166,7 +165,7 @@ request to
 <em>https://example.com</em>
 and view its content.</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://example.com"</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="o">&lt;</span><span class="err">!</span><span class="n">doctype</span> <span class="n">html</span><span class="o">&gt;</span>
 <span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
@@ -180,7 +179,7 @@ and view its content.</p>
     <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">Example</span> <span class="n">Domain</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">This</span> <span class="n">domain</span> <span class="ow">is</span> <span class="k">for</span> <span class="n">use</span> <span class="ow">in</span> <span class="n">illustrative</span> <span class="n">examples</span> <span class="ow">in</span> <span class="n">documents</span><span class="o">.</span> <span class="n">You</span> <span class="n">may</span> <span class="n">use</span> <span class="n">this</span>
     <span class="n">domain</span> <span class="ow">in</span> <span class="n">literature</span> <span class="n">without</span> <span class="n">prior</span> <span class="n">coordination</span> <span class="ow">or</span> <span class="n">asking</span> <span class="k">for</span> <span class="n">permission</span><span class="o">.&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://www.iana.org/domains/example&quot;</span><span class="o">&gt;</span><span class="n">More</span> <span class="n">information</span><span class="o">...&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">"https://www.iana.org/domains/example"</span><span class="o">&gt;</span><span class="n">More</span> <span class="n">information</span><span class="o">...&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
@@ -262,32 +261,32 @@ scraping script,
 <span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;gab_username&quot;</span><span class="p">)</span> <span class="err">❶</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"gab_username"</span><span class="p">)</span> <span class="err">❶</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">gab_username</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download a user&#39;s posts from Gab&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Download a user's posts from Gab"""</span>
 
     <span class="c1"># Get information about the user</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://gab.com/api/v1/account_by_username/</span><span class="si">{</span><span class="n">gab_username</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="err">❷</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">"https://gab.com/api/v1/account_by_username/</span><span class="si">{</span><span class="n">gab_username</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="err">❷</span>
     <span class="n">user_info</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-    <span class="k">if</span> <span class="s2">&quot;error&quot;</span> <span class="ow">in</span> <span class="n">user_info</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">user_info</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="s2">"error"</span> <span class="ow">in</span> <span class="n">user_info</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">user_info</span><span class="p">[</span><span class="s2">"error"</span><span class="p">])</span>
         <span class="k">return</span>
 
     <span class="c1"># Display some user info</span>
-    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Display name: </span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
-    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;followers_count&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> followers, </span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;following_count&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> following, </span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;statuses_count&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> posts&quot;</span><span class="p">)</span> <span class="err">❸</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Display name: </span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">'display_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> 
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">'followers_count'</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> followers, </span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">'following_count'</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> following, </span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">'statuses_count'</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> posts"</span><span class="p">)</span> <span class="err">❸</span>
     <span class="nb">print</span><span class="p">()</span>
 
-    <span class="c1"># Get this user&#39;s posts</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://gab.com/api/v1/accounts/</span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/statuses&quot;</span><span class="p">)</span> <span class="err">❹</span>
+    <span class="c1"># Get this user's posts</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">"https://gab.com/api/v1/accounts/</span><span class="si">{</span><span class="n">user_info</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2">/statuses"</span><span class="p">)</span> <span class="err">❹</span>
     <span class="n">posts</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">post</span><span class="p">[</span><span class="s2">&quot;reblog&quot;</span><span class="p">]:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;repost @</span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;reblog&#39;</span><span class="p">][</span><span class="s1">&#39;account&#39;</span><span class="p">][</span><span class="s1">&#39;username&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;reblog&#39;</span><span class="p">][</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;reblog&#39;</span><span class="p">][</span><span class="s1">&#39;content&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">post</span><span class="p">[</span><span class="s2">"reblog"</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"repost @</span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">'reblog'</span><span class="p">][</span><span class="s1">'account'</span><span class="p">][</span><span class="s1">'username'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">'reblog'</span><span class="p">][</span><span class="s1">'created_at'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">'reblog'</span><span class="p">][</span><span class="s1">'content'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">'created_at'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">'content'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -338,7 +337,7 @@ at all about a particular historical atrocity that happened on another
 continent 80 years ago when there is a genocide of babies happening right
 here, right now, today?
 repost @ScipioAmericanus: 2022-12-07T04:50:37.560Z: Jews literally believe
-that they can reject God because they&#39;re justified according to the flesh and
+that they can reject God because they're justified according to the flesh and
 their own laws. Wicked stuff.
 --snip--
 </code></pre></div>
@@ -389,7 +388,7 @@ the <code>bs4</code> module by running
 <em>https://example.com</em>, like you did in the last section:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://example.com"</span><span class="p">)</span>
 </code></pre></div>
 
 <p>This code imports the <code>httpx</code>
@@ -405,15 +404,15 @@ well as two paragraphs of text within <code>&lt;p&gt;</code> tags inside the <co
 <p>Using BS4, you can parse this HTML to select specific pieces of
 content&mdash;in this case, the page title and the content of the first
 paragraph:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">"html.parser"</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="n">Example</span> <span class="n">Domain</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">paragraph</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">paragraph</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"p"</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">paragraph</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 <span class="n">This</span> <span class="n">domain</span> <span class="ow">is</span> <span class="k">for</span> <span class="n">use</span> <span class="ow">in</span> <span class="n">illustrative</span> <span class="n">examples</span> <span class="ow">in</span> <span class="n">documents</span><span class="o">.</span> <span class="n">You</span> <span class="n">may</span> <span class="n">use</span> <span class="n">this</span>
     <span class="n">domain</span> <span class="ow">in</span> <span class="n">literature</span> <span class="n">without</span> <span class="n">prior</span> <span class="n">coordination</span> <span class="ow">or</span> <span class="n">asking</span> <span class="k">for</span> <span class="n">permission</span><span class="o">.</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">):</span>
-<span class="o">...</span>      <span class="nb">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"a"</span><span class="p">):</span>
+<span class="o">...</span>      <span class="nb">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"href"</span><span class="p">))</span>
 <span class="o">...</span>
 <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">iana</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">domains</span><span class="o">/</span><span class="n">example</span>
 </code></pre></div>
@@ -460,21 +459,21 @@ defined within <code>&lt;table&gt;</code> tags.
 Each row is a <code>&lt;tr&gt;</code> tag, and
 each cell within it has a <code>&lt;td&gt;</code> tag. Here&rsquo;s the HTML code from a
 typical Hacker News post:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;athing&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;34466985&quot;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;title&quot;</span> <span class="na">valign</span><span class="o">=</span><span class="s">&quot;top&quot;</span> <span class="na">align</span><span class="o">=</span><span class="s">&quot;right&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;rank&quot;</span><span class="p">&gt;</span>4.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;votelinks&quot;</span> <span class="na">valign</span><span class="o">=</span><span class="s">&quot;top&quot;</span><span class="p">&gt;</span>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">"athing"</span> <span class="na">id</span><span class="o">=</span><span class="s">"34466985"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">"title"</span> <span class="na">valign</span><span class="o">=</span><span class="s">"top"</span> <span class="na">align</span><span class="o">=</span><span class="s">"right"</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"rank"</span><span class="p">&gt;</span>4.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">"votelinks"</span> <span class="na">valign</span><span class="o">=</span><span class="s">"top"</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">center</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;up_34466985&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;vote?id=34466985&amp;amp;how=up&amp;amp;goto=news&quot;</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;votearrow&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;upvote&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">id</span><span class="o">=</span><span class="s">"up_34466985"</span> <span class="na">href</span><span class="o">=</span><span class="s">"vote?id=34466985&amp;amp;how=up&amp;amp;goto=news"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"votearrow"</span> <span class="na">title</span><span class="o">=</span><span class="s">"upvote"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">center</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;titleline&quot;</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://people.ece.cornell.edu/land/courses/ece4760/RP2040/C_SDK_DMA_machine/DMA_machine_rp2040.html&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">"title"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"titleline"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"https://people.ece.cornell.edu/land/courses/ece4760/RP2040/C_SDK_DMA_machine/DMA_machine_rp2040.html"</span><span class="p">&gt;</span>
         Direct Memory Access computing machine RP2040
       <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sitebit comhead&quot;</span><span class="p">&gt;</span> (<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;from?site=cornell.edu&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sitestr&quot;</span><span class="p">&gt;</span>cornell.edu<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>)
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"sitebit comhead"</span><span class="p">&gt;</span> (<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"from?site=cornell.edu"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"sitestr"</span><span class="p">&gt;</span>cornell.edu<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>)
       <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
@@ -497,30 +496,30 @@ terminal:</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">])</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"output.csv"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="p">[</span><span class="s2">"Title"</span><span class="p">,</span> <span class="s2">"URL"</span><span class="p">])</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">page_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LOADING PAGE </span><span class="si">{</span><span class="n">page_number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://news.ycombinator.com/?p=</span><span class="si">{</span><span class="n">page_number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"LOADING PAGE </span><span class="si">{</span><span class="n">page_number</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">"https://news.ycombinator.com/?p=</span><span class="si">{</span><span class="n">page_number</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
 
-            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">table_row</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;athing&quot;</span><span class="p">):</span>
-                <span class="n">table_cells</span> <span class="o">=</span> <span class="n">table_row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">)</span>
+            <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">"html.parser"</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">table_row</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"tr"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">"athing"</span><span class="p">):</span>
+                <span class="n">table_cells</span> <span class="o">=</span> <span class="n">table_row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"td"</span><span class="p">)</span>
                 <span class="n">last_cell</span> <span class="o">=</span> <span class="n">table_cells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                <span class="n">link</span> <span class="o">=</span> <span class="n">last_cell</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
-                <span class="n">link_url</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span>
+                <span class="n">link</span> <span class="o">=</span> <span class="n">last_cell</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
+                <span class="n">link_url</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"href"</span><span class="p">)</span>
 
                 <span class="nb">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">link_url</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
 
-                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="n">link</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">:</span> <span class="n">link_url</span><span class="p">})</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">"Title"</span><span class="p">:</span> <span class="n">link</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">"URL"</span><span class="p">:</span> <span class="n">link_url</span><span class="p">})</span>
 
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -693,7 +692,7 @@ the Python interpreter by loading this book&rsquo;s git repo website on GitHub
 to get a feel for how Selenium allows you to control a web browser:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span><span class="w"> </span><span class="nn">selenium</span><span class="w"> </span><span class="kn">import</span> <span class="n">webdriver</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://github.com/micahflee/hacks-leaks-and-revelations&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://github.com/micahflee/hacks-leaks-and-revelations"</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
 <span class="n">GitHub</span> <span class="o">-</span> <span class="n">micahflee</span><span class="o">/</span><span class="n">hacks</span><span class="o">-</span><span class="n">leaks</span><span class="o">-</span><span class="ow">and</span><span class="o">-</span><span class="n">revelations</span><span class="p">:</span> <span class="n">Code</span> <span class="n">that</span> <span class="n">goes</span> <span class="n">along</span> <span class="k">with</span> <span class="n">the</span> <span class="n">Hacks</span><span class="p">,</span> <span class="n">Leaks</span><span class="p">,</span> <span class="ow">and</span> <span class="n">Revelations</span> <span class="n">book</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
@@ -757,31 +756,31 @@ satellite image screenshots from Google Maps for you:</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">selenium.webdriver.common.by</span><span class="w"> </span><span class="kn">import</span> <span class="n">By</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;screenshot_filename&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"location"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"screenshot_filename"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">screenshot_filename</span><span class="p">):</span>
     <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Firefox</span><span class="p">()</span>
     <span class="n">driver</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
-    <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://maps.google.com&quot;</span><span class="p">)</span>
-    <span class="n">search_box</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="s2">&quot;searchboxinput&quot;</span><span class="p">)</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://maps.google.com"</span><span class="p">)</span>
+    <span class="n">search_box</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="s2">"searchboxinput"</span><span class="p">)</span>
     <span class="n">search_box</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
     <span class="n">search_box</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
     <span class="n">search_box</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">Keys</span><span class="o">.</span><span class="n">RETURN</span><span class="p">)</span>
 
-    <span class="n">body</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="s2">"body"</span><span class="p">)</span>
     <span class="n">body</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">Keys</span><span class="o">.</span><span class="n">ADD</span><span class="p">)</span>
     <span class="n">body</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">Keys</span><span class="o">.</span><span class="n">ADD</span><span class="p">)</span>
 
-    <span class="n">minimap</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="s2">&quot;minimap&quot;</span><span class="p">)</span>
-    <span class="n">buttons</span> <span class="o">=</span> <span class="n">minimap</span><span class="o">.</span><span class="n">find_elements</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="s2">&quot;button&quot;</span><span class="p">)</span>
+    <span class="n">minimap</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="s2">"minimap"</span><span class="p">)</span>
+    <span class="n">buttons</span> <span class="o">=</span> <span class="n">minimap</span><span class="o">.</span><span class="n">find_elements</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="s2">"button"</span><span class="p">)</span>
     <span class="n">buttons</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">driver</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="n">screenshot_filename</span><span class="p">)</span>
     <span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -831,7 +830,7 @@ When it&rsquo;s done, it quits Firefox.</p>
 <a href="https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/appendix-b/selenium-example.py">https://github.com/micahflee/hacks-leaks-and-revelations/blob/main/appendix-b/selenium-example.py</a>.</p>
 <p>You can use <em>selenium-example.py</em> to generate Google Maps screenshots of
 any location you like. For example, I ran the following command:</p>
-<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>selenium-example.py<span class="w"> </span><span class="s2">&quot;great pyramid of giza&quot;</span><span class="w"> </span>giza.png
+<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>selenium-example.py<span class="w"> </span><span class="s2">"great pyramid of giza"</span><span class="w"> </span>giza.png
 </code></pre></div>
 
 <p>This opened a Firefox window that was controlled by Selenium. It loaded Google Maps, searched for <em>great
