@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -103,7 +102,7 @@ to loop through the output of another shell command, as shown in the
 following code:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>FILENAME<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>*.zip<span class="k">)</span>
 <span class="k">do</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ZIP filename: </span><span class="nv">$FILENAME</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"ZIP filename: </span><span class="nv">$FILENAME</span><span class="s2">"</span>
 <span class="k">done</span>
 </code></pre></div>
 
@@ -119,7 +118,7 @@ this case, the <code>echo</code> command prints the filenames to the terminal in
 <em>BlueLeaks</em> folder in my terminal on macOS:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor BlueLeaks % for FILENAME in $(ls *.zip)
 for&gt; do
-for&gt;     echo &quot;ZIP filename: $FILENAME&quot;
+for&gt;     echo "ZIP filename: $FILENAME"
 for&gt; done
 ZIP filename: 211sfbay.zip
 ZIP filename: Securitypartnership.zip
@@ -185,7 +184,7 @@ files.) In your new file, enter the following code:</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="k">for</span><span class="w"> </span>FILENAME<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>*.zip<span class="k">)</span>
 <span class="k">do</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unzipping </span><span class="nv">$FILENAME</span><span class="s2">...&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Unzipping </span><span class="nv">$FILENAME</span><span class="s2">..."</span>
 <span class="w">    </span>unzip<span class="w"> </span>-o<span class="w"> </span><span class="nv">$FILENAME</span>
 <span class="k">done</span>
 </code></pre></div>
@@ -209,7 +208,7 @@ the script will replace it with the newer version.</p>
 <code>FILENAME</code> during the first
 loop is <code>211sfbay.zip</code>. The
 code that runs in this loop is equivalent to the following commands:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unzipping 211sfbay.zip...&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"Unzipping 211sfbay.zip..."</span>
 unzip<span class="w"> </span>-o<span class="w"> </span>211sfbay.zip
 </code></pre></div>
 
@@ -242,10 +241,10 @@ command outputs a string like <code>readme.txt\nWork Documents.zip</code>.</p>
 <p>To work with filenames with spaces, you change the value of the <code>IFS</code> variable so that it splits strings only on newline characters, but not on spaces or tabs. Then you change it back after the loop. Here’s an example:</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="nv">ORIGINAL_IFS</span><span class="o">=</span><span class="nv">$IFS</span>
-<span class="nv">IFS</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="k">)</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"\n"</span><span class="k">)</span>
 <span class="k">for</span><span class="w"> </span>FILENAME<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="k">)</span>
 <span class="k">do</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$FILENAME</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$FILENAME</span><span class="s2">"</span>
 <span class="k">done</span>
 <span class="nv">IFS</span><span class="o">=</span><span class="nv">$ORIGINAL_IFS</span>
 </code></pre></div>
@@ -298,7 +297,7 @@ command to run 7-Zip.</p>
 <p>Next, run the following PowerShell commands (this is the PowerShell
 version of the <em>exercise-4-1-unzip.sh</em> shell script in the previous
 subsection):</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">$ZipFiles</span> <span class="p">=</span> <span class="nb">Get-ChildItem</span> <span class="n">-Path</span> <span class="p">.</span> <span class="n">-Filter</span> <span class="s2">&quot;*.zip&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">$ZipFiles</span> <span class="p">=</span> <span class="nb">Get-ChildItem</span> <span class="n">-Path</span> <span class="p">.</span> <span class="n">-Filter</span> <span class="s2">"*.zip"</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$ZipFile</span> <span class="k">in</span> <span class="nv">$ZipFiles</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">7z</span> <span class="n">x</span> <span class="nv">$ZipFile</span><span class="p">.</span><span class="n">FullName</span>
 <span class="p">}</span>
@@ -796,7 +795,7 @@ contents of the websites&rsquo; databases. Now that you&rsquo;ve grepped for
 filenames that contain the keyword <em>antifa</em>, use the following command
 to bulk-search the term <em>Black Lives Matter</em> in the contents of the
 files, not just in their filenames:</p>
-<div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;black lives matter&quot;</span><span class="w"> </span>*/*.csv
+<div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"black lives matter"</span><span class="w"> </span>*/*.csv
 </code></pre></div>
 
 <p>The <code>-i</code> argument in this
@@ -813,8 +812,8 @@ CSV files in BlueLeaks. When it&rsquo;s finished, it should show you the lines
 from CSV files that mention <em>black lives matter</em> and tell you in which
 files it found those lines. For example, here are
 snippets from a few of the lines of the output from that command:</p>
-<div class="codehilite"><pre><span></span><code>arictexas/IncidentMap.csv:834,&quot;10/26/16 00:00:00&quot;,-9.7735716800000006e+01,3.0267881299999999e+0
-1,&quot;TX&quot;,,&quot;TLO&quot;,&quot;An APD Police Explorer received a call from a blocked number in which the caller
+<div class="codehilite"><pre><span></span><code>arictexas/IncidentMap.csv:834,"10/26/16 00:00:00",-9.7735716800000006e+01,3.0267881299999999e+0
+1,"TX",,"TLO","An APD Police Explorer received a call from a blocked number in which the caller
 identified himself as an activist for Black Lives Matter, and identified the recipient by name,
 address, and personal descriptors before calling him a racist for having an interest in a LE
 career.  No explicit threats were made during the call...
@@ -826,7 +825,7 @@ regarding planned activities. &lt;/p&gt;... &lt;p&gt;&lt;b&gt;Known COB Activiti
 Avenue. &lt;/li&gt;&lt;li&gt;Not One More! - 5:00 PM to 8:00 PM. Meeting at Franklin Park Road &amp; Blue Hill
 Ave and marching to Franklin Park. &lt;/li&gt;...
 chicagoheat/Blog.csv:Media sources report that the online activist group Anonymous, or a group
-claiming to be Anonymous, has called for a collective &#39;Day of Rage&#39; to take place in numerous
+claiming to be Anonymous, has called for a collective 'Day of Rage' to take place in numerous
 cities across the United States on Friday, July 15th. The action has been called in solidarity
 with the Black Lives Matter movement in light of the recent controversial officer-involved
 shootings that resulted in the deaths of Alton Sterling and Philando Castile. The group that
@@ -1120,7 +1119,7 @@ username is <code>root</code> and the
 hostname is the IP address of your server.</p>
 <p>Here&rsquo;s what it looks like when I SSH into my server for the first time:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % ssh root@178.128.22.151
-The authenticity of host &#39;178.128.22.151 (178.128.22.151)&#39; can&#39;t be established.
+The authenticity of host '178.128.22.151 (178.128.22.151)' can't be established.
 ED25519 key fingerprint is SHA256:062oSOXq+G1sGLIzoQdFnQvJE/BU8GLLWnNr5WUOmAs.
 This key is not known by any other names
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
@@ -1168,16 +1167,16 @@ root user) and <code>ls -l /</code> (which
 should show you a list of files in your server&rsquo;s root folder). Now press
 <strong>CTRL</strong>-A. Byobu will ask you how you want this keyboard command
 to operate:</p>
-<div class="codehilite"><pre><span></span><code>Configure Byobu&#39;s ctrl-a behavior...
+<div class="codehilite"><pre><span></span><code>Configure Byobu's ctrl-a behavior...
 
 When you press ctrl-a in Byobu, do you want it to operate in:
-    (1) Screen mode (GNU Screen&#39;s default escape sequence)
+    (1) Screen mode (GNU Screen's default escape sequence)
     (2) Emacs mode  (go to beginning of line)
 
 Note that:
   - F12 also operates as an escape in Byobu
   - You can press F9 and choose your escape character
-  - You can run &#39;byobu-ctrl-a&#39; at any time to change your selection
+  - You can run 'byobu-ctrl-a' at any time to change your selection
 
 Select [1 or 2]:
 </code></pre></div>
@@ -1305,7 +1304,7 @@ example, you could run this command from the <em>\~/datasets</em> folder:</p>
 Keepers</em> folder:</p>
 <div class="codehilite"><pre><span></span><code>root@test-vps:~/datasets/Oath Keepers# ls -lh
 total 13M
-drwxr-xr-x 2 root root 4.0K Aug  2 23:47 &#39;Oath Keepers.sbd&#39;
+drwxr-xr-x 2 root root 4.0K Aug  2 23:47 'Oath Keepers.sbd'
 -rw-r--r-- 1 root root  12M Aug  2 23:47  messages.json
 -rw-r--r-- 1 root root 1.4M Aug  2 23:44  messages_old.json
 </code></pre></div>
@@ -1318,7 +1317,7 @@ called <em>messages_old.json</em>. These JSON files are chat logs.</p>
 root@test-vps:~/datasets/Oath Keepers/Oath Keepers.sbd# ls -lh
 total 3.9G
 -rw-r--r-- 1 root root 2.2M Aug  2 23:45  Archive
--rw-r--r-- 1 root root  23K Aug  2 23:44 &#39;Saved Correspondence&#39;
+-rw-r--r-- 1 root root  23K Aug  2 23:44 'Saved Correspondence'
 -rw-r--r-- 1 root root  25K Aug  2 23:44  Systems
 -rw-r--r-- 1 root root 2.8M Aug  2 23:44  ak
 --snip--
@@ -1362,7 +1361,7 @@ successfully, it will download the file or folder at
 save it on your computer at <code>local_path</code>.</p>
 <p>For example, here&rsquo;s how I&rsquo;d download the Oath Keepers dataset from my
 VPS to my <em>datasets</em> USB disk:</p>
-<div class="codehilite"><pre><span></span><code>rsync<span class="w"> </span>-av<span class="w"> </span>--progress<span class="w"> </span>root@178.128.22.151:<span class="s2">&quot;~/datasets/Oath\ Keepers&quot;</span><span class="w"> </span>/Volumes/datasets/
+<div class="codehilite"><pre><span></span><code>rsync<span class="w"> </span>-av<span class="w"> </span>--progress<span class="w"> </span>root@178.128.22.151:<span class="s2">"~/datasets/Oath\ Keepers"</span><span class="w"> </span>/Volumes/datasets/
 </code></pre></div>
 
 <p>In this case, <code>root@178.128.22.151:"~/datasets/Oath\ Keepers"</code> is the <code>remote _user``@``remote_host``:``remote_path</code> argument, since the <em>Oath

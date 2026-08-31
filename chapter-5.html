@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -143,7 +142,7 @@ terminal and run this command:</p>
 already have the <code>hello-world</code>
 image on your computer, Docker should download it first. The output
 should look something like this:</p>
-<div class="codehilite"><pre><span></span><code>Unable to find image &#39;hello-world:latest&#39; locally
+<div class="codehilite"><pre><span></span><code>Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 2db29710123e: Pull complete
 Digest: sha256:10d7d58d5ebd2a652f4d93fdd86da8f265f5318c6a73cc5b6a9798ff6d2b2e67
@@ -180,7 +179,7 @@ recommended.</p>
 <code>hello-world</code> image on your
 computer, Docker downloads it first. The output should look something
 like this:</p>
-<div class="codehilite"><pre><span></span><code>Unable to find image &#39;hello-world:latest&#39; locally
+<div class="codehilite"><pre><span></span><code>Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 2db29710123e: Pull complete
 Digest: sha256:507ecde44b8eb741278274653120c2bf793b174c06ff4eaa672b713b3263477b
@@ -232,7 +231,7 @@ isn&rsquo;t already on your computer, Docker automatically downloads it from Doc
 <a href="https://hub.docker.com">https://hub.docker.com</a>. Next, the <code>bash</code> command runs, giving you shell access inside that container. Include the <code>-it</code> argument, which is short for <code>-i</code> (or <code>--interactive</code>) and <code>-t</code> (or <code>--tty</code>), after <code>docker run</code> whenever you plan to open a shell in a container, so that any commands you type in the terminal run in the container. Without the <code>-it</code> argument, the bash shell would immediately quit before you could run any commands, as would the container.</p>
 <p>This command gives me the following output:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % docker run -it ubuntu:latest bash
-Unable to find image &#39;ubuntu:latest&#39; locally
+Unable to find image 'ubuntu:latest' locally
 latest: Pulling from library/ubuntu
 d19f32bd9e41: Pull complete
 Digest: sha256:34fea4f31bf187bc915536831fd0afc9d214755bf700b5cdb1336c82516d154e
@@ -249,7 +248,7 @@ quits the container. If you start a new <code>ubuntu:latest</code> container, it
 container&rsquo;s data. For example, with the following commands, I create a
 file called <em>test.txt</em> in one container, quit the container, and start a
 new one:</p>
-<div class="codehilite"><pre><span></span><code>root@5661828c22a2:/# echo &quot;Hacks, Leaks, and Revelations&quot; &gt; test.txt
+<div class="codehilite"><pre><span></span><code>root@5661828c22a2:/# echo "Hacks, Leaks, and Revelations" &gt; test.txt
 root@5661828c22a2:/# cat test.txt
 Hacks, Leaks, and Revelations
 root@5661828c22a2:/# exit
@@ -271,7 +270,7 @@ run the <code>docker ps</code> command.
 This should show you a list of all containers currently running. Here&rsquo;s
 the output I get, for example:</p>
 <div class="codehilite"><pre><span></span><code>CONTAINER ID   IMAGE           COMMAND   CREATED           STATUS         PORTS     NAMES
-337a795a53b2   ubuntu:latest   &quot;bash&quot;    9 minutes   ago   Up 9 minutes             epic_borg
+337a795a53b2   ubuntu:latest   "bash"    9 minutes   ago   Up 9 minutes             epic_borg
 </code></pre></div>
 
 <p>When you start a container with
@@ -378,7 +377,7 @@ inside the container to which you&rsquo;re mounting.</p>
 the following code (your prompt will be different from mine):</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor ~ % docker run -it --mount type=volume,src=test-data,dst=/mnt
 ubuntu:latest bash
-root@50b8b6f86e4d:/# echo &quot;Hacks, Leaks, and Revelations&quot; &gt; /mnt/test.txt
+root@50b8b6f86e4d:/# echo "Hacks, Leaks, and Revelations" &gt; /mnt/test.txt
 root@50b8b6f86e4d:/# exit
 </code></pre></div>
 
@@ -561,7 +560,7 @@ container. The arguments <code>-p 8000:8888</code> mean that <code>host_port</co
 <em>http://127.0.0.1:8000</em>,
 you&rsquo;ll now actually connect to port 8888 inside the container.</p>
 <p>Here&rsquo;s the output from the previous command:</p>
-<div class="codehilite"><pre><span></span><code>Unable to find image &#39;jupyter/scipy-notebook:latest&#39; locally
+<div class="codehilite"><pre><span></span><code>Unable to find image 'jupyter/scipy-notebook:latest' locally
 latest: Pulling from jupyter/scipy-notebook
 08c01a0ec47e: Pull complete
 --snip--
@@ -817,7 +816,7 @@ save the indexed versions of your datasets. One of these containers,
 called <code>shell</code>, includes a
 bind mount that maps your home folder (<em>\~</em>) on your host filesystem to
 <em>/host</em> in the container:</p>
-<div class="codehilite"><pre><span></span><code>- &quot;~:/host&quot;
+<div class="codehilite"><pre><span></span><code>- "~:/host"
 </code></pre></div>
 
 <p>In your copy of <em>docker-compose.yml</em>, delete this line or comment it out

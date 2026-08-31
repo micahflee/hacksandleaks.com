@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -325,49 +324,49 @@ files with numeric filenames and no file extensions:</p>
 was a JSON file. Each of these files, I discovered, was a record for a
 different user in Cadence Health&rsquo;s system. For example, Listing 13-1 shows a redacted version of the file <em>244273</em>.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;provider_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;npi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;spi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;partner_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">244273</span><span class="p">,</span><span class="w"> </span><span class="err">❶</span>
+<span class="w">    </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"provider_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"npi"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"spi"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"partner_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">244273</span><span class="p">,</span><span class="w"> </span><span class="err">❶</span>
 <span class="w">        </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
-<span class="w">        </span><span class="nt">&quot;fname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;lname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;work_phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;work_phone_ext&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted@hotmail.com&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CA&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;certified_states&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
-<span class="w">        </span><span class="nt">&quot;gender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;fax&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;ssn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">999999999</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;birthdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;addressLine1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;zipcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;avatar&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;avatar\/default_avatar.png&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">78410</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;partner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;,3,&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">❷</span>
-<span class="w">        </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;America\/Los_Angeles&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;role_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"fname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"lname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"work_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"work_phone_ext"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted@hotmail.com"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"certified_states"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"fax"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"ssn"</span><span class="p">:</span><span class="w"> </span><span class="mi">999999999</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"birthdate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"addressLine1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"avatar\/default_avatar.png"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">78410</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"partner"</span><span class="p">:</span><span class="w"> </span><span class="s2">",3,"</span><span class="p">,</span><span class="w"> </span><span class="err">❷</span>
+<span class="w">        </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America\/Los_Angeles"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
 <span class="w">        </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
-<span class="w">        </span><span class="nt">&quot;alcohol_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;alcohol_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;current_physician&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;consultationNotes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">❸</span>
+<span class="w">        </span><span class="nt">"alcohol_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"alcohol_amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"current_physician"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"consultationNotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">❸</span>
 <span class="w">            </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">179820</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;09\/04\/2021 13:47:28&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">❹</span>
-<span class="w">                </span><span class="nt">&quot;note&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This visit was performed via telemedicine.\nThe patient confirmed knowledge of the limitations of the use of telemedicine were verbally confirmed by the provider.\nVerification of patient identity was established.\nVerbal consent was obtained for medical treatment obtained\n\nThe patient is being interviewed via phone Platform\n\nPatient has need for covid meds in regards to: ivermectin\nSymptoms onset date: 7 days\n\nOccupation:\nChronic Medical illnesses: denies heart lung or liver problems\</span>
+<span class="w">                </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">179820</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09\/04\/2021 13:47:28"</span><span class="p">,</span><span class="w"> </span><span class="err">❹</span>
+<span class="w">                </span><span class="nt">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This visit was performed via telemedicine.\nThe patient confirmed knowledge of the limitations of the use of telemedicine were verbally confirmed by the provider.\nVerification of patient identity was established.\nVerbal consent was obtained for medical treatment obtained\n\nThe patient is being interviewed via phone Platform\n\nPatient has need for covid meds in regards to: ivermectin\nSymptoms onset date: 7 days\n\nOccupation:\nChronic Medical illnesses: denies heart lung or liver problems\</span>
 <span class="s2">--snip--</span>
-<span class="s2">be required.&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;practice&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;covid19_treatment&quot;</span>
+<span class="s2">be required."</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"practice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"covid19_treatment"</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">],</span>
-<span class="w">        </span><span class="nt">&quot;internalNotes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">        </span><span class="nt">"internalNotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -470,28 +469,28 @@ same data listed in the <em>hipaa_special</em> patient records. Listing
 13-2 shows a redacted section of the data
 from this file for a single patient.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">168692</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;mname&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;lname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted@gmail.com&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted_password_hash&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ssn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">999999999</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fax&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;birthdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;gender&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;maritalStatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;addressLine1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;addressLine2&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;zipcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NJ&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">168692</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"fname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"mname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"lname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted@gmail.com"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted_password_hash"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"ssn"</span><span class="p">:</span><span class="w"> </span><span class="mi">999999999</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"fax"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"birthdate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"maritalStatus"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"addressLine1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"addressLine2"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NJ"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"language"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
-<span class="w">    </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-08-18 14:04:58&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-08-18 14:04:58&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-08-18 14:04:58"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-08-18 14:04:58"</span><span class="p">,</span>
 <span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
 </code></pre></div>
 
@@ -517,17 +516,17 @@ list of 17 of Cadence&rsquo;s partners, such as America&rsquo;s Frontline Doctor
 SpeakWithAnMD, and Dr. Zelenko. Listing 13-3 shows a redacted example of the AFLDS
 partner from that file.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;America&#39;s Frontline Doctors&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America's Frontline Doctors"</span><span class="p">,</span>
 <span class="w">    </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
-<span class="w">    </span><span class="nt">&quot;practices&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;covid19,followupvisit&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"practices"</span><span class="p">:</span><span class="w"> </span><span class="s2">"covid19,followupvisit"</span><span class="p">,</span>
 <span class="w">    </span><span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
-<span class="w">    </span><span class="nt">&quot;one_merchant_security_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;stripe_publishable_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dev+admin@cadencehealth.us&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;stripe_secret_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;redacted&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;virtual_visit_price&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;covid19&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;90.00&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;followupvisit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;59.99&quot;</span>
+<span class="w">    </span><span class="nt">"one_merchant_security_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"stripe_publishable_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dev+admin@cadencehealth.us"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"stripe_secret_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"redacted"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"virtual_visit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"covid19"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90.00"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"followupvisit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"59.99"</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
 </code></pre></div>
@@ -600,70 +599,70 @@ copy in the book&rsquo;s GitHub repo at
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="c1"># Load patient data from cadence_allpatients_all.json</span>
     <span class="n">patients_data</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span>
-        <span class="s2">&quot;data/horse_around_find_out/cadence_allpatients_all.json&quot;</span>
+        <span class="s2">"data/horse_around_find_out/cadence_allpatients_all.json"</span>
     <span class="p">)</span>
-    <span class="c1"># Keep track of the created_at timestamps for each patient&#39;s id</span>
+    <span class="c1"># Keep track of the created_at timestamps for each patient's id</span>
     <span class="n">patient_ids_to_created_at</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">patient</span> <span class="ow">in</span> <span class="n">patients_data</span><span class="p">[</span><span class="s2">&quot;patients&quot;</span><span class="p">]:</span>
-        <span class="n">patient_ids_to_created_at</span><span class="p">[</span><span class="n">patient</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">patient</span><span class="p">[</span><span class="s2">&quot;created_at&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">patient</span> <span class="ow">in</span> <span class="n">patients_data</span><span class="p">[</span><span class="s2">"patients"</span><span class="p">]:</span>
+        <span class="n">patient_ids_to_created_at</span><span class="p">[</span><span class="n">patient</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">patient</span><span class="p">[</span><span class="s2">"created_at"</span><span class="p">]</span>
 
     <span class="c1"># Start the list of AFLDS patients that have had at least one consultation</span>
     <span class="n">patient_rows</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># Loop through every file in the hipaa_special folder</span>
-    <span class="k">for</span> <span class="n">patient_id</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;data/hipaa_special&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">patient_id</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">"data/hipaa_special"</span><span class="p">):</span>
         <span class="c1"># Load the patient data</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data/hipaa_special&quot;</span><span class="p">,</span> <span class="n">patient_id</span><span class="p">))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"data/hipaa_special"</span><span class="p">,</span> <span class="n">patient_id</span><span class="p">))</span>
 
         <span class="c1"># Some of the patient records are empty. This skips them</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">"result"</span><span class="p">]:</span>
             <span class="k">continue</span>
 
         <span class="c1"># Make sure AFLDS (id 3) is in the list of partners</span>
-        <span class="n">partner_ids</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;partner&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s2">&quot;3&quot;</span> <span class="ow">in</span> <span class="n">partner_ids</span><span class="p">:</span>
+        <span class="n">partner_ids</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"partner"</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">"3"</span> <span class="ow">in</span> <span class="n">partner_ids</span><span class="p">:</span>
             <span class="c1"># Count how many consultations this patient has</span>
-            <span class="n">num_consultations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;consultationNotes&quot;</span><span class="p">])</span>
+            <span class="n">num_consultations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"consultationNotes"</span><span class="p">])</span>
 
             <span class="c1"># If they have had more than one, add them to the list</span>
             <span class="k">if</span> <span class="n">num_consultations</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">patient_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                       <span class="p">{</span>
-                        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;user_id&quot;</span><span class="p">],</span>
-                        <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="n">patient_ids_to_created_at</span><span class="p">[</span>
-                            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span>
+                        <span class="s2">"user_id"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"user_id"</span><span class="p">],</span>
+                        <span class="s2">"created_at"</span><span class="p">:</span> <span class="n">patient_ids_to_created_at</span><span class="p">[</span>
+                            <span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"user_id"</span><span class="p">]</span>
                           <span class="p">],</span>
-                        <span class="s2">&quot;fname&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;fname&quot;</span><span class="p">],</span>
-                        <span class="s2">&quot;lname&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;lname&quot;</span><span class="p">],</span>
-                        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;email&quot;</span><span class="p">],</span>
-                        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;city&quot;</span><span class="p">],</span>
-                        <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;state&quot;</span><span class="p">],</span>
-                        <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;gender&quot;</span><span class="p">],</span>
-                        <span class="s2">&quot;birthdate&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">][</span><span class="s2">&quot;birthdate&quot;</span><span class="p">],</span>
-                        <span class="s2">&quot;num_consultations&quot;</span><span class="p">:</span> <span class="n">num_consultations</span><span class="p">,</span>
+                        <span class="s2">"fname"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"fname"</span><span class="p">],</span>
+                        <span class="s2">"lname"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"lname"</span><span class="p">],</span>
+                        <span class="s2">"email"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"email"</span><span class="p">],</span>
+                        <span class="s2">"city"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"city"</span><span class="p">],</span>
+                        <span class="s2">"state"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"state"</span><span class="p">],</span>
+                        <span class="s2">"gender"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"gender"</span><span class="p">],</span>
+                        <span class="s2">"birthdate"</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">"provider"</span><span class="p">][</span><span class="s2">"birthdate"</span><span class="p">],</span>
+                        <span class="s2">"num_consultations"</span><span class="p">:</span> <span class="n">num_consultations</span><span class="p">,</span>
                       <span class="p">}</span>
                 <span class="p">)</span>
 
     <span class="c1"># Write the CSV file</span>
-    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;aflds-patients.csv&quot;</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">"aflds-patients.csv"</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fname&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lname&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;email&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;city&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;state&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;gender&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;birthdate&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;num_consultations&quot;</span><span class="p">,</span>
+        <span class="s2">"user_id"</span><span class="p">,</span>
+        <span class="s2">"created_at"</span><span class="p">,</span>
+        <span class="s2">"fname"</span><span class="p">,</span>
+        <span class="s2">"lname"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="p">,</span>
+        <span class="s2">"city"</span><span class="p">,</span>
+        <span class="s2">"state"</span><span class="p">,</span>
+        <span class="s2">"gender"</span><span class="p">,</span>
+        <span class="s2">"birthdate"</span><span class="p">,</span>
+        <span class="s2">"num_consultations"</span><span class="p">,</span>
     <span class="p">]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">patient_rows</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -775,43 +774,43 @@ drug, I wrote another script, shown in Listing 13-4 (you can also find a copy of
     <span class="n">total_cost</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="c1"># Loop through ravkoo_rxdata.csv, and count prescriptions and costs</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/horse_around_find_out/ravkoo_rxdata.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"data/horse_around_find_out/ravkoo_rxdata.csv"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">drugs</span><span class="p">:</span>
-               <span class="n">drugs</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;prescription_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;total_cost&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s2">"DrugName"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">drugs</span><span class="p">:</span>
+               <span class="n">drugs</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">"DrugName"</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"prescription_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"total_cost"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
             <span class="c1"># Count prescriptions and cost for this drug</span>
-            <span class="n">drugs</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]][</span><span class="s2">&quot;prescription_count&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">drugs</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]][</span><span class="s2">&quot;total_cost&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Cost&quot;</span><span class="p">])</span>
+            <span class="n">drugs</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">"DrugName"</span><span class="p">]][</span><span class="s2">"prescription_count"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">drugs</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s2">"DrugName"</span><span class="p">]][</span><span class="s2">"total_cost"</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"Cost"</span><span class="p">])</span>
 
             <span class="c1"># Count prescriptions and cost for _all_ drugs</span>
             <span class="n">prescription_count</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">total_cost</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Cost&quot;</span><span class="p">])</span>
+            <span class="n">total_cost</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"Cost"</span><span class="p">])</span>
 
     <span class="c1"># Write the CSV file</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;drug_name&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;prescription_count&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;total_cost&quot;</span><span class="p">,</span>
+        <span class="s2">"drug_name"</span><span class="p">,</span>
+        <span class="s2">"prescription_count"</span><span class="p">,</span>
+        <span class="s2">"total_cost"</span><span class="p">,</span>
     <span class="p">]</span>
-    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;ravkoo.csv&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">"ravkoo.csv"</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">drug_name</span> <span class="ow">in</span> <span class="n">drugs</span><span class="p">:</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;drug_name&quot;</span><span class="p">:</span> <span class="n">drug_name</span><span class="p">,</span>
-                    <span class="s2">&quot;prescription_count&quot;</span><span class="p">:</span> <span class="n">drugs</span><span class="p">[</span><span class="n">drug_name</span><span class="p">][</span><span class="s2">&quot;prescription_count&quot;</span><span class="p">],</span>
-                    <span class="s2">&quot;total_cost&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">drugs</span><span class="p">[</span><span class="n">drug_name</span><span class="p">][</span><span class="s2">&quot;total_cost&quot;</span><span class="p">]),</span>
+                    <span class="s2">"drug_name"</span><span class="p">:</span> <span class="n">drug_name</span><span class="p">,</span>
+                    <span class="s2">"prescription_count"</span><span class="p">:</span> <span class="n">drugs</span><span class="p">[</span><span class="n">drug_name</span><span class="p">][</span><span class="s2">"prescription_count"</span><span class="p">],</span>
+                    <span class="s2">"total_cost"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">drugs</span><span class="p">[</span><span class="n">drug_name</span><span class="p">][</span><span class="s2">"total_cost"</span><span class="p">]),</span>
                 <span class="p">}</span>
             <span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of prescriptions: </span><span class="si">{</span><span class="n">prescription_count</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total cost: $</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">total_cost</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of prescriptions: </span><span class="si">{</span><span class="n">prescription_count</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total cost: $</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">total_cost</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -907,51 +906,51 @@ as a CSV called <em>ravkoo-categories.csv</em>.</p>
     <span class="n">drug_categories</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="c1"># Loop through ravkoo_rxdata.csv, and count prescriptions and costs</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/horse_around_find_out/ravkoo_rxdata.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"data/horse_around_find_out/ravkoo_rxdata.csv"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s2">&quot;ivermectin&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-                <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Ivermectin&quot;</span>
-            <span class="k">elif</span> <span class="s2">&quot;hydroxychloroquine&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-                <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Hydroxychloroquine&quot;</span>
-            <span class="k">elif</span> <span class="s2">&quot;azithromycin&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-                <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Azithromycin&quot;</span>
-            <span class="k">elif</span> <span class="s2">&quot;zinc&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-               <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Zinc&quot;</span>
-            <span class="k">elif</span> <span class="s2">&quot;vitamin c&quot;</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;DrugName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-                <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Vitamin C&quot;</span>
+            <span class="k">if</span> <span class="s2">"ivermectin"</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">"DrugName"</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="s2">"Ivermectin"</span>
+            <span class="k">elif</span> <span class="s2">"hydroxychloroquine"</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">"DrugName"</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="s2">"Hydroxychloroquine"</span>
+            <span class="k">elif</span> <span class="s2">"azithromycin"</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">"DrugName"</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="s2">"Azithromycin"</span>
+            <span class="k">elif</span> <span class="s2">"zinc"</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">"DrugName"</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+               <span class="n">category</span> <span class="o">=</span> <span class="s2">"Zinc"</span>
+            <span class="k">elif</span> <span class="s2">"vitamin c"</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">"DrugName"</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="s2">"Vitamin C"</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Other&quot;</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="s2">"Other"</span>
 
             <span class="k">if</span> <span class="n">category</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">drug_categories</span><span class="p">:</span>
-                <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;prescription_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;total_cost&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+                <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"prescription_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"total_cost"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
             <span class="c1"># Count prescriptions and cost for this drug category</span>
-            <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span><span class="s2">&quot;prescription_count&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span><span class="s2">&quot;total_cost&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Cost&quot;</span><span class="p">])</span>
+            <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span><span class="s2">"prescription_count"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span><span class="s2">"total_cost"</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"Cost"</span><span class="p">])</span>
 
     <span class="c1"># Write the CSV file</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;drug_category&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;prescription_count&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;total_cost&quot;</span><span class="p">,</span>
+        <span class="s2">"drug_category"</span><span class="p">,</span>
+        <span class="s2">"prescription_count"</span><span class="p">,</span>
+        <span class="s2">"total_cost"</span><span class="p">,</span>
     <span class="p">]</span>
-    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;ravkoo-categories.csv&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">"ravkoo-categories.csv"</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">drug_categories</span><span class="p">:</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;drug_category&quot;</span><span class="p">:</span> <span class="n">category</span><span class="p">,</span>
-                    <span class="s2">&quot;prescription_count&quot;</span><span class="p">:</span> <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span>
-                         <span class="s2">&quot;prescription_count&quot;</span>
+                    <span class="s2">"drug_category"</span><span class="p">:</span> <span class="n">category</span><span class="p">,</span>
+                    <span class="s2">"prescription_count"</span><span class="p">:</span> <span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span>
+                         <span class="s2">"prescription_count"</span>
                     <span class="p">],</span>
-                    <span class="s2">&quot;total_cost&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span><span class="s2">&quot;total_cost&quot;</span><span class="p">]),</span>
+                    <span class="s2">"total_cost"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">drug_categories</span><span class="p">[</span><span class="n">category</span><span class="p">][</span><span class="s2">"total_cost"</span><span class="p">]),</span>
                 <span class="p">}</span>
             <span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1047,13 +1046,13 @@ find a copy at
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
-<span class="c1"># Convert the comma-separated list of partners, like &quot;,3,&quot;, into a Python list</span>
-<span class="c1"># of partners, like [&quot;America&#39;s Frontline Doctors&quot;]</span>
+<span class="c1"># Convert the comma-separated list of partners, like ",3,", into a Python list</span>
+<span class="c1"># of partners, like ["America's Frontline Doctors"]</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_partners</span><span class="p">(</span><span class="n">partner_lookup</span><span class="p">,</span> <span class="n">patient</span><span class="p">):</span>
     <span class="n">partners</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">partner_ids</span> <span class="o">=</span> <span class="n">patient</span><span class="p">[</span><span class="s2">&quot;partner&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="n">partner_ids</span> <span class="o">=</span> <span class="n">patient</span><span class="p">[</span><span class="s2">"partner"</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">partner_id</span> <span class="ow">in</span> <span class="n">partner_ids</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">partner_id</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">partner_id</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
             <span class="n">partners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">partner_lookup</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">partner_id</span><span class="p">)])</span>
 
     <span class="k">return</span> <span class="n">partners</span>
@@ -1064,48 +1063,48 @@ find a copy at
 
     <span class="c1"># Load the Cadence patient data</span>
     <span class="n">patients_data</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span>
-        <span class="s2">&quot;data/horse_around_find_out/cadence_allpatients_all.json&quot;</span>
+        <span class="s2">"data/horse_around_find_out/cadence_allpatients_all.json"</span>
     <span class="p">)</span>
 
     <span class="c1"># Load the Cadence partners data</span>
     <span class="n">partners_data</span> <span class="o">=</span> <span class="n">data_from_json</span><span class="p">(</span>
-        <span class="s2">&quot;data/horse_around_find_out/cadence_health_partners.json&quot;</span>
+        <span class="s2">"data/horse_around_find_out/cadence_health_partners.json"</span>
     <span class="p">)</span>
 
     <span class="c1"># Create a dictionary that maps a partner ID with its name</span>
     <span class="n">partner_lookup</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">partner</span> <span class="ow">in</span> <span class="n">partners_data</span><span class="p">:</span>
-        <span class="n">partner_lookup</span><span class="p">[</span><span class="n">partner</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">partner</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">partner_lookup</span><span class="p">[</span><span class="n">partner</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">partner</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
 
     <span class="c1"># Loop through all of the partners</span>
     <span class="k">for</span> <span class="n">partner</span> <span class="ow">in</span> <span class="n">partners_data</span><span class="p">:</span>
         <span class="c1"># Count how many patients use this partner</span>
         <span class="n">patients</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">patient</span> <span class="ow">in</span> <span class="n">patients_data</span><span class="p">[</span><span class="s2">&quot;patients&quot;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">patient</span> <span class="ow">in</span> <span class="n">patients_data</span><span class="p">[</span><span class="s2">"patients"</span><span class="p">]:</span>
             <span class="n">patient_partners</span> <span class="o">=</span> <span class="n">get_partners</span><span class="p">(</span><span class="n">partner_lookup</span><span class="p">,</span> <span class="n">patient</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">patient_partner</span> <span class="ow">in</span> <span class="n">patient_partners</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">patient_partner</span> <span class="o">==</span> <span class="n">partner</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">patient_partner</span> <span class="o">==</span> <span class="n">partner</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]:</span>
                     <span class="n">patients</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="c1"># Add the partner&#39;s row</span>
+        <span class="c1"># Add the partner's row</span>
         <span class="n">partner_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="p">{</span>
-                <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="n">partner</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
-                <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="n">partner</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
-                <span class="s2">&quot;Domain&quot;</span><span class="p">:</span> <span class="n">partner</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">],</span>
-                <span class="s2">&quot;Patients&quot;</span><span class="p">:</span> <span class="n">patients</span><span class="p">,</span>
+                <span class="s2">"ID"</span><span class="p">:</span> <span class="n">partner</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],</span>
+                <span class="s2">"Name"</span><span class="p">:</span> <span class="n">partner</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span>
+                <span class="s2">"Domain"</span><span class="p">:</span> <span class="n">partner</span><span class="p">[</span><span class="s2">"domain"</span><span class="p">],</span>
+                <span class="s2">"Patients"</span><span class="p">:</span> <span class="n">patients</span><span class="p">,</span>
             <span class="p">}</span>
         <span class="p">)</span>
 
     <span class="c1"># Write the CSV file</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Domain&quot;</span><span class="p">,</span> <span class="s2">&quot;Patients&quot;</span><span class="p">]</span>
-    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;cadence-partners.csv&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ID"</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Domain"</span><span class="p">,</span> <span class="s2">"Patients"</span><span class="p">]</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">"cadence-partners.csv"</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">partner_rows</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1277,27 +1276,27 @@ can also find a copy at
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
 
-<span class="n">geocode_api_key</span> <span class="o">=</span> <span class="s2">&quot;PUT_GEOCODE_API_KEY_HERE&quot;</span>
+<span class="n">geocode_api_key</span> <span class="o">=</span> <span class="s2">"PUT_GEOCODE_API_KEY_HERE"</span>
 
 <span class="c1"># Export a CSV that for each city lists its GPS coordinates and the number of patients there</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="c1"># This dictionary maps names of cities (in format &quot;City, State&quot;, like &quot;New York, NY&quot;)</span>
+    <span class="c1"># This dictionary maps names of cities (in format "City, State", like "New York, NY")</span>
     <span class="c1"># to a dictionary with info about that city (number of patients, GPS coordinates)</span>
     <span class="n">cities</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="c1"># Count how many patients are in each city</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;aflds-patients.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"aflds-patients.csv"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
-            <span class="n">city</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">city</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'city'</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
 
             <span class="k">if</span> <span class="n">city</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
-                <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+                <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
-            <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">"count"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found patients in </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cities</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> cities&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Found patients in </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cities</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> cities"</span><span class="p">)</span>
 
     <span class="c1"># Look up GPS coordinates for each city</span>
     <span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
@@ -1308,15 +1307,15 @@ can also find a copy at
         <span class="k">while</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Loading GPS coordinates for: </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> patients)&quot;</span>
+                    <span class="sa">f</span><span class="s2">"Loading GPS coordinates for: </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s1">'count'</span><span class="p">]</span><span class="si">}</span><span class="s2"> patients)"</span>
                 <span class="p">)</span>
                 <span class="n">r</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                    <span class="s2">&quot;https://app.geocodeapi.io/api/v1/search&quot;</span><span class="p">,</span>
+                    <span class="s2">"https://app.geocodeapi.io/api/v1/search"</span><span class="p">,</span>
                      <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                        <span class="s2">&quot;apikey&quot;</span><span class="p">:</span> <span class="n">geocode_api_key</span><span class="p">,</span>
-                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">city</span><span class="p">,</span>
-                        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                        <span class="s2">&quot;boundary.country&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>
+                        <span class="s2">"apikey"</span><span class="p">:</span> <span class="n">geocode_api_key</span><span class="p">,</span>
+                        <span class="s2">"text"</span><span class="p">:</span> <span class="n">city</span><span class="p">,</span>
+                        <span class="s2">"size"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">"boundary.country"</span><span class="p">:</span> <span class="s2">"US"</span><span class="p">,</span>
                     <span class="p">},</span>
                 <span class="p">)</span>
                 <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1325,44 +1324,44 @@ can also find a copy at
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">tries</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">tries</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed, skipping&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">"Failed, skipping"</span><span class="p">)</span>
 
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sleeping 2s and trying again&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Sleeping 2s and trying again"</span><span class="p">)</span>
                 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-            <span class="k">if</span> <span class="s2">&quot;features&quot;</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;geometry&quot;</span><span class="p">][</span><span class="s2">&quot;coordinates&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-                <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;geometry&quot;</span><span class="p">][</span><span class="s2">&quot;coordinates&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s2">"features"</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"features"</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">"lon"</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"features"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"geometry"</span><span class="p">][</span><span class="s2">"coordinates"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">"lat"</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"features"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"geometry"</span><span class="p">][</span><span class="s2">"coordinates"</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">"lon"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">"lat"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># Write the CSV file</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;count&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;city&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lon&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lat&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;label&quot;</span><span class="p">,</span>
+        <span class="s2">"count"</span><span class="p">,</span>
+        <span class="s2">"city"</span><span class="p">,</span>
+        <span class="s2">"lon"</span><span class="p">,</span>
+        <span class="s2">"lat"</span><span class="p">,</span>
+        <span class="s2">"label"</span><span class="p">,</span>
     <span class="p">]</span>
-    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;cities.csv&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">"cities.csv"</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;count&quot;</span><span class="p">],</span>
-                    <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="n">city</span><span class="p">,</span>
-                    <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lat&quot;</span><span class="p">],</span>
-                    <span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">&quot;lon&quot;</span><span class="p">],</span>
-                    <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+                    <span class="s2">"count"</span><span class="p">:</span> <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">"count"</span><span class="p">],</span>
+                    <span class="s2">"city"</span><span class="p">:</span> <span class="n">city</span><span class="p">,</span>
+                    <span class="s2">"lon"</span><span class="p">:</span> <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">"lat"</span><span class="p">],</span>
+                    <span class="s2">"lat"</span><span class="p">:</span> <span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s2">"lon"</span><span class="p">],</span>
+                    <span class="s2">"label"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">cities</span><span class="p">[</span><span class="n">city</span><span class="p">][</span><span class="s1">'count'</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span>
                  <span class="p">}</span>
             <span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1474,69 +1473,69 @@ script (you can also find it at
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="c1"># Age groups, the same ones used in CDC data</span>
     <span class="n">age_groups</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;&lt;0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;0-4&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;5-17&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;18-29&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;30-39&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;40-49&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;50-64&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;65-74&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;75-84&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;85+&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;&gt;100&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"&lt;0"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"0-4"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"5-17"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"18-29"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"30-39"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"40-49"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"50-64"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"65-74"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"75-84"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"85+"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"&gt;100"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="p">}</span>
 
     <span class="n">sept2021</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;aflds-patients.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"aflds-patients.csv"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
-            <span class="n">birthdate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;birthdate&quot;</span><span class="p">],</span> <span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">/%Y&quot;</span><span class="p">)</span>
+            <span class="n">birthdate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"birthdate"</span><span class="p">],</span> <span class="s2">"%m/</span><span class="si">%d</span><span class="s2">/%Y"</span><span class="p">)</span>
             <span class="n">age</span> <span class="o">=</span> <span class="n">sept2021</span> <span class="o">-</span> <span class="n">birthdate</span>
 
             <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;&lt;0&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"&lt;0"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">5</span><span class="p">):</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;0-4&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"0-4"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">18</span><span class="p">):</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;5-17&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"5-17"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">30</span><span class="p">):</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;18-29&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"18-29"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">40</span><span class="p">):</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;30-39&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"30-39"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">50</span><span class="p">):</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;40-49&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"40-49"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">65</span><span class="p">):</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;50-64&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"50-64"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">75</span><span class="p">):</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;65-74&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"65-74"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">85</span><span class="p">):</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;75-84&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"75-84"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">100</span><span class="p">):</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;85+&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"85+"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">age_groups</span><span class="p">[</span><span class="s2">&quot;&gt;100&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">age_groups</span><span class="p">[</span><span class="s2">"&gt;100"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="c1"># Write the CSV file</span>
     <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;age_group&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;patients&quot;</span><span class="p">,</span>
+        <span class="s2">"age_group"</span><span class="p">,</span>
+        <span class="s2">"patients"</span><span class="p">,</span>
     <span class="p">]</span>
-    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">&quot;ages.csv&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">csv_filename</span> <span class="o">=</span> <span class="s2">"ages.csv"</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_filename</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">age_group</span> <span class="ow">in</span> <span class="n">age_groups</span><span class="p">:</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;age_group&quot;</span><span class="p">:</span> <span class="n">age_group</span><span class="p">,</span>
-                    <span class="s2">&quot;patients&quot;</span><span class="p">:</span> <span class="n">age_groups</span><span class="p">[</span><span class="n">age_group</span><span class="p">],</span>
+                    <span class="s2">"age_group"</span><span class="p">:</span> <span class="n">age_group</span><span class="p">,</span>
+                    <span class="s2">"patients"</span><span class="p">:</span> <span class="n">age_groups</span><span class="p">[</span><span class="n">age_group</span><span class="p">],</span>
                 <span class="p">}</span>
             <span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 

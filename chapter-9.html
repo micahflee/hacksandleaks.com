@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -178,8 +177,8 @@ For example, the values &ldquo;Hello, World&rdquo; and &ldquo;Hola, Mundo&rdquo;
 commas. Here&rsquo;s how they look in a CSV file along with fields for their
 respective languages:</p>
 <div class="codehilite"><pre><span></span><code>Language,Greeting
-English,&quot;Hello, World&quot;
-Español,&quot;Hola, Mundo&quot;
+English,"Hello, World"
+Español,"Hola, Mundo"
 </code></pre></div>
 
 <p>Table 9-2 shows this data organized into rows and columns.</p>
@@ -205,9 +204,9 @@ Español,&quot;Hola, Mundo&quot;
 <p>It&rsquo;s common to enclose every value in quotes, regardless of whether it
 includes commas. Here&rsquo;s another version of the previous spreadsheet, now
 with every value in quotes:</p>
-<div class="codehilite"><pre><span></span><code>&quot;Language&quot;,&quot;Greeting&quot;
-&quot;English&quot;,&quot;Hello, World&quot;
-&quot;Español&quot;,&quot;Hola, Mundo&quot;
+<div class="codehilite"><pre><span></span><code>"Language","Greeting"
+"English","Hello, World"
+"Español","Hola, Mundo"
 </code></pre></div>
 
 <p>As with shell scripting and Python programming, you can escape quotes in
@@ -215,7 +214,7 @@ CSVs by using a backslash and double quotes (<code>\"</code>). For example, the 
 <code>"Not I," said the cow</code> contains both quotes and commas, so to add it to a CSV file you would
 surround the entire value in quotes and escape the inner quotes, like
 this:</p>
-<div class="codehilite"><pre><span></span><code>&quot;\&quot;Not I,\&quot; said the cow&quot;
+<div class="codehilite"><pre><span></span><code>"\"Not I,\" said the cow"
 </code></pre></div>
 
 <p>Because the CSV file format is so simple, it&rsquo;s one of the most commonly
@@ -309,12 +308,12 @@ viewed in a text editor like VS Code:</p>
 PageIdentifier,Keywords,DocumentCategoryID,URLLaunchNewBrowser,URL,Featured,YoutubeLink,
 YoutubeVideoName,FrontPageText,YouTubeStartTime,DocFileName2,PreviewImage,ForceSaveAsDialog,
 OpenInIframe,DeleteDate
-84,&quot;DDF00000\084.pdf&quot;,,&quot;10/21/11 13:40:33&quot;,,&quot;Daily Roll-Call Bulletin 102111&quot;,,,52,,36,0,,0,,,,
-,,&quot;DPI00000\084.png&quot;,0,0,
-85,&quot;DDF00000\085.pdf&quot;,,&quot;10/24/11 13:40:33&quot;,,&quot;Daily Roll-Call Bulletin 102411&quot;,,,79,,36,0,,0,,,,
-,,&quot;DPI00000\085.png&quot;,0,0,
-86,&quot;DDF00000\086.pdf&quot;,,&quot;10/25/11 13:40:33&quot;,,&quot;Daily Roll-Call Bulletin 102511&quot;,,,86,,36,0,,0,,,,
-,,&quot;DPI00000\086.png&quot;,0,0,
+84,"DDF00000\084.pdf",,"10/21/11 13:40:33",,"Daily Roll-Call Bulletin 102111",,,52,,36,0,,0,,,,
+,,"DPI00000\084.png",0,0,
+85,"DDF00000\085.pdf",,"10/24/11 13:40:33",,"Daily Roll-Call Bulletin 102411",,,79,,36,0,,0,,,,
+,,"DPI00000\085.png",0,0,
+86,"DDF00000\086.pdf",,"10/25/11 13:40:33",,"Daily Roll-Call Bulletin 102511",,,86,,36,0,,0,,,,
+,,"DPI00000\086.png",0,0,
 --snip--
 </code></pre></div>
 
@@ -392,7 +391,7 @@ student protester, allegedly a member of an antifa group, and mentioned
 &ldquo;Radicalization/Extremism&rdquo;:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor ncric % grep -ri antifa *.csv
 --snip--
-SARs.csv:14277,&quot;06/05/20 14:20:09&quot;,&quot;6/5/2020&quot;,&quot;Marin&quot;,&quot;The attached letter was received via US Postal Service this morning. The letter was passed on from an anonymous party claiming to be a lawyer who was contacted by [redacted name] who is a University of Oregon student. [Redacted name] appears to be a member of the Antifa group and is assisting in planning protesting efforts in the Bay Area despite living in Oregon.&quot;,&quot;[redacted IP address]&quot;,,&quot;NCRICLawEnforceme ntReporting&quot;,,&quot;Unknown&quot;,,&quot;[redacted phone number]&quot;,&quot;f14e1d15-a052-489c-968b-5fd9d38544e1&quot;, &quot;20200596&quot;,&quot;0820&quot;,,&quot;Bay Area&quot;,,0,,0,0,0,,0,0,,,0,0,0,0,,,,,&quot;[redacted name]&quot;,,,,0,,,,,,,&quot; [redacted name]&quot;,&quot;[redacted name]&quot;,&quot;[redacted name]&quot;,,,&quot;Marin County District Attorney&#39;s Office&quot;,,,,,&quot;SARF100014\277.pdf&quot;,,,,,&quot;- Other -”,,,,,,”Letter.pdf”,,,,,,,”[redacted]@marincounty.org&quot;,&quot;AM&quot;,&quot;1&quot;,,,,,,0,0,&quot;Radicalization/Extremism,Suspicious Incident&quot;,,&quot;Emergency Services,Government Facility&quot;,,,&quot;No&quot;
+SARs.csv:14277,"06/05/20 14:20:09","6/5/2020","Marin","The attached letter was received via US Postal Service this morning. The letter was passed on from an anonymous party claiming to be a lawyer who was contacted by [redacted name] who is a University of Oregon student. [Redacted name] appears to be a member of the Antifa group and is assisting in planning protesting efforts in the Bay Area despite living in Oregon.","[redacted IP address]",,"NCRICLawEnforceme ntReporting",,"Unknown",,"[redacted phone number]","f14e1d15-a052-489c-968b-5fd9d38544e1", "20200596","0820",,"Bay Area",,0,,0,0,0,,0,0,,,0,0,0,0,,,,,"[redacted name]",,,,0,,,,,,," [redacted name]","[redacted name]","[redacted name]",,,"Marin County District Attorney's Office",,,,,"SARF100014\277.pdf",,,,,"- Other -”,,,,,,”Letter.pdf”,,,,,,,”[redacted]@marincounty.org","AM","1",,,,,,0,0,"Radicalization/Extremism,Suspicious Incident",,"Emergency Services,Government Facility",,,"No"
 --snip--
 </code></pre></div>
 
@@ -543,16 +542,16 @@ use <code>csv.DictWriter()</code>. For
 example, the following code uses Python to save the
 <em>city-populations.csv</em> file discussed in the Introducing the CSV File
 Format section earlier in this chapter:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;City&quot;</span><span class="p">,</span> <span class="s2">&quot;Country&quot;</span><span class="p">,</span> <span class="s2">&quot;Population&quot;</span><span class="p">]</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="codehilite"><pre><span></span><code><span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"City"</span><span class="p">,</span> <span class="s2">"Country"</span><span class="p">,</span> <span class="s2">"Population"</span><span class="p">]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
     <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
-    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">&quot;City&quot;</span><span class="p">:</span> <span class="s2">&quot;Tōkyō&quot;</span><span class="p">,</span> <span class="s2">&quot;Country&quot;</span><span class="p">:</span> <span class="s2">&quot;Japan&quot;</span><span class="p">,</span> <span class="s2">&quot;Population&quot;</span><span class="p">:</span> <span class="mi">37400000</span><span class="p">})</span>
-    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">&quot;City&quot;</span><span class="p">:</span> <span class="s2">&quot;Delhi&quot;</span><span class="p">,</span> <span class="s2">&quot;Country&quot;</span><span class="p">:</span> <span class="s2">&quot;India&quot;</span><span class="p">,</span> <span class="s2">&quot;Population&quot;</span><span class="p">:</span> <span class="mi">28514000</span><span class="p">})</span>
-    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">&quot;City&quot;</span><span class="p">:</span> <span class="s2">&quot;Shanghai&quot;</span><span class="p">,</span> <span class="s2">&quot;Country&quot;</span><span class="p">:</span> <span class="s2">&quot;China&quot;</span><span class="p">,</span> <span class="s2">&quot;Population&quot;</span><span class="p">:</span> <span class="mi">25582000</span><span class="p">})</span>
-    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">&quot;City&quot;</span><span class="p">:</span> <span class="s2">&quot;São Paulo&quot;</span><span class="p">,</span> <span class="s2">&quot;Country&quot;</span><span class="p">:</span> <span class="s2">&quot;Brazil&quot;</span><span class="p">,</span> <span class="s2">&quot;Population&quot;</span><span class="p">:</span> <span class="mi">21650000</span><span class="p">})</span>
-    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">&quot;City&quot;</span><span class="p">:</span> <span class="s2">&quot;Mexico City&quot;</span><span class="p">,</span> <span class="s2">&quot;Country&quot;</span><span class="p">:</span> <span class="s2">&quot;Mexico&quot;</span><span class="p">,</span> <span class="s2">&quot;Population&quot;</span><span class="p">:</span> <span class="mi">21581000</span><span class="p">})</span>
-    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">&quot;City&quot;</span><span class="p">:</span> <span class="s2">&quot;Cairo&quot;</span><span class="p">,</span> <span class="s2">&quot;Country&quot;</span><span class="p">:</span> <span class="s2">&quot;Egypt&quot;</span><span class="p">,</span> <span class="s2">&quot;Population&quot;</span><span class="p">:</span> <span class="mi">20076000</span><span class="p">})</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">"City"</span><span class="p">:</span> <span class="s2">"Tōkyō"</span><span class="p">,</span> <span class="s2">"Country"</span><span class="p">:</span> <span class="s2">"Japan"</span><span class="p">,</span> <span class="s2">"Population"</span><span class="p">:</span> <span class="mi">37400000</span><span class="p">})</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">"City"</span><span class="p">:</span> <span class="s2">"Delhi"</span><span class="p">,</span> <span class="s2">"Country"</span><span class="p">:</span> <span class="s2">"India"</span><span class="p">,</span> <span class="s2">"Population"</span><span class="p">:</span> <span class="mi">28514000</span><span class="p">})</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">"City"</span><span class="p">:</span> <span class="s2">"Shanghai"</span><span class="p">,</span> <span class="s2">"Country"</span><span class="p">:</span> <span class="s2">"China"</span><span class="p">,</span> <span class="s2">"Population"</span><span class="p">:</span> <span class="mi">25582000</span><span class="p">})</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">"City"</span><span class="p">:</span> <span class="s2">"São Paulo"</span><span class="p">,</span> <span class="s2">"Country"</span><span class="p">:</span> <span class="s2">"Brazil"</span><span class="p">,</span> <span class="s2">"Population"</span><span class="p">:</span> <span class="mi">21650000</span><span class="p">})</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">"City"</span><span class="p">:</span> <span class="s2">"Mexico City"</span><span class="p">,</span> <span class="s2">"Country"</span><span class="p">:</span> <span class="s2">"Mexico"</span><span class="p">,</span> <span class="s2">"Population"</span><span class="p">:</span> <span class="mi">21581000</span><span class="p">})</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span><span class="s2">"City"</span><span class="p">:</span> <span class="s2">"Cairo"</span><span class="p">,</span> <span class="s2">"Country"</span><span class="p">:</span> <span class="s2">"Egypt"</span><span class="p">,</span> <span class="s2">"Population"</span><span class="p">:</span> <span class="mi">20076000</span><span class="p">})</span>
 </code></pre></div>
 
 <p>This code first defines the headers of the spreadsheet in the list
@@ -611,7 +610,7 @@ template in a file called <em>exercise-9-1.py</em>:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">pass</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -623,12 +622,12 @@ modifications shown in bold):</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;csv_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"csv_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make BlueLeaks CSVs easier to read&quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CSV path: </span><span class="si">{</span><span class="n">csv_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""Make BlueLeaks CSVs easier to read"""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"CSV path: </span><span class="si">{</span><span class="n">csv_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -651,15 +650,15 @@ loop through the rows of that CSV:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;csv_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"csv_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make BlueLeaks CSVs easier to read&quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Make BlueLeaks CSVs easier to read"""</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
      <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -679,16 +678,16 @@ path to <em>SARs.csv</em> as the CLI argument. Make sure you use the correct
 path for your copy of the BlueLeaks dataset:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor chapter-9 % python3 exercise-9-1.py /Volumes/datasets/BlueLeaks-extracted/ncric/
 SARs.csv
-{&#39;SARSid&#39;: &#39;14166&#39;, &#39;FormTimeStamp&#39;: &#39;05/14/20 19:15:03&#39;, &#39;IncidentDate&#39;: &#39;2020-05-11&#39;,
-&#39;County&#39;: &#39;Santa Clara&#39;, &#39;BriefSummary&#39;: &#39;*INFO ONLY- no action required* \n\nThe San Francisco
+{'SARSid': '14166', 'FormTimeStamp': '05/14/20 19:15:03', 'IncidentDate': '2020-05-11',
+'County': 'Santa Clara', 'BriefSummary': '*INFO ONLY- no action required* \n\nThe San Francisco
 PD was contacted by the CIA Threat Management Unit regarding a suspicious write-in to the
-CIA\&#39;s public website apparently by a subject [redacted name] (DOB: [redacted birthdate]). See
+CIA\'s public website apparently by a subject [redacted name] (DOB: [redacted birthdate]). See
 details below.\n\n-------- Original message --------\nFrom: ADAMCP4 \nDate: 5/13/20 12:17
-(GMT-08:00)\nTo: &quot;[redacted name] (POL)&quot; \nSubject: CIA Passing Potential Threat Information\
+(GMT-08:00)\nTo: "[redacted name] (POL)" \nSubject: CIA Passing Potential Threat Information\
 nThis message is from outside the City email system. Do not open links or attachments from
 untrusted sources.\nGood afternoon,\nPer our conversation, Mr. [redacted name] wrote in to
-CIA&#39;s public website with the following two messages.  A CLEAR report showed Mr. [redacted
-name]&#39;s address to be in Dixon, CA.  Dixon, CA police made contact with the Subject&#39;s mother
+CIA's public website with the following two messages.  A CLEAR report showed Mr. [redacted
+name]'s address to be in Dixon, CA.  Dixon, CA police made contact with the Subject's mother
 who reported she has not had contact with him in quite some time and last knew him to be in the
 Bay area, likely off his medication.  She reported he suffers from bi-polar disorder.
 --snip--
@@ -705,19 +704,19 @@ own row.</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;csv_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"csv_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make BlueLeaks CSVs easier to read&quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Make BlueLeaks CSVs easier to read"""</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-                   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
+                   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"==="</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -743,20 +742,20 @@ County: Santa Clara
 BriefSummary: *INFO ONLY- no action required*
 
 The San Francisco PD was contacted by the CIA Threat Management Unit regarding a suspicious
-write-in to the CIA&#39;s public website apparently by a subject [redacted name] (DOB: [redacted
+write-in to the CIA's public website apparently by a subject [redacted name] (DOB: [redacted
 birthdate]). See details below.
 
 -------- Original message --------
 From: ADAMCP4
 Date: 5/13/20 12:17 (GMT-08:00)
-To: &quot;[redacted name] (POL)&quot;
+To: "[redacted name] (POL)"
 Subject: CIA Passing Potential Threat Information
 This message is from outside the City email system. Do not open links or attachments from
 untrusted sources.
 Good afternoon,
-Per our conversation, Mr. [redacted name] wrote in to CIA&#39;s public website with the following
-two messages.  A CLEAR report showed Mr. [redacted name]&#39;s address to be in Dixon, CA.  Dixon,
-CA police made contact with the Subject&#39;s mother who reported she has not had contact with him
+Per our conversation, Mr. [redacted name] wrote in to CIA's public website with the following
+two messages.  A CLEAR report showed Mr. [redacted name]'s address to be in Dixon, CA.  Dixon,
+CA police made contact with the Subject's mother who reported she has not had contact with him
 in quite some time and last knew him to be in the Bay area, likely off his medication.  She
 reported he suffers from bi-polar disorder.
 --snip--
@@ -1098,7 +1097,7 @@ template in a file called <em>exercise-9-2.py</em>:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">pass</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1110,14 +1109,14 @@ arguments:</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;emailbuilder_csv_path&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_folder_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"emailbuilder_csv_path"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"output_folder_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make bulk email in BlueLeaks easier to read&quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Path to EmailBuilder.csv: </span><span class="si">{</span><span class="n">emailbuilder_csv_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output folder path: </span><span class="si">{</span><span class="n">output_folder_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""Make bulk email in BlueLeaks easier to read"""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Path to EmailBuilder.csv: </span><span class="si">{</span><span class="n">emailbuilder_csv_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Output folder path: </span><span class="si">{</span><span class="n">output_folder_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1148,13 +1147,13 @@ Output folder path: output
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;emailbuilder_csv_path&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_folder_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"emailbuilder_csv_path"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"output_folder_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make bulk emails in BlueLeaks easier to read&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Make bulk emails in BlueLeaks easier to read"""</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1185,23 +1184,23 @@ modifications:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;emailbuilder_csv_path&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_folder_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"emailbuilder_csv_path"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"output_folder_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make bulk emails in BlueLeaks easier to read&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Make bulk emails in BlueLeaks easier to read"""</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;EmailBuilderID&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;DateSent&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;EmailSubject&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.html&quot;</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'EmailBuilderID'</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'DateSent'</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'EmailSubject'</span><span class="p">]</span><span class="si">}</span><span class="s2">.html"</span>
             <span class="p">)</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1274,39 +1273,39 @@ the email body with data from the CSV:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">html</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;emailbuilder_csv_path&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_folder_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"emailbuilder_csv_path"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"output_folder_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">,</span> <span class="n">output_folder_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make bulk emails in BlueLeaks easier to read&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Make bulk emails in BlueLeaks easier to read"""</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">important_keys</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;EmailBuilderID&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;EmailFrom&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;EmailSubject&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;DateSent&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Attachment1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;SentEmailList&quot;</span><span class="p">,</span>
+        <span class="s2">"EmailBuilderID"</span><span class="p">,</span>
+        <span class="s2">"EmailFrom"</span><span class="p">,</span>
+        <span class="s2">"EmailSubject"</span><span class="p">,</span>
+        <span class="s2">"DateSent"</span><span class="p">,</span>
+        <span class="s2">"Attachment1"</span><span class="p">,</span>
+        <span class="s2">"SentEmailList"</span><span class="p">,</span>
     <span class="p">]</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">emailbuilder_csv_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;EmailBuilderID&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;DateSent&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;EmailSubject&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.html&quot;</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'EmailBuilderID'</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'DateSent'</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'EmailSubject'</span><span class="p">]</span><span class="si">}</span><span class="s2">.html"</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">html_f</span><span class="p">:</span>
-                <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&lt;html&gt;&lt;body&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&lt;ul&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">html_f</span><span class="p">:</span>
+                <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"&lt;html&gt;&lt;body&gt;</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+                <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"&lt;ul&gt;</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">important_keys</span><span class="p">:</span>
-                    <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s2">&lt;/li&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&lt;/ul&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;EmailBody&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&lt;/body&gt;&lt;/html&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved file: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;li&gt;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="s2">&lt;/li&gt;</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+                <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"&lt;/ul&gt;</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+                <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'EmailBody'</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+                <span class="n">html_f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"&lt;/body&gt;&lt;/html&gt;</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saved file: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1410,9 +1409,9 @@ Webinar.html</em> file:</p>
 <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>Attachment1:<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>SentEmailList:<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span> EBSE00006\098.csv<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">base</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://ncric.org/&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;font: bold 15px Arial&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_blank&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://ncric.org/EBForms.aspx?EBID=5499</span>
-<span class="s">&amp;EBType=R&quot;</span><span class="p">&gt;</span>- Click Here To Register -<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;font-weight: bold&quot;</span><span class="p">&gt;</span>Chasing
+<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">base</span> <span class="na">href</span><span class="o">=</span><span class="s">"https://ncric.org/"</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">style</span><span class="o">=</span><span class="s">"font: bold 15px Arial"</span> <span class="na">target</span><span class="o">=</span><span class="s">"_blank"</span> <span class="na">href</span><span class="o">=</span><span class="s">"https://ncric.org/EBForms.aspx?EBID=5499</span>
+<span class="s">&amp;EBType=R"</span><span class="p">&gt;</span>- Click Here To Register -<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">"font-weight: bold"</span><span class="p">&gt;</span>Chasing
 Cell Phones<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 --snip--
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
@@ -1623,7 +1622,7 @@ template in a file called <em>exercise-9-3.py</em>:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="k">pass</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1631,12 +1630,12 @@ template in a file called <em>exercise-9-3.py</em>:</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_csv_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"blueleaks_path"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"output_csv_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a CSV that describes all the BlueLeaks folders&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Make a CSV that describes all the BlueLeaks folders"""</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1651,16 +1650,16 @@ following code:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_csv_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"blueleaks_path"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"output_csv_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a CSV that describes all the BlueLeaks folders&quot;&quot;&quot;</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BlueLeaksFolder&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyID&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyName&quot;</span><span class="p">,</span> <span class="s2">&quot;WebsiteTitle&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_csv_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_f</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Make a CSV that describes all the BlueLeaks folders"""</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"BlueLeaksFolder"</span><span class="p">,</span> <span class="s2">"CompanyID"</span><span class="p">,</span> <span class="s2">"CompanyName"</span><span class="p">,</span> <span class="s2">"WebsiteTitle"</span><span class="p">,</span> <span class="s2">"URL"</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_csv_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">output_f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1697,21 +1696,21 @@ following code:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_csv_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"blueleaks_path"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"output_csv_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a CSV that describes all the BlueLeaks folders&quot;&quot;&quot;</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BlueLeaksFolder&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyID&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyName&quot;</span><span class="p">,</span> <span class="s2">&quot;WebsiteTitle&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_csv_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_f</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Make a CSV that describes all the BlueLeaks folders"""</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"BlueLeaksFolder"</span><span class="p">,</span> <span class="s2">"CompanyID"</span><span class="p">,</span> <span class="s2">"CompanyName"</span><span class="p">,</span> <span class="s2">"WebsiteTitle"</span><span class="p">,</span> <span class="s2">"URL"</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_csv_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">output_f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">folder_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
-            <span class="n">company_csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">folder_name</span><span class="p">,</span> <span class="s2">&quot;Company.csv&quot;</span><span class="p">)</span>
+            <span class="n">company_csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">folder_name</span><span class="p">,</span> <span class="s2">"Company.csv"</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">company_csv_path</span><span class="p">):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">company_csv_path</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -1745,33 +1744,33 @@ CSV file based on them:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;blueleaks_path&quot;</span><span class="p">)</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;output_csv_path&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"blueleaks_path"</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"output_csv_path"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">output_csv_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a CSV that describes all the BlueLeaks folders&quot;&quot;&quot;</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BlueLeaksFolder&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyID&quot;</span><span class="p">,</span> <span class="s2">&quot;CompanyName&quot;</span><span class="p">,</span> <span class="s2">&quot;WebsiteTitle&quot;</span><span class="p">,</span> <span class="s2">&quot;URL&quot;</span><span class="p">]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_csv_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_f</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Make a CSV that describes all the BlueLeaks folders"""</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"BlueLeaksFolder"</span><span class="p">,</span> <span class="s2">"CompanyID"</span><span class="p">,</span> <span class="s2">"CompanyName"</span><span class="p">,</span> <span class="s2">"WebsiteTitle"</span><span class="p">,</span> <span class="s2">"URL"</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_csv_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">output_f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">folder_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">):</span>
-            <span class="n">company_csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">folder_name</span><span class="p">,</span> <span class="s2">&quot;Company.csv&quot;</span><span class="p">)</span>
+            <span class="n">company_csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blueleaks_path</span><span class="p">,</span> <span class="n">folder_name</span><span class="p">,</span> <span class="s2">"Company.csv"</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">company_csv_path</span><span class="p">):</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">company_csv_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_f</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">company_csv_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">input_f</span><span class="p">:</span>
                     <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">input_f</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
                         <span class="n">output_row</span> <span class="o">=</span> <span class="p">{</span>
-                            <span class="s2">&quot;BlueLeaksFolder&quot;</span><span class="p">:</span> <span class="n">folder_name</span><span class="p">,</span>
-                            <span class="s2">&quot;CompanyID&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;CompanyID&quot;</span><span class="p">],</span>
-                            <span class="s2">&quot;CompanyName&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;CompanyName&quot;</span><span class="p">],</span>
-                            <span class="s2">&quot;WebsiteTitle&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;WebsiteTitle&quot;</span><span class="p">],</span>
-                            <span class="s2">&quot;URL&quot;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;URL&quot;</span><span class="p">],</span>
+                            <span class="s2">"BlueLeaksFolder"</span><span class="p">:</span> <span class="n">folder_name</span><span class="p">,</span>
+                            <span class="s2">"CompanyID"</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">"CompanyID"</span><span class="p">],</span>
+                            <span class="s2">"CompanyName"</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">"CompanyName"</span><span class="p">],</span>
+                            <span class="s2">"WebsiteTitle"</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">"WebsiteTitle"</span><span class="p">],</span>
+                            <span class="s2">"URL"</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s2">"URL"</span><span class="p">],</span>
                         <span class="p">}</span>
                         <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">output_row</span><span class="p">)</span>
 
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Finished: </span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Finished: </span><span class="si">{</span><span class="n">folder_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 

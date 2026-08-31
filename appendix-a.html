@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -231,7 +230,7 @@ method if you plan to investigate your own datasets in the future.
 Here&rsquo;s how to implement it.</p>
 <p>Open a PowerShell terminal and create a new folder on your external USB
 disk to store your Linux filesystem by running the following command:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="n">D</span><span class="p">:\</span><span class="n">WSL</span> <span class="n">-ItemType</span> <span class="s1">&#39;directory&#39;</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="n">D</span><span class="p">:\</span><span class="n">WSL</span> <span class="n">-ItemType</span> <span class="s1">'directory'</span>
 </code></pre></div>
 
 <p>In PowerShell, the <code>New-Item</code>
@@ -350,7 +349,7 @@ When you open it, it should drop you into an interactive shell similar
 to the Python shell. In DiskPart, you must first select the disk that
 you&rsquo;d like to resize, in this case the <em>ext4.vhdx</em> file. Run this
 command, substituting the correct path to <em>ext4.vhdx</em> on your machine:</p>
-<div class="codehilite"><pre><span></span><code>DISKPART&gt; select vdisk file=&quot;D:\WSL\ext4.vhdx&quot;
+<div class="codehilite"><pre><span></span><code>DISKPART&gt; select vdisk file="D:\WSL\ext4.vhdx"
 
 DiskPart successfully selected the virtual disk file.
 </code></pre></div>

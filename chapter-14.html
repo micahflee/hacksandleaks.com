@@ -20,7 +20,6 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pygments.css">
-    <script defer data-domain="hacksandleaks.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <header>
@@ -185,11 +184,11 @@ one 29MB JSON file was called <em>VibrantDiversityComplete-Sept5at327PM</em>.
 For the purposes of this book, I&rsquo;ve renamed it <em>VibrantDiversity.json</em>
 to make the following examples easier to read.</p>
 <p>When I opened this file in a text editor, its contents looked like this:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;meta&quot;</span><span class="p">:{</span><span class="nt">&quot;users&quot;</span><span class="p">:{</span><span class="nt">&quot;231148326249037824&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;D&#39;Marcus Liebowitz&quot;</span><span class="p">},</span><span class="nt">&quot;232213403974893569&quot;</span><span class="p">:{</span><span class="nt">&quot;nam</span>
-<span class="nt">e&quot;</span><span class="p">:</span><span class="s2">&quot;northern_confederate&quot;</span><span class="p">},</span><span class="nt">&quot;279620004641767424&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;☇Unlimited Power☇&quot;</span><span class="p">},</span><span class="nt">&quot;23338059623405977</span>
-<span class="nt">6&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;OrwellHuxley&quot;</span><span class="p">},</span><span class="nt">&quot;289851780521787392&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;badtanman&quot;</span><span class="p">},</span><span class="nt">&quot;337421867700715524&quot;</span><span class="p">:{</span><span class="nt">&quot;nam</span>
-<span class="nt">e&quot;</span><span class="p">:</span><span class="s2">&quot;spadegunner&quot;</span><span class="p">},</span><span class="nt">&quot;315936522656546818&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;erz1871&quot;</span><span class="p">},</span><span class="nt">&quot;122932975724789761&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Archer&quot;</span>
-<span class="p">},</span><span class="nt">&quot;201547638129164290&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;SLUG2_&quot;</span><span class="p">},</span><span class="nt">&quot;288899711929286667&quot;</span><span class="p">:{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;million plus&quot;</span><span class="p">},</span><span class="err">&quot;25019824</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">"meta"</span><span class="p">:{</span><span class="nt">"users"</span><span class="p">:{</span><span class="nt">"231148326249037824"</span><span class="p">:{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"D'Marcus Liebowitz"</span><span class="p">},</span><span class="nt">"232213403974893569"</span><span class="p">:{</span><span class="nt">"nam</span>
+<span class="nt">e"</span><span class="p">:</span><span class="s2">"northern_confederate"</span><span class="p">},</span><span class="nt">"279620004641767424"</span><span class="p">:{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"☇Unlimited Power☇"</span><span class="p">},</span><span class="nt">"23338059623405977</span>
+<span class="nt">6"</span><span class="p">:{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"OrwellHuxley"</span><span class="p">},</span><span class="nt">"289851780521787392"</span><span class="p">:{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"badtanman"</span><span class="p">},</span><span class="nt">"337421867700715524"</span><span class="p">:{</span><span class="nt">"nam</span>
+<span class="nt">e"</span><span class="p">:</span><span class="s2">"spadegunner"</span><span class="p">},</span><span class="nt">"315936522656546818"</span><span class="p">:{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"erz1871"</span><span class="p">},</span><span class="nt">"122932975724789761"</span><span class="p">:{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"Archer"</span>
+<span class="p">},</span><span class="nt">"201547638129164290"</span><span class="p">:{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"SLUG2_"</span><span class="p">},</span><span class="nt">"288899711929286667"</span><span class="p">:{</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"million plus"</span><span class="p">},</span><span class="err">"25019824</span>
 <span class="err">--snip--</span>
 </code></pre></div>
 
@@ -201,16 +200,16 @@ command, I formatted it and added syntax highlighting in my terminal
 like so:</p>
 <div class="codehilite"><pre><span></span><code>micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq
 {
-  &quot;meta&quot;: {
-    &quot;users&quot;: {
-      &quot;231148326249037824&quot;: {
-        &quot;name&quot;: &quot;D&#39;Marcus Liebowitz&quot;
+  "meta": {
+    "users": {
+      "231148326249037824": {
+        "name": "D'Marcus Liebowitz"
       },
-      &quot;232213403974893569&quot;: {
-        &quot;name&quot;: &quot;northern_confederate&quot;
+      "232213403974893569": {
+        "name": "northern_confederate"
       },
-      &quot;279620004641767424&quot;: {
-        &quot;name&quot;: &quot;☇Unlimited Power☇&quot;
+      "279620004641767424": {
+        "name": "☇Unlimited Power☇"
       },
 --snip--
 </code></pre></div>
@@ -225,22 +224,22 @@ file was one large JSON object, and one of that object&rsquo;s keys was
 <code>meta</code>. I ran the following
 <code>jq</code> command to see what other
 keys there were:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;keys&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'keys'</span>
 </code></pre></div>
 
 <p>The output told me that the data for each Discord server includes two
 parts, <code>data</code> and
 <code>meta</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="s2">&quot;data&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;meta&quot;</span>
+<span class="w">  </span><span class="s2">"data"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"meta"</span>
 <span class="p">]</span>
 </code></pre></div>
 
 <p>Guessing that <code>meta</code> included
 the metadata for the server, I ran the following command to determine
 the keys of the <code>meta</code> object:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta | keys&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.meta | keys'</span>
 </code></pre></div>
 
 <p>This command piped the output of <code>cat VibrantDiversity.json</code> as input into the
@@ -257,10 +256,10 @@ outputs the keys from that value.</p>
 <p>The output showed me that the metadata included
 information about channels, servers, and users:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="s2">&quot;channels&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;servers&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;userindex&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;users&quot;</span>
+<span class="w">  </span><span class="s2">"channels"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"servers"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"userindex"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"users"</span>
 <span class="p">]</span>
 </code></pre></div>
 
@@ -268,7 +267,7 @@ information about channels, servers, and users:</p>
 look at some of the content, starting with the servers. By running
 <code>jq '.meta .servers'</code>, I could
 look at the value of the <code>servers</code> key inside the <code>meta</code> object:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.servers&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.meta.servers'</span>
 </code></pre></div>
 
 <p>The output in Listing 14-1 showed that
@@ -276,8 +275,8 @@ look at the value of the <code>servers</code> key inside the <code>meta</code> o
 Vibrant Diversity, just as I expected.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">[</span>
 <span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vibrant Diversity&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SERVER&quot;</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vibrant Diversity"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SERVER"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
@@ -287,46 +286,46 @@ Vibrant Diversity, just as I expected.</p>
 surrounded by brackets ([ and ]).</p>
 <p>Next, I wanted to see what channels this server had, so I ran the
 following command to view the value of the <code>channels</code> key in the <code>meta</code> object:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.channels&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.meta.channels'</span>
 </code></pre></div>
 
 <p>Listing 14-2 shows the output of this command.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;274024266435919872&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rules&quot;</span>
+<span class="w">  </span><span class="nt">"274024266435919872"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rules"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;274262571367006208&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;general&quot;</span>
+<span class="w">  </span><span class="nt">"274262571367006208"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"general"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;292812979555139589&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;effortposting&quot;</span>
+<span class="w">  </span><span class="nt">"292812979555139589"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"effortposting"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;288508006990348299&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;problematic_oven&quot;</span>
+<span class="w">  </span><span class="nt">"288508006990348299"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"problematic_oven"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;274055625988898816&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;music&quot;</span>
+<span class="w">  </span><span class="nt">"274055625988898816"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"music"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;343979974241550337&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gun-posting-goes-here&quot;</span>
+<span class="w">  </span><span class="nt">"343979974241550337"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gun-posting-goes-here"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;328841016352440320&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;food-posting&quot;</span>
+<span class="w">  </span><span class="nt">"328841016352440320"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"food-posting"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;274025126641795074&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;share_contact_info&quot;</span>
+<span class="w">  </span><span class="nt">"274025126641795074"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"share_contact_info"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;288901961313550336&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;recruiting&quot;</span>
+<span class="w">  </span><span class="nt">"288901961313550336"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recruiting"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -350,19 +349,19 @@ and Nazi memes, and the word <em>oven</em> was clearly a reference to the
 Holocaust. This was definitely a neo-Nazi chat server.</p>
 <p>I wanted to see a list of this server&rsquo;s users, so I ran the following
 command to view the value of the <code>users</code> key in the <code>meta</code> object:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.users&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.meta.users'</span>
 </code></pre></div>
 
 <p>Listing 14-3 shows my output.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;231148326249037824&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;D&#39;Marcus Liebowitz&quot;</span>
+<span class="w">  </span><span class="nt">"231148326249037824"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D'Marcus Liebowitz"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;232213403974893569&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;northern_confederate&quot;</span>
+<span class="w">  </span><span class="nt">"232213403974893569"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"northern_confederate"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;279620004641767424&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;☇Unlimited Power☇&quot;</span>
+<span class="w">  </span><span class="nt">"279620004641767424"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"☇Unlimited Power☇"</span>
 <span class="w">  </span><span class="p">},</span>
 <span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
 </code></pre></div>
@@ -374,14 +373,14 @@ just a single key, the user&rsquo;s name.</p>
 <p>So far, I had explored the metadata keys <code>channels</code>, <code>servers</code>, and <code>users</code>, but there was one left: the
 <code>userindex</code> key. I ran the
 following command to view the <code>userindex</code> key&rsquo;s value:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.userindex&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.meta.userindex'</span>
 </code></pre></div>
 
 <p>Listing 14-4 shows my output.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="s2">&quot;231148326249037824&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;232213403974893569&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;279620004641767424&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"231148326249037824"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"232213403974893569"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"279620004641767424"</span><span class="p">,</span>
 <span class="mi">--</span><span class="err">s</span><span class="kc">n</span><span class="err">ip</span><span class="mi">--</span>
 </code></pre></div>
 
@@ -395,20 +394,20 @@ At this point I didn&rsquo;t fully understand the purpose of
 clear, as you&rsquo;ll see later in this section.</p>
 <p>Armed with a basic understanding of the server&rsquo;s metadata, I ran the
 following command to find the keys for the <code>data</code> object:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.data | keys&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.data | keys'</span>
 </code></pre></div>
 
 <p>Listing 14-5 shows my output.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="s2">&quot;274024266435919872&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;274025126641795074&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;274055625988898816&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;274262571367006208&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;288508006990348299&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;288901961313550336&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;292812979555139589&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;328841016352440320&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="s2">&quot;343979974241550337&quot;</span>
+<span class="w">  </span><span class="s2">"274024266435919872"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"274025126641795074"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"274055625988898816"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"274262571367006208"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"288508006990348299"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"288901961313550336"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"292812979555139589"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"328841016352440320"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"343979974241550337"</span>
 <span class="p">]</span>
 </code></pre></div>
 
@@ -417,7 +416,7 @@ following command to find the keys for the <code>data</code> object:</p>
 of each key contained the actual messages in those chat channels.
 Because I needed to start somewhere, I decided to view the chat messages
 from the #problematic_oven channel, so I ran the following command:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.data.&quot;288508006990348299&quot;&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.data."288508006990348299"'</span>
 </code></pre></div>
 
 <p>The full argument for this <code>jq</code> command is surrounded by single
@@ -433,29 +432,29 @@ less than before. In this case, the output showed chat messages from
 only a single channel, rather than showing all of the data in the JSON
 file. Listing 14-6 shows just a few chat
 messages from the middle of the output.</p>
-<div class="codehilite"><pre><span></span><code>micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq &#39;.data
-.&quot;288508006990348299&quot;&#39;
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq '.data
+."288508006990348299"'
 {
 --snip--
-  &quot;352992491282366485&quot;: {
-    &quot;u&quot;: 4,
-    &quot;t&quot;: 1504230368205,
-    &quot;m&quot;: &quot;we need more white girls with nice asses&quot;
+  "352992491282366485": {
+    "u": 4,
+    "t": 1504230368205,
+    "m": "we need more white girls with nice asses"
   },
-  &quot;352992512752746496&quot;: {
-    &quot;u&quot;: 4,
-    &quot;t&quot;: 1504230373324,
-    &quot;m&quot;: &quot;no more gay jew shit&quot;
+  "352992512752746496": {
+    "u": 4,
+    "t": 1504230373324,
+    "m": "no more gay jew shit"
   },
-  &quot;352992579949690890&quot;: {
-    &quot;u&quot;: 1,
-    &quot;t&quot;: 1504230389345,
-    &quot;m&quot;: &quot;you&#39;re not allowed to oogle anyone whiter than med&quot;
+  "352992579949690890": {
+    "u": 1,
+    "t": 1504230389345,
+    "m": "you're not allowed to oogle anyone whiter than med"
   },
-  &quot;352992652687441920&quot;: {
-    &quot;u&quot;: 1,
-    &quot;t&quot;: 1504230406687,
-    &quot;m&quot;: &quot;if i catch you looking at anglo/celtic/nordic girls you&#39;re banned&quot;
+  "352992652687441920": {
+    "u": 1,
+    "t": 1504230406687,
+    "m": "if i catch you looking at anglo/celtic/nordic girls you're banned"
   },
 --snip--
 </code></pre></div>
@@ -537,7 +536,7 @@ was actually an index of the <code>userindex</code> array.</p>
 <code>userindex</code> at index
 <code>4</code> by running the following
 command:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.userindex[4]&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.meta.userindex[4]'</span>
 </code></pre></div>
 
 <p>This command is similar to the one in Listing 14-4, but because it uses
@@ -547,12 +546,12 @@ of the <code>.meta.userindex</code> array
 and just displays that result. My output showed that this value was the
 string <code>289851780521787392</code>,
 an 18-digit user ID:</p>
-<div class="codehilite"><pre><span></span><code><span class="s2">&quot;289851780521787392&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="s2">"289851780521787392"</span>
 </code></pre></div>
 
 <p>Now that I had a user ID, I used it in the following command to find the
 matching username:</p>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.meta.users.&quot;289851780521787392&quot;&#39;</span>
+<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>VibrantDiversity.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.meta.users."289851780521787392"'</span>
 </code></pre></div>
 
 <p>Like the previous command, this command selects just one value to
@@ -560,7 +559,7 @@ output. In this case, it selects the <code>meta</code> key, then the <code>users
 <code>289851780521787392</code> key. The
 result is an object that includes a <code>name</code> key:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;badtanman&quot;</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"badtanman"</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -568,12 +567,12 @@ result is an object that includes a <code>name</code> key:</p>
 <p>In the chat logs quoted in Listing 14-6,
 the user <em>badtanman</em> is talking to someone with the <code>u</code> value of <code>1</code>. To find that person&rsquo;s username, I ran
 the same commands, substituting the appropriate ID numbers:</p>
-<div class="codehilite"><pre><span></span><code>micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq &#39;.meta.userindex[1]&#39;
-&quot;232213403974893569&quot;
-micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq &#39;.meta.users.&quot;232213403974
-893569&quot;&#39;
+<div class="codehilite"><pre><span></span><code>micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq '.meta.userindex[1]'
+"232213403974893569"
+micah@trapdoor Discord-JSON-Scrapes % cat VibrantDiversity.json | jq '.meta.users."232213403974
+893569"'
 {
-  &quot;name&quot;: &quot;northern_confederate&quot;
+  "name": "northern_confederate"
 }
 </code></pre></div>
 
@@ -677,10 +676,10 @@ initial Discord JSON search script worked.</p>
 <p>For example, I knew my script needed to be able to display chat messages
 based on what I searched for. Let&rsquo;s say I wanted my code to display the
 following chat message from Listing 14-6:</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">&quot;352992491282366485&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;u&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1504230368205</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;we need more white girls with nice asses&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="nt">"352992491282366485"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"u"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"t"</span><span class="p">:</span><span class="w"> </span><span class="mi">1504230368205</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"m"</span><span class="p">:</span><span class="w"> </span><span class="s2">"we need more white girls with nice asses"</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -694,7 +693,7 @@ JSON&rsquo;s <code>meta</code> object, this
 time for the <code>users</code> key, and
 use that user ID as the key to get this user object:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;badtanman&quot;</span>
+<span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"badtanman"</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -712,7 +711,7 @@ Here&rsquo;s my completed source code (you can also find it at
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">highlight</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❶</span>
-    <span class="n">new_message</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">new_message</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">new_index</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">index</span><span class="p">)</span>
@@ -732,60 +731,60 @@ Here&rsquo;s my completed source code (you can also find it at
 
 <span class="k">def</span><span class="w"> </span><span class="nf">display</span><span class="p">(</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">server_name</span><span class="p">,</span> <span class="n">user_name</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❷</span>
     <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
-        <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s2">&quot;#</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel_name</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;bright_magenta&quot;</span><span class="p">),</span>
-            <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s2">&quot;[server: </span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">server_name</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;bright_black&quot;</span><span class="p">),</span>
+        <span class="s2">"</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s2">"#</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel_name</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="s2">"bright_magenta"</span><span class="p">),</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s2">"[server: </span><span class="si">{}</span><span class="s2">]"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">server_name</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="s2">"bright_black"</span><span class="p">),</span>
         <span class="p">)</span>
     <span class="p">)</span>
     <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
-        <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="s2">"</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">user_name</span><span class="p">,</span> <span class="n">bold</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-            <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">timestamp</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%c</span><span class="s2">&quot;</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;bright_black&quot;</span><span class="p">),</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">timestamp</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"</span><span class="si">%c</span><span class="s2">"</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="s2">"bright_black"</span><span class="p">),</span>
         <span class="p">)</span>
     <span class="p">)</span>
     <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">highlight</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">))</span>
-    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❸</span>
     <span class="c1"># Loop through each channel</span>
-    <span class="k">for</span> <span class="n">channel_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]:</span> <span class="err">❹</span>
+    <span class="k">for</span> <span class="n">channel_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">]:</span> <span class="err">❹</span>
         <span class="c1"># Get the channel name and server name</span>
-        <span class="n">channel_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;channels&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="err">❺</span>
-        <span class="n">server_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;servers&quot;</span><span class="p">][</span>
-            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;channels&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="s2">&quot;server&quot;</span><span class="p">]</span>
-        <span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">channel_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"channels"</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span> <span class="err">❺</span>
+        <span class="n">server_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"servers"</span><span class="p">][</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"channels"</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="s2">"server"</span><span class="p">]</span>
+        <span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>
 
-        <span class="k">for</span> <span class="n">message_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">]:</span> <span class="err">❻</span>
+        <span class="k">for</span> <span class="n">message_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="n">channel_id</span><span class="p">]:</span> <span class="err">❻</span>
             <span class="c1"># Pull the user data, timestamp, and message body from the message</span>
-            <span class="n">user_index</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="n">message_id</span><span class="p">][</span><span class="s2">&quot;u&quot;</span><span class="p">]</span>
-            <span class="n">user_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;userindex&quot;</span><span class="p">][</span><span class="n">user_index</span><span class="p">]</span>
-            <span class="n">user_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;users&quot;</span><span class="p">][</span><span class="n">user_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+            <span class="n">user_index</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="n">message_id</span><span class="p">][</span><span class="s2">"u"</span><span class="p">]</span>
+            <span class="n">user_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"userindex"</span><span class="p">][</span><span class="n">user_index</span><span class="p">]</span>
+            <span class="n">user_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"users"</span><span class="p">][</span><span class="n">user_id</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>
             <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span>
-                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="n">message_id</span><span class="p">][</span><span class="s2">&quot;t&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="n">message_id</span><span class="p">][</span><span class="s2">"t"</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
             <span class="p">)</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="n">message_id</span><span class="p">][</span><span class="s2">&quot;m&quot;</span><span class="p">]</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="n">channel_id</span><span class="p">][</span><span class="n">message_id</span><span class="p">][</span><span class="s2">"m"</span><span class="p">]</span>
 
             <span class="c1"># Is the query in the message?</span>
             <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="err">❼</span>
                 <span class="n">display</span><span class="p">(</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">server_name</span><span class="p">,</span> <span class="n">user_name</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span> 
 
 <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">&quot;query&quot;</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"filename"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">exists</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">argument</span><span class="p">(</span><span class="s2">"query"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span> <span class="err">❽</span>
     <span class="c1"># Load the JSON file</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to load JSON file&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Failed to load JSON file"</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
 
     <span class="c1"># Search</span>
     <span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 
@@ -841,7 +840,7 @@ search term underlined using <code>click.style()</code>. It then returned
 to the terminal in the <code>display()</code> function.</p>
 <p>For example, if I wanted to search <em>VibrantDiversity.json</em> for the term
 <em>berkeley</em>, I could run:</p>
-<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>discord-json-search.py<span class="w"> </span>~/datasets/Discord-JSON-Scrapes/VibrantDiversity.json<span class="w"> </span><span class="s2">&quot;berkeley&quot;</span>
+<div class="codehilite"><pre><span></span><code>python3<span class="w"> </span>discord-json-search.py<span class="w"> </span>~/datasets/Discord-JSON-Scrapes/VibrantDiversity.json<span class="w"> </span><span class="s2">"berkeley"</span>
 </code></pre></div>
 
 <p>The output listed over a hundred chat messages that mentioned Berkeley.
@@ -851,7 +850,7 @@ Here&rsquo;s the first snippet of output, which highlighted the search term in
 the message with an underline:</p>
 <div class="codehilite"><pre><span></span><code>#general [server: Vibrant Diversity]
 Hector Sun Sep  3 20:19:11 2017
-Look at how many antifa were at Boston and Berkeley.  We need numbers.  We can&#39;t have rallies with less than a thousand people now.  Even that&#39;s a low number.
+Look at how many antifa were at Boston and Berkeley.  We need numbers.  We can't have rallies with less than a thousand people now.  Even that's a low number.
 --snip--
 </code></pre></div>
 
@@ -926,8 +925,8 @@ object called <code>db</code>:</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">flask_sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLAlchemy</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_DATABASE_URI&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;sqlite:///database.sqlite3&quot;</span>
-<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">"SQLALCHEMY_DATABASE_URI"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"sqlite:///database.sqlite3"</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">"DEBUG"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 </code></pre></div>
@@ -961,8 +960,8 @@ to store data about servers:</p>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">channels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Channel&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;server&quot;</span><span class="p">)</span>
-    <span class="n">messages</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">&quot;Message&quot;</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;server&quot;</span><span class="p">)</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">"Channel"</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">"server"</span><span class="p">)</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s2">"Message"</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s2">"server"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
@@ -998,7 +997,7 @@ actually use this code&mdash;it loads the servers from the JSON data&mdash;but
 I&rsquo;m including this example to help you understand how to use SQLAlchemy
 classes to interact with databases without needing to write SQL
 queries.)</p>
-<div class="codehilite"><pre><span></span><code><span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="s2">&quot;Vibrant Diversity&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="s2">"Vibrant Diversity"</span><span class="p">)</span>
 <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
 <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 </code></pre></div>
@@ -1103,19 +1102,19 @@ opens this file, loads it into a variable called <code>data</code>, and then use
 <code>data</code> to add servers, users,
 channels, and messages to the SQL database. I&rsquo;ll show the code that adds
 users, channels, and messages soon, but first, Listing 14-8 shows the code that adds servers.</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding servers: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;servers&quot;</span><span class="p">]:</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">"Adding servers: "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"servers"</span><span class="p">]:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">server</span><span class="p">)</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"+"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
 </code></pre></div>
 
 <p><em>Listing 14-8: Code from <code>admin.py</code> to add servers to the database</em></p>
@@ -1171,19 +1170,19 @@ sure that the output gets displayed to the screen immediately; without
 it, the output would still get displayed, but not right after the
 function call. This allowed me to watch the progress of an import.</p>
 <p>After adding servers, the script added users, as shown in Listing 14-9.</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding users: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">user_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;users&quot;</span><span class="p">]:</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;users&quot;</span><span class="p">][</span><span class="n">user_discord_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">"Adding users: "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">user_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"users"</span><span class="p">]:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"users"</span><span class="p">][</span><span class="n">user_discord_id</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">user_discord_id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"+"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
 </code></pre></div>
 
 <p><em>Listing 14-9: Code from <code>admin.py</code> to add users to the database</em></p>
@@ -1208,23 +1207,23 @@ a member of a previous server, the code wouldn&rsquo;t create a duplicate user
 for them.</p>
 <p>After adding servers and users, the script then added channels, using
 the code in Listing 14-10.</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding channels: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">channel_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;channels&quot;</span><span class="p">]:</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;channels&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-    <span class="n">server_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;channels&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="s2">&quot;server&quot;</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">"Adding channels: "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">channel_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"channels"</span><span class="p">]:</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"channels"</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>
+    <span class="n">server_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"channels"</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="s2">"server"</span><span class="p">]</span>
  <span class="err">❶</span> <span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;servers&quot;</span><span class="p">][</span><span class="n">server_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"servers"</span><span class="p">][</span><span class="n">server_id</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>
     <span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">channel</span> <span class="o">=</span> <span class="n">Channel</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">channel_discord_id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"+"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
 </code></pre></div>
 
 <p><em>Listing 14-10: Code from <code>admin.py</code> to add channels to the database</em></p>
@@ -1251,24 +1250,24 @@ channel to the database, displaying a plus sign on success and a dot if
 the channel already existed.</p>
 <p>Finally, after adding servers, users, and channels, the code added all
 of the messages, as shown in Listing 14-11.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">channel_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]:</span>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">channel_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">]:</span>
     <span class="c1"># Get the channel</span>
     <span class="n">channel</span> <span class="o">=</span> <span class="n">Channel</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">discord_id</span><span class="o">=</span><span class="n">channel_discord_id</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span> <span class="err">❶</span>
 
     <span class="c1"># Loop through each message in this channel</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adding messages from </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, #</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">message_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Adding messages from </span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, #</span><span class="si">{</span><span class="n">channel</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">message_discord_id</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">]:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">&quot;t&quot;</span><span class="p">]</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">&quot;m&quot;</span><span class="p">]</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">"t"</span><span class="p">]</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">"m"</span><span class="p">]</span>
 
-            <span class="n">user_index</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">&quot;u&quot;</span><span class="p">]</span>
-            <span class="n">user_discord_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">][</span><span class="s2">&quot;userindex&quot;</span><span class="p">][</span><span class="n">user_index</span><span class="p">]</span>
+            <span class="n">user_index</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">"u"</span><span class="p">]</span>
+            <span class="n">user_discord_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"meta"</span><span class="p">][</span><span class="s2">"userindex"</span><span class="p">][</span><span class="n">user_index</span><span class="p">]</span>
             <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">discord_id</span><span class="o">=</span><span class="n">user_discord_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span> <span class="err">❷</span>
 
-            <span class="k">if</span> <span class="s2">&quot;a&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s2">"a"</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">]:</span>
                 <span class="n">attachments_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
-                    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="n">channel_discord_id</span><span class="p">][</span><span class="n">message_discord_id</span><span class="p">][</span><span class="s2">"a"</span><span class="p">]</span>
                   <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">attachments_json</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1284,11 +1283,11 @@ of the messages, as shown in Listing 14-11.</p>
             <span class="p">)</span>
             <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
             <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"+"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">exc</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
             <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
 </code></pre></div>
 
 <p><em>Listing 14-11: Code from <code>admin.py</code> to add messages to the database</em></p>
@@ -1402,47 +1401,47 @@ layout template.</p>
 
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Discord Analysis<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">stylesheet</span> <span class="na">type</span><span class="o">=</span><span class="s">text/css</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{url_for(&#39;static&#39;, filename=&#39;style.css&#39;)}}&quot;</span><span class="p">&gt;</span> ❶
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">stylesheet</span> <span class="na">type</span><span class="o">=</span><span class="s">text/css</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{url_for('static', filename='style.css')}}"</span><span class="p">&gt;</span> ❶
 <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wrapper&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"wrapper"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"sidebar"</span><span class="p">&gt;</span>
       {% for server in servers %} ❷
-      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;server&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"server"</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{server.name}}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
           {% for c in server.channels %} ❸
-          <span class="p">&lt;</span><span class="nt">li</span><span class="err">{%</span> <span class="na">if</span> <span class="na">channel</span> <span class="err">%}{%</span> <span class="na">if</span> <span class="na">c</span><span class="err">.</span><span class="na">id</span><span class="o">=</span><span class="s">=channel.id</span> <span class="err">%}</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;active&quot;</span> <span class="err">{%</span> <span class="na">endif</span> <span class="err">%}{%</span> <span class="na">endif</span> <span class="err">%}</span><span class="p">&gt;&lt;</span><span class="nt">a</span>
-              <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{c.permalink()}}&quot;</span><span class="p">&gt;</span>#{{c.name}}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;message-count&quot;</span><span class="p">&gt;</span>[{{
-              &quot;{0:,}&quot;.format(c.message_count() | int)}}]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">li</span><span class="err">{%</span> <span class="na">if</span> <span class="na">channel</span> <span class="err">%}{%</span> <span class="na">if</span> <span class="na">c</span><span class="err">.</span><span class="na">id</span><span class="o">=</span><span class="s">=channel.id</span> <span class="err">%}</span> <span class="na">class</span><span class="o">=</span><span class="s">"active"</span> <span class="err">{%</span> <span class="na">endif</span> <span class="err">%}{%</span> <span class="na">endif</span> <span class="err">%}</span><span class="p">&gt;&lt;</span><span class="nt">a</span>
+              <span class="na">href</span><span class="o">=</span><span class="s">"{{c.permalink()}}"</span><span class="p">&gt;</span>#{{c.name}}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">"message-count"</span><span class="p">&gt;</span>[{{
+              "{0:,}".format(c.message_count() | int)}}]<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
             {% endfor %}
         <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
       <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
       {% endfor %}
 
-      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/users&quot;</span><span class="p">&gt;</span>Users<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/users"</span><span class="p">&gt;</span>Users<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;search&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;get&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/search&quot;</span><span class="p">&gt;</span>
-          <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;q&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;q&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Search query&quot;</span> <span class="err">{%</span> <span class="na">if</span> <span class="na">q</span> <span class="err">%}</span>
-            <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{q}}&quot;</span> <span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span> <span class="p">/&gt;</span> ❹
-          <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;s&quot;</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>[all servers]<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"content"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"search"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">"get"</span> <span class="na">action</span><span class="o">=</span><span class="s">"/search"</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">name</span><span class="o">=</span><span class="s">"q"</span> <span class="na">class</span><span class="o">=</span><span class="s">"q"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"Search query"</span> <span class="err">{%</span> <span class="na">if</span> <span class="na">q</span> <span class="err">%}</span>
+            <span class="na">value</span><span class="o">=</span><span class="s">"{{q}}"</span> <span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span> <span class="p">/&gt;</span> ❹
+          <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">"s"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">""</span><span class="p">&gt;</span>[all servers]<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
             {% for server in servers %} ❺
-            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{server.id}}&quot;</span> <span class="err">{%</span> <span class="na">if</span> <span class="na">server</span><span class="err">.</span><span class="na">id</span><span class="o">=</span><span class="s">=s</span> <span class="err">%}</span> <span class="na">selected</span><span class="o">=</span><span class="s">&quot;selected&quot;</span> <span class="err">{%</span> <span class="na">endif</span>
+            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">"{{server.id}}"</span> <span class="err">{%</span> <span class="na">if</span> <span class="na">server</span><span class="err">.</span><span class="na">id</span><span class="o">=</span><span class="s">=s</span> <span class="err">%}</span> <span class="na">selected</span><span class="o">=</span><span class="s">"selected"</span> <span class="err">{%</span> <span class="na">endif</span>
               <span class="err">%}</span><span class="p">&gt;</span>
               {{server.name}}
             <span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
             {% endfor %}
           <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Search&quot;</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span> <span class="na">value</span><span class="o">=</span><span class="s">"Search"</span> <span class="p">/&gt;</span>
         <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
       <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;messages&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"messages"</span><span class="p">&gt;</span>
         {% for message in get_flashed_messages() %} ❻
         <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">flash</span><span class="p">&gt;</span>{{message}}<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
         {% endfor %}
@@ -1463,13 +1462,13 @@ Jinja template. For example, look at the code that adds the <em>CSS
 (Cascading Style Sheets)</em> file&mdash;which defines the page&rsquo;s style&mdash;to the
 page ❶. The HTML syntax for
 adding a stylesheet is</p>
-<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">stylesheet</span> <span class="na">type</span><span class="o">=</span><span class="s">text/css</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;style.css&quot;</span><span class="p">&gt;</span>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">stylesheet</span> <span class="na">type</span><span class="o">=</span><span class="s">text/css</span> <span class="na">href</span><span class="o">=</span><span class="s">"style.css"</span><span class="p">&gt;</span>
 </code></pre></div>
 
 <p>where <code>style.css</code> is
 the path or URL of a CSS file. Instead of an actual filename, the code
 in Listing 14-12 uses this:</p>
-<div class="codehilite"><pre><span></span><code>{{url_for(&#39;static&#39;, filename=&#39;style.css&#39;)}}
+<div class="codehilite"><pre><span></span><code>{{url_for('static', filename='style.css')}}
 </code></pre></div>
 
 <p>In a Jinja template, putting a Python expression between <code>{{</code> and <code>}}</code> means Python will evaluate this
@@ -1511,10 +1510,10 @@ shown in Listing 14-13, was by far the
 simplest one in my web app. This page displayed the message &ldquo;This is a
 web app that will let you research the alt-right chatroom leak,
 published by Unicorn Riot.&rdquo;</p>
-<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
     <span class="n">servers</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;index.html&quot;</span><span class="p">,</span> <span class="n">servers</span><span class="o">=</span><span class="n">servers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">"index.html"</span><span class="p">,</span> <span class="n">servers</span><span class="o">=</span><span class="n">servers</span><span class="p">)</span>
 </code></pre></div>
 
 <p><em>Listing 14-13: The home page route (<code>/</code>)</em></p>
@@ -1529,7 +1528,7 @@ rendering the <em>index.html</em> template, passing the <code>servers</code> var
 returning the HTML it receives.</p>
 <p>Listing 14-14 shows the code for the
 <em>index.html</em> Jinja template that was rendered.</p>
-<div class="codehilite"><pre><span></span><code>{% extends &quot;layout.html&quot; %}
+<div class="codehilite"><pre><span></span><code>{% extends "layout.html" %}
 {% block content %}
 <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Alt-right chatroom research<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is a web app that will let you research the alt-right chatroom leak,
@@ -1557,11 +1556,11 @@ top as defined in <em>layout.html</em>.</p>
 <p>Let&rsquo;s look at one more route that does a bit more than the <code>/</code> route, the <code>/search</code> route, which will help explain how one
 of the web app&rsquo;s core features&mdash;searching the chat logs&mdash;works. Here&rsquo;s
 the Python code:</p>
-<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/search&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/search"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">():</span>
-    <span class="n">q</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"q"</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
         <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">page</span><span class="p">,</span> <span class="n">per_page</span> <span class="o">=</span> <span class="n">get_pagination_args</span><span class="p">()</span>
 
@@ -1571,20 +1570,20 @@ the Python code:</p>
     <span class="k">if</span> <span class="n">server</span><span class="p">:</span>
         <span class="n">messages</span> <span class="o">=</span> <span class="n">messages</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">)</span>
     <span class="n">pagination</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">messages</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Message</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;%</span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">))</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Message</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="sa">f</span><span class="s2">"%</span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">%"</span><span class="p">))</span>
         <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Message</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
         <span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="n">per_page</span><span class="p">)</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">server</span><span class="p">:</span>
-        <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Search </span><span class="si">{</span><span class="n">server</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Search </span><span class="si">{</span><span class="n">server</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Search: </span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Search: </span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">"</span>
 
     <span class="n">servers</span> <span class="o">=</span> <span class="n">Server</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-    <span class="n">pagination_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/search?q=</span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">&amp;s=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">pagination_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"/search?q=</span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">&amp;s=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
-        <span class="s2">&quot;results.html&quot;</span><span class="p">,</span>
+        <span class="s2">"results.html"</span><span class="p">,</span>
         <span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span>
         <span class="n">s</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">),</span>
         <span class="n">servers</span><span class="o">=</span><span class="n">servers</span><span class="p">,</span>
@@ -1691,7 +1690,7 @@ theories, racist diatribes, and selfies of people holding guns.</p>
 worked. When I wanted to run my web app to test it during development or
 to start researching neo-Nazi chats, I&rsquo;d run <code>python3 app.py</code>. It showed this output, which is the
 typical output you see every time you start a Flask web app:</p>
-<div class="codehilite"><pre><span></span><code> * Serving Flask app &#39;app&#39;
+<div class="codehilite"><pre><span></span><code> * Serving Flask app 'app'
  * Debug mode: on
 WARNING: This is a development server. Do not use it in a production
 deployment. Use a production WSGI server instead.
@@ -1710,9 +1709,9 @@ The web server continued to run until I was ready to quit it by pressing
 app. As I made web requests, my terminal output showed me web service
 logs. For example, when I loaded the home page, my app produced these
 logs:</p>
-<div class="codehilite"><pre><span></span><code>127.0.0.1 - - [14/Jan/2023 11:58:30] &quot;GET / HTTP/1.1&quot; 200 -
-127.0.0.1 - - [14/Jan/2023 11:58:30] &quot;GET /static/style.css HTTP/1.1&quot; 200 -
-127.0.0.1 - - [14/Jan/2023 11:58:30] &quot;GET /favicon.ico HTTP/1.1&quot; 404 -
+<div class="codehilite"><pre><span></span><code>127.0.0.1 - - [14/Jan/2023 11:58:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jan/2023 11:58:30] "GET /static/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jan/2023 11:58:30] "GET /favicon.ico HTTP/1.1" 404 -
 </code></pre></div>
 
 <p>The left column is the IP address (<code>127.0.0.1</code>) of the web browser that loaded each
@@ -1732,8 +1731,8 @@ was the drop-down menu that let me choose to search all servers or just
 one. For example, I tried searching all Discord servers from which I had
 imported data for the string <code>berkeley</code>. Back in my terminal, I could see that
 my browser had loaded the <code>/search?q=berkeley&amp;s=</code> route:</p>
-<div class="codehilite"><pre><span></span><code>127.0.0.1 - - [14/Jan/2023 11:58:57] &quot;GET /search?q=berkeley&amp;s= HTTP/1.1&quot; 200 -
-127.0.0.1 - - [14/Jan/2023 11:58:57] &quot;GET /static/style.css HTTP/1.1&quot; 304 -
+<div class="codehilite"><pre><span></span><code>127.0.0.1 - - [14/Jan/2023 11:58:57] "GET /search?q=berkeley&amp;s= HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jan/2023 11:58:57] "GET /static/style.css HTTP/1.1" 304 -
 </code></pre></div>
 
 <p>The search page loaded the CSS stylesheet at <code>/static/style.css</code> as well, but this time it returned
